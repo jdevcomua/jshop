@@ -4,11 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\ItemCat;
-use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ItemCatController implements the CRUD actions for ItemCat model.
@@ -16,36 +13,7 @@ use yii\filters\VerbFilter;
 class ItemCatController extends Controller
 {
     public $layout = 'main3';
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['login'],
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all ItemCat models.

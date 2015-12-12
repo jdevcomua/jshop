@@ -5,10 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Orders;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -17,36 +14,7 @@ class OrdersController extends Controller
 {
 
     public $layout = 'main3';
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['login'],
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Orders models.

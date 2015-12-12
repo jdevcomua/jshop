@@ -5,7 +5,8 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use app\assets\AppAsset;
+use yii\bootstrap\NavBar;
+use frontend\assets\AppAsset;
 
 ?>
 <!-- -->
@@ -124,7 +125,20 @@ use app\assets\AppAsset;
     <ul class="nav nav-enter-reg">
                     <li class="btn-enter-register">
                     <span class="text-el">
-
+                         <?php
+                         echo Nav::widget([
+                             'options' => ['class' => 'navbar-nav navbar-right'],
+                             'items' => [
+                                 Yii::$app->user->isGuest ?
+                                     ['label' => 'Login', 'url' => ['/site/login']] :
+                                     [
+                                         'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                         'url' => ['/site/logout'],
+                                         'linkOptions' => ['data-method' => 'post']
+                                     ],
+                             ],
+                         ]);
+                         ?>
                     </span>
             </li>
             </ul>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\common\models\Orders */
+/* @var $model common\models\Orders */
 
 $this->title = Yii::t('app', 'Создать заказ');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];

@@ -17,7 +17,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\Orders[]|array
+     * @return \common\models\Orders[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class OrdersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\Orders|array|null
+     * @return \common\models\Orders|array|null
      */
     public function one($db = null)
     {

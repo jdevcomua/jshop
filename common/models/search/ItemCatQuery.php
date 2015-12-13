@@ -17,7 +17,7 @@ class ItemCatQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\ItemCat[]|array
+     * @return \common\models\ItemCat[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class ItemCatQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\ItemCat|array|null
+     * @return \common\models\ItemCat|array|null
      */
     public function one($db = null)
     {

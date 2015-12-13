@@ -4,8 +4,11 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Item;
+use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -14,7 +17,6 @@ class ItemController extends Controller
 {
 
     public $layout = 'main3';
-
 
     /**
      * Lists all Item models.
@@ -25,7 +27,7 @@ class ItemController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Item::find(),
             'pagination' => [
-                'pageSize' => 4,
+                'pageSize' => 10,
             ],
         ]);
 
@@ -55,13 +57,22 @@ class ItemController extends Controller
     {
         $model = new Item();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->upload();
+            if($model->save()){
+                $filename = $model->imageFile->baseName ;
+                if(file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
+                    $filename = $filename.rand(1, 20);
+                }
+                $model->imageFile->saveAs(Item::getPath().$filename.'.'.$model->imageFile->extension);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
             return $this->render('create', [
                 'model' => $model,
             ]);
-        }
+
     }
 
     /**
@@ -73,8 +84,24 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if(isset($model->imageFile)){
+                $lastImage = $model->image;
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->upload();
+            }
+            if($model->save()){
+                $filename = $model->imageFile->baseName ;
+                if(file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
+                    $filename = $filename.rand(1, 20);
+                }
+                $model->imageFile->saveAs(Item::getPath().$filename.'.'.$model->imageFile->extension);
+                if(isset($lastImage)){
+                    if(file_exists(Item::getPath().$lastImage)){
+                        unlink(Item::getPath().$lastImage);
+                    }
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -91,8 +118,11 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        if(file_exists(Item::getPath().$model->image)){
+            unlink(Item::getPath().$model->image);
+        }
+        $model->delete();
         return $this->redirect(['index']);
     }
 

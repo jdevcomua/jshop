@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\common\models\ItemCat */
+/* @var $model common\models\ItemCat */
 
 $this->title = Yii::t('app', 'Редактировать категорию: ', [
     'modelClass' => 'Item Cat',

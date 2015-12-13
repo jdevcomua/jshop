@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\common\models\Users */
+/* @var $model common\models\Users */
 
 $this->title = Yii::t('app', 'Редактировать пользователя: ', [
     'modelClass' => 'Users',

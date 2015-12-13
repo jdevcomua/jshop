@@ -26,25 +26,33 @@ AppAsset::register($this);
 
     <div class="wrap">
         <?php
+        NavBar::begin([
+            'brandLabel' => 'My Company',
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 Yii::$app->user->isGuest ?
-                    ['label' => 'Login', 'url' => ['/site/login']] :
+                    ['label' => 'Login', 'url' => ['/site3/login']] :
                     [
                         'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                        'url' => ['/site/logout'],
+                        'url' => ['/site3/logout'],
                         'linkOptions' => ['data-method' => 'post']
                     ],
             ],
         ]);
+        NavBar::end();
         ?>
 
         <div class="container">
            <!-- <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?> -->
-        <?php if(!Yii::$app->user->isGuest){ ?>
+
             <div class="frame_nav header-menu-out">
                 <table>
                     <tbody><tr><td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
@@ -177,7 +185,7 @@ AppAsset::register($this);
                             </ul>
                         </td></tr>
             </tbody></table></div>
-        <?php }?>
+
             <?= $content ?>
         </div>
     </div>
@@ -186,7 +194,6 @@ AppAsset::register($this);
         <div class="container">
             <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-            <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
 

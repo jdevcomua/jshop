@@ -17,7 +17,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\User[]|array
+     * @return \common\models\User[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class UserQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\User|array|null
+     * @return \common\models\User|array|null
      */
     public function one($db = null)
     {

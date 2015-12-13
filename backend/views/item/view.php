@@ -5,7 +5,7 @@ use yii\widgets\LinkPager;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\common\models\Item */
+/* @var $model common\models\Item */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Товары'), 'url' => ['index']];
@@ -35,5 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
         ],
     ]) ?>
+
+    <img src="<?php echo $model->getImageUrl();?>" />
 
 </div>

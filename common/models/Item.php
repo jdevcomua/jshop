@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "item".
@@ -19,12 +20,26 @@ use Yii;
  */
 class Item extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var UploadedFile
+     */
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'item';
+    }
+
+    public static function getPath(){
+        return Yii::getAlias('@frontend').'/web/img/';
+    }
+
+    public function getImageUrl(){
+        return 'http://frontend.dev/img/'.$this->image;
     }
 
     /**
@@ -34,13 +49,22 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             [['category_id'], 'integer'],
-            [['title', 'cost', 'image'], 'required'],
+            [['title', 'cost'], 'required'],
             [['cost'], 'number'],
             [['title'], 'string', 'max' => 250],
             [['image'], 'string', 'max' => 25],
-            [['title'], 'unique'],
-            [['title'], 'unique']
+            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         ];
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->setAttribute('image', $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

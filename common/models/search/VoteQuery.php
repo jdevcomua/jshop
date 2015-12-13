@@ -17,7 +17,7 @@ class VoteQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\Vote[]|array
+     * @return \common\models\Vote[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class VoteQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return \app\common\models\Vote|array|null
+     * @return \common\models\Vote|array|null
      */
     public function one($db = null)
     {

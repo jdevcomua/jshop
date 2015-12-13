@@ -42,9 +42,9 @@ class Orders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'ID пользователя',
-            'timestamp' => 'Время создания',
+            'id' => Yii::t('app', 'ID'),
+            'user_id' => Yii::t('app', 'ID пользователя'),
+            'timestamp' => Yii::t('app', 'Время создания'),
         ];
     }
 
@@ -62,14 +62,5 @@ class Orders extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return \common\models\search\OrdersQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \common\models\search\OrdersQuery(get_called_class());
     }
 }

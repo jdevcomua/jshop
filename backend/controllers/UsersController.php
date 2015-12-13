@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Users;
-use yii\data\ActiveDataProvider;
+use common\models\search\UsersSearch;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -13,23 +13,17 @@ use yii\web\NotFoundHttpException;
 class UsersController extends Controller
 {
 
-    public $layout = 'main3';
-
-
     /**
      * Lists all Users models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Users::find(),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+        $searchModel = new UsersSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

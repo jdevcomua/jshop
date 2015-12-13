@@ -2,13 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\search\ItemSearch;
 use Yii;
 use common\models\Item;
-use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
-use yii\filters\VerbFilter;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -16,22 +14,23 @@ use yii\filters\VerbFilter;
 class ItemController extends Controller
 {
 
-    public $layout = 'main3';
-
     /**
      * Lists all Item models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
+        $searchModel = new ItemSearch();
+        /*$dataProvider = new ActiveDataProvider([
             'query' => Item::find(),
             'pagination' => [
                 'pageSize' => 10,
             ],
-        ]);
+        ]);*/
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

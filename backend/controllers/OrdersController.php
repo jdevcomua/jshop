@@ -4,17 +4,13 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Orders;
-use yii\data\ActiveDataProvider;
+use common\models\search\OrdersSearch;
 use yii\web\NotFoundHttpException;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
  */
-class OrdersController extends Controller
-{
-
-    public $layout = 'main3';
-
+class OrdersController extends Controller{
 
     /**
      * Lists all Orders models.
@@ -22,14 +18,11 @@ class OrdersController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Orders::find(),
-            'pagination' => [
-                'pageSize' => 10,
-            ]
-        ]);
+        $searchModel = new OrdersSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

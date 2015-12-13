@@ -3,16 +3,11 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use common\models\LoginForm;
 use common\models\ContactForm;
 
 class SiteController extends Controller
 {
-
-    public $layout = 'main3';
-
 
     public function actions()
     {

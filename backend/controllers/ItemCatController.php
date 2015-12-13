@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\ItemCat;
-use yii\data\ActiveDataProvider;
+use common\models\search\ItemCatSearch;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -12,8 +12,6 @@ use yii\web\NotFoundHttpException;
  */
 class ItemCatController extends Controller
 {
-    public $layout = 'main3';
-
 
     /**
      * Lists all ItemCat models.
@@ -21,14 +19,11 @@ class ItemCatController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ItemCat::find(),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
+        $searchModel = new ItemCatSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

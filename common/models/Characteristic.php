@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "characteristic".
@@ -24,6 +25,22 @@ class Characteristic extends \yii\db\ActiveRecord
         return 'characteristic';
     }
 
+    public function getCategoryTitle(){
+        return $this->category->title;
+    }
+
+    public static function getCategorys()
+    {
+        // Выбираем только те категории, у которых есть дочерние категории
+        $parents = Characteristic::find()
+            ->select(['i.title'])
+            ->join('JOIN', 'item_cat i', 'characteristic.category_id = i.id')
+            ->distinct(true)
+            ->all();
+
+        return ArrayHelper::map($parents, 'title', 'title');
+    }
+
     /**
      * @inheritdoc
      */
@@ -42,8 +59,9 @@ class Characteristic extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'Category ID'),
-            'title' => Yii::t('app', 'Title'),
+            'category_id' => Yii::t('app', 'ID категории'),
+            'title' => Yii::t('app', 'Название'),
+            'categoryTitle' => Yii::t('app', 'Категория'),
         ];
     }
 

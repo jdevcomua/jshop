@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "item".
@@ -24,6 +25,10 @@ class Item extends \yii\db\ActiveRecord
      * @var UploadedFile
      */
     public $imageFile;
+
+    public function getCategoryTitle(){
+        return $this->category->title;
+    }
 
     /**
      * @inheritdoc
@@ -80,6 +85,7 @@ class Item extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
             'image' => Yii::t('app', 'Изображение'),
+            'categoryTitle' => Yii::t('app', 'Категория'),
         ];
     }
 
@@ -97,6 +103,18 @@ class Item extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'category_id']);
+    }
+
+    public static function getCategorys()
+    {
+        // Выбираем только те категории, у которых есть дочерние категории
+        $parents = Item::find()
+            ->select(['i.title'])
+            ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
+            ->distinct(true)
+            ->all();
+
+        return ArrayHelper::map($parents, 'title', 'title');
     }
 
     /**

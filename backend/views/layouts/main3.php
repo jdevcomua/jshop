@@ -83,14 +83,14 @@ AppAsset::register($this);
                                         Категории товаров </a></li>
                                 <li><a href="?r=item">
                                         Список товаров</a></li>
+                                <li><a href="?r=characteristic">
+                                        Свойства товаров</a></li>
                                 <li><a href="/admin/components/run/shop/kits/index">
                                         Наборы товаров </a></li>
                                 <li><a href="/admin/components/run/shop/search?WithoutImages=1">
                                         Товары без картинок </a></li>
                                 <li><a href="/admin/components/run/shop/brands/index">
                                         Бренды </a></li>
-                                <li><a href="/admin/components/run/shop/properties/index">
-                                        Свойства товаров</a></li>
                             </ul></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователи</a>

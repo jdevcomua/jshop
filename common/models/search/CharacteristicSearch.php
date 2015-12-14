@@ -12,6 +12,9 @@ use common\models\Characteristic;
  */
 class CharacteristicSearch extends Characteristic
 {
+
+    public $categoryTitle;
+
     /**
      * @inheritdoc
      */
@@ -20,6 +23,7 @@ class CharacteristicSearch extends Characteristic
         return [
             [['id', 'category_id'], 'integer'],
             [['title'], 'safe'],
+            [['categoryTitle'], 'safe']
         ];
     }
 
@@ -47,11 +51,21 @@ class CharacteristicSearch extends Characteristic
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $dataProvider->setSort([
+            'attributes' => [
+                'id', 'title',
+                'categoryTitle' => [
+                    'asc' => ['item_cat.title' => SORT_ASC],
+                    'desc' => ['item_cat.title' => SORT_DESC],
+                    'label' => 'Category Title'
+                ]
+            ]
+        ]);
 
-        if (!$this->validate()) {
+        if (!($this->validate() && $this->load($params))) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith(['category']);
             return $dataProvider;
         }
 
@@ -61,6 +75,10 @@ class CharacteristicSearch extends Characteristic
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);
+
+        $query->joinWith(['category' => function ($q) {
+            $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
+        }]);
 
         return $dataProvider;
     }

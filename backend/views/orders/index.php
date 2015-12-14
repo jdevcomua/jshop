@@ -7,15 +7,15 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Orders');
+$this->title = Yii::t('app', 'Заказы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orders-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Orders'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Создать заказ'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

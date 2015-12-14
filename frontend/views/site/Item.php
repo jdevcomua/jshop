@@ -22,7 +22,7 @@
 </div></div>
 <div class="content">
     <br>
-
+<?php /* @var $item common\models\Item */ ?>
     <div class="frame-inside page-product">
         <div class="container">
             <div class="clearfix">
@@ -253,6 +253,13 @@
                                         <div class="product-charac patch-product-view showHidePart">
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
                                                 <tbody>
+                                                <?php foreach($item->getCharacteristicItems()->all() as $i => $value){
+                                                    /* @var $value common\models\CharacteristicItem*/
+                                                    echo "<tr><td>".$value->getCharacteristic()->one()['title']."</td>";
+                                                    echo "<td>".$value->value."</td></tr>";
+                                                }
+                                                //var_dump($item->getCategory()->one()['title']);
+                                                ?>
                                                 <tr>
                                                     <td>-</td><td>-</td></tr>
                                                 <tr>

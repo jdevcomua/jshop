@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "item".
@@ -14,13 +13,13 @@ use yii\web\UploadedFile;
  * @property double $cost
  * @property string $image
  *
+ * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
  * @property OrderItem[] $orderItems
  * @property Vote[] $votes
  */
 class Item extends \yii\db\ActiveRecord
 {
-
     /**
      * @var UploadedFile
      */
@@ -57,6 +56,9 @@ class Item extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function upload()
     {
         if ($this->validate()) {
@@ -79,6 +81,14 @@ class Item extends \yii\db\ActiveRecord
             'cost' => Yii::t('app', 'Стоимость'),
             'image' => Yii::t('app', 'Изображение'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCharacteristicItems()
+    {
+        return $this->hasMany(CharacteristicItem::className(), ['item_id' => 'id']);
     }
 
     /**

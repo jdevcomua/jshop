@@ -71,10 +71,10 @@ class Vote extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \common\models\search\VoteQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\search\VoteQuery(get_called_class());
+        return new \yii\db\ActiveQuery(get_called_class());
     }
 }

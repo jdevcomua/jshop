@@ -414,56 +414,14 @@
                                                 <div class="frame-drop-comment" data-rel="whoCloneAddPaste">
                                                     <div class="form-comment layout-highlight frame-comments">
                                                         <div class="inside-padd horizontal-form">
-                                                            <form>
-                                                                <label class="err-label">
-                        <span class="frame-form-field">
-                            <div class="frame-label error" name="error_text"></div>
-                        </span>
-                                                                </label>
-
-                                                                <label>
-                                                                    <span class="title">Ваше имя</span>
-                        <span class="frame-form-field">
-                            <input type="text" name="comment_author" value="">
-                        </span>
-                                                                </label>
-                                                                <label>
-                                                                    <span class="title">E-mail </span>
-                        <span class="frame-form-field">
-                            <input type="text" name="comment_email" value="">
-                        </span>
-                                                                </label>
-                                                                <label>
-                                                                    <span class="title">Ответ</span>
-                        <span class="frame-form-field">
-                            <textarea class="comment_text" name="comment_text"></textarea>
-                        </span>
-                                                                </label>
-                                                                <div class="frame-label">
-                        <span class="frame-form-field">
-                            <input type="hidden" id="parent" name="comment_parent" value="">
-                            <span class="btn-form">
-                                <input type="submit" value="Комментировать" onclick="Comments.post(this, {'visibleMainForm': '0'})">
-                            </span>
-                        </span>
-                                                                </div>
-                                                            </form>
+                                                            <?= $this->render('vote', [
+                                                                'vote' => new \common\models\Vote(), 'model'=> $item
+                                                            ]) ?>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="d_n" id="useModeration">
-                                                <div class="usemoderation">
-                                                    <div class="msg">
-                                                        <div class="success">
-                                                            Ваш комментарий будет опубликован после модерации администратором            </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <script>
-                                                var _useModeration = 0;
-                                            </script>                    </div>
+               </div>
                                         <!--End. Comments block-->
                                     </div>
                                 </div>
@@ -491,15 +449,7 @@
                                     <div class="preloader"></div>
                                 </div>
                             </div>
-                            <!--Block Accessories Start-->
-                            <div id="fourth" class="accessories" style="">
-                                <div class="inside-padd">
-                                    <h2 class="m-b_30">С этим товаром покупают</h2>
-                                    <ul class="items items-default">
-                                        <div class="preloader"></div>
-                                    </ul>
-                                </div>
-                            </div>
+
                         </div>
                         <!-- End. Tabs block-->
                     </div>

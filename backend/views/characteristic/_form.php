@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList(\common\models\ItemCat::getCategorys_Id_Title()) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

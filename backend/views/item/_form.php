@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="item-form">
@@ -13,7 +14,7 @@ use yii\widgets\ActiveForm;
     <div style="width: 600px; float:left;">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList(\common\models\ItemCat::getCategorys_Id_Title()) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

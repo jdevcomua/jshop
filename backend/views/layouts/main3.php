@@ -78,11 +78,11 @@ AppAsset::register($this);
                             </ul></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Каталог товаров</a>
-                            <ul class="dropdown-menu"><li class="active">
-                                    <a href="?r=item-cat">
-                                        Категории товаров </a></li>
+                            <ul class="dropdown-menu">
                                 <li><a href="?r=item">
                                         Список товаров</a></li>
+                                <li><a href="?r=item-cat">
+                                        Категории товаров </a></li>
                                 <li><a href="?r=characteristic">
                                         Свойства товаров</a></li>
                                 <li><a href="/admin/components/run/shop/kits/index">

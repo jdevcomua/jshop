@@ -5,8 +5,11 @@ namespace backend\controllers;
 use common\models\search\ItemSearch;
 use Yii;
 use common\models\Item;
+use backend\models\CharacteristicsForm;
+use common\models\CharacteristicItem;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use common\models\search\CharacteristicItemSearch;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -42,8 +45,13 @@ class ItemController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new CharacteristicItemSearch();
+        $searchModel->item_id = $id;
+        $characteristics = $searchModel->search([
+            'item_id' => $id,
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id), 'characteristics' => $characteristics
         ]);
     }
 
@@ -57,21 +65,53 @@ class ItemController extends Controller
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $model->upload();
+            if(isset($model->imageFile)){
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->upload();
+            }
             if($model->save()){
-                $filename = $model->imageFile->baseName ;
-                if(file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
-                    $filename = $filename.rand(1, 20);
+                if(isset($model->imageFile)) {
+                    $filename = $model->imageFile->baseName;
+                    if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
+                        $filename = $filename . rand(1, 20);
+                    }
+                    $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
                 }
-                $model->imageFile->saveAs(Item::getPath().$filename.'.'.$model->imageFile->extension);
-                return $this->redirect(['view', 'id' => $model->id]);
+                /*return $this->render('characteristics', [
+                    'model' => $model,
+                ]);*/
+                return $this->redirect(['characteristics', 'id' => $model->id]);
             }
         }
             return $this->render('create', [
                 'model' => $model,
             ]);
 
+    }
+
+    public function actionCharacteristics($id){
+        if (Yii::$app->request->post()) {
+            foreach(Yii::$app->request->post() as $value){
+                if(is_array($value)) {
+                    foreach ($value as $v) {
+                        if(is_array($v)) {
+                            foreach($v as $v2){
+                                /* @var $newCh CharacteristicItem*/
+                                $newCh = new CharacteristicItem();
+                                $newCh->characteristic_id = $v2[0];
+                                $newCh->item_id = $v2[1];
+                                $newCh->value = $v2[2];
+                                $newCh->save();
+                            }
+                        }
+                    }
+                }
+            }
+            return $this->redirect(['view', 'id' => $id]);
+        }
+        return $this->render('characteristics', [
+            'item' => $this->findModel($id), 'model' => new CharacteristicsForm()
+        ]);
     }
 
     /**
@@ -90,11 +130,13 @@ class ItemController extends Controller
                 $model->upload();
             }
             if($model->save()){
-                $filename = $model->imageFile->baseName ;
-                if(file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
-                    $filename = $filename.rand(1, 20);
+                if(isset($model->imageFile)) {
+                    $filename = $model->imageFile->baseName;
+                    if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
+                        $filename = $filename . rand(1, 20);
+                    }
+                    $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
                 }
-                $model->imageFile->saveAs(Item::getPath().$filename.'.'.$model->imageFile->extension);
                 if(isset($lastImage)){
                     if(file_exists(Item::getPath().$lastImage)){
                         unlink(Item::getPath().$lastImage);

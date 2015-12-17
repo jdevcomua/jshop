@@ -66,7 +66,7 @@ class Item extends \yii\db\ActiveRecord
      */
     public function upload()
     {
-        if ($this->validate()) {
+        if (isset($this->imageFile)) {
             $this->setAttribute('image', $this->imageFile->baseName . '.' . $this->imageFile->extension);
             return true;
         } else {
@@ -81,7 +81,7 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'ID категории'),
+            'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
             'image' => Yii::t('app', 'Изображение'),
@@ -107,7 +107,7 @@ class Item extends \yii\db\ActiveRecord
 
     public static function getCategorys()
     {
-        // Выбираем только те категории, у которых есть дочерние категории
+        //Категории, в которых есть предметы
         $parents = Item::find()
             ->select(['i.title'])
             ->join('JOIN', 'item_cat i', 'item.category_id = i.id')

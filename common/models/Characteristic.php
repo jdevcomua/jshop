@@ -59,7 +59,7 @@ class Characteristic extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'ID категории'),
+            'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'categoryTitle' => Yii::t('app', 'Категория'),
         ];

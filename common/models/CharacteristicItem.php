@@ -25,6 +25,10 @@ class CharacteristicItem extends \yii\db\ActiveRecord
         return 'characteristic_item';
     }
 
+    public function getCharacteristicTitle(){
+        return $this->characteristic->title;
+    }
+
     /**
      * @inheritdoc
      */
@@ -43,9 +47,10 @@ class CharacteristicItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'item_id' => Yii::t('app', 'Item ID'),
-            'characteristic_id' => Yii::t('app', 'Characteristic ID'),
-            'value' => Yii::t('app', 'Value'),
+            'item_id' => Yii::t('app', 'ID товара'),
+            'characteristic_id' => Yii::t('app', 'ID характеристики'),
+            'value' => Yii::t('app', 'Значение'),
+            'characteristicTitle' => Yii::t('app', 'Характеристика'),
         ];
     }
 

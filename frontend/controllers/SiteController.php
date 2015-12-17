@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Vote;
 use Yii;
 use yii\web\Controller;
 

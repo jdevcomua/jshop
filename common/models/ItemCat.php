@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "item_cat".
@@ -10,6 +11,7 @@ use Yii;
  * @property integer $id
  * @property string $title
  *
+ * @property Characteristic[] $characteristics
  * @property Item[] $items
  */
 class ItemCat extends \yii\db\ActiveRecord
@@ -44,6 +46,16 @@ class ItemCat extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getCategorys_Id_Title()
+    {
+        // Выбираем только те категории, у которых есть дочерние категории
+        $parents = ItemCat::find()
+            ->distinct(true)
+            ->all();
+
+        return ArrayHelper::map($parents, 'id', 'title');
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -53,11 +65,19 @@ class ItemCat extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCharacteristics()
+    {
+        return $this->hasMany(Characteristic::className(), ['category_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
-     * @return \common\models\search\ItemCatQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\search\ItemCatQuery(get_called_class());
+        return new \yii\db\ActiveQuery(get_called_class());
     }
 }

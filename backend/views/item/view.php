@@ -2,14 +2,18 @@
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\grid\GridView;
 use yii\widgets\DetailView;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
+/* @var $characteristics yii\data\ActiveDataProvider */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Товары'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="item-view">
 
@@ -26,16 +30,34 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <div style="width: 100%;">
+        <div style="width: 550px; float:left;">
+            <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'category_id',
+            'categoryTitle',
             'title',
             'cost',
         ],
     ]) ?>
 
-    <img src="<?php echo $model->getImageUrl();?>" />
+    <?= GridView::widget([
+        'dataProvider' => $characteristics,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'characteristicTitle',
+            'value',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+        </div></div>
+    <?php if($model->image != ""){
+        echo "<div style=\"width: 500px; float:left; padding-left: 50px;\">";
+        echo "<img width=\"500px\" src=\"".$model->getImageUrl()."\" /></div>";
+    }?>
+
 
 </div>

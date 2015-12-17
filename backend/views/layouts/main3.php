@@ -37,10 +37,10 @@ AppAsset::register($this);
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 Yii::$app->user->isGuest ?
-                    ['label' => 'Login', 'url' => ['/site3/login']] :
+                    ['label' => 'Login', 'url' => ['/site/login']] :
                     [
                         'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                        'url' => ['/site3/logout'],
+                        'url' => ['/site/logout'],
                         'linkOptions' => ['data-method' => 'post']
                     ],
             ],
@@ -95,7 +95,7 @@ AppAsset::register($this);
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователи</a>
                             <ul class="dropdown-menu">
-                                <li><a href="?r=users">
+                                <li><a href="?r=user">
                                         Список пользователей </a></li>
                                 <li><a href="/admin/rbac/roleList">
                                         Управление правами доступа </a></li>

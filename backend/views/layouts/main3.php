@@ -60,7 +60,7 @@ AppAsset::register($this);
                                 <!--<span class="menu-counter">4</span>--> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="?r=orders">
-                                        Список заказов </li>
+                                        Список заказов </a></li>
                                 <li><a href="/admin/components/run/shop/orderstatuses">
                                         Статусы заказов</a></li>
                                 <li class="divider"></li>

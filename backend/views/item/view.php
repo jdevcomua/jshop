@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div style="width: 100%;">
         <div style="width: 550px; float:left;">
-            <?= DetailView::widget([
+     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
         ],
     ]) ?>
-
+     <?= Html::a(Yii::t('app', 'Редактировать'), ['updatecharacteristics', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     <?= GridView::widget([
         'dataProvider' => $characteristics,
         'columns' => [
@@ -49,8 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'characteristicTitle',
             'value',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
         </div></div>

@@ -75,7 +75,7 @@ class ItemSearch extends Item
             'cost' => $this->cost,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
+        $query->andFilterWhere(['like', 'item.title', $this->title])
             ->andFilterWhere(['like', 'image', $this->image]);
 
         $query->joinWith(['category' => function ($q) {

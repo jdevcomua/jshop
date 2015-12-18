@@ -1,33 +1,22 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Characteristic;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\CharacteristicsForm*/
-/* @var $item common\models\Item */
-/* @var $form yii\widgets\ActiveForm */
-
-?>
-
-<div class="item-form">
-    <?php $form = ActiveForm::begin();
-    /* @var $category common\models\ItemCat */
-    $category = $item->getCategory()->one();
-    $characteristics = $category->getCharacteristics()->all();
-    foreach($characteristics as $key => $value){
-        /* @var $value common\models\Characteristic */?>
-        <?= $form->field($model, 'inputs['.$key.'][0]')->hiddenInput(['value' => $value->id])->label("") ?>
-        <?= $form->field($model, 'inputs['.$key.'][1]')->hiddenInput(['value' => $item->id])->label("") ?>
-        <?= $form->field($model, 'inputs['.$key.'][2]')->textInput()->label($value->title) ?>
-        <?php
+$form = ActiveForm::begin();
+echo "<div style=\"width: 100%; padding-left: 15px; margin-top: 20px;\">";
+foreach ($characteristics as $index => $characteristic) {
+    if(isset($characteristic->characteristic_id)) {
+        /* @var $characteristic common\models\CharacteristicItem */
+        echo "<div style=\"width: 500px; float:left; padding-right: 50px;\">";
+        echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());
+        echo "</div>";
     }
-    ?>
+}
+echo "</div>";
+echo "<div style=\"width: 100%; padding-left: 15px; float: right;\" class=\"form-group\">";
+echo Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'button']);
+echo "</div>";
 
-    <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
+ActiveForm::end();
+?>

@@ -260,16 +260,6 @@
                                                 }
                                                 //var_dump($item->getCategory()->one()['title']);
                                                 ?>
-                                                <tr>
-                                                    <td>-</td><td>-</td></tr>
-                                                <tr>
-                                                    <td>-</td><td>-</td></tr>
-                                                <tr>
-                                                    <td>-</td><td>-</td></tr>
-                                                <tr>
-                                                    <td>-</td><td>-</td></tr>
-                                                <tr>
-                                                    <td>-</td><td>-</td></tr>
                                                 </tbody>
                                             </table>                    </div>
                                         <button class="t-d_n f-s_0 s-all-d ref2 d_n_" data-trigger="[data-href='#first']" data-scroll="true">
@@ -286,10 +276,6 @@
                                             <h2>...</h2>
                                             <p></p>                      </div>
                                     </div>
-                                    <button class="t-d_n f-s_0 s-all-d ref2 d_n_ d_i-b hidePart" data-trigger="[data-href='#second']" data-scroll="true">
-                                        <span class="icon_arrow"></span>
-                                        <span class="text-el">Смотреть все</span>
-                                    </button>
                                     <!--                        End. Description block-->
                                 </div>
 
@@ -298,54 +284,10 @@
                                     <div class="frame-form-comment">
                                         <div class="forComments p_r">
                                             <div class="comments" id="comments">
-                                                <div class="title-comment">Отзывы <button data-drop=".comments-main-form" data-place="inherit" data-overlay-opacity="0" data-after="Comments.toComment" class="m-l_5 isDrop"><span class="ref2 f-w_b">+</span> <span class="d_l_3">Добавить отзыв</span></button></div>
+                                                <div class="title-comment">Отзывы </div>
                                                 <div class="drop comments-main-form  active inherit">
                                                     <div class="frame-comments layout-highlight horizontal-form">
-                                                        <!-- Start of new comment fild -->
-                                                        <div class="form-comment main-form-comments">
-                                                            <div class="inside-padd">
-                                                                <form method="post">
-                                                                    <div class="mainPlace"></div>
-                                                                    <div class="clearfix">
-                                                                        <label style="width: 40%;float: left;">
-                                                                            <span class="title">Имя</span>
-                                <span class="frame-form-field">
-                                    <input type="text" name="comment_author" value="">
-                                </span>
-                                                                        </label>
-                                                                        <label style="width: 60%;float: left;">
-                                                                            <span class="title t-a_r">E-mail</span>
-                                <span class="frame-form-field">
-                                    <input type="text" name="comment_email" id="comment_email" value="">
-                                </span>
-                                                                        </label>
-                                                                    </div>
-                                                                    <label>
-                                                                        <span class="title">Отзыв</span>
-                            <span class="frame-form-field">
-                                <textarea name="comment_text" class="comment_text"></textarea>
-                            </span>
-                                                                    </label>
-                                                                    <!-- End star reiting -->
-                                                                    <!-- Start star reiting -->
-                                                                    <div class="frame-label">
-                                                                        <span class="title f_l t-a_l">Оценка</span>
-                                                                        <div class="frame-form-field">
-                                                                            <div class="star f_l">
-                                                                                <div class="productRate star-big clicktemprate">
-                                                                                    <div class="for_comment" style="width: 0%"></div>
-                                                                                    <input class="ratec" name="ratec" type="hidden" value="">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="btn-def f_r">
-                                                                                <input type="submit" value="Оставить отзыв" onclick="Comments.post(this,{'visibleMainForm': '1'}, '.mainPlace')">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                            <!-- End of new comment fild -->
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="frame-list-comments">
@@ -374,11 +316,7 @@
                                                                         <p>...</p>
                                                                     </div>
                                                                     <div class="footer-comment clearfix">
-                                                                        <div class="btn f_l">
-                                                                            <button type="button" data-rel="cloneAddPaste" data-parid="3">
-                                                                                <span class="text-el d_l_3">Ответить</span>
-                                                                            </button>
-                                                                        </div>
+
                                                                         <div class="frame-mark f_r">
                                                                             <div class="func-button-comment">
                                                                                 <span class="s-t">Отзыв полезен?</span>
@@ -405,10 +343,6 @@
                                                             </div>
                                                         </li>
                                                     </ul>
-                                                    <button class="t-d_n f-s_0 s-all-d ref2 d_n_" data-trigger="[data-href='#comment']" data-scroll="true">
-                                                        <span class="icon_arrow"></span>
-                                                        <span class="text-el">Смотреть все ответы</span>
-                                                    </button>
                                                 </div>
 
                                                 <div class="frame-drop-comment" data-rel="whoCloneAddPaste">

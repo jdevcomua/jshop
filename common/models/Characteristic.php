@@ -15,7 +15,7 @@ use yii\helpers\ArrayHelper;
  * @property ItemCat $category
  * @property CharacteristicItem[] $characteristicItems
  */
-class Characteristic extends \yii\db\ActiveRecord
+class Characteristic extends Model
 {
     /**
      * @inheritdoc
@@ -23,6 +23,10 @@ class Characteristic extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'characteristic';
+    }
+
+    public function getTranslateColumns(){
+        return ['title'];
     }
 
     public function getCategoryTitle(){

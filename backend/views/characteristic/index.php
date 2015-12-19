@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use backend\models\UrlHelper;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\CharacteristicSearch */
@@ -16,23 +18,39 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Создать характеристику'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?=Html::beginForm(['del'],'post');?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'name' => 'id',
+                // you may configure additional properties here
+                'checkboxOptions' => function ($model, $key, $index, $column) {
+                    return ['value' => $model->id];
+                }
+            ],
             'id',
             'title',
             [
                 'attribute'=>'categoryTitle',
                 'filter'=>\common\models\Characteristic::getCategorys(),
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return [Yii::$app->language.'/characteristic/'.$action,'id'=>$model->id];
+                }
+            ],
         ],
     ]); ?>
+
+    <?=Html::submitButton('Удалить', ['class' => 'btn btn-info',]);?>
+    <?= Html::endForm();?>
 
 </div>

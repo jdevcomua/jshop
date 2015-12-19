@@ -8,6 +8,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
+use backend\models\UrlHelper;
+use yii\helpers\Url;
+use Yii;
 
 AppAsset::register($this);
 ?>
@@ -28,14 +31,19 @@ AppAsset::register($this);
         <?php
         NavBar::begin([
             'brandLabel' => 'My Company',
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandUrl' => UrlHelper::to(['/']),
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
         ]);
+        $url1 = Url::to(["site/language", "lang" => 'ru']);
+        $url2 = Url::to(["site/language", "lang" => 'en']);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
+                "<a href='$url1'><img src='http://www.iconsearch.ru/uploads/icons/flags/32x32/russianfederation.png'/></a>",
+                "<a href='$url2'><img src='http://www.iconsearch.ru/uploads/icons/flags/32x32/unitedstatesofamerica(usa).png'/></a>",
+
                 Yii::$app->user->isGuest ?
                     ['label' => 'Login', 'url' => ['/site/login']] :
                     [
@@ -59,7 +67,7 @@ AppAsset::register($this);
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Заказы
                                 <!--<span class="menu-counter">4</span>--> </a>
                             <ul class="dropdown-menu">
-                                <li><a href="?r=orders">
+                                <li><a href="<?php echo UrlHelper::to(['order-item/index'])?>">
                                         Список заказов </a></li>
                                 <li><a href="/admin/components/run/shop/orderstatuses">
                                         Статусы заказов</a></li>
@@ -79,11 +87,11 @@ AppAsset::register($this);
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Каталог товаров</a>
                             <ul class="dropdown-menu">
-                                <li><a href="?r=item">
+                                <li><a href="<?php echo UrlHelper::to(['item/index'])?>">
                                         Список товаров</a></li>
-                                <li><a href="?r=item-cat">
+                                <li><a href="<?php echo UrlHelper::to(['item-cat/index'])?>">
                                         Категории товаров </a></li>
-                                <li><a href="?r=characteristic">
+                                <li><a href="<?php echo UrlHelper::to(['characteristic/index'])?>">
                                         Свойства товаров</a></li>
                                 <li><a href="/admin/components/run/shop/kits/index">
                                         Наборы товаров </a></li>
@@ -95,7 +103,7 @@ AppAsset::register($this);
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователи</a>
                             <ul class="dropdown-menu">
-                                <li><a href="?r=user">
+                                <li><a href="<?php echo UrlHelper::to(['user/index'])?>">
                                         Список пользователей </a></li>
                                 <li><a href="/admin/rbac/roleList">
                                         Управление правами доступа </a></li>

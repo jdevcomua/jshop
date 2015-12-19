@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Url;
 use yii\bootstrap\NavBar;
 use frontend\assets\AppAsset;
 
@@ -98,7 +99,7 @@ use frontend\assets\AppAsset;
                             
 <li>
             <button type="button" title="Магазин" data-drop-filter="next()" class="isDrop">
-            Магазин            <span class="icon-arrow-d"></span>
+                <?php echo \Yii::t('app', 'Магазин');?>            <span class="icon-arrow-d"></span>
         </button>
         <ul class="sub-menu"><li><a href="http://active.imagecmsdemo.net/o-magazine" target="_self" title="О магазине">О магазине</a></li>
 
@@ -110,13 +111,19 @@ use frontend\assets\AppAsset;
 
 <li>
             <a href="http://active.imagecmsdemo.net/novosti" target="_self" title="Новости">
-            Новости        </a>
+                <?php echo \Yii::t('app', 'Новости');?>        </a>
     </li>
 
 <li>
             <a href="http://active.imagecmsdemo.net/kontakty" target="_self" title="Контакты">
-            Контакты        </a>
+                <?php echo \Yii::t('app', 'Контакты');?>        </a>
     </li>
+                            <li>
+                                <a href='<?php echo Url::to(["site/language", "lang" => 'ru'])?>'><img width="20" src='http://www.iconsearch.ru/uploads/icons/flags/32x32/russianfederation.png'/></a>
+                            </li>
+                            <li>
+                                <a href='<?php echo Url::to(["site/language", "lang" => 'en'])?>'><img width="20" src='http://www.iconsearch.ru/uploads/icons/flags/32x32/unitedstatesofamerica(usa).png'/></a>
+                            </li>
 
                         </ul>
                     </nav>
@@ -129,8 +136,9 @@ use frontend\assets\AppAsset;
                          echo Nav::widget([
                              'options' => ['class' => 'navbar-nav navbar-right'],
                              'items' => [
+
                                  Yii::$app->user->isGuest ?
-                                     ['label' => 'Login', 'url' => ['/site/login']] :
+                                     ['label' => \Yii::t('app', 'Войти'), 'url' => ['/site/login']] :
                                      [
                                          'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                                          'url' => ['/site/logout'],
@@ -153,7 +161,7 @@ use frontend\assets\AppAsset;
         <button>
             <span class="icon_cleaner"></span>
             <span class="text-cleaner">
-                <span class="text-el">Корзина пуста</span>
+                <span class="text-el"><?php echo \Yii::t('app', 'корзина пуста');?></span>
             </span>
         </button>
     </div>
@@ -164,11 +172,11 @@ use frontend\assets\AppAsset;
                     <div class="p_r">
                         <form name="search" method="get" action="">
                             <span class="btn-search">
-                                <button type="submit"><span class="text-el">Поиск</span></button>
+                                <button type="submit"><span class="text-el"><?php echo \Yii::t('app', 'поиск');?></span></button>
                             </span>
                             <div class="frame-search-input">
                                 <span class="icon_search"></span>
-                                <input type="text" class="input-search" id="inputString" name="search" autocomplete="off" value="" placeholder="Я ищу">
+                                <input type="text" class="input-search" id="inputString" name="search" autocomplete="off" value="" placeholder="<?php echo \Yii::t('app', 'Я ищу')?>">
                                 <div id="suggestions" class="drop drop-search"></div>
                             </div>
                         </form>

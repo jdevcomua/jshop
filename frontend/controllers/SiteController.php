@@ -3,13 +3,19 @@ namespace frontend\controllers;
 
 use common\models\Item;
 use common\models\ItemCat;
-use common\models\Vote;
+use frontend\models\UrlHelper;
 use Yii;
 use yii\web\Controller;
 
 class SiteController extends Controller{
 
+    public function actionLanguage($lang){
+        Yii::$app->language = $lang;
+        return $this->redirect(UrlHelper::to(['/']));
+    }
+
     function actionIndex(){
+        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $result1 = ItemCat::find()->all();
         if(isset($_GET['id'])){
             $item = Item::findOne($_GET['id']);

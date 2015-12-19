@@ -19,12 +19,16 @@ use yii\helpers\ArrayHelper;
  * @property OrderItem[] $orderItems
  * @property Vote[] $votes
  */
-class Item extends \yii\db\ActiveRecord
+class Item extends Model
 {
     /**
      * @var UploadedFile
      */
     public $imageFile;
+
+    public function getTranslateColumns(){
+        return ['title'];
+    }
 
     public function getCategoryTitle(){
         return $this->category->title;

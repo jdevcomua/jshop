@@ -6,6 +6,7 @@ use Yii;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
 use yii\web\NotFoundHttpException;
+use backend\models\UrlHelper;
 
 /**
  * ItemCatController implements the CRUD actions for ItemCat model.
@@ -26,6 +27,13 @@ class ItemCatController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionDel(){
+        foreach(Yii::$app->request->post()['id'] as $id){
+            $this->findModel($id)->delete();
+        }
+        return $this->redirect(UrlHelper::to(['item-cat/index']));
     }
 
     /**
@@ -50,7 +58,7 @@ class ItemCatController extends Controller
         $model = new ItemCat();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(UrlHelper::to(['item-cat/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -69,7 +77,7 @@ class ItemCatController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(UrlHelper::to(['item-cat/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -87,7 +95,7 @@ class ItemCatController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(UrlHelper::to(['item-cat/index']));
     }
 
     /**

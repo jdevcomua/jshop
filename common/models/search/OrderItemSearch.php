@@ -5,12 +5,12 @@ namespace common\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Orders;
+use common\models\OrderItem;
 
 /**
- * OrdersSearch represents the model behind the search form about `common\models\Orders`.
+ * OrderItemSearch represents the model behind the search form about `common\models\OrderItem`.
  */
-class OrdersSearch extends Orders
+class OrderItemSearch extends OrderItem
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class OrdersSearch extends Orders
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['timestamp'], 'safe'],
+            [['id', 'item_id', 'order_id'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class OrdersSearch extends Orders
      */
     public function search($params)
     {
-        $query = Orders::find();
+        $query = OrderItem::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -52,15 +51,16 @@ class OrdersSearch extends Orders
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith(['item']);
             return $dataProvider;
         }
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'timestamp' => $this->timestamp,
+            'item_id' => $this->item_id,
+            'order_id' => $this->order_id,
         ]);
-        $query->joinWith(['orderItems']);
+        $query->joinWith(['order', 'item']);
 
         return $dataProvider;
     }

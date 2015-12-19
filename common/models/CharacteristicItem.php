@@ -15,7 +15,7 @@ use Yii;
  * @property Item $item
  * @property Characteristic $characteristic
  */
-class CharacteristicItem extends \yii\db\ActiveRecord
+class CharacteristicItem extends Model
 {
     /**
      * @inheritdoc
@@ -23,6 +23,10 @@ class CharacteristicItem extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'characteristic_item';
+    }
+
+    public function getTranslateColumns(){
+        return ['value'];
     }
 
     public function getCharacteristicTitle(){

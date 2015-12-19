@@ -10,11 +10,18 @@ namespace backend\controllers;
 
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use Yii;
 
 class Controller extends \yii\web\Controller
 {
 
     public $layout = 'main3';
+
+    public function beforeAction($action)
+    {
+        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
+        return parent::beforeAction($action);
+    }
 
     public function behaviors()
     {

@@ -14,7 +14,7 @@ use Yii;
  * @property OrderItem[] $orderItems
  * @property User $user
  */
-class Orders extends \yii\db\ActiveRecord
+class Orders extends Model
 {
     /**
      * @inheritdoc
@@ -22,6 +22,10 @@ class Orders extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'orders';
+    }
+
+    public function getTranslateColumns(){
+        return [];
     }
 
     /**

@@ -30,7 +30,7 @@
                 <div class="frame-title">
                     <h1 class="title"><?php echo $category;?></h1>
                 </div>
-                <span class="count">Найдено <?php echo $count; ?> товаров</span>
+                <span class="count"><?php echo \Yii::t('app', 'Найдено {0} товаров', $count); ?></span>
             </div>
             <!-- End. Category name and count products in category-->
                         <!--Start. Banners block-->
@@ -41,7 +41,7 @@
             <div class="inside-padd clearfix">
                 <!-- Start. Order by block -->
                 <div class="frame-sort f_l">
-                    <span class="title s-t f_l">Сортировать:</span>
+                    <span class="title s-t f_l"><?php echo \Yii::t('app', 'Сортировать');?></span>
                     <ul class="nav-sort nav f_l" id="sort" name="order">
                         <li><button type="button" data-value="action" class="d_l_3">Акции</button></li>
                         <li><a href="?category=<?php echo "$category_id"; ?>&sort=asc" class="d_l_3">От дешевых к дорогим</a></li>

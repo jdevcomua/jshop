@@ -7,6 +7,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -21,6 +22,48 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+
+                '<language:(ru|en)>/'=>'site/index',
+                '<language:(ru|en)>/item'=>'item/index',
+                '<language:(ru|en)>/item/index'=>'item/index',
+                '<language:(ru|en)>/item/update'=>'item/update',
+                '<language:(ru|en)>/item/create'=>'item/create',
+                '<language:(ru|en)>/item/view'=>'item/view',
+                '<language:(ru|en)>/item-cat'=>'item-cat/index',
+                '<language:(ru|en)>/item-cat/index'=>'item-cat/index',
+                '<language:(ru|en)>/item-cat/update'=>'item-cat/update',
+                '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
+                '<language:(ru|en)>/item-cat/view'=>'item-cat/view',
+                '<language:(ru|en)>/characteristic/index'=>'characteristic/index',
+                '<language:(ru|en)>/characteristic'=>'characteristic/index',
+                '<language:(ru|en)>/characteristic/update'=>'characteristic/update',
+                '<language:(ru|en)>/characteristic/create'=>'characteristic/create',
+                '<language:(ru|en)>/characteristic/view'=>'characteristic/view',
+                '<language:(ru|en)>/user/index'=>'user/index',
+                '<language:(ru|en)>/user'=>'user/index',
+                '<language:(ru|en)>/user/update'=>'user/update',
+                '<language:(ru|en)>/user/create'=>'user/create',
+                '<language:(ru|en)>/user/view'=>'user/view',
+                '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@backend/messages',
+                    'sourceLanguage' => 'ru',
+                    'fileMap' => [
+                        'app' => 'index.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

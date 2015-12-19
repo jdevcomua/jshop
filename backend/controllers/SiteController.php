@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\UrlHelper;
 use Yii;
 use common\models\LoginForm;
 use common\models\ContactForm;
+use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -20,6 +22,11 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionLanguage($lang){
+        Yii::$app->language = $lang;
+        return $this->redirect(UrlHelper::to(['/']));
     }
 
     public function actionIndex()

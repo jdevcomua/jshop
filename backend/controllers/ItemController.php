@@ -5,7 +5,9 @@ namespace backend\controllers;
 use common\models\ItemCat;
 use common\models\search\ItemSearch;
 use yii\base\Model;
+use backend\models\UrlHelper;
 use Yii;
+use yii\helpers\Url;
 use common\models\Item;
 use common\models\Characteristic;
 use common\models\CharacteristicItem;
@@ -31,6 +33,23 @@ class ItemController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionView2()
+    {
+        $searchModel = new ItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('view2', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionDel(){
+        foreach(Yii::$app->request->post()['id'] as $id){
+            $this->findModel($id)->delete();
+        }
+        return $this->redirect(['index']);
     }
 
     /**
@@ -72,7 +91,7 @@ class ItemController extends Controller
                     }*/
                     $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
                 }
-                return $this->redirect(['characteristics', 'id' => $model->id]);
+                return $this->redirect(UrlHelper::to(['item/characteristics', 'id' => $model->id]));
             }
         }
             return $this->render('create', [
@@ -88,7 +107,7 @@ class ItemController extends Controller
             foreach ($characteristics as $characteristic) {
                 $characteristic->save(false);
             }
-            return $this->redirect(['view', 'id' => $id]);
+            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
         }
 
         return $this->render('characteristics', ['characteristics' => $characteristics]);
@@ -110,7 +129,7 @@ class ItemController extends Controller
                 /* @var $characteristic CharacteristicItem*/
                 $characteristic->save();
             }
-            return $this->redirect(['view', 'id' => $id]);
+            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
         }
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
@@ -146,7 +165,7 @@ class ItemController extends Controller
                     }
                 }
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -169,7 +188,7 @@ class ItemController extends Controller
             }
         }
         $model->delete();
-        return $this->redirect(['index']);
+        return $this->redirect(UrlHelper::to(['item/index']));
     }
 
     /**

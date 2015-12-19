@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
  * @property Characteristic[] $characteristics
  * @property Item[] $items
  */
-class ItemCat extends \yii\db\ActiveRecord
+class ItemCat extends Model
 {
     /**
      * @inheritdoc
@@ -24,6 +24,10 @@ class ItemCat extends \yii\db\ActiveRecord
         return 'item_cat';
     }
 
+    public function getTranslateColumns(){
+        return ['title'];
+    }
+
     /**
      * @inheritdoc
      */
@@ -31,7 +35,7 @@ class ItemCat extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
-            [['title'], 'string', 'max' => 50]
+            [['title'], 'string']
         ];
     }
 

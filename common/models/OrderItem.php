@@ -14,7 +14,7 @@ use Yii;
  * @property Item $item
  * @property Orders $order
  */
-class OrderItem extends \yii\db\ActiveRecord
+class OrderItem extends Model
 {
     /**
      * @inheritdoc
@@ -22,6 +22,10 @@ class OrderItem extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'order_item';
+    }
+
+    public function getTranslateColumns(){
+        return [];
     }
 
     /**
@@ -52,7 +56,7 @@ class OrderItem extends \yii\db\ActiveRecord
      */
     public function getItem()
     {
-        return $this->hasOne(Item::className(), ['id' => 'item_id']);
+        return $this->hasOne(Item::className(), ['id' => 'item_id']);//->joinWith('category');
     }
 
     /**
@@ -60,7 +64,7 @@ class OrderItem extends \yii\db\ActiveRecord
      */
     public function getOrder()
     {
-        return $this->hasOne(Orders::className(), ['id' => 'order_id']);
+        return $this->hasOne(Orders::className(), ['id' => 'order_id']);//->joinWith('user');
     }
 
     /**

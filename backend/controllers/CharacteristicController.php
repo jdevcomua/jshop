@@ -6,23 +6,19 @@ use Yii;
 use common\models\Characteristic;
 use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use backend\models\UrlHelper;
 
 /**
  * CharacteristicController implements the CRUD actions for Characteristic model.
  */
 class CharacteristicController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
+
+    public function actionDel(){
+        foreach(Yii::$app->request->post()['id'] as $id){
+            $this->findModel($id)->delete();
+        }
+        return $this->redirect(UrlHelper::to(['characteristic/index']));
     }
 
     /**
@@ -62,7 +58,7 @@ class CharacteristicController extends Controller
         $model = new Characteristic();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(UrlHelper::to(['characteristic/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,7 +77,7 @@ class CharacteristicController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(UrlHelper::to(['characteristic/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -99,7 +95,7 @@ class CharacteristicController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(UrlHelper::to(['characteristic/index']));
     }
 
     /**

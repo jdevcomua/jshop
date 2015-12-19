@@ -16,7 +16,7 @@ use Yii;
  * @property Item $item
  * @property User $user
  */
-class Vote extends \yii\db\ActiveRecord
+class Vote extends Model
 {
     /**
      * @inheritdoc
@@ -24,6 +24,10 @@ class Vote extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'vote';
+    }
+
+    public function getTranslateColumns(){
+        return [];
     }
 
     /**

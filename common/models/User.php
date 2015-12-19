@@ -15,13 +15,17 @@ use Yii;
  * @property Orders[] $orders
  * @property Vote[] $votes
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class User extends Model implements \yii\web\IdentityInterface
 {
 
     public $username;
     public $password;
     public $authKey;
     public $accessToken;
+
+    public function getTranslateColumns(){
+        return [];
+    }
 
     private static $users = [
         '100' => [

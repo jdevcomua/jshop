@@ -7,6 +7,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'frontend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -14,6 +15,27 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<language:(ru|en)>/'=>'site/',
+                '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'sourceLanguage' => 'ru',
+                    'fileMap' => [
+                        'app' => 'index.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',

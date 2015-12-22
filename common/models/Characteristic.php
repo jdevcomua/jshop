@@ -52,7 +52,7 @@ class Characteristic extends Model
     {
         return [
             [['category_id'], 'integer'],
-            [['title'], 'string', 'max' => 50]
+            [['title'], 'string']
         ];
     }
 

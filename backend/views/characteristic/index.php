@@ -14,14 +14,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="characteristic-index">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?= Html::encode($this->title) ?>
+        <?= Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
+
+    </h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?=Html::beginForm(['del'],'post');?>
+    <?=Html::beginForm(UrlHelper::to(['characteristic/group']),'post');?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -36,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ['value' => $model->id];
                 }
             ],
-            'id',
+            /*'id',*/
             'title',
             [
                 'attribute'=>'categoryTitle',
@@ -50,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?=Html::submitButton('Удалить', ['class' => 'btn btn-info',]);?>
+    <?=Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);?>
+    <?=Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);?>
     <?= Html::endForm();?>
 
 </div>

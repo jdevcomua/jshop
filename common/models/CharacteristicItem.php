@@ -40,7 +40,7 @@ class CharacteristicItem extends Model
     {
         return [
             [['item_id', 'characteristic_id'], 'integer'],
-            [['value'], 'string', 'max' => 50]
+            [['value'], 'string']
         ];
     }
 

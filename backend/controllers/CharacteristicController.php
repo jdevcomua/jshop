@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\base\Model;
 use common\models\Characteristic;
 use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
@@ -14,9 +15,33 @@ use backend\models\UrlHelper;
 class CharacteristicController extends Controller
 {
 
-    public function actionDel(){
-        foreach(Yii::$app->request->post()['id'] as $id){
-            $this->findModel($id)->delete();
+    public function actionGroup(){
+        if(isset(Yii::$app->request->post()['id'])) {
+            if(Yii::$app->request->post()['action'] == 'del') {
+                foreach (Yii::$app->request->post()['id'] as $id) {
+                    $this->findModel($id)->delete();
+                }
+            } else if(Yii::$app->request->post()['action'] == 'edit'){
+                if(count(Yii::$app->request->post()['id']) == 1){
+                    return $this->redirect(UrlHelper::to(['characteristic/update', 'id' => array_shift(Yii::$app->request->post()['id'])]));
+                } else {
+                    $query = Characteristic::find();
+                    foreach (Yii::$app->request->post()['id'] as $id) {
+                        $query->orWhere(['id' => $id]);
+                    }
+                    $models = $query->indexBy('id')->all();
+                    return $this->render('update', [
+                        'models' => $models, 'count' => 'many',
+                    ]);
+                }
+            }
+        }
+        $characteristics = Characteristic::find()->indexBy('id')->all();
+        if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
+            foreach ($characteristics as $characteristic) {
+                $characteristic->save(false);
+            }
+            return $this->redirect(UrlHelper::to(['characteristic/index']));
         }
         return $this->redirect(UrlHelper::to(['characteristic/index']));
     }
@@ -80,7 +105,7 @@ class CharacteristicController extends Controller
             return $this->redirect(UrlHelper::to(['characteristic/view', 'id' => $id]));
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model, 'count' => 'one',
             ]);
         }
     }

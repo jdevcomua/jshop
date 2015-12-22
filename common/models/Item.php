@@ -59,7 +59,7 @@ class Item extends Model
             [['category_id'], 'integer'],
             [['title', 'cost'], 'required'],
             [['cost'], 'number'],
-            [['title'], 'string', 'max' => 250],
+            [['title'], 'string'],
             [['image'], 'string', 'max' => 25],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         ];

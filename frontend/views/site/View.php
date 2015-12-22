@@ -43,12 +43,12 @@
                 <div class="frame-sort f_l">
                     <span class="title s-t f_l"><?php echo \Yii::t('app', 'Сортировать');?></span>
                     <ul class="nav-sort nav f_l" id="sort" name="order">
-                        <li><button type="button" data-value="action" class="d_l_3">Акции</button></li>
-                        <li><a href="?category=<?php echo "$category_id"; ?>&sort=asc" class="d_l_3">От дешевых к дорогим</a></li>
-                        <li><a href="?category=<?php echo "$category_id"; ?>&sort=desc" class="d_l_3">От дорогих к дешевым</a></li>
-                        <li><button type="button" data-value="hit" class="d_l_3">Популярные</button></li>
-                        <li><button type="button" data-value="rating" class="d_l_3">Рейтинг</button></li>
-                        <li><button type="button" data-value="hot" class="d_l_3">Новинки</button></li>
+                        <li><button type="button" data-value="action" class="d_l_3"><?php echo \Yii::t('app', 'Акции');?></button></li>
+                        <li><a href="?category=<?php echo "$category_id"; ?>&sort=asc" class="d_l_3"><?php echo \Yii::t('app', 'От дешевых к дорогим');?></a></li>
+                        <li><a href="?category=<?php echo "$category_id"; ?>&sort=desc" class="d_l_3"><?php echo \Yii::t('app', 'От дорогих к дешевым');?></a></li>
+                        <li><button type="button" data-value="hit" class="d_l_3"><?php echo \Yii::t('app', 'Популярные');?></button></li>
+                        <li><button type="button" data-value="rating" class="d_l_3"><?php echo \Yii::t('app', 'Рейтинг');?></button></li>
+                        <li><button type="button" data-value="hot" class="d_l_3"><?php echo \Yii::t('app', 'Новинки');?></button></li>
                     </ul>
                 </div>
             </div>

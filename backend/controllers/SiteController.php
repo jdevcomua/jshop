@@ -24,7 +24,8 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionLanguage($lang){
+    public function actionLanguage($lang)
+    {
         Yii::$app->language = $lang;
         return $this->redirect(UrlHelper::to(['/']));
     }

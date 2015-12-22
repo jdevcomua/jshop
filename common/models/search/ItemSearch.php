@@ -14,6 +14,7 @@ class ItemSearch extends Item
 {
     public $categoryTitle;
 
+
     /**
      * @inheritdoc
      */

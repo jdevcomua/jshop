@@ -17,12 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-view">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) ?></h3>
 
     <p>
 
-        <?= Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот предмет?'),
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div style="width: 100%;">
         <div style="width: 550px; float:left;">
-     <?= DetailView::widget([
+            <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -41,17 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'cost',
         ],
-    ]) ?>
-     <?= Html::a(Yii::t('app', 'Редактировать'), ['updatecharacteristics', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    <?= GridView::widget([
-        'dataProvider' => $characteristics,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    ]);
+            Html::a(Yii::t('app', 'Редактировать'), ['updatecharacteristics', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            echo GridView::widget([
+                'dataProvider' => $characteristics,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            'characteristicTitle',
-            'value',
-        ],
-    ]); ?>
+                    'characteristicTitle',
+                    'value',
+                ],
+            ]); ?>
         </div></div>
     <?php if($model->image != ""){
         echo "<div style=\"width: 500px; float:left; padding-left: 50px;\">";

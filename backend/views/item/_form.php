@@ -12,18 +12,18 @@ use yii\widgets\ActiveForm;
 <div class="item-form">
     <div style="width: 100%;">
     <div style="width: 600px; float:left;">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
-    <?= $form->field($model, 'category_id')->dropDownList(\common\models\ItemCat::getCategorys_Id_Title()) ?>
+        echo $form->field($model, 'category_id')->dropDownList(\common\models\ItemCat::getCategorys_Id_Title());
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        echo $form->field($model, 'title')->textInput(['maxlength' => true]);
 
-    <?= $form->field($model, 'cost')->textInput() ?>
+        echo $form->field($model, 'cost')->textInput();
 
-    <?= $form->field($model, 'imageFile')->fileInput() ?>
+        echo $form->field($model, 'imageFile')->fileInput();?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

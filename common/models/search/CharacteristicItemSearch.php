@@ -12,8 +12,8 @@ use common\models\CharacteristicItem;
  */
 class CharacteristicItemSearch extends CharacteristicItem
 {
-
     public $characteristicTitle;
+
 
     /**
      * @inheritdoc

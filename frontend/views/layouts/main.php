@@ -13,7 +13,7 @@ use frontend\assets\AppAsset;
 <!-- -->
 <html><head>
         <meta charset="utf-8">
-    <?= Html::csrfMetaTags() ?>
+    <?php echo Html::csrfMetaTags() ?>
         <title>active</title>
         <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/style.css" media="all">
         <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/colorscheme.css" media="all">

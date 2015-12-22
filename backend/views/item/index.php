@@ -15,16 +15,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Создать предмет'), UrlHelper::to(['item/create']), ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('app', 'Создать предмет'), UrlHelper::to(['item/create']), ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?=Html::beginForm(['del'],'post');?>
+    <?php echo Html::beginForm(['del'],'post');
 
-    <?= GridView::widget([
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -51,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
         ],
-    ]); ?>
+    ]);
 
-    <?=Html::submitButton(\Yii::t('app', 'Удалить'), ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);?>
-    <?= Html::endForm();?>
+    Html::submitButton(\Yii::t('app', 'Удалить'), ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);
+    Html::endForm();?>
 
 </div>

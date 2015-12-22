@@ -26,11 +26,14 @@ class Item extends Model
      */
     public $imageFile;
 
-    public function getTranslateColumns(){
+
+    public function getTranslateColumns()
+    {
         return ['title'];
     }
 
-    public function getCategoryTitle(){
+    public function getCategoryTitle()
+    {
         return $this->category->title;
     }
 
@@ -42,12 +45,14 @@ class Item extends Model
         return 'item';
     }
 
-    public static function getPath(){
-        return Yii::getAlias('@frontend').'/web/img/';
+    public static function getPath()
+    {
+        return Yii::getAlias('@frontend') . '/web/img/';
     }
 
-    public function getImageUrl(){
-        return 'http://frontend.dev/img/'.$this->image;
+    public function getImageUrl()
+    {
+        return 'http://frontend.dev/img/' . $this->image;
     }
 
     /**

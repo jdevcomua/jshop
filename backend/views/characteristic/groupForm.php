@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     foreach ($models as $index => $characteristic) {
             /* @var $characteristic common\models\Characteristic*/
             echo "<div style=\"width: 500px; float:left; padding-right: 50px;\">";
-            echo $form->field($characteristic, "[$index]title")->label($characteristic->title.' -> '.$characteristic->getCategoryTitle());
+            echo $form->field($characteristic, "[$index]title")->label($characteristic->title . ' -> ' . $characteristic->getCategoryTitle());
             echo "</div>";
 
     }

@@ -16,7 +16,7 @@ $this->title = 'Yii Debugger';
     <div id="yii-debug-toolbar" class="yii-debug-toolbar-top">
         <div class="yii-debug-toolbar-block title">
             <a href="#">
-                <img width="29" height="30" alt="" src="<?= \yii\debug\Module::getYiiLogo() ?>">
+                <img width="29" height="30" alt="" src="<?php echo \yii\debug\Module::getYiiLogo() ?>">
             </a>
         </div>
         <?php foreach ($panels as $panel): ?>

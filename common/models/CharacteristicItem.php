@@ -25,11 +25,13 @@ class CharacteristicItem extends Model
         return 'characteristic_item';
     }
 
-    public function getTranslateColumns(){
+    public function getTranslateColumns()
+    {
         return ['value'];
     }
 
-    public function getCharacteristicTitle(){
+    public function getCharacteristicTitle()
+    {
         return $this->characteristic->title;
     }
 

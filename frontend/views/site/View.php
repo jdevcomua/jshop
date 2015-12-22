@@ -6,7 +6,7 @@
       <tbody>
       <tr><td><div class="frame-item-menu"><div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span class="helper" style="height: 43px;"></span><span><span class="text-el">all</span></span></a></div></div></td>
           <?php
-        foreach($result1 as $i => $value){
+        foreach ($result1 as $i => $value) {
             echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"?category=";
             echo $result1[$i]['id'];
             echo "\" class=\"title\" style=\"color: #fff;\">";
@@ -57,7 +57,7 @@
                             <ul class="animateListItems items items-catalog  table" id="items-catalog-main">
 
                             <?php
-                                foreach($result2 as $i => $value){
+                                foreach ($result2 as $i => $value) {
                                     echo "<li class=\"globalFrameProduct to-cart\" data-pos=\"top\"><a href=\"?id=";
                                     echo $value['id'];
                                     echo "\" class=\"frame-photo-title\"><span class=\"photo-block\"><span class=\"helper\"></span><img src=\"img/".$value['image']."\" alt=\"\"></span><span class=\"title\">";

@@ -14,15 +14,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="characteristic-index">
 
-    <h3><?= Html::encode($this->title) ?>
-        <?= Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
+    <h3><?php echo Html::encode($this->title);
+        echo Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
 
     </h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?=Html::beginForm(UrlHelper::to(['characteristic/group']),'post');?>
+    <?php echo Html::beginForm(UrlHelper::to(['characteristic/group']),'post');
 
-    <?= GridView::widget([
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -43,14 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ['class' => 'yii\grid\ActionColumn',
                 'urlCreator'=>function($action, $model, $key, $index){
-                    return [Yii::$app->language.'/characteristic/'.$action,'id'=>$model->id];
+                    return [Yii::$app->language . '/characteristic/' . $action,'id'=>$model->id];
                 }
             ],
         ],
     ]); ?>
 
-    <?=Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);?>
-    <?=Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);?>
-    <?= Html::endForm();?>
+    <?php echo Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);
+    echo Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);
+    echo Html::endForm();?>
 
 </div>

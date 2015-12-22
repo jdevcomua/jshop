@@ -12,8 +12,8 @@ use common\models\Characteristic;
  */
 class CharacteristicSearch extends Characteristic
 {
-
     public $categoryTitle;
+
 
     /**
      * @inheritdoc

@@ -13,19 +13,19 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-    ]); ?>
+    ]);
 
-    <?= $form->field($model, 'id') ?>
+    echo $form->field($model, 'id');
 
-    <?= $form->field($model, 'name') ?>
+    echo $form->field($model, 'name');
 
-    <?= $form->field($model, 'mail') ?>
+    echo $form->field($model, 'mail');
 
-    <?= $form->field($model, 'city') ?>
+    echo $form->field($model, 'city');?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?php echo Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']);
+        echo Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

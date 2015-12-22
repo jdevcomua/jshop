@@ -16,12 +16,12 @@ class CharacteristicController extends Controller
 {
 
     public function actionGroup(){
-        if(isset(Yii::$app->request->post()['id'])) {
-            if(Yii::$app->request->post()['action'] == 'del') {
+        if (isset(Yii::$app->request->post()['id'])) {
+            if (Yii::$app->request->post()['action'] == 'del') {
                 foreach (Yii::$app->request->post()['id'] as $id) {
                     $this->findModel($id)->delete();
                 }
-            } else if(Yii::$app->request->post()['action'] == 'edit'){
+            } elseif (Yii::$app->request->post()['action'] == 'edit') {
                 if(count(Yii::$app->request->post()['id']) == 1){
                     return $this->redirect(UrlHelper::to(['characteristic/update', 'id' => array_shift(Yii::$app->request->post()['id'])]));
                 } else {

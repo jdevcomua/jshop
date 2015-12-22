@@ -15,13 +15,14 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public abstract function getTranslateColumns();
 
-    public function __get($name){
-        if(in_array($name, $this->getTranslateColumns())){
+    public function __get($name)
+    {
+        if (in_array($name, $this->getTranslateColumns())) {
             $json = parent::__get($name);
-            if(is_array(json_decode($json,true))){
+            if (is_array(json_decode($json,true))) {
                 $array = json_decode($json, true);
                 $language = Yii::$app->language;
-                if(isset($array[$language])) {
+                if (isset($array[$language])) {
                     return $array[$language];
                 } else {
                     return array_shift($array);
@@ -34,8 +35,9 @@ abstract class Model extends \yii\db\ActiveRecord
         }
     }
 
-    public function __set($title, $value){
-        if(in_array($title, $this->getTranslateColumns())){
+    public function __set($title, $value)
+    {
+        if (in_array($title, $this->getTranslateColumns())) {
             $json = parent::__get($title);
             $array = (array)json_decode($json, true);
             $language = Yii::$app->language;

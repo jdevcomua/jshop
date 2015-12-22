@@ -26,7 +26,8 @@ class Vote extends Model
         return 'vote';
     }
 
-    public function getTranslateColumns(){
+    public function getTranslateColumns()
+    {
         return [];
     }
 

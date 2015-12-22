@@ -91,8 +91,9 @@ class UserController extends Controller
         return $this->redirect(UrlHelper::to(['user/index']));
     }
 
-    public function actionDel(){
-        foreach(Yii::$app->request->post()['id'] as $id){
+    public function actionDel()
+    {
+        foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
         return $this->redirect(UrlHelper::to(['user/index']));

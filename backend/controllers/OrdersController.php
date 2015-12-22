@@ -10,7 +10,8 @@ use yii\web\NotFoundHttpException;
 /**
  * OrdersController implements the CRUD actions for Orders model.
  */
-class OrdersController extends Controller{
+class OrdersController extends Controller
+{
 
     /**
      * Lists all Orders models.

@@ -30,7 +30,7 @@ class ItemCatController extends Controller
     }
 
     public function actionDel(){
-        foreach(Yii::$app->request->post()['id'] as $id){
+        foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
         return $this->redirect(UrlHelper::to(['item-cat/index']));

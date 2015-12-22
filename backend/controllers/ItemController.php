@@ -45,8 +45,9 @@ class ItemController extends Controller
         ]);
     }
 
-    public function actionDel(){
-        foreach(Yii::$app->request->post()['id'] as $id){
+    public function actionDel()
+    {
+        foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
         return $this->redirect(['index']);
@@ -79,12 +80,12 @@ class ItemController extends Controller
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post())) {
-            if(isset($model->imageFile)){
+            if (isset($model->imageFile)) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 $model->upload();
             }
-            if($model->save()){
-                if(isset($model->imageFile)) {
+            if ($model->save()) {
+                if (isset($model->imageFile)) {
                     $filename = $model->imageFile->baseName;
                     /*if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
                         $filename = $filename . rand(1, 20);
@@ -113,10 +114,11 @@ class ItemController extends Controller
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
 
-    public function actionCharacteristics($id){
+    public function actionCharacteristics($id)
+    {
         $chars = ItemCat::findOne($this->findModel($id)->category_id)->getCharacteristics()->all();
         $characteristics = [new CharacteristicItem()];
-        foreach($chars as $char){
+        foreach ($chars as $char) {
             $char_item = new CharacteristicItem();
             /* @var $char Characteristic*/
             $char_item->item_id = $id;
@@ -144,23 +146,23 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
-            if(isset($model->imageFile)){
-                if(isset($model->image)) {
+            if (isset($model->imageFile)) {
+                if (isset($model->image)) {
                     $lastImage = $model->image;
                 }
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 $model->upload();
             }
-            if($model->save()){
-                if(isset($model->imageFile)) {
+            if ($model->save()) {
+                if (isset($model->imageFile)) {
                     $filename = $model->imageFile->baseName;
                     if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
                         $filename = $filename . rand(1, 20);
                     }
                     $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
-                    if(isset($lastImage)){
-                        if(file_exists(Item::getPath().$lastImage)){
-                            unlink(Item::getPath().$lastImage);
+                    if (isset($lastImage)) {
+                        if (file_exists(Item::getPath() . $lastImage)) {
+                            unlink(Item::getPath() . $lastImage);
                         }
                     }
                 }
@@ -182,7 +184,7 @@ class ItemController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if($model->image != "") {
+        if ($model->image != '') {
             if (file_exists(Item::getPath() . $model->image)) {
                 unlink(Item::getPath() . $model->image);
             }

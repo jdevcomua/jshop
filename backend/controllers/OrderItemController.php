@@ -28,8 +28,9 @@ class OrderItemController extends Controller
         ]);
     }
 
-    public function actionDel(){
-        foreach(Yii::$app->request->post()['id'] as $id){
+    public function actionDel()
+    {
+        foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
         return $this->redirect(['index']);

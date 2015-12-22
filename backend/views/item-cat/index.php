@@ -14,16 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-cat-index">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Создать категорию'), UrlHelper::to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('app', 'Создать категорию'), UrlHelper::to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?=Html::beginForm(['del'],'post');?>
+    <?php echo Html::beginForm(['del'],'post');
 
-    <?= GridView::widget([
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -45,9 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
         ],
-    ]); ?>
+    ]);
 
-    <?=Html::submitButton('Удалить', ['class' => 'btn btn-info',]);?>
-    <?= Html::endForm();?>
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-info',]);
+    echo Html::endForm();?>
 
 </div>

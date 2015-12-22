@@ -6,7 +6,7 @@ use common\models\Characteristic;
 $form = ActiveForm::begin();
 echo "<div style=\"width: 100%; padding-left: 15px; margin-top: 20px;\">";
 foreach ($characteristics as $index => $characteristic) {
-    if(isset($characteristic->characteristic_id)) {
+    if (isset($characteristic->characteristic_id)) {
         /* @var $characteristic common\models\CharacteristicItem */
         echo "<div style=\"width: 500px; float:left; padding-right: 50px;\">";
         echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());

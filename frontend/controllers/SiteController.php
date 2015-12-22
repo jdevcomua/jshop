@@ -7,42 +7,45 @@ use frontend\models\UrlHelper;
 use Yii;
 use yii\web\Controller;
 
-class SiteController extends Controller{
+class SiteController extends Controller
+{
 
-    public function actionLanguage($lang){
+    public function actionLanguage($lang)
+    {
         Yii::$app->language = $lang;
         return $this->redirect(UrlHelper::to(['/']));
     }
 
-    function actionIndex(){
+    function actionIndex()
+    {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $result1 = ItemCat::find()->all();
-        if(isset($_GET['id'])){
+        if (isset($_GET['id'])) {
             $item = Item::findOne($_GET['id']);
             return $this->render('Item', ['result1'=>$result1, 'item'=>$item]);
         }
-        if(isset($_GET['category'])){
+        if (isset($_GET['category'])) {
 	        $id = $_GET['category'];
         } else {
             $id = 0;
         }
         $result2 = Item::find();
-        if($id == "0"){
-            $category = "all";
-        } else if(is_int(+$id)){
+        if ($id == '0') {
+            $category = 'all';
+        } elseif (is_int(+$id)) {
             /**@var ItemCat $result3*/
             $result3 = ItemCat::findOne($id);
             $category = $result3->title;
             $result2->where('category_id=:category_id',[':category_id' => $id]);
         }
-        if(isset($_GET['search'])){
-            $result2->where('title like :title', [':title' => '%'.$_GET['search'].'%']);
+        if (isset($_GET['search'])) {
+            $result2->where('title like :title', [':title' => '%' . $_GET['search'] . '%']);
         }
-        if(isset($_GET['sort'])){
-            if($_GET['sort'] == "asc"){
-                $result2->orderBy("cost asc");
-            } else if($_GET['sort'] == "desc"){
-                $result2->orderBy("cost desc");
+        if (isset($_GET['sort'])) {
+            if ($_GET['sort'] == 'asc') {
+                $result2->orderBy('cost asc');
+            } elseif ($_GET['sort'] == 'desc') {
+                $result2->orderBy('cost desc');
             }
         }
         $result2 = $result2->all();

@@ -14,9 +14,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Редактироваить');
 ?>
 <div class="users-update">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) ?></h3>
 
-    <?= $this->render('_form', [
+    <?php echo $this->render('_form', [
         'model' => $model,
     ]) ?>
 

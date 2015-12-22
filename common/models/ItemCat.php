@@ -24,7 +24,8 @@ class ItemCat extends Model
         return 'item_cat';
     }
 
-    public function getTranslateColumns(){
+    public function getTranslateColumns()
+    {
         return ['title'];
     }
 

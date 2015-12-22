@@ -12,16 +12,16 @@ use yii\widgets\ActiveForm;
 
 <div class="item-cat-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();
 
-    <?= $form->field($vote, 'text')->textarea()->label("") ?>
+    echo $form->field($vote, 'text')->textarea()->label("");
 
-    <?= $form->field($vote, 'item_id')->hiddenInput(['value'=>$model->id])->label("") ?>
+    echo $form->field($vote, 'item_id')->hiddenInput(['value'=>$model->id])->label("");
 
-    <?= $form->field($vote, 'user_id')->hiddenInput()->label("") ?>
+    echo $form->field($vote, 'user_id')->hiddenInput()->label("") ?>
 
     <div class="form-group">
-        <?= Html::submitButton($vote->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => 'btn-search' ]) ?>
+        <?php echo Html::submitButton($vote->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => 'btn-search' ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -6,7 +6,7 @@
       <tbody>
         <tr><td><div class="frame-item-menu"><div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span class="helper" style="height: 43px;"></span><span><span class="text-el">all</span></span></a></div></div></td>
         <?php
-        foreach($result1 as $i => $value){
+        foreach ($result1 as $i => $value) {
             echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"?category=";
             echo $result1[$i]['id'];
             echo "\" class=\"title\" style=\"color: #fff;\">";
@@ -253,7 +253,7 @@
                                         <div class="product-charac patch-product-view showHidePart">
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
                                                 <tbody>
-                                                <?php foreach($item->getCharacteristicItems()->all() as $i => $value){
+                                                <?php foreach ($item->getCharacteristicItems()->all() as $i => $value) {
                                                     /* @var $value common\models\CharacteristicItem*/
                                                     echo "<tr><td>".$value->getCharacteristic()->one()['title']."</td>";
                                                     echo "<td>".$value->value."</td></tr>";
@@ -348,7 +348,7 @@
                                                 <div class="frame-drop-comment" data-rel="whoCloneAddPaste">
                                                     <div class="form-comment layout-highlight frame-comments">
                                                         <div class="inside-padd horizontal-form">
-                                                            <?= $this->render('vote', [
+                                                            <?php echo $this->render('vote', [
                                                                 'vote' => new \common\models\Vote(), 'model'=> $item
                                                             ]) ?>
                                                         </div>

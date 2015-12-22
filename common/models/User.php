@@ -23,7 +23,8 @@ class User extends Model implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
 
-    public function getTranslateColumns(){
+    public function getTranslateColumns()
+    {
         return [];
     }
 

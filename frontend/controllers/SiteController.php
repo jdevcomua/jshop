@@ -1,15 +1,16 @@
 <?php
+
 namespace frontend\controllers;
 
 use common\models\Item;
 use common\models\ItemCat;
 use frontend\models\UrlHelper;
+use common\models\LoginForm;
 use Yii;
 use yii\web\Controller;
 
 class SiteController extends Controller
 {
-
     public function actionLanguage($lang)
     {
         Yii::$app->language = $lang;
@@ -49,8 +50,29 @@ class SiteController extends Controller
             }
         }
         $result2 = $result2->all();
-		return $this->render('View', ['result1'=>$result1, 'result2'=>$result2, 'category_id'=>$id, 'category'=>$category, 'count'=>sizeof($result2)]);
+		return $this->render('index', ['result1'=>$result1, 'result2'=>$result2, 'category_id'=>$id, 'category'=>$category, 'count'=>sizeof($result2)]);
 	}
+
+    public function actionLogin()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $this->layout = 'main3';
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return $this->redirect(UrlHelper::to(['/']));
+    }
 
     public function actions()
     {

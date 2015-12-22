@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="characteristic-index">
 
     <h3><?php echo Html::encode($this->title);
-        echo Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
+        echo '  ' . Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
 
     </h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

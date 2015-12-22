@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div></div>
     <?php if($model->image != ""){
         echo "<div style=\"width: 500px; float:left; padding-left: 50px;\">";
-        echo "<img width=\"500px\" src=\"".$model->getImageUrl()."\" /></div>";
+        echo "<img width=\"500px\" src=\"" . $model->getImageUrl() . "\" /></div>";
     }?>
 
 

@@ -60,7 +60,7 @@
                                 foreach ($result2 as $i => $value) {
                                     echo "<li class=\"globalFrameProduct to-cart\" data-pos=\"top\"><a href=\"?id=";
                                     echo $value['id'];
-                                    echo "\" class=\"frame-photo-title\"><span class=\"photo-block\"><span class=\"helper\"></span><img src=\"img/".$value['image']."\" alt=\"\"></span><span class=\"title\">";
+                                    echo "\" class=\"frame-photo-title\"><span class=\"photo-block\"><span class=\"helper\"></span><img src=\"" . $value->getImageUrl() . "\" alt=\"\"></span><span class=\"title\">";
                                     echo $value['title'];
                                     echo "</span></a><div class=\"description\"><div class=\"left-description\"><div class=\"frame-star f-s_0\"><div class=\"star\"><div id=\"star_rating_17337\" class=\"productRate star-small\"><div style=\"width: 0%\"></div></div></div><a href=\"?id=3\" class=\"count-response\">Отзывы 1</a> </div></div><div class=\"frame-prices-buttons\"><div class=\"frame-prices f-s_0\"><span class=\"current-prices f-s_0\"><span class=\"price-new\"><span><span class=\"price priceVariant\">";
                                     echo $value['cost'];

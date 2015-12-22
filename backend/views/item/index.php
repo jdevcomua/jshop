@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php echo Html::beginForm(['del'],'post');
 
-    GridView::widget([
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [

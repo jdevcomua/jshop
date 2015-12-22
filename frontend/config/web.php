@@ -20,7 +20,10 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<language:(ru|en)>/'=>'site/',
+                '<language:(ru|en)>/'=>'site/index',
+                '<language:(ru|en)>/site/img/*'=>'img/*',
+                '<language:(ru|en)>/site'=>'site/index',
+                '<language:(ru|en)>/site/index'=>'site/index',
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],
@@ -38,7 +41,7 @@ $config = [
             ],
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [

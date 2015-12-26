@@ -84,7 +84,7 @@ use yii\helpers\Url;
 
                 <?php if ($category_id != '0') {
 
-                    $form = ActiveForm::begin(['action' => 'site/srch']);?>
+                    $form = ActiveForm::begin();?>
                     <div class="frame-filter p_r">
                         <div class="preloader wo-i" style="display: none;"></div>
                         <div id="slider-range"></div>
@@ -140,7 +140,12 @@ use yii\helpers\Url;
 
                                                                 <?php $chr = new common\models\CharacteristicItem();
                                                                 echo $form->field($chr, '['. $i .']characteristic_id')->hiddenInput(['value' => $char->id])->label('');
-                                                                echo $form->field($chr, '['. $i .']value')->input('checkbox', ['value' => $itemm->value])->label($itemm->value); ?>
+                                                                if (isset($selected[$i]['value'])) {
+                                                                    echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value, 'checked ' => ''])->label($itemm->value);
+                                                                } else {
+                                                                    echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value])->label($itemm->value);
+                                                                }
+                                                                ?>
                                                             </div>
                                                         </li>
                                                         <?php $i = $i + 1; }?>

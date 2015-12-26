@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use frontend\models\UrlHelper;
@@ -22,31 +23,37 @@ class SiteController extends Controller
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $allCategories = ItemCat::find()->all();
-        if (isset($_GET['id'])) {
-            $item = Item::findOne($_GET['id']);
+        if (!empty(Yii::$app->request->get('id'))) {
+            $item = Item::findOne(Yii::$app->request->get('id'));
             return $this->render('Item', ['allCategories'=>$allCategories, 'item'=>$item]);
         }
-        if (isset($_GET['category'])) {
-            $id = $_GET['category'];
+        if (!empty(Yii::$app->request->get('category'))) {
+            $id = Yii::$app->request->get('category');
         } else {
             $id = 0;
         }
-        $items = Item::find();
+        $selected = [];
+        if (!empty(Yii::$app->request->post('CharacteristicItem'))) {
+            $items = $this->search();
+            $selected = Yii::$app->request->post('CharacteristicItem');
+        } else {
+            $items = Item::find();
+        }
         if ($id == '0') {
             $categoryTitle = 'all';
         } elseif (is_int(+$id)) {
             /**@var ItemCat $category*/
             $category = ItemCat::findOne($id);
             $categoryTitle = $category->title;
-            $items->where('category_id=:category_id',[':category_id' => $id]);
+            $items->andFilterWhere(['category_id' => $id]);
         }
-        if (isset($_GET['search'])) {
-            $items->where('title like :title', [':title' => '%' . $_GET['search'] . '%']);
+        if (!empty(Yii::$app->request->get('search'))) {
+            $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
-        if (isset($_GET['sort'])) {
-            if ($_GET['sort'] == 'asc') {
+        if (!empty(Yii::$app->request->get('sort'))) {
+            if (Yii::$app->request->get('sort') == 'asc') {
                 $items->orderBy('cost asc');
-            } elseif ($_GET['sort'] == 'desc') {
+            } elseif (Yii::$app->request->get('sort') == 'desc') {
                 $items->orderBy('cost desc');
             }
         }
@@ -55,7 +62,7 @@ class SiteController extends Controller
         if($id != '0'){
             $characteristics = ItemCat::findOne($id)->characteristics;
         }
-        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
+        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id, 'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
     }
 
     public function actionAjax()
@@ -63,45 +70,29 @@ class SiteController extends Controller
         Yii::$app->cart->addItem(Yii::$app->request->get('item_id'), Yii::$app->request->get('count'));
     }
 
-    public function actionSrch()
-    {
-        foreach (Yii::$app->request->post('CharacteristicItem') as $items) {
-            var_dump($items['characteristic_id']);
-        }
-    }
-
-    public function search($params)
+    public function search()
     {
         $query = Item::find();
-
-        $characteristics = ItemCat::findOne(8)->getCharacteristics()->innerJoin('characteristic_item')->groupBy('value')->all();
-
-        if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
-            foreach ($characteristics as $characteristic) {
-                $characteristic->save(false);
+        $char_ids = [];
+        foreach (Yii::$app->request->post('CharacteristicItem') as $items) {
+            if (isset($items['value'])) {
+                $query1 = CharacteristicItem::find()->select('item_id');
+                $query1->andFilterWhere(['characteristic_id' => $items['characteristic_id']]);
+                $query1->andFilterWhere(['like', 'value', $items['value']]);
+                $item_ids = [];
+                foreach ($query1->asArray()->all() as $item) {
+                    $item_ids[] = $item['item_id'];
+                }
+                if (in_array($items['characteristic_id'], $char_ids)) {
+                    $query->orFilterWhere(['in', 'id', $item_ids]);
+                } else {
+                    $char_ids[] = $items['characteristic_id'];
+                    $query->andFilterWhere(['in', 'id', $item_ids]);
+                }
             }
+
         }
-
-        /*
-                $query->andFilterWhere([
-                    'id' => $this->id,
-                    'category_id' => $this->category_id,
-                    'cost' => $this->cost,
-                ]);
-        */
-        $query->innerJoin(['characteristicItems']);
-        foreach ($params as $param) {
-            $query->andFilterWhere(['characteristicItems.characteristic_id' => '']);
-        }
-
-        $query->andFilterWhere(['like', 'item.title', $this->title])
-            ->andFilterWhere(['like', 'image', $this->image]);
-
-        $query->joinWith(['category' => function ($q) {
-            $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
-        }]);
-
-        return $query->all();
+        return $query;
     }
 
     public function actionLogin()

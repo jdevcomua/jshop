@@ -1,10 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\LinkPager;
+use backend\models\UrlHelper;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
-use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
@@ -42,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
         ],
     ]);
-            Html::a(Yii::t('app', 'Редактировать'), ['updatecharacteristics', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            echo Html::a(Yii::t('app', 'Редактировать'), UrlHelper::to(['item/updatecharacteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);
             echo GridView::widget([
                 'dataProvider' => $characteristics,
                 'columns' => [

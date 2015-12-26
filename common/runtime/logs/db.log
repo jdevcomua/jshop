@@ -1,0 +1,2486 @@
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][yii\db\Command::query] SELECT `item_cat`.*, count(item.category_id) as 'cnt' FROM `item_cat` LEFT JOIN `item` ON `item_cat`.`id` = `item`.`category_id` GROUP BY `item`.`category_id`
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][yii\db\Command::query] SELECT * FROM `item` WHERE `category_id` IN ('6', '8')
+2015-12-26 16:03:04 [127.0.0.1][-][-][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'im0dap4f9e21j4i3aoledkrmc3'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=im0dap4f9e21j4i3aoledkrmc3; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53557'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451145784.826
+    'REQUEST_TIME' => 1451145784
+]
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\web\Session::open] Session started
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\web\User::loginByCookie] User '100' logged in from 127.0.0.1 via cookie.
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'im0dap4f9e21j4i3aoledkrmc3'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=im0dap4f9e21j4i3aoledkrmc3; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53558'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451146036.177
+    'REQUEST_TIME' => 1451146036
+]
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\web\Session::open] Session started
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 16:07:16 [127.0.0.1][100][kvh45bpp3dn9g3j9dncl51nhp7][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'kvh45bpp3dn9g3j9dncl51nhp7'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=kvh45bpp3dn9g3j9dncl51nhp7; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53558'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451146036.297
+    'REQUEST_TIME' => 1451146036
+]
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE `id`='42'
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `item_id`=42
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=16
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=17
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=18
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `vote`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `vote`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\User::loginByCookie] User '100' logged in from 127.0.0.1 via cookie.
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'id' => '42'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'kvh45bpp3dn9g3j9dncl51nhp7'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=kvh45bpp3dn9g3j9dncl51nhp7; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=42'
+    'REQUEST_URI' => '/?id=42'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150447.752
+    'REQUEST_TIME' => 1451150447
+]
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:47 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150447.87
+    'REQUEST_TIME' => 1451150447
+]
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE `id`='42'
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `item_id`=42
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=16
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=17
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=18
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `vote`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `vote`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'id' => '42'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=42'
+    'REQUEST_URI' => '/?id=42'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150451.391
+    'REQUEST_TIME' => 1451150451
+]
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:51 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => []
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150451.497
+    'REQUEST_TIME' => 1451150451
+]
+2015-12-26 17:20:52 [127.0.0.1][-][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:52 [127.0.0.1][-][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'item_id' => '42'
+    'count' => '1'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/plain, */*; q=0.01'
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'REDIRECT_QUERY_STRING' => 'item_id=42&count=1'
+    'REDIRECT_URL' => '/site/ajax'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'item_id=42&count=1'
+    'REQUEST_URI' => '/site/ajax?item_id=42&count=1'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150452.874
+    'REQUEST_TIME' => 1451150452
+]
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6'
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:54 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6'
+    'REQUEST_URI' => '/?category=6'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150454.997
+    'REQUEST_TIME' => 1451150454
+]
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:55 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150455.094
+    'REQUEST_TIME' => 1451150455
+]
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150456.335
+    'REQUEST_TIME' => 1451150456
+]
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:20:56 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53725'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150456.433
+    'REQUEST_TIME' => 1451150456
+]
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE `id`='42'
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `item_id`=42
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=16
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=17
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `id`=18
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `vote`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `vote`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'id' => '42'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'id=42'
+    'REQUEST_URI' => '/?id=42'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150713.834
+    'REQUEST_TIME' => 1451150713
+]
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:13 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 1
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150713.969
+    'REQUEST_TIME' => 1451150713
+]
+2015-12-26 17:25:16 [127.0.0.1][-][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:16 [127.0.0.1][-][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'item_id' => '42'
+    'count' => '2'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/plain, */*; q=0.01'
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_QUERY_STRING' => 'item_id=42&count=2'
+    'REDIRECT_URL' => '/site/ajax'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'item_id=42&count=2'
+    'REQUEST_URI' => '/site/ajax?item_id=42&count=2'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150716.603
+    'REQUEST_TIME' => 1451150716
+]
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6'
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:17 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?id=42'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6'
+    'REQUEST_URI' => '/?category=6'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150717.941
+    'REQUEST_TIME' => 1451150717
+]
+2015-12-26 17:25:18 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:18 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:18 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:18 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:18 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150718.049
+    'REQUEST_TIME' => 1451150718
+]
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '0'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=0'
+    'REQUEST_URI' => '/?category=0'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150719.526
+    'REQUEST_TIME' => 1451150719
+]
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:19 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=0'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150719.593
+    'REQUEST_TIME' => 1451150719
+]
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '0'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=0'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=0'
+    'REQUEST_URI' => '/?category=0'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150720.483
+    'REQUEST_TIME' => 1451150720
+]
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:20 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=0'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150720.544
+    'REQUEST_TIME' => 1451150720
+]
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6'
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=0'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6'
+    'REQUEST_URI' => '/?category=6'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150721.277
+    'REQUEST_TIME' => 1451150721
+]
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:21 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150721.367
+    'REQUEST_TIME' => 1451150721
+]
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6' ORDER BY `cost`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+    'sort' => 'asc'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6&sort=asc'
+    'REQUEST_URI' => '/?category=6&sort=asc'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150723.013
+    'REQUEST_TIME' => 1451150723
+]
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=asc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150723.121
+    'REQUEST_TIME' => 1451150723
+]
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6' ORDER BY `cost` DESC
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+    'sort' => 'desc'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=asc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6&sort=desc'
+    'REQUEST_URI' => '/?category=6&sort=desc'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150723.491
+    'REQUEST_TIME' => 1451150723
+]
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:23 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=desc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150723.586
+    'REQUEST_TIME' => 1451150723
+]
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=desc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150726.178
+    'REQUEST_TIME' => 1451150726
+]
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:25:26 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53791'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150726.275
+    'REQUEST_TIME' => 1451150726
+]
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=desc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53797'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150793.263
+    'REQUEST_TIME' => 1451150793
+]
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:26:33 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53797'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451150793.375
+    'REQUEST_TIME' => 1451150793
+]
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:03 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6&sort=desc'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53913'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151063.963
+    'REQUEST_TIME' => 1451151063
+]
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='6'
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='6'
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=6
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=8 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=9 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=10 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=11 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=12 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=13 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=14 GROUP BY `value`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '6'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=6'
+    'REQUEST_URI' => '/?category=6'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151069.666
+    'REQUEST_TIME' => 1451151069
+]
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:09 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151069.814
+    'REQUEST_TIME' => 1451151069
+]
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=6'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151070.666
+    'REQUEST_TIME' => 1451151070
+]
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151070.751
+    'REQUEST_TIME' => 1451151070
+]
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item_cat`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item` WHERE category_id='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `item_cat` WHERE `id`='8'
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic` WHERE `category_id`=8
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=15 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `characteristic_item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `characteristic_item`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=16 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=17 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=18 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=19 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SELECT * FROM `characteristic_item` WHERE `characteristic_id`=21 GROUP BY `value`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:10 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_GET = [
+    'category' => '8'
+]
+
+$_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'category=8'
+    'REQUEST_URI' => '/?category=8'
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151070.931
+    'REQUEST_TIME' => 1451151070
+]
+2015-12-26 17:31:11 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\web\Session::open] Session started
+2015-12-26 17:31:11 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW FULL COLUMNS FROM `user`
+2015-12-26 17:31:11 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Connection::open] Opening DB connection: mysql:host=localhost;dbname=mobidev
+2015-12-26 17:31:11 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][yii\db\Command::query] SHOW CREATE TABLE `user`
+2015-12-26 17:31:11 [127.0.0.1][100][p2r17gq7js9d1kjihlgtppjq17][info][application] $_COOKIE = [
+    '_csrf' => 'bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b\";}'
+    'PHPSESSID' => 'p2r17gq7js9d1kjihlgtppjq17'
+    '_identity' => '5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a:2:{i:0;s:9:\"_identity\";i:1;s:28:\"[\"100\",\"test100key\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'bucket' => [
+        42 => 3
+    ]
+    '__id' => '100'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'frontend.dev'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36'
+    'HTTP_REFERER' => 'http://frontend.dev/?category=8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'
+    'HTTP_COOKIE' => '_csrf=bc8cfc826267dd7045e9251e15a0a55b8eace7ca0f50982a84a9224ebbf250d6a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22Ty6Osfvd5PgLosqNKiRxaiHrkU9LrQ2b%22%3B%7D; PHPSESSID=p2r17gq7js9d1kjihlgtppjq17; _identity=5df9efb9d048167bcd3a8f5c6f551c7b56b6a42bd960d07693bf2f2f3e553652a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A28%3A%22%5B%22100%22%2C%22test100key%22%2C2592000%5D%22%3B%7D'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.7 (Ubuntu) Server at frontend.dev Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.7 (Ubuntu)'
+    'SERVER_NAME' => 'frontend.dev'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/yii-application/frontend/web/'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => '/var/www/html/yii-application/frontend/web/index.php'
+    'REMOTE_PORT' => '53914'
+    'REDIRECT_URL' => '/<c:url value='
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/%3Cc:url%20value='
+    'SCRIPT_NAME' => '/index.php'
+    'PHP_SELF' => '/index.php'
+    'REQUEST_TIME_FLOAT' => 1451151071.131
+    'REQUEST_TIME' => 1451151071
+]

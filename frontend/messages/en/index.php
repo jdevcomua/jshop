@@ -2,6 +2,7 @@
 return [
     "поиск" => "search",
     "корзина пуста" => "bucket empty",
+    "в корзине " => "in bucket ",
     "Я ищу" => "I search",
     "Магазин" => "Shop",
     "Новости" => "News",
@@ -11,8 +12,10 @@ return [
     "Сортировать" => "Sort by",
     "Акции" => "Promotions",
     "От дешевых к дорогим" => "From cheap to expensive",
-    "От дорогиз к дешевым" => "From expensive to cheap",
+    "От дорогих к дешевым" => "From expensive to cheap",
     "Популярные" => "Top",
     "Рейтинг" => "Rating",
     "Новинки" => "New products",
+    "Отзывы" => "Reviews",
+    "В корзину" => "To bucket",
 ];

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Item;
 use common\models\ItemCat;
 use frontend\models\UrlHelper;
+use yii\base\Model;
 use common\models\LoginForm;
 use Yii;
 use yii\web\Controller;
@@ -20,38 +21,88 @@ class SiteController extends Controller
     function actionIndex()
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        $result1 = ItemCat::find()->all();
+        $allCategories = ItemCat::find()->all();
         if (isset($_GET['id'])) {
             $item = Item::findOne($_GET['id']);
-            return $this->render('Item', ['result1'=>$result1, 'item'=>$item]);
+            return $this->render('Item', ['allCategories'=>$allCategories, 'item'=>$item]);
         }
         if (isset($_GET['category'])) {
-	        $id = $_GET['category'];
+            $id = $_GET['category'];
         } else {
             $id = 0;
         }
-        $result2 = Item::find();
+        $items = Item::find();
         if ($id == '0') {
-            $category = 'all';
+            $categoryTitle = 'all';
         } elseif (is_int(+$id)) {
-            /**@var ItemCat $result3*/
-            $result3 = ItemCat::findOne($id);
-            $category = $result3->title;
-            $result2->where('category_id=:category_id',[':category_id' => $id]);
+            /**@var ItemCat $category*/
+            $category = ItemCat::findOne($id);
+            $categoryTitle = $category->title;
+            $items->where('category_id=:category_id',[':category_id' => $id]);
         }
         if (isset($_GET['search'])) {
-            $result2->where('title like :title', [':title' => '%' . $_GET['search'] . '%']);
+            $items->where('title like :title', [':title' => '%' . $_GET['search'] . '%']);
         }
         if (isset($_GET['sort'])) {
             if ($_GET['sort'] == 'asc') {
-                $result2->orderBy('cost asc');
+                $items->orderBy('cost asc');
             } elseif ($_GET['sort'] == 'desc') {
-                $result2->orderBy('cost desc');
+                $items->orderBy('cost desc');
             }
         }
-        $result2 = $result2->all();
-		return $this->render('index', ['result1'=>$result1, 'result2'=>$result2, 'category_id'=>$id, 'category'=>$category, 'count'=>sizeof($result2)]);
-	}
+        $items = $items->all();
+        $characteristics = null;
+        if($id != '0'){
+            $characteristics = ItemCat::findOne($id)->characteristics;
+        }
+        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
+    }
+
+    public function actionAjax()
+    {
+        Yii::$app->cart->addItem(Yii::$app->request->get('item_id'), Yii::$app->request->get('count'));
+    }
+
+    public function actionSrch()
+    {
+        foreach (Yii::$app->request->post('CharacteristicItem') as $items) {
+            var_dump($items['characteristic_id']);
+        }
+    }
+
+    public function search($params)
+    {
+        $query = Item::find();
+
+        $characteristics = ItemCat::findOne(8)->getCharacteristics()->innerJoin('characteristic_item')->groupBy('value')->all();
+
+        if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
+            foreach ($characteristics as $characteristic) {
+                $characteristic->save(false);
+            }
+        }
+
+        /*
+                $query->andFilterWhere([
+                    'id' => $this->id,
+                    'category_id' => $this->category_id,
+                    'cost' => $this->cost,
+                ]);
+        */
+        $query->innerJoin(['characteristicItems']);
+        foreach ($params as $param) {
+            $query->andFilterWhere(['characteristicItems.characteristic_id' => '']);
+        }
+
+        $query->andFilterWhere(['like', 'item.title', $this->title])
+            ->andFilterWhere(['like', 'image', $this->image]);
+
+        $query->joinWith(['category' => function ($q) {
+            $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
+        }]);
+
+        return $query->all();
+    }
 
     public function actionLogin()
     {

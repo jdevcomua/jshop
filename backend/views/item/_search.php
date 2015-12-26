@@ -23,11 +23,11 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'cost');
 
-    echo$form->field($model, 'image') ?>
+    echo $form->field($model, 'image') ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']);
-        Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        echo Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

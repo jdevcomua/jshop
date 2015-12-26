@@ -1,28 +1,36 @@
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+
+/* @var $form yii\widgets\ActiveForm */
+?>
+
 <div class="frame-menu-main horizontal-menu">
-                        <!--    menu-row-category || menu-col-category-->
+    <!--    menu-row-category || menu-col-category-->
     <div class="menu-main menu-row-category container">
-  <nav>
-    <table>
-      <tbody>
-        <tr><td><div class="frame-item-menu"><div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span class="helper" style="height: 43px;"></span><span><span class="text-el">all</span></span></a></div></div></td>
-        <?php
-        foreach ($result1 as $i => $value) {
-            echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"?category=";
-            echo $result1[$i]['id'];
-            echo "\" class=\"title\" style=\"color: #fff;\">";
-            echo "<span class=\"helper\" style=\"height: 43px;\"></span><span><span class=\"text-el\">";
-            echo $result1[$i]['title'];
-            echo "</span></span></a></div></div></td>";
-        }
-        ?>
-    </tr>
-    </tbody>
- </table>
-</nav>
-</div></div>
+        <nav>
+            <table>
+                <tbody>
+                <tr><td><div class="frame-item-menu"><div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span class="helper" style="height: 43px;"></span><span><span class="text-el">all</span></span></a></div></div></td>
+                    <?php
+                    foreach ($allCategories as $i => $value) {
+                        echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"?category=";
+                        echo $value['id'];
+                        echo "\" class=\"title\" style=\"color: #fff;\">";
+                        echo "<span class=\"helper\" style=\"height: 43px;\"></span><span><span class=\"text-el\">";
+                        echo $value['title'];
+                        echo "</span></span></a></div></div></td>";
+                    }
+                    ?>
+                </tr>
+                </tbody>
+            </table>
+        </nav>
+    </div></div>
 <div class="content">
     <br>
-<?php /* @var $item common\models\Item */ ?>
+    <?php /* @var $item common\models\Item */ ?>
     <div class="frame-inside page-product">
         <div class="container">
             <div class="clearfix">
@@ -134,9 +142,6 @@
                                         <div style="width: 100%"></div>
                                     </div>
                                 </div>
-                                <div class="d_i-b">
-                                    <button data-trigger="[data-href='#comment']" data-scroll="true" class="count-response d_l">Отзывы                                        1                                    </button>
-                                </div>
                             </div>
                             <!-- End. Star rating-->
                             <!-- Start. frame for cloudzoom -->
@@ -159,60 +164,23 @@
                                             <!-- Start. Collect information about Variants, for future processing -->
                                             <div class="d_i-b v-a_b">
                                                 <div class="frame-count-buy js-variant-17917 js-variant">
-                                                    <form method="POST" action="/shop/cart/addProductByVariantId/17917">
-                                                        <div class="frame-count frameCount">
-                                                            <div class="number js-number" data-title="Количество на складе 1">
-                                                                <input type="text" name="quantity" value="1" class="plusMinus plus-minus" data-title="Только цифры" data-min="1" data-max="1">
-                                                            </div>
-                                                        </div>
-                                                        <div class="btn-cart-p btn-cart d_n">
-                                                            <button type="button" data-id="17917" class="btnBuy">
-                                                                <span class="icon_cleaner icon_cleaner_buy"></span>
-                                                                <span class="text-el">В корзине</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="btn-buy-p btn-buy">
-                                                            <button type="button" onclick="Shop.Cart.add($(this).closest(&quot;form&quot;).serialize(), &quot;17917&quot;)" class="btnBuy infoBut" data-id="17917" data-vname="" data-number="656" data-price="18" data-add-price="180" data-orig-price="" data-large-image="
-                                                                                                                /uploads/shop/products/large/e4955cbea9f6aaab125baa2670729718.jpg                                                        " data-main-image="
-                                                                                                                /uploads/shop/products/main/e4955cbea9f6aaab125baa2670729718.jpg                                                        " data-img="
-                                                                                                                /uploads/shop/products/small/e4955cbea9f6aaab125baa2670729718.jpg                                                        " data-maxcount="1">
-                                                                <span class="icon_cleaner icon_cleaner_buy"></span>
-                                                                <span class="text-el">В корзину</span>
-                                                            </button>
-                                                        </div>
-                                                        <input type="hidden" value="6376d8b505212cf6e8870964e6cb89ba" name="cms_token">                                            </form>
-                                                </div>
-                                            </div>
-                                            <!-- Start. Wish List & Compare List buttons -->
-                                            <div class="frame-wish-compare-list f-s_0 v-a_b">
-                                                <div class="frame-btn-comp">
-                                                    <div class="btn-compare">
-                                                        <button class="toCompare" data-id="17216" type="button" data-title="К сравнению" data-firtitle="К сравнению" data-sectitle="В сравнении" data-rel="tooltip">
-                                                            <span class="icon_compare"></span>
-                                                            <span class="text-el d_l">К сравнению</span>
-                                                        </button>
+
+                                                    <?php
+                                                    echo Html::input('number', 'count', '1', ['id' => 'test', 'style' => 'height: 31px;']);
+                                                    ?>
+                                                    <div class="btn-buy-p btn-buy">
+                                                        <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => '$.ajax({
+                url: \'site/ajax\',
+                data: { item_id: ' . $item->id . ', count: $(\'#test\').val()},
+                dataType: \'text\',
+                success: function(data){
+                var count = $(\'#countItems \').html();
+                    $(\'#countItems \').html(+count + +$(\'#test\').val());
+                }
+            });']); ?>
                                                     </div>
                                                 </div>
-                                                <div class="frame-btn-wish js-variant-17917 js-variant" data-id="17917">
-                                                    <div class="btnWish btn-wish" data-id="17917">
-                                                        <button class="toWishlist isDrop" type="button" data-rel="tooltip" data-title="В желаемое" data-drop="#dropAuth">
-                                                            <span class="icon_wish"></span>
-                                                            <span class="text-el d_l">В желаемое</span>
-                                                        </button>
-                                                        <button class="inWishlist" type="button" data-rel="tooltip" data-title="В списке желаний" style="display: none;">
-                                                            <span class="icon_wish"></span>
-                                                            <span class="text-el d_l">В списке желания</span>
-                                                        </button>
-                                                    </div>
-                                                    <script>
-                                                        langs["Create list"] = 'Создать список';
-                                                        langs["Wrong list name"] = 'Неверное имя списка';
-                                                        langs["Already in Wish List"] = 'Уже в Списке Желаний';
-                                                        langs["List does not chosen"] = 'Список не обран';
-                                                        langs["Limit of Wish List finished "] = 'Лимит списков пожеланий исчерпан';
-                                                    </script>                                </div>
                                             </div>
-                                            <!-- End. Wish List & Compare List buttons -->
                                         </div>
                                         <!-- End. Collect information about Variants, for future processing -->
                                     </div>
@@ -355,7 +323,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-               </div>
+                                        </div>
                                         <!--End. Comments block-->
                                     </div>
                                 </div>

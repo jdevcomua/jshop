@@ -42,7 +42,8 @@ abstract class Model extends \yii\db\ActiveRecord
             $array = (array)json_decode($json, true);
             $language = Yii::$app->language;
             $array[$language] = $value;
-            $json = json_encode($array);
+            $json = json_encode($array, JSON_UNESCAPED_UNICODE);
+            //$json = json_encode($array);
             parent::__set($title, $json);
         } else {
             parent::__set($title, $value);

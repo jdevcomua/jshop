@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
 
         <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
-        Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
+        echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот предмет?'),
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div style="width: 100%;">
-        <div style="width: 550px; float:left;">
+        <div style="width: 650px; float:left;">
             <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div></div>
     <?php if($model->image != ""){
-        echo "<div style=\"width: 500px; float:left; padding-left: 50px;\">";
-        echo "<img width=\"500px\" src=\"" . $model->getImageUrl() . "\" /></div>";
+        echo "<div style=\"width: 300px; float:left; padding-left: 50px;\">";
+        echo "<img width=\"300px\" src=\"" . $model->getImageUrl() . "\" /></div>";
     }?>
 
 

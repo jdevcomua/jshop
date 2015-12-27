@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use backend\models\UrlHelper;
 use yii\helpers\Url;
-use Yii;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\ItemSearch */
@@ -53,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    Html::submitButton(\Yii::t('app', 'Удалить'), ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);
-    Html::endForm();?>
+    echo Html::submitButton(Yii::t('app', 'Удалить'), ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);
+    echo Html::endForm();?>
 
 </div>

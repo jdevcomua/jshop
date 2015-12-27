@@ -65,7 +65,7 @@ class Item extends Model
             [['title', 'cost'], 'required'],
             [['cost'], 'number'],
             [['title'], 'string'],
-            [['image'], 'string', 'max' => 25],
+            [['image'], 'string'],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         ];
     }

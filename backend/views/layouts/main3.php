@@ -63,82 +63,23 @@ AppAsset::register($this);
 
             <div class="frame_nav header-menu-out">
                 <table>
-                    <tbody><tr><td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Заказы
-                                <!--<span class="menu-counter">4</span>--> </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo UrlHelper::to(['order-item/index'])?>">
-                                        Список заказов </a></li>
-                                <li><a href="/admin/components/run/shop/orderstatuses">
-                                        Статусы заказов</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/components/run/shop/callbacks">
-                                        Список обратных звонков</a></li>
-                                <li><a href="/admin/components/run/shop/callbacks/statuses">
-                                        Статусы обратных звонков</a></li>
-                                <li><a href="/admin/components/run/shop/callbacks/themes">
-                                        Темы обратных звонков</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/components/run/shop/notifications">
-                                        Уведомления о появлении</a></li>
-                                <li><a href="/admin/components/run/shop/notificationstatuses/index">
-                                        Статусы уведомлений</a></li>
-                            </ul></td>
+                    <tbody><tr>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Каталог товаров</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo UrlHelper::to(['item/index'])?>">
-                                        Список товаров</a></li>
-                                <li><a href="<?php echo UrlHelper::to(['item-cat/index'])?>">
-                                        Категории товаров </a></li>
-                                <li><a href="<?php echo UrlHelper::to(['characteristic/index'])?>">
-                                        Свойства товаров</a></li>
-                                <li><a href="/admin/components/run/shop/kits/index">
-                                        Наборы товаров </a></li>
-                                <li><a href="/admin/components/run/shop/search?WithoutImages=1">
-                                        Товары без картинок </a></li>
-                                <li><a href="/admin/components/run/shop/brands/index">
-                                        Бренды </a></li>
-                            </ul></td>
+                            <a href="<?php echo UrlHelper::to(['order-item/index'])?>">
+                                        Список заказов </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователи</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<?php echo UrlHelper::to(['user/index'])?>">
-                                        Список пользователей </a></li>
-                                <li><a href="/admin/rbac/roleList">
-                                        Управление правами доступа </a></li>
-                                <li><a href="/admin/components/cp/comments">
-                                        Комментарии </a></li>
-                            </ul></td>
+                            <a href="<?php echo UrlHelper::to(['item/index'])?>">
+                                        Список товаров</a></td>
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['item-cat/index'])?>">
+                                Категории товаров </a></td>
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['characteristic/index'])?>">
+                                Свойства товаров</a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Модули</a>
-                            <ul class="dropdown-menu" style="min-width: 250px;">
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/template_manager">
-                                        <i class="icon-th-large" style="margin-right: 5px;top: 2px;"></i>
-                                        Управление дизайном</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/xbanners">
-                                        <i class="fa fa-picture-o" style="margin-right: 5px;top: 2px;"></i>
-                                        Баннеры</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/menu">
-                                        <i class="icon-align-justify" style="margin-right: 5px;top: 2px;"></i>
-                                        Меню</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/mod_discount">
-                                        <i class="icon-gift" style="margin-right: 5px;top: 2px;"></i>
-                                        Скидки интернет-магазина</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/wishlist">
-                                        <i class="icon-th" style="margin-right: 5px;top: 2px;"></i>
-                                        Списки пожеланий</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/cmsemail">
-                                        <i class="icon-envelope" style="margin-right: 5px;top: 2px;"></i>
-                                        Управление email-уведомлениями </a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/comments">
-                                        <i class="icon-comment" style="margin-right: 5px;top: 2px;"></i>
-                                        Комментарии</a></li>
-                                <li><a style="padding: 3px 15px;" href="/admin/components/cp/share">
-                                        <i class="icon-globe" style="margin-right: 5px;top: 2px;"></i>
-                                        Кнопки социальных сетей</a></li>
-                            </ul></td>
-                        <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
+                            <a href="<?php echo UrlHelper::to(['user/index'])?>">
+                                        Список пользователей </a></td>
+
+
+                    <!--    <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика</a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="/admin/components/cp/mod_stats/orders/info">
@@ -151,47 +92,9 @@ AppAsset::register($this);
                                         Категории</a></li>
                                 <li><a href="/admin/components/cp/mod_stats/search/keywords">
                                         Поиск</a></li>
-                            </ul></td>
-                        <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Настройки</a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="/admin/settings">
-                                        Глобальные настройки</a></li>
-                                <li><a href="/admin/components/run/shop/settings">
-                                        Настройки магазина</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/components/run/shop/currencies">
-                                        Валюты</a></li>
-                                <li><a href="/admin/components/run/shop/deliverymethods/index">
-                                        Способы доставки</a></li>
-                                <li><a href="/admin/components/run/shop/paymentmethods/index">
-                                        Способы оплаты</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/widgets_manager">
-                                        Виджеты </a></li>
-                                <li><a href="/admin/components/run/shop/customfields">
-                                        Дополнительные поля</a></li>
-                                <li><a href="/admin/components/cp/template_editor">
-                                        Редактор шаблонов </a></li>
-                                <li><a href="/admin/languages">
-                                        Языки</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/admin_logs">
-                                        Журнал событий </a></li>
-                                <li><a href="/admin/backup">
-                                        Резервное копирование </a></li>
-                                <li><a href="/admin/rbac/roleList">
-                                        Управление правами доступа </a></li>
-                                <li class="divider"></li>
-                                <li><a href="/admin/sys_update">
-                                        Обновление системы </a></li>
-                                <li><a href="/admin/sys_info">
-                                        Информация системы</a></li>
-                                <li class="divider"></li>
-                                <li><a id="clearAllCache">
-                                        Очистить кеш</a></li>
-                            </ul>
-                        </td></tr>
+                            </ul></td>-->
+
+                    </tr>
             </tbody></table></div>
 
             <?php echo $content ?>

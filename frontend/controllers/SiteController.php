@@ -78,7 +78,7 @@ class SiteController extends Controller
             if (isset($items['value'])) {
                 $query1 = CharacteristicItem::find()->select('item_id');
                 $query1->andFilterWhere(['characteristic_id' => $items['characteristic_id']]);
-                $query1->andFilterWhere(['like', 'value', $items['value']]);
+                $query1->where('`value` like :val', [':val'=> '%"' . $items['value'] . '"%']);
                 $item_ids = [];
                 foreach ($query1->asArray()->all() as $item) {
                     $item_ids[] = $item['item_id'];
@@ -90,7 +90,6 @@ class SiteController extends Controller
                     $query->andFilterWhere(['in', 'id', $item_ids]);
                 }
             }
-
         }
         return $query;
     }

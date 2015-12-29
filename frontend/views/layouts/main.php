@@ -23,29 +23,8 @@ use frontend\assets\AppAsset;
         echo 'var countItems = ' . Yii::$app->cart->getCount();
         echo '</script>';
     ?>
-    <script type="text/javascript">
-    var locale = "";
-    </script>
     <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/jquery-1.8.3.min.js"></script>
     <!-- php vars to js -->
-    <script type="text/javascript">
-        var curr = '$',
-            cartItemsProductsId = null,
-            nextCs = 'руб',
-            nextCsCond = nextCs == '' ? false : true,
-            pricePrecision = parseInt(''),
-            checkProdStock = "", //use in plugin plus minus
-            inServerCompare = parseInt("0"),
-            inServerWishList = parseInt("0"),
-            countViewProd = parseInt("0"),
-            theme = "http://active.imagecmsdemo.net/templates/active/",
-            siteUrl = "http://active.imagecmsdemo.net/",
-            colorScheme = "css/color_scheme_1",
-            isLogin = "0" === '1' ? true : false,
-            typePage = "shop_category",
-            typeMenu = "row";
-
-    </script>
     <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/settings.js"></script>
     <!--[if lte IE 9]><script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/lte_ie_8.css" /><![endif]-->
@@ -162,7 +141,7 @@ use frontend\assets\AppAsset;
                             <div id="tinyBask" class="frame-cleaner">
 
                                 <div class="btn-bask">
-                                    <button>
+                                    <a style="margin-top:6px; height: 23px;" href="<?php echo \frontend\models\UrlHelper::to(['cart'])?>">
                                         <span class="icon_cleaner"></span>
             <span class="text-cleaner">
                 <span class="text-el"><?php
@@ -172,7 +151,7 @@ use frontend\assets\AppAsset;
                         echo \Yii::t('app', 'в корзине ') . '<span id="countItems">' . Yii::$app->cart->getCount() . '</span>';
                     }?></span>
             </span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <!--                    End. Include cart data template-->

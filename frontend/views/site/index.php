@@ -5,28 +5,8 @@ use common\models\ItemCat;
 use yii\helpers\Url;
 ?>
 
-<div class="frame-menu-main horizontal-menu">
-    <!--    menu-row-category || menu-col-category-->
-    <div class="menu-main menu-row-category container">
-        <nav>
-            <table>
-                <tbody>
-                <tr><td><div class="frame-item-menu"><div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span class="helper" style="height: 43px;"></span><span><span class="text-el">all</span></span></a></div></div></td>
-                    <?php
-                    foreach ($allCategories as $i => $value) {
-                        echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"?category=";
-                        echo $value['id'];
-                        echo "\" class=\"title\" style=\"color: #fff;\">";
-                        echo "<span class=\"helper\" style=\"height: 43px;\"></span><span><span class=\"text-el\">";
-                        echo $value['title'];
-                        echo "</span></span></a></div></div></td>";
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
-        </nav>
-    </div></div>
+<?php echo $this->render('menu', ['allCategories' => $allCategories]); ?>
+
 <div class="content">
     <br>
     <div class="frame-inside page-category">

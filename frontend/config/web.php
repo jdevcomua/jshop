@@ -24,6 +24,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '<language:(ru|en)>/'=>'site/index',
+                '<language:(ru|en)>/cart'=>'site/cart',
                 '<language:(ru|en)>/site/img/*'=>'img/*',
                 '<language:(ru|en)>/site'=>'site/index',
                 '<language:(ru|en)>/site/index'=>'site/index',

@@ -3,6 +3,7 @@
 namespace common\components;
 
 use yii\base\Component;
+use common\models\Item;
 use Yii;
 
 /**
@@ -62,6 +63,23 @@ class Cart extends Component
     public function getItems()
     {
         return Yii::$app->session['cart'];
+    }
+
+    public function getItemsModels()
+    {
+        return Item::find()->andFilterWhere(['in', 'id', array_keys(Yii::$app->session['cart'])])->all();
+    }
+
+    public function getSum()
+    {
+        $sum = 0;
+        $itemsCount = $this->getItems();
+        $items = $this->getItemsModels();
+        foreach ($items as $item) {
+            /* @var $item Item*/
+            $sum += ($item->cost*$itemsCount[$item->id]);
+        }
+        return $sum;
     }
 
 }

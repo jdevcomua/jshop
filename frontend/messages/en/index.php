@@ -18,4 +18,5 @@ return [
     "Новинки" => "New products",
     "Отзывы" => "Reviews",
     "В корзину" => "To bucket",
+    "все" => "all",
 ];

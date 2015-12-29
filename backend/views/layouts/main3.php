@@ -66,18 +66,33 @@ AppAsset::register($this);
                     <tbody><tr>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo UrlHelper::to(['order-item/index'])?>">
-                                        Список заказов </a></td>
+                                        Список заказов </a>
+                            <a href="">
+                            <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                        </a></td>
+
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo UrlHelper::to(['item/index'])?>">
-                                        Список товаров</a></td>
+                                        Список товаров</a>
+                            <a href="<?php echo UrlHelper::to(['item/create'])?>">
+                                <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                            </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['item-cat/index'])?>">
-                                Категории товаров </a></td>
+                                Категории товаров </a>
+                            <a href="<?php echo UrlHelper::to(['item-cat/create'])?>">
+                                <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                            </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['characteristic/index'])?>">
-                                Свойства товаров</a></td>
+                                Свойства товаров</a>
+                            <a href="<?php echo UrlHelper::to(['characteristic/create'])?>">
+                                <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                            </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo UrlHelper::to(['user/index'])?>">
-                                        Список пользователей </a></td>
-
+                                        Список пользователей </a>
+                            <a href="<?php echo UrlHelper::to(['user/create'])?>">
+                                <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                            </a></td>
 
                     <!--    <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика</a>

@@ -117,7 +117,7 @@ class ItemController extends Controller
     public function actionCharacteristics($id)
     {
         $chars = ItemCat::findOne($this->findModel($id)->category_id)->getCharacteristics()->all();
-        $characteristics = [new CharacteristicItem()];
+        $characteristics = [];
         foreach ($chars as $char) {
             $char_item = new CharacteristicItem();
             /* @var $char Characteristic*/

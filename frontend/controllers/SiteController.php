@@ -4,15 +4,22 @@ namespace frontend\controllers;
 
 use common\models\CharacteristicItem;
 use common\models\Item;
+use common\models\OrderItem;
 use common\models\ItemCat;
 use frontend\models\UrlHelper;
-use yii\base\Model;
 use common\models\LoginForm;
 use Yii;
 use yii\web\Controller;
 
 class SiteController extends Controller
 {
+
+    public function beforeAction($action)
+    {
+        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
+        return parent::beforeAction($action);
+    }
+
     public function actionLanguage($lang)
     {
         Yii::$app->language = $lang;
@@ -21,7 +28,6 @@ class SiteController extends Controller
 
     function actionIndex()
     {
-        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $allCategories = ItemCat::find()->all();
         if (!empty(Yii::$app->request->get('id'))) {
             $item = Item::findOne(Yii::$app->request->get('id'));
@@ -34,18 +40,20 @@ class SiteController extends Controller
         }
         $selected = [];
         if (!empty(Yii::$app->request->post('CharacteristicItem'))) {
-            $items = $this->search();
+            $items = $this->filter();
             $selected = Yii::$app->request->post('CharacteristicItem');
         } else {
             $items = Item::find();
         }
-        if ($id == '0') {
+        if (!isset($id) || ($id == 0)) {
             $categoryTitle = 'all';
         } elseif (is_int(+$id)) {
             /**@var ItemCat $category*/
             $category = ItemCat::findOne($id);
             $categoryTitle = $category->title;
             $items->andFilterWhere(['category_id' => $id]);
+        } else {
+            $categoryTitle = 'all';
         }
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
@@ -62,7 +70,18 @@ class SiteController extends Controller
         if($id != '0'){
             $characteristics = ItemCat::findOne($id)->characteristics;
         }
-        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id, 'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
+        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id,
+            'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
+    }
+
+    public function actionCart()
+    {
+        $itemsCount = Yii::$app->cart->getItems();
+        $items = Yii::$app->cart->getItemsModels();
+        $sum = Yii::$app->cart->getSum();
+        $allCategories = ItemCat::find()->all();
+        return $this->render('Cart', ['allCategories' => $allCategories, 'itemsCount' => $itemsCount, 'items' => $items,
+            'sum' => $sum]);
     }
 
     public function actionAjax()
@@ -70,7 +89,7 @@ class SiteController extends Controller
         Yii::$app->cart->addItem(Yii::$app->request->get('item_id'), Yii::$app->request->get('count'));
     }
 
-    public function search()
+    public function filter()
     {
         $query = Item::find();
         $char_ids = [];

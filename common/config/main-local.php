@@ -16,5 +16,14 @@ return [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
+        'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'logFile' => '@common/runtime/logs/db.log',
+                ],
+            ]
+        ],
     ],
 ];

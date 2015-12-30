@@ -51,15 +51,17 @@ class SiteController extends Controller
         } else {
             $items = Item::find();
         }
-        if (!isset($id) || ($id == 0)) {
+        if (!isset($id) || ($id == 0) || (!is_int(+$id))) {
             $categoryTitle = 'all';
-        } elseif (is_int(+$id)) {
+            $minCost = Item::find()->min('cost');
+            $maxCost = Item::find()->max('cost');
+        } else {
             /**@var ItemCat $category*/
             $category = ItemCat::findOne($id);
             $categoryTitle = $category->title;
             $items->andFilterWhere(['category_id' => $id]);
-        } else {
-            $categoryTitle = 'all';
+            $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
+            $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
         }
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
@@ -71,13 +73,22 @@ class SiteController extends Controller
                 $items->orderBy('cost desc');
             }
         }
+        if (!empty(Yii::$app->request->post('left')) && !empty(Yii::$app->request->post('right'))) {
+            $leftCost = Yii::$app->request->post('left');
+            $rightCost = Yii::$app->request->post('right');
+        } else {
+            $leftCost = $minCost;
+            $rightCost = $maxCost;
+        }
         $items = $items->all();
         $characteristics = null;
-        if($id != '0'){
+        if ($id != '0') {
             $characteristics = ItemCat::findOne($id)->characteristics;
         }
         return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id,
-            'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
+            'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items),
+            'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
+            'rightCost' => $rightCost]);
     }
 
     /**
@@ -123,6 +134,7 @@ class SiteController extends Controller
                 }
             }
         }
+        $query->andFilterWhere(['between', 'cost', Yii::$app->request->post('left'), Yii::$app->request->post('right')]);
         return $query;
     }
 

@@ -17,7 +17,7 @@ use yii\helpers\Url;
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/color.css" media="all">
     <?php
         echo '<script>';
-        echo 'var countItems = ' . Yii::$app->cart->getCount();
+        echo 'var countItems = ' . Yii::$app->cart->getCount() . ';';
         echo '</script>';
     ?>
     <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/jquery-1.8.3.min.js"></script>

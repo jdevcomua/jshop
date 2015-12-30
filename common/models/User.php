@@ -8,20 +8,25 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $name
+ * @property string $username
  * @property string $mail
  * @property string $city
+ * @property string $password
+ * @property string $name
+ * @property string $surname
+ * @property string $phone
+ * @property string $address
  *
  * @property Orders[] $orders
  * @property Vote[] $votes
  */
 class User extends Model implements \yii\web\IdentityInterface
 {
-
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+    /*
+        public $username;
+        public $password;
+        public $authKey;
+        public $accessToken;*/
 
     /**
      * @return array
@@ -33,30 +38,34 @@ class User extends Model implements \yii\web\IdentityInterface
 
     /**
      * @var array
-     */
+     *
     private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    '100' => [
+    'id' => '100',
+    'username' => 'admin',
+    'password' => 'admin',
+    'authKey' => 'test100key',
+    'accessToken' => '100-token',
+    ],
+    '101' => [
+    'id' => '101',
+    'username' => 'demo',
+    'password' => 'demo',
+    'authKey' => 'test101key',
+    'accessToken' => '101-token',
+    ],
+    ];*/
 
     /**
      * @inheritdoc
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        if (!empty(User::findOne($id))) {
+            return new static(User::findOne($id));
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -81,13 +90,11 @@ class User extends Model implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
+        if (!empty(User::find()->andFilterWhere(['username' => $username])->all()[0])) {
+            return new static(User::find()->andFilterWhere(['username' => $username])->all()[0]);
+        } else {
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -103,14 +110,14 @@ class User extends Model implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return 'test101key';
     }
 
     /**
      * @inheritdoc
      */
     public function validateAuthKey($authKey)
-    {
+    {die();
         return $this->authKey === $authKey;
     }
 
@@ -139,8 +146,8 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'mail', 'city'], 'required'],
-            [['name'], 'string', 'max' => 100],
+            [['username', 'mail', 'city'], 'required'],
+            [['username'], 'string', 'max' => 100],
             [['mail', 'city'], 'string', 'max' => 50]
         ];
     }
@@ -152,7 +159,7 @@ class User extends Model implements \yii\web\IdentityInterface
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Имя'),
+            'username' => Yii::t('app', 'Имя'),
             'mail' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
         ];

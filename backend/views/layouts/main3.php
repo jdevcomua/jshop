@@ -35,8 +35,18 @@ AppAsset::register($this);
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
         ]);
-        $url1 = Url::to(["site/language", "lang" => 'ru']);
-        $url2 = Url::to(["site/language", "lang" => 'en']);
+        $array = Yii::$app->request->queryParams;
+        if(isset($array['language'])){
+            unset($array['language']);
+        }
+        //var_dump(count($array));die();
+        if(count($array) != 0){
+            $url1 = Url::to(['ru/' . Yii::$app->controller->route , key($array) => current($array)]);
+            $url2 = Url::to(['en/' . Yii::$app->controller->route, key($array) => current($array)]);
+        } else {
+            $url1 = Url::to(['ru/' . Yii::$app->controller->route]);
+            $url2 = Url::to(['en/' . Yii::$app->controller->route]);
+        }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [

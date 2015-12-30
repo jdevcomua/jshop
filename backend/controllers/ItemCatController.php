@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\base\Model;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
 use yii\web\NotFoundHttpException;
@@ -12,6 +13,41 @@ use yii\web\NotFoundHttpException;
  */
 class ItemCatController extends Controller
 {
+
+    /**
+     * Updates group of existing ItemCat model.
+     * If update is successful, the browser will be redirected to the 'index' page.
+     */
+    public function actionGroup(){
+        if (isset(Yii::$app->request->post()['id'])) {
+            if (Yii::$app->request->post()['action'] == 'del') {
+                foreach (Yii::$app->request->post()['id'] as $id) {
+                    $this->findModel($id)->delete();
+                }
+            } elseif (Yii::$app->request->post()['action'] == 'edit') {
+                if(count(Yii::$app->request->post()['id']) == 1){
+                    return $this->redirect(Yii::$app->urlHelper->to(['item-cat/update', 'id' => array_shift(Yii::$app->request->post()['id'])]));
+                } else {
+                    $query = ItemCat::find();
+                    foreach (Yii::$app->request->post()['id'] as $id) {
+                        $query->orWhere(['id' => $id]);
+                    }
+                    $models = $query->indexBy('id')->all();
+                    return $this->render('update', [
+                        'models' => $models, 'count' => 'many',
+                    ]);
+                }
+            }
+        }
+        $categories = ItemCat::find()->indexBy('id')->all();
+        if (Model::loadMultiple($categories, Yii::$app->request->post()) && Model::validateMultiple($categories)) {
+            foreach ($categories as $category) {
+                $category->save(false);
+            }
+            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
+        }
+        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
+    }
 
     /**
      * Lists all ItemCat models.
@@ -84,7 +120,7 @@ class ItemCatController extends Controller
             return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
         } else {
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model, 'count' => 'one',
             ]);
         }
     }

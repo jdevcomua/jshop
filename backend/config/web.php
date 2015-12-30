@@ -40,6 +40,7 @@ $config = [
                 '<language:(ru|en)>/item/delete'=>'item/delete',
                 '<language:(ru|en)>/item-cat'=>'item-cat/index',
                 '<language:(ru|en)>/item-cat/index'=>'item-cat/index',
+                '<language:(ru|en)>/item-cat/group'=>'item-cat/group',
                 '<language:(ru|en)>/item-cat/update'=>'item-cat/update',
                 '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
                 '<language:(ru|en)>/item-cat/view'=>'item-cat/view',

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php echo Html::a(Yii::t('app', 'Создать категорию'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php echo Html::beginForm(['del'],'post');
+    <?php echo Html::beginForm(Yii::$app->urlHelper->to(['item-cat/group']),'post');
 
     echo GridView::widget([
         'dataProvider' => $dataProvider,
@@ -45,7 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    echo Html::submitButton('Удалить', ['class' => 'btn btn-info',]);
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']) . ' ';
+    echo Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);
     echo Html::endForm();?>
 
 </div>

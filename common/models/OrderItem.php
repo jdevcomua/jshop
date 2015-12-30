@@ -25,6 +25,9 @@ class OrderItem extends Model
         return 'order_item';
     }
 
+    /**
+     * @return array
+     */
     public function getTranslateColumns()
     {
         return [];

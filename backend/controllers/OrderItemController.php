@@ -28,6 +28,11 @@ class OrderItemController extends Controller
         ]);
     }
 
+    /**
+     * Delete group of OrderItem model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
     public function actionDel()
     {
         foreach (Yii::$app->request->post()['id'] as $id) {

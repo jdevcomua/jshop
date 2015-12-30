@@ -8,9 +8,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use backend\assets\AppAsset;
-use backend\models\UrlHelper;
 use yii\helpers\Url;
-use Yii;
+//use Yii;
 
 AppAsset::register($this);
 ?>
@@ -31,7 +30,7 @@ AppAsset::register($this);
         <?php
         NavBar::begin([
             'brandLabel' => 'My Company',
-            'brandUrl' => UrlHelper::to(['/']),
+            'brandUrl' => Yii::$app->urlHelper->to(['/']),
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
@@ -65,32 +64,32 @@ AppAsset::register($this);
                 <table>
                     <tbody><tr>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="<?php echo UrlHelper::to(['order-item/index'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['order-item/index'])?>">
                                         Список заказов </a>
                             <a href="">
                             <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                         </a></td>
 
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="<?php echo UrlHelper::to(['item/index'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['item/index'])?>">
                                         Список товаров</a>
-                            <a href="<?php echo UrlHelper::to(['item/create'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['item/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
-                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['item-cat/index'])?>">
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['item-cat/index'])?>">
                                 Категории товаров </a>
-                            <a href="<?php echo UrlHelper::to(['item-cat/create'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['item-cat/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
-                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo UrlHelper::to(['characteristic/index'])?>">
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['characteristic/index'])?>">
                                 Свойства товаров</a>
-                            <a href="<?php echo UrlHelper::to(['characteristic/create'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['characteristic/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="<?php echo UrlHelper::to(['user/index'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['user/index'])?>">
                                         Список пользователей </a>
-                            <a href="<?php echo UrlHelper::to(['user/create'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['user/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
 

@@ -27,11 +27,17 @@ class Item extends Model
     public $imageFile;
 
 
+    /**
+     * @return array
+     */
     public function getTranslateColumns()
     {
         return ['title'];
     }
 
+    /**
+     * @return string
+     */
     public function getCategoryTitle()
     {
         return $this->category->title;
@@ -45,11 +51,17 @@ class Item extends Model
         return 'item';
     }
 
+    /**
+     * @return string of dir with images
+     */
     public static function getPath()
     {
         return Yii::getAlias('@frontend') . '/web/img/';
     }
 
+    /**
+     * @return string image url
+     */
     public function getImageUrl()
     {
         return 'http://frontend.dev/img/' . $this->image;

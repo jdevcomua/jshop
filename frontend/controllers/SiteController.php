@@ -4,9 +4,7 @@ namespace frontend\controllers;
 
 use common\models\CharacteristicItem;
 use common\models\Item;
-use common\models\OrderItem;
 use common\models\ItemCat;
-use frontend\models\UrlHelper;
 use common\models\LoginForm;
 use Yii;
 use yii\web\Controller;
@@ -20,12 +18,20 @@ class SiteController extends Controller
         return parent::beforeAction($action);
     }
 
+    /**
+     * Changing the language
+     * @param $lang string
+     * @return \yii\web\Response
+     */
     public function actionLanguage($lang)
     {
         Yii::$app->language = $lang;
-        return $this->redirect(UrlHelper::to(['/']));
+        return $this->redirect(Yii::$app->urlHelper->to(['/']));
     }
 
+    /**
+     * @return string
+     */
     function actionIndex()
     {
         $allCategories = ItemCat::find()->all();
@@ -74,6 +80,10 @@ class SiteController extends Controller
             'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'chars' => $characteristics]);
     }
 
+    /**
+     * Open page of cart
+     * @return string
+     */
     public function actionCart()
     {
         $itemsCount = Yii::$app->cart->getItems();
@@ -84,6 +94,9 @@ class SiteController extends Controller
             'sum' => $sum]);
     }
 
+    /**
+     * Adding item to cart
+     */
     public function actionAjax()
     {
         Yii::$app->cart->addItem(Yii::$app->request->get('item_id'), Yii::$app->request->get('count'));
@@ -131,7 +144,7 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(UrlHelper::to(['/']));
+        return $this->redirect(Yii::$app->urlHelper->to(['/']));
     }
 
     public function actions()

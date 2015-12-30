@@ -6,8 +6,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
-use yii\bootstrap\NavBar;
-use frontend\assets\AppAsset;
 
 ?>
 <html><head>
@@ -17,7 +15,6 @@ use frontend\assets\AppAsset;
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/style.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/colorscheme.css" media="all">
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/color.css" media="all">
-    <script type="text/javascript" src="<c:url value="/resources/jquery-1.11.3.min.js" /> "></script>
     <?php
         echo '<script>';
         echo 'var countItems = ' . Yii::$app->cart->getCount();
@@ -141,7 +138,7 @@ use frontend\assets\AppAsset;
                             <div id="tinyBask" class="frame-cleaner">
 
                                 <div class="btn-bask">
-                                    <a style="margin-top:6px; height: 23px;" href="<?php echo \frontend\models\UrlHelper::to(['cart'])?>">
+                                    <a style="margin-top:6px; height: 23px;" href="<?php echo Yii::$app->urlHelper->to(['cart'])?>">
                                         <span class="icon_cleaner"></span>
             <span class="text-cleaner">
                 <span class="text-el"><?php

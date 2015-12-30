@@ -25,16 +25,25 @@ class Characteristic extends Model
         return 'characteristic';
     }
 
+    /**
+     * @return array
+     */
     public function getTranslateColumns()
     {
         return ['title'];
     }
 
+    /**
+     * @return string
+     */
     public function getCategoryTitle()
     {
         return $this->category->title;
     }
 
+    /**
+     * @return array
+     */
     public static function getCategorys()
     {
         // Выбираем только те категории, у которых есть дочерние категории

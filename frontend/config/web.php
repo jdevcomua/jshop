@@ -19,6 +19,9 @@ $config = [
         'cart' => [
             'class' => 'common\components\Cart',
         ],
+        'urlHelper' => [
+            'class' => 'common\components\UrlHelper',
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

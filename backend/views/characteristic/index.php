@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\models\UrlHelper;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -15,12 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="characteristic-index">
 
     <h3><?php echo Html::encode($this->title);
-        echo '  ' . Html::a(Yii::t('app', 'Создать характеристику'), UrlHelper::to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
+        echo '  ' . Html::a(Yii::t('app', 'Создать характеристику'), Yii::$app->urlHelper->to(['characteristic/create']), ['class' => 'btn btn-success']) ?>
 
     </h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php echo Html::beginForm(UrlHelper::to(['characteristic/group']),'post');
+    <?php echo Html::beginForm(Yii::$app->urlHelper->to(['characteristic/group']),'post');
 
     echo GridView::widget([
         'dataProvider' => $dataProvider,

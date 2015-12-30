@@ -1,18 +1,18 @@
 <?php
 
-namespace backend\models;
+namespace common\components;
 
 use yii\helpers\Url;
 use Yii;
 
-class UrlHelper extends Url
+class UrlHelper
 {
 
-    public static function to($url)
+    public function to($url)
     {
         $newUrl = Yii::$app->language.'/'.current($url);
         $url[0] = $newUrl;
-        return parent::to($url);
+        return Url::to($url);
     }
 
 }

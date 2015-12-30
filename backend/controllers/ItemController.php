@@ -5,9 +5,7 @@ namespace backend\controllers;
 use common\models\ItemCat;
 use common\models\search\ItemSearch;
 use yii\base\Model;
-use backend\models\UrlHelper;
 use Yii;
-use yii\helpers\Url;
 use common\models\Item;
 use common\models\Characteristic;
 use common\models\CharacteristicItem;
@@ -35,16 +33,11 @@ class ItemController extends Controller
         ]);
     }
 
-    public function actionView2()
-    {
-        $searchModel = new ItemSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('view2', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
+    /**
+     * Delete group of Item model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
     public function actionDel()
     {
         foreach (Yii::$app->request->post()['id'] as $id) {
@@ -92,7 +85,7 @@ class ItemController extends Controller
                     }*/
                     $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
                 }
-                return $this->redirect(UrlHelper::to(['item/characteristics', 'id' => $model->id]));
+                return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
             }
         }
             return $this->render('create', [
@@ -101,6 +94,12 @@ class ItemController extends Controller
 
     }
 
+    /**
+     * Updates characteristics of Item.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id of item
+     * @return string|\yii\web\Response
+     */
     public function actionUpdatecharacteristics($id)
     {
         $characteristics = $this->findModel($id)->getCharacteristicItems()->indexBy('id')->all();
@@ -108,12 +107,18 @@ class ItemController extends Controller
             foreach ($characteristics as $characteristic) {
                 $characteristic->save(false);
             }
-            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }
 
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
 
+    /**
+     * Create group of Characteristic models
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id of item
+     * @return string|\yii\web\Response
+     */
     public function actionCharacteristics($id)
     {
         $chars = ItemCat::findOne($this->findModel($id)->category_id)->getCharacteristics()->all();
@@ -131,7 +136,7 @@ class ItemController extends Controller
                 /* @var $characteristic CharacteristicItem*/
                 $characteristic->save();
             }
-            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
@@ -167,7 +172,7 @@ class ItemController extends Controller
                     }
                 }
             }
-            return $this->redirect(UrlHelper::to(['item/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -190,7 +195,7 @@ class ItemController extends Controller
             }
         }
         $model->delete();
-        return $this->redirect(UrlHelper::to(['item/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['item/index']));
     }
 
     /**

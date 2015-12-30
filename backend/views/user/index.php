@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use backend\models\UrlHelper;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\UsersSearch */
@@ -18,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Создать пользователя'), UrlHelper::to(['user/create']), ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('app', 'Создать пользователя'), Yii::$app->urlHelper->to(['user/create']), ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo Html::beginForm(['del'],'post');

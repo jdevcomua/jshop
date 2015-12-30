@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\User;
-use backend\models\UrlHelper;
 use common\models\search\UserSearch;
 use yii\web\NotFoundHttpException;
 
@@ -51,7 +50,7 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['user/view', 'id' => $model->id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['user/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -70,7 +69,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['user/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['user/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -88,15 +87,20 @@ class UserController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(UrlHelper::to(['user/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['user/index']));
     }
 
+    /**
+     * Delete group of User model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
     public function actionDel()
     {
         foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
-        return $this->redirect(UrlHelper::to(['user/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['user/index']));
     }
 
     /**

@@ -6,7 +6,6 @@ use Yii;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
 use yii\web\NotFoundHttpException;
-use backend\models\UrlHelper;
 
 /**
  * ItemCatController implements the CRUD actions for ItemCat model.
@@ -29,11 +28,16 @@ class ItemCatController extends Controller
         ]);
     }
 
+    /**
+     * Delete group of ItemCat model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
     public function actionDel(){
         foreach (Yii::$app->request->post()['id'] as $id) {
             $this->findModel($id)->delete();
         }
-        return $this->redirect(UrlHelper::to(['item-cat/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
     }
 
     /**
@@ -58,7 +62,7 @@ class ItemCatController extends Controller
         $model = new ItemCat();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['item-cat/view', 'id' => $model->id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,7 +81,7 @@ class ItemCatController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['item-cat/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -95,7 +99,7 @@ class ItemCatController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(UrlHelper::to(['item-cat/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
     }
 
     /**

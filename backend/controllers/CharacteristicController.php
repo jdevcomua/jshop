@@ -7,7 +7,6 @@ use yii\base\Model;
 use common\models\Characteristic;
 use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
-use backend\models\UrlHelper;
 
 /**
  * CharacteristicController implements the CRUD actions for Characteristic model.
@@ -15,6 +14,10 @@ use backend\models\UrlHelper;
 class CharacteristicController extends Controller
 {
 
+    /**
+     * Updates group of existing Characteristic model.
+     * If update is successful, the browser will be redirected to the 'index' page.
+     */
     public function actionGroup(){
         if (isset(Yii::$app->request->post()['id'])) {
             if (Yii::$app->request->post()['action'] == 'del') {
@@ -23,7 +26,7 @@ class CharacteristicController extends Controller
                 }
             } elseif (Yii::$app->request->post()['action'] == 'edit') {
                 if(count(Yii::$app->request->post()['id']) == 1){
-                    return $this->redirect(UrlHelper::to(['characteristic/update', 'id' => array_shift(Yii::$app->request->post()['id'])]));
+                    return $this->redirect(Yii::$app->urlHelper->to(['characteristic/update', 'id' => array_shift(Yii::$app->request->post()['id'])]));
                 } else {
                     $query = Characteristic::find();
                     foreach (Yii::$app->request->post()['id'] as $id) {
@@ -41,9 +44,9 @@ class CharacteristicController extends Controller
             foreach ($characteristics as $characteristic) {
                 $characteristic->save(false);
             }
-            return $this->redirect(UrlHelper::to(['characteristic/index']));
+            return $this->redirect(Yii::$app->urlHelper->to(['characteristic/index']));
         }
-        return $this->redirect(UrlHelper::to(['characteristic/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['characteristic/index']));
     }
 
     /**
@@ -83,7 +86,7 @@ class CharacteristicController extends Controller
         $model = new Characteristic();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['characteristic/view', 'id' => $model->id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['characteristic/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -102,7 +105,7 @@ class CharacteristicController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(UrlHelper::to(['characteristic/view', 'id' => $id]));
+            return $this->redirect(Yii::$app->urlHelper->to(['characteristic/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model, 'count' => 'one',
@@ -120,7 +123,7 @@ class CharacteristicController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(UrlHelper::to(['characteristic/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['characteristic/index']));
     }
 
     /**

@@ -2,11 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\UrlHelper;
 use Yii;
 use common\models\LoginForm;
 use common\models\ContactForm;
-use yii\helpers\Url;
 
 class SiteController extends Controller
 {
@@ -24,10 +22,15 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * Changing the language
+     * @param string $lang new language
+     * @return \yii\web\Response
+     */
     public function actionLanguage($lang)
     {
         Yii::$app->language = $lang;
-        return $this->redirect(UrlHelper::to(['/']));
+        return $this->redirect(Yii::$app->urlHelper->to(['/']));
     }
 
     public function actionIndex()
@@ -55,24 +58,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
         return $this->render('index');
     }
-
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
 
 }

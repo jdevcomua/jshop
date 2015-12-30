@@ -24,6 +24,9 @@ class ItemCat extends Model
         return 'item_cat';
     }
 
+    /**
+     * @return array
+     */
     public function getTranslateColumns()
     {
         return ['title'];
@@ -51,9 +54,11 @@ class ItemCat extends Model
         ];
     }
 
+    /**
+     * @return array category_id => category_title
+     */
     public static function getCategorys_Id_Title()
     {
-        // Выбираем только те категории, у которых есть дочерние категории
         $parents = ItemCat::find()
             ->distinct(true)
             ->all();

@@ -134,7 +134,9 @@ class ItemController extends Controller
         if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
             foreach ($characteristics as $characteristic) {
                 /* @var $characteristic CharacteristicItem*/
-                $characteristic->save();
+                if (!empty($characteristic->value)) {
+                    $characteristic->save();
+                }
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }

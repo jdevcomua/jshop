@@ -208,7 +208,7 @@ return [
   'yii\rbac\Assignment' => YII2_PATH . '/rbac/Assignment.php',
   'yii\rbac\BaseManager' => YII2_PATH . '/rbac/BaseManager.php',
   'yii\rbac\DbManager' => YII2_PATH . '/rbac/DbManager.php',
-  'yii\rbac\Item' => YII2_PATH . '/rbac/Item.php',
+  'yii\rbac\Item' => YII2_PATH . '/rbac/item.php',
   'yii\rbac\ManagerInterface' => YII2_PATH . '/rbac/ManagerInterface.php',
   'yii\rbac\Permission' => YII2_PATH . '/rbac/Permission.php',
   'yii\rbac\PhpManager' => YII2_PATH . '/rbac/PhpManager.php',

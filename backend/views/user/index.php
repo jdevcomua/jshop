@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
                 'urlCreator'=>function($action, $model, $key, $index){
-                    return [Yii::$app->language.'/user/'.$action,'id'=>$model->id];
+                    return Yii::$app->urlHelper->to(['user/'.$action,'id'=>$model->id]);
                 }
             ],
         ],

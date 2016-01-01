@@ -10,6 +10,13 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property string $timestamp
+ * @property string $address
+ * @property string $name
+ * @property string $phone
+ * @property string $delivery
+ * @property string $mail
+ * @property string $payment
+ * @property double $sum
  *
  * @property OrderItem[] $orderItems
  * @property User $user
@@ -25,22 +32,18 @@ class Orders extends Model
     }
 
     /**
-     * @return array
-     */
-    public function getTranslateColumns()
-    {
-        return [];
-    }
-
-    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
+            [['user_id', 'phone', 'mail', 'name'], 'required'],
             [['user_id'], 'integer'],
-            [['timestamp'], 'safe']
+            [['timestamp'], 'safe'],
+            [['sum'], 'number'],
+            [['mail'], 'email'],
+            [['address', 'name', 'delivery', 'payment'], 'string', 'max' => 50],
+            [['phone'], 'string', 'max' => 15]
         ];
     }
 
@@ -50,9 +53,16 @@ class Orders extends Model
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'ID пользователя'),
-            'timestamp' => Yii::t('app', 'Время создания'),
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'timestamp' => 'Время создания',
+            'address' => 'Адрес',
+            'name' => 'Имя и фамилия',
+            'phone' => 'Телефон',
+            'delivery' => 'Способ доставки',
+            'mail' => 'E-mail',
+            'payment' => 'Способ оплаты',
+            'sum' => 'Сумма',
         ];
     }
 
@@ -70,5 +80,10 @@ class Orders extends Model
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getTranslateColumns()
+    {
+        return [];
     }
 }

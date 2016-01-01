@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             ['class' => 'yii\grid\ActionColumn',
                 'urlCreator'=>function($action, $model, $key, $index){
-                    return [Yii::$app->language . '/characteristic/' . $action,'id'=>$model->id];
+                    return Yii::$app->urlHelper->to(['characteristic/' . $action,'id'=>$model->id]);
                 }
             ],
         ],

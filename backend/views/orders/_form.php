@@ -10,14 +10,26 @@ use yii\widgets\ActiveForm;
 
 <div class="orders-form">
 
-    <?php $form = ActiveForm::begin();
+    <?php $form = ActiveForm::begin(); ?>
 
-    echo $form->field($model, 'user_id')->textInput();
+    <?= $form->field($model, 'user_id')->textInput() ?>
 
-    echo $form->field($model, 'timestamp')->textInput() ?>
+    <?= $form->field($model, 'timestamp')->textInput() ?>
+
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'delivery')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'mail')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'payment')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

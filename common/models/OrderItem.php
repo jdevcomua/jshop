@@ -11,6 +11,7 @@ use Yii;
  * @property integer $item_id
  * @property integer $order_id
  * @property integer $count
+ * @property double $sum
  *
  * @property Item $item
  * @property Orders $order
@@ -39,8 +40,9 @@ class OrderItem extends Model
     public function rules()
     {
         return [
-            [['item_id', 'order_id'], 'required'],
-            [['item_id', 'order_id', 'count'], 'integer']
+            [['item_id', 'order_id', 'count'], 'required'],
+            [['item_id', 'order_id', 'count'], 'integer'],
+            [['sum'], 'number']
         ];
     }
 
@@ -54,6 +56,7 @@ class OrderItem extends Model
             'item_id' => 'Item ID',
             'order_id' => 'Order ID',
             'count' => 'Count',
+            'sum' => 'Sum',
         ];
     }
 

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<?php echo $this->render('menu', ['allCategories' => $allCategories]); ?>
+<?php echo $this->render('../layouts/menu', ['allCategories' => $allCategories]); ?>
 
 <div class="content">
     <br>
@@ -22,28 +22,46 @@ use yii\helpers\Url;
                 </div>
                 <div class="right-product">
                     <!--Start. Payments method form -->
-                    <div class="frame-delivery-payment"><dl><dt class="title">Доставка и оплата</dt><dd class="frame-list-delivery">
+                    <div class="frame-delivery-payment">
+                        <dl>
+                            <dt class="title">Доставка и оплата</dt>
+                            <dd class="frame-list-delivery">
                                 <ul class="list-delivery">
-                                    <li class="f-s_0"><span class="frame-ico"><span class="icon_d_p1">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Самовывоз</span><span class="d_b s-t">Со склада магазина</span></div>
+                                    <li class="f-s_0"><span class="frame-ico"><span
+                                                class="icon_d_p1">&nbsp;</span></span>
+                                        <div class="descr"><span class="text-el">Самовывоз</span><span class="d_b s-t">Со склада магазина</span>
+                                        </div>
                                     </li>
-                                    <li class="f-s_0"><span class="frame-ico"><span class="icon_d_p2">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Курьерской службой </span><span class="d_b s-t">Новая почта и другие</span></div>
+                                    <li class="f-s_0"><span class="frame-ico"><span
+                                                class="icon_d_p2">&nbsp;</span></span>
+                                        <div class="descr"><span class="text-el">Курьерской службой </span><span
+                                                class="d_b s-t">Новая почта и другие</span></div>
                                     </li>
-                                    <li class="f-s_0"><span class="frame-ico"><span class="icon_d_p3">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Оплата наличными</span><span class="d_b s-t">Курьеру при получении</span></div>
+                                    <li class="f-s_0"><span class="frame-ico"><span
+                                                class="icon_d_p3">&nbsp;</span></span>
+                                        <div class="descr"><span class="text-el">Оплата наличными</span><span
+                                                class="d_b s-t">Курьеру при получении</span></div>
                                     </li>
-                                    <li class="f-s_0"><span class="frame-ico"><span class="icon_d_p4">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Безналичный платеж</span><span class="d_b s-t">Master Card, Visa; Приват 24</span></div>
+                                    <li class="f-s_0"><span class="frame-ico"><span
+                                                class="icon_d_p4">&nbsp;</span></span>
+                                        <div class="descr"><span class="text-el">Безналичный платеж</span><span
+                                                class="d_b s-t">Master Card, Visa; Приват 24</span></div>
                                     </li>
                                 </ul>
-                            </dd></dl></div>
-                    <div class="frame-delivery-payment"><dl><dt class="title">Нужна помощь?</dt><dd class="frame-list-delivery"><span class="s-t">Наши менеджеры ответят на ваши вопросы и помогут с выбором:</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="frame-delivery-payment">
+                        <dl>
+                            <dt class="title">Нужна помощь?</dt>
+                            <dd class="frame-list-delivery"><span class="s-t">Наши менеджеры ответят на ваши вопросы и помогут с выбором:</span>
                                 <ul class="list-style-1 list-phone-number">
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
                                 </ul>
-                            </dd></dl></div>                    <!--End. Payments method form -->
+                            </dd>
+                        </dl>
+                    </div>                    <!--End. Payments method form -->
                     <!-- Start. Similar Products-->
                     <div class="default-frame">
                         <section class="">
@@ -67,27 +85,34 @@ use yii\helpers\Url;
                                         <ul class="items-thumbs items" style="height: 180px;">
                                             <!-- Start. main image-->
                                             <li class="active">
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'" href="img/<?php echo $item['image']; ?>" title="" class="cloud-zoom-gallery" id="mainThumb">
+                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
+                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
+                                                   class="cloud-zoom-gallery" id="mainThumb">
                                                     <span class="photo-block">
                                                         <span class="helper"></span>
-                                                        <img src="img/<?php echo $item['image']; ?>" alt="" title="" class="vImgPr">
+                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title=""
+                                                             class="vImgPr">
                                                     </span>
                                                 </a>
                                             </li>
                                             <!-- End. main image-->
                                             <li>
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'" href="img/<?php echo $item['image']; ?>" title="" class="cloud-zoom-gallery">
+                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
+                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
+                                                   class="cloud-zoom-gallery">
                                                     <span class="photo-block">
                                                         <span class="helper"></span>
-                                                        <img src="img/<?php echo $item['image']; ?>" alt="" title="">
+                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="">
                                                     </span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'" href="img/<?php echo $item['image']; ?>" title="" class="cloud-zoom-gallery">
+                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
+                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
+                                                   class="cloud-zoom-gallery">
                                                     <span class="photo-block">
                                                         <span class="helper"></span>
-                                                        <img src="img/<?php echo $item['image']; ?>" alt="" title="">
+                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="">
                                                     </span>
                                                 </a>
                                             </li>
@@ -105,10 +130,19 @@ use yii\helpers\Url;
                             </div>
                             <!-- End. additional images-->
                             <!-- Start. Photo block-->
-                            <div id="wrap" style="top:0px;z-index:9999;position:relative;"><a rel="position: 'xBlock'" onclick="return false;" href="img/<?php echo $item['image']; ?>" class="frame-photo-title photoProduct cloud-zoom isDrop" id="photoProduct" title="" data-drop="#photo" data-start="Product.initDrop" data-scroll-content="false" style="position: relative; display: block;">
+                            <div id="wrap" style="top:0px;z-index:9999;position:relative;"><a rel="position: 'xBlock'"
+                                                                                              onclick="return false;"
+                                                                                              href="<?php echo $item->getImageUrl(); ?>"
+                                                                                              class="frame-photo-title photoProduct cloud-zoom isDrop"
+                                                                                              id="photoProduct" title=""
+                                                                                              data-drop="#photo"
+                                                                                              data-start="Product.initDrop"
+                                                                                              data-scroll-content="false"
+                                                                                              style="position: relative; display: block;">
                                 <span class="photo-block">
                                     <span class="helper"></span>
-                                    <img src="img/<?php echo $item['image']; ?>" alt="" title="" class="vImgPr" style="display: block;" </span>
+                                    <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="" class="vImgPr"
+                                         style="display: block;" </span>
                                 </a>
 
                             </div>
@@ -134,9 +168,9 @@ use yii\helpers\Url;
                                     <div class="frame-prices-buy f-s_0">
                                         <!-- Start. Prices-->
                                         <div class="frame-prices f-s_0">
-<span class="current-prices f-s_0"><span class="price-new">
-<span><span class="price priceVariant"><?php echo $item['cost']; ?></span> $</span></span>
-</span></span>
+                                            <span class="current-prices f-s_0"><span class="price-new">
+                                            <span><span class="price priceVariant"><?php echo $item['cost']; ?></span> </span></span>
+                                            </span></span>
                                             <!-- End. Product price-->
                                         </div>
                                         <!-- End. Prices-->
@@ -144,20 +178,22 @@ use yii\helpers\Url;
                                             <!-- Start. Collect information about Variants, for future processing -->
                                             <div class="d_i-b v-a_b">
                                                 <div class="frame-count-buy js-variant-17917 js-variant">
-
-                                                    <?php
-                                                    echo Html::input('number', 'count', '1', ['id' => 'test', 'style' => 'height: 31px;']);
-                                                    ?>
-                                                    <div class="btn-buy-p btn-buy">
-                                                        <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => '$.ajax({
-                url: \'site/ajax\',
-                data: { item_id: ' . $item->id . ', count: $(\'#test\').val()},
-                dataType: \'text\',
-                success: function(data){
-                var count = $(\'#countItems \').html();
-                    $(\'#countItems \').html(+count + +$(\'#test\').val());
-                }
-            });']); ?>
+                                                    <div style="display:block; float:left;margin-right:10px;">
+                                                        <?php
+                                                        echo Html::input('number', 'count', '1', ['id' => 'test', 'style' => 'height: 30px;padding: 0 0 0 5px;width:75px;']);
+                                                        ?>
+                                                    </div>
+                                                    <div class="btn-buy-p btn-buy" style="display:block; float:left;">
+                                                        <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => '
+                                                    $.ajax({
+                                                        url: \'cart/ajax\',
+                                                        data: { count: $(\'#test\').val(), item_id: ' . $item->id . ' },
+                                                        dataType: \'text\',
+                                                        success: function(data){
+                                                            var count = $(\'#countItems \').html();
+                                                            $(\'#countItems \').html(+count + +$(\'#test\').val());
+                                                        }
+                                                    });']); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,16 +216,29 @@ use yii\helpers\Url;
                                 <button data-href="#view">Обзор</button>
                             </li>
 
-                            <li><button data-href="#first" data-source="http://active.imagecmsdemo.net/shop/product_api/renderProperties" data-data="{&quot;product_id&quot;: 17216}" data-selector=".characteristic">Свойства</button></li>
-                            <li><button data-href="#second" data-source="http://active.imagecmsdemo.net/shop/product_api/renderFullDescription" data-data="{&quot;product_id&quot;: 17216}" data-selector=".inside-padd > .text">Полное описание</button></li>
+                            <li>
+                                <button data-href="#first"
+                                        data-source="http://active.imagecmsdemo.net/shop/product_api/renderProperties"
+                                        data-data="{&quot;product_id&quot;: 17216}" data-selector=".characteristic">
+                                    Свойства
+                                </button>
+                            </li>
+                            <li>
+                                <button data-href="#second"
+                                        data-source="http://active.imagecmsdemo.net/shop/product_api/renderFullDescription"
+                                        data-data="{&quot;product_id&quot;: 17216}"
+                                        data-selector=".inside-padd > .text">Полное описание
+                                </button>
+                            </li>
                             <!--Output of the block comments-->
                             <li>
-                                <button type="button" data-href="#comment" onclick="Comments.renderPosts($('#comment .inside-padd'),{'visibleMainForm': '1'})">
+                                <button type="button" data-href="#comment"
+                                        onclick="Comments.renderPosts($('#comment .inside-padd'),{'visibleMainForm': '1'})">
                                     <span class="icon_comment-tab"></span>
-                <span class="text-el">
-                    <span id="cc">
-                                                1                        отзыв                                            </span>
-                </span>
+                                    <span class="text-el">
+                                        <span id="cc">
+                                                                    1                        отзыв                                            </span>
+                                    </span>
                                 </button>
                             </li>
                         </ul>
@@ -202,15 +251,17 @@ use yii\helpers\Url;
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
                                                 <tbody>
                                                 <?php foreach ($item->getCharacteristicItems()->all() as $i => $value) {
-                                                    /* @var $value common\models\CharacteristicItem*/
-                                                    echo "<tr><td>".$value->getCharacteristic()->one()['title']."</td>";
-                                                    echo "<td>".$value->value."</td></tr>";
+                                                    /* @var $value common\models\CharacteristicItem */
+                                                    echo "<tr><td>" . $value->getCharacteristic()->one()['title'] . "</td>";
+                                                    echo "<td>" . $value->value . "</td></tr>";
                                                 }
                                                 //var_dump($item->getCategory()->one()['title']);
                                                 ?>
                                                 </tbody>
-                                            </table>                    </div>
-                                        <button class="t-d_n f-s_0 s-all-d ref2 d_n_" data-trigger="[data-href='#first']" data-scroll="true">
+                                            </table>
+                                        </div>
+                                        <button class="t-d_n f-s_0 s-all-d ref2 d_n_"
+                                                data-trigger="[data-href='#first']" data-scroll="true">
                                             <span class="icon_arrow"></span>
                                             <span class="text-el">Смотреть все</span>
                                         </button>
@@ -218,11 +269,12 @@ use yii\helpers\Url;
                                 </div>
                                 <div class="inside-padd">
                                     <!--                        Start. Description block-->
-                                    <div class="product-descr patch-product-view showHidePart" style="max-height: none; height: 250px;">
+                                    <div class="product-descr patch-product-view showHidePart"
+                                         style="max-height: none; height: 250px;">
                                         <div class="text">
                                             <div class="title-h2">Описание</div>
                                             <h2>...</h2>
-                                            <p></p>                      </div>
+                                            <p></p></div>
                                     </div>
                                     <!--                        End. Description block-->
                                 </div>
@@ -232,7 +284,7 @@ use yii\helpers\Url;
                                     <div class="frame-form-comment">
                                         <div class="forComments p_r">
                                             <div class="comments" id="comments">
-                                                <div class="title-comment">Отзывы </div>
+                                                <div class="title-comment">Отзывы</div>
                                                 <div class="drop comments-main-form  active inherit">
                                                     <div class="frame-comments layout-highlight horizontal-form">
 
@@ -243,13 +295,16 @@ use yii\helpers\Url;
                                                         <li>
                                                             <input type="hidden" name="comment_item_id" value="3">
                                                             <div class="clearfix global-frame-comment-sub1">
-                                                                <div class="author-data-comment author-data-comment-sub1">
-                                                                    <span class="f-s_0 frame-autor-comment"><span class="icon_comment"></span><span class="author-comment">admin</span></span>
-                        <span class="date-comment">
-                            <span class="day">02 </span>
-                            <span class="month">Сентября </span>
-                            <span class="year">2014 </span>
-                        </span>
+                                                                <div
+                                                                    class="author-data-comment author-data-comment-sub1">
+                                                                    <span class="f-s_0 frame-autor-comment"><span
+                                                                            class="icon_comment"></span><span
+                                                                            class="author-comment">admin</span></span>
+                                                                    <span class="date-comment">
+                                                                        <span class="day">02 </span>
+                                                                        <span class="month">Сентября </span>
+                                                                        <span class="year">2014 </span>
+                                                                    </span>
                                                                     <div class="mark-pr">
                                                                         <span class="title">Оценка товара:</span>
                                                                         <div class="star-small d_i-b">
@@ -287,7 +342,10 @@ use yii\helpers\Url;
                                                             </div>
                                                             <div data-place="3"></div>
                                                             <div class="btn-all-comments">
-                                                                <button type="button"><span class="text-el" data-hide="<span class=&quot;d_l_1&quot;>Скрыть</span> ↑" data-show="<span class=&quot;d_l_1&quot;>Смотреть все ответы</span> ↓"></span></button>
+                                                                <button type="button"><span class="text-el"
+                                                                                            data-hide="<span class=&quot;d_l_1&quot;>Скрыть</span> ↑"
+                                                                                            data-show="<span class=&quot;d_l_1&quot;>Смотреть все ответы</span> ↓"></span>
+                                                                </button>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -297,7 +355,7 @@ use yii\helpers\Url;
                                                     <div class="form-comment layout-highlight frame-comments">
                                                         <div class="inside-padd horizontal-form">
                                                             <?php echo $this->render('vote', [
-                                                                'vote' => new \common\models\Vote(), 'model'=> $item
+                                                                'vote' => new \common\models\Vote(), 'model' => $item
                                                             ]) ?>
                                                         </div>
                                                     </div>
@@ -340,5 +398,6 @@ use yii\helpers\Url;
         </div>
 
     </div>
-    <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/cusel-min-2.5.js"></script>                </div>
+    <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/cusel-min-2.5.js"></script>
+</div>
 <div class="h-footer"></div>

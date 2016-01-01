@@ -7,18 +7,19 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\OrdersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Заказы');
+$this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orders-index">
 
-    <h3><?php echo Html::encode($this->title) ?></h3>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Создать заказ'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Orders'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php echo GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -27,6 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             'timestamp',
+            'address',
+            'name',
+            // 'phone',
+            // 'delivery',
+            // 'mail',
+            // 'payment',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

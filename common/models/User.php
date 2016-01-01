@@ -117,7 +117,7 @@ class User extends Model implements \yii\web\IdentityInterface
      * @inheritdoc
      */
     public function validateAuthKey($authKey)
-    {die();
+    {
         return $this->authKey === $authKey;
     }
 
@@ -146,9 +146,13 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'mail', 'city'], 'required'],
-            [['username'], 'string', 'max' => 100],
-            [['mail', 'city'], 'string', 'max' => 50]
+            [['username', 'mail', 'password'], 'required'],
+            [['username', 'mail'], 'unique'],
+            [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
+            [['username'], 'string', 'length' => [4, 25]],
+            [['name', 'surname', 'address', 'phone'], 'string'],
+            [['mail'], 'email']
+
         ];
     }
 
@@ -159,9 +163,14 @@ class User extends Model implements \yii\web\IdentityInterface
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Имя'),
+            'username' => Yii::t('app', 'Логин'),
             'mail' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
+            'password' => Yii::t('app', 'Пароль'),
+            'address' => Yii::t('app', 'Адрес'),
+            'phone' => Yii::t('app', 'Телефон'),
+            'name' => Yii::t('app', 'Имя'),
+            'surname' => Yii::t('app', 'Фамилия'),
         ];
     }
 

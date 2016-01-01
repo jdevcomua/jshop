@@ -92,25 +92,13 @@ class SiteController extends Controller
     }
 
     /**
-     * Open page of cart
-     * @return string
-     */
-    public function actionCart()
-    {
-        $itemsCount = Yii::$app->cart->getItems();
-        $items = Yii::$app->cart->getItemsModels();
-        $sum = Yii::$app->cart->getSum();
-        $allCategories = ItemCat::find()->all();
-        return $this->render('Cart', ['allCategories' => $allCategories, 'itemsCount' => $itemsCount, 'items' => $items,
-            'sum' => $sum]);
-    }
-
-    /**
      * Adding item to cart
+     * @param $item_id
+     * @param $count
      */
-    public function actionAjax()
+    public function actionAjax($item_id, $count)
     {
-        Yii::$app->cart->addItem(Yii::$app->request->get('item_id'), Yii::$app->request->get('count'));
+        Yii::$app->cart->addItem($item_id, $count);
     }
 
     public function filter()
@@ -136,27 +124,6 @@ class SiteController extends Controller
         }
         $query->andFilterWhere(['between', 'cost', Yii::$app->request->post('left'), Yii::$app->request->post('right')]);
         return $query;
-    }
-
-    public function actionLogin()
-    {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-        $this->layout = 'main3';
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-        return $this->redirect(Yii::$app->urlHelper->to(['/']));
     }
 
     public function actions()

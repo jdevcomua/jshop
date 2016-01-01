@@ -74,7 +74,7 @@ AppAsset::register($this);
                 <table>
                     <tbody><tr>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
-                            <a href="<?php echo Yii::$app->urlHelper->to(['order-item/index'])?>">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['orders/index'])?>">
                                         Список заказов </a>
                             <a href="">
                             <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">

@@ -47,9 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]);
-
-    echo Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']) . ' ';
-    echo Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);
+    echo Html::submitButton('Редактировать', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'edit']) . ' ';
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'del']);
     echo Html::endForm();?>
 
 </div>

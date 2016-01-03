@@ -53,10 +53,10 @@ class OrderItem extends Model
     {
         return [
             'id' => 'ID',
-            'item_id' => 'Item ID',
-            'order_id' => 'Order ID',
-            'count' => 'Count',
-            'sum' => 'Sum',
+            'item_id' => 'ID товара',
+            'order_id' => 'ID заказа',
+            'count' => 'Количество',
+            'sum' => 'Сумма',
         ];
     }
 

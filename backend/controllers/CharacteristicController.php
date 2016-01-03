@@ -7,6 +7,7 @@ use yii\base\Model;
 use common\models\Characteristic;
 use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
+use yii\data\Pagination;
 
 /**
  * CharacteristicController implements the CRUD actions for Characteristic model.
@@ -57,7 +58,7 @@ class CharacteristicController extends Controller
     {
         $searchModel = new CharacteristicSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

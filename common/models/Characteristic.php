@@ -46,7 +46,6 @@ class Characteristic extends Model
      */
     public static function getCategorys()
     {
-        // Выбираем только те категории, у которых есть дочерние категории
         $parents = Characteristic::find()
             ->select(['i.title'])
             ->join('JOIN', 'item_cat i', 'characteristic.category_id = i.id')

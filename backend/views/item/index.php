@@ -12,12 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
 
-    <h3><?php echo Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) . ' ';
+        echo Html::a(Yii::t('app', 'Создать предмет'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success'])?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php echo Html::a(Yii::t('app', 'Создать предмет'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php echo Html::beginForm(['del'],'post');
 
@@ -50,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    echo Html::submitButton(Yii::t('app', 'Удалить'), ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']);
+    echo Html::submitButton(Yii::t('app', 'Удалить'), ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'del']);
     echo Html::endForm();?>
 
 </div>

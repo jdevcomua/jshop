@@ -12,12 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-cat-index">
 
-    <h3><?php echo Html::encode($this->title) ?></h3>
+    <h3><?php echo Html::encode($this->title) . ' ';
+        echo Html::a(Yii::t('app', 'Создать категорию'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success'])
+        ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php echo Html::a(Yii::t('app', 'Создать категорию'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php echo Html::beginForm(Yii::$app->urlHelper->to(['item-cat/group']),'post');
 
@@ -44,9 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]);
-
-    echo Html::submitButton('Удалить', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'del']) . ' ';
-    echo Html::submitButton('Редактировать', ['class' => 'btn btn-info', 'name' => 'action', 'value' => 'edit']);
+    echo Html::submitButton('Редактировать', ['class' => 'btn btn-primary', 'name' => 'action', 'value' => 'edit']) . ' ';
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'del']) . ' ';
     echo Html::endForm();?>
 
 </div>

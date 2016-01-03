@@ -6,6 +6,8 @@ use Yii;
 use common\models\Orders;
 use common\models\search\OrdersSearch;
 use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
+use common\models\OrderItem;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -35,8 +37,11 @@ class OrdersController extends Controller
      */
     public function actionView($id)
     {
+        $orderItems = new ActiveDataProvider([
+            'query' => OrderItem::find()->andFilterWhere(['order_id' => $id])->joinWith('item'),
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id),  'orderItems' => $orderItems
         ]);
     }
 
@@ -105,4 +110,25 @@ class OrdersController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionGroup()
+    {
+        if (!empty(Yii::$app->request->post()['id'])) {
+            $models = Orders::find()->andFilterWhere(['in', 'id', Yii::$app->request->post()['id']])->all();
+            if (Yii::$app->request->post('action') == 'paid') {
+                foreach ($models as $model) {
+                    /* @var $model Orders */
+                    $model->payment_status = 'Оплачено';
+                    //var_dump($model);die();
+                    $model->save();
+                }
+            } else {
+                foreach ($models as $model) {
+                    $model->delete();
+                }
+            }
+        }
+        return $this->redirect(['index']);
+    }
+
 }

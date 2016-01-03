@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -12,24 +13,24 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orders-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?php echo Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('app', 'Оплачено'), ['paid', 'id' => $model->id], ['class' => 'btn btn-success']) . ' ';
+        echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
+        echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот заказ?'),
                 'method' => 'post',
             ],
-        ]) ?>
+        ]); ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
             'timestamp',
             'address',
             'name',
@@ -38,6 +39,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'mail',
             'payment',
         ],
-    ]) ?>
+    ]);
+
+    echo '<h3>Товары</h3>';
+
+    echo GridView::widget([
+    'dataProvider' => $orderItems,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+
+        'item.title',
+        'count',
+        'sum'
+        ],
+    ]); ?>
 
 </div>

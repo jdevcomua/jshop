@@ -17,6 +17,8 @@ use Yii;
  * @property string $mail
  * @property string $payment
  * @property double $sum
+ * @property string $order_status
+ * @property string $payment_status
  *
  * @property OrderItem[] $orderItems
  * @property User $user
@@ -40,11 +42,17 @@ class Orders extends Model
             [['user_id', 'phone', 'mail', 'name'], 'required'],
             [['user_id'], 'integer'],
             [['timestamp'], 'safe'],
+            ['payment_status', 'default', 'value' => 'Не оплачен'],
+            ['order_status', 'default', 'value' => 'Новый'],
             [['sum'], 'number'],
             [['mail'], 'email'],
             [['address', 'name', 'delivery', 'payment'], 'string', 'max' => 50],
             [['phone'], 'string', 'max' => 15]
         ];
+    }
+
+    public function getCountItems(){
+        return count($this->orderItems);
     }
 
     /**
@@ -63,6 +71,9 @@ class Orders extends Model
             'mail' => 'E-mail',
             'payment' => 'Способ оплаты',
             'sum' => 'Сумма',
+            'order_status' => 'Статус заказа',
+            'payment_status' => 'Статус оплаты',
+            'countItems' => 'Товаров',
         ];
     }
 

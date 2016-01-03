@@ -68,6 +68,7 @@ $config = [
                 '<language:(ru|en)>/orders/update'=>'orders/update',
                 '<language:(ru|en)>/orders/create'=>'orders/create',
                 '<language:(ru|en)>/orders/view'=>'orders/view',
+                '<language:(ru|en)>/orders/group'=>'orders/group',
 
                 '<language:(ru|en)>/order-item/index'=>'order-item/index',
                 '<language:(ru|en)>/order-item'=>'order-item/index',

@@ -19,7 +19,7 @@ class OrdersSearch extends Orders
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['timestamp', 'address', 'name', 'phone', 'delivery', 'mail', 'payment'], 'safe'],
+            [['timestamp', 'address', 'name', 'phone', 'delivery', 'mail', 'payment', 'order_status', 'payment_status', 'sum'], 'safe'],
         ];
     }
 
@@ -58,7 +58,6 @@ class OrdersSearch extends Orders
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'timestamp' => $this->timestamp,
         ]);
 
         $query->andFilterWhere(['like', 'address', $this->address])
@@ -66,7 +65,11 @@ class OrdersSearch extends Orders
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'delivery', $this->delivery])
             ->andFilterWhere(['like', 'mail', $this->mail])
-            ->andFilterWhere(['like', 'payment', $this->payment]);
+            ->andFilterWhere(['like', 'payment', $this->payment])
+            ->andFilterWhere(['like', 'timestamp', $this->timestamp])
+            ->andFilterWhere(['like', 'order_status', $this->order_status])
+            ->andFilterWhere(['like', 'payment_status', $this->payment_status])
+            ->andFilterWhere(['>=', 'sum', $this->sum]);
 
         return $dataProvider;
     }

@@ -32,6 +32,8 @@ $config = [
             'rules' => [
 
                 '<language:(ru|en)>/'=>'site/index',
+                '<language:(ru|en)>/site/index'=>'site/index',
+
                 '<language:(ru|en)>/item'=>'item/index',
                 '<language:(ru|en)>/item/index'=>'item/index',
                 '<language:(ru|en)>/item/update'=>'item/update',

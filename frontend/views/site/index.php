@@ -104,7 +104,7 @@ use yii\widgets\ActiveForm;
                                                     <div id="toCart-<?php echo $value->id ?>" class="btn-buy">
                                                         <button type="button" class="btnBuy infoBut" onclick="
                                                             $.ajax({
-                                                            url: 'cart/ajax',
+                                                            url: '/cart/ajax',
                                                             data: { count: 1, item_id: <?php echo $value->id ?> },
                                                             dataType: 'text',
                                                             success: function(data){
@@ -183,7 +183,7 @@ use yii\widgets\ActiveForm;
                         <div class="frames-checks-sliders">
                             <div class="frame-slider" data-rel="sliders.slider1">
                                 <div class="inside-padd">
-                                    <div class="title">Фильтр по цене</div>
+                                    <div class="title"><?php echo \Yii::t('app', 'Фильтр по цене'); ?></div>
                                     <br>
                                     <div id="slider"></div>
                                     <br>
@@ -350,7 +350,7 @@ use yii\widgets\ActiveForm;
                             <div class="filter-foot">
                                 <div class="inside-padd t-a_c">
                                     <div class="btn-form">
-                                        <?php echo Html::submitButton('<span class="text-el" style="color: #000;" c>Фильтровать</span>'); ?>
+                                        <?php echo Html::submitButton('<span class="text-el" style="color: #000;" c>' . \Yii::t("app", "Фильтровать") . '</span>'); ?>
 
                                     </div>
                                 </div>

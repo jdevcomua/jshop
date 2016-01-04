@@ -24,28 +24,28 @@ use yii\helpers\Url;
                     <!--Start. Payments method form -->
                     <div class="frame-delivery-payment">
                         <dl>
-                            <dt class="title">Доставка и оплата</dt>
+                            <dt class="title"><?php echo \Yii::t('app', 'Доставка и оплата'); ?></dt>
                             <dd class="frame-list-delivery">
                                 <ul class="list-delivery">
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p1">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Самовывоз</span><span class="d_b s-t">Со склада магазина</span>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Самовывоз'); ?></span><span class="d_b s-t"><?php echo \Yii::t('app', 'Со склада магазина'); ?></span>
                                         </div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p2">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Курьерской службой </span><span
-                                                class="d_b s-t">Новая почта и другие</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Курьерской службой'); ?> </span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Новая почта и другие'); ?></span></div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p3">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Оплата наличными</span><span
-                                                class="d_b s-t">Курьеру при получении</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Оплата наличными'); ?></span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Курьеру при получении'); ?></span></div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p4">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Безналичный платеж</span><span
-                                                class="d_b s-t">Master Card, Visa; Приват 24</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Безналичный платеж'); ?></span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Master Card, Visa; Приват 24'); ?></span></div>
                                     </li>
                                 </ul>
                             </dd>
@@ -53,8 +53,8 @@ use yii\helpers\Url;
                     </div>
                     <div class="frame-delivery-payment">
                         <dl>
-                            <dt class="title">Нужна помощь?</dt>
-                            <dd class="frame-list-delivery"><span class="s-t">Наши менеджеры ответят на ваши вопросы и помогут с выбором:</span>
+                            <dt class="title"><?php echo \Yii::t('app', 'Нужна помощь?'); ?></dt>
+                            <dd class="frame-list-delivery"><span class="s-t"><?php echo \Yii::t('app', 'Наши менеджеры ответят на ваши вопросы и помогут с выбором:'); ?></span>
                                 <ul class="list-style-1 list-phone-number">
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
@@ -67,8 +67,8 @@ use yii\helpers\Url;
                         <section class="">
                             <div class="default-title">
                                 <div class="frame-title">
-                                    <div class="title">Похожие товары</div>
-                                </div>
+                                    <div class="title"><?php echo \Yii::t('app', 'Похожие товары'); ?></div>
+                                </div><?php echo \Yii::t('app', ''); ?>
                             </div>
 
                         </section>
@@ -213,21 +213,21 @@ use yii\helpers\Url;
                     <div class="f-s_0">
                         <ul class="tabs tabs-data tabs-product">
                             <li class="active">
-                                <button data-href="#view">Обзор</button>
+                                <button data-href="#view"><?php echo \Yii::t('app', 'Обзор'); ?></button>
                             </li>
 
                             <li>
                                 <button data-href="#first"
                                         data-source="http://active.imagecmsdemo.net/shop/product_api/renderProperties"
                                         data-data="{&quot;product_id&quot;: 17216}" data-selector=".characteristic">
-                                    Свойства
+                                    <?php echo \Yii::t('app', 'Свойства'); ?>
                                 </button>
                             </li>
                             <li>
                                 <button data-href="#second"
                                         data-source="http://active.imagecmsdemo.net/shop/product_api/renderFullDescription"
                                         data-data="{&quot;product_id&quot;: 17216}"
-                                        data-selector=".inside-padd > .text">Полное описание
+                                        data-selector=".inside-padd > .text"><?php echo \Yii::t('app', 'Полное описание'); ?>
                                 </button>
                             </li>
                             <!--Output of the block comments-->
@@ -237,7 +237,8 @@ use yii\helpers\Url;
                                     <span class="icon_comment-tab"></span>
                                     <span class="text-el">
                                         <span id="cc">
-                                                                    1                        отзыв                                            </span>
+                                            <?php echo \Yii::t('app', 'Отзывы'); ?>
+                                        </span>
                                     </span>
                                 </button>
                             </li>
@@ -245,7 +246,7 @@ use yii\helpers\Url;
                         <div class="frame-tabs-ref frame-tabs-product">
                             <div id="view">
                                 <div class="inside-padd">
-                                    <div class="title-h2">Свойства</div>
+                                    <div class="title-h2"><?php echo \Yii::t('app', 'Свойства'); ?></div>
                                     <div class="characteristic">
                                         <div class="product-charac patch-product-view showHidePart">
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
@@ -263,7 +264,7 @@ use yii\helpers\Url;
                                         <button class="t-d_n f-s_0 s-all-d ref2 d_n_"
                                                 data-trigger="[data-href='#first']" data-scroll="true">
                                             <span class="icon_arrow"></span>
-                                            <span class="text-el">Смотреть все</span>
+                                            <span class="text-el"><?php echo \Yii::t('app', 'Смотреть все'); ?></span>
                                         </button>
                                     </div>
                                 </div>
@@ -272,7 +273,7 @@ use yii\helpers\Url;
                                     <div class="product-descr patch-product-view showHidePart"
                                          style="max-height: none; height: 250px;">
                                         <div class="text">
-                                            <div class="title-h2">Описание</div>
+                                            <div class="title-h2"><?php echo \Yii::t('app', 'Описание'); ?></div>
                                             <h2>...</h2>
                                             <p></p></div>
                                     </div>
@@ -284,7 +285,7 @@ use yii\helpers\Url;
                                     <div class="frame-form-comment">
                                         <div class="forComments p_r">
                                             <div class="comments" id="comments">
-                                                <div class="title-comment">Отзывы</div>
+                                                <div class="title-comment"><?php echo \Yii::t('app', 'Отзывы'); ?></div>
                                                 <div class="drop comments-main-form  active inherit">
                                                     <div class="frame-comments layout-highlight horizontal-form">
 
@@ -306,7 +307,7 @@ use yii\helpers\Url;
                                                                         <span class="year">2014 </span>
                                                                     </span>
                                                                     <div class="mark-pr">
-                                                                        <span class="title">Оценка товара:</span>
+                                                                        <span class="title"><?php echo \Yii::t('app', 'Оценка товара:'); ?></span>
                                                                         <div class="star-small d_i-b">
                                                                             <div class="productRate star-small">
                                                                                 <div style="width: 100%;"></div>
@@ -322,17 +323,17 @@ use yii\helpers\Url;
 
                                                                         <div class="frame-mark f_r">
                                                                             <div class="func-button-comment">
-                                                                                <span class="s-t">Отзыв полезен?</span>
+                                                                                <span class="s-t"><?php echo \Yii::t('app', 'Отзыв полезен?'); ?></span>
                                     <span class="btn like">
                                         <button type="button" class="usefullyes" data-comid="3">
                                             <span class="icon_like"></span>
-                                            <span class="text-el d_l_3">Да<span class="yesholder3 d_n">(0)</span></span>
+                                            <span class="text-el d_l_3"><?php echo \Yii::t('app', 'Да'); ?><span class="yesholder3 d_n">(0)</span></span>
                                         </button>
                                     </span>
                                     <span class="btn dis-like">
                                         <button type="button" class="usefullno" data-comid="3">
                                             <span class="icon_dislike"></span>
-                                            <span class="text-el d_l_4">Нет<span class="noholder3 d_n">(0)</span></span>
+                                            <span class="text-el d_l_4"><?php echo \Yii::t('app', 'Нет'); ?><span class="noholder3 d_n">(0)</span></span>
                                         </button>
                                     </span>
                                                                             </div>
@@ -369,7 +370,7 @@ use yii\helpers\Url;
                             <!--             Start. Characteristic-->
                             <div id="first" style="">
                                 <div class="inside-padd">
-                                    <div class="title-h2">Свойства</div>
+                                    <div class="title-h2"><?php echo \Yii::t('app', 'Свойства'); ?></div>
                                     <div class="characteristic">
                                         <div class="preloader"></div>
                                     </div>
@@ -378,7 +379,7 @@ use yii\helpers\Url;
                             <!--                    End. Characteristic-->
                             <div id="second" style="">
                                 <div class="inside-padd">
-                                    <div class="title-h2">Описание</div>
+                                    <div class="title-h2"><?php echo \Yii::t('app', 'Описание'); ?></div>
                                     <div class="text">
                                         <div class="preloader"></div>
                                     </div>

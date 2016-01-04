@@ -24,7 +24,7 @@ use Yii;
             </div>
             <div class="f-s_0 title-order-view without-crumbs">
                 <div class="frame-title">
-                    <h1 class="title">Заказ №:<span class="number-order"><?php echo $order->id; ?></span></h1>
+                    <h1 class="title"><?php echo \Yii::t('app', 'Заказ'); ?> №:<span class="number-order"><?php echo $order->id; ?></span></h1>
                 </div>
             </div>
 
@@ -37,7 +37,7 @@ use Yii;
                     </colgroup>
                     <tbody>
                     <tr>
-                        <th style="padding-bottom: 10px;">Имя получателя:</th>
+                        <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Имя получателя:'); ?></th>
                         <td><?php echo $order->name; ?></td>
                     </tr>
 
@@ -46,11 +46,11 @@ use Yii;
                         <td><?php echo $order->mail; ?></td>
                     </tr>
                     <tr>
-                        <th style="padding-bottom: 10px;">Телефон:</th>
+                        <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Телефон'); ?>:</th>
                         <td><?php echo $order->phone; ?></td>
                     </tr>
                     <tr>
-                        <th>Адрес:</th>
+                        <th><?php echo \Yii::t('app', 'Адрес'); ?>:</th>
                         <td><?php echo $order->address; ?></td>
                     </tr>
                     <!--                End. User info block-->
@@ -60,7 +60,7 @@ use Yii;
                         </td>
                     </tr>
                     <tr>
-                        <th>Дата заказа:</th>
+                        <th><?php echo \Yii::t('app', 'Дата заказа:'); ?></th>
                         <td><?php echo $order->timestamp; ?></td>
                     </tr>
 
@@ -71,24 +71,24 @@ use Yii;
                     </tr>
                     <!-- Start. Delivery Method name -->
                     <tr>
-                        <th style="padding-bottom: 10px;">Способ доставки:</th>
+                        <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Способ доставки'); ?>:</th>
                         <td>
-                            Доставка экспресс службой
+                            <?php echo \Yii::t('app', 'Доставка экспресс службой'); ?>
                         </td>
                     </tr>
                     <!-- End. Delivery Method name -->
                     <!-- Start. Render payment button and payment description -->
                     <tr>
-                        <th style="padding-bottom: 10px;">Способ оплаты:</th>
+                        <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Способ оплаты'); ?>:</th>
                         <td>
-                            Наложенным платежем
+                            <?php echo \Yii::t('app', 'Наложенным платежом'); ?>
                         </td>
                     </tr>
                     <!--                Start. Order status-->
                     <tr>
-                        <th>Статус оплаты:</th>
+                        <th><?php echo \Yii::t('app', 'Статус оплаты'); ?>:</th>
                         <td>
-                            <span class="status-pay not-paid">Не оплачен</span>
+                            <span class="status-pay not-paid"><?php echo \Yii::t('app', 'Не оплачен'); ?></span>
                         </td>
                     </tr>
                     <!--                End. Order status-->
@@ -148,7 +148,7 @@ use Yii;
                                 <tfoot class="gen-info-price">
                                 <tr>
                                     <td colspan="3">
-                                        <span class="s-t f_l">Cтоимость товаров</span>
+                                        <span class="s-t f_l"><?php echo \Yii::t('app', 'Стоимость товаров:'); ?></span>
                                         <div class="frame-cur-sum-price f_r">
                                 <span class="price-new">
                                     <span>
@@ -161,9 +161,9 @@ use Yii;
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-                                        <span class="s-t f_l">Доставка:</span>
+                                        <span class="s-t f_l"><?php echo \Yii::t('app', 'Доставка:'); ?></span>
                                         <div class="f_r">
-                                            <span class="text-el s-t">согласно тарифам перевозчиков</span>
+                                            <span class="text-el s-t"><?php echo \Yii::t('app', 'согласно тарифам перевозчиков'); ?></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -178,16 +178,16 @@ use Yii;
                         <div class="inside-padd">
                             <!-- Start. Price block-->
                             <div class="gen-sum-order clearfix">
-                                <span class="title f_l">Всего к оплате:</span>
-            <span class="frame-prices f-s_0 f_r">
-                <span class="current-prices f-s_0">
-                    <span class="price-new">
-                        <span>
-                            <span class="price"><?php echo $order->sum; ?></span>
-                        </span>
-                    </span>
+                                <span class="title f_l"><?php echo \Yii::t('app', 'Всего к оплате:'); ?></span>
+                                <span class="frame-prices f-s_0 f_r">
+                                    <span class="current-prices f-s_0">
+                                        <span class="price-new">
+                                            <span>
+                                                <span class="price"><?php echo $order->sum; ?></span>
+                                            </span>
+                                        </span>
                                     </span>
-            </span>
+                                </span>
                             </div>
                             <!-- End. Price block-->
                         </div>

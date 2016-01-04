@@ -20,20 +20,20 @@ use Yii;
             <div class="js-empty empty ">
                 <div class="f-s_0 title-cart without-crumbs">
                     <div class="frame-title">
-                        <h1 class="title">Оформление заказа</h1>
+                        <h1 class="title"><?php echo \Yii::t('app', 'Оформление заказа'); ?></h1>
                     </div>
                 </div>
                 <div class="msg layout-highlight layout-highlight-msg">
                     <div class="info">
                         <span class="icon_info"></span>
-                        <span class="text-el">Корзина пуста</span>
+                        <span class="text-el"><?php echo \Yii::t('app', 'Корзина пуста'); ?></span>
                     </div>
                 </div>
             </div>
             <div class="js-no-empty no-empty">
                 <div class="f-s_0 title-cart without-crumbs">
                     <div class="frame-title">
-                        <h1 class="title">Оформление заказа</h1>
+                        <h1 class="title"><?php echo \Yii::t('app', 'Оформление заказа'); ?></h1>
                     </div>
                 </div>
                 <div class="left-cart">
@@ -49,7 +49,7 @@ use Yii;
                         <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;', 'value' => $user->address])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
                         <div class="frame-label" id="frameDelivery">
-                            <span class="title">Способ доставки</span>
+                            <span class="title"><?php echo \Yii::t('app', 'Способ доставки'); ?></span>
                             <div class="frame-form-field check-variant-delivery">
                                 <div class="frame-radio">
                                     <div class="frame-label">
@@ -57,7 +57,7 @@ use Yii;
 
                                     </span>
                                         <div class="name-count">
-                                            <span class="text-el p_r">Адресная доставка курьером</span>
+                                            <span class="text-el p_r"><?php echo \Yii::t('app', 'Адресная доставка курьером'); ?></span>
                                         </div>
                                     </div>
                                     <div class="frame-label">
@@ -65,10 +65,10 @@ use Yii;
 
                                     </span>
                                         <div class="name-count">
-                                            <span class="text-el p_r">Доставка экспресс службой</span>
+                                            <span class="text-el p_r"><?php echo \Yii::t('app', 'Доставка экспресс службой'); ?></span>
                                         </div>
                                         <div class="help-block">
-                                            согласно тарифам перевозчиков
+                                            <?php echo \Yii::t('app', 'согласно тарифам перевозчиков'); ?>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@ use Yii;
                         <div class="frame-label">
                             <div class="frame-form-field">
                                 <button type="button" class="d_l_3 m-b_5 isDrop" data-drop=".hidden-comment"
-                                        data-place="inherit" data-overlay-opacity="0">Добавить комментарий к заказу
+                                        data-place="inherit" data-overlay-opacity="0"><?php echo \Yii::t('app', 'Добавить комментарий к заказу'); ?>
                                 </button>
                                 <div class="hidden-comment drop">
 
@@ -90,7 +90,7 @@ use Yii;
                         <div class="frame-label">
                         <span class="frame-form-field">
                             <div class="btn-buy btn-buy-p btn-buy-pp">
-                                <input type="submit" value="Подтвердить заказ" id="submitOrder">
+                                <input type="submit" value="<?php echo \Yii::t('app', 'Подтвердить заказ'); ?>" id="submitOrder">
                             </div>
                         </span></div>
                         <?php ActiveForm::end(); ?>
@@ -99,9 +99,9 @@ use Yii;
                 <div class="right-cart">
                     <div class="frame-bask frame-bask-order">
                         <div class="frame-title clearfix">
-                            <div class="title f_l">Мой заказ</div>
+                            <div class="title f_l"><?php echo \Yii::t('app', 'Мой заказ'); ?></div>
                             <div class="f_r">
-                                <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>" class="d_l_3 editCart">Редактировать</a>
+                                <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>" class="d_l_3 editCart"><?php echo \Yii::t('app', 'Редактировать'); ?></a>
                             </div>
                         </div>
 
@@ -145,7 +145,7 @@ use Yii;
                                 <tfoot class="gen-info-price">
                                 <tr>
                                     <td colspan="3">
-                                        <span class="s-t f_l">Cтоимость товаров:</span>
+                                        <span class="s-t f_l"><?php echo \Yii::t('app', 'Стоимость товаров:'); ?></span>
                                         <div class="f_r">
                                             <span class="price f-w_b"
                                                   style="margin-right: 19px;"><?php echo $sum; ?></span>
@@ -156,7 +156,7 @@ use Yii;
                             </table>
                             <div class="gen-sum-order footer-bask">
                                 <div class="inside-padd clearfix">
-                                    <span class="title f_l">Всего к оплате:</span>
+                                    <span class="title f_l"><?php echo \Yii::t('app', 'Всего к оплате:'); ?></span>
                                     <span class="frame-prices f_r">
                                         <span class="current-prices f-s_0">
                                             <span class="price-new">

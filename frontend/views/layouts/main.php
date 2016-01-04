@@ -170,7 +170,7 @@ use yii\helpers\Url;
                                     <a href="<?php echo Yii::$app->urlHelper->to(['cart'])?>"><button type="button" class="btnBask" style="padding-top: 4px;">
                                         <span class="icon_cleaner"></span>
                                             <span class="text-cleaner">
-                                                <span class="text-el">Корзина</span>
+                                                <span class="text-el"><?php echo \Yii::t('app', 'корзина'); ?></span>
                                                 <span class="text-el">&nbsp;</span>
                                                 <span class="text-el">(</span>
                                                 <span id="countItems" class="text-el"><?php echo Yii::$app->cart->getCount(); ?></span>
@@ -192,7 +192,7 @@ use yii\helpers\Url;
                                     <a href="<?php echo Yii::$app->urlHelper->to(['cart'])?>"><button type="button" class="btnBask"  style="padding-top: 4px;">
                                         <span class="icon_cleaner"></span>
                                             <span class="text-cleaner">
-                                                <span class="text-el">Корзина</span>
+                                                <span class="text-el"><?php echo \Yii::t('app', 'корзина'); ?></span>
                                                 <span class="text-el">&nbsp;</span>
                                                 <span class="text-el">(</span>
                                                 <span id="countItems" class="text-el">0</span>

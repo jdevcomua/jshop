@@ -18,7 +18,7 @@ use yii\bootstrap\ActiveForm;
         <div class="container">
             <div class="f-s_0 title-register without-crumbs">
                 <div class="frame-title">
-                    <h1 class="title">Регистрация</h1>
+                    <h1 class="title"><?php echo \Yii::t('app', 'Регистрация'); ?></h1>
                 </div>
             </div>
             <div class="frame-register">
@@ -42,19 +42,19 @@ use yii\bootstrap\ActiveForm;
                         <span class="title">&nbsp;</span>
                         <div class="frame-form-field">
                             <div class="btn-form m-b_15">
-                                <?php echo Html::submitButton('<span class="text-el" style="color:#fff">Зарегистрироваться</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
+                                <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Зарегистрироваться') . '</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
                             </div>
-                            <p class="help-block">Я уже зарегистрирован</p>
+                            <p class="help-block"><?php echo \Yii::t('app', 'Я уже зарегистрирован'); ?></p>
                             <ul class="items items-register-add-ref">
                                 <li>
                                     <a href="<?php echo Yii::$app->urlHelper->to(['login']); ?>" type="button">
-                                        <span class="text-el d_l_1">Войти</span>
+                                        <span class="text-el d_l_1"><?php echo \Yii::t('app', 'Войти'); ?></span>
                                     </a>
                                 </li>
                                 <li>
                                     <span class="divider">|</span>
                                     <button type="button">
-                                        <span class="text-el d_l_1">Напомнить пароль</span>
+                                        <span class="text-el d_l_1"><?php echo \Yii::t('app', 'Напомнить пароль'); ?></span>
                                     </button>
                                 </li>
                             </ul>

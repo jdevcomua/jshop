@@ -19,7 +19,7 @@ use common\models\Orders;
         <div class="container">
             <div class="f-s_0 title-profile without-crumbs">
                 <div class="frame-title">
-                    <h1 class="title">umo4ka, Добро пожаловать!</h1>
+                    <h1 class="title">umo4ka, <?php echo \Yii::t('app', 'Добро пожаловать!'); ?></h1>
                 </div>
             </div>
             <div class="left-personal f-s_0">
@@ -32,7 +32,7 @@ use common\models\Orders;
                     $('#my_data').toggleClass('d_n');
                     $('#my_data').toggleClass('activeTab');">
                         <button data-href="#my_data"
-                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_data">Основные данные
+                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_data"><?php echo \Yii::t('app', 'Основные данные'); ?>
                         </button>
                     </li>
                     <li class="" onclick="
@@ -43,8 +43,7 @@ use common\models\Orders;
                     $('#change_pass').toggleClass('d_n');
                     $('#change_pass').toggleClass('activeTab');">
                         <button data-href="#change_pass"
-                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_change_pass">Изменить
-                            пароль
+                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_change_pass"><?php echo \Yii::t('app', 'Изменить пароль'); ?>
                         </button>
                     </li>
                     <li class="" onclick="
@@ -55,7 +54,7 @@ use common\models\Orders;
                     $('#history_order').toggleClass('d_n');
                     $('#history_order').toggleClass('activeTab');">
                         <button data-href="#history_order"
-                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_history">История заказа
+                                data-source="http://active.imagecmsdemo.net/shop/profile/profile_history"><?php echo \Yii::t('app', 'История заказа'); ?>
                         </button>
                     </li>
                 </ul>
@@ -81,7 +80,7 @@ use common\models\Orders;
                                         <span class="title">&nbsp;</span>
                                         <div class="frame-form-field">
                                             <div class="btn-form m-b_15">
-                                                <?php echo Html::submitButton('<span class="text-el" style="color:#fff">Сохранить</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
+                                                <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . Yii::t('app', 'Сохранить') . '</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
                                             </div>
                                         </div>
                                     </div>
@@ -96,19 +95,19 @@ use common\models\Orders;
                                 <div class="horizontal-form big-title">
                                     <?php $form = ActiveForm::begin(); ?>
                                         <label>
-                                            <span class="title">Старый пароль:</span>
+                                            <span class="title"><?php echo \Yii::t('app', 'Старый пароль'); ?>:</span>
                                             <span class="frame-form-field">
                                                 <input type="password" name="old_password" style="width:250px;">
                                             </span>
                                         </label>
                                         <label>
-                                            <span class="title">Новый пароль:</span>
+                                            <span class="title"><?php echo \Yii::t('app', 'Новый пароль'); ?>:</span>
                                             <span class="frame-form-field">
                                                 <input type="password" name="new_password" style="width:250px;">
                                             </span>
                                         </label>
                                         <label>
-                                            <span class="title">Повторите пароль:</span>
+                                            <span class="title"><?php echo \Yii::t('app', 'Повторите пароль'); ?>:</span>
                                             <span class="frame-form-field">
                                                 <input type="password" name="confirm_new_password" style="width:250px;">
                                             </span>
@@ -117,7 +116,7 @@ use common\models\Orders;
                                             <span class="title">&nbsp;</span>
                                             <span class="frame-form-field">
                                                 <span class="btn-form">
-                                                    <input type="submit" value="Изменить пароль">
+                                                    <input type="submit" value="<?php echo \Yii::t('app', 'Изменить пароль'); ?>">
                                                 </span>
                                             </span>
                                         </div>
@@ -131,11 +130,11 @@ use common\models\Orders;
                             <table class="table-profile" style="font-size: 13px">
                                 <thead>
                                 <tr>
-                                    <th>Заказ #</th>
-                                    <th>Время покупки</th>
-                                    <th>Сумма покупки</th>
-                                    <th>Статус заказа</th>
-                                    <th>Статус платежа</th>
+                                    <th><?php echo \Yii::t('app', 'Заказ'); ?> #</th>
+                                    <th><?php echo \Yii::t('app', 'Время покупки'); ?></th>
+                                    <th><?php echo \Yii::t('app', 'Сумма покупки'); ?></th>
+                                    <th><?php echo \Yii::t('app', 'Статус заказа'); ?></th>
+                                    <th><?php echo \Yii::t('app', 'Статус платежа'); ?></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -143,23 +142,22 @@ use common\models\Orders;
                                     /* @var $order Orders */
                                     ?>
                                     <tr>
-                                        <td><a href="<?php echo Yii::$app->urlHelper->to(['cart/order', 'id' => $order->id]); ?>">Заказ
+                                        <td><a href="<?php echo Yii::$app->urlHelper->to(['cart/order', 'id' => $order->id]); ?>"><?php echo \Yii::t('app', 'Заказ'); ?>
                                                 #<?php echo $order->id; ?></a></td>
                                         <td><?php echo $order->timestamp; ?></td>
                                         <td>
                                             <div class="frame-prices">
-                                    <span class="current-prices">
-                                        <span class="price-new">
-                                            <span>
-                                                <span class="price"><?php echo $order->sum; ?></span>
-                                            </span>
-                                        </span>
-                                    </span>
+                                                <span class="current-prices">
+                                                    <span class="price-new">
+                                                        <span>
+                                                            <span class="price"><?php echo $order->sum; ?></span>
+                                                        </span>
+                                                    </span>
+                                                </span>
                                             </div>
                                         </td>
-
-                                        <td>Новый</td>
-                                        <td> Не оплачен</td>
+                                        <td><?php echo \Yii::t('app', 'Новый'); ?></td>
+                                        <td><?php echo \Yii::t('app', 'Не оплачен'); ?></td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>

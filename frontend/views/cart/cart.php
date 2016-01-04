@@ -21,28 +21,28 @@ echo '</script>';
                     <!--Start. Payments method form -->
                     <div class="frame-delivery-payment">
                         <dl>
-                            <dt class="title">Доставка и оплата</dt>
+                            <dt class="title"><?php echo \Yii::t('app', 'Доставка и оплата'); ?></dt>
                             <dd class="frame-list-delivery">
                                 <ul class="list-delivery">
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p1">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Самовывоз</span><span class="d_b s-t">Со склада магазина</span>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Самовывоз'); ?></span><span class="d_b s-t"><?php echo \Yii::t('app', 'Со склада магазина'); ?></span>
                                         </div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p2">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Курьерской службой </span><span
-                                                class="d_b s-t">Новая почта и другие</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Курьерской службой'); ?> </span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Новая почта и другие'); ?></span></div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p3">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Оплата наличными</span><span
-                                                class="d_b s-t">Курьеру при получении</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Оплата наличными'); ?></span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Курьеру при получении'); ?></span></div>
                                     </li>
                                     <li class="f-s_0"><span class="frame-ico"><span
                                                 class="icon_d_p4">&nbsp;</span></span>
-                                        <div class="descr"><span class="text-el">Безналичный платеж</span><span
-                                                class="d_b s-t">Master Card, Visa; Приват 24</span></div>
+                                        <div class="descr"><span class="text-el"><?php echo \Yii::t('app', 'Безналичный платеж'); ?></span><span
+                                                class="d_b s-t"><?php echo \Yii::t('app', 'Master Card, Visa; Приват 24'); ?></span></div>
                                     </li>
                                 </ul>
                             </dd>
@@ -50,8 +50,8 @@ echo '</script>';
                     </div>
                     <div class="frame-delivery-payment">
                         <dl>
-                            <dt class="title">Нужна помощь?</dt>
-                            <dd class="frame-list-delivery"><span class="s-t">Наши менеджеры ответят на ваши вопросы и помогут с выбором:</span>
+                            <dt class="title"><?php echo \Yii::t('app', 'Нужна помощь?'); ?></dt>
+                            <dd class="frame-list-delivery"><span class="s-t"><?php echo \Yii::t('app', 'Наши менеджеры ответят на ваши вопросы и помогут с выбором:'); ?></span>
                                 <ul class="list-style-1 list-phone-number">
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
                                     <li class="f-s_15">(093) <span class="d_n">−</span>169-36-98</li>
@@ -64,15 +64,14 @@ echo '</script>';
                         <section class="">
                             <div class="default-title">
                                 <div class="frame-title">
-                                    <div class="title">Похожие товары</div>
-                                </div>
+                                    <div class="title"><?php echo \Yii::t('app', 'Похожие товары'); ?></div>
+                                </div><?php echo \Yii::t('app', ''); ?>
                             </div>
 
                         </section>
                     </div>
                     <!-- End. Similar Products-->
                 </div>
-
                 <div>
                     <div class="jspContainer" style="width: 661px;">
                         <div class="inside-padd">
@@ -189,7 +188,7 @@ echo '</script>';
                                                                                             class="current-prices f-s_0">
                                                 <span class="price-new">
                                                     <span>
-<span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->cost * $itemsCount[$item->id] ?></span>
+                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->cost * $itemsCount[$item->id] ?></span>
                                                     </span>
                                                 </span>
                                                                                             </span>
@@ -220,7 +219,7 @@ echo '</script>';
                             <div class="clearfix inside-padd">
                                 <div class="btn-buy btn-buy-p btn-buy-pp f_r">
                                     <a href="<?php echo Yii::$app->urlHelper->to(['cart/order']) ?>">
-                                        <span class="text-el">Оформить заказ</span>
+                                        <span class="text-el"><?php echo \Yii::t('app', 'Оформить заказ'); ?></span>
                                     </a>
                                 </div>
                             </div>

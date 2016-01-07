@@ -118,13 +118,24 @@ class OrdersController extends Controller
             if (Yii::$app->request->post('action') == 'paid') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->payment_status = 'Оплачено';
-                    //var_dump($model);die();
+                    $model->payment_status = 'Оплачен';
                     $model->save();
                 }
-            } else {
+            } elseif(Yii::$app->request->post('action') == 'delete') {
                 foreach ($models as $model) {
                     $model->delete();
+                }
+            } elseif(Yii::$app->request->post('action') == 'sent') {
+                foreach ($models as $model) {
+                    /* @var $model Orders */
+                    $model->order_status = 'Отправлен';
+                    $model->save();
+                }
+            } elseif(Yii::$app->request->post('action') == 'delivered') {
+                foreach ($models as $model) {
+                    /* @var $model Orders */
+                    $model->order_status = 'Доставлен';
+                    $model->save();
                 }
             }
         }

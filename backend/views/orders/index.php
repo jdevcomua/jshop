@@ -39,6 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'Отправлен' => 'Отправлен',
                             'Доставлен' => 'Доставлен']
             ],
+            [
+                'attribute' => 'payment_status',
+                'filter' => ['Оплачен' => 'Оплачен',
+                    'Не оплачен' => 'Не оплачен']
+            ],
             'timestamp',
             //'address',
             [
@@ -47,11 +52,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'countItems',
             'sum',
-            [
-                'attribute' => 'payment_status',
-                'filter' => ['Оплачен' => 'Оплачен',
-                            'Не оплачен' => 'Не оплачен']
-            ],
             // 'phone',
             // 'delivery',
             // 'mail',
@@ -61,7 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    echo Html::submitButton('Оплачено', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'paid']) . ' ';
+    echo Html::submitButton('Оплачен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'paid']) . ' ';
+    echo Html::submitButton('Отправлен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'sent']) . ' ';
+    echo Html::submitButton('Доставлен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'delivered']) . ' ';
     echo Html::submitButton('Удалить', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete']);
     echo Html::endForm();?>
 

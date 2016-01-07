@@ -68,7 +68,7 @@ class OrdersSearch extends Orders
             ->andFilterWhere(['like', 'payment', $this->payment])
             ->andFilterWhere(['like', 'timestamp', $this->timestamp])
             ->andFilterWhere(['like', 'order_status', $this->order_status])
-            ->andFilterWhere(['like', 'payment_status', $this->payment_status])
+            ->andFilterWhere(['payment_status' => $this->payment_status])
             ->andFilterWhere(['>=', 'sum', $this->sum]);
 
         return $dataProvider;

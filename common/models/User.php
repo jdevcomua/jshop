@@ -150,6 +150,7 @@ class User extends Model implements \yii\web\IdentityInterface
             [['username', 'mail'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
             [['username'], 'string', 'length' => [4, 25]],
+            [['password'], 'string', 'length' => [4, 25]],
             [['name', 'surname', 'address', 'phone'], 'string'],
             [['mail'], 'email']
 

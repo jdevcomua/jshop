@@ -59,6 +59,14 @@ $config = [
                 '<language:(ru|en)>/characteristic/group'=>'characteristic/group',
                 '<language:(ru|en)>/characteristic/delete'=>'characteristic/delete',
 
+                '<language:(ru|en)>/vote/index'=>'vote/index',
+                '<language:(ru|en)>/vote'=>'vote/index',
+                '<language:(ru|en)>/vote/update'=>'vote/update',
+                '<language:(ru|en)>/vote/create'=>'vote/create',
+                '<language:(ru|en)>/vote/view'=>'vote/view',
+                '<language:(ru|en)>/vote/group'=>'vote/group',
+                '<language:(ru|en)>/vote/delete'=>'vote/delete',
+
                 '<language:(ru|en)>/user/index'=>'user/index',
                 '<language:(ru|en)>/user'=>'user/index',
                 '<language:(ru|en)>/user/update'=>'user/update',

@@ -16,6 +16,11 @@ use yii\helpers\Url;
             <div class="clearfix">
                 <div class="f-s_0 title-product">
                     <!-- Start. Name product -->
+                    <?php if (isset($message)) { ?>
+                    <div style="width: 505px; background: #fbfff9; border:1px solid #96C61E; padding: 10px;border-radius: 2%;margin-bottom: 15px;">
+                        <span style="opacity: 1;"><?php echo $message; ?></span>
+                    </div>
+                    <?php } ?>
                     <div class="frame-title">
                         <h1 class="title m-r_5"><?php echo $item['title']; ?></h1>
                     </div>
@@ -150,13 +155,13 @@ use yii\helpers\Url;
                         </div>
                         <div class="left-product-right">
                             <!-- Start. Star rating -->
-                            <div class="frame-star">
-                                <div class="star">
-                                    <div id="star_rating_17216" class="productRate star-small">
-                                        <div style="width: 100%"></div>
-                                    </div>
+                            <?php if ($item->getAvgRating()['avg'] != 0) { ?>
+                                <div class="mark-pr">
+                                    <span class="title"><?php //echo \Yii::t('app', 'Оценка товара:'); ?></span>
+                                    <div class="rateit" data-rateit-value="<?php echo $item->getAvgRating()['avg']; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                    (<?php echo $item->getAvgRating()['count']; ?>)
                                 </div>
-                            </div>
+                            <?php } ?>
                             <!-- End. Star rating-->
                             <!-- Start. frame for cloudzoom -->
                             <div id="xBlock"></div>
@@ -270,8 +275,7 @@ use yii\helpers\Url;
                                 </div>
                                 <div class="inside-padd">
                                     <!--                        Start. Description block-->
-                                    <div class="product-descr patch-product-view showHidePart"
-                                         style="max-height: none; height: 250px;">
+                                    <div class="product-descr patch-product-view showHidePart">
                                         <div class="text">
                                             <div class="title-h2"><?php echo \Yii::t('app', 'Описание'); ?></div>
                                             <h2>...</h2>
@@ -293,67 +297,60 @@ use yii\helpers\Url;
                                                 </div>
                                                 <div class="frame-list-comments">
                                                     <ul class="sub-1 product-comment patch-product-view showHidePart">
-                                                        <li>
-                                                            <input type="hidden" name="comment_item_id" value="3">
-                                                            <div class="clearfix global-frame-comment-sub1">
-                                                                <div
-                                                                    class="author-data-comment author-data-comment-sub1">
-                                                                    <span class="f-s_0 frame-autor-comment"><span
-                                                                            class="icon_comment"></span><span
-                                                                            class="author-comment">admin</span></span>
+                                                        <?php foreach ($item->votes as $vote) {
+                                                            /* @var $vote \common\models\Vote */
+                                                            if ($vote->checked == 1) {
+                                                            ?>
+                                                        <li><hr>
+                                                            <div style="padding: 10px 0 5px 0;" class="clearfix global-frame-comment-sub1">
+                                                                <div class="author-data-comment author-data-comment-sub1">
+                                                                    <span class="f-s_0 frame-autor-comment"><span class="icon_comment"></span>
+                                                                        <span class="author-comment"><b><?php echo $vote->user->username; ?></b></span></span>
                                                                     <span class="date-comment">
-                                                                        <span class="day">02 </span>
-                                                                        <span class="month">Сентября </span>
-                                                                        <span class="year">2014 </span>
+                                                                        <span class="day"><?php echo $vote->timestamp; ?></span>
                                                                     </span>
+                                                                    <?php if (!empty($vote->rating)) { ?>
                                                                     <div class="mark-pr">
                                                                         <span class="title"><?php echo \Yii::t('app', 'Оценка товара:'); ?></span>
-                                                                        <div class="star-small d_i-b">
-                                                                            <div class="productRate star-small">
-                                                                                <div style="width: 100%;"></div>
-                                                                            </div>
-                                                                        </div>
+                                                                        <div class="rateit" data-rateit-value="<?php echo $vote->rating; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+
                                                                     </div>
+                                                                    <?php } ?>
                                                                 </div>
                                                                 <div class="frame-comment-sub1">
                                                                     <div class="frame-comment">
-                                                                        <p>...</p>
+                                                                        <p><?php echo $vote->text; ?></p>
                                                                     </div>
                                                                     <div class="footer-comment clearfix">
 
-                                                                        <div class="frame-mark f_r">
+                                                                        <!--<div class="frame-mark f_r">
                                                                             <div class="func-button-comment">
                                                                                 <span class="s-t"><?php echo \Yii::t('app', 'Отзыв полезен?'); ?></span>
                                     <span class="btn like">
                                         <button type="button" class="usefullyes" data-comid="3">
                                             <span class="icon_like"></span>
-                                            <span class="text-el d_l_3"><?php echo \Yii::t('app', 'Да'); ?><span class="yesholder3 d_n">(0)</span></span>
+                                            <span class="text-el d_l_3"><?php //echo \Yii::t('app', 'Да'); ?><span class="yesholder3 d_n">(0)</span></span>
                                         </button>
                                     </span>
                                     <span class="btn dis-like">
                                         <button type="button" class="usefullno" data-comid="3">
                                             <span class="icon_dislike"></span>
-                                            <span class="text-el d_l_4"><?php echo \Yii::t('app', 'Нет'); ?><span class="noholder3 d_n">(0)</span></span>
+                                            <span class="text-el d_l_4"><?php //echo \Yii::t('app', 'Нет'); ?><span class="noholder3 d_n">(0)</span></span>
                                         </button>
                                     </span>
                                                                             </div>
-                                                                        </div>
+                                                                        </div>-->
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div data-place="3"></div>
-                                                            <div class="btn-all-comments">
-                                                                <button type="button"><span class="text-el"
-                                                                                            data-hide="<span class=&quot;d_l_1&quot;>Скрыть</span> ↑"
-                                                                                            data-show="<span class=&quot;d_l_1&quot;>Смотреть все ответы</span> ↓"></span>
-                                                                </button>
-                                                            </div>
                                                         </li>
+                                                        <?php } } ?>
                                                     </ul>
                                                 </div>
-
+                                                <br>
                                                 <div class="frame-drop-comment" data-rel="whoCloneAddPaste">
                                                     <div class="form-comment layout-highlight frame-comments">
+                                                        <h4>Оставить отзыв</h4>
                                                         <div class="inside-padd horizontal-form">
                                                             <?php echo $this->render('vote', [
                                                                 'vote' => new \common\models\Vote(), 'model' => $item

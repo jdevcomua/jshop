@@ -12,6 +12,8 @@ use Yii;
  * @property integer $user_id
  * @property string $timestamp
  * @property string $text
+ * @property integer $rating
+ * @property integer $checked
  *
  * @property Item $item
  * @property User $user
@@ -41,7 +43,7 @@ class Vote extends Model
     {
         return [
             [['item_id', 'text'], 'required'],
-            [['item_id', 'user_id'], 'integer'],
+            [['item_id', 'user_id', 'rating', 'checked'], 'integer'],
             [['timestamp'], 'safe'],
             [['text'], 'string']
         ];
@@ -58,7 +60,15 @@ class Vote extends Model
             'user_id' => 'ID пользователя',
             'timestamp' => 'Время создания',
             'text' => 'Текст',
+            'rating' => 'Рейтинг',
+            'itemTitle' => 'Товар',
+            'checked' => 'Проверено',
         ];
+    }
+
+    public function getItemTitle()
+    {
+        return $this->item->title;
     }
 
     /**

@@ -12,16 +12,17 @@ use yii\widgets\ActiveForm;
 
 <div class="item-cat-form">
 
-    <?php $form = ActiveForm::begin();
+    <?php $form = ActiveForm::begin();?>
 
-    echo $form->field($vote, 'text')->textarea()->label("");
+    <input name="Vote[rating]" type="range" min="0" max="5" value="0" step="1" id="backing4">
+    <div class="rateit" data-rateit-backingfld="#backing4"></div>
+    <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>
 
-    echo $form->field($vote, 'item_id')->hiddenInput(['value'=>$model->id])->label("");
-
-    echo $form->field($vote, 'user_id')->hiddenInput()->label("") ?>
+    <?php
+    echo $form->field($vote, 'text')->textarea()->label(""); ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton($vote->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => 'btn-search' ]) ?>
+        <?php echo Html::submitButton('<span class="text-el">' . Yii::t('app', 'Отправить') . '</span>>', ['class' => 'btn-search', 'style' => 'width: 110px;']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

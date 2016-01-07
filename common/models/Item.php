@@ -110,6 +110,23 @@ class Item extends Model
         ];
     }
 
+    public function getAvgRating()
+    {
+        $sum = 0;
+        $count = 0;
+        foreach ($this->votes as $vote) {
+            if (($vote->checked == 1) && ($vote->rating > 0)) {
+                $sum += $vote->rating;
+                $count++;
+            }
+        }
+        if ($count != 0) {
+            return ['avg' => $sum / $count, 'count' => $count];
+        } else {
+            return ['avg' => 0, 'count' => 0];
+        }
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -151,6 +168,6 @@ class Item extends Model
      */
     public function getVotes()
     {
-        return $this->hasMany(Vote::className(), ['item_id' => 'id']);
+        return $this->hasMany(Vote::className(), ['item_id' => 'id'])->joinWith('user');
     }
 }

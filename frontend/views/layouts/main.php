@@ -15,6 +15,7 @@ use yii\helpers\Url;
     <title>active</title>
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/style.css"
           media="all">
+    <link href="http://www.radioactivethinking.com/rateit/src/rateit.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css"
           href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/colorscheme.css" media="all">
     <link rel="stylesheet" type="text/css"

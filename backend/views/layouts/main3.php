@@ -18,8 +18,11 @@ AppAsset::register($this);
     <html lang="<?php echo Yii::$app->language ?>">
     <head>
         <meta charset="<?php echo Yii::$app->charset ?>">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">>
         <?php echo Html::csrfMetaTags() ?>
+        <style>.d_n {
+                display: none!important;
+            }</style>
         <title><?php echo Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
@@ -75,33 +78,37 @@ AppAsset::register($this);
                     <tbody><tr>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['orders/index'])?>">
-                                        Список заказов </a>
+                                        Заказы</a>
                             <a href="">
                             <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                         </a></td>
 
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['item/index'])?>">
-                                        Список товаров</a>
+                                       Товары</a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['item/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['item-cat/index'])?>">
-                                Категории товаров </a>
+                                Категории </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['item-cat/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['characteristic/index'])?>">
-                                Свойства товаров</a>
+                                Характеристики</a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['characteristic/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['user/index'])?>">
-                                        Список пользователей </a>
+                                        Пользователи </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['user/create'])?>">
                                 <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
                             </a></td>
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['vote/index'])?>">
+                                Отзывы </a>
+                            </td>
 
                     <!--    <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика</a>

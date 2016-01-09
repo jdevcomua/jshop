@@ -73,7 +73,7 @@ use Yii;
                     <tr>
                         <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Способ доставки'); ?>:</th>
                         <td>
-                            <?php echo \Yii::t('app', 'Доставка экспресс службой'); ?>
+                            <?php echo $order->delivery; ?>
                         </td>
                     </tr>
                     <!-- End. Delivery Method name -->
@@ -81,14 +81,14 @@ use Yii;
                     <tr>
                         <th style="padding-bottom: 10px;"><?php echo \Yii::t('app', 'Способ оплаты'); ?>:</th>
                         <td>
-                            <?php echo \Yii::t('app', 'Наложенным платежом'); ?>
+                            <?php echo $order->payment ?>
                         </td>
                     </tr>
                     <!--                Start. Order status-->
                     <tr>
                         <th><?php echo \Yii::t('app', 'Статус оплаты'); ?>:</th>
                         <td>
-                            <span class="status-pay not-paid"><?php echo \Yii::t('app', 'Не оплачен'); ?></span>
+                            <span class="status-pay <?php echo ($order->payment_status == 'Не оплачен') ? 'not-paid' : 'paid'; ?>"><?php echo $order->payment_status; ?></span>
                         </td>
                     </tr>
                     <!--                End. Order status-->

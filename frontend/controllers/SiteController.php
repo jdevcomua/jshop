@@ -6,6 +6,8 @@ use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\LoginForm;
+use common\models\Wish;
+use common\models\WishList;
 use Yii;
 use yii\web\Controller;
 
@@ -137,5 +139,30 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionDellist($list_id)
+    {
+        WishList::findOne($list_id)->delete();
+    }
+
+    public function actionWish($item_id, $list_id)
+    {
+        if ($list_id == '0') {
+            $wishList = new WishList();
+            $wishList->user_id = Yii::$app->user->id;
+            $wishList->title = Yii::$app->request->get('textt');
+            $wishList->save();
+            $list_id = $wishList->id;
+        }
+        $wish = new Wish();
+        $wish->list_id = $list_id;
+        $wish->item_id = $item_id;
+        $wish->save();
+    }
+
+    public function actionDelwish($wish_id)
+    {
+        Wish::findOne($wish_id)->delete();
     }
 }

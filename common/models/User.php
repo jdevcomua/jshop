@@ -19,6 +19,7 @@ use Yii;
  *
  * @property Orders[] $orders
  * @property Vote[] $votes
+ * @property WishList[] $wishLists
  */
 class User extends Model implements \yii\web\IdentityInterface
 {
@@ -190,4 +191,13 @@ class User extends Model implements \yii\web\IdentityInterface
     {
         return $this->hasMany(Vote::className(), ['user_id' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWishLists()
+    {
+        return $this->hasMany(WishList::className(), ['user_id' => 'id']);
+    }
+
 }

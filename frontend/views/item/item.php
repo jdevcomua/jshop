@@ -195,8 +195,12 @@ use yii\helpers\Url;
                                                         data: { count: $(\'#test\').val(), item_id: ' . $item->id . ' },
                                                         dataType: \'text\',
                                                         success: function(data){
-                                                            var count = $(\'#countItems \').html();
-                                                            $(\'#countItems \').html(+count + +$(\'#test\').val());
+                                                            var count = +$(\'#countItems \').html();
+                                                            if (count == 0) {
+                                                            $(\'#cartEmpty\').toggleClass(\'d_n\');
+                                                            $(\'#cartFull\').toggleClass(\'d_n\');
+                                                            }
+                                                            $(\'#countItems \').html(+count + 1);
                                                         }
                                                     });']); ?>
                                                     </div>

@@ -48,8 +48,11 @@ use Yii;
 
                         <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;', 'value' => $user->address])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
-                        <div class="frame-label" id="frameDelivery">
-                            <span class="title"><?php echo \Yii::t('app', 'Способ доставки'); ?></span>
+                        <?php echo $form->field($model, 'delivery')->dropDownList(['Самовывоз из магазина' => 'Самовывоз из магазина', 'Новая почта до склада' => 'Новая почта до склада', 'Курьер' => 'Курьер'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']);?>
+
+                        <?php echo $form->field($model, 'payment')->dropDownList(['Оплата наличными' => 'Оплата наличными', 'Безналичный платёж' => 'Безналичный платёж'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']);?>
+                        <!--<div class="frame-label" id="frameDelivery">
+                            <span class="title"><?php //echo \Yii::t('app', 'Способ доставки'); ?></span>
                             <div class="frame-form-field check-variant-delivery">
                                 <div class="frame-radio">
                                     <div class="frame-label">
@@ -57,7 +60,7 @@ use Yii;
 
                                     </span>
                                         <div class="name-count">
-                                            <span class="text-el p_r"><?php echo \Yii::t('app', 'Адресная доставка курьером'); ?></span>
+                                            <span class="text-el p_r"><?php //echo \Yii::t('app', 'Адресная доставка курьером'); ?></span>
                                         </div>
                                     </div>
                                     <div class="frame-label">
@@ -65,17 +68,15 @@ use Yii;
 
                                     </span>
                                         <div class="name-count">
-                                            <span class="text-el p_r"><?php echo \Yii::t('app', 'Доставка экспресс службой'); ?></span>
+                                            <span class="text-el p_r"><?php //echo \Yii::t('app', 'Доставка экспресс службой'); ?></span>
                                         </div>
                                         <div class="help-block">
-                                            <?php echo \Yii::t('app', 'согласно тарифам перевозчиков'); ?>
+                                            <?php //echo \Yii::t('app', 'согласно тарифам перевозчиков'); ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <?php echo $form->field($model, 'payment')->dropDownList([0 => '0', 1 => '1'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+                        </div>-->
 
                         <div class="frame-label">
                             <div class="frame-form-field">

@@ -5,7 +5,9 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'controllerNamespace' => 'frontend\controllers',
     'bootstrap' => ['log'],
+    'language' => 'ru',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -14,8 +16,51 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'cart' => [
+            'class' => 'common\components\Cart',
+        ],
+        'urlHelper' => [
+            'class' => 'common\components\UrlHelper',
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '<language:(ru|en)>/'=>'site/index',
+                '<language:(ru|en)>/site'=>'site/index',
+                '<language:(ru|en)>/site/index'=>'site/index',
+                '<language:(ru|en)>/site/img/*'=>'img/*',
+                '<language:(ru|en)>/cart'=>'cart/index',
+                '<language:(ru|en)>/cart/order'=>'cart/order',
+                '<language:(ru|en)>/cart/delete'=>'cart/delete',
+                '<language:(ru|en)>/cart/ajax'=>'cart/ajax',
+                '<language:(ru|en)>/cart/add'=>'cart/add',
+                '<language:(ru|en)>/item'=>'item/item',
+                '<language:(ru|en)>/item/<id:\d+>'=>'item/item',
+                '<language:(ru|en)>/item/item'=>'item/item',
+                '<language:(ru|en)>/login'=>'user/login',
+                '<language:(ru|en)>/user/login'=>'user/login',
+                '<language:(ru|en)>/logout'=>'user/logout',
+                '<language:(ru|en)>/register'=>'user/register',
+                '<language:(ru|en)>/profile'=>'user/profile',
+                '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'sourceLanguage' => 'ru',
+                    'fileMap' => [
+                        'app' => 'index.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -37,7 +82,6 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
 ];
@@ -47,6 +91,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*']
     ];
 
     $config['bootstrap'][] = 'gii';

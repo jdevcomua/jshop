@@ -5,7 +5,7 @@ return [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=mobidev',
             'username' => 'root',
-            'password' => '230263',
+            'password' => '2103',
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -15,6 +15,15 @@ return [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+        ],
+        'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'logFile' => '@common/runtime/logs/db.log',
+                ],
+            ]
         ],
     ],
 ];

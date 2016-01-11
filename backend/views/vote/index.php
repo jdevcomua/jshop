@@ -75,6 +75,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             'rating',
                             [
                                 'attribute' => 'checked',
+                                'value' => function($data){
+                                    switch($data->checked){
+                                        case 0: return 'Не проверен';
+                                        case -1: return 'Скрыт';
+                                        case 1: return 'Одобрен';
+                                        default; return 'Не проверен';
+                                    }
+                                },
                                 'filter' => ['0' => 'Не проверен', '1' => 'Одобрен', '-1' => 'Скрыт']
                             ],
 

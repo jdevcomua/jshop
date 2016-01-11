@@ -295,7 +295,7 @@ use yii\helpers\Url;
                                                             <div style="padding: 10px 0 5px 0;" class="clearfix global-frame-comment-sub1">
                                                                 <div class="author-data-comment author-data-comment-sub1">
                                                                     <span class="f-s_0 frame-autor-comment"><span class="icon_comment"></span>
-                                                                        <span class="author-comment"><b><?php echo $vote->user->username; ?></b></span></span>
+                                                                        <span class="author-comment"><b><?php echo isset($vote->user) ? $vote->user->username : 'Гость'; ?></b></span></span>
                                                                     <span class="date-comment">
                                                                         <span class="day"><?php echo $vote->timestamp; ?></span>
                                                                     </span>

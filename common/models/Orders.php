@@ -39,7 +39,7 @@ class Orders extends Model
     public function rules()
     {
         return [
-            [['user_id', 'phone', 'mail', 'name'], 'required'],
+            [['phone', 'mail', 'name'], 'required'],
             [['user_id'], 'integer'],
             [['timestamp'], 'safe'],
             ['payment_status', 'default', 'value' => 'Не оплачен'],

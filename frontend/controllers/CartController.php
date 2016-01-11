@@ -31,7 +31,7 @@ class CartController extends Controller
         }
         $model = new Orders();
         if ($model->load(Yii::$app->request->post())) {
-            $model->user_id = Yii::$app->user->id;
+            $model->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
             $model->sum = Yii::$app->cart->getSum();
             if ($model->save()) {
                 Yii::$app->cart->saveOrder($model->id);

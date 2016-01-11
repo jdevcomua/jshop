@@ -40,13 +40,13 @@ use Yii;
                     <div class="horizontal-form order-form big-title">
                         <?php $form = ActiveForm::begin(); ?>
 
-                        <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;', 'value' => $user->surname . ' ' . $user->name])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->surname . ' ' . $user->name])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
-                        <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;', 'value' => $user->mail])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->mail])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
-                        <?php echo $form->field($model, 'phone')->input('text', ['style' => 'width:250px;', 'value' => $user->phone])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'phone')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->phone])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
-                        <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;', 'value' => $user->address])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->address])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
 
                         <?php echo $form->field($model, 'delivery')->dropDownList(['Самовывоз из магазина' => 'Самовывоз из магазина', 'Новая почта до склада' => 'Новая почта до склада', 'Курьер' => 'Курьер'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']);?>
 

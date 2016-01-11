@@ -189,20 +189,7 @@ use yii\helpers\Url;
                                                         ?>
                                                     </div>
                                                     <div class="btn-buy-p btn-buy" style="display:block; float:left;">
-                                                        <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => '
-                                                    $.ajax({
-                                                        url: \'cart/ajax\',
-                                                        data: { count: $(\'#test\').val(), item_id: ' . $item->id . ' },
-                                                        dataType: \'text\',
-                                                        success: function(data){
-                                                            var count = +$(\'#countItems \').html();
-                                                            if (count == 0) {
-                                                            $(\'#cartEmpty\').toggleClass(\'d_n\');
-                                                            $(\'#cartFull\').toggleClass(\'d_n\');
-                                                            }
-                                                            $(\'#countItems \').html(+count + 1);
-                                                        }
-                                                    });']); ?>
+                                                        <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => 'addToCartFromItemPage(' . $item->id . ')']); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,8 +228,7 @@ use yii\helpers\Url;
                             </li>
                             <!--Output of the block comments-->
                             <li>
-                                <button type="button" data-href="#comment"
-                                        onclick="Comments.renderPosts($('#comment .inside-padd'),{'visibleMainForm': '1'})">
+                                <button type="button" data-href="#comment" >
                                     <span class="icon_comment-tab"></span>
                                     <span class="text-el">
                                         <span id="cc">

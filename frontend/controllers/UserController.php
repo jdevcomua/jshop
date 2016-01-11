@@ -3,30 +3,12 @@
 namespace frontend\controllers;
 
 use common\models\User;
-use yii\web\Controller;
 use Yii;
 use common\models\ItemCat;
 use common\models\LoginForm;
 
 class UserController extends Controller
 {
-
-    public function beforeAction($action)
-    {
-        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        return parent::beforeAction($action);
-    }
-
-    /**
-     * Changing the language
-     * @param $lang string
-     * @return \yii\web\Response
-     */
-    public function actionLanguage($lang)
-    {
-        Yii::$app->language = $lang;
-        return $this->redirect(Yii::$app->urlHelper->to(['/']));
-    }
 
     /**
      * View page of user

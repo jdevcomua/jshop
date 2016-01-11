@@ -83,24 +83,7 @@ echo '</script>';
 
                                     <tr data-id="17917" class="items items-bask cart-product">
                                         <td class="frame-remove-bask-btn">
-                                            <button type="button" class="icon_times_cart" onclick="
-                                                var $thisitem = $(this);
-                                                $.ajax({
-                                                url: 'cart/delete',
-                                                async: false,
-                                                data: { item_id: '<?php echo $item->id ?>'},
-                                                dataType: 'text',
-                                                success: function(data){
-                                                $thisitem.parent().parent().remove();
-                                                var obj = eval(data);
-                                                $('.sum').html(obj.sumAll);
-                                                $('#countItems ').html(obj.countAll);
-                                                if (obj.countAll == 0) {
-                                                $('#cartFull').toggleClass('d_n');
-                                                $('#cartEmpty').toggleClass('d_n');
-                                                }
-                                                }
-                                                });"></button>
+                                            <button type="button" class="icon_times_cart" onclick="deleteFromCart(<?php echo $item->id; ?>)"></button>
                                         </td>
                                         <td class="frame-items">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]) ?>"
@@ -121,64 +104,7 @@ echo '</script>';
                                                        class="plusMinus plus-minus"
                                                        id="inputChange-<?php echo $item->id ?>"
                                                        style="width:50px; border: 1px solid #dfdfdf;padding: 0;height: 31px;"
-                                                       onchange="
-                                                           var $thisItem = $(this);
-                                                           if ($(this).val() < 0) {
-                                                           $(this).val(array[$(this).attr('id').split('-')[1]]);
-                                                           alert('Значение должно быть больше или равно 0');
-                                                           } else if ($(this).val() == 0) {
-                                                           $.ajax({
-                                                           url: 'cart/delete',
-                                                           async: false,
-                                                           data: { item_id: '<?php echo $item->id ?>'},
-                                                           dataType: 'text',
-                                                           success: function(data){
-                                                           var obj = eval(data);
-                                                           $('.sum').html(obj.sumAll);
-                                                           $('#countItems ').html(obj.countAll);
-                                                           $thisItem.parent().parent().parent().remove();
-                                                           }
-                                                           });
-                                                           } else {
-                                                           if ($(this).val() > array[$(this).attr('id').split('-')[1]]) {
-                                                           var toChange = $(this).val() - array[$(this).attr('id').split('-')[1]];
-                                                           $.ajax({
-                                                           url: 'cart/add',
-                                                           async: false,
-                                                           data: { item_id: '<?php echo $item->id ?>', count: toChange},
-                                                           dataType: 'text',
-                                                           success: function(data){
-                                                           var obj = eval(data);
-                                                           $('.sum').html(obj.sumAll);
-                                                           $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
-                                                           $thisItem.val(obj.countItem);
-                                                           array[$thisItem.attr('id').split('-')[1]] = obj.countItem;
-                                                           $('#countItems ').html(obj.countAll);
-                                                           }
-                                                           });
-                                                           } else if ($(this).val() < array[$(this).attr('id').split('-')[1]]) {
-                                                           var toChange = array[$(this).attr('id').split('-')[1]] - $(this).val();
-                                                           $.ajax({
-                                                           url: 'cart/delete',
-                                                           async: false,
-                                                           data: { item_id: '<?php echo $item->id ?>', count: toChange},
-                                                           dataType: 'text',
-                                                           success: function(data){
-                                                           var obj = eval(data);
-                                                           $('.sum').html(obj.sumAll);
-                                                           $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
-                                                           $thisItem.val(obj.countItem);
-                                                           array[$thisItem.attr('id').split('-')[1]] = obj.countItem;
-                                                           $('#countItems ').html(obj.countAll);
-                                                           if (obj.countAll == 0) {
-                                                           $('#cartFull').toggleClass('d_n');
-                                                           $('#cartEmpty').toggleClass('d_n');
-                                                           }
-                                                           }
-                                                           });
-                                                           }
-                                                           }
-                                                           ">
+                                                       onchange="changeCountOfItem(<?php echo $item->id ?>)">
                                             </div>
                                             <span class="s-t f-s_13">шт.</span>
                                         </td>

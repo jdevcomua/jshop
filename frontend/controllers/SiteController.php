@@ -5,31 +5,13 @@ namespace frontend\controllers;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
-use common\models\LoginForm;
+use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
-use yii\web\Controller;
 
 class SiteController extends Controller
 {
-
-    public function beforeAction($action)
-    {
-        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        return parent::beforeAction($action);
-    }
-
-    /**
-     * Changing the language
-     * @param $lang string
-     * @return \yii\web\Response
-     */
-    public function actionLanguage($lang)
-    {
-        Yii::$app->language = $lang;
-        return $this->redirect(Yii::$app->urlHelper->to(['/']));
-    }
 
     /**
      * @return string
@@ -87,10 +69,15 @@ class SiteController extends Controller
         if ($id != '0') {
             $characteristics = ItemCat::findOne($id)->characteristics;
         }
+        if (Yii::$app->user->isGuest) {
+            $wishLists = [];
+        } else {
+            $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
+        }
         return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id,
             'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items),
             'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
-            'rightCost' => $rightCost]);
+            'rightCost' => $rightCost, 'wishLists' => $wishLists]);
     }
 
     /**
@@ -143,7 +130,7 @@ class SiteController extends Controller
 
     public function actionDellist($list_id)
     {
-        WishList::findOne($list_id)->delete();
+        return WishList::findOne($list_id)->delete();
     }
 
     public function actionWish($item_id, $list_id)
@@ -163,6 +150,6 @@ class SiteController extends Controller
 
     public function actionDelwish($wish_id)
     {
-        Wish::findOne($wish_id)->delete();
+        return Wish::findOne($wish_id)->delete();
     }
 }

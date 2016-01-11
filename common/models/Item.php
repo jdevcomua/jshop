@@ -129,11 +129,15 @@ class Item extends Model
 
     public function inWishList()
     {
-        $wish = Wish::find()->andFilterWhere(['item_id' => $this->id]);
-        $wish->joinWith(['list' => function ($q) {
-            $q->where('wish_list.user_id = ' . Yii::$app->user->getId() . '');
-        }]);
-        return !(empty($wish->all()));
+        if (!Yii::$app->user->isGuest) {
+            $wish = Wish::find()->andFilterWhere(['item_id' => $this->id]);
+            $wish->joinWith(['list' => function ($q) {
+                $q->where('wish_list.user_id = ' . Yii::$app->user->getId() . '');
+            }]);
+            return !(empty($wish->all()));
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -4,29 +4,11 @@ namespace frontend\controllers;
 
 use common\models\Vote;
 use Yii;
-use yii\web\Controller;
 use common\models\Item;
 use common\models\ItemCat;
 
 class ItemController extends Controller
 {
-
-    public function beforeAction($action)
-    {
-        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        return parent::beforeAction($action);
-    }
-
-    /**
-     * Changing the language
-     * @param $lang string
-     * @return \yii\web\Response
-     */
-    public function actionLanguage($lang)
-    {
-        Yii::$app->language = $lang;
-        return $this->redirect(Yii::$app->urlHelper->to(['/']));
-    }
 
     /**
      * Viwe page of item

@@ -18,10 +18,9 @@ class SiteController extends Controller
      */
     function actionIndex()
     {
-        $allCategories = ItemCat::find()->all();
         if (!empty(Yii::$app->request->get('id'))) {
             $item = Item::findOne(Yii::$app->request->get('id'));
-            return $this->render('Item', ['allCategories'=>$allCategories, 'item'=>$item]);
+            return $this->render('Item', ['item'=>$item]);
         }
         if (!empty(Yii::$app->request->get('category'))) {
             $id = Yii::$app->request->get('category');
@@ -74,7 +73,7 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['allCategories'=>$allCategories, 'items'=>$items, 'category_id'=>$id,
+        return $this->render('index', ['items'=>$items, 'category_id'=>$id,
             'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items),
             'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
             'rightCost' => $rightCost, 'wishLists' => $wishLists]);

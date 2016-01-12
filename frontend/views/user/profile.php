@@ -11,8 +11,6 @@ use common\models\Orders;
 
 ?>
 
-<?php echo $this->render('../layouts/menu', ['allCategories' => $allCategories]); ?>
-
 <div class="content">
     <br>
     <div class="frame-inside page-product">

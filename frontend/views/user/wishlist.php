@@ -5,13 +5,8 @@
 /* @var $model common\models\User */
 
 use Yii;
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use common\models\Orders;
 
 ?>
-
-<?php echo $this->render('../layouts/menu', ['allCategories' => $allCategories]); ?>
 
 <div class="content">
     <br>

@@ -26,8 +26,7 @@ class CartController extends Controller
         if (!empty(Yii::$app->request->get('id'))) {
             $order = Orders::findOne(Yii::$app->request->get('id'));
             $orderItems = OrderItem::find()->andFilterWhere(['order_id' => Yii::$app->request->get('id')])->joinWith('item')->all();
-            $allCategories = ItemCat::find()->all();
-            return $this->render('view-order', ['allCategories' => $allCategories, 'orderItems' => $orderItems, 'order' => $order]);
+            return $this->render('view-order', ['orderItems' => $orderItems, 'order' => $order]);
         }
         $model = new Orders();
         if ($model->load(Yii::$app->request->post())) {
@@ -42,9 +41,8 @@ class CartController extends Controller
         $itemsCount = Yii::$app->cart->getItems();
         $items = Yii::$app->cart->getItemsModels();
         $sum = Yii::$app->cart->getSum();
-        $allCategories = ItemCat::find()->all();
         $user = User::findOne(Yii::$app->user->id);
-        return $this->render('order', ['allCategories' => $allCategories, 'itemsCount' => $itemsCount, 'items' => $items,
+        return $this->render('order', ['itemsCount' => $itemsCount, 'items' => $items,
             'sum' => $sum, 'model' => $model, 'user' => $user]);
     }
 
@@ -57,8 +55,7 @@ class CartController extends Controller
         $itemsCount = Yii::$app->cart->getItems();
         $items = Yii::$app->cart->getItemsModels();
         $sum = Yii::$app->cart->getSum();
-        $allCategories = ItemCat::find()->all();
-        return $this->render('cart', ['allCategories' => $allCategories, 'itemsCount' => $itemsCount, 'items' => $items,
+        return $this->render('cart', ['itemsCount' => $itemsCount, 'items' => $items,
             'sum' => $sum]);
     }
 

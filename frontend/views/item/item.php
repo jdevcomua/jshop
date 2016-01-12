@@ -1,12 +1,8 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\helpers\Url;
 
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
-<?php echo $this->render('../layouts/menu', ['allCategories' => $allCategories]); ?>
 
 <div class="content">
     <br>

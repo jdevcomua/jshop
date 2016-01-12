@@ -28,8 +28,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
         }
-        $allCategories = ItemCat::find()->all();
-        return $this->render('profile', ['model' => $model, 'allCategories' => $allCategories, 'model1' => $model,]);
+        return $this->render('profile', ['model' => $model, 'model1' => $model,]);
     }
 
     public function actionLogin()
@@ -37,13 +36,12 @@ class UserController extends Controller
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $allCategories = ItemCat::find()->all();
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
         return $this->render('login', [
-            'model' => $model, 'allCategories' => $allCategories,
+            'model' => $model
         ]);
     }
 
@@ -65,21 +63,19 @@ class UserController extends Controller
                 return $this->redirect(Yii::$app->urlHelper->to(['login']));
             }
         }
-        $allCategories = ItemCat::find()->all();
         return $this->render('register', [
-            'model' => $model, 'allCategories' => $allCategories,
+            'model' => $model,
         ]);
     }
 
     public function actionWishlist($id)
     {
         $model = WishList::findOne($id);
-        $allCategories = ItemCat::find()->all();
         if (empty($model)) {
             return $this->redirect(Yii::$app->urlHelper->to(['/']));
         }
         return $this->render('wishlist', [
-            'list' => $model, 'allCategories' => $allCategories,
+            'list' => $model
         ]);
     }
 

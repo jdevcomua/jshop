@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
+use common\components\CategoriesView;
 
 ?>
 <html>
@@ -241,7 +242,13 @@ use yii\helpers\Url;
                 </div>
             </div>
         </header>
+
+        <?= CategoriesView::widget() ?>
+
         <?php echo $content; ?>
+
+
+
         <footer>
             <div class="content-footer">
                 <div class="container">

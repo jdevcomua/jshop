@@ -1,8 +1,5 @@
 <?php
 
-use common\models\Item;
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
 use common\models\OrderItem;
 use Yii;
 
@@ -11,8 +8,6 @@ use Yii;
 /* @var $model common\models\Orders */
 
 ?>
-
-<?php echo $this->render('../layouts/menu', ['allCategories' => $allCategories]); ?>
 
 <div class="content">
     <br>

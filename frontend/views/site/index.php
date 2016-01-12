@@ -257,7 +257,7 @@ use yii\widgets\ActiveForm;
 
                                     <div class="frame-group-checks">
                                         <div class="inside-padd">
-                                            <div style="cursor: pointer;" class="title" onclick="openFilterContent()">
+                                            <div style="cursor: pointer;" class="title" onclick="openFilterContent($(this))">
                                                 <span class="f-s_0">
                                                     <span class="icon-arrow"></span>
                                                     <span class="d_b">

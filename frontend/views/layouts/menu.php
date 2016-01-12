@@ -7,7 +7,7 @@
                 <tr>
                     <td>
                         <div class="frame-item-menu">
-                            <div class="frame-title"><a href="?category=0" class="title" style="color: #fff;"><span
+                            <div class="frame-title"><a href="<?php echo Yii::$app->urlHelper->to(['', 'category' => '0'])?>" class="title" style="color: #fff;"><span
                                         class="helper" style="height: 43px;"></span><span><span
                                             class="text-el"><?php echo \Yii::t('app', 'все'); ?></span></span></a></div>
                         </div>

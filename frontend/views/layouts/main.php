@@ -18,7 +18,7 @@ use yii\helpers\Url;
 
     <link rel="stylesheet" type="text/css" href="//frontend.dev/css/wishList.css">
     <link rel="stylesheet" type="text/css" href="//frontend.dev/css/slider.css">
-    <script type="text/javascript" src="//frontend.dev/onClickFunctions.js"></script>
+
 
     <link href="http://www.radioactivethinking.com/rateit/src/rateit.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css"
@@ -48,9 +48,7 @@ use yii\helpers\Url;
     <link rel="shortcut icon" href="/uploads/images/favicon.ico" type="image/x-icon">
     <link data-arr="8" rel="stylesheet" type="text/css"
           href="http://active.imagecmsdemo.net/templates/active/star_rating/css/style.css">
-    <style type="text/css">
-
-    </style>
+    <script type="text/javascript" src="//frontend.dev/onClickFunctions.js"></script>
 </head>
 
 <body class="isChrome shop_category notTouch">
@@ -67,7 +65,7 @@ use yii\helpers\Url;
             <div class="content-header">
                 <div class="container">
                     <!--        Logo-->
-                    <a href="" class="logo">
+                    <a href="<?php echo Yii::$app->urlHelper->to(['/']); ?>" class="logo">
                         <img src="http://active.imagecmsdemo.net/uploads/images/logo.png" alt="logo">
                     </a>
                     <div class="left-content-header">

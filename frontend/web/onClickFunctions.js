@@ -16,12 +16,12 @@ function closeWishAuthWindow() {
     $('#forCenterAuth').toggleClass('d_n');
 }
 function addToWishList() {
+    var list = '0';
+    var textt = '_';
     if ($('.wishRadio').filter(':checked').val() == '1') {
-        var list = $('#wishSelect').val();
-        var textt = '_';
+        list = $('#wishSelect').val();
     } else {
-        var list = '0';
-        var textt = $('.wish_list_name').val();
+        textt = $('.wish_list_name').val();
     }
     $.ajax({
         url: '/site/wish',
@@ -51,15 +51,15 @@ function addToCart(id) {
         }
     });
 }
-function openFilterContent() {
-    $(this).parent('div').find('.filters-content').toggleClass('d_n');
+function openFilterContent($thisItem) {
+    $thisItem.parent('div').find('.filters-content').toggleClass('d_n');
 }
 function addToCartFromItemPage(id) {
     $.ajax({
         url: 'cart/ajax',
-    data: { count: $('#test').val(), item_id: id },
+        data: {count: $('#test').val(), item_id: id},
         dataType: 'text',
-        success: function(data){
+        success: function (data) {
             var count = +$('#countItems').html();
             if (count == 0) {
                 $('#cartEmpty').toggleClass('d_n');
@@ -69,14 +69,13 @@ function addToCartFromItemPage(id) {
         }
     });
 }
-function deleteFromCart(id){
-    var $thisitem = $(this);
+function deleteFromCart(id, $thisitem) {
     $.ajax({
         url: 'cart/delete',
-        async: false,
-        data: { item_id: id},
+        async: true,
+        data: {item_id: id},
         dataType: 'text',
-        success: function(data){
+        success: function (data) {
             $thisitem.parent().parent().remove();
             var obj = eval(data);
             $('.sum').html(obj.sumAll);
@@ -88,18 +87,17 @@ function deleteFromCart(id){
         }
     });
 }
-function changeCountOfItem(id){
-    var $thisItem = $(this);
-    if ($(this).val() < 0) {
-        $(this).val(array[$(this).attr('id').split('-')[1]]);
+function changeCountOfItem(id, $thisItem) {
+    if ($thisItem.val() < 0) {
+        $thisItem.val(array[$thisItem.attr('id').split('-')[1]]);
         alert('Значение должно быть больше или равно 0');
-    } else if ($(this).val() == 0) {
+    } else if ($thisItem.val() == 0) {
         $.ajax({
             url: 'cart/delete',
             async: false,
-            data: { item_id: id},
+            data: {item_id: id},
             dataType: 'text',
-            success: function(data){
+            success: function (data) {
                 var obj = eval(data);
                 $('.sum').html(obj.sumAll);
                 $('#countItems ').html(obj.countAll);
@@ -107,14 +105,14 @@ function changeCountOfItem(id){
             }
         });
     } else {
-        if ($(this).val() > array[$(this).attr('id').split('-')[1]]) {
-            var toChange = $(this).val() - array[$(this).attr('id').split('-')[1]];
+        if ($thisItem.val() > array[$thisItem.attr('id').split('-')[1]]) {
+            var toChange = $thisItem.val() - array[$thisItem.attr('id').split('-')[1]];
             $.ajax({
                 url: 'cart/add',
                 async: false,
-                data: { item_id: id, count: toChange},
+                data: {item_id: id, count: toChange},
                 dataType: 'text',
-                success: function(data){
+                success: function (data) {
                     var obj = eval(data);
                     $('.sum').html(obj.sumAll);
                     $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
@@ -123,14 +121,14 @@ function changeCountOfItem(id){
                     $('#countItems ').html(obj.countAll);
                 }
             });
-        } else if ($(this).val() < array[$(this).attr('id').split('-')[1]]) {
-            var toChange = array[$(this).attr('id').split('-')[1]] - $(this).val();
+        } else if ($thisItem.val() < array[$thisItem.attr('id').split('-')[1]]) {
+            var toChange = array[$thisItem.attr('id').split('-')[1]] - $thisItem.val();
             $.ajax({
                 url: 'cart/delete',
                 async: false,
-                data: { item_id: id, count: toChange},
+                data: {item_id: id, count: toChange},
                 dataType: 'text',
-                success: function(data){
+                success: function (data) {
                     var obj = eval(data);
                     $('.sum').html(obj.sumAll);
                     $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
@@ -145,4 +143,56 @@ function changeCountOfItem(id){
             });
         }
     }
+}
+function removeWishList(id) {
+    $.ajax({
+        url: '/site/dellist',
+        data: {list_id: id},
+        dataType: 'text',
+        success: function () {
+            $('#list-' + id).toggleClass('d_n');
+        }
+    });
+}
+function removeItemFromWishList(id) {
+    $.ajax({
+        url: '/site/delwish',
+        data: {wish_id: id},
+        dataType: 'text',
+        success: function () {
+            $('#wish-' + id).toggleClass('d_n');
+        }
+    });
+}
+function tabMyData() {
+    $('.activeTab').toggleClass('d_n');
+    $('.activeTab').toggleClass('activeTab');
+    $('.active').toggleClass('active');
+    $(this).toggleClass('active');
+    $('#my_data').toggleClass('d_n');
+    $('#my_data').toggleClass('activeTab');
+}
+function tabChangePassword() {
+    $('.activeTab').toggleClass('d_n');
+    $('.activeTab').toggleClass('activeTab');
+    $('.active').toggleClass('active');
+    $(this).toggleClass('active');
+    $('#change_pass').toggleClass('d_n');
+    $('#change_pass').toggleClass('activeTab');
+}
+function tabOrderHistory() {
+    $('.activeTab').toggleClass('d_n');
+    $('.activeTab').toggleClass('activeTab');
+    $('.active').toggleClass('active');
+    $(this).toggleClass('active');
+    $('#history_order').toggleClass('d_n');
+    $('#history_order').toggleClass('activeTab');
+}
+function tabWishList() {
+    $('.activeTab').toggleClass('d_n');
+    $('.activeTab').toggleClass('activeTab');
+    $('.active').toggleClass('active');
+    $(this).toggleClass('active');
+    $('#wish_list').toggleClass('d_n');
+    $('#wish_list').toggleClass('activeTab');
 }

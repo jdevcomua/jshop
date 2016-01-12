@@ -83,7 +83,7 @@ echo '</script>';
 
                                     <tr data-id="17917" class="items items-bask cart-product">
                                         <td class="frame-remove-bask-btn">
-                                            <button type="button" class="icon_times_cart" onclick="deleteFromCart(<?php echo $item->id; ?>)"></button>
+                                            <button type="button" class="icon_times_cart" onclick="deleteFromCart(<?php echo $item->id; ?>, $(this))"></button>
                                         </td>
                                         <td class="frame-items">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]) ?>"
@@ -104,7 +104,7 @@ echo '</script>';
                                                        class="plusMinus plus-minus"
                                                        id="inputChange-<?php echo $item->id ?>"
                                                        style="width:50px; border: 1px solid #dfdfdf;padding: 0;height: 31px;"
-                                                       onchange="changeCountOfItem(<?php echo $item->id ?>)">
+                                                       onchange="changeCountOfItem(<?php echo $item->id ?>, $(this))">
                                             </div>
                                             <span class="s-t f-s_13">шт.</span>
                                         </td>

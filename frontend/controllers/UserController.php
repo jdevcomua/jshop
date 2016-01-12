@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use common\models\WishList;
 use Yii;
 use common\models\ItemCat;
 use common\models\LoginForm;
@@ -16,6 +17,13 @@ class UserController extends Controller
      */
     public function actionProfile()
     {
+        //var_dump(Yii::$app->request->post());die();
+        if (!empty(Yii::$app->request->post('WishList'))) {
+            $wishList = new WishList();
+            $wishList->load(Yii::$app->request->post());
+            $wishList->user_id = Yii::$app->user->id;
+            $wishList->save();
+        }
         $model = User::findOne(Yii::$app->user->getId());
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
@@ -60,6 +68,18 @@ class UserController extends Controller
         $allCategories = ItemCat::find()->all();
         return $this->render('register', [
             'model' => $model, 'allCategories' => $allCategories,
+        ]);
+    }
+
+    public function actionWishlist($id)
+    {
+        $model = WishList::findOne($id);
+        $allCategories = ItemCat::find()->all();
+        if (empty($model)) {
+            return $this->redirect(Yii::$app->urlHelper->to(['/']));
+        }
+        return $this->render('wishlist', [
+            'list' => $model, 'allCategories' => $allCategories,
         ]);
     }
 

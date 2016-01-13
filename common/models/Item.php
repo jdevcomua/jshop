@@ -114,16 +114,14 @@ class Item extends Model
 
     public function getAvgRating()
     {
-        $sum = 0;
-        $count = 0;
-        foreach ($this->votes as $vote) {
-            if (($vote->checked == 1) && ($vote->rating > 0)) {
-                $sum += $vote->rating;
-                $count++;
-            }
-        }
-        if ($count != 0) {
-            return ['avg' => $sum / $count, 'count' => $count];
+        $average = Vote::find()->select(['avg(rating)', 'count(rating)'])
+            ->andFilterWhere(['item_id' => $this->id])
+            ->andFilterWhere(['checked' => 1])
+            ->andFilterWhere(['>', 'rating', 0])
+            ->asArray(true)->all();
+        $average = $average[0];
+        if ($average["count(rating)"] != 0) {
+            return ['avg' => $average["avg(rating)"], 'count' => $average["count(rating)"]];
         } else {
             return ['avg' => 0, 'count' => 0];
         }

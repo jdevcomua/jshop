@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'categoryTitle',
             'title',
             'cost',
+            'count_of_views',
         ],
     ]);
             echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item/updatecharacteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);

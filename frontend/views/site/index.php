@@ -68,15 +68,16 @@ use yii\widgets\ActiveForm;
                                         src="<?php echo $value->getImageUrl(); ?>"></span>
                                 <span class="title"><?php echo $value['title']; ?></span></a>
                             <div class="description">
-                                <div class="left-description">
-                                    <div class="frame-star f-s_0">
-                                        <div class="star">
-                                            <div id="star_rating_17337" class="productRate star-small">
-                                                <div style="width: 0%"></div>
-                                            </div>
-                                        </div>
+                                            <!-- Start. Star rating -->
+                                <?php if ($value->getAvgRating()['avg'] != 0) { ?>
+                                    <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>                                    <div class="mark-pr">
+                                        <span class="title"><?php //echo \Yii::t('app', 'Оценка товара:'); ?></span>
+                                        <div class="rateit" data-rateit-value="<?php echo $value->getAvgRating()['avg']; ?>"
+                                             data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                        (<?php echo $value->getAvgRating()['count']; ?>)
                                     </div>
-                                </div>
+                                <?php } ?>
+                                            <!-- End. Star rating-->
                                 <div class="frame-prices-buttons">
                                     <div class="frame-prices f-s_0"><span class="current-prices f-s_0">
                                         <span class="price-new"><span><span

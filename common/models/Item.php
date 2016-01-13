@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property string $title
  * @property double $cost
  * @property string $image
+ * @property integer $count_of_views
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -73,9 +74,10 @@ class Item extends Model
     public function rules()
     {
         return [
-            [['category_id'], 'integer'],
+            [['category_id', 'count_of_views'], 'integer'],
             [['title', 'cost'], 'required'],
             [['cost'], 'number'],
+            ['count_of_views', 'default', 'value' => 0],
             [['title'], 'string'],
             [['image'], 'string'],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
@@ -107,6 +109,7 @@ class Item extends Model
             'cost' => Yii::t('app', 'Стоимость'),
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
+            'count_of_views' => Yii::t('app', 'Количество просмотров'),
         ];
     }
 

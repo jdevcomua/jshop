@@ -26,6 +26,9 @@ class ItemController extends Controller
             return $this->render('item', ['item'=>$item,
                 'message' => 'Ваш отзыв отправлен и будет доступен после проверки модератора.']);
         }
+        /* @var $item Item*/
+        $item->count_of_views++;
+        $item->save();
         return $this->render('item', ['item'=>$item]);
     }
 

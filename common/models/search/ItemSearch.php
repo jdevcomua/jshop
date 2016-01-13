@@ -21,7 +21,7 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
+            [['id', 'category_id', 'count_of_views'], 'integer'],
             [['title', 'image'], 'safe'],
             [['cost'], 'number'],
             [['categoryTitle'], 'safe']
@@ -54,7 +54,7 @@ class ItemSearch extends Item
 
         $dataProvider->setSort([
             'attributes' => [
-                'id', 'title', 'cost',
+                'id', 'title', 'cost', 'count_of_views',
                 'categoryTitle' => [
                     'asc' => ['item_cat.title' => SORT_ASC],
                     'desc' => ['item_cat.title' => SORT_DESC],

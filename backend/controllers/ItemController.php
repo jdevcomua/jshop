@@ -12,6 +12,7 @@ use common\models\CharacteristicItem;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use common\models\search\CharacteristicItemSearch;
+use yii\helpers\ArrayHelper;
 
 /**
  * ItemController implements the CRUD actions for Item model.
@@ -27,9 +28,17 @@ class ItemController extends Controller
     {
         $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $categories = Item::find()
+            ->select(['i.title'])
+            ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
+            ->distinct(true)
+            ->all();
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'filterByCategories' => ArrayHelper::map($categories, 'title', 'title'),
         ]);
     }
 

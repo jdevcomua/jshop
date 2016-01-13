@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $filterByCategories array*/
 
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
@@ -37,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'count_of_views',
 
             [
-                'attribute'=>'categoryTitle',
-                'filter'=>\common\models\Item::getCategorys(),
+                'attribute' => 'categoryTitle',
+                'filter' => $filterByCategories,
             ],
             ['class' => 'yii\grid\ActionColumn',
                 'urlCreator'=>function($action, $model, $key, $index){

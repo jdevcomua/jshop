@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "item".
@@ -157,18 +156,6 @@ class Item extends Model
     public function getCategory()
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'category_id']);
-    }
-
-    public static function getCategorys()
-    {
-        //Категории, в которых есть предметы
-        $parents = Item::find()
-            ->select(['i.title'])
-            ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
-            ->distinct(true)
-            ->all();
-
-        return ArrayHelper::map($parents, 'title', 'title');
     }
 
     /**

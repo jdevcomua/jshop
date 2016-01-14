@@ -19,6 +19,9 @@ $config = [
         'cart' => [
             'class' => 'common\components\Cart',
         ],
+        'compare' => [
+            'class' => 'common\components\Compare',
+        ],
         'urlHelper' => [
             'class' => 'common\components\UrlHelper',
         ],
@@ -46,6 +49,8 @@ $config = [
                 '<language:(ru|en)>/wishlist'=>'user/wishlist',
                 '<language:(ru|en)>/user/wishlist'=>'user/wishlist',
                 '<language:(ru|en)>/user/profile'=>'user/profile',
+                '<language:(ru|en)>/compare'=>'compare/compare',
+                '<language:(ru|en)>/compare/compare'=>'compare/compare',
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],

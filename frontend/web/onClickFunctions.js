@@ -1,6 +1,12 @@
 /**
  * Created by umka on 10.01.16.
  */
+$(document).ready(function(){
+    $('.tabs-compare-category').children(":first").toggleClass('active');
+    var id = $('.categoryLink').filter('.active').attr('id').split('-')[1];
+    $('#tab-' + id).toggleClass('active');
+    $('#tab-' + id).attr('style', 'display: block;');
+});
 function openWishWindow(bool, id) {
     if (bool) {
         $('#forCenterAuth').toggleClass('d_n');
@@ -33,6 +39,36 @@ function addToWishList() {
             $('#forCenter').toggleClass('d_n');
         }
     });
+}
+function addToCompareList(id) {
+    $.ajax({
+        url: '/site/compare',
+        data: {item_id: id},
+        dataType: 'text',
+        success: function (data) {
+            $('#toCompare').toggleClass('d_n');
+            $('#inCompare').toggleClass('d_n');
+        }
+    });
+}
+function deleteFromCompareList(id, $thisButton) {
+    $.ajax({
+        url: '/compare/delete',
+        async: true,
+        data: {item_id: id},
+        dataType: 'text',
+        success: function (data) {
+            $thisButton.parent().parent().parent().parent().parent().remove();
+        }
+    });
+}
+function changeCategoryInCompare($thisElement) {
+    $('.items-carousel').filter('.active').attr('style', 'display: none;');
+    $('.items-carousel').filter('.active').toggleClass('active');
+    $('#tab-' + $thisElement.parent().attr('id').split('-')[1]).toggleClass('active');
+    $('#tab-' + $thisElement.parent().attr('id').split('-')[1]).attr('style', 'display: block;');
+    $('.categoryLink').filter('.active').toggleClass('active');
+    $thisElement.parent().toggleClass('active');
 }
 function addToCart(id) {
     $.ajax({

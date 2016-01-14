@@ -4,3 +4,5 @@
 .git-credentials
 
 composer.lock
+
+test.sh

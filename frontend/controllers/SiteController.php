@@ -89,6 +89,14 @@ class SiteController extends Controller
         Yii::$app->cart->addItem($item_id, $count);
     }
 
+    /**
+     * @param $item_id integer
+     */
+    public function actionCompare($item_id)
+    {
+        Yii::$app->compare->addItem(Item::findOne($item_id));
+    }
+
     public function filter()
     {
         $query = Item::find();

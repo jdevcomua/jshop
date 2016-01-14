@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\Orders;
 use common\models\OrderItem;
 use Yii;
-use common\models\ItemCat;
 use common\models\User;
 
 class CartController extends Controller

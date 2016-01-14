@@ -124,16 +124,31 @@ use yii\widgets\ActiveForm;
                                         <!-- Wish List & Compare List buttons -->
                                         <div class="frame-wish-compare-list f-s_0">
                                             <div class="frame-btn-comp">
-                                                <!-- Start. Compare List button -->
-                                                <div class="btn-compare">
-                                                    <button class="toCompare" data-id="17205" type="button"
-                                                            data-firtitle="В список сравнений"
-                                                            data-sectitle="В списке сравнений"
-                                                            data-title="В список сравнений" data-rel="tooltip">
+                                                <!-- Start. Compare List button-->
+                                                <?php if (!Yii::$app->compare->existInList($value->id)) { ?>
+                                                <div id="toCompare" class="btn-compare">
+                                                    <button class="toCompare" type="button" data-title="В список сравнений"
+                                                            onclick="addToCompareList(<?php echo $value->id; ?>)" >
                                                         <span class="icon_compare"></span>
                                                         <span class="text-el d_l">В список сравнений</span>
                                                     </button>
                                                 </div>
+                                                <div id="inCompare" class="btn-compare btn-comp-in d_n">
+                                                    <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
+                                                        style="padding-top: 8px; padding-bottom: 9px;"><button class="toCompare" type="button" data-title="В список сравнений">
+                                                        <span class="icon_compare"></span>
+                                                        <span class="text-el d_l">В список сравнений</span>
+                                                    </button></a>
+                                                </div>
+                                                <?php } else { ?>
+                                                    <div class="btn-compare btn-comp-in">
+                                                        <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
+                                                            style="padding-top: 8px; padding-bottom: 9px;"><button class="toCompare" type="button" data-title="В список сравнений">
+                                                                <span class="icon_compare"></span>
+                                                                <span class="text-el d_l">В список сравнений</span>
+                                                            </button></a>
+                                                    </div>
+                                                <?php } ?>
                                                 <!-- End. Compare List button -->
                                             </div>
                                             <!-- Start. Wish list buttons -->
@@ -270,22 +285,24 @@ use yii\widgets\ActiveForm;
                                             <div class="filters-content d_n">
                                                 <ul>
                                                     <?php
-                                                    foreach ($char->getCharacteristicItems()->all() as $itemm) { ?>
-                                                        <li>
-                                                            <div class="frame-label" id="brand_281">
-
-                                                                <?php $chr = new common\models\CharacteristicItem();
-                                                                echo $form->field($chr, '[' . $i . ']characteristic_id')->hiddenInput(['value' => $char->id])->label('');
-                                                                if (isset($selected[$i]['value'])) {
-                                                                    echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value, 'checked ' => ''])->label($itemm->value);
-                                                                } else {
-                                                                    echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value])->label($itemm->value);
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                        </li>
-                                                        <?php $i = $i + 1;
-                                                    } ?>
+                                                    foreach ($char->getCharacteristicItems()->all() as $itemm) {
+                                                        if (!empty($itemm->value)) {
+                                                            ?>
+                                                            <li>
+                                                                <div class="frame-label" id="brand_281">
+                                                                    <?php $chr = new common\models\CharacteristicItem();
+                                                                        echo $form->field($chr, '[' . $i . ']characteristic_id')->hiddenInput(['value' => $char->id])->label('');
+                                                                        if (isset($selected[$i]['value'])) {
+                                                                            echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value, 'checked ' => ''])->label($itemm->value);
+                                                                        } else {
+                                                                            echo $form->field($chr, '[' . $i . ']value')->input('checkbox', ['value' => $itemm->value])->label($itemm->value);
+                                                                        }
+                                                                    ?>
+                                                                </div>
+                                                            </li>
+                                                            <?php $i = $i + 1;
+                                                        }
+                                                    }?>
                                                 </ul>
                                             </div>
                                         </div>

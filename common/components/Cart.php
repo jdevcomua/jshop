@@ -4,9 +4,7 @@ namespace common\components;
 
 use yii\base\Component;
 use common\models\Item;
-use common\models\Orders;
 use common\models\OrderItem;
-use common\models\User;
 use Yii;
 
 /**
@@ -21,7 +19,6 @@ class Cart extends Component
     public function init()
     {
         parent::init();
-        Yii::$app->session->open();
         if (empty(Yii::$app->session->get('cart'))) {
             Yii::$app->session->set('cart', []);
         }
@@ -33,7 +30,7 @@ class Cart extends Component
     public function getCount()
     {
         $sum = 0;
-        foreach (Yii::$app->session['cart'] as $item) {
+        foreach ($this->getItems() as $item) {
             $sum += $item;
         }
         return $sum;
@@ -45,7 +42,7 @@ class Cart extends Component
      */
     public function addItem($item_id, $count = 1)
     {
-        $array = Yii::$app->session['cart'];
+        $array = $this->getItems();
         if (isset($array[$item_id])) {
             $array[$item_id] = $array[$item_id] + $count;
         } else {
@@ -61,7 +58,7 @@ class Cart extends Component
      */
     public function deleteItem($item_id, $count = 0)
     {
-        $array = Yii::$app->session['cart'];
+        $array = $this->getItems();
         if (isset($array[$item_id])) {
             if ($count > 0) {
                 $array[$item_id] = $array[$item_id] - $count;
@@ -93,10 +90,11 @@ class Cart extends Component
      */
     public function getItemsModels()
     {
-        if (empty(Yii::$app->session['cart'])) {
+        $items = $this->getItems();
+        if (empty($items)) {
             return [];
         } else {
-            return Item::find()->filterWhere(['in', 'id', array_keys(Yii::$app->session['cart'])])->all();
+            return Item::find()->filterWhere(['in', 'id', array_keys($items)])->all();
         }
     }
 
@@ -148,8 +146,9 @@ class Cart extends Component
      */
     public function saveOrder($order_id)
     {
-        if (!empty(Yii::$app->session['cart'])) {
-            foreach (Yii::$app->session['cart'] as $item_id => $count) {
+        $items = $this->getItems();
+        if (!empty($items)) {
+            foreach ($items as $item_id => $count) {
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $order_id;
                 $orderItem->item_id = $item_id;
@@ -166,7 +165,7 @@ class Cart extends Component
      */
     public function checkItemInCart($item_id)
     {
-        return array_key_exists($item_id, Yii::$app->session['cart']);
+        return array_key_exists($item_id, $this->getItems());
     }
 
     public function isEmpty()

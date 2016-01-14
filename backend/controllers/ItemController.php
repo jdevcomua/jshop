@@ -33,8 +33,6 @@ class ItemController extends Controller
             ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
             ->distinct(true)
             ->all();
-
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -142,10 +140,7 @@ class ItemController extends Controller
         }
         if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
             foreach ($characteristics as $characteristic) {
-                /* @var $characteristic CharacteristicItem*/
-                if (!empty($characteristic->value)) {
-                    $characteristic->save();
-                }
+                $characteristic->save();
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }

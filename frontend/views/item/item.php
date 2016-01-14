@@ -242,10 +242,12 @@ use yii\helpers\Html;
                                         <div class="product-charac patch-product-view showHidePart">
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
                                                 <tbody>
-                                                <?php foreach ($item->getCharacteristicItems()->all() as $i => $value) {
+                                                <?php foreach ($item->getCharacteristicItems()->all() as $value) {
                                                     /* @var $value common\models\CharacteristicItem */
-                                                    echo "<tr><td>" . $value->getCharacteristic()->one()['title'] . "</td>";
-                                                    echo "<td>" . $value->value . "</td></tr>";
+                                                    if (!empty($value->value)) {
+                                                        echo "<tr><td>" . $value->getCharacteristic()->one()['title'] . "</td>";
+                                                        echo "<td>" . $value->value . "</td></tr>";
+                                                    }
                                                 }
                                                 //var_dump($item->getCategory()->one()['title']);
                                                 ?>

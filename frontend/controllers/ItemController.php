@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\Vote;
 use Yii;
 use common\models\Item;
-use common\models\ItemCat;
 
 class ItemController extends Controller
 {

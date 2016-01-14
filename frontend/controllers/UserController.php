@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\User;
 use common\models\WishList;
 use Yii;
-use common\models\ItemCat;
 use common\models\LoginForm;
 
 class UserController extends Controller

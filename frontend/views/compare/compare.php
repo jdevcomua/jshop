@@ -9,7 +9,14 @@ use common\models\ItemCat;
 use common\models\Characteristic;
 
 ?>
-
+<script>
+    $(document).ready(function(){
+        $('.tabs-compare-category').children(":first").toggleClass('active');
+        var id = $('.categoryLink').filter('.active').attr('id').split('-')[1];
+        $('#tab-' + id).toggleClass('active');
+        $('#tab-' + id).attr('style', 'display: block;');
+    });
+</script>
 <div class="content">
     <br>
     <div class="frame-inside page-product">
@@ -86,7 +93,8 @@ use common\models\Characteristic;
                                                         <div class="description">
                                                             <!-- Start. Star rating -->
                                                             <?php if ($item->getAvgRating()['avg'] != 0) { ?>
-                                                                <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>                                    <div class="mark-pr">
+                                                                <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+                                                                <div class="mark-pr">
                                                                     <span class="title"><?php //echo \Yii::t('app', 'Оценка товара:'); ?></span>
                                                                     <div class="rateit" data-rateit-value="<?php echo $item->getAvgRating()['avg']; ?>"
                                                                          data-rateit-ispreset="true" data-rateit-readonly="true"></div>
@@ -95,10 +103,26 @@ use common\models\Characteristic;
                                                             <?php } ?>
                                                             <!-- End. Star rating-->
                                                             <div class="frame-prices-buttons">
-                                                                <div class="frame-prices f-s_0"><span class="current-prices f-s_0">
-                                        <span class="price-new"><span><span
-                                                    class="price priceVariant"><?php echo $item->cost; ?></span> </span></span>
-                                        </span></div>
+                                                                <div class="frame-prices f-s_0">
+                                                                    <!-- Start. Check old price-->
+                                                                    <?php if ($item->existDiscount()) { ?>
+                                                                        <span class="price-discount">
+                                                                            <span class="price priceOrigVariant">
+                                                                                <?php echo $item->cost; ?>
+                                                                            </span>
+                                                                        </span>
+                                                                    <?php } ?>
+                                                                    <!-- End. Check old price-->
+                                                                    <!-- Start. Product price-->
+                                                                    <span class="current-prices f-s_0">
+                                                                        <span class="price-new">
+                                                                            <span class="price priceVariant">
+                                                                                <?php echo $item->existDiscount() ? $item->getNewPrice() : $item->cost; ?>
+                                                                            </span>
+                                                                        </span>
+                                                                    </span>
+                                                                    <!-- End. Product price-->
+                                                                </div>
                                                                 <div class="f-s_0 m-b_10">
                                                                     <div class="funcs-buttons">
                                                                         <!-- Start. Collect information about Variants, for future processing -->

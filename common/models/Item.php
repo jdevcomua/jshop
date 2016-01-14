@@ -17,6 +17,7 @@ use Yii;
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
  * @property OrderItem[] $orderItems
+ * @property StockItem[] $stockItems
  * @property Vote[] $votes
  */
 class Item extends Model
@@ -109,9 +110,13 @@ class Item extends Model
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
             'count_of_views' => Yii::t('app', 'Количество просмотров'),
+            'newPrice' => Yii::t('app', 'Новая цена'),
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getAvgRating()
     {
         $average = Vote::find()->select(['avg(rating)', 'count(rating)'])
@@ -127,6 +132,9 @@ class Item extends Model
         }
     }
 
+    /**
+     * @return bool
+     */
     public function inWishList()
     {
         if (!Yii::$app->user->isGuest) {
@@ -162,6 +170,63 @@ class Item extends Model
     public function getOrderItems()
     {
         return $this->hasMany(OrderItem::className(), ['item_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStockItems()
+    {
+        return $this->hasMany(StockItem::className(), ['item_id' => 'id']);
+    }
+
+    /**
+     * @return bool
+     */
+    public function existDiscount()
+    {
+        return !(empty($this->getStockItems()->all()));
+    }
+
+    /**
+     * @return Stock|int|mixed
+     */
+    public function getMaxDiscount()
+    {
+        if ($this->existDiscount()) {
+            $stocks = $this->getStockItems()->all();
+            $max = $stocks[0]->stock;
+            /* @var $max Stock*/
+            foreach ($stocks as $stockItem) {
+                /* @var $stockItem StockItem*/
+                $stock = $stockItem->stock;
+                $disc1 = ($max->type == 1) ? ($this->cost * $max->value / 100) : $max->value;
+                $disc2 = ($stock->type == 1) ? ($this->cost * $stock->value / 100) : $stock->value;
+                if ($disc2 > $disc1) {
+                    $max = $stock;
+                }
+            }
+            return $max;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * @return float
+     */
+    public function getNewPrice()
+    {
+        if ($this->existDiscount()) {
+            $stock = $this->getMaxDiscount();
+            if ($stock->type == 1) {
+                return $this->cost * (1 - ($stock->value / 100));
+            } else {
+                return $this->cost - $stock->value;
+            }
+        } else {
+            return $this->cost;
+        }
     }
 
     /**

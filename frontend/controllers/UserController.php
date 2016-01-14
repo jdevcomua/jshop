@@ -16,7 +16,6 @@ class UserController extends Controller
      */
     public function actionProfile()
     {
-        //var_dump(Yii::$app->request->post());die();
         if (!empty(Yii::$app->request->post('WishList'))) {
             $wishList = new WishList();
             $wishList->load(Yii::$app->request->post());

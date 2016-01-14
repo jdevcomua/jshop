@@ -109,6 +109,12 @@ AppAsset::register($this);
                             <a href="<?php echo Yii::$app->urlHelper->to(['vote/index'])?>">
                                 Отзывы </a>
                             </td>
+                        <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['stock/index'])?>">
+                                Акции </a>
+                            <a href="<?php echo Yii::$app->urlHelper->to(['stock/create'])?>">
+                                <img width="20px" src="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                            </a></td>
 
                     <!--    <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Статистика</a>

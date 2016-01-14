@@ -79,10 +79,22 @@ use yii\widgets\ActiveForm;
                                 <?php } ?>
                                             <!-- End. Star rating-->
                                 <div class="frame-prices-buttons">
-                                    <div class="frame-prices f-s_0"><span class="current-prices f-s_0">
-                                        <span class="price-new"><span><span
-                                                    class="price priceVariant"><?php echo $value['cost']; ?></span> </span></span>
-                                        </span></div>
+                                    <div class="frame-prices f-s_0">
+                                        <!-- Start. Check old price-->
+                                        <?php if ($value->existDiscount()) { ?>
+                                            <span class="price-discount">
+                                                    <span class="price priceOrigVariant"><?php echo $value->cost; ?></span>
+                                                </span>
+                                        <?php } ?>
+                                        <!-- End. Check old price-->
+                                        <!-- Start. Product price-->
+                                            <span class="current-prices f-s_0">
+                                                <span class="price-new">
+                                                    <span class="price priceVariant"><?php echo $value->existDiscount() ? $value->getNewPrice() : $value->cost; ?></span>
+                                                </span>
+                                            </span>
+                                        <!-- End. Product price-->
+                                    </div>
                                     <div class="f-s_0 m-b_10">
                                         <div class="funcs-buttons">
                                             <!-- Start. Collect information about Variants, for future processing -->

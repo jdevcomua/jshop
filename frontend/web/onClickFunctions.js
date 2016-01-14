@@ -1,12 +1,6 @@
 /**
  * Created by umka on 10.01.16.
  */
-$(document).ready(function(){
-    $('.tabs-compare-category').children(":first").toggleClass('active');
-    var id = $('.categoryLink').filter('.active').attr('id').split('-')[1];
-    $('#tab-' + id).toggleClass('active');
-    $('#tab-' + id).attr('style', 'display: block;');
-});
 function openWishWindow(bool, id) {
     if (bool) {
         $('#forCenterAuth').toggleClass('d_n');

@@ -112,7 +112,7 @@ echo '</script>';
                                                                                             class="current-prices f-s_0">
                                                 <span class="price-new">
                                                     <span>
-                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->cost * $itemsCount[$item->id] ?></span>
+                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->getNewPrice() * $itemsCount[$item->id] ?></span>
                                                     </span>
                                                 </span>
                                                                                             </span>

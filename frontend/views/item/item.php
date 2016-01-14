@@ -169,9 +169,19 @@ use yii\helpers\Html;
                                     <div class="frame-prices-buy f-s_0">
                                         <!-- Start. Prices-->
                                         <div class="frame-prices f-s_0">
-                                            <span class="current-prices f-s_0"><span class="price-new">
-                                            <span><span class="price priceVariant"><?php echo $item['cost']; ?></span> </span></span>
-                                            </span></span>
+                                            <!-- Start. Check old price-->
+                                            <?php if ($item->existDiscount()) { ?>
+                                                <span class="price-discount">
+                                                    <span class="price priceOrigVariant"><?php echo $item->cost; ?></span>
+                                                </span>
+                                            <?php } ?>
+                                            <!-- End. Check old price-->
+                                            <!-- Start. Product price-->
+                                            <span class="current-prices f-s_0">
+                                                <span class="price-new">
+                                                    <span class="price priceVariant"><?php echo $item->existDiscount() ? $item->getNewPrice() : $item->cost; ?></span>
+                                                </span>
+                                            </span>
                                             <!-- End. Product price-->
                                         </div>
                                         <!-- End. Prices-->

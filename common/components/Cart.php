@@ -108,7 +108,7 @@ class Cart extends Component
         $items = $this->getItemsModels();
         foreach ($items as $item) {
             /* @var $item Item*/
-            $sum += ($item->cost*$itemsCount[$item->id]);
+            $sum += ($item->getNewPrice()*$itemsCount[$item->id]);
         }
         return $sum;
     }
@@ -120,8 +120,8 @@ class Cart extends Component
     public function getSumForItem($item_id)
     {
         $cart = $this->getItems();
-        if (isset($cart[$item_id]) && !empty(Item::findOne($item_id)->cost)) {
-            return $cart[$item_id] * Item::findOne($item_id)->cost;
+        if (isset($cart[$item_id]) && !empty(Item::findOne($item_id)->getNewPrice())) {
+            return $cart[$item_id] * Item::findOne($item_id)->getNewPrice();
         } else {
             return 0;
         }
@@ -153,7 +153,7 @@ class Cart extends Component
                 $orderItem->order_id = $order_id;
                 $orderItem->item_id = $item_id;
                 $orderItem->count = $count;
-                $orderItem->sum = Item::findOne($item_id)->cost*$count;
+                $orderItem->sum = Item::findOne($item_id)->getNewPrice()*$count;
                 $orderItem->save();
             }
         }

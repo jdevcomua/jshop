@@ -7,17 +7,13 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\StockSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stocks');
+$this->title = Yii::t('app', 'Акции');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stock-index">
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php echo Html::a(Yii::t('app', 'Create Stock'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <h3><?php echo Html::encode($this->title) . ' ' .
+            Html::a(Yii::t('app', 'Создать акцию'), ['create'], ['class' => 'btn btn-success']) ?></h3>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,

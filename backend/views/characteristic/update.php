@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
     <?php
     if($count == 'one'){
         echo $this->render('_form', [
-            'model' => $model,
+            'model' => $model, 'categories' => $categories,
         ]);
     } else {
         echo $this->render('groupForm', [

@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             'title',
             [
-                'attribute'=>'categoryTitle',
-                'filter'=>\common\models\Characteristic::getCategorys(),
+                'attribute' => 'categoryTitle',
+                'filter' => $categories,
             ],
             ['class' => 'yii\grid\ActionColumn',
                 'urlCreator'=>function($action, $model, $key, $index){

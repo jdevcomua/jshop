@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "characteristic".
@@ -39,20 +38,6 @@ class Characteristic extends Model
     public function getCategoryTitle()
     {
         return $this->category->title;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getCategorys()
-    {
-        $parents = Characteristic::find()
-            ->select(['i.title'])
-            ->join('JOIN', 'item_cat i', 'characteristic.category_id = i.id')
-            ->distinct(true)
-            ->all();
-
-        return ArrayHelper::map($parents, 'title', 'title');
     }
 
     /**

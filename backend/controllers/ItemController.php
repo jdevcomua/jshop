@@ -78,7 +78,7 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new Item();
-
+        $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post())) {
             if (isset($model->imageFile)) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
@@ -97,6 +97,7 @@ class ItemController extends Controller
         }
             return $this->render('create', [
                 'model' => $model,
+                'categories' => ArrayHelper::map($categories, 'id', 'title'),
             ]);
 
     }
@@ -156,6 +157,7 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post())) {
             if (isset($model->imageFile)) {
                 if (isset($model->image)) {
@@ -182,6 +184,7 @@ class ItemController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'categories' => ArrayHelper::map($categories, 'id', 'title'),
             ]);
         }
     }

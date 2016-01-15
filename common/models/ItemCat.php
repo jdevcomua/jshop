@@ -55,18 +55,6 @@ class ItemCat extends Model
     }
 
     /**
-     * @return array category_id => category_title
-     */
-    public static function getCategorys_Id_Title()
-    {
-        $parents = ItemCat::find()
-            ->distinct(true)
-            ->all();
-
-        return ArrayHelper::map($parents, 'id', 'title');
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getItems()

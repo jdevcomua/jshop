@@ -51,7 +51,7 @@ class StockController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
+        $model = Stock::find()->where('id = ' + $id)->joinWith('stockItems')->one();
         $items = new ActiveDataProvider([
             'query' => $model->getStockItems()->joinWith('item'),
         ]);

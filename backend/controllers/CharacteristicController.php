@@ -8,6 +8,7 @@ use common\models\Characteristic;
 use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 /**
  * CharacteristicController implements the CRUD actions for Characteristic model.
@@ -59,9 +60,15 @@ class CharacteristicController extends Controller
         $searchModel = new CharacteristicSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $categories = Characteristic::find()
+            ->select(['i.title'])
+            ->join('JOIN', 'item_cat i', 'characteristic.category_id = i.id')
+            ->distinct(true)
+            ->all();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'categories' => ArrayHelper::map($categories, 'title', 'title')
         ]);
     }
 
@@ -85,12 +92,13 @@ class CharacteristicController extends Controller
     public function actionCreate()
     {
         $model = new Characteristic();
-
+        $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->urlHelper->to(['characteristic/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'categories' => ArrayHelper::map($categories, 'id', 'title'),
             ]);
         }
     }
@@ -104,12 +112,13 @@ class CharacteristicController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->urlHelper->to(['characteristic/view', 'id' => $id]));
         } else {
             return $this->render('update', [
                 'model' => $model, 'count' => 'one',
+                'categories' => ArrayHelper::map($categories, 'id', 'title'),
             ]);
         }
     }

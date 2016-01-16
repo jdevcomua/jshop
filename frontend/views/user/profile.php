@@ -341,7 +341,7 @@ use common\models\Orders;
                                                                 src="http://yandex.st/share/share.js"
                                                                 charset="utf-8"></script>
                                                         <div class="yashare-auto-init" data-yasharel10n="ru"
-                                                             data-yasharelink="http://frontend.dev<?php echo Yii::$app->urlHelper->to(['user/wishlist', 'id' => '9']);?>"
+                                                             data-yasharelink="http://frontend.dev<?php echo Yii::$app->urlHelper->to(['user/wishlist', 'id' => $list->id]);?>"
                                                              data-yasharetype="none" data-yashareTitle="Мой список желаний"
                                                              data-yashareDescription='Хочу купить в "active"'
                                                              data-yashareImage="http://s017.radikal.ru/i421/1601/46/57881a3ba8e9.jpg"

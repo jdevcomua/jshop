@@ -2,10 +2,13 @@
 
 namespace frontend\controllers;
 
+use common\models\Item;
+use common\models\Kit;
 use common\models\Orders;
 use common\models\OrderItem;
 use Yii;
 use common\models\User;
+use common\components\CartAdd;
 
 class CartController extends Controller
 {
@@ -17,7 +20,12 @@ class CartController extends Controller
      */
     public function actionAjax($item_id, $count)
     {
-        Yii::$app->cart->addItem($item_id, $count);
+        Yii::$app->cart->addItem(Item::findOne($item_id), $count);
+    }
+
+    public function actionAjaxkit($item_id, $count)
+    {
+        Yii::$app->cart->addItem(Kit::findOne($item_id), $count);
     }
 
     public function actionOrder()
@@ -37,11 +45,9 @@ class CartController extends Controller
                 return $this->redirect(Yii::$app->urlHelper->to(['cart/order', 'id' => $model->id]));
             }
         }
-        $itemsCount = Yii::$app->cart->getItems();
-        $items = Yii::$app->cart->getItemsModels();
         $sum = Yii::$app->cart->getSum();
         $user = User::findOne(Yii::$app->user->id);
-        return $this->render('order', ['itemsCount' => $itemsCount, 'items' => $items,
+        return $this->render('order', ['models' => Yii::$app->cart->getModels(),
             'sum' => $sum, 'model' => $model, 'user' => $user]);
     }
 
@@ -51,22 +57,28 @@ class CartController extends Controller
      */
     public function actionIndex()
     {
-        $itemsCount = Yii::$app->cart->getItems();
-        $items = Yii::$app->cart->getItemsModels();
+        //Yii::$app->cart->addItem(Item::findOne(2));
+        //var_dump(Yii::$app->cart->getArray());
+        //die();
         $sum = Yii::$app->cart->getSum();
-        return $this->render('cart', ['itemsCount' => $itemsCount, 'items' => $items,
+        //Yii::$app->cart->resetItems();
+        //Yii::$app->cart->addItem(Kit::findOne(1));;
+        //var_dump(Yii::$app->cart->getModels());die();
+        return $this->render('cart', ['models' => Yii::$app->cart->getModels(),
             'sum' => $sum]);
     }
 
     /**
      * Delete item from cart using ajax
      * @param $item_id
-     * @param $count  - item to delete, if 0 - delete all
-     * @return array
+     * @param $cart_type
+     * @param int $count
+     * @return string
      */
-    public function actionDelete($item_id, $count = 0)
+    public function actionDelete($item_id, $cart_type, $count = 0)
     {
-        Yii::$app->cart->deleteItem($item_id, $count);
+        $cartAdd =
+        Yii::$app->cart->deleteItem($item_id, $cart_type, $count);
         if ($count == 0) {
             return '({"sumAll":' . Yii::$app->cart->getSum() . ', "countAll":' . Yii::$app->cart->getCount() . '})';
         } else {

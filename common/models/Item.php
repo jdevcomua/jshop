@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use common\components\CartAdd;
 
 /**
  * This is the model class for table "item".
@@ -18,15 +19,18 @@ use Yii;
  * @property ItemCat $category
  * @property OrderItem[] $orderItems
  * @property StockItem[] $stockItems
+ * @property KitItem[] $kitItems
  * @property Vote[] $votes
+ * @property Kit[] $kits
  */
-class Item extends Model
+class Item extends Model implements CartAdd
 {
     /**
      * @var UploadedFile
      */
     public $imageFile;
 
+    const CART_TYPE = 1;
 
     /**
      * @return array
@@ -34,6 +38,16 @@ class Item extends Model
     public function getTranslateColumns()
     {
         return ['title'];
+    }
+
+    public function hasKit()
+    {
+        return !empty($this->kitItems);
+    }
+
+    public function getKits()
+    {
+        return $this->hasMany(Kit::className(), ['id' => 'kit_id'])->viaTable('kit_item', ['item_id' => 'id']);
     }
 
     /**
@@ -236,4 +250,45 @@ class Item extends Model
     {
         return $this->hasMany(Vote::className(), ['item_id' => 'id'])->joinWith('user');
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKitItems()
+    {
+        return $this->hasMany(KitItem::className(), ['item_id' => 'id']);
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return self::CART_TYPE;
+    }
+
 }

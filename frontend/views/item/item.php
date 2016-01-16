@@ -201,6 +201,70 @@ use yii\helpers\Html;
                                             </div>
                                         </div>
                                         <!-- End. Collect information about Variants, for future processing -->
+                                        <!-- Wish List & Compare List buttons -->
+                                        <div class="frame-wish-compare-list f-s_0">
+                                            <div class="frame-btn-comp">
+                                                <!-- Start. Compare List button-->
+                                                <?php if (!Yii::$app->compare->existInList($item->id)) { ?>
+                                                    <div id="toCompare" class="btn-compare">
+                                                        <button class="toCompare" type="button" data-title="В список сравнений"
+                                                                onclick="addToCompareList(<?php echo $item->id; ?>)" >
+                                                            <span class="icon_compare"></span>
+                                                            <span class="text-el d_l">В список сравнений</span>
+                                                        </button>
+                                                    </div>
+                                                    <div id="inCompare" class="btn-compare btn-comp-in d_n">
+                                                        <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
+                                                           style="padding-top: 8px; padding-bottom: 9px;"><button class="toCompare" type="button" data-title="В список сравнений">
+                                                                <span class="icon_compare"></span>
+                                                                <span class="text-el d_l">В список сравнений</span>
+                                                            </button></a>
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="btn-compare btn-comp-in">
+                                                        <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
+                                                           style="padding-top: 8px; padding-bottom: 9px;"><button class="toCompare" type="button" data-title="В список сравнений">
+                                                                <span class="icon_compare"></span>
+                                                                <span class="text-el d_l">В список сравнений</span>
+                                                            </button></a>
+                                                    </div>
+                                                <?php } ?>
+                                                <!-- End. Compare List button -->
+                                            </div>
+                                            <!-- Start. Wish list buttons -->
+                                            <div class="frame-btn-wish js-variant-17906 js-variant d_i-b_">
+                                                <div class="btnWish btn-wish">
+                                                    <?php if ($item->inWishList()) { ?>
+                                                        <button id="inwish-<?php echo $item->id; ?>" class="inWishlist"
+                                                                data-title="В списке желаний">
+                                                            <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                                                <span class="icon_wish"
+                                                                      style="background-position: -160px 0;"></span>
+                                                                <span class="text-el d_l">В списке желания</span>
+                                                            </a>
+                                                        </button>
+                                                    <?php } else { ?>
+                                                        <button id="towish-<?php echo $item->id; ?>" class="toWishlist"
+                                                                onclick="
+                                                                    openWishWindow(<?php echo Yii::$app->user->isGuest ? 1 : 0; ?>, <?php echo $item->id; ?>);
+                                                                    "><span class="icon_wish"></span>
+                                                            <span class="text-el d_l">В желаемое</span>
+                                                        </button>
+                                                        <button id="inwish-<?php echo $item->id; ?>"
+                                                                class="inWishlist d_n"
+                                                                data-title="В списке желаний">
+                                                            <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                                                <span class="icon_wish"
+                                                                      style="background-position: -160px 0;"></span>
+                                                                <span class="text-el d_l">В списке желания</span>
+                                                            </a>
+                                                        </button>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                            <!-- End. wish list buttons -->
+                                        </div>
+                                        <!-- End. Wish List & Compare List buttons -->
                                     </div>
                                 </div>
                             </div>
@@ -211,6 +275,144 @@ use yii\helpers\Html;
                         </div>
                     </div>
 
+                    <?php if ($item->hasKit()) {
+                        ?>
+                    <div class="container">
+                        <section class="frame-complect horizontal-carousel">
+                            <div class="frame-title">
+                                <div class="title">Комплект по выгодной цене</div>
+                            </div>
+                            <div class="carousel-js-css items-carousel complects-carousel jcarousel-container jcarousel-container-horizontal iscarousel" style="position: relative; display: block;">
+                                <div class="content-carousel">
+                                    <div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative;">
+                                        <ul class="items-complect items jcarousel-list jcarousel-list-horizontal" style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: 0px; width: 1272px;">
+                                            <?php foreach ($item->kits as $kit) {
+
+                                                ?>
+                                            <li class="globalFrameProduct to-cart jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal" jcarouselindex="1" style="float: left; list-style: none; width: 596px;">
+                                                <ul class="items items-bask row-kits rowKits">
+
+                                                    <li clsss="f-s_0">
+                                                        <div class="frame-kit main-product">
+                                                            <div class="frame-photo-title">
+                                            <span class="photo-block">
+                                                <span class="helper"></span>
+                                                <img src="<?php echo $item->getImageUrl()?>">
+                                                                                          </span>
+                                                                <span class="title"><?php echo $item->getTitle()?></span>
+                                                            </div>
+                                                            <div class="description">
+                                                                <div class="frame-prices f-s_0">
+                                                                    <!-- Start. Product price-->
+                                                <span class="current-prices f-s_0">
+                                                    <span class="price-new">
+                                                        <span>
+                                                            <span class="price priceVariant"><?php echo $item->getCost();?></span>
+                                                        </span>
+                                                    </span>
+                                                                                                    </span>
+                                                                    <!-- End. Product price-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <?php foreach ($kit->kitItems as $kitItem) {
+                                                        /* @var $kitItem \common\models\KitItem */
+                                                        if($kitItem->item_id != $item->id) {
+                                                        ?>
+                                                    <li class="f-s_0">
+                                                        <div class="next-kit">+</div>
+                                                        <div class="frame-kit">
+                                                            <a href="http://active.imagecmsdemo.net/shop/product/perchatki-velosipednye-cyclotech-racer" class="frame-photo-title">
+                                            <span class="photo-block">
+                                                <span class="helper"></span>
+                                                <img src="<?php echo $kitItem->item->getImageUrl(); ?>">
+
+
+                                                                                            </span>
+                                                                <span class="title"><?php echo $kitItem->item->getTitle(); ?></span>
+                                                            </a>
+                                                            <div class="description">
+                                                                <div class="frame-prices f-s_0">
+                                                                    <!-- Check for discount-->
+                                                                    <!-- Start. Product price-->
+
+                                                                    <span class="current-prices f-s_0">
+                                                                        <span class="price-new">
+                                                                            <span>
+                                                                                <span class="price priceVariant"><?php echo $kitItem->item->getCost(); ?></span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </span>
+
+                                                                    <!-- End. Product price-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <?php } } ?>
+                                                </ul>
+                                                <!-- total -->
+                                                <div class="complect-gen-sum">
+                                                    <div class="gen-sum-kit">=</div>
+                                                    <div class="frame-gen-price-buy-complect">
+                                                        <div class="frame-prices f-s_0">
+                                        <span class="price-discount">
+                                            <span>
+<span class="price"><?php
+    $sum = 0.0;
+    foreach (\common\models\Kit::findOne(1)->kitItems as $kitItem) {
+        /* @var $kitItem \common\models\KitItem */
+        $sum = $kitItem->item->cost;
+    }
+    echo $sum;
+    ?></span>
+                                            </span>
+                                        </span>
+                                        <span class="current-prices f-s_0">
+                                            <span class="price-new">
+                                                <span>
+<span class="price"><?php echo $kit->cost; ?></span>
+                                                </span>
+                                            </span>
+                                                                                    </span>
+                                                        </div>
+                                                        <form method="POST" action="/shop/cart/addKit/16">
+                                                            <div class="btn-cart-p btn-cart d_n">
+                                                                <button type="button" data-id="16" class="btnBuy infoBut btnBuyKit">
+                                                                    <span class="icon_cleaner icon_cleaner_buy"></span>
+                                                                    <span class="text-el">В корзине</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="btn-buy-p btn-buy">
+                                                                <button type="button" data-id="16" onclick="addKit(1)" class="btnBuy infoBut btnBuyKit">
+                                                                    <span class="icon_cleaner icon_cleaner_buy"></span>
+                                                                    <span class="text-el">Купить</span>
+                                                                </button>
+                                                            </div>
+                                                            <input type="hidden" value="3df462ac0dcbe669ab4978ba1ef7cf1f" name="cms_token">                            </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /total -->
+                                            </li>
+                                            <?php } ?>
+                                        </ul></div>
+                                </div>
+                                <!-- Start. Buttons for next/prev kit-->
+                                <div class="group-button-carousel">
+
+
+                                    <button type="button" class="prev arrow jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal" disabled="disabled" style="display: inline-block;">
+                                        <span class="icon_arrow_p"></span>
+                                    </button><button type="button" class="next arrow jcarousel-next jcarousel-next-horizontal" style="display: inline-block;">
+                                        <span class="icon_arrow_n"></span>
+                                    </button></div>
+                                <!-- Start. Buttons for next/prev kit-->
+                            </div>
+                        </section>
+                    </div>
+                    <?php } ?>
                     <!-- Start. Tabs block-->
                     <div class="f-s_0">
                         <ul class="tabs tabs-data tabs-product">
@@ -254,9 +456,9 @@ use yii\helpers\Html;
                                                 <tbody>
                                                 <?php foreach ($item->getCharacteristicItems()->all() as $value) {
                                                     /* @var $value common\models\CharacteristicItem */
-                                                    if (!empty($value->value)) {
-                                                        echo "<tr><td>" . $value->getCharacteristic()->one()['title'] . "</td>";
-                                                        echo "<td>" . $value->value . "</td></tr>";
+                                                    if (!empty($item->value)) {
+                                                        echo "<tr><td>" . $item->getCharacteristic()->one()['title'] . "</td>";
+                                                        echo "<td>" . $item->value . "</td></tr>";
                                                     }
                                                 }
                                                 //var_dump($item->getCategory()->one()['title']);

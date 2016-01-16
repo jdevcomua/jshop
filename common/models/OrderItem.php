@@ -12,6 +12,7 @@ use Yii;
  * @property integer $order_id
  * @property integer $count
  * @property double $sum
+ * @property integer $type
  *
  * @property Item $item
  * @property Orders $order
@@ -41,7 +42,8 @@ class OrderItem extends Model
     {
         return [
             [['item_id', 'order_id', 'count'], 'required'],
-            [['item_id', 'order_id', 'count'], 'integer'],
+            [['item_id', 'order_id', 'count', 'type'], 'integer'],
+            ['type', 'default', 'value' => 1],
             [['sum'], 'number']
         ];
     }

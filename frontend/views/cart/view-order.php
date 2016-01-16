@@ -113,18 +113,19 @@ use Yii;
                                 <?php
                                 foreach ($orderItems as $orderItem) {
                                     /* @var $orderItem OrderItem */
+                                    $item = Yii::$app->cart->creator($orderItem->item_id, $orderItem->type);
                                     ?>
 
                                     <tr class="items items-bask items-order cart-product">
                                         <td class="frame-items">
                                             <!-- Start. Render Ordered Products -->
-                                            <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $orderItem->item->id]) ?>"
+                                            <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $orderItem->item_id]) ?>"
                                                class="frame-photo-title">
                                         <span class="photo-block">
                                             <span class="helper"></span>
-                                            <img src="<?php echo $orderItem->item->getImageUrl() ?>" alt="">
+                                            <img src="<?php echo $item->getImageUrl() ?>" alt="">
                                         </span>
-                                                <span class="title"><?php echo $orderItem->item->title ?></span></a>
+                                                <span class="title"><?php echo $item->title ?></span></a>
                                         </td>
                                         <td><span class="plus-minus"><?php echo $orderItem->count ?></span><span
                                                 class="text-el"> шт.</span></td>

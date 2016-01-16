@@ -107,7 +107,9 @@ use Yii;
                             <table class="table-order table-order-view">
                                 <tbody>
                                 <?php
-                                foreach ($items as $item) {
+                                foreach ($models as $model) {
+                                    /* @var $model \common\components\CartElement*/
+                                    $item = $model->model;
                                     /* @var $item Item */
                                     ?>
                                     <!-- Start. For single product -->
@@ -123,7 +125,7 @@ use Yii;
                                         <td>
                                             <div class="frame-frame-count">
                                                 <div class="frame-count">
-                                                    <span class="plus-minus"><?php echo $itemsCount[$item->id] ?></span><span
+                                                    <span class="plus-minus"><?php echo $model->count ?></span><span
                                                         class="text-el"> шт.</span>
                                                 </div>
                                             </div>
@@ -133,7 +135,7 @@ use Yii;
                                             <div class="frame-prices f-s_0"><span class="current-prices f-s_0">
                                         <span class="price-new">
                                     <span><span
-                                            class="price"><?php echo Yii::$app->cart->getSumForItem($item->id); ?></span> </span></span></span>
+                                            class="price"><?php //echo Yii::$app->cart->getSumForItem($item->id); ?></span> </span></span></span>
                                             </div>
                                         </td>
                                     </tr>

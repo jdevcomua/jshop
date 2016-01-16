@@ -2,6 +2,7 @@
 
 namespace common\components;
 
+use common\models\Kit;
 use yii\base\Component;
 use common\models\Item;
 use common\models\OrderItem;
@@ -30,40 +31,45 @@ class Cart extends Component
     public function getCount()
     {
         $sum = 0;
-        foreach ($this->getItems() as $item) {
-            $sum += $item;
+        foreach ($this->getArray() as $array) {
+            $sum += $array['count'];
         }
         return $sum;
     }
 
     /**
-     * @param $item_id
+     * @param CartAdd $item
      * @param int $count items to add
      */
-    public function addItem($item_id, $count = 1)
+    public function addItem(CartAdd $item, $count = 1)
     {
-        $array = $this->getItems();
-        if (isset($array[$item_id])) {
-            $array[$item_id] = $array[$item_id] + $count;
+        $array = $this->getArray();
+        if ($this->checkItem($item)) {
+            $key = $this->getSubArrayKey($item);
+            $array[$key]['count']++;
         } else {
-            $array[$item_id] = $count;
+            $array[] = ['id' => $item->getId(),
+                'type' => $item->getType(),
+                'count' => $count];
         }
         Yii::$app->session['cart'] = $array;
     }
 
     /**
-     * Delete item from cart if count is not set and subtract count if it set
      * @param $item_id
-     * @param int $count items to delete. If 0 - delete all
+     * @param $type
+     * @param int $count
      */
-    public function deleteItem($item_id, $count = 0)
+    public function deleteItem($item_id, $type, $count = 0)
     {
-        $array = $this->getItems();
-        if (isset($array[$item_id])) {
+        $item = $this->creator($item_id, $type);
+        $array = $this->getArray();
+        if ($this->checkItem($item)) {
+            $key = $this->getSubArrayKey($item);
             if ($count > 0) {
-                $array[$item_id] = $array[$item_id] - $count;
+                $array[$key] = $array[$key] - $count;
             } else {
-                unset($array[$item_id]);
+                unset($array[$key]);
             }
         }
         Yii::$app->session['cart'] = $array;
@@ -74,27 +80,53 @@ class Cart extends Component
      */
     public function resetItems()
     {
-        Yii::$app->session->remove('cart');
+        Yii::$app->session->set('cart', []);
     }
 
     /**
      * @return array item_id => count_items_in_cart
      */
-    public function getItems()
+    public function getArray()
     {
         return Yii::$app->session['cart'];
     }
 
     /**
-     * @return array|\yii\db\ActiveRecord[]
+     * @param CartAdd $item
+     * @return int|null|string
      */
-    public function getItemsModels()
+    public function getSubArrayKey(CartAdd $item)
     {
-        $items = $this->getItems();
-        if (empty($items)) {
-            return [];
+        foreach ($this->getArray() as $key => $array) {
+            if (($array['type'] == $item->getType()) && ($array['id'] == $item->getId())) {
+                return $key;
+            }
+        }
+        return null;
+    }
+
+    public function getModels()
+    {
+        if (!$this->isEmpty()) {
+            $models = [];
+            foreach ($this->getArray() as $key => $array) {
+                $element = new CartElement();
+                $element->model = $this->creator($array['id'], $array['type']);
+                $element->count = $array['count'];
+                $models[] = $element;
+            }
+            return $models;
         } else {
-            return Item::find()->filterWhere(['in', 'id', array_keys($items)])->all();
+            return [];
+        }
+    }
+
+    public function creator($id, $type)
+    {
+        if ($type == Item::CART_TYPE) {
+            return Item::findOne($id);
+        } elseif ($type == Kit::CART_TYPE) {
+            return Kit::findOne($id);
         }
     }
 
@@ -104,11 +136,10 @@ class Cart extends Component
     public function getSum()
     {
         $sum = 0.0;
-        $itemsCount = $this->getItems();
-        $items = $this->getItemsModels();
-        foreach ($items as $item) {
-            /* @var $item Item*/
-            $sum += ($item->getNewPrice()*$itemsCount[$item->id]);
+        $models = $this->getModels();
+        foreach ($models as $model) {
+            /* @var $model CartElement*/
+            $sum += ($model->model->getNewPrice()*$model->count);
         }
         return $sum;
     }
@@ -131,9 +162,14 @@ class Cart extends Component
      * @param $item_id
      * @return int
      */
-    public function getCountForItem($item_id)
+    public function getCountForItem($item_id, $type)
     {
-        $cart = $this->getItems();
+        $cart = $this->getArray();
+        foreach ($cart as $array) {
+            if (($array['type'] == $type) && ($array['id'] == $item_id)) {
+                return $array['count'];
+            }
+        }
         if (isset($cart[$item_id])){
             return $cart[$item_id];
         } else {
@@ -146,26 +182,46 @@ class Cart extends Component
      */
     public function saveOrder($order_id)
     {
-        $items = $this->getItems();
+        $items = $this->getArray();
         if (!empty($items)) {
-            foreach ($items as $item_id => $count) {
+            foreach ($items as $array) {
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $order_id;
-                $orderItem->item_id = $item_id;
-                $orderItem->count = $count;
-                $orderItem->sum = Item::findOne($item_id)->getNewPrice()*$count;
+                $orderItem->item_id = $array['id'];
+                $orderItem->count = $array['count'];
+                $orderItem->type = $array['type'];
+                if ($array['type'] == Item::CART_TYPE) {
+                    $orderItem->sum = Item::findOne($array['id'])->getNewPrice() * $array['count'];
+                } elseif ($array['type'] == Kit::CART_TYPE) {
+                    $orderItem->sum = Kit::findOne($array['id'])->getNewPrice() * $array['count'];
+                }
                 $orderItem->save();
             }
         }
     }
 
     /**
-     * @param $item_id
+     * @param CartAdd $item
      * @return bool
      */
+    public function checkItem(CartAdd $item)
+    {
+        foreach ($this->getArray() as $array) {
+            if (($array['type'] == $item->getType()) && ($array['id'] == $item->getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function checkItemInCart($item_id)
     {
-        return array_key_exists($item_id, $this->getItems());
+        foreach ($this->getArray() as $array) {
+            if (($array['type'] == 1) && ($array['id'] == $item_id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function isEmpty()

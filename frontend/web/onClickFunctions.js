@@ -81,6 +81,21 @@ function addToCart(id) {
         }
     });
 }
+function addKit(id) {
+    $.ajax({
+        url: '/cart/ajaxkit',
+        data: {count: 1, item_id: id},
+        dataType: 'text',
+        success: function (data) {
+            var count = +$('#countItems ').html();
+            if (count == 0) {
+                $('#cartEmpty').toggleClass('d_n');
+                $('#cartFull').toggleClass('d_n');
+            }
+            $('#countItems ').html(+count + 1);
+        }
+    });
+}
 function openFilterContent($thisItem) {
     $thisItem.parent('div').find('.filters-content').toggleClass('d_n');
 }
@@ -99,11 +114,11 @@ function addToCartFromItemPage(id) {
         }
     });
 }
-function deleteFromCart(id, $thisitem) {
+function deleteFromCart(id, cart_type, $thisitem) {
     $.ajax({
         url: 'cart/delete',
         async: true,
-        data: {item_id: id},
+        data: {item_id: id, cart_type: cart_type},
         dataType: 'text',
         success: function (data) {
             $thisitem.parent().parent().remove();

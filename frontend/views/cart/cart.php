@@ -3,11 +3,6 @@
 use common\models\Item;
 use Yii;
 
-echo '<script>';
-echo 'var array =';
-echo json_encode($itemsCount);
-echo ';';
-echo '</script>';
 ?>
 
 <div class="content">
@@ -75,13 +70,14 @@ echo '</script>';
                         <div class="inside-padd">
                             <table class="table-order">
                                 <tbody>
-                                <?php foreach ($items as $item) {
-                                    /* @var $item Item */
+                                <?php foreach ($models as $model) {
+                                    $item = $model->model;
+                                    /* @var $item \common\components\CartAdd */
                                     ?>
 
                                     <tr data-id="17917" class="items items-bask cart-product">
                                         <td class="frame-remove-bask-btn">
-                                            <button type="button" class="icon_times_cart" onclick="deleteFromCart(<?php echo $item->id; ?>, $(this))"></button>
+                                            <button type="button" class="icon_times_cart" onclick="deleteFromCart(<?php echo $item->getId(); ?>, <?php echo $item->getType(); ?>, $(this))"></button>
                                         </td>
                                         <td class="frame-items">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]) ?>"
@@ -98,7 +94,7 @@ echo '</script>';
                                         <td class="frame-count frameCount" style="width: 80px;">
                                             <div class="number js-number">
                                                 <input type="number" step="1" min="0"
-                                                       value="<?php echo $itemsCount[$item->id]; ?>"
+                                                       value="<?php echo $model->count; ?>"
                                                        class="plusMinus plus-minus"
                                                        id="inputChange-<?php echo $item->id ?>"
                                                        style="width:50px; border: 1px solid #dfdfdf;padding: 0;height: 31px;"
@@ -112,7 +108,7 @@ echo '</script>';
                                                                                             class="current-prices f-s_0">
                                                 <span class="price-new">
                                                     <span>
-                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->getNewPrice() * $itemsCount[$item->id] ?></span>
+                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->getNewPrice() * $model->count ?></span>
                                                     </span>
                                                 </span>
                                                                                             </span>

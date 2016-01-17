@@ -49,6 +49,7 @@ $config = [
                 '<language:(ru|en)>/wishlist'=>'user/wishlist',
                 '<language:(ru|en)>/user/wishlist'=>'user/wishlist',
                 '<language:(ru|en)>/user/profile'=>'user/profile',
+                '<language:(ru|en)>/user/vk-auth'=>'user/vk-auth',
                 '<language:(ru|en)>/compare'=>'compare/compare',
                 '<language:(ru|en)>/compare/compare'=>'compare/compare',
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',

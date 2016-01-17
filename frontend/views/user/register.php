@@ -22,11 +22,11 @@ use yii\bootstrap\ActiveForm;
             <div class="frame-register">
                 <?php $form = ActiveForm::begin(); ?>
                 <div class="horizontal-form">
-                    <?php echo $form->field($model, 'username')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                    <?php echo $form->field($model, 'username')->input('text', ['style' => 'width:250px;', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
 
-                    <?php echo $form->field($model, 'password')->passwordInput(['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                    <?php echo $form->field($model, 'password')->passwordInput(['style' => 'width:250px;', 'pattern' => '.{4,25}', 'title' => 'От 4 до 25 символов', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
 
-                    <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                    <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
 
                     <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
 

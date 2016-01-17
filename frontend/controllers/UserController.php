@@ -4,11 +4,15 @@ namespace frontend\controllers;
 
 use common\models\User;
 use common\models\WishList;
+use VK\VK;
 use Yii;
 use common\models\LoginForm;
 
 class UserController extends Controller
 {
+
+    const VK_APP_ID = '5231107';
+    const VK_SECRET_KEY = 'bzvW6ULy2hUZhf7Nn48C';
 
     /**
      * View page of user
@@ -27,6 +31,31 @@ class UserController extends Controller
             $model->save();
         }
         return $this->render('profile', ['model' => $model, 'model1' => $model,]);
+    }
+
+    public function actionVkAuth()
+    {
+        $vk = new VK(self::VK_APP_ID, self::VK_SECRET_KEY);
+        if (empty(Yii::$app->request->get('code'))) {
+            return $this->redirect($vk->getAuthorizeUrl('email', 'http://frontend.dev/user/vk-auth'));
+        }
+        $token = $vk->getAccessToken(Yii::$app->request->get('code'), 'http://frontend.dev/user/vk-auth');
+        $user = User::find()->andFilterWhere(['vk_id' => $token['user_id']])->one();
+        if (!empty($user)) {
+            Yii::$app->user->login($user, 3600*24);
+        } else {
+            $user = new User();
+            $user->vk_id = $token['user_id'];
+            $user->mail = $token['email'];
+            $user_info = $vk->api('users.get', array(
+                'user_ids' => $token['user_id']
+            ));
+            $user->name = $user_info['response'][0]['first_name'];
+            $user->surname = $user_info['response'][0]['last_name'];
+            $user->save();
+            Yii::$app->user->login($user, 3600*24);
+        }
+        return $this->goBack();
     }
 
     public function actionLogin()

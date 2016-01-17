@@ -146,6 +146,13 @@ use common\components\CategoriesView;
                                             <li class="btn-enter-register">
                                                 <span class="text-el">
                                                      <?php
+                                                     if (!Yii::$app->user->isGuest) {
+                                                         if (empty(Yii::$app->user->identity->vk_id)) {
+                                                             $username = Yii::$app->user->identity->username;
+                                                         } else {
+                                                             $username = Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->surname;
+                                                         }
+                                                     }
                                                      echo Nav::widget([
                                                          'options' => ['class' => 'navbar-nav navbar-right'],
                                                          'items' => [
@@ -153,7 +160,7 @@ use common\components\CategoriesView;
                                                              Yii::$app->user->isGuest ?
                                                                  ['label' => \Yii::t('app', 'Войти'), 'url' => Yii::$app->urlHelper->to(['login'])] :
                                                                  [
-                                                                     'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                                                     'label' => 'Logout (' . $username . ')',
                                                                      'url' => Yii::$app->urlHelper->to(['logout']),
                                                                      'linkOptions' => ['data-method' => 'post']
                                                                  ],

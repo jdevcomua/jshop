@@ -16,6 +16,7 @@ use Yii;
  * @property string $surname
  * @property string $phone
  * @property string $address
+ * @property integer $vk_id
  *
  * @property Orders[] $orders
  * @property Vote[] $votes
@@ -147,11 +148,11 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'mail', 'password'], 'required'],
-            [['username', 'mail'], 'unique'],
+            //[['username', 'mail'/*, 'password'*/], 'required'],
+            [['username', 'mail', 'vk_id'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
             [['username'], 'string', 'length' => [4, 25]],
-            [['password'], 'string', 'length' => [4, 25]],
+            //[['password'], 'string', 'length' => [4, 25]],
             [['name', 'surname', 'address', 'phone'], 'string'],
             [['mail'], 'email']
 

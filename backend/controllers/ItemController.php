@@ -141,7 +141,7 @@ class ItemController extends Controller
         }
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
-    
+
     /**
      * Updates an existing Item model.
      * If update is successful, the browser will be redirected to the 'view' page.

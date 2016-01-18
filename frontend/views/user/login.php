@@ -62,8 +62,9 @@ use Yii;
                 <?php ActiveForm::end(); ?>
             </div>
 
-            <div style="width:30%;float:left;">
-                <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>"><img src="http://www.vkintegrator.com/assets//images/auth/index/vk_login_button.png"></a>
+            <div style="width:40%;float:left;">Войти как пользователь: <br>
+                <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>"><img src="http://frontend.dev/img/vk.png"></a>
+                <a href="<?php echo Yii::$app->urlHelper->to(['user/facebook-auth']); ?>"><img src="http://frontend.dev/img/fb.png"></a>
             </div>
         </div>
 

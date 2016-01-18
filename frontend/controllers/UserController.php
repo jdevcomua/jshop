@@ -7,12 +7,17 @@ use common\models\WishList;
 use VK\VK;
 use Yii;
 use common\models\LoginForm;
+use Facebook\Facebook;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
 
 class UserController extends Controller
 {
 
     const VK_APP_ID = '5231107';
     const VK_SECRET_KEY = 'bzvW6ULy2hUZhf7Nn48C';
+    const FB_APP_ID = '1683328171910358';
+    const FB_SECRET_KEY = 'd988402856a3e844769281d7f54db104';
 
     /**
      * View page of user
@@ -41,9 +46,7 @@ class UserController extends Controller
         }
         $token = $vk->getAccessToken(Yii::$app->request->get('code'), 'http://frontend.dev/user/vk-auth');
         $user = User::find()->andFilterWhere(['vk_id' => $token['user_id']])->one();
-        if (!empty($user)) {
-            Yii::$app->user->login($user, $token['expires_in']);
-        } else {
+        if (empty($user)) {
             $user = new User();
             $user->vk_id = $token['user_id'];
             $user->mail = $token['email'];
@@ -53,8 +56,39 @@ class UserController extends Controller
             $user->name = $user_info['response'][0]['first_name'];
             $user->surname = $user_info['response'][0]['last_name'];
             $user->save();
-            Yii::$app->user->login($user, $token['expires_in']);
         }
+        Yii::$app->user->login($user, $token['expires_in']);
+        return $this->goBack();
+    }
+
+    public function actionFacebookAuth()
+    {
+        if (!Yii::$app->session->isActive) {
+            Yii::$app->session->open();
+        }
+        $fb = new Facebook([
+            'app_id' => self::FB_APP_ID,
+            'app_secret' => self::FB_SECRET_KEY,
+            'default_graph_version' => 'v2.5',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        try {
+            $accessToken = $helper->getAccessToken();
+            $userNode = $fb->get('/me', $accessToken)->getGraphUser();
+        } catch(FacebookResponseException $e) {
+            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['email']));
+        } catch(FacebookSDKException $e) {
+            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['email']));
+        }
+        $user = User::find()->andFilterWhere(['vk_id' => $userNode['id']])->one();
+        if (empty($user)) {
+            $user = new User();
+            $user->fb_id = $userNode['id'];
+            $user->name = explode(' ', $userNode['name'])[0];
+            $user->surname = explode(' ', $userNode['name'])[2];
+            $user->save();
+        }
+        Yii::$app->user->login($user, 3600*24);
         return $this->goBack();
     }
 

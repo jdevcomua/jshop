@@ -147,10 +147,12 @@ use common\components\CategoriesView;
                                                 <span class="text-el">
                                                      <?php
                                                      if (!Yii::$app->user->isGuest) {
-                                                         if (empty(Yii::$app->user->identity->vk_id)) {
-                                                             $username = Yii::$app->user->identity->username;
-                                                         } else {
+                                                         if (!empty(Yii::$app->user->identity->vk_id)) {
                                                              $username = Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->surname;
+                                                         } elseif (!empty(Yii::$app->user->identity->fb_id)){
+                                                             $username = Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->surname;
+                                                         } else {
+                                                             $username = Yii::$app->user->identity->username;
                                                          }
                                                      }
                                                      echo Nav::widget([

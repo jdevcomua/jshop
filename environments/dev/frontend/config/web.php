@@ -19,6 +19,9 @@ $config = [
         'cart' => [
             'class' => 'common\components\Cart',
         ],
+        'compare' => [
+            'class' => 'common\components\Compare',
+        ],
         'urlHelper' => [
             'class' => 'common\components\UrlHelper',
         ],
@@ -43,6 +46,12 @@ $config = [
                 '<language:(ru|en)>/logout'=>'user/logout',
                 '<language:(ru|en)>/register'=>'user/register',
                 '<language:(ru|en)>/profile'=>'user/profile',
+                '<language:(ru|en)>/wishlist'=>'user/wishlist',
+                '<language:(ru|en)>/user/wishlist'=>'user/wishlist',
+                '<language:(ru|en)>/user/profile'=>'user/profile',
+                '<language:(ru|en)>/user/vk-auth'=>'user/vk-auth',
+                '<language:(ru|en)>/compare'=>'compare/compare',
+                '<language:(ru|en)>/compare/compare'=>'compare/compare',
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],
@@ -71,7 +80,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

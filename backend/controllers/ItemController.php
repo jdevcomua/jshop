@@ -82,24 +82,18 @@ class ItemController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if (isset($model->imageFile)) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->upload();
+                $model->image = time() . '.' . $model->imageFile->extension;
+                $model->image_storage = Yii::$app->params['imageStorage'];
             }
             if ($model->save()) {
-                if (isset($model->imageFile)) {
-                    $filename = $model->imageFile->baseName;
-                    /*if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
-                        $filename = $filename . rand(1, 20);
-                    }*/
-                    $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
-                }
+                $model->upload();
                 return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
             }
         }
-            return $this->render('create', [
-                'model' => $model,
-                'categories' => ArrayHelper::map($categories, 'id', 'title'),
-            ]);
-
+        return $this->render('create', [
+            'model' => $model,
+            'categories' => ArrayHelper::map($categories, 'id', 'title'),
+        ]);
     }
 
     /**
@@ -147,7 +141,7 @@ class ItemController extends Controller
         }
         return $this->render('characteristics', ['characteristics' => $characteristics]);
     }
-
+    
     /**
      * Updates an existing Item model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -162,21 +156,17 @@ class ItemController extends Controller
             if (isset($model->imageFile)) {
                 if (isset($model->image)) {
                     $lastImage = $model->image;
+                    $lastStorage = $model->image_storage;
                 }
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->upload();
+                $model->image = time() . '.' . $model->imageFile->extension;
+                $model->image_storage = Yii::$app->params['imageStorage'];
             }
             if ($model->save()) {
                 if (isset($model->imageFile)) {
-                    $filename = $model->imageFile->baseName;
-                    if (file_exists(Item::getPath() . $model->imageFile->baseName . '.' . $model->imageFile->extension)) {
-                        $filename = $filename . rand(1, 20);
-                    }
-                    $model->imageFile->saveAs(Item::getPath() . $filename . '.' . $model->imageFile->extension);
-                    if (isset($lastImage)) {
-                        if (file_exists(Item::getPath() . $lastImage)) {
-                            unlink(Item::getPath() . $lastImage);
-                        }
+                    $model->upload();
+                    if (isset($lastImage) && isset($lastStorage)) {
+                        $model->deleteImage($lastImage, $lastStorage);
                     }
                 }
             }
@@ -199,9 +189,7 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->image != '') {
-            if (file_exists(Item::getPath() . $model->image)) {
-                unlink(Item::getPath() . $model->image);
-            }
+            $model->deleteImage($model->image, $model->image_storage);
         }
         $model->delete();
         return $this->redirect(Yii::$app->urlHelper->to(['item/index']));

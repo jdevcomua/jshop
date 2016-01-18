@@ -85,6 +85,14 @@ $config = [
                 '<language:(ru|en)>/order-item/update'=>'order-item/update',
                 '<language:(ru|en)>/order-item/create'=>'order-item/create',
                 '<language:(ru|en)>/order-item/view'=>'order-item/view',
+
+                '<language:(ru|en)>/stock'=>'stock/index',
+                '<language:(ru|en)>/stock/index'=>'stock/index',
+                '<language:(ru|en)>/stock/group'=>'stock/group',
+                '<language:(ru|en)>/stock/update'=>'stock/update',
+                '<language:(ru|en)>/stock/create'=>'stock/create',
+                '<language:(ru|en)>/stock/view'=>'stock/view',
+
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],

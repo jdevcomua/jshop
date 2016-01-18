@@ -42,7 +42,7 @@ class UserController extends Controller
         $token = $vk->getAccessToken(Yii::$app->request->get('code'), 'http://frontend.dev/user/vk-auth');
         $user = User::find()->andFilterWhere(['vk_id' => $token['user_id']])->one();
         if (!empty($user)) {
-            Yii::$app->user->login($user, 3600*24);
+            Yii::$app->user->login($user, $token['expires_in']);
         } else {
             $user = new User();
             $user->vk_id = $token['user_id'];
@@ -53,7 +53,7 @@ class UserController extends Controller
             $user->name = $user_info['response'][0]['first_name'];
             $user->surname = $user_info['response'][0]['last_name'];
             $user->save();
-            Yii::$app->user->login($user, 3600*24);
+            Yii::$app->user->login($user, $token['expires_in']);
         }
         return $this->goBack();
     }

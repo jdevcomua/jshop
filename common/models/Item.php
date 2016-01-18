@@ -4,6 +4,9 @@ namespace common\models;
 
 use Yii;
 use common\components\CartAdd;
+use yii\web\UploadedFile;
+use Aws\S3;
+use Aws\Sdk;
 
 /**
  * This is the model class for table "item".
@@ -14,6 +17,7 @@ use common\components\CartAdd;
  * @property double $cost
  * @property string $image
  * @property integer $count_of_views
+ * @property string $image_storage;
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -31,6 +35,11 @@ class Item extends Model implements CartAdd
     public $imageFile;
 
     const CART_TYPE = 1;
+    const MY_SERVER = 'my_server';
+    const AMAZON = 'amazon';
+    const AMAZON_KEY = 'AKIAIR2NVD2HK4P7BW4Q';
+    const AMAZON_SECRET = '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';
+    const AMAZON_BUCKET = 'umo4ka';
 
     /**
      * @return array
@@ -79,7 +88,11 @@ class Item extends Model implements CartAdd
      */
     public function getImageUrl()
     {
-        return 'http://frontend.dev/img/' . $this->image;
+        if ($this->image_storage == self::MY_SERVER) {
+            return 'http://frontend.dev/img/' . $this->image;
+        } elseif ($this->image_storage == self::AMAZON) {
+            return 'https://s3.eu-central-1.amazonaws.com/' . self::AMAZON_BUCKET . '/' . $this->image;
+        }
     }
 
     /**
@@ -94,6 +107,7 @@ class Item extends Model implements CartAdd
             ['count_of_views', 'default', 'value' => 0],
             [['title'], 'string'],
             [['image'], 'string'],
+            [['image_storage'], 'string'],
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
@@ -104,10 +118,56 @@ class Item extends Model implements CartAdd
     public function upload()
     {
         if (isset($this->imageFile)) {
-            $this->setAttribute('image', $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
+            if (Yii::$app->params['imageStorage'] == self::AMAZON) {
+                $this->uploadToAmazon();
+            } elseif (Yii::$app->params['imageStorage'] == self::MY_SERVER) {
+                $fileName = time() . '.' . $this->imageFile->extension;
+                $this->imageFile->saveAs(Item::getPath() . $fileName);
+            }
+        }
+    }
+
+    public function uploadToAmazon()
+    {
+        $client = $this->createAmazonClient();
+        $key = time() . '.' . $this->imageFile->extension;
+        $client->putObject([
+            'Bucket' => self::AMAZON_BUCKET,
+            'Key'    => $key,
+            'Body'   => fopen($this->imageFile->tempName, 'r'),
+            'ACL'    => 'public-read',
+        ]);
+    }
+
+    /**
+     * @return S3\S3Client
+     */
+    public function createAmazonClient()
+    {
+        $sharedConfig = [
+            'region'  => 'eu-central-1',
+            'credentials' => [
+                'key' => self::AMAZON_KEY,
+                'secret' => self::AMAZON_SECRET
+            ],
+            'version' => 'latest'
+        ];
+        $sdk = new Sdk($sharedConfig);
+        return $sdk->createS3();
+    }
+
+    public function deleteImage($lastImage, $lastStorage)
+    {
+        if ($lastStorage == self::AMAZON) {
+            $client = $this->createAmazonClient();
+            $client->deleteObject([
+                'Bucket' => self::AMAZON_BUCKET,
+                'Key'    => $lastImage
+            ]);
+        } elseif ($lastStorage == self::MY_SERVER) {
+            if (file_exists(Item::getPath() . $lastImage)) {
+                unlink(Item::getPath() . $lastImage);
+            }
         }
     }
 

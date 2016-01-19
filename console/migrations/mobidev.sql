@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `cost` double NOT NULL,
   `image` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`),
+  KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
 
 --

@@ -9,7 +9,7 @@ class m151230_221421_user_new_column extends Migration
     {
         $this->addColumn('user', 'phone', 'varchar(25)');
         $this->addColumn('user', 'password', 'varchar(25)');
-        $this->addColumn('user', 'name', 'varchar(25)');
+        $this->addColumn('user', 'username', 'varchar(25)');
         $this->addColumn('user', 'surname', 'varchar(25)');
         $this->addColumn('user', 'address', 'varchar(100)');
     }

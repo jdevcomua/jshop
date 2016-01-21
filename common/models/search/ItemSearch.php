@@ -22,7 +22,7 @@ class ItemSearch extends Item
     {
         return [
             [['id', 'category_id', 'count_of_views'], 'integer'],
-            [['title', 'image'], 'safe'],
+            [['title'], 'safe'],
             [['cost'], 'number'],
             [['categoryTitle'], 'safe']
         ];

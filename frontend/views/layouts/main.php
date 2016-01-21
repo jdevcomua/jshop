@@ -50,6 +50,10 @@ use common\components\CategoriesView;
     <link data-arr="8" rel="stylesheet" type="text/css"
           href="http://active.imagecmsdemo.net/templates/active/star_rating/css/style.css">
     <script type="text/javascript" src="//frontend.dev/onClickFunctions.js"></script>
+    <script src="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Owl Carousel Assets -->
+    <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.theme.css" rel="stylesheet">
 </head>
 
 <body class="isChrome shop_category notTouch">

@@ -88,7 +88,7 @@ use common\models\Characteristic;
                                                         <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]); ?>"
                                                            class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
-                                        src="<?php echo $item->getImageUrl(); ?>"></span>
+                                        src="<?php echo array_shift($item->getImageUrl()); ?>"></span>
                                                             <span class="title"><?php echo $item->title; ?></span></a>
                                                         <div class="description">
                                                             <!-- Start. Star rating -->

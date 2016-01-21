@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Image;
 use common\models\ItemCat;
 use common\models\search\ItemSearch;
 use yii\base\Model;
@@ -48,7 +49,9 @@ class ItemController extends Controller
     public function actionDel()
     {
         foreach (Yii::$app->request->post()['id'] as $id) {
-            $this->findModel($id)->delete();
+            $model = $this->findModel($id);
+            $model->deleteImages();
+            $model->delete();
         }
         return $this->redirect(['index']);
     }
@@ -70,6 +73,11 @@ class ItemController extends Controller
         ]);
     }
 
+    public function actionDeleteImage($id)
+    {
+        Image::findOne($id)->delete();
+    }
+
     /**
      * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -80,11 +88,6 @@ class ItemController extends Controller
         $model = new Item();
         $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post())) {
-            if (isset($model->imageFile)) {
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->image = time() . '.' . $model->imageFile->extension;
-                $model->image_storage = Yii::$app->params['imageStorage'];
-            }
             if ($model->save()) {
                 $model->upload();
                 return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
@@ -153,22 +156,9 @@ class ItemController extends Controller
         $model = $this->findModel($id);
         $categories = ItemCat::find()->distinct(true)->all();
         if ($model->load(Yii::$app->request->post())) {
-            if (isset($model->imageFile)) {
-                if (isset($model->image)) {
-                    $lastImage = $model->image;
-                    $lastStorage = $model->image_storage;
-                }
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->image = time() . '.' . $model->imageFile->extension;
-                $model->image_storage = Yii::$app->params['imageStorage'];
-            }
             if ($model->save()) {
-                if (isset($model->imageFile)) {
-                    $model->upload();
-                    if (isset($lastImage) && isset($lastStorage)) {
-                        $model->deleteImage($lastImage, $lastStorage);
-                    }
-                }
+                $model->upload();
+                return $this->redirect(Yii::$app->urlHelper->to(['item/updatecharacteristics', 'id' => $model->id]));
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         } else {
@@ -188,9 +178,7 @@ class ItemController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->image != '') {
-            $model->deleteImage($model->image, $model->image_storage);
-        }
+        $model->deleteImages();
         $model->delete();
         return $this->redirect(Yii::$app->urlHelper->to(['item/index']));
     }

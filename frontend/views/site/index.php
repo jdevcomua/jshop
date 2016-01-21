@@ -65,7 +65,7 @@ use yii\widgets\ActiveForm;
                             <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $value->id]); ?>"
                                class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
-                                        src="<?php echo $value->getImageUrl(); ?>"></span>
+                                        src="<?php echo array_shift($value->getImageUrl()); ?>"></span>
                                 <span class="title"><?php echo $value['title']; ?></span></a>
                             <div class="description">
                                             <!-- Start. Star rating -->

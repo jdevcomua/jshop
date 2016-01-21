@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-select2": "*",
         "vladkens/vk": "*",
         "aws/aws-sdk-php": "*",
-        "facebook/php-sdk-v4": "*"
+        "facebook/php-sdk-v4": "*",
+        "kartik-v/yii2-widget-fileinput": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 
 /* @var $form yii\widgets\ActiveForm */
@@ -79,75 +80,49 @@ use yii\helpers\Html;
                 <div class="left-product leftProduct">
                     <div class="clearfix item-product globalFrameProduct to-cart">
                         <div class="left-product-left">
-                            <!-- Start. additional images-->
-                            <div class="vertical-carousel">
-                                <div class="frame-thumbs carousel-js-css">
-                                    <div class="content-carousel" style="height: auto;">
-                                        <ul class="items-thumbs items" style="height: 180px;">
-                                            <!-- Start. main image-->
-                                            <li class="active">
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
-                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
-                                                   class="cloud-zoom-gallery" id="mainThumb">
-                                                    <span class="photo-block">
-                                                        <span class="helper"></span>
-                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title=""
-                                                             class="vImgPr">
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <!-- End. main image-->
-                                            <li>
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
-                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
-                                                   class="cloud-zoom-gallery">
-                                                    <span class="photo-block">
-                                                        <span class="helper"></span>
-                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="">
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a onclick="return false;" rel="useZoom: 'photoProduct'"
-                                                   href="<?php echo $item->getImageUrl(); ?>" title=""
-                                                   class="cloud-zoom-gallery">
-                                                    <span class="photo-block">
-                                                        <span class="helper"></span>
-                                                        <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="">
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="group-button-carousel">
-                                        <button type="button" class="prev arrow" style="display: none;">
-                                            <span class="icon_arrow_p"></span>
-                                        </button>
-                                        <button type="button" class="next arrow" style="display: none;">
-                                            <span class="icon_arrow_n"></span>
-                                        </button>
+                            <style>
+                                #owl-demo .item img{
+                                    display: block;
+                                    max-height: 300px;
+                                    max-width: 282px;
+                                    height: auto;
+                                }
+                            </style>
+                            <div id="demo">
+                                <div class="container">
+                                    <div class="row">
+                                        <div  class="span12">
+                                            <div id="owl-demo" class="owl-carousel">
+                                                <?php foreach ($item->getImageUrl() as $url) { ?>
+                                                    <div class="item" align="center">
+                                                        <img  src="<?php echo $url; ?>">
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End. additional images-->
-                            <!-- Start. Photo block-->
-                            <div id="wrap" style="top:0px;z-index:9999;position:relative;"><a rel="position: 'xBlock'"
-                                                                                              onclick="return false;"
-                                                                                              href="<?php echo $item->getImageUrl(); ?>"
-                                                                                              class="frame-photo-title photoProduct cloud-zoom isDrop"
-                                                                                              id="photoProduct" title=""
-                                                                                              data-drop="#photo"
-                                                                                              data-start="Product.initDrop"
-                                                                                              data-scroll-content="false"
-                                                                                              style="position: relative; display: block;">
-                                <span class="photo-block">
-                                    <span class="helper"></span>
-                                    <img src="<?php echo $item->getImageUrl(); ?>" alt="" title="" class="vImgPr"
-                                         style="display: block;" </span>
-                                </a>
 
-                            </div>
-                            <!-- End. Photo block-->
+                            <script>
+                                $(document).ready(function() {
+                                    $("#owl-demo").owlCarousel({
+
+                                        navigation : true,
+                                        slideSpeed : 300,
+                                        paginationSpeed : 400,
+                                        singleItem : true
+
+                                        // "singleItem:true" is a shortcut for:
+                                        // items : 1,
+                                        // itemsDesktop : false,
+                                        // itemsDesktopSmall : false,
+                                        // itemsTablet: false,
+                                        // itemsMobile : false
+
+                                    });
+                                });
+                            </script>
                         </div>
                         <div class="left-product-right">
                             <!-- Start. Star rating -->
@@ -297,7 +272,7 @@ use yii\helpers\Html;
                                                             <div class="frame-photo-title">
                                             <span class="photo-block">
                                                 <span class="helper"></span>
-                                                <img src="<?php echo $item->getImageUrl()?>">
+                                                <img src="<?php echo array_shift($item->getImageUrl()); ?>">
                                                                                           </span>
                                                                 <span class="title"><?php echo $item->getTitle()?></span>
                                                             </div>
@@ -327,7 +302,7 @@ use yii\helpers\Html;
                                                             <a href="http://active.imagecmsdemo.net/shop/product/perchatki-velosipednye-cyclotech-racer" class="frame-photo-title">
                                             <span class="photo-block">
                                                 <span class="helper"></span>
-                                                <img src="<?php echo $kitItem->item->getImageUrl(); ?>">
+                                                <img src="<?php echo array_shift($kitItem->item->getImageUrl()); ?>">
 
 
                                                                                             </span>

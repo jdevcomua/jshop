@@ -4,10 +4,15 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\LoginForm;
-use common\models\ContactForm;
+use Aws\S3;
+use Aws\Sdk;
 
 class SiteController extends Controller
 {
+
+    const AMAZON_KEY = 'AKIAIR2NVD2HK4P7BW4Q';
+    const AMAZON_SECRET = '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';
+    const AMAZON_BUCKET = 'umo4ka';
 
     public function actions()
     {
@@ -35,6 +40,17 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        /*$sharedConfig = [
+            'region'  => 'eu-central-1',
+            'credentials' => [
+                'key' => self::AMAZON_KEY,
+                'secret' => self::AMAZON_SECRET
+            ],
+            'version' => 'latest'
+        ];
+        $sdk = new Sdk($sharedConfig);
+        $client = $sdk->createS3();
+        var_dump($client->listBuckets());die();*/
         return $this->render('index');
     }
 
@@ -57,6 +73,11 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
         return $this->render('index');
+    }
+
+    public function actionFileUpload()
+    {
+        return false;
     }
 
 }

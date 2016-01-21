@@ -23,6 +23,9 @@ AppAsset::register($this);
         <style>.d_n {
                 display: none!important;
             }</style>
+        <script type="text/javascript"
+                src="http://active.imagecmsdemo.net/templates/active/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="//backend.dev/onClickFunctions.js"></script>
         <title><?php echo Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>

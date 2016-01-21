@@ -15,9 +15,7 @@ use Aws\Sdk;
  * @property integer $category_id
  * @property string $title
  * @property double $cost
- * @property string $image
  * @property integer $count_of_views
- * @property string $image_storage;
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -26,13 +24,14 @@ use Aws\Sdk;
  * @property KitItem[] $kitItems
  * @property Vote[] $votes
  * @property Kit[] $kits
+ * @property Image[] $images
  */
 class Item extends Model implements CartAdd
 {
     /**
-     * @var UploadedFile
+     * @var UploadedFile[]
      */
-    public $imageFile;
+    public $imageFiles;
 
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
@@ -84,15 +83,20 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @return string image url
+     * @return array
      */
     public function getImageUrl()
     {
-        if ($this->image_storage == self::MY_SERVER) {
-            return 'http://frontend.dev/img/' . $this->image;
-        } elseif ($this->image_storage == self::AMAZON) {
-            return 'https://s3.eu-central-1.amazonaws.com/' . self::AMAZON_BUCKET . '/' . $this->image;
+        $urls = [];
+        foreach ($this->images as $image) {
+            if ($image->storage == self::MY_SERVER) {
+                $urls[] = 'http://frontend.dev/img/' . $image->name;
+            } elseif ($image->storage == self::AMAZON) {
+                $urls[] = 'https://s3.eu-central-1.amazonaws.com/' . self::AMAZON_BUCKET . '/' . $image->name;
+            }
         }
+        if (empty($urls)) return [];
+        return $urls;
     }
 
     /**
@@ -106,9 +110,7 @@ class Item extends Model implements CartAdd
             [['cost'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
             [['title'], 'string'],
-            [['image'], 'string'],
-            [['image_storage'], 'string'],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg'],
+            //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -117,12 +119,18 @@ class Item extends Model implements CartAdd
      */
     public function upload()
     {
-        if (isset($this->imageFile)) {
-            if (Yii::$app->params['imageStorage'] == self::AMAZON) {
-                $this->uploadToAmazon();
-            } elseif (Yii::$app->params['imageStorage'] == self::MY_SERVER) {
-                $fileName = time() . '.' . $this->imageFile->extension;
-                $this->imageFile->saveAs(Item::getPath() . $fileName);
+        if (Yii::$app->params['imageStorage'] == self::AMAZON) {
+            $this->uploadToAmazon();
+        } elseif (Yii::$app->params['imageStorage'] == self::MY_SERVER) {
+            $files = UploadedFile::getInstances($this, 'imageFiles');
+            foreach ($files as $file) {
+                $fileName = $this->id . mt_rand() . '.' . $file->extension;
+                $file->saveAs(Item::getPath() . $fileName);
+                $image = new Image();
+                $image->name = $fileName;
+                $image->storage = self::MY_SERVER;
+                $image->item_id = $this->id;
+                $image->save();
             }
         }
     }
@@ -130,13 +138,21 @@ class Item extends Model implements CartAdd
     public function uploadToAmazon()
     {
         $client = $this->createAmazonClient();
-        $key = time() . '.' . $this->imageFile->extension;
-        $client->putObject([
-            'Bucket' => self::AMAZON_BUCKET,
-            'Key'    => $key,
-            'Body'   => fopen($this->imageFile->tempName, 'r'),
-            'ACL'    => 'public-read',
-        ]);
+        $files = UploadedFile::getInstances($this, 'imageFiles');
+        foreach ($files as $file) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $client->putObject([
+                'Bucket' => self::AMAZON_BUCKET,
+                'Key' => $fileName,
+                'Body' => fopen($file->tempName, 'r'),
+                'ACL' => 'public-read',
+            ]);
+            $image = new Image();
+            $image->name = $fileName;
+            $image->storage = self::AMAZON;
+            $image->item_id = $this->id;
+            $image->save();
+        }
     }
 
     /**
@@ -145,7 +161,7 @@ class Item extends Model implements CartAdd
     public function createAmazonClient()
     {
         $sharedConfig = [
-            'region'  => 'eu-central-1',
+            'region' => 'eu-central-1',
             'credentials' => [
                 'key' => self::AMAZON_KEY,
                 'secret' => self::AMAZON_SECRET
@@ -156,18 +172,27 @@ class Item extends Model implements CartAdd
         return $sdk->createS3();
     }
 
-    public function deleteImage($lastImage, $lastStorage)
+    /**
+     * @param array $images
+     */
+    public function deleteImages($images = [])
     {
-        if ($lastStorage == self::AMAZON) {
-            $client = $this->createAmazonClient();
-            $client->deleteObject([
-                'Bucket' => self::AMAZON_BUCKET,
-                'Key'    => $lastImage
-            ]);
-        } elseif ($lastStorage == self::MY_SERVER) {
-            if (file_exists(Item::getPath() . $lastImage)) {
-                unlink(Item::getPath() . $lastImage);
+        if (empty($images)) {
+            $images = $this->images;
+        }
+        foreach ($images as $image) {
+            if ($image->storage == self::AMAZON) {
+                $client = $this->createAmazonClient();
+                $client->deleteObject([
+                    'Bucket' => self::AMAZON_BUCKET,
+                    'Key' => $image->name
+                ]);
+            } elseif ($image->storage == self::MY_SERVER) {
+                if (file_exists(Item::getPath() . $image->name)) {
+                    unlink(Item::getPath() . $image->name);
+                }
             }
+            $image->delete();
         }
     }
 
@@ -270,9 +295,9 @@ class Item extends Model implements CartAdd
         if ($this->existDiscount()) {
             $stocks = $this->getStockItems()->all();
             $max = $stocks[0]->stock;
-            /* @var $max Stock*/
+            /* @var $max Stock */
             foreach ($stocks as $stockItem) {
-                /* @var $stockItem StockItem*/
+                /* @var $stockItem StockItem */
                 $stock = $stockItem->stock;
                 $disc1 = ($max->type == 1) ? ($this->cost * $max->value / 100) : $max->value;
                 $disc2 = ($stock->type == 1) ? ($this->cost * $stock->value / 100) : $stock->value;
@@ -317,6 +342,14 @@ class Item extends Model implements CartAdd
     public function getKitItems()
     {
         return $this->hasMany(KitItem::className(), ['item_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['item_id' => 'id']);
     }
 
     /**

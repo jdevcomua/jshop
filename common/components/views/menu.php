@@ -14,7 +14,7 @@
                     </td>
                     <?php
                     foreach ($allCategories as $i => $value) {
-                        echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"" . Yii::$app->urlHelper->to(['', 'category' => $value['id']]);
+                        echo "<td><div class=\"frame-item-menu\"><div class=\"frame-title\"><a href=\"" . Yii::$app->urlHelper->to(['category/' . $value['id'] . '-' . $value->getTranslit()]);
                         echo "\" class=\"title\" style=\"color: #fff;\">";
                         echo "<span class=\"helper\" style=\"height: 43px;\"></span><span><span class=\"text-el\">";
                         echo $value['title'];

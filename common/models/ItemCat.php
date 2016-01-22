@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use dosamigos\transliterator\TransliteratorHelper;
 
 /**
  * This is the model class for table "item_cat".
@@ -29,6 +30,11 @@ class ItemCat extends Model
     public function getTranslateColumns()
     {
         return ['title'];
+    }
+
+    public function getTranslit()
+    {
+        return str_replace(['/', ' '], '_', TransliteratorHelper::process($this->title, '', 'en'));
     }
 
     /**

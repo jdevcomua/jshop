@@ -18,15 +18,31 @@ class SiteController extends Controller
      */
     function actionIndex()
     {
-        if (!empty(Yii::$app->request->get('id'))) {
-            $item = Item::findOne(Yii::$app->request->get('id'));
-            return $this->render('Item', ['item'=>$item]);
+        $items = Item::find();
+        $categoryTitle = ' ';
+        if (!empty(Yii::$app->request->get('search'))) {
+            $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
-        if (!empty(Yii::$app->request->get('category'))) {
-            $id = Yii::$app->request->get('category');
+        if (!empty(Yii::$app->request->get('sort'))) {
+            if (Yii::$app->request->get('sort') == 'asc') {
+                $items->orderBy('cost asc');
+            } elseif (Yii::$app->request->get('sort') == 'desc') {
+                $items->orderBy('cost desc');
+            }
+        }
+        $items = $items->all();
+        if (Yii::$app->user->isGuest) {
+            $wishLists = [];
         } else {
-            $id = 0;
+            $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
+        return $this->render('index', ['items'=>$items, 'category_id' => 0,
+            'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'wishLists' => $wishLists]);
+    }
+
+    function actionCategory($id)
+    {
+        $id = explode('-', $id)[0];
         $selected = [];
         if (!empty(Yii::$app->request->post('CharacteristicItem'))) {
             $items = $this->filter();
@@ -34,18 +50,11 @@ class SiteController extends Controller
         } else {
             $items = Item::find();
         }
-        if (!isset($id) || ($id == 0) || (!is_int(+$id))) {
-            $categoryTitle = 'all';
-            $minCost = Item::find()->min('cost');
-            $maxCost = Item::find()->max('cost');
-        } else {
-            /**@var ItemCat $category*/
-            $category = ItemCat::findOne($id);
-            $categoryTitle = $category->title;
-            $items->andFilterWhere(['category_id' => $id]);
-            $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
-            $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
-        }
+        /**@var ItemCat $category*/
+        $category = ItemCat::findOne($id);
+        $items->andFilterWhere(['category_id' => $id]);
+        $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
+        $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
@@ -65,24 +74,23 @@ class SiteController extends Controller
         }
         $items = $items->all();
         $characteristics = null;
-        if ($id != '0') {
-            $characteristics = ItemCat::findOne($id)->characteristics;
-        }
+        $characteristics = ItemCat::findOne($id)->characteristics;
+
         if (Yii::$app->user->isGuest) {
             $wishLists = [];
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items'=>$items, 'category_id'=>$id,
-            'selected' => $selected, 'categoryTitle'=>$categoryTitle, 'count'=>count($items),
+        return $this->render('index', ['items' => $items, 'category_id' => $id,
+            'selected' => $selected, 'categoryTitle' => $category->title, 'count' => count($items),
             'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
             'rightCost' => $rightCost, 'wishLists' => $wishLists]);
     }
 
     /**
      * Adding item to cart
-     * @param $item_id
-     * @param $count
+     * @param $item_id integer
+     * @param $count integer
      */
     public function actionAjax($item_id, $count)
     {
@@ -97,6 +105,9 @@ class SiteController extends Controller
         Yii::$app->compare->addItem(Item::findOne($item_id));
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function filter()
     {
         $query = Item::find();
@@ -135,11 +146,19 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * @param $list_id integer
+     * @return false|int
+     */
     public function actionDellist($list_id)
     {
         return WishList::findOne($list_id)->delete();
     }
 
+    /**
+     * @param $item_id integer
+     * @param $list_id integer
+     */
     public function actionWish($item_id, $list_id)
     {
         if ($list_id == '0') {
@@ -155,6 +174,10 @@ class SiteController extends Controller
         $wish->save();
     }
 
+    /**
+     * @param $wish_id integer
+     * @return false|int
+     */
     public function actionDelwish($wish_id)
     {
         return Wish::findOne($wish_id)->delete();

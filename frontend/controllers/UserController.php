@@ -80,7 +80,7 @@ class UserController extends Controller
         } catch(FacebookSDKException $e) {
             return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['email']));
         }
-        $user = User::find()->andFilterWhere(['vk_id' => $userNode['id']])->one();
+        $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
         if (empty($user)) {
             $user = new User();
             $user->fb_id = $userNode['id'];

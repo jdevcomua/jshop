@@ -15,13 +15,13 @@ use yii\helpers\Url;
     <div style="width: 100%;">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
-        echo $form->field($model, 'category_id')->dropDownList($categories, ['style' => 'width:40%;']);?>
+        echo $form->field($model, 'category_id')->dropDownList($categories, ['style' => 'width:48%;']);?>
 
-        <div style="float: left;width:40%; margin-right: 50px;">
+        <div style="float: left;width:48%; margin-right: 4%;">
             <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]);?>
         </div>
 
-        <?php echo $form->field($model, 'cost')->textInput(['style' => 'width:40%;']);?>
+        <?php echo $form->field($model, 'cost')->textInput(['style' => 'width:48%;']);?>
 
         <?php $images = [];
         if (!$model->isNewRecord) {
@@ -42,7 +42,6 @@ use yii\helpers\Url;
                 ],
                 'showUpload' => false,
                 'overwriteInitial' => false,
-                'uploadUrl' => Url::to(['/site/file-upload']),
                 'maxFileCount' => 3
             ]
         ]);

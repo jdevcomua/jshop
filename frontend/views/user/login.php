@@ -63,8 +63,8 @@ use Yii;
             </div>
 
             <div style="width:40%;float:left;">Войти как пользователь: <br>
-                <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>"><img src="https://s3.eu-central-1.amazonaws.com/umo4ka/32746619642.png"></a>
-                <a href="<?php echo Yii::$app->urlHelper->to(['user/facebook-auth']); ?>"><img src="https://s3.eu-central-1.amazonaws.com/umo4ka/32928655167.png"></a>
+                <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>"><img src="https://s3.eu-central-1.amazonaws.com/umo4ka/32928655167.png"></a>
+                <a href="<?php echo Yii::$app->urlHelper->to(['user/facebook-auth']); ?>"><img src="https://s3.eu-central-1.amazonaws.com/umo4ka/32746619642.png"></a>
             </div>
         </div>
 

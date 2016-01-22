@@ -34,9 +34,9 @@ use yii\widgets\ActiveForm;
                                         <button type="button" data-value="action"
                                                 class="d_l_3"><?php echo \Yii::t('app', 'Акции'); ?></button>
                                     </li>
-                                    <li><a href="?category=<?php echo "$category_id"; ?>&sort=asc"
+                                    <li><a href="?sort=asc"
                                            class="d_l_3"><?php echo \Yii::t('app', 'От дешевых к дорогим'); ?></a></li>
-                                    <li><a href="?category=<?php echo "$category_id"; ?>&sort=desc"
+                                    <li><a href="?sort=desc"
                                            class="d_l_3"><?php echo \Yii::t('app', 'От дорогих к дешевым'); ?></a></li>
                                     <li>
                                         <button type="button" data-value="hit"
@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
                         /* @var $value \common\models\Item */
                         ?>
                         <li class="globalFrameProduct to-cart" data-pos="top">
-                            <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $value->id]); ?>"
+                            <a href="<?php echo Yii::$app->urlHelper->to(['item/' . $value->id . '-' . $value->getTranslit()]); ?>"
                                class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
                                         src="<?php echo array_shift($value->getImageUrl()); ?>"></span>

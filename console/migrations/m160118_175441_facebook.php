@@ -7,7 +7,7 @@ class m160118_175441_facebook extends Migration
 {
     public function up()
     {
-        $this->addColumn('user', 'fb_id', 'integer');
+        $this->addColumn('user', 'fb_id', 'bigint');
     }
 
     public function down()

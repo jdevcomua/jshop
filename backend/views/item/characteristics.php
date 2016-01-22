@@ -1,22 +1,38 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Characteristic;
+use kartik\typeahead\Typeahead;
 
-$form = ActiveForm::begin();
-echo "<div style=\"width: 100%; padding-left: 15px; margin-top: 20px;\">";
-foreach ($characteristics as $index => $characteristic) {
+$form = ActiveForm::begin();?>
+<div style="width: 100%; padding-left: 15px; margin-top: 20px;">
+<?php foreach ($characteristics as $index => $characteristic) {
     if (isset($characteristic->characteristic_id)) {
-        /* @var $characteristic common\models\CharacteristicItem */
-        echo "<div style=\"width: 500px; float:left; padding-right: 50px;\">";
-        echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());
-        echo "</div>";
+        /* @var $characteristic common\models\CharacteristicItem */?>
+        <div style="width: 500px; float:left; padding-right: 50px;">
+        <?php //echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());?>
+        <?php $charItems = $characteristic->characteristic->getCharacteristicItems()->all();
+        $typehead = [];
+        foreach ($charItems as $charItem) {
+            $typehead[] = $charItem->value;
+        }
+        echo $form->field($characteristic, "[$index]value")->widget(Typeahead::classname(), [
+            'options' => ['placeholder' => ''],
+            'pluginOptions' => ['highlight'=>true],
+            'dataset' => [
+                [
+                    'local' => $typehead,
+                    'limit' => 10
+                ]
+            ]
+        ])->label($characteristic->getCharacteristicTitle()); ?>
+        </div>
+        <?php
     }
-}
-echo "</div>";
-echo "<div style=\"width: 100%; padding-left: 15px; float: right;\" class=\"form-group\">";
-echo Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'button']);
-echo "</div>";
+}?>
+</div>
+<div style="width: 100%; padding-left: 15px; float: right;" class="form-group">
+<?php echo Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'button']);?>
+</div>
 
-ActiveForm::end();
-?>
+<?php ActiveForm::end(); ?>

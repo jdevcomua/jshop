@@ -7,6 +7,7 @@ use common\components\CartAdd;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
+use dosamigos\transliterator\TransliteratorHelper;
 
 /**
  * This is the model class for table "item".
@@ -46,6 +47,11 @@ class Item extends Model implements CartAdd
     public function getTranslateColumns()
     {
         return ['title'];
+    }
+
+    public function getTranslit()
+    {
+        return str_replace(['/', ' '], '_', TransliteratorHelper::process($this->title, '', 'en'));
     }
 
     public function hasKit()
@@ -107,6 +113,7 @@ class Item extends Model implements CartAdd
         return [
             [['category_id', 'count_of_views'], 'integer'],
             [['title', 'cost'], 'required'],
+            ['title', 'trim'],
             [['cost'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
             [['title'], 'string'],

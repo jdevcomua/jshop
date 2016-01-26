@@ -34,14 +34,16 @@ function addToWishList() {
         }
     });
 }
-function addToCompareList(id) {
+function addToCompareList(id, $thisElement) {
     $.ajax({
         url: '/site/compare',
         data: {item_id: id},
         dataType: 'text',
         success: function (data) {
-            $('#toCompare').toggleClass('d_n');
-            $('#inCompare').toggleClass('d_n');
+            $thisElement.parent().parent().find('#toCompare').toggleClass('d_n');
+            $thisElement.parent().parent().find('#inCompare').toggleClass('d_n');
+            //$('#toCompare').toggleClass('d_n');
+            //$('#inCompare').toggleClass('d_n');
         }
     });
 }

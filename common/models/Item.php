@@ -17,6 +17,7 @@ use dosamigos\transliterator\TransliteratorHelper;
  * @property string $title
  * @property double $cost
  * @property integer $count_of_views
+ * @property string $addition_date
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -26,6 +27,7 @@ use dosamigos\transliterator\TransliteratorHelper;
  * @property Vote[] $votes
  * @property Kit[] $kits
  * @property Image[] $images
+ * @property Stock[] $stocks
  */
 class Item extends Model implements CartAdd
 {
@@ -119,6 +121,7 @@ class Item extends Model implements CartAdd
             [['category_id', 'count_of_views'], 'integer'],
             [['title', 'cost'], 'required'],
             ['title', 'trim'],
+            [['addition_date'], 'safe'],
             [['cost'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
             [['title'], 'string'],
@@ -296,7 +299,16 @@ class Item extends Model implements CartAdd
      */
     public function existDiscount()
     {
-        return !(empty($this->stockItems));
+        return ($this->getStocks()->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
+            ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')])->count() > 0);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStocks()
+    {
+        return $this->hasMany(Stock::className(), ['id' => 'stock_id'])->viaTable('stock_item', ['item_id' => 'id']);
     }
 
     /**
@@ -305,12 +317,11 @@ class Item extends Model implements CartAdd
     public function getMaxDiscount()
     {
         if ($this->existDiscount()) {
-            $stocks = $this->getStockItems()->all();
-            $max = $stocks[0]->stock;
+            $stocks = $this->getStocks()->all();
+            $max = $stocks[0];
             /* @var $max Stock */
-            foreach ($stocks as $stockItem) {
-                /* @var $stockItem StockItem */
-                $stock = $stockItem->stock;
+            foreach ($stocks as $stock) {
+                /* @var $stock Stock */
                 $disc1 = ($max->type == 1) ? ($this->cost * $max->value / 100) : $max->value;
                 $disc2 = ($stock->type == 1) ? ($this->cost * $stock->value / 100) : $stock->value;
                 if ($disc2 > $disc1) {

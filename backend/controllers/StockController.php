@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\web\UploadedFile;
 
 /**
  * StockController implements the CRUD actions for Stock model.
@@ -51,7 +52,7 @@ class StockController extends Controller
      */
     public function actionView($id)
     {
-        $model = Stock::find()->where('id = ' + $id)->joinWith('stockItems')->one();
+        $model = Stock::find()->andFilterWhere(['stock.id' => $id])->joinWith('stockItems')->one();
         $items = new ActiveDataProvider([
             'query' => $model->getStockItems()->joinWith('item'),
         ]);
@@ -70,6 +71,7 @@ class StockController extends Controller
     {
         $model = new Stock();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
             $items = Yii::$app->request->post('items');
             if (!empty($items)) {
                 foreach ($items as $item_id) {
@@ -107,6 +109,7 @@ class StockController extends Controller
         $model = $this->findModel($id);
         $selected = $model->getStockItems()->indexBy('item_id')->asArray(true)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
             $items = Yii::$app->request->post('items');
             if (!empty($items)) {
                 foreach (array_diff(array_keys($selected), Yii::$app->request->post('items')) as $item_id) {

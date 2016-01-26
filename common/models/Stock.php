@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "stock".
@@ -14,15 +15,21 @@ use Yii;
  * @property string $description
  * @property integer $type
  * @property integer $value
+ * @property string $image
  *
  * @property StockItem[] $stockItems
+ * @property Item[] $items
  */
 class Stock extends Model
 {
+    /**
+     * @var UploadedFile
+     */
+    public $imageFile;
 
     public function getTranslateColumns()
     {
-        return [];
+        return ['title'];
     }
 
     /**
@@ -34,15 +41,39 @@ class Stock extends Model
     }
 
     /**
+     * @return array
+     */
+    public function getImageUrl()
+    {
+        return 'http://frontend.dev/img/' . $this->image;
+    }
+
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        if (isset($file)) {
+            if (isset($this->image)) {
+                if (file_exists(Item::getPath() . $this->image)) {
+                    unlink(Item::getPath() . $this->image);
+                }
+            }
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $file->saveAs(Item::getPath() . $fileName);
+            $this->image = $fileName;
+            $this->save();
+        }
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['date_from', 'date_to'], 'safe'],
-            [['description'], 'string'],
+            [['description', 'image', 'title'], 'string'],
             [['type', 'value'], 'integer'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'required'],
         ];
     }
 
@@ -59,6 +90,7 @@ class Stock extends Model
             'description' => Yii::t('app', 'Описание'),
             'type' => Yii::t('app', 'Метод подсчета'),
             'value' => Yii::t('app', 'Значение'),
+            'image' => Yii::t('app', 'Изображение'),
         ];
     }
 
@@ -68,5 +100,22 @@ class Stock extends Model
     public function getStockItems()
     {
         return $this->hasMany(StockItem::className(), ['stock_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(Item::className(), ['id' => 'item_id'])->viaTable('stock_item', ['stock_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getCurrent()
+    {
+        return Stock::find()->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
+        ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')]);
     }
 }

@@ -74,6 +74,9 @@ class ItemCat extends Model
     {
         $file = UploadedFile::getInstance($this, 'imageFile');
         if (isset($file)) {
+            if (file_exists(Item::getPath() . $this->image)) {
+                unlink(Item::getPath() . $this->image);
+            }
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
             $file->saveAs(Item::getPath() . $fileName);
             $this->image = $fileName;
@@ -120,14 +123,6 @@ class ItemCat extends Model
     public function getParent()
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
-    }
-
-    /**
-     * @return string of dir with images
-     */
-    public static function getPath()
-    {
-        return Yii::getAlias('@frontend') . '/web/img/';
     }
 
     /**

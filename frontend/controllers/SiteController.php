@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Stock;
 use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
@@ -18,24 +19,13 @@ class SiteController extends Controller
      */
     function actionIndex()
     {
-        $items = Item::find();
-        if (!empty(Yii::$app->request->get('search'))) {
-            $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
-        }
-        if (!empty(Yii::$app->request->get('sort'))) {
-            if (Yii::$app->request->get('sort') == 'asc') {
-                $items->orderBy('cost asc');
-            } elseif (Yii::$app->request->get('sort') == 'desc') {
-                $items->orderBy('cost desc');
-            }
-        }
-        $items = $items->all();
+        $items = Item::find()->orderBy('addition_date desc')->limit(6)->all();
         if (Yii::$app->user->isGuest) {
             $wishLists = [];
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items'=>$items, 'count'=>count($items), 'wishLists' => $wishLists]);
+        return $this->render('index', ['items'=>$items, 'wishLists' => $wishLists]);
     }
 
     function actionCategory($id)
@@ -92,6 +82,22 @@ class SiteController extends Controller
     public function actionAjax($item_id, $count)
     {
         Yii::$app->cart->addItem($item_id, $count);
+    }
+
+    public function actionPromotions()
+    {
+        $stocks = Stock::getCurrent()->all();
+        return $this->render('promotions', [
+            'stocks' => $stocks,
+        ]);
+    }
+
+    public function actionPromotion($id)
+    {
+        $model = Stock::findOne($id);
+        return $this->render('promotion', [
+            'model' => $model,
+        ]);
     }
 
     /**

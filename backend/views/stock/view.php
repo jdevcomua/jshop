@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <div style="width: 100%;">
+        <div style="width: 70%; float:left; padding-right: 50px;">
     <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -37,9 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'type',
             'value',
         ],
-    ]);
+    ]);?>
+        </div></div>
 
-    echo GridView::widget([
+    <?php if (isset($model->image)) { ?>
+        <div style="height: 280px;">
+            <img style="max-width: 250px;max-height: 250px;" src="<?php echo $model->getImageUrl(); ?>">
+        </div>
+    <?php } ?>
+    <?php echo GridView::widget([
         'dataProvider' => $items,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

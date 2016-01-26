@@ -105,7 +105,7 @@ class ItemCatController extends Controller
                 unset($model->parent_id);
             }
             if ($model->save()) {
-                $model->update();
+                $model->upload();
                 return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
             }
         } else {

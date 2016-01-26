@@ -7,6 +7,10 @@ use common\models\Kit;
 use common\models\search\KitSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\ItemCat;
+use yii\helpers\ArrayHelper;
+use common\models\KitItem;
+use yii\data\ActiveDataProvider;
 
 /**
  * KitController implements the CRUD actions for Kit model.
@@ -47,8 +51,12 @@ class KitController extends Controller
      */
     public function actionView($id)
     {
+        $model = Kit::find()->where('id = ' + $id)->joinWith('kitItems')->one();
+        $items = new ActiveDataProvider([
+            'query' => $model->getKitItems()->joinWith('item'),
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model, 'items' => $items,
         ]);
     }
 
@@ -60,12 +68,28 @@ class KitController extends Controller
     public function actionCreate()
     {
         $model = new Kit();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $items = Yii::$app->request->post('items');
+            if (!empty($items)) {
+                foreach ($items as $item_id) {
+                    $stockItem = new KitItem();
+                    $stockItem->kit_id = $model->id;
+                    $stockItem->item_id = $item_id;
+                    $stockItem->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $arrayItems = [];
+            $categories = ItemCat::find()->joinWith('items')->all();
+            foreach ($categories as $category) {
+                /* @var $category ItemCat*/
+                if (!empty($category->items)) {
+                    $arrayItems[$category->title] = ArrayHelper::map($category->items, 'id', 'title');
+                }
+            }
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'arrayItems' => $arrayItems,
             ]);
         }
     }
@@ -79,12 +103,32 @@ class KitController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $selected = $model->getKitItems()->indexBy('item_id')->asArray(true)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $items = Yii::$app->request->post('items');
+            if (!empty($items)) {
+                foreach (array_diff(array_keys($selected), Yii::$app->request->post('items')) as $item_id) {
+                    KitItem::find()->andFilterWhere(['item_id' => $item_id, 'kit_id' => $model->id])->one()->delete();
+                }
+                foreach (array_diff(Yii::$app->request->post('items'), array_keys($selected)) as $item_id) {
+                    $stockItem = new KitItem();
+                    $stockItem->kit_id = $model->id;
+                    $stockItem->item_id = $item_id;
+                    $stockItem->save();
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $arrayItems = [];
+            $categories = ItemCat::find()->joinWith('items')->all();
+            foreach ($categories as $category) {
+                /* @var $category ItemCat*/
+                if (!empty($category->items)) {
+                    $arrayItems[$category->title] = ArrayHelper::map($category->items, 'id', 'title');
+                }
+            }
             return $this->render('update', [
-                'model' => $model,
+                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => array_keys($selected)
             ]);
         }
     }

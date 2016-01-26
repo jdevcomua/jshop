@@ -89,6 +89,13 @@ $config = [
                 '<language:(ru|en)>/stock/create'=>'stock/create',
                 '<language:(ru|en)>/stock/view'=>'stock/view',
 
+                '<language:(ru|en)>/kit'=>'kit/index',
+                '<language:(ru|en)>/kit/index'=>'kit/index',
+                '<language:(ru|en)>/kit/group'=>'kit/group',
+                '<language:(ru|en)>/kit/update'=>'kit/update',
+                '<language:(ru|en)>/kit/create'=>'kit/create',
+                '<language:(ru|en)>/kit/view'=>'kit/view',
+
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],

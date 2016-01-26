@@ -22,7 +22,7 @@ class Kit extends Model implements CartAdd
 
     public function getTranslateColumns()
     {
-        return [];
+        return ['title', 'description'];
     }
 
     /**
@@ -60,7 +60,7 @@ class Kit extends Model implements CartAdd
 
     public function getImageUrl()
     {
-        return 'http://dayfun.ru/wp-content/uploads/2013/11/%D0%9A%D0%B0%D0%BA-%D1%80%D0%B8%D1%81%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D0%BA%D1%83.jpg';
+        return ['http://dayfun.ru/wp-content/uploads/2013/11/%D0%9A%D0%B0%D0%BA-%D1%80%D0%B8%D1%81%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BA%D0%BE%D1%80%D0%BE%D0%B1%D0%BA%D1%83.jpg'];
     }
 
     /**

@@ -69,14 +69,6 @@ class StockController extends Controller
     public function actionCreate()
     {
         $model = new Stock();
-
-        $arrayItems = [];
-        $categories = ItemCat::find()->joinWith('items')->all();
-        foreach ($categories as $category) {
-            /* @var $category ItemCat*/
-            $arrayItems[$category->title] = ArrayHelper::map($category->items, 'id', 'title');
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $items = Yii::$app->request->post('items');
             if (!empty($items)) {
@@ -89,6 +81,14 @@ class StockController extends Controller
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $arrayItems = [];
+            $categories = ItemCat::find()->joinWith('items')->all();
+            foreach ($categories as $category) {
+                /* @var $category ItemCat*/
+                if (!empty($category->items)) {
+                    $arrayItems[$category->title] = ArrayHelper::map($category->items, 'id', 'title');
+                }
+            }
             return $this->render('create', [
                 'model' => $model,
                 'arrayItems' => $arrayItems,

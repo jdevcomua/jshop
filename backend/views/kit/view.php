@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Kit */
@@ -12,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kit-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php echo Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
+        echo Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -33,6 +34,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'cost',
         ],
-    ]) ?>
+    ]);
+
+    echo GridView::widget([
+        'dataProvider' => $items,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'item.title',
+                'value' => function($data){
+                    return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view','id'=>$data->item->id]));
+                },
+                'format' => 'raw',
+            ],
+            'item.cost',
+        ],
+    ]);?>
 
 </div>

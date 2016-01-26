@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\KitSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Kits');
+$this->title = Yii::t('app', 'Комплекты');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kit-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Create Kit'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('app', 'Создать комплект'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([

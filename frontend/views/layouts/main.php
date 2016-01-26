@@ -6,11 +6,15 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
+use frontend\assets\AppAsset;
 use common\components\CategoriesView;
 
+AppAsset::register($this);
 ?>
+<?php $this->beginPage() ?>
 <html>
 <head>
+    <?php //$this->head() ?>
     <meta charset="utf-8">
     <?php echo Html::csrfMetaTags() ?>
     <title>active</title>
@@ -54,16 +58,12 @@ use common\components\CategoriesView;
     <!-- Owl Carousel Assets -->
     <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.theme.css" rel="stylesheet">
+
+
 </head>
 
 <body class="isChrome shop_category notTouch">
-<script>
-    var langs = new Object();
-    function lang(value) {
-        return langs[value] ? langs[value] : value;
-    }
-
-</script>
+<?php $this->beginBody() ?>
 <div class="main-body">
     <div class="fon-header">
         <header>
@@ -355,5 +355,7 @@ use common\components\CategoriesView;
         <div id="fancybox-loading">
             <div></div>
         </div>
+        <?php $this->endBody() ?>
 </body>
 </html>
+<?php $this->endPage() ?>

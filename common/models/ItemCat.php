@@ -4,18 +4,28 @@ namespace common\models;
 
 use Yii;
 use dosamigos\transliterator\TransliteratorHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "item_cat".
  *
  * @property integer $id
  * @property string $title
+ * @property integer $parent_id
+ * @property string $image
  *
  * @property Characteristic[] $characteristics
  * @property Item[] $items
+ * @property ItemCat[] children
  */
 class ItemCat extends Model
 {
+
+    /**
+     * @var UploadedFile
+     */
+    public $imageFile;
+
     /**
      * @inheritdoc
      */
@@ -44,7 +54,8 @@ class ItemCat extends Model
     {
         return [
             [['title'], 'required'],
-            [['title'], 'string']
+            [['title', 'image'], 'string'],
+            ['parent_id', 'integer']
         ];
     }
 
@@ -57,6 +68,17 @@ class ItemCat extends Model
             'id' => 'ID',
             'title' => 'Название',
         ];
+    }
+
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        if (isset($file)) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $file->saveAs(Item::getPath() . $fileName);
+            $this->image = $fileName;
+            $this->save();
+        }
     }
 
     /**
@@ -76,11 +98,43 @@ class ItemCat extends Model
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChildren()
+    {
+        return $this->hasMany(ItemCat::className(), ['parent_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
      * @return \yii\db\ActiveQuery the active query used by this AR class.
      */
     public static function find()
     {
         return new \yii\db\ActiveQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent()
+    {
+        return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
+    }
+
+    /**
+     * @return string of dir with images
+     */
+    public static function getPath()
+    {
+        return Yii::getAlias('@frontend') . '/web/img/';
+    }
+
+    /**
+     * @return array
+     */
+    public function getImageUrl()
+    {
+        return 'http://frontend.dev/img/' . $this->image;
     }
 }

@@ -84,7 +84,7 @@ use Yii;
                                                class="frame-photo-title">
                                             <span class="photo-block">
                                                 <span class="helper"></span>
-                                                <img src="<?php echo $item->getImageUrl(); ?>">
+                                                <img src="<?php echo array_shift($item->getImageUrl()); ?>">
                                             </span>
                                                 <span class="title"><?php echo $item->title; ?></span>
                                             </a>
@@ -108,7 +108,7 @@ use Yii;
                                                                                             class="current-prices f-s_0">
                                                 <span class="price-new">
                                                     <span>
-                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->getNewPrice() * $model->count ?></span>
+                        <span id="price-<?php echo $item->id ?>" class="price"><?php echo $item->getNewPrice() * $model->count ?></span> грн.
                                                     </span>
                                                 </span>
                                                                                             </span>
@@ -130,7 +130,7 @@ use Yii;
                                     <span class="frame-cur-sum-price">
                                         <span class="frame-prices f-s_0"><span class="current-prices f-s_0">
                                                 <span class="price-new">
-                                                    <span class="sum price f-w_b"><?php echo $sum ?></span></span></span></span>
+                                                    <span class="sum price f-w_b" style="display: inline;"><?php echo $sum ?></span> грн.</span></span></span>
                                     </span>
                                 </div>
                             </div>

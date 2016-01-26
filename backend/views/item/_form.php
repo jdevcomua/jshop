@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
-use yii\helpers\Url;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
@@ -15,7 +15,13 @@ use yii\helpers\Url;
     <div style="width: 100%;">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
-        echo $form->field($model, 'category_id')->dropDownList($categories, ['style' => 'width:48%;']);?>
+        echo $form->field($model, 'category_id')->widget(Select2::classname(), [
+            'data' => $categories,
+            'options' => ['placeholder' => 'Select a parent ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);?>
 
         <div style="float: left;width:48%; margin-right: 4%;">
             <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]);?>

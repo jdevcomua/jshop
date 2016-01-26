@@ -13,9 +13,6 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KZ0u56ukNp3p5W82jnpJmisKu8wDUDdY',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
         'cart' => [
             'class' => 'common\components\Cart',
         ],
@@ -38,6 +35,7 @@ $config = [
                 '<language:(ru|en)>/cart/delete'=>'cart/delete',
                 '<language:(ru|en)>/cart/ajax'=>'cart/ajax',
                 '<language:(ru|en)>/cart/add'=>'cart/add',
+                '<language:(ru|en)>/cart/change'=>'cart/change',
                 '<language:(ru|en)>/item'=>'item/item',
                 '<language:(ru|en)>/item/<id>'=>'item/item',
                 '<language:(ru|en)>/item/item'=>'item/item',

@@ -56,6 +56,20 @@ class Cart extends Component
     }
 
     /**
+     * @param $item_id integer
+     * @param $type
+     * @param $count integer
+     */
+    public function setItem($item_id, $type, $count)
+    {
+        $array = $this->getArray();
+        $array[$this->getSubArrayKey($this->creator($item_id, $type))] = ['id' => $item_id,
+            'type' => $type,
+            'count' => $count];
+        Yii::$app->session['cart'] = $array;
+    }
+
+    /**
      * @param $item_id
      * @param $type
      * @param int $count
@@ -105,6 +119,22 @@ class Cart extends Component
         return null;
     }
 
+
+    /**
+     * @param $item_id integer
+     * @param $type
+     * @return null|array
+     */
+    public function getSubArray($item_id, $type)
+    {
+        foreach ($this->getArray() as $array) {
+            if (($array['type'] == $type) && ($array['id'] == $item_id)) {
+                return $array;
+            }
+        }
+        return null;
+    }
+
     public function getModels()
     {
         if (!$this->isEmpty()) {
@@ -121,6 +151,11 @@ class Cart extends Component
         }
     }
 
+    /**
+     * @param $id integer
+     * @param $type
+     * @return CartAdd
+     */
     public function creator($id, $type)
     {
         if ($type == Item::CART_TYPE) {
@@ -145,21 +180,24 @@ class Cart extends Component
     }
 
     /**
-     * @param $item_id
+     * @param $item_id integer
+     * @param $type
      * @return int
      */
-    public function getSumForItem($item_id)
+    public function getSumForItem($item_id, $type)
     {
-        $cart = $this->getItems();
-        if (isset($cart[$item_id]) && !empty(Item::findOne($item_id)->getNewPrice())) {
-            return $cart[$item_id] * Item::findOne($item_id)->getNewPrice();
-        } else {
-            return 0;
+        $cart = $this->getArray();
+        foreach ($cart as $array) {
+            if (($array['type'] == $type) && ($array['id'] == $item_id)) {
+                return $array['count'] * $this->creator($item_id, $type)->getNewPrice();
+            }
         }
+        return 0;
     }
 
     /**
-     * @param $item_id
+     * @param $item_id integer
+     * @param $type
      * @return int
      */
     public function getCountForItem($item_id, $type)
@@ -170,11 +208,7 @@ class Cart extends Component
                 return $array['count'];
             }
         }
-        if (isset($cart[$item_id])){
-            return $cart[$item_id];
-        } else {
-            return 0;
-        }
+        return 0;
     }
 
     /**

@@ -20,6 +20,6 @@ interface CartAdd
 
     public function getTitle();
 
-
+    public function getNewPrice();
 
 }

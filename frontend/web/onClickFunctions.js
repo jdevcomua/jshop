@@ -150,43 +150,19 @@ function changeCountOfItem(id, $thisItem) {
             }
         });
     } else {
-        if ($thisItem.val() > array[$thisItem.attr('id').split('-')[1]]) {
-            var toChange = $thisItem.val() - array[$thisItem.attr('id').split('-')[1]];
-            $.ajax({
-                url: 'cart/add',
-                async: false,
-                data: {item_id: id, count: toChange},
-                dataType: 'text',
-                success: function (data) {
-                    var obj = eval(data);
-                    $('.sum').html(obj.sumAll);
-                    $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
-                    $thisItem.val(obj.countItem);
-                    array[$thisItem.attr('id').split('-')[1]] = obj.countItem;
-                    $('#countItems ').html(obj.countAll);
-                }
-            });
-        } else if ($thisItem.val() < array[$thisItem.attr('id').split('-')[1]]) {
-            var toChange = array[$thisItem.attr('id').split('-')[1]] - $thisItem.val();
-            $.ajax({
-                url: 'cart/delete',
-                async: false,
-                data: {item_id: id, count: toChange},
-                dataType: 'text',
-                success: function (data) {
-                    var obj = eval(data);
-                    $('.sum').html(obj.sumAll);
-                    $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
-                    $thisItem.val(obj.countItem);
-                    array[$thisItem.attr('id').split('-')[1]] = obj.countItem;
-                    $('#countItems ').html(obj.countAll);
-                    if (obj.countAll == 0) {
-                        $('#cartFull').toggleClass('d_n');
-                        $('#cartEmpty').toggleClass('d_n');
-                    }
-                }
-            });
-        }
+        $.ajax({
+            url: 'cart/change',
+            async: false,
+            data: {id: +id, count: +$thisItem.val()},
+            dataType: 'text',
+            success: function (data) {
+                var obj = eval(data);
+                $('.sum').html(obj.sumAll);
+                $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
+                $thisItem.val(obj.countItem);
+                $('#countItems ').html(obj.countAll);
+            }
+        });
     }
 }
 function removeWishList(id) {

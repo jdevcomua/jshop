@@ -19,7 +19,6 @@ class SiteController extends Controller
     function actionIndex()
     {
         $items = Item::find();
-        $categoryTitle = ' ';
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
@@ -36,8 +35,7 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items'=>$items, 'category_id' => 0,
-            'categoryTitle'=>$categoryTitle, 'count'=>count($items), 'wishLists' => $wishLists]);
+        return $this->render('index', ['items'=>$items, 'count'=>count($items), 'wishLists' => $wishLists]);
     }
 
     function actionCategory($id)
@@ -51,7 +49,7 @@ class SiteController extends Controller
             $items = Item::find();
         }
         /**@var ItemCat $category*/
-        $category = ItemCat::findOne($id);
+        $category = ItemCat::findBySql("SELECT p.* FROM item_cat p LEFT JOIN item_cat c ON p.id = c.parent_id WHERE p.id=" . $id)->one();
         $items->andFilterWhere(['category_id' => $id]);
         $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
         $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
@@ -72,7 +70,7 @@ class SiteController extends Controller
             $leftCost = $minCost;
             $rightCost = $maxCost;
         }
-        $items = $items->all();
+        $items = $items->with(['stockItems', 'images'])->all();
         $characteristics = null;
         $characteristics = ItemCat::findOne($id)->characteristics;
 
@@ -81,10 +79,9 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items' => $items, 'category_id' => $id,
-            'selected' => $selected, 'categoryTitle' => $category->title, 'count' => count($items),
+        return $this->render('category', ['items' => $items, 'selected' => $selected,'count' => count($items),
             'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
-            'rightCost' => $rightCost, 'wishLists' => $wishLists]);
+            'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category]);
     }
 
     /**

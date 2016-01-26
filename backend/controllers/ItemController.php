@@ -86,16 +86,38 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new Item();
-        $categories = ItemCat::find()->distinct(true)->all();
+        $categories = ItemCat::find()->andFilterWhere(['level' => 1])->all();
+        $categoriesArray = [];
+        foreach ($categories as $category) {
+            /* @var $category ItemCat*/
+            if (!empty($category->getChildren()->all())) {
+                $categoriesArray2 = [];
+                foreach ($category->getChildren()->all() as $child) {
+                    /* @var $child ItemCat*/
+                    if (!empty($child->getChildren()->all())) {
+                        $categoriesArray2['> ' . $child->title] = ArrayHelper::map($child->getChildren()->all(), 'id', 'title');
+                    } else {
+                        $categoriesArray2[$child->id] = $child->title;
+                    }
+                }
+                $categoriesArray[$category->title] = $categoriesArray2;
+            } else {
+                $categoriesArray[$category->id] = $category->title;
+            }
+        }
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 $model->upload();
-                return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
+                if (ItemCat::findOne($this->findModel($model->id)->category_id)->getCharacteristics()->count() > 0) {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
+                } else {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $model->id]));
+                }
             }
         }
         return $this->render('create', [
             'model' => $model,
-            'categories' => ArrayHelper::map($categories, 'id', 'title'),
+            'categories' => $categoriesArray
         ]);
     }
 
@@ -105,7 +127,7 @@ class ItemController extends Controller
      * @param integer $id of item
      * @return string|\yii\web\Response
      */
-    public function actionUpdatecharacteristics($id)
+    public function actionUpdateCharacteristics($id)
     {
         $characteristics = $this->findModel($id)->getCharacteristicItems()->indexBy('id')->all();
         if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
@@ -158,7 +180,11 @@ class ItemController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 $model->upload();
-                return $this->redirect(Yii::$app->urlHelper->to(['item/updatecharacteristics', 'id' => $model->id]));
+                if (ItemCat::findOne($this->findModel($model->id)->category_id)->getCharacteristics()->count() > 0) {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item/update-characteristics', 'id' => $model->id]));
+                } else {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $model->id]));
+                }
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         } else {

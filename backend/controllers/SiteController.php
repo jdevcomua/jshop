@@ -40,17 +40,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        /*$sharedConfig = [
-            'region'  => 'eu-central-1',
-            'credentials' => [
-                'key' => self::AMAZON_KEY,
-                'secret' => self::AMAZON_SECRET
-            ],
-            'version' => 'latest'
-        ];
-        $sdk = new Sdk($sharedConfig);
-        $client = $sdk->createS3();
-        var_dump($client->listBuckets());die();*/
         return $this->render('index');
     }
 

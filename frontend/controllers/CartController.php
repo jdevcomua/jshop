@@ -37,6 +37,7 @@ class CartController extends Controller
         }
         $model = new Orders();
         if ($model->load(Yii::$app->request->post())) {
+            var_dump(Yii::$app->request->post());die;
             $model->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
             $model->sum = Yii::$app->cart->getSum();
             if ($model->save()) {
@@ -57,13 +58,7 @@ class CartController extends Controller
      */
     public function actionIndex()
     {
-        //Yii::$app->cart->addItem(Item::findOne(2));
-        //var_dump(Yii::$app->cart->getArray());
-        //die();
         $sum = Yii::$app->cart->getSum();
-        //Yii::$app->cart->resetItems();
-        //Yii::$app->cart->addItem(Kit::findOne(1));;
-        //var_dump(Yii::$app->cart->getModels());die();
         return $this->render('cart', ['models' => Yii::$app->cart->getModels(),
             'sum' => $sum]);
     }
@@ -77,7 +72,6 @@ class CartController extends Controller
      */
     public function actionDelete($item_id, $cart_type, $count = 0)
     {
-        $cartAdd =
         Yii::$app->cart->deleteItem($item_id, $cart_type, $count);
         if ($count == 0) {
             return '({"sumAll":' . Yii::$app->cart->getSum() . ', "countAll":' . Yii::$app->cart->getCount() . '})';
@@ -98,6 +92,19 @@ class CartController extends Controller
         Yii::$app->cart->addItem($item_id, $count);
         return '({"sumAll":' . Yii::$app->cart->getSum() . ', "sumItem":' .  Yii::$app->cart->getSumForItem($item_id)
             . ', "countItem":' .  Yii::$app->cart->getCountForItem($item_id) . ', "countAll":' .
+            Yii::$app->cart->getCount() . '})';
+    }
+
+    /**
+     * @param $id integer
+     * @param $count integer
+     * @return string
+     */
+    public function actionChange($id, $count)
+    {
+        Yii::$app->cart->setItem($id, Item::CART_TYPE, $count);
+        return '({"sumAll":' . Yii::$app->cart->getSum() . ', "sumItem":' .  Yii::$app->cart->getSumForItem($id, Item::CART_TYPE)
+            . ', "countItem":' .  Yii::$app->cart->getCountForItem($id, Item::CART_TYPE) . ', "countAll":' .
             Yii::$app->cart->getCount() . '})';
     }
 

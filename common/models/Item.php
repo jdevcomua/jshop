@@ -41,6 +41,11 @@ class Item extends Model implements CartAdd
     const AMAZON_SECRET = '28GsC8/NVPR3g9XAFFm1iZn6kyf/Eoz3062wGiDG';
     const AMAZON_BUCKET = 'umo4ka';
 
+    public function extraFields()
+    {
+        return ['category'];
+    }
+
     /**
      * @return array
      */
@@ -291,7 +296,7 @@ class Item extends Model implements CartAdd
      */
     public function existDiscount()
     {
-        return !(empty($this->getStockItems()->all()));
+        return !(empty($this->stockItems));
     }
 
     /**
@@ -326,9 +331,9 @@ class Item extends Model implements CartAdd
         if ($this->existDiscount()) {
             $stock = $this->getMaxDiscount();
             if ($stock->type == 1) {
-                return $this->cost * (1 - ($stock->value / 100));
+                return (int) ($this->cost * (1 - ($stock->value / 100)));
             } else {
-                return $this->cost - $stock->value;
+                return (int) ($this->cost - $stock->value);
             }
         } else {
             return $this->cost;

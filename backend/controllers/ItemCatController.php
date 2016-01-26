@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\web\UploadedFile;
 use yii\base\Model;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
@@ -96,12 +97,32 @@ class ItemCatController extends Controller
     public function actionCreate()
     {
         $model = new ItemCat();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->parent_id != 0) {
+                $model->level = $model->parent->level + 1;
+            } else {
+                $model->level = 1;
+                unset($model->parent_id);
+            }
+            if ($model->save()) {
+                $model->update();
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
+            }
         } else {
+            $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
+            $categoriesArray = [];
+            $categoriesArray[] = null;
+            foreach ($categories as $category) {
+                /* @var $category ItemCat*/
+                $categoriesArray[$category->id] = $category->title;
+                if (!empty($category->getChildren()->all())) {
+                    foreach ($category->getChildren()->all() as $child) {
+                        $categoriesArray[$child->id] = ' - ' . $child->title;
+                    }
+                }
+            }
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model, 'categories' => $categoriesArray
             ]);
         }
     }
@@ -115,12 +136,24 @@ class ItemCatController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->upload();
             return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
         } else {
+            $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
+            $categoriesArray = [];
+            $categoriesArray[] = null;
+            foreach ($categories as $category) {
+                /* @var $category ItemCat*/
+                $categoriesArray[$category->id] = $category->title;
+                if (!empty($category->getChildren()->all())) {
+                    foreach ($category->getChildren()->all() as $child) {
+                        $categoriesArray[$child->id] = ' - ' . $child->title;
+                    }
+                }
+            }
             return $this->render('update', [
-                'model' => $model, 'count' => 'one',
+                'model' => $model, 'count' => 'one', 'categories' => $categoriesArray
             ]);
         }
     }

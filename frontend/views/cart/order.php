@@ -119,7 +119,7 @@ use Yii;
                                                class="frame-photo-title">
                                                 <span class="photo-block">
                                                     <span class="helper"></span>
-                                                    <img src="<?php echo $item->getImageUrl() ?>" alt="">
+                                                    <img src="<?php echo array_shift($item->getImageUrl()) ?>" alt="">
                                                 </span>
                                                 <span class="title"><?php echo $item->title ?></span></a></td>
                                         <td>
@@ -135,7 +135,7 @@ use Yii;
                                             <div class="frame-prices f-s_0"><span class="current-prices f-s_0">
                                         <span class="price-new">
                                     <span><span
-                                            class="price"><?php //echo Yii::$app->cart->getSumForItem($item->id); ?></span> </span></span></span>
+                                            class="price"><?php echo Yii::$app->cart->getSumForItem($item->id, $item::CART_TYPE); ?></span> грн.</span></span></span>
                                             </div>
                                         </td>
                                     </tr>
@@ -146,9 +146,9 @@ use Yii;
                                 <tr>
                                     <td colspan="3">
                                         <span class="s-t f_l"><?php echo \Yii::t('app', 'Стоимость товаров:'); ?></span>
-                                        <div class="f_r">
+                                        <div class="f_r"><span>
                                             <span class="price f-w_b"
-                                                  style="margin-right: 19px;"><?php echo $sum; ?></span>
+                                                  style="margin-right: 19px;"><?php echo $sum; ?><span style="font-size: 12px;font-weight: 100;"> грн.</span></span></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -160,7 +160,7 @@ use Yii;
                                     <span class="frame-prices f_r">
                                         <span class="current-prices f-s_0">
                                             <span class="price-new">
-                                                <span><span id="finalAmount" class="price"><?php echo $sum; ?></span>
+                                                <span><span id="finalAmount" class="price"><?php echo $sum; ?></span> грн.
                                                 </span></span></span>  </span>
                                 </div>
                             </div>

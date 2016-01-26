@@ -12,12 +12,6 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KZ0u56ukNp3p5W82jnpJmisKu8wDUDdY',
-            /*'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]*/
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
         ],
         'urlHelper' => [
             'class' => 'common\components\UrlHelper',
@@ -31,10 +25,8 @@ $config = [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                //['class' => 'yii\rest\UrlRule', 'controller' => 'rest'],
                 '<language:(ru|en)>/'=>'site/index',
                 '<language:(ru|en)>/site/index'=>'site/index',
 
@@ -140,6 +132,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*']
     ];
 
     $config['bootstrap'][] = 'gii';

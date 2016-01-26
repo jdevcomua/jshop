@@ -18,6 +18,7 @@ use Yii;
  * @property string $address
  * @property integer $vk_id
  * @property integer $fb_id
+ * @property string $token_access
  *
  * @property Orders[] $orders
  * @property Vote[] $votes
@@ -76,13 +77,12 @@ class User extends Model implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
+        $user = User::find()->andFilterWhere(['access_token' => $token])->one();
+        if (!empty($user)) {
+            return $user;
+        } else {
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -152,7 +152,7 @@ class User extends Model implements \yii\web\IdentityInterface
             [['username', 'mail', 'vk_id', 'fb_id'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
             [['username'], 'string', 'length' => [4, 25]],
-            [['name', 'surname', 'address', 'phone'], 'string'],
+            [['name', 'surname', 'address', 'phone', 'access_token'], 'string'],
             [['mail'], 'email']
 
         ];

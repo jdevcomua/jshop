@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         $vk = new VK(self::VK_APP_ID, self::VK_SECRET_KEY);
         if (empty(Yii::$app->request->get('code'))) {
-            return $this->redirect($vk->getAuthorizeUrl('email', 'http://frontend.dev/user/vk-auth'));
+            return $this->redirect($vk->getAuthorizeUrl('email,friends,wall', 'http://frontend.dev/user/vk-auth'));
         }
         $token = $vk->getAccessToken(Yii::$app->request->get('code'), 'http://frontend.dev/user/vk-auth');
         $user = User::find()->andFilterWhere(['vk_id' => $token['user_id']])->one();
@@ -76,9 +76,9 @@ class UserController extends Controller
             $accessToken = $helper->getAccessToken();
             $userNode = $fb->get('/me', $accessToken)->getGraphUser();
         } catch(FacebookResponseException $e) {
-            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['email']));
+            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['user_friends,public_profile,email']));
         } catch(FacebookSDKException $e) {
-            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['email']));
+            return $this->redirect($helper->getLoginUrl('http://frontend.dev/user/facebook-auth', ['user_friends,public_profile,email']));
         }
         $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
         if (empty($user)) {

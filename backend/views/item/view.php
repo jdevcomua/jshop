@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div style="width: 100%;">
-        <div style="width: 550px; float:left; padding-right: 50px;">
+        <div style="width: 700px; float:left; padding-right: 25px;">
             <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'categoryTitle',
             'title',
             'cost',
+            'description',
             'count_of_views',
         ],
     ]);
@@ -53,12 +54,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
         </div></div>
     <?php foreach ($model->images as $image) {?>
-        <div align="center"  style="vertical-align:middle; height: 260px; width: 260px; float:left; padding: 5px 5px 5px 5px;margin: 5px 5px 5px 5px;border:1px dotted #cdc9c9;">
+        <div align="center"  style="vertical-align:middle; height: 180px; width: 180px; float:left; padding: 5px 5px 5px 5px;margin: 5px 5px 5px 5px;border:1px dotted #cdc9c9;">
         <button type="button" class="icon_times deleteFromCompare"
                 style="background: url('http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/images/sprite.png') no-repeat;
                 background-position: -440px 0;height: 14px;border: 0;width:14px;position: absolute;"
                 onclick="deleteImage(<?php echo $image->id; ?>, $(this))"></button>
-            <img style="vertical-align:middle;max-width: 250px; max-height: 250px;" src="<?php echo $image->getImageUrl(); ?>"/>
+            <img style="vertical-align:middle;max-width: 170px; max-height: 170px;" src="<?php echo $image->getImageUrl(); ?>"/>
         </div>
     <?php }?>
 

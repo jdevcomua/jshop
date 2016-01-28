@@ -238,7 +238,7 @@ use yii\helpers\Html;
                             </div>
                             <!-- Start. Description -->
                             <div class="short-desc">
-                                <p>краткое описание</p>
+                                <p></p>
                             </div>
                         </div>
                     </div>
@@ -381,53 +381,22 @@ use yii\helpers\Html;
                     <?php } ?>
                     <!-- Start. Tabs block-->
                     <div class="f-s_0">
-                        <ul class="tabs tabs-data tabs-product">
-                            <li class="active">
-                                <button data-href="#view"><?php echo \Yii::t('app', 'Обзор'); ?></button>
-                            </li>
-
-                            <li>
-                                <button data-href="#first"
-                                        data-source="http://active.imagecmsdemo.net/shop/product_api/renderProperties"
-                                        data-data="{&quot;product_id&quot;: 17216}" data-selector=".characteristic">
-                                    <?php echo \Yii::t('app', 'Свойства'); ?>
-                                </button>
-                            </li>
-                            <li>
-                                <button data-href="#second"
-                                        data-source="http://active.imagecmsdemo.net/shop/product_api/renderFullDescription"
-                                        data-data="{&quot;product_id&quot;: 17216}"
-                                        data-selector=".inside-padd > .text"><?php echo \Yii::t('app', 'Полное описание'); ?>
-                                </button>
-                            </li>
-                            <!--Output of the block comments-->
-                            <li>
-                                <button type="button" data-href="#comment" >
-                                    <span class="icon_comment-tab"></span>
-                                    <span class="text-el">
-                                        <span id="cc">
-                                            <?php echo \Yii::t('app', 'Отзывы'); ?>
-                                        </span>
-                                    </span>
-                                </button>
-                            </li>
-                        </ul>
                         <div class="frame-tabs-ref frame-tabs-product">
                             <div id="view">
+                                <?php if ($item->getCharacteristicItems()->count() > 0) { ?>
                                 <div class="inside-padd">
                                     <div class="title-h2"><?php echo \Yii::t('app', 'Свойства'); ?></div>
                                     <div class="characteristic">
                                         <div class="product-charac patch-product-view showHidePart">
                                             <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
                                                 <tbody>
-                                                <?php foreach ($item->getCharacteristicItems()->all() as $value) {
+                                                <?php foreach ($item->characteristicItems as $value) {
                                                     /* @var $value common\models\CharacteristicItem */
-                                                    if (!empty($item->value)) {
-                                                        echo "<tr><td>" . $item->getCharacteristic()->one()['title'] . "</td>";
-                                                        echo "<td>" . $item->value . "</td></tr>";
+                                                    if (!empty($value->value)) {
+                                                        echo "<tr><td>" . $value->characteristic->title . "</td>";
+                                                        echo "<td>" . $value->value . "</td></tr>";
                                                     }
                                                 }
-                                                //var_dump($item->getCategory()->one()['title']);
                                                 ?>
                                                 </tbody>
                                             </table>
@@ -439,23 +408,27 @@ use yii\helpers\Html;
                                         </button>
                                     </div>
                                 </div>
-                                <div class="inside-padd">
+                                <?php } ?>
+                                <?php if (!empty($item->description)) { ?>
+                                <div class="inside-padd" style="margin: 0;">
                                     <!--                        Start. Description block-->
                                     <div class="product-descr patch-product-view showHidePart">
                                         <div class="text">
                                             <div class="title-h2"><?php echo \Yii::t('app', 'Описание'); ?></div>
-                                            <h2>...</h2>
-                                            <p></p></div>
+                                            <p><?php echo $item->description; ?></p>
+                                            </div>
                                     </div>
                                     <!--                        End. Description block-->
                                 </div>
+                                <?php } ?>
 
                                 <div class="inside-padd">
                                     <!--Start. Comments block-->
                                     <div class="frame-form-comment">
                                         <div class="forComments p_r">
                                             <div class="comments" id="comments">
-                                                <div class="title-comment"><?php echo \Yii::t('app', 'Отзывы'); ?></div>
+                                                <?php if ($item->getVotes()->count() > 0) { ?>
+                                                <div class="title-h2"><?php echo \Yii::t('app', 'Отзывы'); ?></div>
                                                 <div class="drop comments-main-form  active inherit">
                                                     <div class="frame-comments layout-highlight horizontal-form">
 
@@ -513,6 +486,7 @@ use yii\helpers\Html;
                                                         <?php } } ?>
                                                     </ul>
                                                 </div>
+                                                <?php } ?>
                                                 <br>
                                                 <div class="frame-drop-comment" data-rel="whoCloneAddPaste">
                                                     <div class="form-comment layout-highlight frame-comments">
@@ -531,28 +505,7 @@ use yii\helpers\Html;
                                 </div>
                             </div>
                             <!--             Start. Characteristic-->
-                            <div id="first" style="">
-                                <div class="inside-padd">
-                                    <div class="title-h2"><?php echo \Yii::t('app', 'Свойства'); ?></div>
-                                    <div class="characteristic">
-                                        <div class="preloader"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--                    End. Characteristic-->
-                            <div id="second" style="">
-                                <div class="inside-padd">
-                                    <div class="title-h2"><?php echo \Yii::t('app', 'Описание'); ?></div>
-                                    <div class="text">
-                                        <div class="preloader"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="comment" style="">
-                                <div class="inside-padd forComments p_r">
-                                    <div class="preloader"></div>
-                                </div>
-                            </div>
+
 
                         </div>
                         <!-- End. Tabs block-->

@@ -43,7 +43,7 @@ $config = [
                 '<language:(ru|en)>/item/<id:\d+>'=>'item/view',
                 '<language:(ru|en)>/item/delete'=>'item/delete',
                 '<language:(ru|en)>/item/characteristics'=>'item/characteristics',
-                '<language:(ru|en)>/item/updatecharacteristics'=>'item/updatecharacteristics',
+                '<language:(ru|en)>/item/update-characteristics'=>'item/update-characteristics',
 
                 '<language:(ru|en)>/item-cat'=>'item-cat/index',
                 '<language:(ru|en)>/item-cat/index'=>'item-cat/index',

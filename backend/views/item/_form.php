@@ -29,6 +29,8 @@ use kartik\select2\Select2;
 
         <?php echo $form->field($model, 'cost')->textInput(['style' => 'width:48%;']);?>
 
+        <?php echo $form->field($model, 'description')->textarea(['rows' => 4]);?>
+
         <?php $images = [];
         if (!$model->isNewRecord) {
             foreach ($model->getImageUrl() as $url) {

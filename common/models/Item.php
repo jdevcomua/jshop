@@ -18,6 +18,7 @@ use dosamigos\transliterator\TransliteratorHelper;
  * @property double $cost
  * @property integer $count_of_views
  * @property string $addition_date
+ * @property string description
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -124,7 +125,7 @@ class Item extends Model implements CartAdd
             [['addition_date'], 'safe'],
             [['cost'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
-            [['title'], 'string'],
+            [['title', 'description'], 'string'],
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
@@ -225,6 +226,7 @@ class Item extends Model implements CartAdd
             'categoryTitle' => Yii::t('app', 'Категория'),
             'count_of_views' => Yii::t('app', 'Количество просмотров'),
             'newPrice' => Yii::t('app', 'Новая цена'),
+            'description' => Yii::t('app', 'Описание'),
         ];
     }
 

@@ -407,4 +407,13 @@ class Item extends Model implements CartAdd
         return self::CART_TYPE;
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getTop()
+    {
+        return Item::find()->joinWith('orderItems')->groupBy('order_item.item_id')
+            ->orderBy('count(order_item.count) desc')->limit(3);
+    }
+
 }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use kartik\file\FileInput;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Stock */
@@ -14,19 +15,44 @@ use kartik\file\FileInput;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
-    echo $form->field($model, 'title')->textInput(['maxlength' => true]);
+    echo $form->field($model, 'title')->textInput(['maxlength' => true]); ?>
 
-    echo $form->field($model, 'date_from')->textInput();
+    <div style="width: 47%; float:left;margin-right: 6%">
+        <?php echo $form->field($model, 'date_from')->widget(DateControl::classname(), [
+            'ajaxConversion' => false,
+            'type'=>DateControl::FORMAT_DATETIME,
+            'options' => [
+                'pluginOptions' => [
+                    'autoclose' => true
+                ],
+            ]
+        ]);?>
+    </div>
 
-    echo $form->field($model, 'date_to')->textInput();
+    <div style="width: 47%; float:left;">
+        <?php echo $form->field($model, 'date_to')->widget(DateControl::classname(), [
+            'ajaxConversion' => false,
+            'type'=>DateControl::FORMAT_DATETIME,
+            'options' => [
+                'pluginOptions' => [
+                    'autoclose' => true
+                ],
+            ]
+        ]);?>
+    </div>
 
-    echo $form->field($model, 'description')->textarea(['rows' => 6]);
+    <?php echo $form->field($model, 'description')->textarea(['rows' => 4]);?>
 
-    echo $form->field($model, 'type')->dropDownList(['1' => 'Проценты', '2' => 'Фиксированный']);
+    <div style="width: 47%; float:left;margin-right: 6%">
+        <?php echo $form->field($model, 'type')->dropDownList(['1' => 'Проценты', '2' => 'Фиксированный']);?>
+    </div>
 
-    echo $form->field($model, 'value')->textInput();
+    <div style="width: 47%; float:left;">
+        <?php echo $form->field($model, 'value')->textInput();?>
+    </div>
 
-    $configs = [
+    <div style="float: left;width: 100%;padding-bottom: 15px;">
+    <?php $configs = [
         'name' => 'items',
         'data' => $arrayItems,
         'options' => [
@@ -37,10 +63,10 @@ use kartik\file\FileInput;
     if (isset($selected)) {
         $configs['value'] = $selected;
     }
-    echo Select2::widget($configs);
+    echo Select2::widget($configs);?>
+    </div>
 
-    echo '<br>';
-    $images = [];
+    <?php $images = [];
     if (!$model->isNewRecord && !empty($model->image)) {
         $images[] = Html::img($model->getImageUrl(), ['width' => '120px']);
     }
@@ -56,7 +82,7 @@ use kartik\file\FileInput;
                 'width' => '120px'
             ],
             'showUpload' => false,
-            'overwriteInitial' => false,
+            'overwriteInitial' => true,
             'maxFileCount' => 1
         ]
     ]);

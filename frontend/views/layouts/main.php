@@ -9,9 +9,9 @@ use yii\helpers\Url;
 use frontend\assets\AppAsset;
 use common\components\CategoriesView;
 
-AppAsset::register($this);
+//AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+<?php //$this->beginPage() ?>
 <html>
 <head>
     <?php //$this->head() ?>
@@ -57,13 +57,13 @@ AppAsset::register($this);
     <script src="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js"></script>
     <!-- Owl Carousel Assets -->
     <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="//frontend.dev/css/owl.theme.css" rel="stylesheet">
 
 
 </head>
 
 <body class="isChrome shop_category notTouch">
-<?php $this->beginBody() ?>
+<?php //$this->beginBody() ?>
 <div class="main-body">
     <div class="fon-header">
         <header>
@@ -116,15 +116,13 @@ AppAsset::register($this);
                                         </li>
 
                                         <li>
-                                            <a href="http://active.imagecmsdemo.net/novosti" target="_self"
-                                               title="Новости">
-                                                <?php echo \Yii::t('app', 'Новости'); ?>        </a>
+                                            <a href="<?php echo Yii::$app->urlHelper->to(['compare']);?>">
+                                                <?php echo \Yii::t('app', 'Сравнение'); ?>        </a>
                                         </li>
 
                                         <li>
-                                            <a href="http://active.imagecmsdemo.net/kontakty" target="_self"
-                                               title="Контакты">
-                                                <?php echo \Yii::t('app', 'Контакты'); ?>        </a>
+                                            <a href="<?php echo Yii::$app->urlHelper->to(['promotions']);?>">
+                                                <?php echo \Yii::t('app', 'Акции'); ?>        </a>
                                         </li>
                                         <?php
                                         $array = Yii::$app->request->queryParams;
@@ -355,7 +353,7 @@ AppAsset::register($this);
         <div id="fancybox-loading">
             <div></div>
         </div>
-        <?php $this->endBody() ?>
+        <?php //$this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php //$this->endPage() ?>

@@ -41,7 +41,8 @@ class Kit extends Model implements CartAdd
         return [
             [['description'], 'string'],
             [['cost'], 'number'],
-            [['title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255],
+            [['title', 'cost'], 'required']
         ];
     }
 

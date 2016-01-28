@@ -19,6 +19,13 @@ class SiteController extends Controller
      */
     function actionIndex()
     {
+        //var_dump(Item::getTop()->all());die;
+        /*Yii::$app->mailer
+            ->compose()
+            ->setFrom('litvinova.a95@gmail.com')
+            ->setTo('litvinova.a95@gmail.com')
+            ->setSubject('subject')
+            ->send();die;*/
         $items = Item::find()->orderBy('addition_date desc')->limit(6)->all();
         if (Yii::$app->user->isGuest) {
             $wishLists = [];

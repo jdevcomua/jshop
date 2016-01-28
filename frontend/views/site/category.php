@@ -179,7 +179,7 @@ use yii\widgets\ActiveForm;
                                                 <?php if (!Yii::$app->compare->existInList($value->id)) { ?>
                                                 <div id="toCompare" class="btn-compare">
                                                     <button class="toCompare" type="button" data-title="В список сравнений"
-                                                            onclick="addToCompareList(<?php echo $value->id; ?>)" >
+                                                            onclick="addToCompareList(<?php echo $value->id; ?>, $(this))" >
                                                         <span class="icon_compare"></span>
                                                         <span class="text-el d_l">В список сравнений</span>
                                                     </button>
@@ -241,6 +241,8 @@ use yii\widgets\ActiveForm;
                                          style="height: 281px; width: 100%; position: absolute; right: auto; left: 0px; bottom: auto; top: 0px;">
 
                                     </div>
+                                    </div>
+                                </div>
                         </li>
 
                         <?php

@@ -51,7 +51,7 @@ class KitController extends Controller
      */
     public function actionView($id)
     {
-        $model = Kit::find()->where('id = ' + $id)->joinWith('kitItems')->one();
+        $model = Kit::find()->where('kit.id=' . $id)->joinWith('kitItems')->one();
         $items = new ActiveDataProvider([
             'query' => $model->getKitItems()->joinWith('item'),
         ]);

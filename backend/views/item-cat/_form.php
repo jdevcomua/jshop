@@ -40,7 +40,7 @@ use kartik\file\FileInput;
                 'width' => '120px'
             ],
             'showUpload' => false,
-            'overwriteInitial' => false,
+            'overwriteInitial' => true,
             'maxFileCount' => 1
         ]
     ]);

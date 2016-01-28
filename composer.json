@@ -25,7 +25,10 @@
         "facebook/php-sdk-v4": "*",
         "kartik-v/yii2-widget-fileinput": "*",
         "2amigos/yii2-transliterator-helper": "*",
-        "kartik-v/yii2-widget-typeahead": "*"
+        "kartik-v/yii2-widget-typeahead": "*",
+        "kartik-v/yii2-datecontrol": "dev-master",
+        "kartik-v/yii2-widgets": "@dev",
+        "lbootstrap-plus/bootstrap-media-lightbox": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -108,17 +108,10 @@ use yii\helpers\Html;
                                 $(document).ready(function() {
                                     $("#owl-demo").owlCarousel({
 
-                                        navigation : true,
+                                        navigation : false,
                                         slideSpeed : 300,
                                         paginationSpeed : 400,
                                         singleItem : true
-
-                                        // "singleItem:true" is a shortcut for:
-                                        // items : 1,
-                                        // itemsDesktop : false,
-                                        // itemsDesktopSmall : false,
-                                        // itemsTablet: false,
-                                        // itemsMobile : false
 
                                     });
                                 });
@@ -146,15 +139,15 @@ use yii\helpers\Html;
                                         <div class="frame-prices f-s_0">
                                             <!-- Start. Check old price-->
                                             <?php if ($item->existDiscount()) { ?>
-                                                <span class="price-discount">
-                                                    <span class="price priceOrigVariant"><?php echo $item->cost; ?></span>
+                                                <span class="price-discount"><span>
+                                                    <span class="price priceOrigVariant"><?php echo $item->cost; ?></span> грн.</span>
                                                 </span>
                                             <?php } ?>
                                             <!-- End. Check old price-->
                                             <!-- Start. Product price-->
                                             <span class="current-prices f-s_0">
-                                                <span class="price-new">
-                                                    <span class="price priceVariant"><?php echo $item->existDiscount() ? $item->getNewPrice() : $item->cost; ?></span>
+                                                <span class="price-new"><span>
+                                                    <span class="price priceVariant"><?php echo $item->existDiscount() ? $item->getNewPrice() : $item->cost; ?></span> грн.</span>
                                                 </span>
                                             </span>
                                             <!-- End. Product price-->
@@ -282,7 +275,7 @@ use yii\helpers\Html;
                                                 <span class="current-prices f-s_0">
                                                     <span class="price-new">
                                                         <span>
-                                                            <span class="price priceVariant"><?php echo $item->getCost();?></span>
+                                                            <span class="price priceVariant"><?php echo $item->getCost();?></span> грн.
                                                         </span>
                                                     </span>
                                                                                                     </span>
@@ -316,7 +309,7 @@ use yii\helpers\Html;
                                                                     <span class="current-prices f-s_0">
                                                                         <span class="price-new">
                                                                             <span>
-                                                                                <span class="price priceVariant"><?php echo $kitItem->item->getCost(); ?></span>
+                                                                                <span class="price priceVariant"><?php echo $kitItem->item->getCost(); ?></span> грн.
                                                                             </span>
                                                                         </span>
                                                                     </span>
@@ -342,18 +335,17 @@ use yii\helpers\Html;
         $sum = $kitItem->item->cost;
     }
     echo $sum;
-    ?></span>
+    ?></span> грн.
                                             </span>
                                         </span>
                                         <span class="current-prices f-s_0">
                                             <span class="price-new">
                                                 <span>
-<span class="price"><?php echo $kit->cost; ?></span>
+<span class="price"><?php echo $kit->cost; ?></span> грн.
                                                 </span>
                                             </span>
                                                                                     </span>
                                                         </div>
-                                                        <form method="POST" action="/shop/cart/addKit/16">
                                                             <div class="btn-cart-p btn-cart d_n">
                                                                 <button type="button" data-id="16" class="btnBuy infoBut btnBuyKit">
                                                                     <span class="icon_cleaner icon_cleaner_buy"></span>
@@ -361,12 +353,11 @@ use yii\helpers\Html;
                                                                 </button>
                                                             </div>
                                                             <div class="btn-buy-p btn-buy">
-                                                                <button type="button" data-id="16" onclick="addKit(1)" class="btnBuy infoBut btnBuyKit">
+                                                                <button type="button" data-id="16" onclick="addKit(<?php echo $kit->id?>)" class="btnBuy infoBut btnBuyKit">
                                                                     <span class="icon_cleaner icon_cleaner_buy"></span>
                                                                     <span class="text-el">Купить</span>
                                                                 </button>
                                                             </div>
-                                                            <input type="hidden" value="3df462ac0dcbe669ab4978ba1ef7cf1f" name="cms_token">                            </form>
                                                     </div>
                                                 </div>
                                                 <!-- /total -->

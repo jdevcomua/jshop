@@ -73,7 +73,7 @@ class Stock extends Model
             [['date_from', 'date_to'], 'safe'],
             [['description', 'image', 'title'], 'string'],
             [['type', 'value'], 'integer'],
-            [['title'], 'required'],
+            [['title', 'date_to', 'date_from', 'value'], 'required'],
         ];
     }
 
@@ -116,6 +116,15 @@ class Stock extends Model
     public static function getCurrent()
     {
         return Stock::find()->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
-        ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')]);
+            ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getThreeItems()
+    {
+        return Item::find()->joinWith(['stocks'])->andFilterWhere(['<', 'stock.date_from', date('Y-m-d H:i:s')])
+            ->andFilterWhere(['>', 'stock.date_to', date('Y-m-d H:i:s')])->limit(3);
     }
 }

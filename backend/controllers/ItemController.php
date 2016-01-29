@@ -11,7 +11,7 @@ use common\models\Item;
 use common\models\Characteristic;
 use common\models\CharacteristicItem;
 use yii\web\NotFoundHttpException;
-use yii\web\UploadedFile;
+use yii\data\Pagination;
 use common\models\search\CharacteristicItemSearch;
 use yii\helpers\ArrayHelper;
 
@@ -29,6 +29,7 @@ class ItemController extends Controller
     {
         $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         $categories = Item::find()
             ->select(['i.title'])
             ->join('JOIN', 'item_cat i', 'item.category_id = i.id')

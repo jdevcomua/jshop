@@ -6,6 +6,7 @@ use Yii;
 use common\models\User;
 use common\models\search\UserSearch;
 use yii\web\NotFoundHttpException;
+use yii\data\Pagination;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -21,7 +22,7 @@ class UserController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

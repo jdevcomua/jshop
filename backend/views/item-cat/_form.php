@@ -47,7 +47,12 @@ use kartik\file\FileInput;
     ?>
 <br>
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
+        ]) . ' ';
+        echo Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
+            'class' => 'btn btn-primary', 'name' => 'action', 'value' => 'chars'
+        ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

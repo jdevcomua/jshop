@@ -4,15 +4,9 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\LoginForm;
-use Aws\S3;
-use Aws\Sdk;
 
 class SiteController extends Controller
 {
-
-    const AMAZON_KEY = 'AKIAIR2NVD2HK4P7BW4Q';
-    const AMAZON_SECRET = '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';
-    const AMAZON_BUCKET = 'umo4ka';
 
     public function actions()
     {

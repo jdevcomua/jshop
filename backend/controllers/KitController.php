@@ -11,6 +11,7 @@ use common\models\ItemCat;
 use yii\helpers\ArrayHelper;
 use common\models\KitItem;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * KitController implements the CRUD actions for Kit model.
@@ -37,7 +38,7 @@ class KitController extends Controller
     {
         $searchModel = new KitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

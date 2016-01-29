@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
-use yii\web\UploadedFile;
+use yii\data\Pagination;
 
 /**
  * StockController implements the CRUD actions for Stock model.
@@ -38,7 +38,7 @@ class StockController extends Controller
     {
         $searchModel = new StockSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

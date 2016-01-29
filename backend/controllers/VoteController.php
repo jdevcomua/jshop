@@ -8,6 +8,7 @@ use common\models\search\VoteSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * VoteController implements the CRUD actions for Vote model.
@@ -34,12 +35,15 @@ class VoteController extends Controller
     {
         $searchModel = new VoteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         $notChecked = new ActiveDataProvider([
             'query' => Vote::find()->andFilterWhere(['checked' => '0'])->orderBy('timestamp')
         ]);
+        $notChecked->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         $hidden = new ActiveDataProvider([
             'query' => Vote::find()->andFilterWhere(['checked' => '-1'])->orderBy('timestamp')
         ]);
+        $hidden->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

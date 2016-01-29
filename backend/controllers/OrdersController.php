@@ -8,6 +8,7 @@ use common\models\search\OrdersSearch;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 use common\models\OrderItem;
+use yii\data\Pagination;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -23,7 +24,7 @@ class OrdersController extends Controller
     {
         $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

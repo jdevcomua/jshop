@@ -47,7 +47,8 @@ class Characteristic extends Model
     {
         return [
             [['category_id'], 'integer'],
-            [['title'], 'string']
+            [['title'], 'string'],
+            [['title'], 'required']
         ];
     }
 

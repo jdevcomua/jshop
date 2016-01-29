@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use common\models\Characteristic;
 use Yii;
-use yii\web\UploadedFile;
 use yii\base\Model;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
 use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * ItemCatController implements the CRUD actions for ItemCat model.
@@ -58,7 +60,7 @@ class ItemCatController extends Controller
     {
         $searchModel = new ItemCatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -84,8 +86,11 @@ class ItemCatController extends Controller
      */
     public function actionView($id)
     {
+        $characteristics = new ActiveDataProvider([
+            'query' => ItemCat::findOne($id)->getCharacteristics()
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id), 'characteristics' => $characteristics
         ]);
     }
 
@@ -106,7 +111,11 @@ class ItemCatController extends Controller
             }
             if ($model->save()) {
                 $model->upload();
-                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
+                if (Yii::$app->request->post()['action'] == 'save') {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
+                } elseif (Yii::$app->request->post()['action'] == 'chars') {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
+                }
             }
         } else {
             $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
@@ -185,5 +194,60 @@ class ItemCatController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     */
+    public function actionCharacteristics($id)
+    {
+        $request = Yii::$app->request;
+        $models = [];
+        if ($request->isPost) {
+            $data = Yii::$app->request->post('Characteristic', []);
+            foreach (array_keys($data) as $index) {
+                $models[$index] = new Characteristic();
+            }
+            if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
+                foreach ($models as $characteristic) {
+                    /* @var $characteristic Characteristic*/
+                    $characteristic->category_id = $id;
+                    $characteristic->save();
+                }
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
+            }
+        }
+        $models = [new Characteristic()];
+        return $this->render('characteristics', [
+            'models' => $models, 'category' => ItemCat::findOne($id)
+        ]);
+    }
+
+    public function actionUpdateCharacteristics($id)
+    {
+        $models = ItemCat::findOne($id)->characteristics;
+        $request = Yii::$app->request;
+        if ($request->isPost) {
+            $data = Yii::$app->request->post('Characteristic', []);
+            foreach (array_keys($data) as $index) {
+                $models[$index] = new Characteristic();
+            }
+            if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
+                Characteristic::deleteAll(['category_id' => $id]);
+                foreach ($models as $characteristic) {
+                    /* @var $characteristic Characteristic*/
+                    $characteristic->category_id = $id;
+                    $characteristic->save();
+                }
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
+            }
+        }
+        if (empty($models)) {
+            $models = [new Characteristic()];
+        }
+        return $this->render('characteristics', [
+            'models' => $models, 'category' => ItemCat::findOne($id)
+        ]);
     }
 }

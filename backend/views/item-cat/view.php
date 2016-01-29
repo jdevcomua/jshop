@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
@@ -15,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?php echo Html::encode($this->title) ?></h3>
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
         echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -31,6 +32,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
         ],
-    ]) ?>
+    ]);?>
+
+    <h3>Характеристики</h3>
+
+    <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item-cat/update-characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);
+
+    echo GridView::widget([
+        'dataProvider' => $characteristics,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'title'
+
+        ],
+    ]);
+    ?>
 
 </div>

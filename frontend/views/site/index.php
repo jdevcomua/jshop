@@ -76,7 +76,7 @@ use yii\widgets\ActiveForm;
                                                        class="frame-photo-title">
                                                         <span class="photo-block">
                                                             <span class="helper"></span>
-                                                            <img src="<?php echo array_shift($item->getImageUrl()); ?>">
+                                                            <img src="<?php echo array_shift($item->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
                                                             <span class="product-status nowelty"></span>
                                                         </span>
                                                         <span class="title"><?php echo $item->title; ?></span>
@@ -281,7 +281,7 @@ use yii\widgets\ActiveForm;
                                                                     <a href="<?php echo Yii::$app->urlHelper->to(['item/' . $value->id . '-' . $value->getTranslit()]); ?>"
                                                                        class="frame-photo-title">
                                 <div class="photo-block" align="center"><img
-                                        src="<?php echo array_shift($value->getImageUrl()); ?>">
+                                        src="<?php echo array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
                                     <?php if ($value->existDiscount()) { ?>
                                         <span class="product-status action"></span>
                                     <?php } ?>
@@ -489,7 +489,7 @@ use yii\widgets\ActiveForm;
                                                                     <a href="<?php echo Yii::$app->urlHelper->to(['item/' . $value->id . '-' . $value->getTranslit()]); ?>"
                                                                        class="frame-photo-title">
                                                                         <div class="photo-block" align="center"><img
-                                                                                src="<?php echo array_shift($value->getImageUrl()); ?>">
+                                                                                src="<?php echo array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
                                                                                 <span class="product-status hit"></span>
                                                                         </div>
                                                                         <span class="title"><?php echo $value['title']; ?></span></a>

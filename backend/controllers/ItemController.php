@@ -10,6 +10,7 @@ use Yii;
 use common\models\Item;
 use common\models\Characteristic;
 use common\models\CharacteristicItem;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\data\Pagination;
 use common\models\search\CharacteristicItemSearch;
@@ -64,10 +65,10 @@ class ItemController extends Controller
      */
     public function actionView($id)
     {
-        $searchModel = new CharacteristicItemSearch();
-        $searchModel->item_id = $id;
-        $characteristics = $searchModel->search([
-            'item_id' => $id,
+        $characteristics = new ActiveDataProvider([
+            'query' => CharacteristicItem::find()->joinWith('characteristic')
+                ->andFilterWhere(['characteristic_item.item_id' => $id])
+                ->andFilterWhere(['!=', 'characteristic_item.value', '{"ru":""}'])
         ]);
         return $this->render('view', [
             'model' => $this->findModel($id), 'characteristics' => $characteristics

@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
         echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div style="width: 100%;">
-        <div style="width: 700px; float:left; padding-right: 25px;">
+        <div style="width: 750px; float:left; padding-right: 25px;">
             <?php echo DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -42,7 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'count_of_views',
         ],
     ]);
-            echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item/update-characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);
+            echo '<p>' .Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to([
+                    'item/update-characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']) . '</p>';
             echo GridView::widget([
                 'dataProvider' => $characteristics,
                 'columns' => [

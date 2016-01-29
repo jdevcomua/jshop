@@ -8,6 +8,7 @@ use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
 use dosamigos\transliterator\TransliteratorHelper;
+use Eventviva\ImageResize;
 
 /**
  * This is the model class for table "item".
@@ -43,6 +44,7 @@ class Item extends Model implements CartAdd
     const AMAZON_KEY = 'AKIAIR2NVD2HK4P7BW4Q';
     const AMAZON_SECRET = '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';
     const AMAZON_BUCKET = 'umo4ka';
+    const SMALL_IMAGE = 'small_';
 
     public function extraFields()
     {
@@ -89,7 +91,7 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @return string of dir with images
+     * @return string path of dir with images
      */
     public static function getPath()
     {
@@ -97,19 +99,15 @@ class Item extends Model implements CartAdd
     }
 
     /**
+     * @param string $size of image
      * @return array
      */
-    public function getImageUrl()
+    public function getImageUrl($size = '')
     {
         $urls = [];
         foreach ($this->images as $image) {
-            if ($image->storage == self::MY_SERVER) {
-                $urls[] = 'http://frontend.dev/img/' . $image->name;
-            } elseif ($image->storage == self::AMAZON) {
-                $urls[] = 'https://s3.eu-central-1.amazonaws.com/' . self::AMAZON_BUCKET . '/' . $image->name;
-            }
+            $urls[] = $image->getImageUrl($size);
         }
-        if (empty($urls)) return [];
         return $urls;
     }
 
@@ -120,7 +118,7 @@ class Item extends Model implements CartAdd
     {
         return [
             [['category_id', 'count_of_views'], 'integer'],
-            [['title', 'cost'], 'required'],
+            [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['addition_date'], 'safe'],
             [['cost'], 'number'],
@@ -146,6 +144,14 @@ class Item extends Model implements CartAdd
                 $image->name = $fileName;
                 $image->storage = self::MY_SERVER;
                 $image->item_id = $this->id;
+
+                $smallImage = new ImageResize(Item::getPath() . $fileName);
+                $smallImage->quality_jpg = 100;
+                $smallImage->quality_png= 100;
+                $smallImage->resizeToBestFit(200, 160);
+                $smallImage->save(Item::getPath() . self::SMALL_IMAGE . $fileName);
+
+                $image->small = self::SMALL_IMAGE . $fileName;
                 $image->save();
             }
         }
@@ -167,6 +173,20 @@ class Item extends Model implements CartAdd
             $image->name = $fileName;
             $image->storage = self::AMAZON;
             $image->item_id = $this->id;
+
+            $smallImage = new ImageResize($image->getImageUrl());
+            $smallImage->quality_jpg = 100;
+            $smallImage->quality_png= 100;
+            $smallImage->resizeToBestFit(200, 160);
+            $client->putObject([
+                'Bucket' => self::AMAZON_BUCKET,
+                'Key' => self::SMALL_IMAGE . $fileName,
+                'Body' => $smallImage,
+                'ACL' => 'public-read',
+            ]);
+            //$smallImage->save(Item::getPath() . self::SMALL_IMAGE . $fileName);
+
+            $image->small = self::SMALL_IMAGE . $fileName;
             $image->save();
         }
     }

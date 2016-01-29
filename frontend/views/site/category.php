@@ -64,26 +64,28 @@ use yii\widgets\ActiveForm;
                             <!-- Start. Order by block -->
                             <div class="frame-sort f_l">
                                 <span class="title s-t f_l"><?php echo \Yii::t('app', 'Сортировать'); ?></span>
-                                <ul class="nav-sort nav f_l" id="sort" name="order">
+                                <ul class="nav-sort nav f_l" id="sort">
                                     <li>
-                                        <button type="button" data-value="action"
-                                                class="d_l_3"><?php echo \Yii::t('app', 'Акции'); ?></button>
+                                        <a href="?sort=promotions"
+                                           class="d_l_3"><?php echo \Yii::t('app', 'Акции'); ?></a>
                                     </li>
                                     <li><a href="?sort=asc"
-                                           class="d_l_3"><?php echo \Yii::t('app', 'От дешевых к дорогим'); ?></a></li>
+                                           class="d_l_3"><?php echo \Yii::t('app', 'От дешевых к дорогим'); ?></a>
+                                    </li>
                                     <li><a href="?sort=desc"
-                                           class="d_l_3"><?php echo \Yii::t('app', 'От дорогих к дешевым'); ?></a></li>
-                                    <li>
-                                        <button type="button" data-value="hit"
-                                                class="d_l_3"><?php echo \Yii::t('app', 'Популярные'); ?></button>
+                                           class="d_l_3"><?php echo \Yii::t('app', 'От дорогих к дешевым'); ?></a>
                                     </li>
                                     <li>
-                                        <button type="button" data-value="rating"
-                                                class="d_l_3"><?php echo \Yii::t('app', 'Рейтинг'); ?></button>
+                                        <a href="?sort=top"
+                                           class="d_l_3"><?php echo \Yii::t('app', 'Популярные'); ?></a>
                                     </li>
                                     <li>
-                                        <button type="button" data-value="hot"
-                                                class="d_l_3"><?php echo \Yii::t('app', 'Новинки'); ?></button>
+                                        <a href="?sort=rating"
+                                           class="d_l_3"><?php echo \Yii::t('app', 'Рейтинг'); ?></a>
+                                    </li>
+                                    <li>
+                                        <a href="?sort=new"
+                                           class="d_l_3"><?php echo \Yii::t('app', 'Новинки'); ?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -319,7 +321,7 @@ use yii\widgets\ActiveForm;
 
                             <?php $i = 0;
                             foreach ($chars as $char) {
-                                if (!empty($char->getCharacteristicItems()->all())) {
+                                if (!empty($char->characteristicItems)) {
 
                                     ?>
 
@@ -335,10 +337,10 @@ use yii\widgets\ActiveForm;
                                                     </span>
                                                 </span>
                                             </div>
-                                            <div class="filters-content d_n">
+                                            <div class="filters-content <?php echo !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
                                                 <ul>
                                                     <?php
-                                                    foreach ($char->getCharacteristicItems()->all() as $itemm) {
+                                                    foreach ($char->characteristicItems as $itemm) {
                                                         if (!empty($itemm->value)) {
                                                             ?>
                                                             <li>

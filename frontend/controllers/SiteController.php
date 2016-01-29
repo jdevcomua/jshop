@@ -18,7 +18,7 @@ class SiteController extends Controller
     /**
      * @return string
      */
-    function actionIndex()
+    public function actionIndex()
     {
         $items = Item::find()->orderBy('addition_date desc')->limit(6)->all();
         if (Yii::$app->user->isGuest) {
@@ -26,20 +26,49 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items'=>$items, 'wishLists' => $wishLists]);
+        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists]);
     }
 
-    function actionCategory($id)
+    /**
+     * @param $items \yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
+     */
+    public function sorting($items)
+    {
+        switch (Yii::$app->request->get('sort')) {
+            case 'asc' : $items->orderBy('cost asc'); break;
+            case 'desc' : $items->orderBy('cost desc'); break;
+            case 'promotions' : $items->join('inner join', 'stock_item', 'stock_item.item_id=item.id'); break;
+            case 'date' : $items->orderBy('addition_date desc'); break;
+            case 'rating' : $items->join('inner join', 'vote', 'vote.item_id=item.id')
+                ->groupBy('vote.item_id')->orderBy('avg(vote.rating) desc'); break;
+            case 'top' : $items->join('inner join', 'order_item', 'order_item.item_id=item.id')
+                ->groupBy('order_item.item_id')->orderBy('count(order_item.count) desc'); break;
+            case 'new' : $items->orderBy('addition_date desc'); break;
+        }
+    }
+
+    /**
+     * @param integer $id of category
+     * @return string
+     */
+    public function actionCategory($id)
     {
         $id = explode('-', $id)[0];
         $selected = [];
         if (!empty(Yii::$app->request->post('CharacteristicItem'))) {
             $items = $this->filter();
-            $selected = Yii::$app->request->post('CharacteristicItem');
+            //$selected = Yii::$app->request->post('CharacteristicItem');
+            foreach (Yii::$app->request->post('CharacteristicItem') as $char) {
+                if (isset($char['value'])) {
+                    $selected[] = $char;
+                }
+            }
         } else {
             $items = Item::find();
         }
         /**@var ItemCat $category*/
+        $category = ItemCat::findBySql("SELECT p.* FROM item_cat p LEFT JOIN item_cat c ON p.id = c.parent_id WHERE p.id=" . $id)->one();
         $category = ItemCat::findBySql("SELECT p.* FROM item_cat p LEFT JOIN item_cat c ON p.id = c.parent_id WHERE p.id=" . $id)->one();
         $items->andFilterWhere(['category_id' => $id]);
         $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
@@ -47,13 +76,7 @@ class SiteController extends Controller
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
-        if (!empty(Yii::$app->request->get('sort'))) {
-            if (Yii::$app->request->get('sort') == 'asc') {
-                $items->orderBy('cost asc');
-            } elseif (Yii::$app->request->get('sort') == 'desc') {
-                $items->orderBy('cost desc');
-            }
-        }
+        $this->sorting($items);
         if (!empty(Yii::$app->request->post('left')) && !empty(Yii::$app->request->post('right'))) {
             $leftCost = Yii::$app->request->post('left');
             $rightCost = Yii::$app->request->post('right');
@@ -85,6 +108,9 @@ class SiteController extends Controller
         Yii::$app->cart->addItem($item_id, $count);
     }
 
+    /**
+     * @return string
+     */
     public function actionPromotions()
     {
         $stocks = Stock::getCurrent()->all();
@@ -93,6 +119,10 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * @param integer $id of promotion
+     * @return string
+     */
     public function actionPromotion($id)
     {
         $model = Stock::findOne($id);

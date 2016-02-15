@@ -9,6 +9,7 @@ use common\models\search\CharacteristicSearch;
 use yii\web\NotFoundHttpException;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use common\models\ItemCat;
 
 /**
  * CharacteristicController implements the CRUD actions for Characteristic model.

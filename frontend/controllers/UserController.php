@@ -14,11 +14,6 @@ use Facebook\Exceptions\FacebookSDKException;
 class UserController extends Controller
 {
 
-    const VK_APP_ID = '5231107';
-    const VK_SECRET_KEY = 'bzvW6ULy2hUZhf7Nn48C';
-    const FB_APP_ID = '1683328171910358';
-    const FB_SECRET_KEY = 'd988402856a3e844769281d7f54db104';
-
     /**
      * View page of user
      * @return string
@@ -40,7 +35,7 @@ class UserController extends Controller
 
     public function actionVkAuth()
     {
-        $vk = new VK(self::VK_APP_ID, self::VK_SECRET_KEY);
+        $vk = new VK(Yii::$app->params['vkAppId'], Yii::$app->params['vkSecretKey']);
         if (empty(Yii::$app->request->get('code'))) {
             return $this->redirect($vk->getAuthorizeUrl('email,friends,wall', 'http://frontend.dev/user/vk-auth'));
         }
@@ -67,8 +62,8 @@ class UserController extends Controller
             Yii::$app->session->open();
         }
         $fb = new Facebook([
-            'app_id' => self::FB_APP_ID,
-            'app_secret' => self::FB_SECRET_KEY,
+            'app_id' => Yii::$app->params['fbAppId'],
+            'app_secret' => Yii::$app->params['fbSecretKey'],
             'default_graph_version' => 'v2.5',
         ]);
         $helper = $fb->getRedirectLoginHelper();

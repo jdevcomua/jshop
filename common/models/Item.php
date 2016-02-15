@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\query\ItemQuery;
 use Yii;
 use common\components\CartAdd;
 use yii\web\UploadedFile;
@@ -41,9 +42,6 @@ class Item extends Model implements CartAdd
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
-    const AMAZON_KEY = 'AKIAIR2NVD2HK4P7BW4Q';
-    const AMAZON_SECRET = '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';
-    const AMAZON_BUCKET = 'umo4ka';
     const SMALL_IMAGE = 'small_';
 
     public function extraFields()
@@ -164,7 +162,7 @@ class Item extends Model implements CartAdd
         foreach ($files as $file) {
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
             $client->putObject([
-                'Bucket' => self::AMAZON_BUCKET,
+                'Bucket' => Yii::$app->params['amazonBucket'],
                 'Key' => $fileName,
                 'Body' => fopen($file->tempName, 'r'),
                 'ACL' => 'public-read',
@@ -179,7 +177,7 @@ class Item extends Model implements CartAdd
             $smallImage->quality_png= 100;
             $smallImage->resizeToBestFit(200, 160);
             $client->putObject([
-                'Bucket' => self::AMAZON_BUCKET,
+                'Bucket' => Yii::$app->params['amazonBucket'],
                 'Key' => self::SMALL_IMAGE . $fileName,
                 'Body' => $smallImage,
                 'ACL' => 'public-read',
@@ -199,8 +197,8 @@ class Item extends Model implements CartAdd
         $sharedConfig = [
             'region' => 'eu-central-1',
             'credentials' => [
-                'key' => self::AMAZON_KEY,
-                'secret' => self::AMAZON_SECRET
+                'key' => Yii::$app->params['amazonKey'],
+                'secret' => Yii::$app->params['amazonSecret']
             ],
             'version' => 'latest'
         ];
@@ -220,7 +218,7 @@ class Item extends Model implements CartAdd
             if ($image->storage == self::AMAZON) {
                 $client = $this->createAmazonClient();
                 $client->deleteObject([
-                    'Bucket' => self::AMAZON_BUCKET,
+                    'Bucket' => Yii::$app->params['amazonBucket'],
                     'Key' => $image->name
                 ]);
             } elseif ($image->storage == self::MY_SERVER) {
@@ -430,12 +428,12 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @inheritdoc
+     * @return ItemQuery the active query used by this AR class.
      */
-    public static function getTop()
+    public static function find()
     {
-        return Item::find()->joinWith('orderItems')->groupBy('order_item.item_id')
-            ->orderBy('count(order_item.count) desc')->limit(3);
+        return new ItemQuery(get_called_class());
     }
 
 }

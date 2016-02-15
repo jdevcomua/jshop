@@ -13,9 +13,6 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KZ0u56ukNp3p5W82jnpJmisKu8wDUDdY',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
         'cart' => [
             'class' => 'common\components\Cart',
         ],
@@ -38,9 +35,15 @@ $config = [
                 '<language:(ru|en)>/cart/delete'=>'cart/delete',
                 '<language:(ru|en)>/cart/ajax'=>'cart/ajax',
                 '<language:(ru|en)>/cart/add'=>'cart/add',
+                '<language:(ru|en)>/cart/change'=>'cart/change',
                 '<language:(ru|en)>/item'=>'item/item',
-                '<language:(ru|en)>/item/<id:\d+>'=>'item/item',
+                '<language:(ru|en)>/item/<id>'=>'item/item',
                 '<language:(ru|en)>/item/item'=>'item/item',
+                '<language:(ru|en)>/promotion/<id>'=>'site/promotion',
+                '<language:(ru|en)>/promotions'=>'site/promotions',
+                '<language:(ru|en)>/category/<id>'=>'site/category',
+                '<language:(ru|en)>/site/category/<id>'=>'site/category',
+                '<language:(ru|en)>/site/category'=>'site/category',
                 '<language:(ru|en)>/login'=>'user/login',
                 '<language:(ru|en)>/user/login'=>'user/login',
                 '<language:(ru|en)>/logout'=>'user/logout',
@@ -75,13 +78,6 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

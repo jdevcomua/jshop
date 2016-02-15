@@ -30,9 +30,10 @@ class CartController extends Controller
 
     public function actionOrder()
     {
-        if (!empty(Yii::$app->request->get('id'))) {
-            $order = Orders::findOne(Yii::$app->request->get('id'));
-            $orderItems = OrderItem::find()->andFilterWhere(['order_id' => Yii::$app->request->get('id')])->joinWith('item')->all();
+        $id = Yii::$app->request->get('id');
+        if (!empty($id)) {
+            $order = Orders::findOne($id);
+            $orderItems = OrderItem::find()->andFilterWhere(['order_id' => $id])->joinWith('item')->all();
             return $this->render('view-order', ['orderItems' => $orderItems, 'order' => $order]);
         }
         $model = new Orders();

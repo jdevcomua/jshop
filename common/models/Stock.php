@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\query\StockQuery;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -45,7 +46,7 @@ class Stock extends Model
      */
     public function getImageUrl()
     {
-        return 'http://frontend.dev/img/' . $this->image;
+        return Yii::$app->params['myServerImageLink'] . $this->image;
     }
 
     public function upload()
@@ -111,20 +112,11 @@ class Stock extends Model
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @inheritdoc
+     * @return StockQuery the active query used by this AR class.
      */
-    public static function getCurrent()
+    public static function find()
     {
-        return Stock::find()->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
-            ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')]);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public static function getThreeItems()
-    {
-        return Item::find()->joinWith(['stocks'])->andFilterWhere(['<', 'stock.date_from', date('Y-m-d H:i:s')])
-            ->andFilterWhere(['>', 'stock.date_to', date('Y-m-d H:i:s')])->limit(3);
+        return new StockQuery(get_called_class());
     }
 }

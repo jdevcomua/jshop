@@ -8,13 +8,15 @@ $config = [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'language' => 'ru',
+    'modules' => [
+        'datecontrol' =>  [
+            'class' => '\kartik\datecontrol\Module'
+        ]
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KZ0u56ukNp3p5W82jnpJmisKu8wDUDdY',
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
         ],
         'urlHelper' => [
             'class' => 'common\components\UrlHelper',
@@ -30,7 +32,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-
                 '<language:(ru|en)>/'=>'site/index',
                 '<language:(ru|en)>/site/index'=>'site/index',
 
@@ -42,7 +43,7 @@ $config = [
                 '<language:(ru|en)>/item/<id:\d+>'=>'item/view',
                 '<language:(ru|en)>/item/delete'=>'item/delete',
                 '<language:(ru|en)>/item/characteristics'=>'item/characteristics',
-                '<language:(ru|en)>/item/updatecharacteristics'=>'item/updatecharacteristics',
+                '<language:(ru|en)>/item/update-characteristics'=>'item/update-characteristics',
 
                 '<language:(ru|en)>/item-cat'=>'item-cat/index',
                 '<language:(ru|en)>/item-cat/index'=>'item-cat/index',
@@ -50,6 +51,8 @@ $config = [
                 '<language:(ru|en)>/item-cat/update'=>'item-cat/update',
                 '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
                 '<language:(ru|en)>/item-cat/view'=>'item-cat/view',
+                '<language:(ru|en)>/item-cat/characteristics'=>'item-cat/characteristics',
+                '<language:(ru|en)>/item-cat/update-characteristics'=>'item-cat/update-characteristics',
 
                 '<language:(ru|en)>/characteristic/index'=>'characteristic/index',
                 '<language:(ru|en)>/characteristic'=>'characteristic/index',
@@ -93,6 +96,13 @@ $config = [
                 '<language:(ru|en)>/stock/create'=>'stock/create',
                 '<language:(ru|en)>/stock/view'=>'stock/view',
 
+                '<language:(ru|en)>/kit'=>'kit/index',
+                '<language:(ru|en)>/kit/index'=>'kit/index',
+                '<language:(ru|en)>/kit/group'=>'kit/group',
+                '<language:(ru|en)>/kit/update'=>'kit/update',
+                '<language:(ru|en)>/kit/create'=>'kit/create',
+                '<language:(ru|en)>/kit/view'=>'kit/view',
+
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],
         ],
@@ -108,13 +118,6 @@ $config = [
                     ],
                 ],
             ],
-        ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -136,6 +139,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*']
     ];
 
     $config['bootstrap'][] = 'gii';

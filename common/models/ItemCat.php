@@ -130,6 +130,6 @@ class ItemCat extends Model
      */
     public function getImageUrl()
     {
-        return 'http://frontend.dev/img/' . $this->image;
+        return Yii::$app->params['myServerImageLink'] . $this->image;
     }
 }

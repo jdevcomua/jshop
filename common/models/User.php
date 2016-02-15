@@ -132,7 +132,8 @@ class User extends Model implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        $hash = Yii::$app->getSecurity()->generatePasswordHash($password);
+        return Yii::$app->getSecurity()->validatePassword($password, $hash);
     }
 
     /**
@@ -141,6 +142,16 @@ class User extends Model implements \yii\web\IdentityInterface
     public static function tableName()
     {
         return 'user';
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -152,7 +163,7 @@ class User extends Model implements \yii\web\IdentityInterface
             [['username', 'mail', 'vk_id', 'fb_id'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
             [['username'], 'string', 'length' => [4, 25]],
-            [['name', 'surname', 'address', 'phone', 'access_token'], 'string'],
+            [['name', 'surname', 'address', 'phone', 'access_token', 'password'], 'string'],
             [['mail'], 'email']
 
         ];

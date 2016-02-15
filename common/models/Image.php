@@ -67,9 +67,9 @@ class Image extends \yii\db\ActiveRecord
             $size = '';
         }
         if ($this->storage == Item::MY_SERVER) {
-            return 'http://frontend.dev/img/' . $size . $this->name;
+            return Yii::$app->params['myServerImageLink'] . $size . $this->name;
         } elseif ($this->storage == Item::AMAZON) {
-            return 'https://s3.eu-central-1.amazonaws.com/' . Item::AMAZON_BUCKET . '/' . $size . $this->name;
+            return Yii::$app->params['amazonImageLink'] . $size . $this->name;
         }
     }
 }

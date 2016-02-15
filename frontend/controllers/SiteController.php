@@ -20,7 +20,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $items = Item::find()->orderBy('addition_date desc')->limit(6)->all();
+        $items = Item::find()->orderBy('addition_date desc')->limit(6);
         if (Yii::$app->user->isGuest) {
             $wishLists = [];
         } else {
@@ -55,28 +55,29 @@ class SiteController extends Controller
     public function actionCategory($id)
     {
         $id = explode('-', $id)[0];
+        $items = $this->filter();
+
         $selected = [];
         if (!empty(Yii::$app->request->post('CharacteristicItem'))) {
-            $items = $this->filter();
-            //$selected = Yii::$app->request->post('CharacteristicItem');
             foreach (Yii::$app->request->post('CharacteristicItem') as $char) {
                 if (isset($char['value'])) {
                     $selected[] = $char;
                 }
             }
-        } else {
-            $items = Item::find();
         }
-        /**@var ItemCat $category*/
-        $category = ItemCat::findBySql("SELECT p.* FROM item_cat p LEFT JOIN item_cat c ON p.id = c.parent_id WHERE p.id=" . $id)->one();
-        $category = ItemCat::findBySql("SELECT p.* FROM item_cat p LEFT JOIN item_cat c ON p.id = c.parent_id WHERE p.id=" . $id)->one();
+
+        $category = ItemCat::findOne($id);
         $items->andFilterWhere(['category_id' => $id]);
-        $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
-        $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
+
         if (!empty(Yii::$app->request->get('search'))) {
             $items->andFilterWhere(['like', 'title', Yii::$app->request->get('search')]);
         }
+
         $this->sorting($items);
+
+        //for filter by price
+        $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
+        $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
         if (!empty(Yii::$app->request->post('left')) && !empty(Yii::$app->request->post('right'))) {
             $leftCost = Yii::$app->request->post('left');
             $rightCost = Yii::$app->request->post('right');
@@ -84,18 +85,17 @@ class SiteController extends Controller
             $leftCost = $minCost;
             $rightCost = $maxCost;
         }
-        $items = $items->with(['stockItems', 'images'])->all();
-        $characteristics = null;
-        $characteristics = ItemCat::findOne($id)->characteristics;
+
+        $items->with(['stockItems', 'images']);
 
         if (Yii::$app->user->isGuest) {
             $wishLists = [];
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('category', ['items' => $items, 'selected' => $selected,'count' => count($items),
-            'chars' => $characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
-            'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category]);
+        return $this->render('category', ['items' => $items, 'selected' => $selected,
+            'chars' => $category->characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
+            'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category, 'count' => $items->count(),]);
     }
 
     /**
@@ -113,7 +113,7 @@ class SiteController extends Controller
      */
     public function actionPromotions()
     {
-        $stocks = Stock::getCurrent()->all();
+        $stocks = Stock::find()->current()->all();
         return $this->render('promotions', [
             'stocks' => $stocks,
         ]);
@@ -146,20 +146,23 @@ class SiteController extends Controller
     {
         $query = Item::find();
         $char_ids = [];
-        foreach (Yii::$app->request->post('CharacteristicItem') as $items) {
-            if (isset($items['value'])) {
-                $query1 = CharacteristicItem::find()->select('item_id');
-                $query1->andFilterWhere(['characteristic_id' => $items['characteristic_id']]);
-                $query1->where('`value` like :val', [':val'=> '%"' . $items['value'] . '"%']);
-                $item_ids = [];
-                foreach ($query1->asArray()->all() as $item) {
-                    $item_ids[] = $item['item_id'];
-                }
-                if (in_array($items['characteristic_id'], $char_ids)) {
-                    $query->orFilterWhere(['in', 'id', $item_ids]);
-                } else {
-                    $char_ids[] = $items['characteristic_id'];
-                    $query->andFilterWhere(['in', 'id', $item_ids]);
+        if(!empty(Yii::$app->request->post('CharacteristicItem'))) {
+            foreach (Yii::$app->request->post('CharacteristicItem') as $items) {
+                if (isset($items['value'])) {
+                    $query1 = CharacteristicItem::find()->select('item_id');
+                    $query1->andFilterWhere(['characteristic_id' => $items['characteristic_id']]);
+                    $query1->andFilterWhere(['like', 'value', $items['value']]);
+                    //$query1->where('`value` like :val', [':val'=> '%"' . $items['value'] . '"%']);
+                    $item_ids = [];
+                    foreach ($query1->asArray()->all() as $item) {
+                        $item_ids[] = $item['item_id'];
+                    }
+                    if (in_array($items['characteristic_id'], $char_ids)) {
+                        $query->orFilterWhere(['in', 'id', $item_ids]);
+                    } else {
+                        $char_ids[] = $items['characteristic_id'];
+                        $query->andFilterWhere(['in', 'id', $item_ids]);
+                    }
                 }
             }
         }

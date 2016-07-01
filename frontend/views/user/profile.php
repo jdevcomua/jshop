@@ -341,7 +341,7 @@ use common\models\Orders;
                                                                 src="http://yandex.st/share/share.js"
                                                                 charset="utf-8"></script>
                                                         <div class="yashare-auto-init" data-yasharel10n="ru"
-                                                             data-yasharelink="http://frontend.dev<?php echo Yii::$app->urlHelper->to(['user/wishlist', 'id' => $list->id]);?>"
+                                                             data-yasharelink="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['user/wishlist', 'id' => $list->id]);?>"
                                                              data-yasharetype="none" data-yashareTitle="Мой список желаний"
                                                              data-yashareDescription='Хочу купить в "active"'
                                                              data-yashareImage="http://s017.radikal.ru/i421/1601/46/57881a3ba8e9.jpg"
@@ -349,22 +349,22 @@ use common\models\Orders;
                                                         <span class="b-share"><a rel="nofollow" target="_blank"
                                                                                  title="ВКонтакте"
                                                                                  class="b-share__handle b-share__link b-share-btn__vkontakte"
-                                                                                 href="https://share.yandex.net/go.xml?service=vkontakte&amp;url=http://frontend.dev/&amp;title=Wishlist%20%2F%20sportstore"
+                                                                                 href="https://share.yandex.net/go.xml?service=vkontakte&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
                                                                                  data-service="vkontakte"><span
                                                                     class="b-share-icon b-share-icon_vkontakte"></span></a><a
                                                                 rel="nofollow" target="_blank" title="Facebook"
                                                                 class="b-share__handle b-share__link b-share-btn__facebook"
-                                                                href="https://share.yandex.net/go.xml?service=facebook&amp;url=http://frontend.dev/&amp;title=Wishlist%20%2F%20sportstore"
+                                                                href="https://share.yandex.net/go.xml?service=facebook&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
                                                                 data-service="facebook"><span
                                                                     class="b-share-icon b-share-icon_facebook"></span></a><a
                                                                 rel="nofollow" target="_blank" title="Одноклассники"
                                                                 class="b-share__handle b-share__link b-share-btn__odnoklassniki"
-                                                                href="https://share.yandex.net/go.xml?service=odnoklassniki&amp;url=http://frontend.dev/&amp;title=Wishlist%20%2F%20sportstore"
+                                                                href="https://share.yandex.net/go.xml?service=odnoklassniki&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
                                                                 data-service="odnoklassniki"><span
                                                                     class="b-share-icon b-share-icon_odnoklassniki"></span></a><a
                                                                 rel="nofollow" target="_blank" title="Google Plus"
                                                                 class="b-share__handle b-share__link b-share-btn__gplus"
-                                                                href="https://share.yandex.net/go.xml?service=gplus&amp;url=http://frontend.dev/&amp;title=Wishlist%20%2F%20sportstore"
+                                                                href="https://share.yandex.net/go.xml?service=gplus&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
                                                                 data-service="gplus"><span
                                                                     class="b-share-icon b-share-icon_gplus"></span></a></span>
                                                         </div>

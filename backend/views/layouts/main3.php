@@ -83,30 +83,30 @@ AppAsset::register($this);
                             <a href="<?php echo Yii::$app->urlHelper->to(['orders/index'])?>">
                                         Заказы</a>
                             <a href="">
-                            <img width="20px" src="http://frontend.dev/img/add.png">
+                            <img width="20px" src="/img/add.png">
                         </a></td>
 
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['item/index'])?>">
                                        Товары</a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['item/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['item-cat/index'])?>">
                                 Категории </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['item-cat/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;"><a href="<?php echo Yii::$app->urlHelper->to(['characteristic/index'])?>">
                                 Характеристики</a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['characteristic/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['user/index'])?>">
                                         Пользователи </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['user/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['vote/index'])?>">
@@ -116,13 +116,13 @@ AppAsset::register($this);
                             <a href="<?php echo Yii::$app->urlHelper->to(['stock/index'])?>">
                                 Акции </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['stock/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
                         <td class="dropdown" style="padding-right: 20px; padding-left: 20px;">
                             <a href="<?php echo Yii::$app->urlHelper->to(['kit/index'])?>">
                                 Комплекты </a>
                             <a href="<?php echo Yii::$app->urlHelper->to(['kit/create'])?>">
-                                <img width="20px" src="http://frontend.dev/img/add.png">
+                                <img width="20px" src="/img/add.png">
                             </a></td>
 
                     <!--    <td class="dropdown"  style="padding-right: 20px; padding-left: 20px;">

@@ -5,9 +5,9 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=mobidev',
+            'dsn' => 'mysql:host=localhost;dbname=shop',
             'username' => 'root',
-            'password' => 'umo4ka11',
+            'password' => '2103',
             'charset' => 'utf8',
         ],
         'mailer' => [

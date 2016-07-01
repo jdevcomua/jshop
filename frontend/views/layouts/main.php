@@ -21,8 +21,8 @@ use common\components\CategoriesView;
     <link rel="stylesheet" type="text/css" href="http://active.imagecmsdemo.net/templates/active/css/style.css"
           media="all">
 
-    <link rel="stylesheet" type="text/css" href="//frontend.dev/css/wishList.css">
-    <link rel="stylesheet" type="text/css" href="//frontend.dev/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->hostInfo ?>/css/wishList.css">
+    <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->hostInfo ?>/css/slider.css">
 
 
     <link href="http://www.radioactivethinking.com/rateit/src/rateit.css" rel="stylesheet" type="text/css">
@@ -53,11 +53,11 @@ use common\components\CategoriesView;
     <link rel="shortcut icon" href="/uploads/images/favicon.ico" type="image/x-icon">
     <link data-arr="8" rel="stylesheet" type="text/css"
           href="http://active.imagecmsdemo.net/templates/active/star_rating/css/style.css">
-    <script type="text/javascript" src="//frontend.dev/onClickFunctions.js"></script>
+    <script type="text/javascript" src="<?= Yii::$app->request->hostInfo ?>/onClickFunctions.js"></script>
     <script src="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js"></script>
     <!-- Owl Carousel Assets -->
     <link href="http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="//frontend.dev/css/owl.theme.css" rel="stylesheet">
+    <link href="<?= Yii::$app->request->hostInfo ?>/css/owl.theme.css" rel="stylesheet">
 
 
 </head>

@@ -138,7 +138,7 @@
                             </p>
                             <p style="font-size:15px;line-height:24px;margin:0">Вы можете отследить статус своего заказа
                                 в
-                                <a href="<?php echo 'http://frontend.dev/' . Yii::$app->urlHelper->to(['profile']); ?>"
+                                <a href="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['profile']); ?>"
                                    target="_blank" style="text-decoration:none;color:#3e77aa">личном кабинете</a>.
                             </p>
                         </td>
@@ -182,7 +182,7 @@
                                                             <tr>
                                                                 <td align="center"
                                                                     style="padding-left:20px;padding-right:20px;padding-top:5px;padding-bottom:5px;width:100px;vertical-align:middle">
-                                                                    <a href="<?php echo 'http://frontend.dev/' . Yii::$app->urlHelper->to(['item/' . $orderItem->item_id]); ?>"
+                                                                    <a href="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['item/' . $orderItem->item_id]); ?>"
                                                                        target="_blank"
                                                                        style="text-decoration:none;line-height:0;">
                                                                         <img border="0"

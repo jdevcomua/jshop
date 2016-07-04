@@ -74,13 +74,23 @@ class ItemCat extends Model
     {
         $file = UploadedFile::getInstance($this, 'imageFile');
         if (isset($file)) {
-            if (file_exists(Item::getPath() . $this->image)) {
-                unlink(Item::getPath() . $this->image);
-            }
+            $this->deleteImage(false);
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
             $file->saveAs(Item::getPath() . $fileName);
             $this->image = $fileName;
             $this->save();
+        }
+    }
+
+    public function deleteImage($save = true)
+    {
+        $oldImage = Item::getPath() . $this->image;
+        if (!empty($this->image) && file_exists($oldImage) && !is_dir($oldImage)) {
+            unlink($oldImage);
+            $this->image = null;
+            if ($save) {
+                $this->save();
+            }
         }
     }
 

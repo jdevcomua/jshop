@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'validateOnSubmit'          => true,
             'validateOnBlur'            => false,
         ],
+        'allowEmptyList' => true,
         'columns' => [
             [
                 'name'  => 'title',

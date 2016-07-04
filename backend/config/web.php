@@ -52,7 +52,6 @@ $config = [
                 '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
                 '<language:(ru|en)>/item-cat/view'=>'item-cat/view',
                 '<language:(ru|en)>/item-cat/characteristics'=>'item-cat/characteristics',
-                '<language:(ru|en)>/item-cat/update-characteristics'=>'item-cat/update-characteristics',
 
                 '<language:(ru|en)>/characteristic/index'=>'characteristic/index',
                 '<language:(ru|en)>/characteristic'=>'characteristic/index',

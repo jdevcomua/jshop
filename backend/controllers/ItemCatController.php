@@ -145,26 +145,29 @@ class ItemCatController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $request = Yii::$app->request;
+        if ($model->load($request->post()) && $model->save()) {
             $model->upload();
-            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
-        } else {
-            $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
-            $categoriesArray = [];
-            $categoriesArray[] = null;
-            foreach ($categories as $category) {
-                /* @var $category ItemCat*/
-                $categoriesArray[$category->id] = $category->title;
-                if (!empty($category->getChildren()->all())) {
-                    foreach ($category->getChildren()->all() as $child) {
-                        $categoriesArray[$child->id] = ' - ' . $child->title;
-                    }
+            if ($request->post('action') == 'save') {
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
+            } else if ($request->post('action') == 'chars') {
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
+            }
+        }
+        $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
+        $categoriesArray = [];
+        foreach ($categories as $category) {
+            /* @var $category ItemCat*/
+            $categoriesArray[$category->id] = $category->title;
+            if (!empty($category->getChildren()->all())) {
+                foreach ($category->getChildren()->all() as $child) {
+                    $categoriesArray[$child->id] = ' - ' . $child->title;
                 }
             }
-            return $this->render('update', [
-                'model' => $model, 'count' => 'one', 'categories' => $categoriesArray
-            ]);
         }
+        return $this->render('update', [
+            'model' => $model, 'count' => 'one', 'categories' => $categoriesArray
+        ]);
     }
 
     /**
@@ -197,57 +200,33 @@ class ItemCatController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $id integer id of category
      * @return string|\yii\web\Response
      */
     public function actionCharacteristics($id)
     {
         $request = Yii::$app->request;
-        $models = [];
+        $models = ItemCat::findOne($id)->characteristics;
+
         if ($request->isPost) {
-            $data = Yii::$app->request->post('Characteristic', []);
+            $data = $request->post('Characteristic', []);
             foreach (array_keys($data) as $index) {
                 $models[$index] = new Characteristic();
             }
-            if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
+            if (Model::loadMultiple($models, $request->post()) && Model::validateMultiple($models)) {
+                Characteristic::deleteAll(['category_id' => $id]);
+                /* @var $characteristic Characteristic*/
                 foreach ($models as $characteristic) {
-                    /* @var $characteristic Characteristic*/
                     $characteristic->category_id = $id;
                     $characteristic->save();
                 }
                 return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
             }
         }
-        $models = [new Characteristic()];
+
         return $this->render('characteristics', [
             'models' => $models, 'category' => ItemCat::findOne($id)
         ]);
     }
 
-    public function actionUpdateCharacteristics($id)
-    {
-        $models = ItemCat::findOne($id)->characteristics;
-        $request = Yii::$app->request;
-        if ($request->isPost) {
-            $data = Yii::$app->request->post('Characteristic', []);
-            foreach (array_keys($data) as $index) {
-                $models[$index] = new Characteristic();
-            }
-            if (Model::loadMultiple($models, Yii::$app->request->post()) && Model::validateMultiple($models)) {
-                Characteristic::deleteAll(['category_id' => $id]);
-                foreach ($models as $characteristic) {
-                    /* @var $characteristic Characteristic*/
-                    $characteristic->category_id = $id;
-                    $characteristic->save();
-                }
-                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
-            }
-        }
-        if (empty($models)) {
-            $models = [new Characteristic()];
-        }
-        return $this->render('characteristics', [
-            'models' => $models, 'category' => ItemCat::findOne($id)
-        ]);
-    }
 }

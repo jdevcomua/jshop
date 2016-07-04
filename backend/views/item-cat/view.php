@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3>Характеристики</h3>
 
-    <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item-cat/update-characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);
+    <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']);
 
     echo GridView::widget([
         'dataProvider' => $characteristics,

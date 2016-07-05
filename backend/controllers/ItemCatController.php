@@ -206,22 +206,34 @@ class ItemCatController extends Controller
     public function actionCharacteristics($id)
     {
         $request = Yii::$app->request;
-        $models = ItemCat::findOne($id)->characteristics;
+        $models = Characteristic::find()->where(['category_id' => $id])->indexBy('id')->all();
 
         if ($request->isPost) {
             $data = $request->post('Characteristic', []);
-            foreach (array_keys($data) as $index) {
-                $models[$index] = new Characteristic();
-            }
-            if (Model::loadMultiple($models, $request->post()) && Model::validateMultiple($models)) {
-                Characteristic::deleteAll(['category_id' => $id]);
-                /* @var $characteristic Characteristic*/
-                foreach ($models as $characteristic) {
-                    $characteristic->category_id = $id;
-                    $characteristic->save();
+            $withId = [];
+            //добавляем новые
+            foreach ($data as $char) {
+                if ($char['id'] == "") {
+                    $newChar = new Characteristic(['category_id' => $id, 'title' => $char['title']]);
+                    $newChar->save();
+                } else {
+                    $withId[$char['id']] = $char['title'];
                 }
-                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
             }
+            //просматриваем старые
+            $keys = array_keys($withId);
+            /* @var $model Characteristic */
+            foreach ($models as $model) {
+                if (in_array($model->id, $keys)) {
+                    if ($model->title != $withId[$model->id]) {
+                        $model->title = $withId[$model->id];
+                        $model->save();
+                    }
+                } else {
+                    $model->delete();
+                }
+            }
+            return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
         }
 
         return $this->render('characteristics', [

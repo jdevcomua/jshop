@@ -36,6 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->title;
                 }
             ],
+            [
+                'name'  => 'id',
+                'options' => [
+                    'class' => 'hide'
+                ],
+                'value' => function($data){
+                    return $data->id;
+                }
+            ],
         ],
     ]);
 

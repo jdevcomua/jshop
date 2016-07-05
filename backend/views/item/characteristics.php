@@ -16,16 +16,22 @@ $form = ActiveForm::begin();?>
         foreach ($charItems as $charItem) {
             $typehead[] = $charItem->value;
         }
-        echo $form->field($characteristic, "[$index]value")->widget(Typeahead::classname(), [
-            'options' => ['placeholder' => ''],
-            'pluginOptions' => ['highlight'=>true],
-            'dataset' => [
-                [
-                    'local' => $typehead,
-                    'limit' => 10
+        if (empty($typehead)) {
+            echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());
+        } else {
+            echo $form->field($characteristic, "[$index]value")->widget(Typeahead::classname(), [
+                'options' => ['placeholder' => ''],
+                'pluginOptions' => ['highlight' => true],
+                'dataset' => [
+                    [
+                        'local' => $typehead,
+                        'limit' => 10
+                    ]
                 ]
-            ]
-        ])->label($characteristic->getCharacteristicTitle()); ?>
+            ])->label($characteristic->getCharacteristicTitle());
+        }
+
+        ?>
         </div>
         <?php
     }

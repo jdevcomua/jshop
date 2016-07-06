@@ -130,7 +130,7 @@
                     <tbody>
                     <tr>
                         <td style="padding:25px 30px 32px 27px;vertical-align:top;border-bottom:1px solid #cccccc;">
-                            <h1 style="font-size:28px;line-height:32px;padding-bottom:15px;font-weight:normal;margin:0"><?php echo $user->name;?>, спасибо за ваш заказ!</h1>
+                            <h1 style="font-size:28px;line-height:32px;padding-bottom:15px;font-weight:normal;margin:0"><?php echo $order->name;?>, спасибо за ваш заказ!</h1>
                             <p style="font-size:15px;padding-bottom:22px;line-height:24px;margin:0">
                                 Ваша заявка принята.
                                 Мы свяжемся с вами в ближайшее время для подтверждения заказа №<?php echo $order->id; ?>

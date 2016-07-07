@@ -25,7 +25,7 @@ use common\components\CategoriesView;
     <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->hostInfo ?>/css/slider.css">
 
 
-    <link href="http://www.radioactivethinking.com/rateit/src/rateit.css" rel="stylesheet" type="text/css">
+    <link href="/rateit/rateit.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css"
           href="http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/colorscheme.css" media="all">
     <link rel="stylesheet" type="text/css"

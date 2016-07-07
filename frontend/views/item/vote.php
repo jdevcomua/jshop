@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <input name="Vote[rating]" type="range" min="0" max="5" value="0" step="1" id="backing4">
     <div class="rateit" data-rateit-backingfld="#backing4"></div>
-    <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+    <script src="/rateit/jquery.rateit.js" type="text/javascript"></script>
 
     <?php
     echo $form->field($vote, 'text')->textarea()->label(""); ?>

@@ -93,7 +93,7 @@ use common\models\Characteristic;
                                                         <div class="description">
                                                             <!-- Start. Star rating -->
                                                             <?php if ($item->getAvgRating()['avg'] != 0) { ?>
-                                                                <script src="http://www.radioactivethinking.com/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+                                                                <script src="/rateit/jquery.rateit.js" type="text/javascript"></script>
                                                                 <div class="mark-pr">
                                                                     <span class="title"><?php //echo \Yii::t('app', 'Оценка товара:'); ?></span>
                                                                     <div class="rateit" data-rateit-value="<?php echo $item->getAvgRating()['avg']; ?>"

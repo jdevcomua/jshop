@@ -103,7 +103,7 @@ function openFilterContent($thisItem) {
 }
 function addToCartFromItemPage(id) {
     $.ajax({
-        url: 'cart/ajax',
+        url: '/cart/ajax',
         data: {count: $('#test').val(), item_id: id},
         dataType: 'text',
         success: function (data) {

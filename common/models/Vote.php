@@ -20,6 +20,11 @@ use Yii;
  */
 class Vote extends Model
 {
+    
+    const STATUS_CHECKED = 1;
+    const STATUS_NOT_CHECKED = 0;
+    const STATUS_HIDDEN = -1;
+    
     /**
      * @inheritdoc
      */
@@ -45,7 +50,8 @@ class Vote extends Model
             [['item_id', 'text'], 'required'],
             [['item_id', 'user_id', 'rating', 'checked'], 'integer'],
             [['timestamp'], 'safe'],
-            [['text'], 'string']
+            [['text'], 'string'],
+            [['checked'], 'default', 'value' => self::STATUS_NOT_CHECKED],
         ];
     }
 
@@ -62,7 +68,7 @@ class Vote extends Model
             'text' => 'Текст',
             'rating' => 'Рейтинг',
             'itemTitle' => 'Товар',
-            'checked' => 'Проверено',
+            'checked' => 'Статус',
         ];
     }
 

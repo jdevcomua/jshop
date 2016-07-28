@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Vote;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -22,7 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'rating')->textInput() ?>
 
-    <?= $form->field($model, 'checked')->textInput() ?>
+    <?= $form->field($model, 'checked')->dropDownList([
+        Vote::STATUS_NOT_CHECKED => 'Не проверен',
+        Vote::STATUS_CHECKED => 'Одобрен',
+        Vote::STATUS_HIDDEN => 'Скрыт'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

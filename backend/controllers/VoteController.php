@@ -37,11 +37,11 @@ class VoteController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         $notChecked = new ActiveDataProvider([
-            'query' => Vote::find()->andFilterWhere(['checked' => '0'])->orderBy('timestamp')
+            'query' => Vote::find()->andFilterWhere(['checked' => Vote::STATUS_NOT_CHECKED])->orderBy('timestamp')
         ]);
         $notChecked->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         $hidden = new ActiveDataProvider([
-            'query' => Vote::find()->andFilterWhere(['checked' => '-1'])->orderBy('timestamp')
+            'query' => Vote::find()->andFilterWhere(['checked' => Vote::STATUS_HIDDEN])->orderBy('timestamp')
         ]);
         $hidden->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
         return $this->render('index', [

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Vote;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -77,13 +78,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'checked',
                                 'value' => function($data){
                                     switch($data->checked){
-                                        case 0: return 'Не проверен';
-                                        case -1: return 'Скрыт';
-                                        case 1: return 'Одобрен';
+                                        case Vote::STATUS_NOT_CHECKED: return 'Не проверен';
+                                        case Vote::STATUS_HIDDEN: return 'Скрыт';
+                                        case Vote::STATUS_CHECKED: return 'Одобрен';
                                         default; return 'Не проверен';
                                     }
                                 },
-                                'filter' => ['0' => 'Не проверен', '1' => 'Одобрен', '-1' => 'Скрыт']
+                                'filter' => [
+                                    Vote::STATUS_NOT_CHECKED => 'Не проверен',
+                                    Vote::STATUS_CHECKED => 'Одобрен', 
+                                    Vote::STATUS_HIDDEN => 'Скрыт'
+                                ]
                             ],
 
                             ['class' => 'yii\grid\ActionColumn'],
@@ -126,8 +131,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['class' => 'yii\grid\ActionColumn'],
                         ],
                     ]);
-                    echo Html::submitButton(Yii::t('app', 'Одобрить'), ['class' => 'btn btn-success', 'name' => 'action', 'value' => '1']) . ' ';
-                    echo Html::submitButton(Yii::t('app', 'Скрыть'), ['class' => 'btn btn-warning', 'name' => 'action', 'value' => '-1']);
+                    echo Html::submitButton(Yii::t('app', 'Одобрить'), ['class' => 'btn btn-success', 'name' => 'action', 'value' => Vote::STATUS_CHECKED]) . ' ';
+                    echo Html::submitButton(Yii::t('app', 'Скрыть'), ['class' => 'btn btn-warning', 'name' => 'action', 'value' => Vote::STATUS_HIDDEN]);
                     echo Html::endForm();
                     ?>
                 </div>

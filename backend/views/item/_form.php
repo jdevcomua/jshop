@@ -1,5 +1,6 @@
 <?php
 
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
@@ -29,7 +30,18 @@ use kartik\select2\Select2;
 
         <?php echo $form->field($model, 'cost')->textInput(['style' => 'width:48%;']);?>
 
-        <?php echo $form->field($model, 'description')->textarea(['rows' => 4]);?>
+        <?= $form->field($model, 'description')->widget(TinyMce::className(), [
+            'options' => ['rows' => 10],
+            'language' => 'es',
+            'clientOptions' => [
+                'plugins' => [
+                    "advlist autolink lists link charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste"
+                ],
+                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            ]
+        ]);?>
 
         <?php $images = [];
         if (!$model->isNewRecord) {

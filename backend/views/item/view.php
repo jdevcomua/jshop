@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?php echo Html::encode($this->title) ?></h3>
 
     <p>
-
         <?php echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
         echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -32,17 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <div style="width: 100%;">
         <div style="width: 750px; float:left; padding-right: 25px;">
             <?php echo DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'categoryTitle',
-            'title',
-            'cost',
-            'description',
-            'count_of_views',
-        ],
-    ]);
-            echo '<p>' .Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'categoryTitle',
+                    'title',
+                    'cost',
+                    [
+                        'attribute' => 'description',
+                        'format' => 'html'
+                    ],
+                    'count_of_views',
+                ],
+            ]);
+            echo '<p>' . Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to([
                     'item/update-characteristics', 'id' => $model->id]), ['class' => 'btn btn-primary']) . '</p>';
             echo GridView::widget([
                 'dataProvider' => $characteristics,
@@ -53,15 +55,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     'value',
                 ],
             ]); ?>
-        </div></div>
-    <?php foreach ($model->images as $image) {?>
-        <div align="center"  style="vertical-align:middle; height: 180px; width: 180px; float:left; padding: 5px 5px 5px 5px;margin: 5px 5px 5px 5px;border:1px dotted #cdc9c9;">
-        <button type="button" class="icon_times deleteFromCompare"
-                style="background: url('http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/images/sprite.png') no-repeat;
-                background-position: -440px 0;height: 14px;border: 0;width:14px;position: absolute;"
-                onclick="deleteImage(<?php echo $image->id; ?>, $(this))"></button>
-            <img style="vertical-align:middle;max-width: 170px; max-height: 170px;" src="<?php echo $image->getImageUrl(); ?>"/>
         </div>
-    <?php }?>
+    </div>
+    <?php foreach ($model->images as $image) { ?>
+        <div align="center"
+             style="vertical-align:middle; height: 180px; width: 180px; float:left; padding: 5px 5px 5px 5px;margin: 5px 5px 5px 5px;border:1px dotted #cdc9c9;">
+            <button type="button" class="icon_times deleteFromCompare"
+                    style="background: url('http://active.imagecmsdemo.net/templates/active/css/color_scheme_1/images/sprite.png') no-repeat;
+                background-position: -440px 0;height: 14px;border: 0;width:14px;position: absolute;"
+                    onclick="deleteImage(<?php echo $image->id; ?>, $(this))"></button>
+            <img style="vertical-align:middle;max-width: 170px; max-height: 170px;"
+                 src="<?php echo $image->getImageUrl(); ?>"/>
+        </div>
+    <?php } ?>
 
 </div>

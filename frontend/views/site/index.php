@@ -1,9 +1,11 @@
 <?php
 
+use common\models\Stock;
 use yii\widgets\ListView;
 use common\models\Item;
 
 /* @var $category \common\models\ItemCat */
+/* @var $stocks Stock[] */
 ?>
 
 <div class="content">
@@ -11,51 +13,51 @@ use common\models\Item;
     <div class="frame-inside page-category">
         <div class="container">
             <div class="left-start-page">
-                <div class="frame-baner frame-baner-start_page" style="height: 270px;">
-                    <style>
-                        #owl-demo .item img{
-                            display: block;
-                            width: 100%;
-                            height: auto;
-                        }
-                    </style>
-                    <div id="demo">
-                        <div class="container">
-                            <div class="row">
-                                <div class="span12">
-                                    <div id="owl-demo" class="owl-carousel">
-                                        <?php foreach (\common\models\Stock::find()->current()->all() as $stock) {
-                                            /* @var $stock \common\models\Stock*/
-                                            ?>
-                                            <div class="item" align="center">
-                                                <a href="<?php echo Yii::$app->urlHelper->to(['promotion/' . $stock->id]); ?>">
-                                                    <img style="max-height: 227px;width:initial;"
-                                                        src="<?php echo $stock->getImageUrl(); ?>">
-                                                </a>
-                                            </div>
-                                        <?php } ?>
+                <?php if (count($stocks) > 0) { ?>
+                    <div class="frame-baner frame-baner-start_page" style="height: 270px;">
+                        <style>
+                            #owl-demo .item img{
+                                display: block;
+                                width: 100%;
+                                height: auto;
+                            }
+                        </style>
+                        <div id="demo">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="span12">
+                                        <div id="owl-demo" class="owl-carousel">
+                                            <?php foreach ($stocks as $stock) {
+                                                /* @var $stock Stock*/ ?>
+                                                <div class="item" align="center">
+                                                    <a href="<?php echo Yii::$app->urlHelper->to(['promotion/' . $stock->id]); ?>">
+                                                        <img style="max-height: 227px;width:initial;"
+                                                            src="<?php echo $stock->getImageUrl(); ?>">
+                                                    </a>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            $(document).ready(function() {
+                                $("#owl-demo").owlCarousel({
 
-                    <script>
-                        $(document).ready(function() {
-                            $("#owl-demo").owlCarousel({
+                                    navigation : false,
+                                    slideSpeed : 500,
+                                    paginationSpeed : 500,
+                                    singleItem : true,
+                                    autoPlay: 5000,
+                                    stopOnHover: true
 
-                                navigation : false,
-                                slideSpeed : 500,
-                                paginationSpeed : 500,
-                                singleItem : true,
-                                autoPlay: 5000,
-                                stopOnHover: true
-
+                                });
                             });
-                        });
-                    </script>
-                </div>
-                <div id="new_products" style="margin-top: 4px;">
+                        </script>
+                    </div>
+                <?php } ?>
+                <div id="new_products">
                     <div class="horizontal-carousel">
                         <section class="special-proposition">
                             <div class="title-proposition-h">

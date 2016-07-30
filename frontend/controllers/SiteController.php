@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
-use common\models\Orders;
 use common\models\Stock;
 use common\models\User;
 use common\models\Wish;
@@ -26,7 +25,8 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
-        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists]);
+        $stocks = Stock::find()->current()->all();
+        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists, 'stocks' => $stocks]);
     }
 
     /**

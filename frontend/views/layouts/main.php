@@ -255,7 +255,7 @@ use frontend\widgets\category\CategoriesView;
         </header>
 
         <?= CategoriesView::widget() ?>
-
+    </div>
         <?php echo $content; ?>
 
 

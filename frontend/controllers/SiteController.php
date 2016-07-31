@@ -10,6 +10,7 @@ use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
@@ -47,6 +48,25 @@ class SiteController extends Controller
                 ->groupBy('order_item.item_id')->orderBy('count(order_item.count) desc'); break;
             case 'new' : $items->orderBy('addition_date desc'); break;
         }
+    }
+
+    /**
+     * @param $text string
+     * @param $category_id integer
+     * @return string
+     */
+    public function actionSearch($text, $category_id = null, $sort = null)
+    {
+        $items = Item::find()->where(['like', 'item.title', $text])->andFilterWhere(['category_id' => $category_id]);
+        $categories = ItemCat::find()->select(['item_cat.id', 'item_cat.title', 'count(item_cat.id) as count'])
+            ->innerJoin('item', 'item.category_id = item_cat.id')->where(['like', 'item.title', $text])
+            ->groupBy('item_cat.id')->all();
+        $this->sorting($items, $sort);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $items
+        ]);
+        return $this->render('search', ['dataProvider' => $dataProvider, 'count' => $items->count(), 'text' => $text,
+            'categories' => $categories, 'category_id' => $category_id]);
     }
 
     /**
@@ -88,7 +108,8 @@ class SiteController extends Controller
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
         return $this->render('category', ['items' => $items, 'selected' => empty($selected) ? [] : $selected, 'sort' => $sort,
-            'chars' => $category->characteristics, 'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
+            'chars' => $category->characteristics,
+            'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
             'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category, 'count' => $items->count(),]);
     }
 

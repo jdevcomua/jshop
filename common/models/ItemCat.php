@@ -20,6 +20,8 @@ use yii\web\UploadedFile;
  */
 class ItemCat extends Model
 {
+    
+    public $count;
 
     /**
      * @var UploadedFile

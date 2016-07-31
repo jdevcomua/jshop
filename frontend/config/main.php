@@ -37,6 +37,7 @@ $config = [
                 '<language:(ru|en)>/'=>'site/index',
                 '<language:(ru|en)>/site'=>'site/index',
                 '<language:(ru|en)>/site/index'=>'site/index',
+                '<language:(ru|en)>/search'=>'site/search',
                 '<language:(ru|en)>/site/img/*'=>'img/*',
                 '<language:(ru|en)>/cart'=>'cart/index',
                 '<language:(ru|en)>/cart/order'=>'cart/order',

@@ -94,6 +94,20 @@ $config = [
                 ],
             ],
         ],
+        'view' => [
+            'theme' => [
+                'basePath' => '@app/themes/basic',
+                'baseUrl' => '@web/themes/basic',
+                'pathMap' => [
+                    '@app/views' => '@app/themes/basic/views',
+                ],
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => false,
+            ],
+        ],
     ],
     'params' => $params,
 ];

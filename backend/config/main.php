@@ -1,6 +1,12 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
+$params = array_merge(
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
+
+);
 
 $config = [
     'id' => 'basic',
@@ -52,6 +58,7 @@ $config = [
                 '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
                 '<language:(ru|en)>/item-cat/view'=>'item-cat/view',
                 '<language:(ru|en)>/item-cat/characteristics'=>'item-cat/characteristics',
+                '<language:(ru|en)>/item-cat/update-characteristics'=>'item-cat/update-characteristics',
 
                 '<language:(ru|en)>/characteristic/index'=>'characteristic/index',
                 '<language:(ru|en)>/characteristic'=>'characteristic/index',

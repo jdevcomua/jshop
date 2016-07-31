@@ -1,10 +1,12 @@
 <?php
+$params = require(__DIR__ . '/params.php');
+
 return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=mobidev',
-            'username' => 'root',
+            'dsn' => 'mysql:host=localhost;dbname=shop',
+            'username' => 'shop',
             'password' => 'umo4ka11',
             'charset' => 'utf8',
         ],

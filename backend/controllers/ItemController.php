@@ -131,7 +131,23 @@ class ItemController extends Controller
      */
     public function actionUpdateCharacteristics($id)
     {
-        $characteristics = $this->findModel($id)->getCharacteristicItems()->indexBy('id')->all();
+        $item = Item::findOne($id);
+        // значения характеристик товара
+        $characteristics = $item->getCharacteristicItems()->indexBy('characteristic_id')->all();
+        // все характеристики категории
+        $categoryChars = Characteristic::find()->where(['category_id' => $item->category_id])->all();
+        // если появились новые характеристики, для которых нет значения у этого товара
+        if (count($categoryChars) > count($characteristics)) {
+            $keys = array_keys($characteristics);
+            /* @var $characteristic Characteristic */
+            foreach ($categoryChars as $characteristic) {
+                if (!in_array($characteristic->id, $keys)) {
+                    $newChar = new CharacteristicItem(['item_id' => $id, 'characteristic_id' => $characteristic->id, 'value' => '']);
+                    $newChar->save();
+                    $characteristics[] = $newChar;
+                }
+            }
+        }
         if (Model::loadMultiple($characteristics, Yii::$app->request->post()) && Model::validateMultiple($characteristics)) {
             foreach ($characteristics as $characteristic) {
                 $characteristic->save(false);
@@ -150,7 +166,8 @@ class ItemController extends Controller
      */
     public function actionCharacteristics($id)
     {
-        $chars = ItemCat::findOne($this->findModel($id)->category_id)->getCharacteristics()->all();
+        $item = Item::findOne($id);
+        $chars = Characteristic::find()->where(['category_id' => $item->category_id])->all();
         $characteristics = [];
         foreach ($chars as $char) {
             $char_item = new CharacteristicItem();

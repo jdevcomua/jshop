@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Stock */
+/* @var $arrayItems array */
+/* @var $selected array */
 
-$this->title = Yii::t('app', 'Создать {modelClass}: ', [
-    'modelClass' => 'Stock',
-]) . ' ' . $model->title;
+$this->title = Yii::t('app', 'Редактировать акцию: ') . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Акции'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');

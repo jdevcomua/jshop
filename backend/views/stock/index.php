@@ -15,12 +15,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?php echo Html::encode($this->title) . ' ' .
             Html::a(Yii::t('app', 'Создать акцию'), ['create'], ['class' => 'btn btn-success']) ?></h3>
 
-    <?php echo GridView::widget([
+    <?php echo Html::beginForm(['del'],'post');
+
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'name' => 'id',
+                // you may configure additional properties here
+                'checkboxOptions' => function ($model, $key, $index, $column) {
+                    return ['value' => $model->id];
+                }
+            ],
             'id',
             'title',
             //'date_from',
@@ -29,8 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'type',
             // 'value',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return Yii::$app->urlHelper->to(['stock/'.$action,'id'=>$model->id]);
+                }
+            ],
         ],
-    ]); ?>
+    ]);
+    
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-danger',]);
+    echo Html::endForm();?>
 
 </div>

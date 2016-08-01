@@ -98,9 +98,7 @@ class UserController extends Controller
      */
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $this->findModel($id)->delete();
-        }
+        User::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
         return $this->redirect(Yii::$app->urlHelper->to(['user/index']));
     }
 
@@ -108,7 +106,7 @@ class UserController extends Controller
      * Finds the Users model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Users the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Orders */
+/* @var $orderItems \yii\data\ActiveDataProvider */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
@@ -16,9 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?php echo Html::encode($this->title) ?></h3>
 
     <p>
-        <?php echo Html::a(Yii::t('app', 'Оплачено'), ['paid', 'id' => $model->id], ['class' => 'btn btn-success']) . ' ';
-        echo Html::a(Yii::t('app', 'Редактировать'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
-        echo Html::a(Yii::t('app', 'Удалить'), ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('app', 'Оплачено'), Yii::$app->urlHelper->to(['orders/paid', 'id' => $model->id]),
+                ['class' => 'btn btn-success']) . ' ';
+        echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['orders/update', 'id' => $model->id]),
+                ['class' => 'btn btn-primary']) . ' ';
+        echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['orders/delete', 'id' => $model->id]), [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот заказ?'),
@@ -44,13 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
     echo '<h3>Товары</h3>';
 
     echo GridView::widget([
-    'dataProvider' => $orderItems,
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        'dataProvider' => $orderItems,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-        'item.title',
-        'count',
-        'sum'
+            'item.title',
+            'count',
+            'sum'
         ],
     ]); ?>
 

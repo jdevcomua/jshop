@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Characteristic */
+/* @var $categories array */
 
 $this->title = Yii::t('app', 'Создать характеристику');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Characteristics'), 'url' => ['index']];

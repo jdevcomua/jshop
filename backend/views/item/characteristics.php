@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\typeahead\Typeahead;
 
+/* @var $characteristics \common\models\Characteristic[] */
+
 $form = ActiveForm::begin();?>
 <div style="width: 100%; padding-left: 15px; margin-top: 20px;">
 <?php foreach ($characteristics as $index => $characteristic) {

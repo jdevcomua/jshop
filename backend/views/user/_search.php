@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\search\UsersSearch */
+/* @var $model common\models\search\UserSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'mail');
 
-    echo $form->field($model, 'city');?>
+    echo $form->field($model, 'city'); ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']);

@@ -44,7 +44,18 @@ class KitController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    
+    /**
+     * Delete group of Kit model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
+    public function actionDel()
+    {
+        Kit::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        return $this->redirect(Yii::$app->urlHelper->to(['user/index']));
+    }
+    
     /**
      * Displays a single Kit model.
      * @param integer $id
@@ -52,6 +63,7 @@ class KitController extends Controller
      */
     public function actionView($id)
     {
+        /* @var $model Kit */
         $model = Kit::find()->where('kit.id=' . $id)->joinWith('kitItems')->one();
         $items = new ActiveDataProvider([
             'query' => $model->getKitItems()->joinWith('item'),

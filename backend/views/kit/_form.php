@@ -7,6 +7,8 @@ use kartik\select2\Select2;
 /* @var $this yii\web\View */
 /* @var $model common\models\Kit */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $arrayItems array */
+
 ?>
 
 <div class="kit-form">
@@ -35,7 +37,8 @@ use kartik\select2\Select2;
     ?>
 
     <div class="form-group"><br>
-        <?php echo Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton(Yii::t('app', 'Сохранить'), [
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

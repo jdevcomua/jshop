@@ -19,19 +19,35 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php echo Html::a(Yii::t('app', 'Создать комплект'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php echo GridView::widget([
+    <?php echo Html::beginForm(['del'],'post');
+
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'name' => 'id',
+                // you may configure additional properties here
+                'checkboxOptions' => function ($model, $key, $index, $column) {
+                    return ['value' => $model->id];
+                }
+            ],
             'id',
             'title',
             'description:ntext',
             'cost',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'urlCreator'=>function($action, $model, $key, $index){
+                    return Yii::$app->urlHelper->to(['kit/'.$action,'id'=>$model->id]);
+                }
+            ],
         ],
-    ]); ?>
+    ]);
+    
+    echo Html::submitButton('Удалить', ['class' => 'btn btn-danger',]);
+    echo Html::endForm();?>
 
 </div>

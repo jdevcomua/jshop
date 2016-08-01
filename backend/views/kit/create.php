@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-
+/* @var $arrayItems array */
 /* @var $this yii\web\View */
 /* @var $model common\models\Kit */
 

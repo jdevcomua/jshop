@@ -8,6 +8,7 @@ use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $categories array */
 ?>
 
 <div class="item-cat-form">
@@ -31,7 +32,7 @@ use kartik\file\FileInput;
     echo FileInput::widget([
         'model' => $model,
         'attribute' => 'imageFile',
-        'options'=>[
+        'options' => [
             'multiple' => false,
         ],
         'pluginOptions' => [
@@ -45,11 +46,11 @@ use kartik\file\FileInput;
         ]
     ]);
     ?>
-<br>
+    <br>
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [
-            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
-        ]) . ' ';
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
+            ]) . ' ';
         echo Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
             'class' => 'btn btn-primary', 'name' => 'action', 'value' => 'chars'
         ]) ?>

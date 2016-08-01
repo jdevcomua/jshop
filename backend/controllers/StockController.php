@@ -46,6 +46,17 @@ class StockController extends Controller
     }
 
     /**
+     * Delete group of Stock model
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @return \yii\web\Response
+     */
+    public function actionDel()
+    {
+        Stock::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        return $this->redirect(Yii::$app->urlHelper->to(['stock/index']));
+    }
+
+    /**
      * Displays a single Stock model.
      * @param integer $id
      * @return mixed

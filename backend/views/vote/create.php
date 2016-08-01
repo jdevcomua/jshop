@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Vote */
 
-$this->title = Yii::t('app', 'Create Vote');
+$this->title = Yii::t('app', 'Создать отзыв');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Votes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -1,20 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: umka
- * Date: 13.01.16
- * Time: 1:13
- */
 
-namespace common\components;
+namespace frontend\widgets\category;
 
 use yii\base\Widget;
 use common\models\ItemCat;
 
 class CategoriesView extends Widget
 {
-
-    public $categories;
+    private $categories;
 
     public function init()
     {

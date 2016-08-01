@@ -6,7 +6,8 @@
 use frontend\themes\basic\BasicAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use common\components\CategoriesView;
+use frontend\widgets\category\CategoriesView;
+use yii\helpers\Url;
 
 $basicAsset =  BasicAsset::register($this);
 ?>
@@ -29,7 +30,7 @@ $basicAsset =  BasicAsset::register($this);
                 <div class="container">
                     <!--        Logo-->
                     <a href="<?php echo Yii::$app->urlHelper->to(['/']); ?>" class="logo">
-                        <img src="<?= $basicAsset->baseUrl ?>/img/logo.png" alt="logo">
+                        <img src="<?= Url::base() . '/images/logo.png'?>" alt="logo">
                     </a>
                     <div class="left-content-header">
                         <div class="header-left-content-header t-a_j">

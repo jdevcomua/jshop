@@ -1,3 +1,8 @@
+<?php
+
+/**@var common\models\ItemCat[] $allCategories*/
+?>
+
 <div class="frame-menu-main horizontal-menu">
     <!--    menu-row-category || menu-col-category-->
     <div class="menu-main menu-row-category container">
@@ -13,8 +18,7 @@
                             <div class="frame-item-menu">
                                 <div class="frame-title is-sub" onmouseover="$(this).parent().find('.frame-drop-menu').attr('style', 'left:initial;display:block;');"
                                      onmouseout="$(this).parent().find('.frame-drop-menu').attr('style', 'display:none;');">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['category/' . $category->id . '-' . $category->getTranslit()]);?>"
-                                       class="title active">
+                                    <a href="<?= $category->getUrl() ?>" class="title active">
                                         <span class="helper"></span><span><span class="text-el"><?php echo $category->title; ?></span></span>
                                     </a>
                                 </div>

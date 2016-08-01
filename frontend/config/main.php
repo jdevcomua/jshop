@@ -1,5 +1,7 @@
 <?php
 
+use common\components\Theme;
+
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -96,10 +98,11 @@ $config = [
         ],
         'view' => [
             'theme' => [
-                'basePath' => '@app/themes/basic',
-                'baseUrl' => '@web/themes/basic',
+                'basePath' => '@app/themes/' . $params['theme'],
+                'baseUrl' => '@web/themes/'. $params['theme'],
                 'pathMap' => [
-                    '@app/views' => '@app/themes/basic/views',
+                    '@app/views'    => '@app/themes/' . $params['theme'] . '/views',
+                    '@app/widgets'  => '@app/themes/' . $params['theme'] . '/widgets',
                 ],
             ],
         ],

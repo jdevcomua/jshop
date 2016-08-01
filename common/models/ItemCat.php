@@ -142,4 +142,9 @@ class ItemCat extends Model
     {
         return Yii::$app->params['myServerImageLink'] . $this->image;
     }
+
+    public function getUrl()
+    {
+        return Yii::$app->urlHelper->to(['category/' . $this->id . '-' . $this->getTranslit()]);
+    }
 }

@@ -36,17 +36,6 @@ CREATE TABLE IF NOT EXISTS `item` (
   KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
 
---
--- Дамп данных таблицы `item`
---
-
-INSERT INTO `item` (`id`, `category_id`, `title`, `cost`, `image`) VALUES
-(3, 4, 'item1', 500, '1.jpg'),
-(4, 4, 'item2', 600, '2.jpg'),
-(12, 5, 'item999', 999, '3.jpeg'),
-(17, 5, 'mmm', 555, '4.jpg'),
-(18, 4, 'mnmn', 65, '5.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -58,14 +47,6 @@ CREATE TABLE IF NOT EXISTS `item_cat` (
   `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
---
--- Дамп данных таблицы `item_cat`
---
-
-INSERT INTO `item_cat` (`id`, `title`) VALUES
-(4, 'category1'),
-(5, 'category2');
 
 -- --------------------------------------------------------
 
@@ -110,13 +91,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `city` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `user`
---
-
-INSERT INTO `user` (`id`, `name`, `mail`, `city`) VALUES
-(1, 'rtggf22', 'fghfgh22', 'fghfgh22');
 
 -- --------------------------------------------------------
 

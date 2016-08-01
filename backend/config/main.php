@@ -55,6 +55,7 @@ $config = [
                 '<language:(ru|en)>/item-cat/index'=>'item-cat/index',
                 '<language:(ru|en)>/item-cat/group'=>'item-cat/group',
                 '<language:(ru|en)>/item-cat/update'=>'item-cat/update',
+                '<language:(ru|en)>/item-cat/delete'=>'item-cat/delete',
                 '<language:(ru|en)>/item-cat/create'=>'item-cat/create',
                 '<language:(ru|en)>/item-cat/view'=>'item-cat/view',
                 '<language:(ru|en)>/item-cat/characteristics'=>'item-cat/characteristics',

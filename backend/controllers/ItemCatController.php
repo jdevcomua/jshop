@@ -61,10 +61,15 @@ class ItemCatController extends Controller
         $searchModel = new ItemCatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
-        return $this->render('index', [
+        $context = [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ];
+        $deleted = Yii::$app->request->get('deleted');
+        if (isset($deleted)) {
+            $context['deleted'] = $deleted;
+        }
+        return $this->render('index', $context);
     }
 
     /**
@@ -178,9 +183,15 @@ class ItemCatController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $category = $this->findModel($id);
+        if ($category->getItems()->count() > 0) {
+            $deleted = false;
+        } else {
+            $this->findModel($id)->delete();
+            $deleted = true;
+        }
 
-        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index', 'deleted' => $deleted]));
     }
 
     /**

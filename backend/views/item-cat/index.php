@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\ItemCatSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $deleted string */
 
 $this->title = Yii::t('app', 'Категории');
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,6 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
         echo Html::a(Yii::t('app', 'Создать категорию'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success'])
         ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?php if (isset($deleted) && $deleted == '0') { ?>
+        <div class="callout callout-danger">
+            <h4>Невозможно удалить категорию.</h4>
+            <p>Категория содержит товары.</p>
+        </div>
+    <?php } ?>
 
     <?php echo Html::beginForm(Yii::$app->urlHelper->to(['item-cat/group']),'post');
 

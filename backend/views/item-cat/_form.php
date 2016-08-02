@@ -19,7 +19,8 @@ use kartik\file\FileInput;
 
     echo $form->field($model, 'parent_id')->widget(Select2::classname(), [
         'data' => $categories,
-        'options' => ['placeholder' => 'Select a parent ...'],
+        'options' => ['placeholder' => ''],
+        'theme' => Select2::THEME_DEFAULT,
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -29,9 +30,7 @@ use kartik\file\FileInput;
     if (!$model->isNewRecord && !empty($model->image)) {
         $images[] = Html::img($model->getImageUrl(), ['width' => '120px']);
     }
-    echo FileInput::widget([
-        'model' => $model,
-        'attribute' => 'imageFile',
+    echo $form->field($model, 'imageFile')->widget(FileInput::classname(), [
         'options' => [
             'multiple' => false,
         ],
@@ -44,8 +43,7 @@ use kartik\file\FileInput;
             'overwriteInitial' => true,
             'maxFileCount' => 1
         ]
-    ]);
-    ?>
+    ]); ?>
     <br>
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [

@@ -18,7 +18,8 @@ use kartik\select2\Select2;
 
         echo $form->field($model, 'category_id')->widget(Select2::classname(), [
             'data' => $categories,
-            'options' => ['placeholder' => 'Select a category ...'],
+            'options' => ['placeholder' => ''],
+            'theme' => Select2::THEME_DEFAULT,
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -49,9 +50,7 @@ use kartik\select2\Select2;
                 $images[] = Html::img($url, ['width' => '120px']);
             }
         }
-        echo FileInput::widget([
-            'model' => $model,
-            'attribute' => 'imageFiles[]',
+        echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
             'options'=>[
                 'multiple' => true,
             ],
@@ -64,8 +63,7 @@ use kartik\select2\Select2;
                 'overwriteInitial' => false,
                 'maxFileCount' => 3
             ]
-        ]);
-        ?>
+        ]); ?>
 
         <div class="form-group"><br>
             <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), 

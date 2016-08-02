@@ -125,7 +125,6 @@ class ItemCatController extends Controller
         } else {
             $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
             $categoriesArray = [];
-            $categoriesArray[] = null;
             foreach ($categories as $category) {
                 /* @var $category ItemCat*/
                 $categoriesArray[$category->id] = $category->title;

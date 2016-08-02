@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+.select2-dropdown .select2-search__field:focus, .select2-search--inline .select2-search__field:focus {
+    border: none!important;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

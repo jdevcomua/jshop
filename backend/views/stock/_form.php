@@ -9,6 +9,7 @@ use kartik\datecontrol\DateControl;
 /* @var $this yii\web\View */
 /* @var $model common\models\Stock */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $arrayItems array */
 ?>
 
 <div class="stock-form">
@@ -20,60 +21,62 @@ use kartik\datecontrol\DateControl;
     <div style="width: 47%; float:left;margin-right: 6%">
         <?php echo $form->field($model, 'date_from')->widget(DateControl::classname(), [
             'ajaxConversion' => false,
-            'type'=>DateControl::FORMAT_DATETIME,
+            'type' => DateControl::FORMAT_DATETIME,
             'options' => [
                 'pluginOptions' => [
                     'autoclose' => true
                 ],
             ]
-        ]);?>
+        ]); ?>
     </div>
 
     <div style="width: 47%; float:left;">
         <?php echo $form->field($model, 'date_to')->widget(DateControl::classname(), [
             'ajaxConversion' => false,
-            'type'=>DateControl::FORMAT_DATETIME,
+            'type' => DateControl::FORMAT_DATETIME,
             'options' => [
                 'pluginOptions' => [
                     'autoclose' => true
                 ],
             ]
-        ]);?>
+        ]); ?>
     </div>
 
-    <?php echo $form->field($model, 'description')->textarea(['rows' => 4]);?>
+    <?php echo $form->field($model, 'description')->textarea(['rows' => 4]); ?>
 
     <div style="width: 47%; float:left;margin-right: 6%">
-        <?php echo $form->field($model, 'type')->dropDownList(['1' => 'Проценты', '2' => 'Фиксированный']);?>
+        <?php echo $form->field($model, 'type')->dropDownList(['1' => 'Проценты', '2' => 'Фиксированный']); ?>
     </div>
 
     <div style="width: 47%; float:left;">
-        <?php echo $form->field($model, 'value')->textInput();?>
+        <?php echo $form->field($model, 'value')->textInput(); ?>
     </div>
 
     <div style="float: left;width: 100%;padding-bottom: 15px;">
-    <?php $configs = [
-        'name' => 'items',
-        'data' => $arrayItems,
-        'options' => [
-            'placeholder' => 'Select items ...',
-            'multiple' => true
-        ],
-    ];
-    if (isset($selected)) {
-        $configs['value'] = $selected;
-    }
-    echo Select2::widget($configs);?>
+        <label class="control-label">Товары, участвующие в акции</label>
+        <?php $configs = [
+            'name' => 'items',
+            'data' => $arrayItems,
+            'theme' => Select2::THEME_DEFAULT,
+            'options' => [
+                'placeholder' => '',
+                'multiple' => true
+            ],
+        ];
+        if (isset($selected)) {
+            $configs['value'] = $selected;
+        }
+        echo Select2::widget($configs); ?>
     </div>
 
     <?php $images = [];
     if (!$model->isNewRecord && !empty($model->image)) {
         $images[] = Html::img($model->getImageUrl(), ['width' => '120px']);
     }
-    echo FileInput::widget([
+    echo $form->field($model, 'imageFile')->widget(FileInput::classname(), [
         'model' => $model,
         'attribute' => 'imageFile',
-        'options'=>[
+        'options' => [
             'multiple' => false,
         ],
         'pluginOptions' => [
@@ -85,8 +88,7 @@ use kartik\datecontrol\DateControl;
             'overwriteInitial' => true,
             'maxFileCount' => 1
         ]
-    ]);
-    ?>
+    ]); ?>
     <br>
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('app', 'Сохранить'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

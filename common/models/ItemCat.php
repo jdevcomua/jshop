@@ -69,6 +69,9 @@ class ItemCat extends Model
         return [
             'id' => 'ID',
             'title' => 'Название',
+            'parent_id' => 'Родительская категория',
+            'image' => 'Изображение',
+            'imageFile' => 'Изображение',
         ];
     }
 

@@ -31,7 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'categoryTitle',
+                    [
+                        'label' => 'Категория',
+                        'value' => Html::a(Html::encode($model->category->title), Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->category->id])),
+                        'format' => 'raw',
+                    ],
                     'title',
                 ],
             ]) ?>

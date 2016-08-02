@@ -38,7 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'date_from',
                             'date_to',
                             'description:ntext',
-                            'type',
+                            [
+                                'attribute' => 'type',
+                                'value' => $model->type == 1 ? 'Проценты' : 'Фиксированный'
+                            ],
                             'value',
                         ],
                     ]); ?>

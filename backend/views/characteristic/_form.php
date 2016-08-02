@@ -1,5 +1,6 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,8 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin();
 
-    echo $form->field($model, 'category_id')->dropDownList($categories);
-
+    echo $form->field($model, 'category_id')->widget(Select2::classname(), [
+        'data' => $categories,
+        'options' => ['placeholder' => ''],
+        'theme' => Select2::THEME_DEFAULT,
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    
     echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

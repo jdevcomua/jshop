@@ -245,6 +245,7 @@ class Item extends Model implements CartAdd
             'count_of_views' => Yii::t('app', 'Количество просмотров'),
             'newPrice' => Yii::t('app', 'Новая цена'),
             'description' => Yii::t('app', 'Описание'),
+            'imageFiles' => Yii::t('app', 'Изображения'),
         ];
     }
 

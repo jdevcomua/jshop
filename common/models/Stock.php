@@ -92,6 +92,7 @@ class Stock extends Model
             'type' => Yii::t('app', 'Метод подсчета'),
             'value' => Yii::t('app', 'Значение'),
             'image' => Yii::t('app', 'Изображение'),
+            'imageFile' => Yii::t('app', 'Изображение'),
         ];
     }
 

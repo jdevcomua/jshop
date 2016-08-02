@@ -19,22 +19,22 @@ use kartik\select2\Select2;
 
     echo $form->field($model, 'description')->textarea(['rows' => 4]);
 
-    echo $form->field($model, 'cost')->textInput();
+    echo $form->field($model, 'cost')->textInput(); ?>
 
-    $configs = [
+    <label class="control-label">Товары, участвующие в акции</label>
+    <?php $configs = [
         'name' => 'items',
         'data' => $arrayItems,
+        'theme' => Select2::THEME_DEFAULT,
         'options' => [
-            'placeholder' => 'Select items ...',
+            'placeholder' => '',
             'multiple' => true
         ],
     ];
     if (isset($selected)) {
         $configs['value'] = $selected;
     }
-
-    echo Select2::widget($configs);
-    ?>
+    echo Select2::widget($configs); ?>
 
     <div class="form-group"><br>
         <?php echo Html::submitButton(Yii::t('app', 'Сохранить'), [

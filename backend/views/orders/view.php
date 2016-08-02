@@ -53,7 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
-                    'item.title',
+                    [
+                        'attribute' => 'item.title',
+                        'value' => function ($data) {
+                            return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view', 'id' => $data->item->id]));
+                        },
+                        'format' => 'raw',
+                    ],
                     'count',
                     'sum'
                 ],

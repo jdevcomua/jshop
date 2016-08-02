@@ -11,43 +11,45 @@ $this->title = Yii::t('app', 'Комплекты');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kit-index">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+        </div>
+        <div class="box-body">
+            <p>
+                <?= Html::a(Yii::t('app', 'Создать комплект'), ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <?php echo Html::beginForm(['del'], 'post');
 
-    <p>
-        <?php echo Html::a(Yii::t('app', 'Создать комплект'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'class' => 'yii\grid\CheckboxColumn',
+                        'name' => 'id',
+                        // you may configure additional properties here
+                        'checkboxOptions' => function ($model, $key, $index, $column) {
+                            return ['value' => $model->id];
+                        }
+                    ],
+                    'id',
+                    'title',
+                    'description:ntext',
+                    'cost',
 
-    <?php echo Html::beginForm(['del'],'post');
+                    ['class' => 'yii\grid\ActionColumn',
+                        'urlCreator' => function ($action, $model, $key, $index) {
+                            return Yii::$app->urlHelper->to(['kit/' . $action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]);
 
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'name' => 'id',
-                // you may configure additional properties here
-                'checkboxOptions' => function ($model, $key, $index, $column) {
-                    return ['value' => $model->id];
-                }
-            ],
-            'id',
-            'title',
-            'description:ntext',
-            'cost',
-
-            ['class' => 'yii\grid\ActionColumn',
-                'urlCreator'=>function($action, $model, $key, $index){
-                    return Yii::$app->urlHelper->to(['kit/'.$action,'id'=>$model->id]);
-                }
-            ],
-        ],
-    ]);
-    
-    echo Html::submitButton('Удалить', ['class' => 'btn btn-danger',]);
-    echo Html::endForm();?>
-
+            echo Html::submitButton('Удалить', ['class' => 'btn btn-danger',]);
+            echo Html::endForm(); ?>
+        </div>
+    </div>
 </div>

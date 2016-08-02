@@ -15,7 +15,7 @@ use Yii;
 class Controller extends \yii\web\Controller
 {
 
-    public $layout = 'main3';
+    //public $layout = 'main3';
 
 
     public function beforeAction($action)

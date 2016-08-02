@@ -12,44 +12,48 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Kits'), 'url' => ['i
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kit-view">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+        </div>
+        <div class="box-body">
+            <p>
+                <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['kit/update', 'id' => $model->id]),
+                        ['class' => 'btn btn-primary']) . ' ';
+                echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['kit/delete', 'id' => $model->id]), [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот комплект?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
 
-    <h1><?php echo Html::encode($this->title) ?></h1>
+            <?php echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'title',
+                    'description:ntext',
+                    'cost',
+                ],
+            ]); ?>
 
-    <p>
-        <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['kit/update', 'id' => $model->id]),
-                ['class' => 'btn btn-primary']) . ' ';
-        echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['kit/delete', 'id' => $model->id]), [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот комплект?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?php echo DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'description:ntext',
-            'cost',
-        ],
-    ]);
-
-    echo GridView::widget([
-        'dataProvider' => $items,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'item.title',
-                'value' => function($data){
-                    return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view','id'=>$data->item->id]));
-                },
-                'format' => 'raw',
-            ],
-            'item.cost',
-        ],
-    ]);?>
-
+            <h4>Товары, участвующие в акции:</h4>
+            <?php echo GridView::widget([
+                'dataProvider' => $items,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'attribute' => 'item.title',
+                        'value' => function ($data) {
+                            return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view', 'id' => $data->item->id]));
+                        },
+                        'format' => 'raw',
+                    ],
+                    'item.cost',
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

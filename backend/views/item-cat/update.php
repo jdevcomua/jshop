@@ -10,29 +10,30 @@ use yii\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Cats'), 'url' => ['index']];
 if ($count == 'one') {
-    $this->title = Yii::t('app', 'Редактировать характеристику: ') . ' ' . $model->title;
+    $this->title = Yii::t('app', 'Редактировать категорию: ') . ' ' . $model->title;
     $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 }
 $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
 ?>
 <div class="item-cat-update">
-
-    <h3><?php
-        if ($count == 'one') {
-            echo Html::encode($this->title);
-        }
-        ?></h3>
-
-    <?php
-    if ($count == 'one') {
-        echo $this->render('_form', [
-            'model' => $model, 'categories' => $categories
-        ]);
-    } else {
-        echo $this->render('groupForm', [
-            'models' => $models,
-        ]);
-    }
-    ?>
-
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?php if ($count == 'one') {
+                    echo Html::encode($this->title);
+                } else {
+                    echo 'Редактировать категории';
+                } ?></h3>
+        </div>
+        <div class="box-body">
+            <?php if ($count == 'one') {
+                echo $this->render('_form', [
+                    'model' => $model, 'categories' => $categories,
+                ]);
+            } else {
+                echo $this->render('groupForm', [
+                    'models' => $models,
+                ]);
+            } ?>
+        </div>
+    </div>
 </div>

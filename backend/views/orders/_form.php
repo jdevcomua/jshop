@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div style="width: 500px; float:left; padding-right: 50px;">
-        <? $form->field($model, 'order_status')->dropDownList(['Новый' => 'Новый', 'Отправлен' => 'Отправлен',
+        <?= $form->field($model, 'order_status')->dropDownList(['Новый' => 'Новый', 'Отправлен' => 'Отправлен',
             'Доставлен' => 'Доставлен']); ?>
     </div>
 

@@ -13,11 +13,14 @@ $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'i
 $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
 ?>
 <div class="kit-update">
-
-    <h1><?php echo Html::encode($this->title) ?></h1>
-
-    <?php echo $this->render('_form', [
-        'model' => $model, 'arrayItems' => $arrayItems, 'selected' => $selected
-    ]) ?>
-
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+        </div>
+        <div class="box-body">
+            <?php echo $this->render('_form', [
+                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => $selected
+            ]) ?>
+        </div>
+    </div>
 </div>

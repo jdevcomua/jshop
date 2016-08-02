@@ -6,50 +6,53 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $filterByCategories array*/
+/* @var $filterByCategories array */
 
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-index">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Html::encode($this->title) . ' ';
+                echo Html::a(Yii::t('app', 'Создать товар'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success']) ?>
+            </h3>
+        </div>
+        <div class="box-body">
+            <?php echo Html::beginForm(['del'], 'post');
 
-    <h3><?php echo Html::encode($this->title) . ' ';
-        echo Html::a(Yii::t('app', 'Создать предмет'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success'])?></h3>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'class' => 'yii\grid\CheckboxColumn',
+                        'name' => 'id',
+                        // you may configure additional properties here
+                        'checkboxOptions' => function ($model, $key, $index, $column) {
+                            return ['value' => $model->id];
+                        }
+                    ],
+                    'id',
+                    'title',
+                    'cost',
+                    'count_of_views',
 
-    <?php echo Html::beginForm(['del'],'post');
+                    [
+                        'attribute' => 'categoryTitle',
+                        'filter' => $filterByCategories,
+                    ],
+                    ['class' => 'yii\grid\ActionColumn',
+                        'urlCreator' => function ($action, $model, $key, $index) {
+                            return Yii::$app->urlHelper->to(['item/' . $action, 'id' => $model->id]);
+                        }
+                    ],
+                ],
+            ]);
 
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'name' => 'id',
-                // you may configure additional properties here
-                'checkboxOptions' => function ($model, $key, $index, $column) {
-                    return ['value' => $model->id];
-                }
-            ],
-            'id',
-            'title',
-            'cost',
-            'count_of_views',
-
-            [
-                'attribute' => 'categoryTitle',
-                'filter' => $filterByCategories,
-            ],
-            ['class' => 'yii\grid\ActionColumn',
-                'urlCreator'=>function($action, $model, $key, $index){
-                    return Yii::$app->urlHelper->to(['item/'.$action,'id'=>$model->id]);
-                }
-            ],
-        ],
-    ]);
-
-    echo Html::submitButton(Yii::t('app', 'Удалить'), ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'del']);
-    echo Html::endForm();?>
-
+            echo Html::submitButton(Yii::t('app', 'Удалить'), ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'del']);
+            echo Html::endForm(); ?>
+        </div>
+    </div>
 </div>

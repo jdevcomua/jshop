@@ -14,6 +14,7 @@ use common\components\CartAdd;
  * @property double $cost
  *
  * @property KitItem[] $kitItems
+ * @property Item[] $items
  */
 class Kit extends Model implements CartAdd
 {
@@ -111,4 +112,13 @@ class Kit extends Model implements CartAdd
     {
         return self::CART_TYPE;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItems()
+    {
+        return $this->hasMany(Item::className(), ['id' => 'item_id'])->viaTable('kit_item', ['kit_id' => 'id']);
+    }
+    
 }

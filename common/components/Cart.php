@@ -135,6 +135,9 @@ class Cart extends Component
         return null;
     }
 
+    /**
+     * @return CartElement[]
+     */
     public function getModels()
     {
         if (!$this->isEmpty()) {

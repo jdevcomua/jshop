@@ -3,11 +3,12 @@
 use yii\helpers\Html;
 
 /* @var $form yii\widgets\ActiveForm */
+/* @var $item common\models\Item */
+$imageUrls = $item->getImageUrl();
 ?>
 
 <div class="content">
     <br>
-    <?php /* @var $item common\models\Item */ ?>
     <div class="frame-inside page-product">
         <div class="container">
             <div class="clearfix">
@@ -80,39 +81,21 @@ use yii\helpers\Html;
                 <div class="left-product leftProduct">
                     <div class="clearfix item-product globalFrameProduct to-cart">
                         <div class="left-product-left">
-                            <style>
-                                #owl-demo .item img{
-                                    display: block;
-                                    max-height: 300px;
-                                    max-width: 282px;
-                                    height: auto;
-                                }
-                            </style>
-                            <div id="demo">
-                                <div class="container">
-                                    <div class="row">
-                                        <div  class="span12">
-                                            <div id="owl-demo" class="owl-carousel">
-                                                <?php foreach ($item->getImageUrl() as $url) { ?>
-                                                    <div class="item" align="center">
-                                                        <img  src="<?php echo $url; ?>">
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="gallery">
+                                <?php foreach ($imageUrls as $url) { ?>
+                                    <a href="<?= $url; ?>"><img src="<?= $url; ?>" /></a>
+                                <?php } ?>
                             </div>
-
-                            <script>
-                                $(document).ready(function() {
-                                    $("#owl-demo").owlCarousel({
-
-                                        navigation : false,
-                                        slideSpeed : 300,
-                                        paginationSpeed : 400,
-                                        singleItem : true
-
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('#gallery').jGallery({
+                                        backgroundColor: '#fff',
+                                        height: '300px',
+                                        canMinimalizeThumbnails: true,
+                                        thumbWidth: 50,
+                                        thumbWidthOnFullScreen: 100,
+                                        hideThumbnailsOnInit: false,
+                                        thumbnailsPosition: 'left'
                                     });
                                 });
                             </script>

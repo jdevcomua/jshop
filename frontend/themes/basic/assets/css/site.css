@@ -1,5 +1,13 @@
 @charset "utf-8";
 
+.jgallery {
+    background: white!important;
+}
+
+.jgallery[data-jgallery-id="1"] .zoom-container:not([data-size="fill"]) .jgallery-container {
+    background: white!important
+}
+
 html,
 body {
     height: 100%;
@@ -681,7 +689,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 /*/carousels*/
 
 /*menu*/
-.frame-menu-main{position: relative;z-index: 2;}
+.frame-menu-main{position: relative;}
 .menu-main{position: relative;z-index: 1;}
 .vertical-menu .menu-main{margin-bottom: 20px;}
 .horizontal-menu .menu-main{padding-bottom: 0px; position: relative;}

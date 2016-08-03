@@ -18,6 +18,8 @@ class BasicAsset extends AssetBundle
         'css/slider.css',
         'css/owl.carousel.css',
         'css/owl.theme.css',
+        'css/font-awesome.min.css',
+        'css/jgallery.min.css',
     ];
     public $js = [
         'js/onClickFunctions.js',
@@ -26,6 +28,7 @@ class BasicAsset extends AssetBundle
         'js/jquery.rateit.js',
         'js/cusel-min-2.5.js',
         'js/nouislider.min.js',
+        'js/jgallery.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

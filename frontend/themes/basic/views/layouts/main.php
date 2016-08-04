@@ -190,7 +190,7 @@ $basicAsset =  BasicAsset::register($this);
                             <!--                Start. Show search form-->
                             <div class="frame-search-form">
                                 <div class="p_r">
-                                    <form name="search" method="get" action="">
+                                    <form name="search" method="get" action="<?= Yii::$app->urlHelper->to(['search']) ?>">
                                         <span class="btn-search">
                                             <button type="submit"><span
                                                     class="text-el"><?php echo \Yii::t('app', 'поиск'); ?></span>
@@ -198,8 +198,8 @@ $basicAsset =  BasicAsset::register($this);
                                         </span>
                                         <div class="frame-search-input">
                                             <span class="icon_search"></span>
-                                            <input type="text" class="input-search" id="inputString" name="search"
-                                                   autocomplete="off" value=""
+                                            <input type="text" class="input-search" id="inputString" name="text"
+                                                   required autocomplete="off" value=""
                                                    placeholder="<?php echo \Yii::t('app', 'Я ищу') ?>">
                                             <div id="suggestions" class="drop drop-search"></div>
                                         </div>

@@ -5,8 +5,9 @@ use Yii;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model common\models\Orders */
-
+/* @var $order common\models\Orders */
+/* @var $orderItems OrderItem[] */
+$this->title = 'Заказ №' . $order->id;
 ?>
 
 <div class="content">

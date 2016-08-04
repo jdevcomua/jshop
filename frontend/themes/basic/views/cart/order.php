@@ -7,7 +7,7 @@ use Yii;
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model common\models\Orders */
-
+$this->title = 'Оформление заказа';
 ?>
 
 <div class="content">

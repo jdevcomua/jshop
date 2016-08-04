@@ -5,7 +5,7 @@
 /* @var $model common\models\User */
 
 use Yii;
-
+$this->title = 'Список желаний';
 ?>
 
 <div class="content">

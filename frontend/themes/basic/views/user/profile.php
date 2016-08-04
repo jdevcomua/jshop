@@ -8,7 +8,7 @@ use Yii;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\models\Orders;
-
+$this->title = 'Профиль пользователя';
 ?>
 
 <div class="content">

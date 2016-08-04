@@ -7,7 +7,7 @@
 use Yii;
 use common\models\ItemCat;
 use common\models\Characteristic;
-
+$this->title = 'Сравнение товаров';
 ?>
 <script>
     $(document).ready(function(){

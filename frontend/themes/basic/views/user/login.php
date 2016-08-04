@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use Yii;
-
+$this->title = 'Авторизация';
 ?>
 
 <div class="content">

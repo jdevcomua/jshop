@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $item common\models\Item */
 $imageUrls = $item->getImageUrl();
+$this->title = $item->title;
 ?>
 
 <div class="content">

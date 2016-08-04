@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 /* @var $category \common\models\ItemCat*/
+$this->title = 'Акции';
 ?>
 
 <div class="content">

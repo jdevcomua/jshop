@@ -10,6 +10,7 @@ use common\models\Item;
 /* @var $salesCount integer */
 /* @var $salesDataProvider ActiveDataProvider */
 /* @var $topDataProvider ActiveDataProvider */
+$this->title = 'Интернет-магазин';
 ?>
 
 <div class="content">

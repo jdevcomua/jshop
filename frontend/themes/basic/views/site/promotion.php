@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 /* @var $model \common\models\Stock*/
+$this->title = $model->title;
 ?>
 
 <div class="content">

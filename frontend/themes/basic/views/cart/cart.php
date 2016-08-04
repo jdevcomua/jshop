@@ -8,6 +8,7 @@ use Yii;
 /* @var $this \yii\web\View */
 /* @var $models CartElement[] */
 /* @var $sum double */
+$this->title = 'Корзина';
 ?>
 <div class="content">
     <br>

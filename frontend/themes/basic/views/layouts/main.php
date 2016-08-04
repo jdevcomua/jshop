@@ -97,7 +97,7 @@ $basicAsset =  BasicAsset::register($this);
                                             <li><?= Html::a(Html::img($basicAsset->baseUrl . '/img/usa.png',['width'=>20]), ['en/' . Yii::$app->controller->route]) ?></li>
                                         <?php endif ?>
                                         <?php if (!Yii::$app->user->isGuest) : ?>
-                                            <li><?= Html::a('Profile', ['profile'], ['style' =>'color: #1083c7;'])?></li>
+                                            <li><?= Html::a('Profile', Yii::$app->urlHelper->to(['user/profile']), ['style' =>'color: #1083c7;'])?></li>
                                         <?php endif ?>
                                     </ul>
                                 </nav>

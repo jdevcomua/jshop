@@ -26,8 +26,18 @@ class SiteController extends Controller
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
+        $salesItemsQuery = Item::find()->threeItems();
+        $salesDataProvider = new \yii\data\ActiveDataProvider([
+            'query' => $salesItemsQuery
+        ]);
+        $topDataProvider = new \yii\data\ActiveDataProvider([
+            'query' => Item::find()->top()
+        ]);
         $stocks = Stock::find()->current()->all();
-        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists, 'stocks' => $stocks]);
+        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists, 'stocks' => $stocks,
+            'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
+            'topDataProvider' => $topDataProvider
+        ]);
     }
 
     /**

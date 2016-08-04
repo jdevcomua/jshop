@@ -1,11 +1,15 @@
 <?php
 
 use common\models\Stock;
+use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 use common\models\Item;
 
 /* @var $category \common\models\ItemCat */
 /* @var $stocks Stock[] */
+/* @var $salesCount integer */
+/* @var $salesDataProvider ActiveDataProvider */
+/* @var $topDataProvider ActiveDataProvider */
 ?>
 
 <div class="content">
@@ -112,84 +116,83 @@ use common\models\Item;
                                 src="http://active.imagecmsdemo.net/uploads/shop/banners/banner_small.jpg" alt=""></a>
                     </p>
                 </div>
-                <div id="action_products">
-                    <div class="vertical-carousel">
-                        <section class="special-proposition">
-                            <div class="title-proposition-v">
-                                <div class="frame-title">
-                                    <div class="title">Цена недели</div>
+                <?php if ($salesCount > 0) { ?>
+                    <div id="action_products">
+                        <div class="vertical-carousel">
+                            <section class="special-proposition">
+                                <div class="title-proposition-v">
+                                    <div class="frame-title">
+                                        <div class="title">Цена недели</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="big-container">
-                                <div class="frame-baner frame-baner-start_page" style="padding-bottom: 5px;">
-                                    <style>
-                                        #owl-demo1 .item img{
-                                            width: initial;
-                                            height: 200px;
-                                        }
-                                        .frame-photo-title{
-                                            text-decoration: none;
-                                        }
-                                        .photo-block {
-                                            width: 200px;
-                                            height: 160px;
-                                            padding: 7px;
-                                        }
-                                    </style>
-                                    <div id="demo">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="span12">
-                                                    <?php
-                                                    $dataProvider = new \yii\data\ActiveDataProvider([
-                                                        'query' => Item::find()->threeItems()
-                                                    ]);
-                                                    echo ListView::widget([
-                                                        'dataProvider' => $dataProvider,
-                                                        'itemView' => function ($model, $key, $index, $widget) {
-                                                            return $this->render('item', ['value' => $model]);
-                                                        },
-                                                        'options' => [
-                                                            'tag' => 'div',
-                                                            'class' => 'owl-carousel',
-                                                            'id' => 'owl-demo1',
-                                                            'align' => 'center',
-                                                        ],
-                                                        'itemOptions' => [
-                                                            'tag' => 'div',
-                                                            'class' => 'item',
-                                                        ],
-                                                        'summary'=>'',
-                                                    ]);
-                                                    ?>
+                                <div class="big-container">
+                                    <div class="frame-baner frame-baner-start_page" style="padding-bottom: 5px;">
+                                        <style>
+                                            #owl-demo1 .item img{
+                                                width: initial;
+                                                height: 200px;
+                                            }
+                                            .frame-photo-title{
+                                                text-decoration: none;
+                                            }
+                                            .photo-block {
+                                                width: 200px;
+                                                height: 160px;
+                                                padding: 7px;
+                                            }
+                                        </style>
+                                        <div id="demo">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="span12">
+                                                        <?= ListView::widget([
+                                                            'dataProvider' => $salesDataProvider,
+                                                            'itemView' => function ($model, $key, $index, $widget) {
+                                                                return $this->render('item', ['value' => $model]);
+                                                            },
+                                                            'options' => [
+                                                                'tag' => 'div',
+                                                                'class' => 'owl-carousel',
+                                                                'id' => 'owl-demo1',
+                                                                'align' => 'center',
+                                                            ],
+                                                            'itemOptions' => [
+                                                                'tag' => 'div',
+                                                                'class' => 'item',
+                                                            ],
+                                                            'summary'=>'',
+                                                        ]);
+                                                        ?>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $("#owl-demo1").owlCarousel({
-
-                                                        navigation : false,
-                                                        slideSpeed : 500,
-                                                        paginationSpeed : 500,
-                                                        singleItem : true,
-                                                        autoPlay: 5000,
-                                                        stopOnHover: true,
-                                                        baseClass: 'owl-carousel1',
-                                                        autoHeight: true
-
+    
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#owl-demo1").owlCarousel({
+    
+                                                            navigation : false,
+                                                            slideSpeed : 500,
+                                                            paginationSpeed : 500,
+                                                            singleItem : true,
+                                                            autoPlay: 5000,
+                                                            stopOnHover: true,
+                                                            baseClass: 'owl-carousel1',
+                                                            autoHeight: true
+    
+                                                        });
                                                     });
-                                                });
-                                            </script>
+                                                </script>
+                                            </div>
+    
                                         </div>
-
+    
                                     </div>
 
                                 </div>
-                                </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
                 <div id="action_products">
                     <div class="vertical-carousel">
                         <section class="special-proposition">
@@ -218,12 +221,8 @@ use common\models\Item;
                                         <div class="container">
                                             <div class="row">
                                                 <div class="span12">
-                                                        <?php
-                                                        $dataProvider = new \yii\data\ActiveDataProvider([
-                                                            'query' => Item::find()->top()
-                                                        ]);
-                                                        echo ListView::widget([
-                                                            'dataProvider' => $dataProvider,
+                                                        <?= ListView::widget([
+                                                            'dataProvider' => $topDataProvider,
                                                             'itemView' => function ($model, $key, $index, $widget) {
                                                                 return $this->render('item', ['value' => $model]);
                                                             },

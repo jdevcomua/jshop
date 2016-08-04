@@ -55,7 +55,6 @@
                                 <button type="button" class="btnBuy"
                                         style="padding-top: 8px;">
                                     <span class="icon_cleaner icon_cleaner_buy"></span>
-                                    <span class="text-el">В корзине</span>
                                 </button>
                             </a>
                         </div>
@@ -67,7 +66,6 @@
                                 <button type="button" class="btnBuy"
                                         style="padding-top: 8px;">
                                     <span class="icon_cleaner icon_cleaner_buy"></span>
-                                    <span class="text-el">В корзине</span>
                                 </button>
                             </a>
                         </div>

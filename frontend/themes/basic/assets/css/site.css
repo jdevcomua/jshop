@@ -113,7 +113,7 @@ ul, ol{list-style: none;}
 input, select, button, textarea{margin: 0;font-size: 100%;}
 input[type="submit"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, button::-moz-focus-inner{padding: 0;border: 0;}/* Firefox button bug */
 input[type="text"], input[type="password"], textarea {padding: 0;}
-input[type="checkbox"] {vertical-align: bottom;}
+input[type="checkbox"] {vertical-align: middle;}
 input[type="radio"] {vertical-align: text-bottom;}
 a img{border: none;}
 img{height: auto;max-width: 100%;vertical-align: middle;border: 0;width: auto\9;-ms-interpolation-mode: bicubic;}

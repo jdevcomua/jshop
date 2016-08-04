@@ -17,6 +17,9 @@ use Yii;
  */
 class CharacteristicItem extends Model
 {
+    
+    public $count;
+    
     /**
      * @inheritdoc
      */

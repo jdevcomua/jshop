@@ -78,6 +78,7 @@ class Characteristic extends Model
      */
     public function getCharacteristicItems()
     {
-        return $this->hasMany(CharacteristicItem::className(), ['characteristic_id' => 'id'])->addGroupBy(['value']);
+        return $this->hasMany(CharacteristicItem::className(), ['characteristic_id' => 'id'])->addGroupBy(['value'])
+            ->select(['characteristic_item.*, count(value) as count']);
     }
 }

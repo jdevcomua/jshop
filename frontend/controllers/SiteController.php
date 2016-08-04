@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Characteristic;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
@@ -112,13 +113,18 @@ class SiteController extends Controller
 
         $items->with(['stockItems', 'images']);
 
+        $filterCounts = CharacteristicItem::find()->select(['characteristic_id', 'count(characteristic_id) as count'])
+            ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')
+            ->where(['category_id' => $id])->groupBy('characteristic_id')
+            ->indexBy('characteristic_id')->asArray(true)->all();
+
         if (Yii::$app->user->isGuest) {
             $wishLists = [];
         } else {
             $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
         }
         return $this->render('category', ['items' => $items, 'selected' => empty($selected) ? [] : $selected, 'sort' => $sort,
-            'chars' => $category->characteristics,
+            'chars' => $category->characteristics, 'filterCounts' => $filterCounts,
             'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
             'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category, 'count' => $items->count(),]);
     }

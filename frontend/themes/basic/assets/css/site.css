@@ -8,6 +8,10 @@
     background: white!important
 }
 
+.hide {
+    display: none;
+}
+
 html,
 body {
     height: 100%;
@@ -385,9 +389,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 .code + .code{margin-left: 10px;}
 .frame-star{display: block;}
 .star{display: inline-block;position: relative;margin-right: 5px;top: 1px;}
-.funcs-buttons{display: inline-block;position: relative;vertical-align: middle;}
-.vertical-carousel .funcs-buttons{margin-right: 6px;}
-.special-proposition .funcs-buttons{margin-right: 6px;}
+.funcs-buttons{display: inline-block;position: relative;vertical-align: middle;margin-right: 6px;}
 .frame-wish-compare-list{display: inline-block;position: relative;font-size: 0;}
 .left-product .vertical-carousel{width: 62px;float: left;}
 .left-product .vertical-carousel + *{margin-left: 75px;}

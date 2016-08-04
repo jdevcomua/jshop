@@ -29,12 +29,12 @@ use common\models\Characteristic;
                         <h1 class="title">Сравнение товаров</h1>
                     </div>
                     <ul class="tabs groups-buttons tabs-compare-diferent">
-                        <li class="btn-def active">
+                        <li class="btn-def active btn-def-all">
                             <button type="button" data-href="#all-params">
                                 <span class="text-el">Все параметры</span>
                             </button>
                         </li>
-                        <li class="btn-def">
+                        <li class="btn-def btn-def-only">
                             <button type="button" data-href="#only-dif">
                                 <span class="text-el">Только Различия</span>
                             </button>
@@ -59,7 +59,7 @@ use common\models\Characteristic;
                                     <li data-equalhorizcell="" style="height: 273px;"></li>
                                 </ul>
                                 <!--Start.Product properties names -->
-                                <ul class="compare-characteristic">
+                                <ul class="compare-characteristic characteristic-names">
                                     <?php $count = 1;
                                     foreach ($characteristics as $characteristic) {
                                         /* @var $characteristic Characteristic*/
@@ -210,11 +210,14 @@ use common\models\Characteristic;
                                                     <?php $charItems = $item->getCharacteristicItems()->indexBy('characteristic_id')->all();
                                                     $count = 1;
                                                     foreach ($characteristics as $characteristic) {
+                                                        //var_dump($charItems[$characteristic->id]);die;
                                                         /* @var $charItem \common\models\CharacteristicItem*/
                                                     ?>
                                                         <li class="<?php echo ($count%2 == 0) ? 'evenC' : 'oddC' ?>" style="height: 34px;">
                                                             <span class="helper helper-comp" style="height: 34px;"></span>
-                                                            <span><?php echo $charItems[$characteristic->id]->value; ?></span>
+                                                            <span class="characteristic-value">
+                                                                <?= array_key_exists($characteristic->id, $charItems) ? $charItems[$characteristic->id]->value : ''; ?>
+                                                            </span>
                                                         </li>
                                                     <?php $count++;
                                                     } ?>

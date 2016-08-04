@@ -28,7 +28,8 @@ class BasicAsset extends AssetBundle
         'js/jquery.rateit.js',
         'js/cusel-min-2.5.js',
         'js/nouislider.min.js',
-        'js/jgallery.js'
+        'js/jgallery.js',
+        'js/compare.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

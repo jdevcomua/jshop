@@ -120,7 +120,7 @@ $this->title = 'Корзина';
                                                 <input type="number" step="1" min="0"
                                                        value="<?php echo $model->count; ?>"
                                                        class="plusMinus plus-minus"
-                                                       id="inputChange-<?php echo $item->getCost() ?>"
+                                                       id="inputChange-<?php echo $item->getId() ?>"
                                                        style="width:50px; border: 1px solid #dfdfdf;padding: 0;height: 31px;"
                                                        onchange="changeCountOfItem(<?php echo $item->getId() ?>, $(this))">
                                             </div>

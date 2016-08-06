@@ -44,7 +44,7 @@ class Item extends Model implements CartAdd
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
-    const SMALL_IMAGE = 'small_';
+    const IMAGE_SMALL = 'small_';
 
     public function extraFields()
     {
@@ -150,9 +150,9 @@ class Item extends Model implements CartAdd
                 $smallImage->quality_jpg = 100;
                 $smallImage->quality_png= 100;
                 $smallImage->resizeToBestFit(200, 160);
-                $smallImage->save(Item::getPath() . self::SMALL_IMAGE . $fileName);
+                $smallImage->save(Item::getPath() . self::IMAGE_SMALL . $fileName);
 
-                $image->small = self::SMALL_IMAGE . $fileName;
+                $image->small = self::IMAGE_SMALL . $fileName;
                 $image->save();
             }
         }
@@ -181,13 +181,13 @@ class Item extends Model implements CartAdd
             $smallImage->resizeToBestFit(200, 160);
             $client->putObject([
                 'Bucket' => Yii::$app->params['amazonBucket'],
-                'Key' => self::SMALL_IMAGE . $fileName,
+                'Key' => self::IMAGE_SMALL . $fileName,
                 'Body' => $smallImage,
                 'ACL' => 'public-read',
             ]);
             //$smallImage->save(Item::getPath() . self::SMALL_IMAGE . $fileName);
 
-            $image->small = self::SMALL_IMAGE . $fileName;
+            $image->small = self::IMAGE_SMALL . $fileName;
             $image->save();
         }
     }
@@ -445,5 +445,4 @@ class Item extends Model implements CartAdd
     {
         return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
     }
-
 }

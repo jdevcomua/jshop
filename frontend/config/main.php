@@ -76,10 +76,11 @@ $config = [
                 'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@frontend/messages',
-                    'sourceLanguage' => 'ru',
+//                    'sourceLanguage' => 'ru',
                     'fileMap' => [
-                        'app' => 'index.php',
+                        'app'       => 'index.php',
                         'app/error' => 'error.php',
+                        'app/model'     => 'model.php',
                     ],
                 ],
             ],

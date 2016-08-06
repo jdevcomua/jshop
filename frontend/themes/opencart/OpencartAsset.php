@@ -21,7 +21,7 @@ class OpencartAsset extends AssetBundle
         'js/jquery.flexslider-min.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
+        'frontend\assets\AppAsset',
     ];
     public $jsOptions = [
         'position' => View::POS_HEAD,

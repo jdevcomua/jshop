@@ -36,6 +36,7 @@ class BasicAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'frontend\assets\AppAsset',
     ];
     public $jsOptions = [
         'position' => View::POS_HEAD,

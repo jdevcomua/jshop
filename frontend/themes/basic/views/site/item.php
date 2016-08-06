@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Item;
+
 /* @var $category \common\models\ItemCat */
 /* @var $value \common\models\Item */
 
@@ -131,7 +133,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                                         onclick="openWishWindow(<?php echo $value->id; ?>);">
                                     <span class="icon_wish"></span>
                                 </button>
-                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n" 
+                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n"
                                         title="В списке желаний">
                                     <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
                                         <span class="icon_wish"  style="background-position: -160px 0;"></span>

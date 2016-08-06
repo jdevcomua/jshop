@@ -1,0 +1,32 @@
+<?php
+
+use yii\helpers\Url;
+use common\models\Item;
+
+/**@var Item $model*/
+?>
+<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition">
+        <div class="image">
+            <a href="<?= $model->getUrl() ?>">
+                <img src="<?= array_shift($model->getImageUrl(Item::IMAGE_SMALL)) ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>" class="img-responsive">
+            </a>
+        </div>
+        <div class="caption">
+            <h4><a href="<?= $model->getUrl() ?>"><?= $model->title ?></a></h4>
+            <p><?= $model->description ?></p>
+            <p class="price"><?= $model->cost ?></p>
+        </div>
+        <div class="button-group">
+            <button type="button" data-id="<?= $model->id?>" class="cart-add">
+                <i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
+            </button>
+            <button type="button" data-toggle="tooltip" title=""
+                    onclick="addToWishList();" data-original-title="Add to Wish List"><i
+                    class="fa fa-heart"></i></button>
+            <button type="button" data-toggle="tooltip" title=""
+                    onclick="compare.add(&#39;43&#39;);" data-original-title="Compare this Product">
+                <i class="fa fa-exchange"></i></button>
+        </div>
+    </div>
+</div>

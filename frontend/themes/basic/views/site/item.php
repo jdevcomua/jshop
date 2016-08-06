@@ -15,8 +15,6 @@
 <div class="description">
     <!-- Start. Star rating -->
     <?php if ($value->getAvgRating()['avg'] != 0) { ?>
-        <script src="/rateit/jquery.rateit.js"
-                type="text/javascript"></script>
         <div class="mark-pr">
             <span class="title"><?php //echo \Yii::t('app', 'Оценка товара:'); ?></span>
             <div class="rateit" data-rateit-value="<?php echo $value->getAvgRating()['avg']; ?>"

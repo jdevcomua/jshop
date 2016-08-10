@@ -49,8 +49,10 @@ class User extends Model implements \yii\web\IdentityInterface
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->password_hash = Yii::$app->getSecurity()->generatePasswordHash($this->password);
-            $this->password = null;
+            if (isset($this->password)) {
+                $this->setPassword($this->password);
+                $this->password = null;
+            }
             return true;
         } else {
             return false;

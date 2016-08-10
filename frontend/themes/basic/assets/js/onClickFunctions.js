@@ -160,7 +160,7 @@ function changeCountOfItem(id, $thisItem) {
             success: function (data) {
                 var obj = eval(data);
                 $('.sum').html(obj.sumAll);
-                $('#price-' + id).html(obj.sumItem);
+                $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
                 $thisItem.val(obj.countItem);
                 $('#countItems ').html(obj.countAll);
             }

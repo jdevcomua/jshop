@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\widgets\Alert;
 use frontend\themes\basic\BasicAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -215,9 +216,17 @@ $basicAsset =  BasicAsset::register($this);
 
         <?= CategoriesView::widget() ?>
 
-        <?php echo $content; ?>
+        <div class="content">
+            <div class="frame-inside page-product">
+                <div class="container">
+                    <?= Alert::widget() ?>
 
+                    <?php echo $content; ?>
+                </div>
+            </div>
+        </div>
 
+        <div class="h-footer"></div>
 
         <footer>
             <div class="content-footer">
@@ -299,7 +308,7 @@ $basicAsset =  BasicAsset::register($this);
         </footer>
 
         <script type="text/javascript">
-            initDownloadScripts(['united_scripts'], 'init', 'scriptDefer');
+            //initDownloadScripts(['united_scripts'], 'init', 'scriptDefer');
         </script>
 
         <button type="button" id="showCartPopup" data-drop="#popupCart" style="display: none;" class="isDrop"></button>

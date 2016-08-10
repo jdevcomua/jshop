@@ -25,4 +25,3 @@ $this->title = $name;
         </div>
     </div>
 </div>
-<div class="h-footer"></div>

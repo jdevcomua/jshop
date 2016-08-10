@@ -2,44 +2,37 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-/* @var $category \common\models\ItemCat*/
+
+/* @var $category \common\models\ItemCat */
 $this->title = 'Акции';
 ?>
 
-<div class="content">
-    <br>
-    <div class="frame-inside page-category">
-        <div class="container">
-            <?php if (!empty($stocks)) { ?>
-            <div class="">
-                <ul class="animateListItems items items-catalog  table" id="items-catalog-main">
+<?php if (!empty($stocks)) { ?>
+    <div class="">
+        <ul class="animateListItems items items-catalog  table" id="items-catalog-main">
 
-                    <?php
-                    foreach ($stocks as $stock) {
-                        /* @var $stock \common\models\Stock */
-                        ?>
-                        <li class="globalFrameProduct to-cart" style="height: 210px;width: 20% !important;">
-                            <a href="<?php echo Yii::$app->urlHelper->to(['promotion/' . $stock->id]); ?>"
-                               class="frame-photo-title">
+            <?php
+            foreach ($stocks as $stock) {
+                /* @var $stock \common\models\Stock */
+                ?>
+                <li class="globalFrameProduct to-cart" style="height: 210px;width: 20% !important;">
+                    <a href="<?php echo Yii::$app->urlHelper->to(['promotion/' . $stock->id]); ?>"
+                       class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
                                         src="<?php echo $stock->getImageUrl(); ?>"></span>
-                                <span class="title" style="font-size: 14px; font-weight: bold;"><?php echo $stock->title; ?></span></a>
-                                До: <?php echo $stock->date_to; ?>
-                                    <div class="decor-element"
-                                         style="height: 210px; width: 100%; position: absolute; right: auto; left: 0px; bottom: auto; top: 0px;">
-                                    </div>
-                        </li>
-                        <?php
-                    }
-                    ?>
-                </ul>
-            </div>
-            <?php } ?>
-        </div>
+                        <span class="title"
+                              style="font-size: 14px; font-weight: bold;"><?php echo $stock->title; ?></span></a>
+                    До: <?php echo $stock->date_to; ?>
+                    <div class="decor-element"
+                         style="height: 210px; width: 100%; position: absolute; right: auto; left: 0px; bottom: auto; top: 0px;">
+                    </div>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
     </div>
-    <script type="text/javascript" src="http://active.imagecmsdemo.net/templates/active/js/cusel-min-2.5.js"></script>
-</div>
-<div class="h-footer"></div>
+<?php } ?>
 <div id="forCenter" class="forCenter d_n" data-rel="#wishListPopup"
      style="left: 0px; width: 100%; position: fixed; height: 100%; overflow-x: auto; z-index: 1105; display: block; top: 0px; background: rgba(0, 0, 0, 0.8);">
     <div class="drop drop-style drop-wishlist center active" id="wishListPopup"
@@ -57,7 +50,7 @@ $this->title = 'Акции';
                         <div class="horizontal-form">
                             <form method="post" action="" onsubmit="return false;">
                                 <div class="frame-radio">
-                                    <?php if (!empty($wishLists)) {?>
+                                    <?php if (!empty($wishLists)) { ?>
                                         <div class="frame-label active">
                                             <input class="wishRadio" type="radio" name="wishlist" value="1"
                                                    checked="checked">

@@ -29,14 +29,16 @@ class SiteController extends Controller
         }
         $salesItemsQuery = Item::find()->threeItems();
         $salesDataProvider = new \yii\data\ActiveDataProvider([
-            'query' => $salesItemsQuery
+            'query' => $salesItemsQuery,
+            'pagination' => false,
         ]);
         $topDataProvider = new \yii\data\ActiveDataProvider([
-            'query' => Item::find()->top()
+            'query' => Item::find()->top(),
+            'pagination' => false,
         ]);
         $stocks = Stock::find()->current()->all();
         return $this->render('index', ['items' => $items, 'wishLists' => $wishLists, 'stocks' => $stocks,
-            'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
+                'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
             'topDataProvider' => $topDataProvider
         ]);
     }

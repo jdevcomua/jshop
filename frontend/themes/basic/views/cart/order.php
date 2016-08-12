@@ -8,6 +8,8 @@ use Yii;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model common\models\Orders */
 /* @var $sum double */
+/* @var $user \common\models\User */
+/* @var $models \common\components\CartElement[] */
 
 $this->title = 'Оформление заказа'; ?>
 
@@ -34,29 +36,30 @@ $this->title = 'Оформление заказа'; ?>
         <div class="horizontal-form order-form big-title">
             <?php $form = ActiveForm::begin(); ?>
 
-            <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->surname . ' ' . $user->name])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'name')->input('text', ['value' => Yii::$app->user->isGuest ? null : $user->surname . ' ' . $user->name]); ?>
 
-            <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->mail])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'mail')->input('text', ['value' => Yii::$app->user->isGuest ? null : $user->mail]); ?>
 
-            <?php echo $form->field($model, 'phone')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->phone])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'phone')->input('text', ['value' => Yii::$app->user->isGuest ? null : $user->phone]); ?>
 
-            <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;', 'value' => Yii::$app->user->isGuest ? null : $user->address])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'address')->input('text', ['value' => Yii::$app->user->isGuest ? null : $user->address]); ?>
 
-            <?php echo $form->field($model, 'delivery')->dropDownList(['Самовывоз из магазина' => 'Самовывоз из магазина', 'Новая почта до склада' => 'Новая почта до склада', 'Курьер' => 'Курьер'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'delivery')->dropDownList(['Самовывоз из магазина' => 'Самовывоз из магазина',
+                'Новая почта до склада' => 'Новая почта до склада', 'Курьер' => 'Курьер']); ?>
 
-            <?php echo $form->field($model, 'payment')->dropDownList(['Оплата наличными' => 'Оплата наличными', 'Безналичный платёж' => 'Безналичный платёж'], ['style' => 'width:250px;border-color: #dfdfdf;padding-left:5px;box-shadow: inset 0 1px 1px #f8f7f7;'])->label(null, ['style' => 'width:160px;float:left;padding-top:3px;']); ?>
+            <?= $form->field($model, 'payment')->dropDownList(['Оплата наличными' => 'Оплата наличными',
+                'Безналичный платёж' => 'Безналичный платёж']); ?>
 
-            <div class="frame-label">
-                <div class="frame-form-field">
-                    <button type="button" class="d_l_3 m-b_5 isDrop" data-drop=".hidden-comment"
-                            data-place="inherit"
-                            data-overlay-opacity="0"><?php echo \Yii::t('app', 'Добавить комментарий к заказу'); ?>
-                    </button>
-                    <div class="hidden-comment drop">
-
-                    </div>
-                </div>
+            <div class="frame-form-field">
+                <button type="button" class="show_comment d_l_3 m-b_5 isDrop">
+                    <?php echo \Yii::t('app', 'Добавить комментарий к заказу'); ?>
+                </button>
             </div>
+
+            <div class="hidden-comment drop">
+                <?= $form->field($model, 'comment')->textarea()->label(''); ?>
+            </div>
+
             <div class="frame-label">
                 <span class="frame-form-field">
                     <div class="btn-buy btn-buy-p btn-buy-pp">
@@ -83,7 +86,6 @@ $this->title = 'Оформление заказа'; ?>
                     <tbody>
                     <?php
                     foreach ($models as $model) {
-                        /* @var $model \common\components\CartElement */
                         $item = $model->model;
                         /* @var $item Item */
                         ?>

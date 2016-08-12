@@ -19,6 +19,7 @@ use Yii;
  * @property double $sum
  * @property string $order_status
  * @property string $payment_status
+ * @property string comment
  *
  * @property OrderItem[] $orderItems
  * @property User $user
@@ -46,8 +47,7 @@ class Orders extends Model
             ['order_status', 'default', 'value' => 'Новый'],
             [['sum'], 'number'],
             [['mail'], 'email'],
-            [['address', 'name', 'delivery', 'payment'], 'string', 'max' => 50],
-            [['phone'], 'string', 'max' => 15]
+            [['address', 'name', 'delivery', 'payment', 'phone', 'comment'], 'string'],
         ];
     }
 
@@ -74,6 +74,7 @@ class Orders extends Model
             'order_status' => 'Статус заказа',
             'payment_status' => 'Статус оплаты',
             'countItems' => 'Товаров',
+            'comment' => 'Комментарий',
         ];
     }
 

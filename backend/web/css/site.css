@@ -3,6 +3,16 @@ body {
     height: 100%;
 }
 
+.orders-input {
+    width: 500px;
+    float:left;
+    padding-right: 50px;
+}
+
+.clear {
+    clear: both;
+}
+
 .select2-dropdown .select2-search__field:focus, .select2-search--inline .select2-search__field:focus {
     border: none!important;
 }

@@ -11,4 +11,7 @@ $(document).ready(function(){
         $('#filterForm').submit();
         return false;
     });
+    $('.show_comment').click(function () {
+        $('.hidden-comment').toggleClass('drop');
+    });
 });

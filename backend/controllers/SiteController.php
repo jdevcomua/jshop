@@ -2,8 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\Orders;
+use common\models\Vote;
 use Yii;
 use common\models\LoginForm;
+use yii\helpers\ArrayHelper;
 
 class SiteController extends Controller
 {
@@ -34,7 +37,38 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $sales = Orders::find()->select('DAY(orders.timestamp) AS day, COUNT(orders.timestamp) AS count')
+            ->innerJoin('order_item', 'order_item.order_id = orders.id')
+            ->where('MONTH(orders.timestamp) = MONTH(NOW())')
+            ->andWhere(['orders.payment_status' => 'Оплачен'])
+            ->groupBy('DATE(orders.timestamp)')
+            ->asArray(true)
+            ->all();
+        $salesArray = ArrayHelper::map($sales, 'day', 'count');
+        $salesDays = array_keys($salesArray);
+        $salesValues = array_values($salesArray);
+        $newOrdersCount = Orders::find()->where(['order_status' => 'Новый'])->count();
+        $salesCount = Orders::find()
+            ->where(['payment_status' => 'Оплачен'])
+            ->andWhere('MONTH(orders.timestamp) = MONTH(NOW())')
+            ->count();
+        $newVotesCount = Vote::find()->where(['checked' => Vote::STATUS_NOT_CHECKED])->count();
+        $sales = Orders::find()->select('DAY(timestamp) AS day, SUM(sum) AS sum')
+            ->where('MONTH(timestamp) = MONTH(NOW())')
+            ->andWhere(['payment_status' => 'Оплачен'])
+            ->groupBy('DATE(timestamp)')
+            ->asArray(true)
+            ->all();
+        $salesArray = ArrayHelper::map($sales, 'day', 'sum');
+        $salesValuesMoney = array_values($salesArray);
+        return $this->render('index', [
+            'salesDays' => $salesDays,
+            'salesValues' => $salesValues,
+            'newOrdersCount' => $newOrdersCount,
+            'salesCount' => $salesCount,
+            'newVotesCount' => $newVotesCount,
+            'salesValuesMoney' => $salesValuesMoney
+        ]);
     }
 
     public function actionLogin()

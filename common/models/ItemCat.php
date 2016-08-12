@@ -112,7 +112,7 @@ class ItemCat extends Model
      */
     public function getCharacteristics()
     {
-        return $this->hasMany(Characteristic::className(), ['category_id' => 'id']);
+        return $this->hasMany(Characteristic::className(), ['category_id' => 'id'])->indexBy('id');
     }
 
     /**

@@ -64,12 +64,13 @@ class Item extends Model implements CartAdd
 
     public function hasKit()
     {
-        return !empty($this->kitItems);
+        return !empty($this->kits);
     }
 
     public function getKits()
     {
-        return $this->hasMany(Kit::className(), ['id' => 'kit_id'])->viaTable('kit_item', ['item_id' => 'id']);
+        return $this->hasMany(Kit::className(), ['id' => 'kit_id'])->viaTable('kit_item', ['item_id' => 'id'])
+            ->joinWith('kitItems')->where(['is_main_item' => true, 'item_id' => $this->id]);
     }
 
     /**
@@ -435,6 +436,11 @@ class Item extends Model implements CartAdd
     public static function find()
     {
         return new ItemQuery(get_called_class());
+    }
+
+    public function getUrl()
+    {
+        return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
     }
 
 }

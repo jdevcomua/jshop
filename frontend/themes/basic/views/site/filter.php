@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 if (($category->id != '0') && ($category->getItems()->count() > 1)) {
     $form = ActiveForm::begin([
         'method' => 'get',
-        'action' => Yii::$app->urlHelper->to(['category/' . $category->id . '-' . $category->getTranslit()]),
+        'action' =>  $category->getUrl(),
         'id' => 'filterForm'
     ]);
     echo Html::input('hidden', 'sort', $sort, ['id' => 'sort_input'])

@@ -6,6 +6,7 @@ use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Kit */
+/* @var $items \yii\data\ActiveDataProvider */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Kits'), 'url' => ['index']];
@@ -47,7 +48,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'item.title',
                         'value' => function ($data) {
-                            return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view', 'id' => $data->item->id]));
+                            $a = Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view', 'id' => $data->item->id]));
+                            if ($data->is_main_item) {
+                                $a = $a . ' ' . Html::tag('span', 'main', ['class' => 'label label-danger']);
+                            }
+                            return $a;
                         },
                         'format' => 'raw',
                     ],

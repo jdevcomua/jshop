@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $item_id
  * @property integer $kit_id
+ * @property boolean $is_main_item
  *
  * @property Item $item
  * @property Kit $kit
@@ -36,7 +37,9 @@ class KitItem extends Model
     public function rules()
     {
         return [
-            [['item_id', 'kit_id'], 'integer']
+            [['item_id', 'kit_id'], 'integer'],
+            [['is_main_item'], 'boolean'],
+            [['is_main_item'], 'default', 'value' => false],
         ];
     }
 

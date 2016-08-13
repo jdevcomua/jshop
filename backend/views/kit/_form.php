@@ -8,7 +8,33 @@ use kartik\select2\Select2;
 /* @var $model common\models\Kit */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $arrayItems array */
+/* @var $mainItem \common\models\Item */
 
+$configs = [
+    'name' => 'items',
+    'data' => $arrayItems,
+    'theme' => Select2::THEME_DEFAULT,
+    'options' => [
+        'placeholder' => '',
+        'multiple' => true,
+    ],
+];
+if (isset($selected)) {
+    $configs['value'] = $selected;
+}
+$configsMain = [
+    'name' => 'mainItem',
+    'data' => $arrayItems,
+    'theme' => Select2::THEME_DEFAULT,
+    'options' => [
+        'placeholder' => '',
+        'multiple' => false,
+        'required' => true,
+    ],
+];
+if (isset($mainItem)) {
+    $configsMain['value'] = $mainItem->id;
+}
 ?>
 
 <div class="kit-form">
@@ -21,22 +47,17 @@ use kartik\select2\Select2;
 
     echo $form->field($model, 'cost')->textInput(); ?>
 
-    <label class="control-label">Товары, участвующие в акции</label>
-    <?php $configs = [
-        'name' => 'items',
-        'data' => $arrayItems,
-        'theme' => Select2::THEME_DEFAULT,
-        'options' => [
-            'placeholder' => '',
-            'multiple' => true
-        ],
-    ];
-    if (isset($selected)) {
-        $configs['value'] = $selected;
-    }
-    echo Select2::widget($configs); ?>
+    <div class="form-group">
+        <label class="control-label">Главный товар</label>
+        <?= Select2::widget($configsMain); ?>
+    </div>
 
-    <div class="form-group"><br>
+    <div class="form-group">
+        <label class="control-label">Прикрепленные товары</label>
+        <?= Select2::widget($configs); ?>
+    </div>
+
+    <div class="form-group">
         <?php echo Html::submitButton(Yii::t('app', 'Сохранить'), [
             'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

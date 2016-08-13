@@ -53,7 +53,7 @@ class KitController extends Controller
     public function actionDel()
     {
         Kit::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
-        return $this->redirect(Yii::$app->urlHelper->to(['user/index']));
+        return $this->redirect(Yii::$app->urlHelper->to(['kit/index']));
     }
     
     /**
@@ -83,13 +83,16 @@ class KitController extends Controller
         $model = new Kit();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $items = Yii::$app->request->post('items');
+            $mainItem = Yii::$app->request->post('mainItem');
             if (!empty($items)) {
                 foreach ($items as $item_id) {
-                    $stockItem = new KitItem();
-                    $stockItem->kit_id = $model->id;
-                    $stockItem->item_id = $item_id;
+                    $stockItem = new KitItem(['kit_id' => $model->id, 'item_id' => $item_id]);
                     $stockItem->save();
                 }
+            }
+            if (!empty($mainItem)) {
+                $stockItem = new KitItem(['kit_id' => $model->id, 'item_id' => $mainItem, 'is_main_item' => true]);
+                $stockItem->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -116,19 +119,26 @@ class KitController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $selected = $model->getKitItems()->indexBy('item_id')->asArray(true)->all();
+        $selected = $model->getAttachedItems()->indexBy('id')->asArray(true)->all();
+        $mainItem = $model->getMainItem();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $items = Yii::$app->request->post('items');
+            $newMain = Yii::$app->request->post('mainItem');
             if (!empty($items)) {
                 foreach (array_diff(array_keys($selected), Yii::$app->request->post('items')) as $item_id) {
-                    KitItem::find()->andFilterWhere(['item_id' => $item_id, 'kit_id' => $model->id])->one()->delete();
+                    KitItem::find()->andFilterWhere(['item_id' => $item_id, 'kit_id' => $model->id,
+                        'is_main_item' => false])->one()->delete();
                 }
                 foreach (array_diff(Yii::$app->request->post('items'), array_keys($selected)) as $item_id) {
-                    $stockItem = new KitItem();
-                    $stockItem->kit_id = $model->id;
-                    $stockItem->item_id = $item_id;
+                    $stockItem = new KitItem(['kit_id' => $model->id, 'item_id' => $item_id, 'is_main_item' => false]);
                     $stockItem->save();
                 }
+            }
+            if ($newMain != $mainItem->id) {
+                KitItem::find()->andFilterWhere(['item_id' => $mainItem->id, 'kit_id' => $model->id,
+                    'is_main_item' => true])->one()->delete();
+                $stockItem = new KitItem(['kit_id' => $model->id, 'item_id' => $newMain, 'is_main_item' => true]);
+                $stockItem->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -141,7 +151,8 @@ class KitController extends Controller
                 }
             }
             return $this->render('update', [
-                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => array_keys($selected)
+                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => array_keys($selected),
+                'mainItem' => $mainItem
             ]);
         }
     }

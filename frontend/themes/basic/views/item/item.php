@@ -297,7 +297,7 @@ $this->title = $item->title;
                                                         <li class="f-s_0">
                                                             <div class="next-kit">+</div>
                                                             <div class="frame-kit">
-                                                                <a href="http://active.imagecmsdemo.net/shop/product/perchatki-velosipednye-cyclotech-racer"
+                                                                <a href="<?= $kitItem->item->getUrl(); ?>"
                                                                    class="frame-photo-title">
                                                                     <span class="photo-block">
                                                                         <span class="helper"></span>
@@ -337,9 +337,9 @@ $this->title = $item->title;
                                                             <span>
                                                                 <span class="price">
                                                                     <?php $sum = 0.0;
-                                                                    foreach (\common\models\Kit::findOne(1)->kitItems as $kitItem) {
+                                                                    foreach ($kit->kitItems as $kitItem) {
                                                                         /* @var $kitItem \common\models\KitItem */
-                                                                        $sum = $kitItem->item->cost;
+                                                                        $sum = $sum + $kitItem->item->cost;
                                                                     }
                                                                     echo $sum; ?>
                                                                 </span> грн.

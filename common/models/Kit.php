@@ -15,6 +15,8 @@ use common\components\CartAdd;
  *
  * @property KitItem[] $kitItems
  * @property Item[] $items
+ * @property Item mainItem
+ * @property Item[] $attachedItems
  */
 class Kit extends Model implements CartAdd
 {
@@ -78,7 +80,7 @@ class Kit extends Model implements CartAdd
      */
     public function getKitItems()
     {
-        return $this->hasMany(KitItem::className(), ['kit_id' => 'id']);
+        return $this->hasMany(KitItem::className(), ['kit_id' => 'id'])->orderBy('is_main_item desc');
     }
 
     /**
@@ -119,6 +121,24 @@ class Kit extends Model implements CartAdd
     public function getItems()
     {
         return $this->hasMany(Item::className(), ['id' => 'item_id'])->viaTable('kit_item', ['kit_id' => 'id']);
+    }
+
+    /**
+     * @return Item
+     */
+    public function getMainItem()
+    {
+        return $this->getItems()->andWhere(['kit_item.is_main_item' => true])
+            ->innerJoin('kit_item', 'kit_item.item_id=item.id')->one();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAttachedItems()
+    {
+        return $this->getItems()->innerJoin('kit_item', 'kit_item.item_id=item.id')
+            ->andWhere(['kit_item.is_main_item' => false]);
     }
     
 }

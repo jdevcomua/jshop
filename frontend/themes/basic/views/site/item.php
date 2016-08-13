@@ -3,7 +3,7 @@
 /* @var $category \common\models\ItemCat */
 /* @var $value \common\models\Item */
 ?>
-<a href="<?php echo Yii::$app->urlHelper->to(['item/' . $value->id . '-' . $value->getTranslit()]); ?>"
+<a href="<?= $value->getUrl(); ?>"
    class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
                                         src="<?php echo array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">

@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Kit */
 /* @var $arrayItems array */
 /* @var $selected array */
+/* @var $mainItem \common\models\Item */
 
 $this->title = Yii::t('app', 'Редактировать комплект: ') . ' ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Комплекты'), 'url' => ['index']];
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
         </div>
         <div class="box-body">
             <?php echo $this->render('_form', [
-                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => $selected
+                'model' => $model, 'arrayItems' => $arrayItems, 'selected' => $selected, 'mainItem' => $mainItem
             ]) ?>
         </div>
     </div>

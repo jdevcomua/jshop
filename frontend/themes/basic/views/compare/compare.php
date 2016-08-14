@@ -8,6 +8,8 @@ use Yii;
 use common\models\ItemCat;
 use common\models\Characteristic;
 
+$this->registerJs("$('.items-compare').css('width', $('.compare_product').size()*$('.compare_product').first().width());");
+
 $this->title = 'Сравнение товаров';
 ?>
 <script>
@@ -74,13 +76,13 @@ $this->title = 'Сравнение товаров';
                         </div>
                         <div class="right-compare horizontal-carousel">
                             <div class="">
-                                <div class="content-carousel" style="overflow: hidden;">
+                                <div class="content-carousel" style="overflow-x: scroll;">
                                     <ul class="items items-compare" id="items-catalog-main">
                                         <!--Start. Show product block with characteristic by category-->
                                         <?php foreach ($items as $item) {
                                             /* @var $item \common\models\Item */
                                             ?>
-                                            <li class="compare_product_17314">
+                                            <li class="compare_product">
                                                 <!--Start. Include product template-->
                                                 <ul class="items items-catalog" style="height: 273px;">
                                                     <li class="globalFrameProduct to-cart" data-pos="top">

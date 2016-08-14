@@ -35,7 +35,7 @@ $this->title = 'Список желаний';
                            class="frame-photo-title">
                             <span class="photo-block">
                                 <span class="helper"></span>
-                                <img src="<?php echo $item->getImageUrl(); ?>">
+                                <img src="<?= array_shift($item->getImageUrl()); ?>">
                             </span>
                             <span class="title"><?php echo $item->title; ?></span>
                         </a>

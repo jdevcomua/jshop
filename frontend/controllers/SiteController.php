@@ -22,11 +22,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $items = Item::find()->orderBy('addition_date desc')->limit(6);
-        if (Yii::$app->user->isGuest) {
-            $wishLists = [];
-        } else {
-            $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
-        }
         $salesItemsQuery = Item::find()->threeItems();
         $salesDataProvider = new \yii\data\ActiveDataProvider([
             'query' => $salesItemsQuery,
@@ -37,7 +32,7 @@ class SiteController extends Controller
             'pagination' => false,
         ]);
         $stocks = Stock::find()->current()->all();
-        return $this->render('index', ['items' => $items, 'wishLists' => $wishLists, 'stocks' => $stocks,
+        return $this->render('index', ['items' => $items, 'stocks' => $stocks,
                 'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
             'topDataProvider' => $topDataProvider
         ]);
@@ -119,16 +114,11 @@ class SiteController extends Controller
             ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')
             ->where(['category_id' => $id])->groupBy('characteristic_id')
             ->indexBy('characteristic_id')->asArray(true)->all();
-
-        if (Yii::$app->user->isGuest) {
-            $wishLists = [];
-        } else {
-            $wishLists = User::findOne(Yii::$app->user->getId())->wishLists;
-        }
+        
         return $this->render('category', ['items' => $items, 'selected' => empty($selected) ? [] : $selected, 'sort' => $sort,
             'chars' => $category->characteristics, 'filterCounts' => $filterCounts,
             'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
-            'rightCost' => $rightCost, 'wishLists' => $wishLists, 'category' => $category, 'count' => $items->count(),]);
+            'rightCost' => $rightCost, 'category' => $category, 'count' => $items->count(),]);
     }
 
     /**
@@ -159,8 +149,11 @@ class SiteController extends Controller
     public function actionPromotion($id)
     {
         $model = Stock::findOne($id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $model->getItems()
+        ]);
         return $this->render('promotion', [
-            'model' => $model,
+            'model' => $model, 'dataProvider' => $dataProvider,
         ]);
     }
 

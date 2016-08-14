@@ -1,19 +1,18 @@
 /**
  * Created by umka on 10.01.16.
  */
-function openWishWindow(bool, id) {
-    if (bool) {
-        $('#forCenterAuth').toggleClass('d_n');
-    } else {
-        $('#forCenter').toggleClass('d_n');
-        $('#forCenter').attr('vid', id);
-    }
+function openWishWindow(id) {
+    $.ajax({
+        url: '/popup/add-to-wish',
+        dataType: 'json',
+        success: function (data) {
+            $('#forCenter').data('vid', id);
+            showPopup(data.html, data.title);
+        }
+    });
 }
-function closeWishWindow() {
+function closePopup() {
     $('#forCenter').toggleClass('d_n');
-}
-function closeWishAuthWindow() {
-    $('#forCenterAuth').toggleClass('d_n');
 }
 function addToWishList() {
     var list = '0';
@@ -25,11 +24,11 @@ function addToWishList() {
     }
     $.ajax({
         url: '/site/wish',
-        data: {item_id: $('.forCenter').attr('vid'), list_id: list, textt: $('.wish_list_name').val()},
+        data: {item_id: $('.forCenter').data('vid'), list_id: list, textt: $('.wish_list_name').val()},
         dataType: 'text',
         success: function () {
-            $('#towish-' + $('.forCenter').attr('vid')).toggleClass('d_n');
-            $('#inwish-' + $('.forCenter').attr('vid')).toggleClass('d_n');
+            $('#towish-' + $('.forCenter').data('vid')).toggleClass('d_n');
+            $('#inwish-' + $('.forCenter').data('vid')).toggleClass('d_n');
             $('#forCenter').toggleClass('d_n');
         }
     });
@@ -70,7 +69,7 @@ function addToCart(id) {
     $.ajax({
         url: '/cart/ajax',
         data: {count: 1, item_id: id},
-        dataType: 'text',
+        dataType: 'json',
         success: function (data) {
             var count = +$('#countItems ').html();
             if (count == 0) {
@@ -80,8 +79,18 @@ function addToCart(id) {
             $('#countItems ').html(+count + 1);
             $('#toCart-' + id).toggleClass('d_n');
             $('#inCart-' + id).toggleClass('d_n');
+            showPopup(data.html, data.title);
         }
     });
+}
+function showPopup(html, title) {
+    var forCenter = $('#forCenter');
+    var popup = $('#popup');
+    forCenter.find('.title').html(title);
+    forCenter.find('.drop-content').html(html);
+    forCenter.toggleClass('d_n');
+    popup.css('left', ($(window).width() - popup.width())/2);
+    popup.css('top', ($(window).height() - popup.height())/2);
 }
 function addKit(id) {
     $.ajax({

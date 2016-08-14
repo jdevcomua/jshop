@@ -212,7 +212,7 @@ $this->title = $item->title;
                                         <?php } else { ?>
                                             <button id="towish-<?php echo $item->id; ?>" class="toWishlist"
                                                     onclick="
-                                                        openWishWindow(<?php echo Yii::$app->user->isGuest ? 1 : 0; ?>, <?php echo $item->id; ?>);
+                                                        openWishWindow(<?php echo $item->id; ?>);
                                                         ">
                                                 <span class="icon_wish"></span>
                                                 <span class="text-el d_l">В желаемое</span>

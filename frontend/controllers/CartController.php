@@ -9,6 +9,7 @@ use common\models\OrderItem;
 use Yii;
 use common\models\User;
 use common\components\CartAdd;
+use yii\web\Response;
 
 class CartController extends Controller
 {
@@ -17,10 +18,14 @@ class CartController extends Controller
      * Adding item to cart
      * @param $item_id
      * @param $count
+     * @return string
      */
     public function actionAjax($item_id, $count)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         Yii::$app->cart->addItem(Item::findOne($item_id), $count);
+        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
+            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
     }
 
     public function actionAjaxkit($item_id, $count)

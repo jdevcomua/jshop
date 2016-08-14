@@ -311,16 +311,21 @@ $basicAsset =  BasicAsset::register($this);
             //initDownloadScripts(['united_scripts'], 'init', 'scriptDefer');
         </script>
 
-        <button type="button" id="showCartPopup" data-drop="#popupCart" style="display: none;" class="isDrop"></button>
-        <div class="drop-bask drop drop-style" id="popupCart"></div>
-
-
-        <div id="fancybox-loading">
-            <div></div>
+        <div id="forCenter" class="forCenter d_n"
+             style="left: 0; width: 100%; position: fixed; height: 100%; overflow-x: auto; z-index: 1105; display: block; top: 0; background: rgba(0, 0, 0, 0.8);">
+            <div class="drop drop-style center active" id="popup"
+                 style="z-index: 1105; position: fixed; display: block;">
+                <button type="button" class="icon_times_drop" onclick="closePopup()"></button>
+                <div class="drop-header">
+                    <div class="title">
+                    </div>
+                </div>
+                <div class="drop-content" style="overflow: hidden; padding: 0;">
+                </div>
+                <div class="drop-footer"></div>
+            </div>
         </div>
-        <div id="fancybox-loading">
-            <div></div>
-        </div>
+        
         <?php $this->endBody() ?>
 </body>
 </html>

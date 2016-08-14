@@ -127,7 +127,7 @@
                         <?php } else { ?>
                             <button id="towish-<?php echo $value->id; ?>" class="toWishlist"
                                     onclick="
-                                        openWishWindow(<?php echo Yii::$app->user->isGuest ? 1 : 0; ?>, <?php echo $value->id; ?>);
+                                        openWishWindow(<?php echo $value->id; ?>);
                                         "><span class="icon_wish"></span>
                                 <span class="text-el d_l">В желаемое</span>
                             </button>

@@ -342,10 +342,7 @@ $this->title = 'Профиль пользователя';
                                     <div class="inside-padd">
                                         <div class="funcs-buttons-wishlist d_i-b">
                                             <div class="btn-edit-WL">
-                                                <button type="button" class="isDrop" onclick="
-                                                            $('#forCenter').toggleClass('d_n');
-                                                            $('#wishListId').val($(this).parent().parent().parent().parent().parent().attr('id').split('-')[1]);
-                                                            ">
+                                                <button type="button" class="isDrop">
                                                     <span class="d_l_1 text-el">Редактировать список</span>
                                                 </button>
                                             </div>
@@ -398,41 +395,5 @@ $this->title = 'Профиль пользователя';
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div id="forCenter" class="forCenter d_n" data-rel="#wishListPopup"
-     style="left: 0px; width: 100%; position: fixed; height: 100%; overflow-x: auto; z-index: 1105; display: block; top: 0px; background: rgba(0, 0, 0, 0.8);">
-    <div class="drop drop-style drop-wishlist center active" id="wishListPopup"
-         style="z-index: 1105; position: fixed; display: block; top: 20%; left: 391px; width: 500px;">
-        <button type="button" class="icon_times_drop" data-closed="closed-js" onclick="closeWishWindow()"></button>
-        <div class="drop-header">
-            <div class="title">
-                Редактирование списка желаний
-            </div>
-        </div>
-        <div class="drop-content" style="overflow: hidden; padding: 0px; height: 197px; width: 500px;">
-            <div class="jspContainer" style="width: 500px; height: 189px;">
-                <div class="jspPane" style="padding: 0px; top: 0px; width: 500px;">
-                    <div class="inside-padd">
-                        <div class="horizontal-form">
-                            <?php $form = ActiveForm::begin();
-                            $editWishList = new \common\models\WishList();
-                            echo $form->field($editWishList, 'id')->hiddenInput(['id' => 'wishListId'])->label('');
-                            echo $form->field($editWishList, 'title')->textInput(['style' => 'width: 287px;'])->label("Название списка:", ['style' => 'width: 160px;float:left;']);
-                            ?>
-                            <div class="frame-label" style="margin-bottom: 0;">
-                                <div class="frame-form-field" style="margin-left: 160px; margin-top: 10px;">
-                                    <div class="btn-def">
-                                        <?php echo Html::submitButton('<span class="text-el">' . Yii::t('app', 'Сохранить') . '</span>>', ['class' => 'btn-search', 'style' => 'width: 180px;']) ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php ActiveForm::end(); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="drop-footer"></div>
     </div>
 </div>

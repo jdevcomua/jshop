@@ -18,19 +18,20 @@ class ItemController extends Controller
     {
         $id = explode('-', $id)[0];
         $item = Item::findOne(Yii::$app->request->get('id'));
+        $message = null;
         if (!empty($item)) {
             $vote = new Vote();
             if ($vote->load(Yii::$app->request->post())) {
                 $vote->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
                 $vote->item_id = $id;
                 $vote->save();
-                return $this->render('item', ['item'=>$item,
-                    'message' => 'Ваш отзыв отправлен и будет доступен после проверки модератора.']);
+                $message = 'Ваш отзыв отправлен и будет доступен после проверки модератора.';
             }
             /* @var $item Item*/
             $item->count_of_views++;
             $item->save();
-            return $this->render('item', ['item'=>$item]);
+            return $this->render('item', ['item' => $item, 'inCart' => Yii::$app->cart->checkItemInCart($id),
+                'message' => $message]);
         }
         return $this->goHome();
     }

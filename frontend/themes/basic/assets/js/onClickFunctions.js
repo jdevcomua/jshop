@@ -122,6 +122,8 @@ function addToCartFromItemPage(id) {
                 $('#cartFull').toggleClass('d_n');
             }
             $('#countItems').html(+count + +$('#test').val());
+            $('#toCart').toggleClass('d_n');
+            $('#inCart').toggleClass('d_n');
         }
     });
 }

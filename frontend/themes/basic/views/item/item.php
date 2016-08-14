@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 /* @var $form yii\widgets\ActiveForm */
 /* @var $item common\models\Item */
+/* @var $inCart boolean */
+
 $imageUrls = $item->getImageUrl();
 $this->title = $item->title;
 ?>
@@ -152,13 +154,31 @@ $this->title = $item->title;
                                 <div class="d_i-b v-a_b">
                                     <div class="frame-count-buy js-variant-17917 js-variant">
                                         <div style="display:block; float:left;margin-right:10px;">
-                                            <?php
-                                            echo Html::input('number', 'count', '1', ['id' => 'test', 'style' => 'height: 30px;padding: 0 0 0 5px;width:75px;']);
-                                            ?>
+                                            <?= Html::input('number', 'count', '1', ['id' => 'test', 'style' => 'height: 30px;padding: 0 0 0 5px;width:75px;']); ?>
                                         </div>
-                                        <div class="btn-buy-p btn-buy" style="display:block; float:left;">
-                                            <?php echo Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>', ['onClick' => 'addToCartFromItemPage(' . $item->id . ')']); ?>
-                                        </div>
+                                        <?php if ($inCart) { ?>
+                                            <div id="inCart" class="btn-cart-p btn-cart">
+                                                <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>">
+                                                    <button type="button" class="btnBuy" style="padding: 5px 0;">
+                                                        <span class="icon_cleaner icon_cleaner_buy"></span>
+                                                        <span class="text-el">В корзине</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div id="inCart" class="btn-cart-p btn-cart d_n">
+                                                <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>">
+                                                    <button type="button" class="btnBuy" style="padding: 5px 0;">
+                                                        <span class="icon_cleaner icon_cleaner_buy"></span>
+                                                        <span class="text-el">В корзине</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div id='toCart' class="btn-buy-p btn-buy" style="display:block; float:left;">
+                                                <?= Html::button('<span class="text-el">' . \Yii::t('app', 'В корзину') . '</span>',
+                                                    ['onClick' => 'addToCartFromItemPage(' . $item->id . ')']); ?>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,8 @@ use yii\web\View;
 class Controller extends \yii\web\Controller
 {
     public $layout = '@app/views/layouts/main';
+    
+    const PAGE_SIZE = 12;
 
     public function beforeAction($action)
     {

@@ -23,16 +23,20 @@ class SiteController extends Controller
     {
         $items = Item::find()->orderBy('addition_date desc')->limit(6);
         $salesItemsQuery = Item::find()->threeItems();
-        $salesDataProvider = new \yii\data\ActiveDataProvider([
+        $salesDataProvider = new ActiveDataProvider([
             'query' => $salesItemsQuery,
             'pagination' => false,
         ]);
-        $topDataProvider = new \yii\data\ActiveDataProvider([
+        $topDataProvider = new ActiveDataProvider([
             'query' => Item::find()->top(),
             'pagination' => false,
         ]);
         $stocks = Stock::find()->current()->all();
-        return $this->render('index', ['items' => $items, 'stocks' => $stocks,
+        $itemsDataProvider = new ActiveDataProvider([
+            'query' => $items,
+            'pagination' => false,
+        ]);
+        return $this->render('index', ['itemsDataProvider' => $itemsDataProvider, 'stocks' => $stocks,
                 'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
             'topDataProvider' => $topDataProvider
         ]);
@@ -114,10 +118,17 @@ class SiteController extends Controller
             ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')
             ->where(['category_id' => $id])->groupBy('characteristic_id')
             ->indexBy('characteristic_id')->asArray(true)->all();
-        
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $items,
+            'pagination' => [
+                'pageSize' => Controller::PAGE_SIZE,
+            ]
+        ]);
+
         return $this->render('category', ['items' => $items, 'selected' => empty($selected) ? [] : $selected, 'sort' => $sort,
             'chars' => $category->characteristics, 'filterCounts' => $filterCounts,
-            'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost,
+            'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost, 'dataProvider' => $dataProvider,
             'rightCost' => $rightCost, 'category' => $category, 'count' => $items->count(),]);
     }
 

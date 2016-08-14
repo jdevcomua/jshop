@@ -10,6 +10,8 @@ use common\models\Item;
 /* @var $salesCount integer */
 /* @var $salesDataProvider ActiveDataProvider */
 /* @var $topDataProvider ActiveDataProvider */
+/* @var $itemsDataProvider ActiveDataProvider */
+
 $this->title = 'Интернет-магазин';
 ?>
 
@@ -69,12 +71,8 @@ $this->title = 'Интернет-магазин';
                 <div class="big-container">
                     <div class="items-carousel">
                         <div class="content-carousel container">
-                            <?php
-                            $dataProvider = new \yii\data\ActiveDataProvider([
-                                'query' => $items
-                            ]);
-                            echo ListView::widget([
-                                'dataProvider' => $dataProvider,
+                            <?= ListView::widget([
+                                'dataProvider' => $itemsDataProvider,
                                 'itemView' => function ($model, $key, $index, $widget) {
                                     return $this->render('item', ['value' => $model]);
                                 },

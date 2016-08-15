@@ -7,8 +7,8 @@ use common\models\Kit;
 /* @var $models CartElement[] */
 /* @var $sum double */
 ?>
-<div>
-    <div class="jspContainer" style="width: 661px;">
+<div class="cart-items">
+    <div class="jspContainer" >
         <div class="inside-padd">
             <table class="table-order">
                 <tbody>

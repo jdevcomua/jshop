@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.cart-items {
+    width: 730px;
+}
+
 .pagination .active > a {
     color: #fff;
     background: #000;

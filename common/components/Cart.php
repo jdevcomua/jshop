@@ -72,19 +72,14 @@ class Cart extends Component
     /**
      * @param $item_id
      * @param $type
-     * @param int $count
      */
-    public function deleteItem($item_id, $type, $count = 0)
+    public function deleteItem($item_id, $type)
     {
         $item = $this->creator($item_id, $type);
         $array = $this->getArray();
         if ($this->checkItem($item)) {
             $key = $this->getSubArrayKey($item);
-            if ($count > 0) {
-                $array[$key] = $array[$key] - $count;
-            } else {
-                unset($array[$key]);
-            }
+            unset($array[$key]);
         }
         Yii::$app->session['cart'] = $array;
     }
@@ -192,10 +187,13 @@ class Cart extends Component
         $cart = $this->getArray();
         foreach ($cart as $array) {
             if (($array['type'] == $type) && ($array['id'] == $item_id)) {
-                return $array['count'] * $this->creator($item_id, $type)->getNewPrice();
+                $model = $this->creator($item_id, $type);
+                return ['newPrice' => $array['count'] * $model->getNewPrice(),
+                    'oldPrice' => $model instanceof Kit ? $array['count'] * $model->getOldCost() : $array['count'] * $model->getCost()
+                ];
             }
         }
-        return 0;
+        return ['newPrice' => 0, 'oldPrice' => 0];
     }
 
     /**

@@ -18,7 +18,7 @@ class CartController extends Controller
      * Adding item to cart
      * @param $item_id
      * @param $count
-     * @return string
+     * @return array
      */
     public function actionAjax($item_id, $count)
     {
@@ -81,45 +81,30 @@ class CartController extends Controller
      * Delete item from cart using ajax
      * @param $item_id
      * @param $cart_type
-     * @param int $count
-     * @return string
+     * @return array
      */
-    public function actionDelete($item_id, $cart_type, $count = 0)
+    public function actionDelete($item_id, $cart_type)
     {
-        Yii::$app->cart->deleteItem($item_id, $cart_type, $count);
-        if ($count == 0) {
-            return '({"sumAll":' . Yii::$app->cart->getSum() . ', "countAll":' . Yii::$app->cart->getCount() . '})';
-        } else {
-            return '({"sumAll":' . Yii::$app->cart->getSum() . ', "sumItem":' . Yii::$app->cart->getSumForItem($item_id)
-                . ', "countItem":' . Yii::$app->cart->getCountForItem($item_id) . ', "countAll":' .
-                Yii::$app->cart->getCount() . '})';
-        }
-    }
-
-    /**
-     * @param $item_id
-     * @param $count
-     * @return string
-     */
-    public function actionAdd($item_id, $count)
-    {
-        Yii::$app->cart->addItem($item_id, $count);
-        return '({"sumAll":' . Yii::$app->cart->getSum() . ', "sumItem":' .  Yii::$app->cart->getSumForItem($item_id)
-            . ', "countItem":' .  Yii::$app->cart->getCountForItem($item_id) . ', "countAll":' .
-            Yii::$app->cart->getCount() . '})';
+        Yii::$app->cart->deleteItem($item_id, $cart_type);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ['sumAll' => Yii::$app->cart->getSum(), 'countAll' => Yii::$app->cart->getCount()];
     }
 
     /**
      * @param $id integer
+     * @param $cart_type integer
      * @param $count integer
-     * @return string
+     * @return array
      */
-    public function actionChange($id, $count)
+    public function actionChange($id, $cart_type, $count)
     {
-        Yii::$app->cart->setItem($id, Item::CART_TYPE, $count);
-        return '({"sumAll":' . Yii::$app->cart->getSum() . ', "sumItem":' .  Yii::$app->cart->getSumForItem($id, Item::CART_TYPE)
-            . ', "countItem":' .  Yii::$app->cart->getCountForItem($id, Item::CART_TYPE) . ', "countAll":' .
-            Yii::$app->cart->getCount() . '})';
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        Yii::$app->cart->setItem($id, $cart_type, $count);
+        $sumItem = Yii::$app->cart->getSumForItem($id, $cart_type);
+        return ['sumAll' => Yii::$app->cart->getSum(), 'sumItem' => $sumItem['newPrice'],
+            'countItem' => Yii::$app->cart->getCountForItem($id, $cart_type), 
+            'countAll' =>  Yii::$app->cart->getCount(), 'oldPriceItem' => $sumItem['oldPrice']
+        ];
     }
 
 }

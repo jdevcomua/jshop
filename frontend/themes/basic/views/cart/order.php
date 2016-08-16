@@ -1,6 +1,8 @@
 <?php
 
+use common\components\CartAdd;
 use common\models\Item;
+use common\models\Kit;
 use yii\bootstrap\ActiveForm;
 use Yii;
 
@@ -84,23 +86,54 @@ $this->title = 'Оформление заказа'; ?>
             <div id="orderDetails" class="p_r">
                 <table class="table-order table-order-view">
                     <tbody>
-                    <?php
+                    <?php /* @var $model \common\components\CartElement */
                     foreach ($models as $model) {
+                        /* @var $item CartAdd */
                         $item = $model->model;
-                        /* @var $item Item */
-                        ?>
+                        $kit = ($item->getType() == Kit::CART_TYPE) ? true : false; ?>
                         <!-- Start. For single product -->
-                        <tr class="items items-bask cart-product">
-                            <td class="frame-items">
-                                <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]) ?>"
-                                   class="frame-photo-title">
+                        <tr class="<?= $kit ? 'row row-kits' : 'items items-bask cart-product' ?>">
+                            <?php if ($kit) { 
+                                /* @var $item Kit */
+                                $itemsCost = 0;
+                                $count = 0; ?>
+                                <td class="frame-items frame-items-kit">
+                                    <div class="title">Комплект товаров</div>
+                                    <ul class="items items-bask">
+                                        <?php foreach ($item->items as $value) { ?>
+                                            <li>
+                                                <?php if ($count > 0) { ?>
+                                                    <div class="next-kit">+</div>
+                                                <?php } 
+                                                $itemsCost = $itemsCost + $value->cost; ?>
+                                                <div class="frame-kit">
+                                                    <a class="frame-photo-title" href="<?= $value->getUrl(); ?>">
+                                                        <span class="photo-block">
+                                                            <span class="helper"></span>
+                                                            <img src="<?= array_shift($value->getImageUrl()); ?>">
+                                                        </span>
+                                                        <span class="title"><?= $value->title; ?></span>
+                                                    </a>
+                                                    <div class="description"></div>
+                                                </div>
+                                            </li>
+                                            <?php $count++;
+                                        } ?>
+                                    </ul>
+                                </td>
+                            <?php } else {
+                                /* @var $item Item */ ?>
+                                <td class="frame-items">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]) ?>"
+                                       class="frame-photo-title">
                                         <span class="photo-block">
                                             <span class="helper"></span>
                                             <img src="<?php echo array_shift($item->getImageUrl()) ?>" alt="">
                                         </span>
-                                    <span class="title"><?php echo $item->title ?></span>
-                                </a>
-                            </td>
+                                        <span class="title"><?php echo $item->title ?></span>
+                                    </a>
+                                </td>
+                            <?php } ?>
                             <td>
                                 <div class="frame-frame-count">
                                     <div class="frame-count">
@@ -113,10 +146,19 @@ $this->title = 'Оформление заказа'; ?>
                             <td class="frame-cur-sum-price">
                                 <div class="frame-prices f-s_0">
                                     <span class="current-prices f-s_0">
+                                        <?php if ($kit || $item->existDiscount()) { ?>
+                                            <span class="price-discount">
+                                                <span>
+                                                    <span class="price">
+                                                        <?= $kit ? $model->count*$itemsCost : $model->count*$item->cost ?>
+                                                    </span> грн.
+                                                </span>
+                                            </span>
+                                        <?php } ?>
                                         <span class="price-new">
                                             <span>
                                                 <span class="price">
-                                                    <?= Yii::$app->cart->getSumForItem($item->id, $item::CART_TYPE); ?>
+                                                    <?= $model->count*$item->cost ?>
                                                 </span> грн.
                                             </span>
                                         </span>
@@ -124,7 +166,6 @@ $this->title = 'Оформление заказа'; ?>
                                 </div>
                             </td>
                         </tr>
-
                     <?php } ?>
                     </tbody>
                     <tfoot class="gen-info-price">

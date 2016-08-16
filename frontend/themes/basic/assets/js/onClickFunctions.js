@@ -132,48 +132,39 @@ function deleteFromCart(id, cart_type, $thisitem) {
         url: 'cart/delete',
         async: true,
         data: {item_id: id, cart_type: cart_type},
-        dataType: 'text',
+        dataType: 'json',
         success: function (data) {
             $thisitem.parent().parent().remove();
-            var obj = eval(data);
-            $('.sum').html(obj.sumAll);
-            $('#countItems ').html(obj.countAll);
-            if (obj.countAll == 0) {
+            $('.sum').html(data.sumAll);
+            $('#countItems ').html(data.countAll);
+            if (data.countAll == 0) {
                 $('#cartFull').toggleClass('d_n');
                 $('#cartEmpty').toggleClass('d_n');
             }
         }
     });
 }
-function changeCountOfItem(id, $thisItem) {
+function changeCountOfItem(id, cartType, $thisItem) {
     if ($thisItem.val() < 0) {
         $thisItem.val(array[$thisItem.attr('id').split('-')[1]]);
         alert('Значение должно быть больше или равно 0');
     } else if ($thisItem.val() == 0) {
-        $.ajax({
-            url: 'cart/delete',
-            async: false,
-            data: {item_id: id},
-            dataType: 'text',
-            success: function (data) {
-                var obj = eval(data);
-                $('.sum').html(obj.sumAll);
-                $('#countItems ').html(obj.countAll);
-                $thisItem.parent().parent().parent().remove();
-            }
-        });
+        deleteFromCart(id, cartType, $thisItem.parent());
     } else {
         $.ajax({
             url: 'cart/change',
             async: false,
-            data: {id: +id, count: +$thisItem.val()},
-            dataType: 'text',
+            data: {id: +id, count: +$thisItem.val(), cart_type: cartType},
+            dataType: 'json',
             success: function (data) {
-                var obj = eval(data);
-                $('.sum').html(obj.sumAll);
-                $('#price-' + $thisItem.attr('id').split('-')[1]).html(obj.sumItem);
-                $thisItem.val(obj.countItem);
-                $('#countItems ').html(obj.countAll);
+                $('.sum').html(data.sumAll);
+                var tr = $thisItem.parent().parent().parent();
+                tr.find('.price-new').find('.price').html(data.sumItem);
+                if (data.sumItem != data.oldPriceItem) {
+                    tr.find('.price-discount').find('.price').html(data.oldPriceItem);
+                }
+                $thisItem.val(data.countItem);
+                $('#countItems ').html(data.countAll);
             }
         });
     }

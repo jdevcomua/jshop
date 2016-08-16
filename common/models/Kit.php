@@ -124,6 +124,18 @@ class Kit extends Model implements CartAdd
     }
 
     /**
+     * @return int cost of items in kit
+     */
+    public function getOldCost()
+    {
+        $oldCost = 0;
+        foreach ($this->items as $item) {
+            $oldCost = $oldCost + $item->cost;
+        }
+        return $oldCost;
+    }
+
+    /**
      * @return Item
      */
     public function getMainItem()

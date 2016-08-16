@@ -1,6 +1,7 @@
 <?php
 use common\components\CartAdd;
 use common\components\CartElement;
+use common\models\Item;
 use common\models\Kit;
 
 /* @var $this \yii\web\View */
@@ -23,8 +24,9 @@ use common\models\Kit;
                             </button>
                         </td>
                         <td class="frame-items <?= $kit ? 'frame-items-kit' : '' ?>">
-                            <?php if ($item->getType() == Kit::CART_TYPE) {
+                            <?php if ($kit) {
                                 /* @var $item Kit */
+                                $itemsCost = 0;
                                 $count = 0; ?>
                                 <div class="title">Комплект товаров</div>
                                 <ul class="items items-bask">
@@ -33,6 +35,7 @@ use common\models\Kit;
                                             <?php if ($count > 0) { ?>
                                                 <div class="next-kit">+</div>
                                             <?php }
+                                            $itemsCost = $itemsCost + $value->cost;
                                             echo $this->render('item', ['item' => $value]); ?>
                                         </li>
                                         <?php $count++;
@@ -40,6 +43,7 @@ use common\models\Kit;
                                 </ul>
                                 <?php
                             } else {
+                                /* @var $item Item */
                                 echo $this->render('item', ['item' => $item]);
                             } ?>
                         </td>
@@ -50,13 +54,22 @@ use common\models\Kit;
                                        class="plusMinus plus-minus"
                                        id="inputChange-<?php echo $item->getId() ?>"
                                        style="width:50px; border: 1px solid #dfdfdf;padding: 0;height: 31px;"
-                                       onchange="changeCountOfItem(<?php echo $item->getId() ?>, $(this))">
+                                       onchange="changeCountOfItem(<?= $item->getId() ?>, <?= $item->getType() ?>, $(this))">
                             </div>
                             <span class="s-t f-s_13">шт.</span>
                         </td>
                         <td class="frame-cur-sum-price" style="width: 80px;">
                             <div class="frame-prices f-s_0" style="margin-top:8px;">
                                 <span class="current-prices f-s_0">
+                                    <?php if ($kit || $item->existDiscount()) { ?>
+                                        <span class="price-discount">
+                                            <span>
+                                                <span class="price">
+                                                    <?= $kit ? $model->count*$itemsCost : $model->count*$item->cost ?>
+                                                </span> грн.
+                                            </span>
+                                        </span>
+                                    <?php } ?>
                                     <span class="price-new">
                                         <span>
                                             <span id="price-<?php echo $item->getId() ?>" class="price">

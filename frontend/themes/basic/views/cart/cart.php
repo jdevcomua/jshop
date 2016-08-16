@@ -61,19 +61,8 @@ $this->title = 'Корзина';
                     </ul>
                 </dd>
             </dl>
-        </div>                    <!--End. Payments method form -->
-        <!-- Start. Similar Products-->
-        <div class="default-frame">
-            <section class="">
-                <div class="default-title">
-                    <div class="frame-title">
-                        <div class="title"><?php echo \Yii::t('app', 'Похожие товары'); ?></div>
-                    </div><?php echo \Yii::t('app', ''); ?>
-                </div>
-
-            </section>
         </div>
-        <!-- End. Similar Products-->
+        <!--End. Payments method form -->
     </div>
     <?= $this->render('cartItems', [
         'models' => $models, 'sum' => $sum

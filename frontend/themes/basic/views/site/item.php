@@ -2,16 +2,22 @@
 
 /* @var $category \common\models\ItemCat */
 /* @var $value \common\models\Item */
+
+$isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
 ?>
-<a href="<?= $value->getUrl(); ?>"
-   class="frame-photo-title">
-                                <span class="photo-block"><span class="helper"></span><img
-                                        src="<?php echo array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
-                                    <?php if ($value->existDiscount()) { ?>
-                                        <span class="product-status action"></span>
-                                    <?php } ?>
-                                </span>
-    <span class="title"><?php echo $value->title; ?></span></a>
+<?php if ($isWish) { ?>
+    <div id="wish-<?= $wishId; ?>">
+<?php } ?>
+<a href="<?= $value->getUrl(); ?>" class="frame-photo-title">
+    <span class="photo-block">
+        <span class="helper"></span>
+        <img src="<?= array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
+        <?php if ($value->existDiscount()) { ?>
+            <span class="product-status action"></span>
+        <?php } ?>
+    </span>
+    <span class="title"><?php echo $value->title; ?></span>
+</a>
 <div class="description">
     <!-- Start. Star rating -->
     <?php if ($value->getAvgRating()['avg'] != 0) { ?>
@@ -38,9 +44,12 @@
             <!-- End. Check old price-->
             <!-- Start. Product price-->
             <span class="current-prices f-s_0">
-                <span class="price-new"><span>
-                    <span
-                        class="price priceVariant"><?php echo $value->existDiscount() ? $value->getNewPrice() : $value->cost; ?> </span> грн. </span>
+                <span class="price-new">
+                    <span>
+                        <span class="price priceVariant">
+                            <?= $value->existDiscount() ? $value->getNewPrice() : $value->cost; ?>
+                        </span> грн.
+                    </span>
                 </span>
             </span>
             <!-- End. Product price-->
@@ -107,30 +116,32 @@
                     <?php } ?>
                     <!-- End. Compare List button -->
                 </div>
-                <!-- Start. Wish list buttons -->
-                <div class="frame-btn-wish js-variant-17906 js-variant d_i-b_">
-                    <div class="btnWish btn-wish">
-                        <?php if ($value->inWishList()) { ?>
-                            <button id="inwish-<?php echo $value->id; ?>" class="inWishlist" title="В списке желаний">
-                                <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
-                                    <span class="icon_wish" style="background-position: -160px 0;"></span>
-                                </a>
-                            </button>
-                        <?php } else { ?>
-                            <button id="towish-<?php echo $value->id; ?>" class="toWishlist" title="В список желаний"
-                                    onclick="openWishWindow(<?php echo $value->id; ?>);">
-                                <span class="icon_wish"></span>
-                            </button>
-                            <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n"
-                                    title="В списке желаний">
-                                <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
-                                    <span class="icon_wish"  style="background-position: -160px 0;"></span>
-                                </a>
-                            </button>
-                        <?php } ?>
+                <?php if (!$isWish) { ?>
+                    <!-- Start. Wish list buttons -->
+                    <div class="frame-btn-wish js-variant-17906 js-variant d_i-b_">
+                        <div class="btnWish btn-wish">
+                            <?php if ($value->inWishList()) { ?>
+                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist" title="В списке желаний">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                        <span class="icon_wish" style="background-position: -160px 0;"></span>
+                                    </a>
+                                </button>
+                            <?php } else { ?>
+                                <button id="towish-<?php echo $value->id; ?>" class="toWishlist" title="В список желаний"
+                                        onclick="openWishWindow(<?php echo $value->id; ?>);">
+                                    <span class="icon_wish"></span>
+                                </button>
+                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n" 
+                                        title="В списке желаний">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                        <span class="icon_wish"  style="background-position: -160px 0;"></span>
+                                    </a>
+                                </button>
+                            <?php } ?>
+                        </div>
                     </div>
-                </div>
-                <!-- End. wish list buttons -->
+                    <!-- End. wish list buttons -->
+                <?php } ?>
             </div>
             <!-- End. Wish List & Compare List buttons -->
         </div>
@@ -139,3 +150,17 @@
         </div>
     </div>
 </div>
+<?php if ($isWish) { ?>
+    <!-- Start. For wishlist page-->
+    <div class="funcs-buttons-WL-item">
+        <div class="btn-remove-item-wl">
+            <button type="button" id="remove-<?= $wishId; ?>" class="btnRemoveItem isDrop"
+                    onclick="removeItemFromWishList(<?= $wishId; ?>)">
+                <span class="icon_remove"></span>
+                <span class="text-el d_l_1">Удалить</span>
+            </button>
+        </div>
+    </div>
+    <!-- End. For wishlist page-->
+    </div>
+<?php } ?>

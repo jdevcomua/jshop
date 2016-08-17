@@ -80,17 +80,21 @@ class Characteristic extends Model
     public function getCharacteristicItems()
     {
         $filters = Yii::$app->request->get('filter');
-        if (key_exists($this->id, $filters)) {
-            unset($filters[$this->id]);
-        }
         if (empty($filters)) {
             $count = 'count(value)';
         } else {
-            $filterWhere = SiteController::getItemIdsForFilter($filters);
-            if (!$filterWhere) {
-                $filterWhere = [0];
+            if (key_exists($this->id, $filters)) {
+                unset($filters[$this->id]);
             }
-            $count = 'sum(if(item_id in (' . implode(',', $filterWhere) . '), 1, 0))';
+            $filterWhere = SiteController::getItemIdsForFilter($filters);
+            if (count($filterWhere) > 0) {
+                if (!is_array($filterWhere)) {
+                    $filterWhere = [0];
+                }
+                $count = 'sum(if(item_id in (' . implode(',', $filterWhere) . '), 1, 0))';
+            } else {
+                $count = 'count(value)';
+            }
         }
         return $this->hasMany(CharacteristicItem::className(), ['characteristic_id' => 'id'])->addGroupBy(['value'])
             ->select(['characteristic_item.*, ' . $count . ' as count']);

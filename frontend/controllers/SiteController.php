@@ -225,7 +225,7 @@ class SiteController extends Controller
     {
         $query = Item::find();
         $filterWhere = self::getItemIdsForFilter($filters);
-        if ($filterWhere) {
+        if (is_array($filterWhere)) {
             $query->andFilterWhere(['in', 'item.id', $filterWhere]);
         } else {
             $query->where('false');

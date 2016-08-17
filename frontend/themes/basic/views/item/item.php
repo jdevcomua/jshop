@@ -189,7 +189,7 @@ $this->title = $item->title;
                                     <!-- Start. Compare List button-->
                                     <?php if (!Yii::$app->compare->existInList($item->id)) { ?>
                                         <div id="toCompare" class="btn-compare">
-                                            <button class="toCompare" type="button" data-title="В список сравнений"
+                                            <button class="toCompare" type="button" title="В список сравнений"
                                                     onclick="addToCompareList(<?php echo $item->id; ?>)">
                                                 <span class="icon_compare"></span>
                                                 <span class="text-el d_l">В список сравнений</span>
@@ -198,7 +198,7 @@ $this->title = $item->title;
                                         <div id="inCompare" class="btn-compare btn-comp-in d_n">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
                                                style="padding-top: 8px; padding-bottom: 9px;">
-                                                <button class="toCompare" type="button" data-title="В список сравнений">
+                                                <button class="toCompare" type="button" title="Сравнить товары">
                                                     <span class="icon_compare"></span>
                                                     <span class="text-el d_l">В список сравнений</span>
                                                 </button>
@@ -208,7 +208,7 @@ $this->title = $item->title;
                                         <div class="btn-compare btn-comp-in">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
                                                style="padding-top: 8px; padding-bottom: 9px;">
-                                                <button class="toCompare" type="button" data-title="В список сравнений">
+                                                <button class="toCompare" type="button" title="В список сравнений">
                                                     <span class="icon_compare"></span>
                                                     <span class="text-el d_l">В список сравнений</span>
                                                 </button>
@@ -222,7 +222,7 @@ $this->title = $item->title;
                                     <div class="btnWish btn-wish">
                                         <?php if ($item->inWishList()) { ?>
                                             <button id="inwish-<?php echo $item->id; ?>" class="inWishlist"
-                                                    data-title="В списке желаний">
+                                                    title="В списке желаний">
                                                 <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
                                                     <span class="icon_wish"
                                                           style="background-position: -160px 0;"></span>
@@ -231,15 +231,14 @@ $this->title = $item->title;
                                             </button>
                                         <?php } else { ?>
                                             <button id="towish-<?php echo $item->id; ?>" class="toWishlist"
-                                                    onclick="
-                                                        openWishWindow(<?php echo $item->id; ?>);
-                                                        ">
+                                                    onclick="openWishWindow(<?php echo $item->id; ?>);"
+                                                    title="В список желаний">
                                                 <span class="icon_wish"></span>
                                                 <span class="text-el d_l">В желаемое</span>
                                             </button>
                                             <button id="inwish-<?php echo $item->id; ?>"
                                                     class="inWishlist d_n"
-                                                    data-title="В списке желаний">
+                                                    title="В списке желаний">
                                                 <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
                                                     <span class="icon_wish"
                                                           style="background-position: -160px 0;"></span>

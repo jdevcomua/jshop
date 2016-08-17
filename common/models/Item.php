@@ -321,8 +321,7 @@ class Item extends Model implements CartAdd
      */
     public function existDiscount()
     {
-        return ($this->getStocks()->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
-            ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')])->count() > 0);
+        return (count($this->stocks) > 0);
     }
 
     /**
@@ -330,7 +329,9 @@ class Item extends Model implements CartAdd
      */
     public function getStocks()
     {
-        return $this->hasMany(Stock::className(), ['id' => 'stock_id'])->viaTable('stock_item', ['item_id' => 'id']);
+        return $this->hasMany(Stock::className(), ['id' => 'stock_id'])->viaTable('stock_item', ['item_id' => 'id'])
+            ->andFilterWhere(['<', 'date_from', date('Y-m-d H:i:s')])
+            ->andFilterWhere(['>', 'date_to', date('Y-m-d H:i:s')]);
     }
 
     /**

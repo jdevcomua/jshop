@@ -112,7 +112,7 @@ class SiteController extends Controller
             $rightCost = $maxCost;
         }
 
-        $items->with(['stockItems', 'images']);
+        $items->with(['stockItems', 'images', 'stocks']);
 
         $filterCounts = CharacteristicItem::find()->select(['characteristic_id', 'count(characteristic_id) as count'])
             ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')

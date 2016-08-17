@@ -177,38 +177,58 @@ class SiteController extends Controller
     }
 
     /**
+     * Returns ids of item which passed filters or false if it empty
      * @param $filters array
-     * @return \yii\db\ActiveQuery
+     * @return array|bool
      */
-    public function filter($filters)
+    public static function getItemIdsForFilter($filters)
     {
-        $query = Item::find();
-        $char_ids = [];
+        $filterWhere = [];
         if(!empty($filters)) {
+            $left = Yii::$app->request->get('left');
+            $right = Yii::$app->request->get('right');
+            $filterCount = 0;
             foreach ($filters as $key => $items) {
                 $count = count($items);
                 if (is_array($items) && $count > 0) {
                     $query1 = CharacteristicItem::find()->select('item_id');
-                    $query1->andFilterWhere(['characteristic_id' => $key]);
                     $query1->andFilterWhere(['like', 'value', array_shift($items)]);
                     if ($count > 1) {
                         for ($i = 1; $i < $count; $i++) {
                             $query1->orFilterWhere(['like', 'value', array_shift($items)]);
                         }
                     }
+                    $query1->andFilterWhere(['characteristic_id' => $key])
+                        ->innerJoin('item', 'characteristic_item.item_id=item.id')
+                        ->andFilterWhere(['between', 'cost', $left, $right]);
                     //$query1->where('`value` like :val', [':val'=> '%"' . $items['value'] . '"%']);
                     $item_ids = [];
                     foreach ($query1->asArray()->all() as $item) {
                         $item_ids[] = $item['item_id'];
                     }
-                    if (in_array($key, $char_ids)) {
-                        $query->orFilterWhere(['in', 'item.id', $item_ids]);
-                    } else {
-                        $char_ids[] = $key;
-                        $query->andFilterWhere(['in', 'item.id', $item_ids]);
-                    }
+                    $filterWhere = $filterCount == 0 ? $item_ids : array_intersect($filterWhere, $item_ids);
+                    $filterCount++;
                 }
             }
+            if (empty($filterWhere) && $filterCount > 0) {
+                return false;
+            }
+        }
+        return $filterWhere;
+    }
+
+    /**
+     * @param $filters array
+     * @return \yii\db\ActiveQuery
+     */
+    public function filter($filters)
+    {
+        $query = Item::find();
+        $filterWhere = self::getItemIdsForFilter($filters);
+        if ($filterWhere) {
+            $query->andFilterWhere(['in', 'item.id', $filterWhere]);
+        } else {
+            $query->where('false');
         }
         $query->andFilterWhere(['between', 'cost', Yii::$app->request->get('left'), Yii::$app->request->get('right')]);
         return $query;

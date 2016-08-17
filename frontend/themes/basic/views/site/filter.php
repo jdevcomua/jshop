@@ -144,6 +144,7 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                                                         }
                                                         echo Html::checkbox('filter[' . $char->id . '][]', $checked, [
                                                             'value' => $characteristicItem->value,
+                                                            'disabled' => ($characteristicItem->count == 0),
                                                             'label' => $characteristicItem->value .
                                                                 Html::tag('span', ' (' . $characteristicItem->count . ')'
                                                                     , ['class' => 'count'])

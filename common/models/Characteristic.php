@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use frontend\controllers\SiteController;
 use Yii;
 
 /**
@@ -78,7 +79,20 @@ class Characteristic extends Model
      */
     public function getCharacteristicItems()
     {
+        $filters = Yii::$app->request->get('filter');
+        if (key_exists($this->id, $filters)) {
+            unset($filters[$this->id]);
+        }
+        if (empty($filters)) {
+            $count = 'count(value)';
+        } else {
+            $filterWhere = SiteController::getItemIdsForFilter($filters);
+            if (!$filterWhere) {
+                $filterWhere = [0];
+            }
+            $count = 'sum(if(item_id in (' . implode(',', $filterWhere) . '), 1, 0))';
+        }
         return $this->hasMany(CharacteristicItem::className(), ['characteristic_id' => 'id'])->addGroupBy(['value'])
-            ->select(['characteristic_item.*, count(value) as count']);
+            ->select(['characteristic_item.*, ' . $count . ' as count']);
     }
 }

@@ -25,13 +25,17 @@ class UserController extends Controller
      */
     public function actionProfile()
     {
+        $user = Yii::$app->user;
+        if ($user->isGuest) {
+            return $this->redirect(Yii::$app->urlHelper->to(['login']));
+        }
         if (!empty(Yii::$app->request->post('WishList'))) {
             $wishList = new WishList();
             $wishList->load(Yii::$app->request->post());
-            $wishList->user_id = Yii::$app->user->id;
+            $wishList->user_id = $user->id;
             $wishList->save();
         }
-        $model = User::findOne(Yii::$app->user->getId());
+        $model = User::findOne($user->id);
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
         }

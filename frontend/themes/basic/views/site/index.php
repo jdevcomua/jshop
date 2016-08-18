@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Stock;
+use frontend\widgets\sliders\flex\FlexSlider;
 use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 use common\models\Item;
@@ -8,9 +9,9 @@ use common\models\Item;
 /* @var $category \common\models\ItemCat */
 /* @var $stocks Stock[] */
 /* @var $salesCount integer */
-/* @var $salesDataProvider ActiveDataProvider */
-/* @var $topDataProvider ActiveDataProvider */
 /* @var $itemsDataProvider ActiveDataProvider */
+/* @var $saleItems Item[] */
+/* @var $topItems Item[] */
 
 $this->title = 'Интернет-магазин';
 ?>
@@ -88,14 +89,6 @@ $this->title = 'Интернет-магазин';
                             ]);
                             ?>
                         </div>
-                        <div class="group-button-carousel">
-                            <button type="button" class="prev arrow">
-                                <span class="icon_arrow_p"></span>
-                            </button>
-                            <button type="button" class="next arrow">
-                                <span class="icon_arrow_n"></span>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -107,8 +100,9 @@ $this->title = 'Интернет-магазин';
 <div class="right-start-page">
     <div class="frame-little-banner">
         <p>
-            <a href="http://active.imagecmsdemo.net/dostavka"><img
-                    src="http://active.imagecmsdemo.net/uploads/shop/banners/banner_small.jpg" alt=""></a>
+            <a href="http://active.imagecmsdemo.net/dostavka">
+                <img src="http://active.imagecmsdemo.net/uploads/shop/banners/banner_small.jpg" alt="">
+            </a>
         </p>
     </div>
     <?php if ($salesCount > 0) { ?>
@@ -121,145 +115,76 @@ $this->title = 'Интернет-магазин';
                         </div>
                     </div>
                     <div class="big-container">
-                        <div class="frame-baner frame-baner-start_page" style="padding-bottom: 5px;">
-                            <style>
-                                #owl-demo1 .item img {
-                                    width: initial;
-                                    height: 200px;
-                                }
-
-                                .frame-photo-title {
-                                    text-decoration: none;
-                                }
-
-                                .photo-block {
-                                    width: 200px;
-                                    height: 160px;
-                                    padding: 7px;
-                                }
-                            </style>
-                            <div id="demo">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="span12">
-                                            <?= ListView::widget([
-                                                'dataProvider' => $salesDataProvider,
-                                                'itemView' => function ($model, $key, $index, $widget) {
-                                                    return $this->render('item', ['value' => $model]);
-                                                },
-                                                'options' => [
-                                                    'tag' => 'div',
-                                                    'class' => 'owl-carousel',
-                                                    'id' => 'owl-demo1',
-                                                    'align' => 'center',
-                                                ],
-                                                'itemOptions' => [
-                                                    'tag' => 'div',
-                                                    'class' => 'item',
-                                                ],
-                                                'summary' => '',
-                                            ]);
-                                            ?>
-                                        </div>
-                                    </div>
-
-                                    <script>
-                                        $(document).ready(function () {
-                                            $("#owl-demo1").owlCarousel({
-
-                                                navigation: false,
-                                                slideSpeed: 500,
-                                                paginationSpeed: 500,
-                                                singleItem: true,
-                                                autoPlay: 5000,
-                                                stopOnHover: true,
-                                                baseClass: 'owl-carousel1',
-                                                autoHeight: true
-
-                                            });
-                                        });
-                                    </script>
-                                </div>
-
+                        <div class="items-carousel" style="position: relative; display: block;">
+                            <?php $topItemsSlider = [];
+                            foreach ($topItems as $topItem) {
+                                $topItemsSlider[] = $this->render('item', ['value' => $topItem]);
+                            }
+                            echo FlexSlider::widget([
+                                'items' => $topItemsSlider,
+                                'options' => [
+                                    'class' => 'content-carousel container',
+                                ],
+                                'slidesOptions' => [
+                                    'class' => 'slides items items-catalog items-v-carousel',
+                                ],
+                                'pluginOptions' => [
+                                    'animation' => 'slide',
+                                    'direction' => 'vertical',
+                                    'controlNav' => false,
+                                    'customDirectionNav' => new \yii\web\JsExpression('$(".group-button-carousel-top button")'),
+                                ],
+                            ]); ?>
+                            <div class="group-button-carousel group-button-carousel-top">
+                                <button type="button" style="display: inline-block;" class="flex-prev prev arrow">
+                                    <span class="icon_arrow_p"></span>
+                                </button>
+                                <button type="button" style="display: inline-block;" class="flex-next next arrow">
+                                    <span class="icon_arrow_n"></span>
+                                </button>
                             </div>
-
                         </div>
-
                     </div>
                 </section>
             </div>
         </div>
     <?php } ?>
-    <div id="action_products">
+    <div id="popular_products">
         <div class="vertical-carousel">
             <section class="special-proposition">
                 <div class="title-proposition-v">
                     <div class="frame-title">
-                        <div class="title">Топ продаж</div>
+                        <div class="title">хит продаж</div>
                     </div>
                 </div>
                 <div class="big-container">
-                    <div class="frame-baner frame-baner-start_page" style="padding-bottom: 5px;">
-                        <style>
-                            #owl-demo2 .item img {
-                                width: initial;
-                                height: 200px;
-                            }
-
-                            .frame-photo-title {
-                                text-decoration: none;
-                            }
-
-                            .photo-block {
-                                width: 200px;
-                                height: 160px;
-                                padding: 7px;
-                            }
-                        </style>
-                        <div id="demo">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="span12">
-                                        <?= ListView::widget([
-                                            'dataProvider' => $topDataProvider,
-                                            'itemView' => function ($model, $key, $index, $widget) {
-                                                return $this->render('item', ['value' => $model]);
-                                            },
-                                            'options' => [
-                                                'tag' => 'div',
-                                                'class' => 'owl-carousel',
-                                                'id' => 'owl-demo2',
-                                                'align' => 'center',
-                                            ],
-                                            'itemOptions' => [
-                                                'tag' => 'div',
-                                                'class' => 'item',
-                                            ],
-                                            'summary' => '',
-                                        ]);
-                                        ?>
-
-                                    </div>
-                                </div>
-
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#owl-demo2").owlCarousel({
-
-                                            navigation: false,
-                                            slideSpeed: 500,
-                                            paginationSpeed: 500,
-                                            singleItem: true,
-                                            autoPlay: 5000,
-                                            stopOnHover: true,
-                                            baseClass: 'owl-carousel',
-                                            autoHeight: true
-
-                                        });
-                                    });
-                                </script>
-                            </div>
-
+                    <div class="items-carousel" style="position: relative; display: block;">
+                        <?php $saleItemsSlider = [];
+                        foreach ($saleItems as $saleItem) {
+                            $saleItemsSlider[] = $this->render('item', ['value' => $saleItem]);
+                        }
+                        echo FlexSlider::widget([
+                            'items' => $saleItemsSlider,
+                            'options' => [
+                                'class' => 'content-carousel container',
+                            ],
+                            'slidesOptions' => [
+                                'class' => 'slides items items-catalog items-v-carousel',
+                            ],
+                            'pluginOptions' => [
+                                'animation' => 'slide',
+                                'direction' => 'vertical',
+                                'controlNav' => false,
+                                'customDirectionNav' => new \yii\web\JsExpression('$(".group-button-carousel-hit button")'),
+                            ],
+                        ]); ?>
+                        <div class="group-button-carousel group-button-carousel-hit">
+                            <button type="button" style="display: inline-block;" class="flex-prev prev arrow">
+                                <span class="icon_arrow_p"></span>
+                            </button>
+                            <button type="button" style="display: inline-block;" class="flex-next next arrow">
+                                <span class="icon_arrow_n"></span>
+                            </button>
                         </div>
                     </div>
                 </div>

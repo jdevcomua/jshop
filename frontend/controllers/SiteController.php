@@ -23,22 +23,14 @@ class SiteController extends Controller
     {
         $items = Item::find()->orderBy('addition_date desc')->limit(6);
         $salesItemsQuery = Item::find()->threeItems();
-        $salesDataProvider = new ActiveDataProvider([
-            'query' => $salesItemsQuery,
-            'pagination' => false,
-        ]);
-        $topDataProvider = new ActiveDataProvider([
-            'query' => Item::find()->top(),
-            'pagination' => false,
-        ]);
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
             'query' => $items,
             'pagination' => false,
         ]);
         return $this->render('index', ['itemsDataProvider' => $itemsDataProvider, 'stocks' => $stocks,
-                'salesDataProvider' => $salesDataProvider, 'salesCount' => $salesItemsQuery->count(),
-            'topDataProvider' => $topDataProvider
+            'saleItems' => $salesItemsQuery->all(), 'salesCount' => $salesItemsQuery->count(),
+            'topItems' => Item::find()->top()->all()
         ]);
     }
 

@@ -284,7 +284,6 @@ $this->title = $item->title;
                                 'pluginOptions' => [
                                     'animation' => 'slide',
                                     'controlNav' => false,
-                                    'controlsContainer' => new \yii\web\JsExpression('$(".custom-controls-container")'),
                                     'customDirectionNav' => new \yii\web\JsExpression('$(".group-button-carousel button")'),
                                 ],
                             ]); ?>

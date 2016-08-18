@@ -1,5 +1,14 @@
 @charset "utf-8";
 
+.kit-photo-block img {
+    display: inline-block!important;
+    width: auto!important;
+}
+
+.items-complect {
+    border: 4px solid #fff;
+}
+
 .cart-items {
     width: 730px;
 }
@@ -499,7 +508,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 .row-kits .description{margin-left: 0;}
 .table-order .row-kits .description{margin-left: 80px;}
 .row-kits td{padding-bottom: 10px !important;}
-.row-kits li{width: 185px;margin-bottom: 10px;}
+.row-kits li{width: 185px;}
 .complects-carousel .row-kits .photo-block{float: none;display: block;margin-bottom: 8px;}
 .table-order .row-kits .frame-frame-count{padding-top: 23px;}
 .table-order .row-kits .frame-prices{padding-top: 26px;}
@@ -513,7 +522,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 .gen-sum-kit{display: inline-block;vertical-align: middle;top: -20px;width: 27px;text-align: left;}
 .complect-gen-sum .price-discount{display: block;}
 .frame-gen-price-buy-complect .price-new{margin-bottom: 5px;}
-.frame-gen-price-buy-complect{vertical-align: middle;width: 109px;}
+.frame-gen-price-buy-complect{vertical-align: middle;width: 100px;}
 .frame-gen-price-buy-complect [class*="btn-"] button{padding: 0 20px;}
 
 .item-report{margin-bottom: 16px;}
@@ -561,7 +570,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 .frame-kit.main-product{width: 100%;}
 .items-complect .next-kit{width: 31px;position: absolute;left: -50px;top: 25px;}
 .items-complect [class*="items"]{display: inline-block;vertical-align: middle;text-align: left;}
-.items-complect .complect-gen-sum{width: 136px;display: inline-block;vertical-align: middle;text-align: left;font-size: 0;}
+.items-complect .complect-gen-sum{width: 127px;display: inline-block;vertical-align: middle;text-align: left;font-size: 0;}
 
 .items-default{margin-left: -20px;}
 .items-default > li{text-align: center;width:  219px;margin-left: 20px;margin-bottom: 20px;}

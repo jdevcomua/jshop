@@ -747,7 +747,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 
 /*menu*/
 .frame-menu-main{position: relative;}
-.menu-main{position: relative;z-index: 1;}
+.menu-main{position: relative;z-index:999;}
 .vertical-menu .menu-main{margin-bottom: 20px;}
 .horizontal-menu .menu-main{padding-bottom: 0px; position: relative;}
 .menu-main .title-category-l1.active > span{cursor: pointer;}

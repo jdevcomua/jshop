@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+.flex-slider-banners {
+    margin: 0 0 15px!important;
+}
+
 .kit-photo-block img {
     display: inline-block!important;
     width: auto!important;

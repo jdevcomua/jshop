@@ -234,6 +234,9 @@ AppAsset::register($this);
                     <li><a href="<?= Yii::$app->urlHelper->to(['kit/index'])?>">
                             <i class="fa fa-suitcase"></i><span>Комплекты</span></a>
                     </li>
+                    <li><a href="<?= Yii::$app->urlHelper->to(['banner/index'])?>">
+                            <i class="fa fa-bullhorn "></i><span>Баннеры</span></a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

@@ -82,6 +82,7 @@ $config = [
                 '<language:(ru|en)>/user/update'=>'user/update',
                 '<language:(ru|en)>/user/create'=>'user/create',
                 '<language:(ru|en)>/user/view'=>'user/view',
+                '<language:(ru|en)>/user/delete'=>'user/delete',
 
                 '<language:(ru|en)>/orders/index'=>'orders/index',
                 '<language:(ru|en)>/orders'=>'orders/index',
@@ -89,6 +90,7 @@ $config = [
                 '<language:(ru|en)>/orders/create'=>'orders/create',
                 '<language:(ru|en)>/orders/view'=>'orders/view',
                 '<language:(ru|en)>/orders/group'=>'orders/group',
+                '<language:(ru|en)>/orders/delete'=>'orders/delete',
 
                 '<language:(ru|en)>/order-item/index'=>'order-item/index',
                 '<language:(ru|en)>/order-item'=>'order-item/index',
@@ -102,6 +104,15 @@ $config = [
                 '<language:(ru|en)>/stock/update'=>'stock/update',
                 '<language:(ru|en)>/stock/create'=>'stock/create',
                 '<language:(ru|en)>/stock/view'=>'stock/view',
+                '<language:(ru|en)>/stock/delete'=>'stock/delete',
+
+                '<language:(ru|en)>/banner'=>'banner/index',
+                '<language:(ru|en)>/banner/index'=>'banner/index',
+                '<language:(ru|en)>/banner/group'=>'banner/group',
+                '<language:(ru|en)>/banner/update'=>'banner/update',
+                '<language:(ru|en)>/banner/create'=>'banner/create',
+                '<language:(ru|en)>/banner/view'=>'banner/view',
+                '<language:(ru|en)>/banner/delete'=>'banner/delete',
 
                 '<language:(ru|en)>/kit'=>'kit/index',
                 '<language:(ru|en)>/kit/index'=>'kit/index',
@@ -109,6 +120,7 @@ $config = [
                 '<language:(ru|en)>/kit/update'=>'kit/update',
                 '<language:(ru|en)>/kit/create'=>'kit/create',
                 '<language:(ru|en)>/kit/view'=>'kit/view',
+                '<language:(ru|en)>/kit/delete'=>'kit/delete',
 
                 '<language:(ru|en)><controller>/<action>'=>'<controller>/<action>',
             ],

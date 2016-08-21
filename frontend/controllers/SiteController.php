@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Banner;
 use common\models\Characteristic;
 use common\models\CharacteristicItem;
 use common\models\Item;
@@ -12,6 +13,7 @@ use common\models\Wish;
 use common\models\WishList;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 
 class SiteController extends Controller
 {
@@ -21,6 +23,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $centerBanners = Banner::find()->where(['enable' => 1, 'position' => Banner::POSITION_INDEX_CENTER])->all();
+        $centerBannersImages = [];
+        /* @var $centerBanner Banner */
+        foreach ($centerBanners as $centerBanner) {
+            $centerBannersImages[] = Html::a(Html::img($centerBanner->getImageUrl()), $centerBanner->url);
+        }
         $items = Item::find()->orderBy('addition_date desc')->limit(6);
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
@@ -30,7 +38,9 @@ class SiteController extends Controller
         ]);
         return $this->render('index', ['itemsDataProvider' => $itemsDataProvider, 'stocks' => $stocks,
             'saleItems' => $salesItemsQuery->all(), 'salesCount' => $salesItemsQuery->count(),
-            'topItems' => Item::find()->top()->all()
+            'topItems' => Item::find()->top()->all(),
+            'centerBanners' => $centerBannersImages,
+            'rightBanner' => Banner::findOne(['enable' => 1, 'position' => Banner::POSITION_INDEX_RIGHT]),
         ]);
     }
 

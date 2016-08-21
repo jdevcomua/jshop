@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Banner;
 use common\models\Stock;
 use frontend\widgets\sliders\flex\FlexSlider;
 use yii\data\ActiveDataProvider;
@@ -12,54 +13,24 @@ use common\models\Item;
 /* @var $itemsDataProvider ActiveDataProvider */
 /* @var $saleItems Item[] */
 /* @var $topItems Item[] */
+/* @var $rightBanner Banner|null */
+/* @var $centerBanners Banner[] */
 
 $this->title = 'Интернет-магазин';
 ?>
 
 <div class="left-start-page">
-    <?php if (count($stocks) > 0) { ?>
-        <div class="frame-baner frame-baner-start_page" style="height: 270px;">
-            <style>
-                #owl-demo .item img {
-                    display: block;
-                    width: 100%;
-                    height: auto;
-                }
-            </style>
-            <div id="demo">
-                <div class="container">
-                    <div class="row">
-                        <div class="span12">
-                            <div id="owl-demo" class="owl-carousel">
-                                <?php foreach ($stocks as $stock) {
-                                    /* @var $stock Stock */ ?>
-                                    <div class="item" align="center">
-                                        <a href="<?php echo Yii::$app->urlHelper->to(['promotion/' . $stock->id]); ?>">
-                                            <img style="max-height: 227px;width:initial;"
-                                                 src="<?php echo $stock->getImageUrl(); ?>">
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
-                $(document).ready(function () {
-                    $("#owl-demo").owlCarousel({
-
-                        navigation: false,
-                        slideSpeed: 500,
-                        paginationSpeed: 500,
-                        singleItem: true,
-                        autoPlay: 5000,
-                        stopOnHover: true
-
-                    });
-                });
-            </script>
-        </div>
+    <?php if (count($centerBanners) > 0) { ?>
+            <?= FlexSlider::widget([
+                'items' => $centerBanners,
+            'options' => [
+                'class' => 'flexslider flex-slider-banners',
+            ],
+            'pluginOptions' => [
+                'animation' => 'slide',
+                'controlNav' => false,
+            ],
+            ])?>
     <?php } ?>
     <div id="new_products">
         <div class="horizontal-carousel">
@@ -98,13 +69,15 @@ $this->title = 'Интернет-магазин';
 
 </div>
 <div class="right-start-page">
-    <div class="frame-little-banner">
-        <p>
-            <a href="http://active.imagecmsdemo.net/dostavka">
-                <img src="http://active.imagecmsdemo.net/uploads/shop/banners/banner_small.jpg" alt="">
-            </a>
-        </p>
-    </div>
+    <?php if (isset($rightBanner)) { ?>
+        <div class="frame-little-banner">
+            <p>
+                <a href="<?= $rightBanner->url ?>">
+                    <img src="<?= $rightBanner->getImageUrl() ?>" alt="">
+                </a>
+            </p>
+        </div>
+    <?php } ?>
     <?php if ($salesCount > 0) { ?>
         <div id="action_products">
             <div class="vertical-carousel">

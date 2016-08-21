@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "banner".
@@ -14,40 +13,12 @@ use yii\web\UploadedFile;
  * @property string $position
  * @property integer $enable
  */
-class Banner extends Model
+class Banner extends ModelWithImage
 {
 
     const POSITION_INDEX_CENTER = 1;
     const POSITION_INDEX_RIGHT = 2;
-
-    /**
-     * @var UploadedFile
-     */
-    public $imageFile;
-
-    public function upload()
-    {
-        $file = UploadedFile::getInstance($this, 'imageFile');
-        if (isset($file)) {
-            $this->deleteImage(false);
-            $fileName = $this->id . mt_rand() . '.' . $file->extension;
-            $file->saveAs(Item::getPath() . $fileName);
-            $this->image = $fileName;
-            $this->save();
-        }
-    }
-
-    public function deleteImage($save = true)
-    {
-        $oldImage = Item::getPath() . $this->image;
-        if (!empty($this->image) && file_exists($oldImage) && !is_dir($oldImage)) {
-            unlink($oldImage);
-            $this->image = null;
-            if ($save) {
-                $this->save();
-            }
-        }
-    }
+    public $dir = 'banners';
     
     /**
      * @inheritdoc
@@ -92,14 +63,6 @@ class Banner extends Model
             'imageUrl' => 'Изображение',
             'positionTitle' => 'Позиция',
         ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getImageUrl()
-    {
-        return Yii::$app->params['myServerImageLink'] . $this->image;
     }
 
     public function getPositionTitle()

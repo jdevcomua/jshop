@@ -4,7 +4,6 @@ namespace common\models;
 
 use Yii;
 use dosamigos\transliterator\TransliteratorHelper;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "item_cat".
@@ -18,15 +17,11 @@ use yii\web\UploadedFile;
  * @property Item[] $items
  * @property ItemCat[] children
  */
-class ItemCat extends Model
+class ItemCat extends ModelWithImage
 {
     
     public $count;
-
-    /**
-     * @var UploadedFile
-     */
-    public $imageFile;
+    public $dir = 'categories';
 
     /**
      * @inheritdoc
@@ -75,30 +70,6 @@ class ItemCat extends Model
         ];
     }
 
-    public function upload()
-    {
-        $file = UploadedFile::getInstance($this, 'imageFile');
-        if (isset($file)) {
-            $this->deleteImage(false);
-            $fileName = $this->id . mt_rand() . '.' . $file->extension;
-            $file->saveAs(Item::getPath() . $fileName);
-            $this->image = $fileName;
-            $this->save();
-        }
-    }
-
-    public function deleteImage($save = true)
-    {
-        $oldImage = Item::getPath() . $this->image;
-        if (!empty($this->image) && file_exists($oldImage) && !is_dir($oldImage)) {
-            unlink($oldImage);
-            $this->image = null;
-            if ($save) {
-                $this->save();
-            }
-        }
-    }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -138,14 +109,6 @@ class ItemCat extends Model
     public function getParent()
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
-    }
-
-    /**
-     * @return array
-     */
-    public function getImageUrl()
-    {
-        return Yii::$app->params['myServerImageLink'] . $this->image;
     }
 
     public function getUrl()

@@ -4,7 +4,6 @@ namespace common\models;
 
 use common\models\query\StockQuery;
 use Yii;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "stock".
@@ -21,12 +20,10 @@ use yii\web\UploadedFile;
  * @property StockItem[] $stockItems
  * @property Item[] $items
  */
-class Stock extends Model
+class Stock extends ModelWithImage
 {
-    /**
-     * @var UploadedFile
-     */
-    public $imageFile;
+
+    public $dir = 'stocks';
 
     public function getTranslateColumns()
     {
@@ -39,30 +36,6 @@ class Stock extends Model
     public static function tableName()
     {
         return 'stock';
-    }
-
-    /**
-     * @return array
-     */
-    public function getImageUrl()
-    {
-        return Yii::$app->params['myServerImageLink'] . $this->image;
-    }
-
-    public function upload()
-    {
-        $file = UploadedFile::getInstance($this, 'imageFile');
-        if (isset($file)) {
-            if (isset($this->image)) {
-                if (file_exists(Item::getPath() . $this->image)) {
-                    unlink(Item::getPath() . $this->image);
-                }
-            }
-            $fileName = $this->id . mt_rand() . '.' . $file->extension;
-            $file->saveAs(Item::getPath() . $fileName);
-            $this->image = $fileName;
-            $this->save();
-        }
     }
 
     /**

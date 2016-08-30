@@ -224,21 +224,20 @@ class ItemCatController extends Controller
             //добавляем новые
             foreach ($data as $char) {
                 if ($char['id'] == "") {
-                    $newChar = new Characteristic(['category_id' => $id, 'title' => $char['title']]);
+                    $newChar = new Characteristic(['category_id' => $id, 'title' => $char['title'], 'type' => $char['type']]);
                     $newChar->save();
                 } else {
-                    $withId[$char['id']] = $char['title'];
+                    $withId[$char['id']] = ['title' => $char['title'], 'type' => $char['type']];
                 }
-            }
+            };
             //просматриваем старые
             $keys = array_keys($withId);
             /* @var $model Characteristic */
             foreach ($models as $model) {
                 if (in_array($model->id, $keys)) {
-                    if ($model->title != $withId[$model->id]) {
-                        $model->title = $withId[$model->id];
-                        $model->save();
-                    }
+                    $model->title = $withId[$model->id]['title'];
+                    $model->type = $withId[$model->id]['type'];
+                    $model->save();
                 } else {
                     $model->delete();
                 }

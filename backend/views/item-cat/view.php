@@ -44,7 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $characteristics,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
-                    'title'
+                    'title',
+                    'typeTitle'
                 ],
             ]); ?>
         </div>

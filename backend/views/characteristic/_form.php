@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Characteristic;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -23,7 +24,10 @@ use yii\widgets\ActiveForm;
         ],
     ]);
     
-    echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    echo $form->field($model, 'title')->textInput(['maxlength' => true]);
+    
+    echo $form->field($model, 'type')->dropDownList(Characteristic::getTypesArray());
+    ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [

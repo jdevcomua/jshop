@@ -11,18 +11,29 @@ use Yii;
  * @property integer $id
  * @property integer $category_id
  * @property string $title
+ * @property integer $type of displaying in filters
  *
  * @property ItemCat $category
  * @property CharacteristicItem[] $characteristicItems
  */
 class Characteristic extends Model
 {
+
+    const TYPE_NONE = 0;
+    const TYPE_CHECKBOXES = 1;
+    const TYPE_RANGE = 2;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'characteristic';
+    }
+
+    public function getTypeTitle()
+    {
+        return self::getTypesArray()[$this->type];
     }
 
     /**
@@ -47,7 +58,8 @@ class Characteristic extends Model
     public function rules()
     {
         return [
-            [['category_id'], 'integer'],
+            [['category_id', 'type'], 'integer'],
+            [['type'], 'default', 'value' => self::TYPE_NONE],
             [['title'], 'string'],
             [['title'], 'required']
         ];
@@ -63,7 +75,15 @@ class Characteristic extends Model
             'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'categoryTitle' => Yii::t('app', 'Категория'),
+            'type' => Yii::t('app', 'Вид в фильтрах'),
+            'typeTitle' => Yii::t('app', 'Вид в фильтрах'),
         ];
+    }
+    
+    public static function getTypesArray()
+    {
+        return [Characteristic::TYPE_NONE => 'Не показывать', Characteristic::TYPE_CHECKBOXES => 'Чекбоксы', 
+            Characteristic::TYPE_RANGE => 'Диапазон'];
     }
 
     /**

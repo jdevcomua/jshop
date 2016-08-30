@@ -33,10 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     [
                         'name' => 'title',
-                        'title' => 'Title',
+                        'title' => 'Название',
                         'value' => function ($data) {
                             return $data->title;
                         }
+                    ],
+                    [
+                        'name' => 'type',
+                        'type'  => 'dropDownList',
+                        'title' => 'Вид в фильтрах',
+                        'value' => function ($data) {
+                            return $data->type;
+                        },
+                        'items' => Characteristic::getTypesArray(),
+                        'headerOptions' => [
+                            'style' => 'width: 250px;',
+                        ]
                     ],
                     [
                         'name' => 'id',

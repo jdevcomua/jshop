@@ -14,4 +14,6 @@ $(document).ready(function(){
     $('.show_comment').click(function () {
         $('.hidden-comment').toggleClass('drop');
     });
+    var hash = window.location.hash;
+    hash && $('ul.nav-tabs a[href="' + hash + '"]').tab('show');
 });

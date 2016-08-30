@@ -122,7 +122,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                         <div class="btnWish btn-wish">
                             <?php if ($value->inWishList()) { ?>
                                 <button id="inwish-<?php echo $value->id; ?>" class="inWishlist" title="В списке желаний">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
                                         <span class="icon_wish" style="background-position: -160px 0;"></span>
                                     </a>
                                 </button>
@@ -133,7 +133,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                                 </button>
                                 <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n" 
                                         title="В списке желаний">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
                                         <span class="icon_wish"  style="background-position: -160px 0;"></span>
                                     </a>
                                 </button>

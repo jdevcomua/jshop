@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model common\models\User */
+/* @var $activeTab string|null */
 
 use Yii;
 use yii\helpers\Html;
@@ -19,26 +20,26 @@ $this->title = 'Профиль пользователя';
     </div>
 </div>
 <div class="left-personal f-s_0">
-    <ul class="tabs tabs-data">
-        <li class="active" onclick="tabMyData()">
-            <button><?php echo \Yii::t('app', 'Основные данные'); ?>
-            </button>
+    <ul class="tabs tabs-data nav nav-tabs">
+        <li class="active" onclick="">
+            <a href="#my_data" data-toggle="tab"><?php echo \Yii::t('app', 'Основные данные'); ?>
+            </a>
         </li>
-        <li class="" onclick="tabChangePassword()">
-            <button><?php echo \Yii::t('app', 'Изменить пароль'); ?>
-            </button>
+        <li class="" onclick="">
+            <a href="#change_pass" data-toggle="tab"><?php echo \Yii::t('app', 'Изменить пароль'); ?>
+            </a>
         </li>
-        <li class="" onclick="tabOrderHistory()">
-            <button><?php echo \Yii::t('app', 'История заказа'); ?>
-            </button>
+        <li class="" onclick="">
+            <a href="#history_order" data-toggle="tab"><?php echo \Yii::t('app', 'История заказа'); ?>
+            </a>
         </li>
-        <li id="wish" class="" onclick="tabWishList()">
-            <button><?php echo \Yii::t('app', 'Список желаний'); ?>
-            </button>
+        <li id="wish" class="" onclick="">
+            <a href="#wish_list" data-toggle="tab"><?php echo \Yii::t('app', 'Список желаний'); ?>
+            </a>
         </li>
     </ul>
-    <div class="frame-tabs-ref frame-tabs-profile">
-        <div id="my_data" style="display: block;" class="visited activeTab">
+    <div class="frame-tabs-ref frame-tabs-profile tab-content">
+        <div id="my_data" class="tab-pane active">
             <div class="inside-padd clearfix">
                 <div class="frame-change-profile">
                     <?php $form = ActiveForm::begin(); ?>
@@ -68,7 +69,7 @@ $this->title = 'Профиль пользователя';
                 </div>
             </div>
         </div>
-        <div id="change_pass" style="display: block;" class="d_n">
+        <div id="change_pass" class="tab-pane">
             <div class="inside-padd">
                 <div class="frame-change-password">
                     <div class="horizontal-form big-title">
@@ -105,7 +106,7 @@ $this->title = 'Профиль пользователя';
                 </div>
             </div>
         </div>
-        <div id="history_order" style="display: block;" class="d_n">
+        <div id="history_order" class="tab-pane">
             <div class="inside-padd">
                 <table class="table-profile" style="font-size: 13px">
                     <thead>
@@ -146,7 +147,7 @@ $this->title = 'Профиль пользователя';
                 </table>
             </div>
         </div>
-        <div id="wish_list" style="display: block;" class="d_n">
+        <div id="wish_list" class="tab-pane">
             <div class="inside-padd">
                 <div class="clearfix frame-tabs-ref">
                     <div id="list-products" style="display: block;">

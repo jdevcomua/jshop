@@ -225,7 +225,7 @@ $this->title = $item->title;
                                         <?php if ($item->inWishList()) { ?>
                                             <button id="inwish-<?php echo $item->id; ?>" class="inWishlist"
                                                     title="В списке желаний">
-                                                <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                                <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
                                                     <span class="icon_wish"
                                                           style="background-position: -160px 0;"></span>
                                                     <span class="text-el d_l">В списке желания</span>
@@ -241,7 +241,7 @@ $this->title = $item->title;
                                             <button id="inwish-<?php echo $item->id; ?>"
                                                     class="inWishlist d_n"
                                                     title="В списке желаний">
-                                                <a href="<?php echo Yii::$app->urlHelper->to(['profile']) ?>">
+                                                <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
                                                     <span class="icon_wish"
                                                           style="background-position: -160px 0;"></span>
                                                     <span class="text-el d_l">В списке желания</span>

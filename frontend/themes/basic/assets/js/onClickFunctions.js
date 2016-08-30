@@ -189,35 +189,3 @@ function removeItemFromWishList(id) {
         }
     });
 }
-function tabMyData() {
-    $('.activeTab').toggleClass('d_n');
-    $('.activeTab').toggleClass('activeTab');
-    $('.active').toggleClass('active');
-    $(this).toggleClass('active');
-    $('#my_data').toggleClass('d_n');
-    $('#my_data').toggleClass('activeTab');
-}
-function tabChangePassword() {
-    $('.activeTab').toggleClass('d_n');
-    $('.activeTab').toggleClass('activeTab');
-    $('.active').toggleClass('active');
-    $(this).toggleClass('active');
-    $('#change_pass').toggleClass('d_n');
-    $('#change_pass').toggleClass('activeTab');
-}
-function tabOrderHistory() {
-    $('.activeTab').toggleClass('d_n');
-    $('.activeTab').toggleClass('activeTab');
-    $('.active').toggleClass('active');
-    $(this).toggleClass('active');
-    $('#history_order').toggleClass('d_n');
-    $('#history_order').toggleClass('activeTab');
-}
-function tabWishList() {
-    $('.activeTab').toggleClass('d_n');
-    $('.activeTab').toggleClass('activeTab');
-    $('.active').toggleClass('active');
-    $(this).toggleClass('active');
-    $('#wish_list').toggleClass('d_n');
-    $('#wish_list').toggleClass('activeTab');
-}

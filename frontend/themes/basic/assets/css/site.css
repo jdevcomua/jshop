@@ -30,11 +30,11 @@
     display: none;
 }
 
-.left-cart input[type="text"]{
+.left-cart input[type="text"], .horizontal-form input[type="text"], .horizontal-form input[type="password"]{
     width: 250px;
 }
 
-.left-cart label {
+.left-cart label, .horizontal-form label {
     width: 160px;
     float: left;
     padding-top: 3px;

@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\User;
 use common\models\WishList;
+use frontend\models\ChangePassword;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use VK\VK;
@@ -35,11 +36,18 @@ class UserController extends Controller
             $wishList->user_id = $user->id;
             $wishList->save();
         }
+        $changePasswordModel = new ChangePassword();
+        if ($changePasswordModel->load(Yii::$app->request->post())) {
+            if ($changePasswordModel->validate() && $changePasswordModel->changePassword()) {
+                Yii::$app->session->setFlash('success', 'Пароль успешно изменен');
+                $changePasswordModel = new ChangePassword();
+            }
+        }
         $model = User::findOne($user->id);
         if ($model->load(Yii::$app->request->post())) {
             $model->save();
         }
-        return $this->render('profile', ['model' => $model, 'model1' => $model,]);
+        return $this->render('profile', ['model' => $model, 'changePasswordModel' => $changePasswordModel]);
     }
 
     public function actionVkAuth()

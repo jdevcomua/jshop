@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model common\models\User */
-/* @var $activeTab string|null */
+/* @var $changePasswordModel \frontend\models\ChangePassword */
 
 use Yii;
 use yii\helpers\Html;
@@ -73,33 +73,22 @@ $this->title = 'Профиль пользователя';
             <div class="inside-padd">
                 <div class="frame-change-password">
                     <div class="horizontal-form big-title">
-                        <?php $form = ActiveForm::begin(); ?>
-                        <label>
-                            <span class="title"><?php echo \Yii::t('app', 'Старый пароль'); ?>:</span>
-                                            <span class="frame-form-field">
-                                                <input type="password" name="old_password" style="width:250px;">
-                                            </span>
-                        </label>
-                        <label>
-                            <span class="title"><?php echo \Yii::t('app', 'Новый пароль'); ?>:</span>
-                                            <span class="frame-form-field">
-                                                <input type="password" name="new_password" style="width:250px;">
-                                            </span>
-                        </label>
-                        <label>
-                            <span class="title"><?php echo \Yii::t('app', 'Повторите пароль'); ?>:</span>
-                                            <span class="frame-form-field">
-                                                <input type="password" name="confirm_new_password" style="width:250px;">
-                                            </span>
-                        </label>
+                        <?php $form = ActiveForm::begin(['action' => Yii::$app->urlHelper->to(['profile#change_pass'])]); ?>
+
+                        <?= $form->field($changePasswordModel, 'oldPassword')->input('password') ?>
+
+                        <?= $form->field($changePasswordModel, 'newPassword')->input('password') ?>
+
+                        <?= $form->field($changePasswordModel, 'confirmNewPassword')->input('password') ?>
+
                         <div class="frame-label">
                             <span class="title">&nbsp;</span>
-                                            <span class="frame-form-field">
-                                                <span class="btn-form">
-                                                    <input type="submit"
-                                                           value="<?php echo \Yii::t('app', 'Изменить пароль'); ?>">
-                                                </span>
-                                            </span>
+                            <span class="frame-form-field">
+                                <span class="btn-form">
+                                    <input type="submit"
+                                           value="<?php echo \Yii::t('app', 'Изменить пароль'); ?>">
+                                </span>
+                            </span>
                         </div>
                         <?php ActiveForm::end(); ?>
                     </div>

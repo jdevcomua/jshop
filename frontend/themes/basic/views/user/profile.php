@@ -44,23 +44,24 @@ $this->title = 'Профиль пользователя';
                 <div class="frame-change-profile">
                     <?php $form = ActiveForm::begin(); ?>
                     <div class="horizontal-form">
-                        <?php echo $form->field($model, 'username')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'username')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'mail')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'name')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'surname')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'surname')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'phone')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'phone')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+                        <?php echo $form->field($model, 'address')->textInput(); ?>
 
                         <div class="frame-label">
                             <span class="title">&nbsp;</span>
                             <div class="frame-form-field">
                                 <div class="btn-form m-b_15">
-                                    <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . Yii::t('app', 'Сохранить') . '</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
+                                    <?php echo Html::submitButton('<span class="text-el" style="color:#fff">'
+                                        . Yii::t('app', 'Сохранить') . '</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
                                 </div>
                             </div>
                         </div>
@@ -109,8 +110,7 @@ $this->title = 'Профиль пользователя';
                     </thead>
                     <tbody>
                     <?php foreach ($model->orders as $order) {
-                        /* @var $order Orders */
-                        ?>
+                        /* @var $order Orders */ ?>
                         <tr>
                             <td>
                                 <a href="<?php echo Yii::$app->urlHelper->to(['cart/order', 'id' => $order->id]); ?>">
@@ -119,13 +119,13 @@ $this->title = 'Профиль пользователя';
                             <td><?php echo $order->timestamp; ?></td>
                             <td>
                                 <div class="frame-prices">
-                                                <span class="current-prices">
-                                                    <span class="price-new">
-                                                        <span>
-                                                            <span class="price"><?php echo $order->sum; ?></span>
-                                                        </span>
-                                                    </span>
-                                                </span>
+                                    <span class="current-prices">
+                                        <span class="price-new">
+                                            <span>
+                                                <span class="price"><?php echo $order->sum; ?></span>
+                                            </span>
+                                        </span>
+                                    </span>
                                 </div>
                             </td>
                             <td><?php echo $order->order_status; ?></td>
@@ -159,7 +159,7 @@ $this->title = 'Профиль пользователя';
                                 <div class="inside-padd">
                                     <div class="horizontal-form big-title">
                                         <?php $form = ActiveForm::begin(); ?>
-                                        <?php echo $form->field(new \common\models\WishList(), 'title')->textInput(['style' => 'width: 300px;'])->label("Название списка:", ['style' => 'width: 160px;float:left;']); ?>
+                                        <?= $form->field(new \common\models\WishList(), 'title')->textInput(); ?>
                                         <!--<label>
                                             <span class="title">Описание:</span>
                                             <span class="frame-form-field">
@@ -169,7 +169,8 @@ $this->title = 'Профиль пользователя';
                                         <div class="frame-label" style="margin-bottom: 0;">
                                             <div class="frame-form-field" style="margin-left: 160px; margin-top: 10px;">
                                                 <div class="btn-def">
-                                                    <?php echo Html::submitButton('<span class="text-el">' . Yii::t('app', 'Создать новый список') . '</span>>', ['class' => 'btn-search', 'style' => 'width: 180px;']) ?>
+                                                    <?php echo Html::submitButton('<span class="text-el">' . Yii::t('app', 'Создать новый список')
+                                                        . '</span>>', ['class' => 'btn-search', 'style' => 'width: 180px;']) ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -235,8 +236,7 @@ $this->title = 'Профиль пользователя';
                                             </div>
                                         </div>
                                         <div class="d_i-b">
-                                            <script type="text/javascript"
-                                                    src="http://yandex.st/share/share.js"
+                                            <script type="text/javascript" src="http://yandex.st/share/share.js"
                                                     charset="utf-8"></script>
                                             <div class="yashare-auto-init" data-yasharel10n="ru"
                                                  data-yasharelink="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['user/wishlist', 'id' => $list->id]); ?>"
@@ -244,27 +244,33 @@ $this->title = 'Профиль пользователя';
                                                  data-yashareDescription='Хочу купить в "active"'
                                                  data-yashareImage="http://s017.radikal.ru/i421/1601/46/57881a3ba8e9.jpg"
                                                  data-yasharequickservices="vkontakte,facebook,odnoklassniki,gplus,">
-                                                        <span class="b-share"><a rel="nofollow" target="_blank"
-                                                                                 title="ВКонтакте"
-                                                                                 class="b-share__handle b-share__link b-share-btn__vkontakte"
-                                                                                 href="https://share.yandex.net/go.xml?service=vkontakte&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
-                                                                                 data-service="vkontakte"><span
-                                                                    class="b-share-icon b-share-icon_vkontakte"></span></a><a
-                                                                rel="nofollow" target="_blank" title="Facebook"
-                                                                class="b-share__handle b-share__link b-share-btn__facebook"
-                                                                href="https://share.yandex.net/go.xml?service=facebook&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
-                                                                data-service="facebook"><span
-                                                                    class="b-share-icon b-share-icon_facebook"></span></a><a
-                                                                rel="nofollow" target="_blank" title="Одноклассники"
-                                                                class="b-share__handle b-share__link b-share-btn__odnoklassniki"
-                                                                href="https://share.yandex.net/go.xml?service=odnoklassniki&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
-                                                                data-service="odnoklassniki"><span
-                                                                    class="b-share-icon b-share-icon_odnoklassniki"></span></a><a
-                                                                rel="nofollow" target="_blank" title="Google Plus"
-                                                                class="b-share__handle b-share__link b-share-btn__gplus"
-                                                                href="https://share.yandex.net/go.xml?service=gplus&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
-                                                                data-service="gplus"><span
-                                                                    class="b-share-icon b-share-icon_gplus"></span></a></span>
+                                                <span class="b-share">
+                                                    <a rel="nofollow" target="_blank"
+                                                       title="ВКонтакте"
+                                                       class="b-share__handle b-share__link b-share-btn__vkontakte"
+                                                       href="https://share.yandex.net/go.xml?service=vkontakte&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
+                                                       data-service="vkontakte">
+                                                        <span class="b-share-icon b-share-icon_vkontakte"></span>
+                                                    </a>
+                                                    <a rel="nofollow" target="_blank" title="Facebook"
+                                                       class="b-share__handle b-share__link b-share-btn__facebook"
+                                                       href="https://share.yandex.net/go.xml?service=facebook&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
+                                                       data-service="facebook">
+                                                        <span class="b-share-icon b-share-icon_facebook"></span>
+                                                    </a>
+                                                    <a rel="nofollow" target="_blank" title="Одноклассники"
+                                                       class="b-share__handle b-share__link b-share-btn__odnoklassniki"
+                                                       href="https://share.yandex.net/go.xml?service=odnoklassniki&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
+                                                       data-service="odnoklassniki">
+                                                        <span class="b-share-icon b-share-icon_odnoklassniki"></span>
+                                                    </a>
+                                                    <a rel="nofollow" target="_blank" title="Google Plus"
+                                                       class="b-share__handle b-share__link b-share-btn__gplus"
+                                                       href="https://share.yandex.net/go.xml?service=gplus&amp;url=<?= Yii::$app->request->hostInfo ?>/&amp;title=Wishlist%20%2F%20sportstore"
+                                                       data-service="gplus">
+                                                        <span class="b-share-icon b-share-icon_gplus"></span>
+                                                    </a>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>

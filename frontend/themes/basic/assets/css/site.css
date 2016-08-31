@@ -40,6 +40,10 @@
     padding-top: 3px;
 }
 
+.frame-change-profile label {
+    width: 110px;
+}
+
 .left-cart select {
     width: 250px;
     border-color: #dfdfdf;

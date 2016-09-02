@@ -66,8 +66,16 @@ use kartik\select2\Select2;
         ]); ?>
 
         <div class="form-group"><br>
-            <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), 
-                ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Сохранить'), [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                'name' => 'action',
+                'value' => 'save'
+            ]); ?>
+            <?= Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
+                'class' => 'btn btn-primary',
+                'name' => 'action',
+                'value' => 'characteristics'
+            ]); ?>
         </div>
 
         <?php ActiveForm::end(); ?>

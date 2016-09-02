@@ -107,10 +107,11 @@ class ItemController extends Controller
                 $categoriesArray[$category->id] = $category->title;
             }
         }
-        if ($model->load(Yii::$app->request->post())) {
+        $request = Yii::$app->request;
+        if ($model->load($request->post())) {
             if ($model->save()) {
                 $model->upload();
-                if (ItemCat::findOne($this->findModel($model->id)->category_id)->getCharacteristics()->count() > 0) {
+                if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
                 } else {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $model->id]));

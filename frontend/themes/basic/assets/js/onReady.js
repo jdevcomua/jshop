@@ -3,8 +3,21 @@
  */
 $(document).ready(function(){
     $('.clear-filter').click(function () {
-        $('input[name="filter[' + $(this).data('id') + '][]"][value="' + $(this).data('value') + '"]').prop("checked", false);
+        if ($(this).data('type') == 'range') {
+            $('input[name="filter[' + $(this).data('id') + '][' + $(this).data('value') + ']"]').attr('name', '');
+        } else {
+            $('input[name="filter[' + $(this).data('id') + '][]"][value="' + $(this).data('value') + '"]').prop("checked", false);
+        }
         $('#filterForm').submit();
+    });
+    $('#filterForm').submit(function(){
+        $('.slider-input').each(function() {
+            if ($(this).hasClass('slider-input-left') && $(this).val() == $(this).attr('min')) {
+                $('input[name="filter[' + $(this).data('id') + '][' + $(this).data('value') + ']"]').attr('name', '');
+            } else if ($(this).hasClass('slider-input-right') && $(this).val() == $(this).attr('max')) {
+                $('input[name="filter[' + $(this).data('id') + '][' + $(this).data('value') + ']"]').attr('name', '');
+            }
+        });
     });
     $('.sort_a').click(function () {
         $('#sort_input').val($(this).data('value'));

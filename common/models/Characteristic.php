@@ -86,6 +86,12 @@ class Characteristic extends Model
             Characteristic::TYPE_RANGE => 'Диапазон'];
     }
 
+    public function getMinMaxValue()
+    {
+        return CharacteristicItem::find()->andFilterWhere(['characteristic_id' => $this->id])
+            ->select(['min(float_value) as min', 'max(float_value) as max'])->asArray(true)->one();
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

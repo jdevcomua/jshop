@@ -1,32 +1,39 @@
 <?php
 
+use common\models\Characteristic;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\typeahead\Typeahead;
 
-/* @var $characteristics \common\models\Characteristic[] */ ?>
+/* @var $characteristics \common\models\Characteristic[] */
+/* @var $this \yii\web\View */
+
+$this->title = 'Характеристики товара';
+?>
 <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">Характеристики товара</h3>
     </div>
     <div class="box-body">
         <?php $form = ActiveForm::begin(); ?>
-        <div style="width: 100%; padding-left: 15px; margin-top: 20px;">
+        <div>
             <?php foreach ($characteristics as $index => $characteristic) {
                 if (isset($characteristic->characteristic_id)) {
                     /* @var $characteristic common\models\CharacteristicItem */ ?>
                     <div style="width: 500px; float:left; padding-right: 50px;">
                         <?php //echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());?>
-                        <?php $charItems = $characteristic->characteristic->getCharacteristicItems()->all();
+                        <?php $char = $characteristic->characteristic;
+                        $charItems = $char->getCharacteristicItems()->all();
                         $typehead = [];
                         foreach ($charItems as $charItem) {
                             $typehead[] = $charItem->value;
                         }
+                        $type = $char->type == Characteristic::TYPE_RANGE ? 'number' : 'text';
                         if (empty($typehead)) {
-                            echo $form->field($characteristic, "[$index]value")->label($characteristic->getCharacteristicTitle());
+                            echo $form->field($characteristic, "[$index]value")->input($type)->label($characteristic->getCharacteristicTitle());
                         } else {
                             echo $form->field($characteristic, "[$index]value")->widget(Typeahead::classname(), [
-                                'options' => ['placeholder' => ''],
+                                'options' => ['placeholder' => '', 'type' => $type],
                                 'pluginOptions' => ['highlight' => true],
                                 'dataset' => [
                                     [
@@ -39,8 +46,9 @@ use kartik\typeahead\Typeahead;
                     </div>
                 <?php }
             } ?>
+            <div class="clear"></div>
         </div>
-        <div style="width: 100%; padding-left: 15px; float: right;" class="form-group">
+        <div class="form-group">
             <?php echo Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'button']); ?>
         </div>
 

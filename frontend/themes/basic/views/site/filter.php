@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Characteristic;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -17,7 +18,7 @@ use yii\widgets\ActiveForm;
 if (($category->id != '0') && ($category->getItems()->count() > 1)) {
     $form = ActiveForm::begin([
         'method' => 'get',
-        'action' =>  $category->getUrl(),
+        'action' => $category->getUrl(),
         'id' => 'filterForm'
     ]);
     echo Html::input('hidden', 'sort', $sort, ['id' => 'sort_input'])
@@ -29,17 +30,42 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                     <div class="title">Выбранные фильтры:</div>
                     <ul class="list-check-filter">
                         <?php foreach ($selected as $key => $char) {
-                            foreach ($char as $value) { ?>
-                                <li class="clear-filter" data-value="<?= $value; ?>" data-id="<?= $key; ?>">
-                                    <button type="button">
-                                        <span class="icon_times icon_remove_filter f_l"></span>
-                                        <span class="name-check-filter">
-                                            <?= $chars[$key]->title; ?>: <?= $value; ?>
-                                        </span>
-                                    </button>
-                                </li>
-                        <?php }
-                        } ?>
+                            if ($chars[$key]->type == Characteristic::TYPE_RANGE) {
+                                $leftSet = key_exists('left', $char);
+                                $rightSet = key_exists('right', $char);
+                                if ($leftSet) { ?>
+                                    <li class="clear-filter" data-type="range" data-value="left" data-id="<?= $key; ?>">
+                                        <button type="button">
+                                            <span class="icon_times icon_remove_filter f_l"></span>
+                                            <span class="name-check-filter">
+                                                <?= $chars[$key]->title; ?>: от <?= $char['left']; ?>
+                                            </span>
+                                        </button>
+                                    </li>
+                                <?php }
+                                if ($rightSet) { ?>
+                                        <li class="clear-filter" data-type="range" data-value="right" data-id="<?= $key; ?>">
+                                            <button type="button">
+                                                <span class="icon_times icon_remove_filter f_l"></span>
+                                                <span class="name-check-filter">
+                                                    <?= $chars[$key]->title; ?>: до <?= $char['right']; ?>
+                                                </span>
+                                            </button>
+                                        </li>
+                                    <?php }
+                            } else { ?>
+                                <?php foreach ($char as $value) { ?>
+                                    <li class="clear-filter" data-type="checkbox" data-value="<?= $value; ?>" data-id="<?= $key; ?>">
+                                        <button type="button">
+                                            <span class="icon_times icon_remove_filter f_l"></span>
+                                            <span class="name-check-filter">
+                                                <?= $chars[$key]->title; ?>: <?= $value; ?>
+                                            </span>
+                                        </button>
+                                    </li>
+                                <?php }
+                            }
+                        }?>
                     </ul>
                     <div class="foot-check-filter">
                         <button type="button" onclick="location.href = location.origin + location.pathname"
@@ -59,33 +85,23 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                     <div class="inside-padd">
                         <div class="title"><?php echo \Yii::t('app', 'Фильтр по цене'); ?></div>
                         <br>
-                        <div id="slider"></div>
+                        <div class="slider" id="slider"></div>
                         <br>
-                        <?php
-                        echo '<script>';
-                        echo 'var maxCost = ' . $maxCost . ';';
-                        echo 'var minCost = ' . $minCost . ';';
-                        echo 'var leftCost = ' . $leftCost . ';';
-                        echo 'var rightCost = ' . $rightCost . ';';
-                        echo '</script>';
-                        ?>
                         <script>
                             var slider = document.getElementById('slider');
                             noUiSlider.create(slider, {
-                                start: [leftCost, rightCost],
+                                start: [<?= $leftCost ?>, <?= $rightCost ?>],
                                 connect: true,
                                 range: {
-                                    'min': minCost,
-                                    'max': maxCost
+                                    'min': <?= $minCost ?>,
+                                    'max': <?= $maxCost ?>
                                 }
                             });
                         </script>
-                        <input name="left" type="number" min="minCost" max="maxCost" step="1"
-                               id="input-number-left"
-                               style="width:75px; border: 1px solid #dfdfdf;padding: 0 5px;height: 31px;margin-left: 25px;">
-                        <input name="right" type="number" min="minCost" max="maxCost" step="1"
-                               id="input-number-right"
-                               style="width:75px; border: 1px solid #dfdfdf;padding: 0 5px;height: 31px;margin-bottom: 15px;">
+                        <input name="left" type="number" min="<?= $minCost ?>" max="<?= $maxCost ?>"
+                               id="input-number-left" class="slider-input slider-input-left">
+                        <input name="right" type="number" min="<?= $minCost ?>" max="<?= $maxCost ?>" 
+                               id="input-number-right" class="slider-input slider-input-right">
                         <script>
                             var inputNumberLeft = document.getElementById('input-number-left');
                             var inputNumberRight = document.getElementById('input-number-right');
@@ -113,12 +129,13 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                 </div>
 
                 <?php $i = 0;
-                /* @var $char \common\models\Characteristic */
+                /* @var $char Characteristic */
                 foreach ($chars as $char) {
-                    if (!empty($char->characteristicItems)) { ?>
-                        <div class="frame-group-checks">
-                            <div class="inside-padd">
-                                <div style="cursor: pointer;" class="title" onclick="openFilterContent($(this))">
+                    if ($char->type == Characteristic::TYPE_CHECKBOXES) {
+                        if (!empty($char->characteristicItems)) { ?>
+                            <div class="frame-group-checks">
+                                <div class="inside-padd">
+                                    <div style="cursor: pointer;" class="title" onclick="openFilterContent($(this))">
                                     <span class="f-s_0">
                                         <span class="icon-arrow"></span>
                                         <span class="d_b">
@@ -128,39 +145,107 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                                             </span>
                                         </span>
                                     </span>
-                                </div>
-                                <div
-                                    class="filters-content <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
-                                    <ul>
-                                        <?php foreach ($char->characteristicItems as $characteristicItem) {
-                                            if (!empty($characteristicItem->value)) { ?>
-                                                <li>
-                                                    <div class="frame-label" id="brand_281">
-                                                        <?php
-                                                        if (array_key_exists($char->id, $selected) && in_array($characteristicItem->value, $selected[$char->id])) {
-                                                            $checked = true;
-                                                        } else {
-                                                            $checked = false;
-                                                        }
-                                                        echo Html::checkbox('filter[' . $char->id . '][]', $checked, [
-                                                            'value' => $characteristicItem->value,
-                                                            'disabled' => ($characteristicItem->count == 0),
-                                                            'label' => $characteristicItem->value .
-                                                                Html::tag('span', ' (' . $characteristicItem->count . ')'
-                                                                    , ['class' => 'count'])
-                                                        ]);
-                                                        ?>
-                                                    </div>
-                                                </li>
-                                                <?php $i = $i + 1;
-                                            }
-                                        } ?>
-                                    </ul>
+                                    </div>
+                                    <div
+                                        class="filters-content <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
+                                        <ul>
+                                            <?php foreach ($char->characteristicItems as $characteristicItem) {
+                                                if (!empty($characteristicItem->value)) { ?>
+                                                    <li>
+                                                        <div class="frame-label" id="brand_281">
+                                                            <?php
+                                                            if (array_key_exists($char->id, $selected) && in_array($characteristicItem->value, $selected[$char->id])) {
+                                                                $checked = true;
+                                                            } else {
+                                                                $checked = false;
+                                                            }
+                                                            echo Html::checkbox('filter[' . $char->id . '][]', $checked, [
+                                                                'value' => $characteristicItem->value,
+                                                                'disabled' => ($characteristicItem->count == 0 && !$checked),
+                                                                'label' => $characteristicItem->value .
+                                                                    Html::tag('span', ' (' . $characteristicItem->count . ')'
+                                                                        , ['class' => 'count'])
+                                                            ]);
+                                                            ?>
+                                                        </div>
+                                                    </li>
+                                                    <?php $i = $i + 1;
+                                                }
+                                            } ?>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <?php
+                        }
+                    } else if ($char->type == Characteristic::TYPE_RANGE) {
+                        $minMaxValue = $char->getMinMaxValue();
+                        $min = $minMaxValue['min'];
+                        $max = $minMaxValue['max'];
+                        $left = isset($selected[$char->id]['left']) ? $selected[$char->id]['left'] : $min;
+                        $right = isset($selected[$char->id]['right']) ? $selected[$char->id]['right'] : $max;
+                        if (isset($min) && isset($max)) { ?>
+                            <div class="frame-slider">
+                                <div class="inside-padd">
+                                    <div style="cursor: pointer;" class="title" onclick="openFilterContent($(this))">
+                                    <span class="f-s_0">
+                                        <span class="d_b">
+                                            <span class="text-el"><?php echo $char->title; ?>
+                                                <img width="10px"
+                                                     src="http://rentlytics.com/wp-content/themes/rentlytics/img/arrow-down.png">
+                                            </span>
+                                        </span>
+                                    </span>
+                                    </div>
+                                    <div
+                                        class="filters-content <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
+                                        <div class="slider" id="slider<?= $char->id ?>"></div>
+                                        <br>
+                                        <script>
+                                            var slider<?= $char->id ?> = document.getElementById('slider<?= $char->id ?>');
+                                            noUiSlider.create(slider<?= $char->id ?>, {
+                                                start: [<?= $left ?>, <?= $right ?>],
+                                                connect: true,
+                                                range: {
+                                                    'min': <?= $min ?>,
+                                                    'max': <?= $max ?>
+                                                }
+                                            });
+                                        </script>
+                                        <input name="filter[<?= $char->id ?>][left]" type="number" min="<?= $min ?>"
+                                               data-value="left" data-id="<?= $char->id; ?>" max="<?= $max ?>"
+                                               id="input-number-left<?= $char->id ?>" class="slider-input slider-input-left">
+                                        <input name="filter[<?= $char->id ?>][right]" type="number" min="<?= $min ?>"
+                                               data-value="right" data-id="<?= $char->id; ?>" max="<?= $max ?>"
+                                               id="input-number-right<?= $char->id ?>" class="slider-input slider-input-right">
+                                        <script>
+                                            var inputNumberLeft<?= $char->id ?> = document.getElementById('input-number-left<?= $char->id ?>');
+                                            var inputNumberRight<?= $char->id ?> = document.getElementById('input-number-right<?= $char->id ?>');
 
-                    <?php }
+                                            slider<?= $char->id ?>.noUiSlider.on('update', function (values, handle) {
+
+                                                var value = values[handle];
+
+                                                if (handle) {
+                                                    inputNumberRight<?= $char->id ?>.value = Math.round(value);
+                                                } else {
+                                                    inputNumberLeft<?= $char->id ?>.value = Math.round(value);
+                                                }
+                                            });
+
+                                            inputNumberLeft<?= $char->id ?>.addEventListener('change', function () {
+                                                slider<?= $char->id ?>.noUiSlider.set([this.value, null]);
+                                            });
+
+                                            inputNumberRight<?= $char->id ?>.addEventListener('change', function () {
+                                                slider<?= $char->id ?>.noUiSlider.set([null, this.value]);
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }
+                    }
                 } ?>
 
                 <div class="filter-foot">

@@ -193,11 +193,22 @@ class SiteController extends Controller
             foreach ($filters as $key => $items) {
                 $count = count($items);
                 if (is_array($items) && $count > 0) {
+                    $rightSet = key_exists('right', $items);
+                    $leftSet = key_exists('left', $items);
                     $query1 = CharacteristicItem::find()->select('item_id');
-                    $query1->andFilterWhere(['like', 'value', array_shift($items)]);
-                    if ($count > 1) {
-                        for ($i = 1; $i < $count; $i++) {
-                            $query1->orFilterWhere(['like', 'value', array_shift($items)]);
+                    if ($rightSet || $leftSet) {
+                        if ($leftSet) {
+                            $query1->andFilterWhere(['>=', 'float_value', $items['left']]);
+                        }
+                        if ($rightSet) {
+                            $query1->andFilterWhere(['<=', 'float_value', $items['right']]);
+                        }
+                    } else {
+                        $query1->andFilterWhere(['like', 'value', array_shift($items)]);
+                        if ($count > 1) {
+                            for ($i = 1; $i < $count; $i++) {
+                                $query1->orFilterWhere(['like', 'value', array_shift($items)]);
+                            }
                         }
                     }
                     $query1->andFilterWhere(['characteristic_id' => $key])

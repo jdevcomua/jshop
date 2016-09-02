@@ -1,5 +1,20 @@
 @charset "utf-8";
 
+.slider-input {
+    width:75px;
+    border: 1px solid #dfdfdf;
+    padding: 0 5px;
+    height: 31px;
+}
+
+.slider-input-left {
+    margin-left: 25px;
+}
+
+.slider-input-right {
+    margin-bottom: 15px;
+}
+
 .tab-pane.active {
     display: block;
 }
@@ -1005,6 +1020,7 @@ input + .msg{margin-top: 5px;}
 .tabs-data > li > a{text-decoration: none;}
 .frame-tabs-ref{position: relative;}
 .frame-tabs-ref > div{display: none;min-height: 75px;}
+.frame-tabs-ref #view {display: block;}
 
 .frame-tabs-ref > div > .inside-padd{margin: 15px 0 35px;}
 .frame-tabs-profile > div > .inside-padd{padding: 0;}
@@ -1024,7 +1040,8 @@ input + .msg{margin-top: 5px;}
 .check-filter > li > div{margin-left: 16px;}
 
 .frames-checks-sliders .title{padding: 6px 12px 9px;}
-.frame-slider .title{margin-right: -15px;margin-left: -11px;}
+.frame-slider .title{margin-right: -15px;margin-left: -15px;}
+.frame-slider .filters-content {padding-top: 10px;}
 
 .slider-cont{margin: 31px 0 19px 10px;position: relative;}
 .slider {position: relative;height: 5px;}
@@ -1034,7 +1051,7 @@ input + .msg{margin-top: 5px;}
 .form-cost label{width: 95px;}
 
 .ui-widget-header{position: absolute;z-index: 1;height: 6px;top: -1px;}
-.frame-slider .inside-padd{padding: 0 15px 0 11px;}
+.frame-slider .inside-padd{padding: 0 15px;}
 /*if filter style*/
 .frame-group-checks[data-rel]{display: none;}
 .frame-group-checks[data-rel*="scroll"] .filters-content{max-height: 159px;overflow: auto;}

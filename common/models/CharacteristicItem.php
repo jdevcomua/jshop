@@ -11,6 +11,7 @@ use Yii;
  * @property integer $item_id
  * @property integer $characteristic_id
  * @property string $value
+ * @property float $float_value
  *
  * @property Item $item
  * @property Characteristic $characteristic
@@ -51,8 +52,27 @@ class CharacteristicItem extends Model
     {
         return [
             [['item_id', 'characteristic_id'], 'integer'],
-            [['value'], 'string']
+            [['float_value'], 'double'],
+            [['value'], 'string'],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (isset($this->characteristic_id)) {
+                $characteristic = Characteristic::findOne($this->characteristic_id);
+                if ($characteristic && $characteristic->type == Characteristic::TYPE_RANGE && !empty($this->value)) {
+                    $this->float_value = floatval($this->value);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -66,6 +86,7 @@ class CharacteristicItem extends Model
             'characteristic_id' => Yii::t('app', 'ID характеристики'),
             'value' => Yii::t('app', 'Значение'),
             'characteristicTitle' => Yii::t('app', 'Характеристика'),
+            'float_value' => Yii::t('app', 'Числовое значение'),
         ];
     }
 

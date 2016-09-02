@@ -104,6 +104,7 @@ $this->title = $item->title;
                             thumbWidth: 50,
                             thumbWidthOnFullScreen: 100,
                             hideThumbnailsOnInit: false,
+                            browserHistory: false,
                             thumbnailsPosition: 'left'
                         });
                     });

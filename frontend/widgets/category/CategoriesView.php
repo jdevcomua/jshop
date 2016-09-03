@@ -2,6 +2,7 @@
 
 namespace frontend\widgets\category;
 
+use Yii;
 use yii\base\Widget;
 use common\models\ItemCat;
 
@@ -17,6 +18,20 @@ class CategoriesView extends Widget
 
     public function run()
     {
-        return $this->render('menu', ['allCategories' => $this->categories]);
+        if (Yii::$app->controller->route == 'site/category') {
+            $inCategory = array_shift(explode('-', Yii::$app->request->get('id', '')));
+            if ($inCategory != '') {
+                $category = ItemCat::findOne($inCategory);
+                if ($category->depth > 0) {
+                    $parent = ItemCat::findOne(['tree' => $category->tree, 'depth' => 0]);
+                    if ($parent) {
+                        $inCategory = $parent->id;
+                    }
+                }
+            }
+        } else {
+            $inCategory = null;
+        }
+        return $this->render('menu', ['allCategories' => $this->categories, 'inCategory' => $inCategory]);
     }
 }

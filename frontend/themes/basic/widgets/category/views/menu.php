@@ -15,7 +15,7 @@
                         /* @var $category \common\models\ItemCat*/
                         ?>
                         <td>
-                            <div class="frame-item-menu">
+                            <div class="frame-item-menu <?= $category->id == $inCategory ? 'active' : ''; ?>">
                                 <div class="frame-title is-sub" onmouseover="$(this).parent().find('.frame-drop-menu').attr('style', 'left:initial;display:block;');"
                                      onmouseout="$(this).parent().find('.frame-drop-menu').attr('style', 'display:none;');">
                                     <a href="<?= $category->getUrl() ?>" class="title active">

@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use common\models\query\ItemCatQuery;
+use creocoder\nestedsets\NestedSetsBehavior;
 use Yii;
 use dosamigos\transliterator\TransliteratorHelper;
 
@@ -12,6 +14,10 @@ use dosamigos\transliterator\TransliteratorHelper;
  * @property string $title
  * @property integer $parent_id
  * @property string $image
+ * @property integer $lft
+ * @property integer $rgt
+ * @property integer $depth
+ * @property integer $tree
  *
  * @property Characteristic[] $characteristics
  * @property Item[] $items
@@ -56,6 +62,25 @@ class ItemCat extends ModelWithImage
         ];
     }
 
+    public function behaviors() {
+        return [
+            'tree' => [
+                'class' => NestedSetsBehavior::className(),
+                 'treeAttribute' => 'tree',
+                // 'leftAttribute' => 'lft',
+                // 'rightAttribute' => 'rgt',
+                // 'depthAttribute' => 'depth',
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -96,15 +121,15 @@ class ItemCat extends ModelWithImage
 
     /**
      * @inheritdoc
-     * @return \yii\db\ActiveQuery the active query used by this AR class.
+     * @return ItemCatQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \yii\db\ActiveQuery(get_called_class());
+        return new ItemCatQuery(get_called_class());
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ItemCat
      */
     public function getParent()
     {

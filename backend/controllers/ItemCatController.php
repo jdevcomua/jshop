@@ -7,6 +7,7 @@ use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
@@ -108,13 +109,17 @@ class ItemCatController extends Controller
     {
         $model = new ItemCat();
         if ($model->load(Yii::$app->request->post())) {
+            $continue = false;
             if ($model->parent_id != 0) {
-                $model->level = $model->parent->level + 1;
+                $parent = ItemCat::findOne($model->parent_id);
+                if ($parent) {
+                    $continue = $model->appendTo($parent);
+                }
             } else {
-                $model->level = 1;
                 unset($model->parent_id);
+                $continue = $model->makeRoot();
             }
-            if ($model->save()) {
+            if ($continue) {
                 $model->upload();
                 if (Yii::$app->request->post()['action'] == 'save') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
@@ -122,22 +127,11 @@ class ItemCatController extends Controller
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
                 }
             }
-        } else {
-            $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
-            $categoriesArray = [];
-            foreach ($categories as $category) {
-                /* @var $category ItemCat*/
-                $categoriesArray[$category->id] = $category->title;
-                if (!empty($category->getChildren()->all())) {
-                    foreach ($category->getChildren()->all() as $child) {
-                        $categoriesArray[$child->id] = ' - ' . $child->title;
-                    }
-                }
-            }
-            return $this->render('create', [
-                'model' => $model, 'categories' => $categoriesArray
-            ]);
         }
+        $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
+        return $this->render('create', [
+            'model' => $model, 'categories' => $categoriesArray
+        ]);
     }
 
     /**
@@ -150,25 +144,26 @@ class ItemCatController extends Controller
     {
         $model = $this->findModel($id);
         $request = Yii::$app->request;
-        if ($model->load($request->post()) && $model->save()) {
-            $model->upload();
-            if ($request->post('action') == 'save') {
-                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
-            } else if ($request->post('action') == 'chars') {
-                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
+        if ($model->load($request->post())) {
+            $continue = false;
+            if ($model->oldAttributes['parent_id']  != $model->parent_id) {
+                $parent = ItemCat::findOne($model->parent_id);
+                if ($parent) {
+                    $continue = $model->appendTo($parent);
+                }
+            } else {
+                $continue = $model->save();
             }
-        }
-        $categories = ItemCat::find()->andFilterWhere(['level' => 1])->distinct(true)->all();
-        $categoriesArray = [];
-        foreach ($categories as $category) {
-            /* @var $category ItemCat*/
-            $categoriesArray[$category->id] = $category->title;
-            if (!empty($category->getChildren()->all())) {
-                foreach ($category->getChildren()->all() as $child) {
-                    $categoriesArray[$child->id] = ' - ' . $child->title;
+            if ($continue) {
+                $model->upload();
+                if ($request->post('action') == 'save') {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
+                } else if ($request->post('action') == 'chars') {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
                 }
             }
         }
+        $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
         return $this->render('update', [
             'model' => $model, 'count' => 'one', 'categories' => $categoriesArray
         ]);

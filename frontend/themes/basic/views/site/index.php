@@ -122,46 +122,48 @@ $this->title = 'Интернет-магазин';
             </div>
         </div>
     <?php } ?>
-    <div id="popular_products">
-        <div class="vertical-carousel">
-            <section class="special-proposition">
-                <div class="title-proposition-v">
-                    <div class="frame-title">
-                        <div class="title">хит продаж</div>
-                    </div>
-                </div>
-                <div class="big-container">
-                    <div class="items-carousel" style="position: relative; display: block;">
-                        <?php $saleItemsSlider = [];
-                        foreach ($saleItems as $saleItem) {
-                            $saleItemsSlider[] = $this->render('item', ['value' => $saleItem]);
-                        }
-                        echo FlexSlider::widget([
-                            'items' => $saleItemsSlider,
-                            'options' => [
-                                'class' => 'content-carousel container',
-                            ],
-                            'slidesOptions' => [
-                                'class' => 'slides items items-catalog items-v-carousel',
-                            ],
-                            'pluginOptions' => [
-                                'animation' => 'slide',
-                                'direction' => 'vertical',
-                                'controlNav' => false,
-                                'customDirectionNav' => new \yii\web\JsExpression('$(".group-button-carousel-hit button")'),
-                            ],
-                        ]); ?>
-                        <div class="group-button-carousel group-button-carousel-hit">
-                            <button type="button" style="display: inline-block;" class="flex-prev prev arrow">
-                                <span class="icon_arrow_p"></span>
-                            </button>
-                            <button type="button" style="display: inline-block;" class="flex-next next arrow">
-                                <span class="icon_arrow_n"></span>
-                            </button>
+    <?php if (count($saleItems) > 0) { ?>
+        <div id="popular_products">
+            <div class="vertical-carousel">
+                <section class="special-proposition">
+                    <div class="title-proposition-v">
+                        <div class="frame-title">
+                            <div class="title">хит продаж</div>
                         </div>
                     </div>
-                </div>
-            </section>
+                    <div class="big-container">
+                        <div class="items-carousel" style="position: relative; display: block;">
+                            <?php $saleItemsSlider = [];
+                            foreach ($saleItems as $saleItem) {
+                                $saleItemsSlider[] = $this->render('item', ['value' => $saleItem]);
+                            }
+                            echo FlexSlider::widget([
+                                'items' => $saleItemsSlider,
+                                'options' => [
+                                    'class' => 'content-carousel container',
+                                ],
+                                'slidesOptions' => [
+                                    'class' => 'slides items items-catalog items-v-carousel',
+                                ],
+                                'pluginOptions' => [
+                                    'animation' => 'slide',
+                                    'direction' => 'vertical',
+                                    'controlNav' => false,
+                                    'customDirectionNav' => new \yii\web\JsExpression('$(".group-button-carousel-hit button")'),
+                                ],
+                            ]); ?>
+                            <div class="group-button-carousel group-button-carousel-hit">
+                                <button type="button" style="display: inline-block;" class="flex-prev prev arrow">
+                                    <span class="icon_arrow_p"></span>
+                                </button>
+                                <button type="button" style="display: inline-block;" class="flex-next next arrow">
+                                    <span class="icon_arrow_n"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </div>

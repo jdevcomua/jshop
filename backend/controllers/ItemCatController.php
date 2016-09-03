@@ -231,6 +231,10 @@ class ItemCatController extends Controller
             return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
         }
 
+        if (count($models) == 0) {
+            $models[] = new Characteristic();
+        }
+
         return $this->render('characteristics', [
             'models' => $models, 'category' => ItemCat::findOne($id)
         ]);

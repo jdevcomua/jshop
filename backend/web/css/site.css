@@ -3,6 +3,11 @@ body {
     height: 100%;
 }
 
+.info-box-content .btn-block {
+    width: 100px;
+    float: right;
+}
+
 .detail-view img {
     max-width: 50%;
 }

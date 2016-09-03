@@ -20,7 +20,7 @@ use Eventviva\ImageResize;
  * @property double $cost
  * @property integer $count_of_views
  * @property string $addition_date
- * @property string description
+ * @property string $description
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -38,6 +38,8 @@ class Item extends Model implements CartAdd
      * @var UploadedFile[]
      */
     public $imageFiles;
+
+    public $count;
 
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';

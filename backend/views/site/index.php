@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Item;
 use dosamigos\chartjs\ChartJs;
 
 /* @var $this yii\web\View */
@@ -9,6 +10,8 @@ use dosamigos\chartjs\ChartJs;
 /* @var $salesCount int */
 /* @var $newVotesCount int */
 /* @var $salesValuesMoney array */
+/* @var $latestItems Item[] */
+/* @var $usersCount integer */
 
 $this->title = 'Home Page';
 ?>
@@ -21,7 +24,6 @@ $this->title = 'Home Page';
                     <span class="info-box-text">New Orders</span>
                     <span class="info-box-number"><?= $newOrdersCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[order_status]' => 'Новый']) ?>"
-                       style="width: 100px; float: right;"
                        type="button" class="btn btn-block btn-success btn-flat">Show</a>
                 </div>
             </div>
@@ -33,7 +35,6 @@ $this->title = 'Home Page';
                     <span class="info-box-text">Sales</span>
                     <span class="info-box-number"><?= $salesCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[payment_status]' => 'Оплачен']) ?>"
-                       style="width: 100px; float: right;"
                        type="button" class="btn btn-block btn-info btn-flat">Show</a>
                 </div>
             </div>
@@ -44,8 +45,7 @@ $this->title = 'Home Page';
                 <div class="info-box-content">
                     <span class="info-box-text">New Votes</span>
                     <span class="info-box-number"><?= $newVotesCount; ?></span>
-                    <a href="<?= Yii::$app->urlHelper->to(['vote/index', 'VoteSearch[checked]' => 'Не проверен']) ?>"
-                       style="width: 100px; float: right;"
+                    <a href="<?= Yii::$app->urlHelper->to(['vote/index', 'VoteSearch[checked]' => '0']) ?>"
                        type="button" class="btn btn-block btn-warning btn-flat">Show</a>
                 </div>
             </div>
@@ -55,7 +55,9 @@ $this->title = 'Home Page';
                 <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">New Members</span>
-                    <span class="info-box-number">2,000</span>
+                    <span class="info-box-number"><?= $usersCount; ?></span>
+                    <a href="<?= Yii::$app->urlHelper->to(['user/index', 'sort' => '-created']) ?>"
+                       type="button" class="btn btn-block btn-danger btn-flat">Show</a>
                 </div>
             </div>
         </div>
@@ -185,4 +187,53 @@ $this->title = 'Home Page';
             </div>
         </div>
     <?php } ?>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Последние добавленные товары: </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Цена</th>
+                                    <th>Дата добавления</th>
+                                    <th>Просмотров</th>
+                                    <th>Продаж</th>
+                                </tr>
+                                <?php foreach ($latestItems as $item) { ?>
+                                    <tr style="vertical-align: middle;">
+                                        <td>
+                                            <a href="<?= Yii::$app->urlHelper->to(['item/view', 'id' => $item->id]); ?>">
+                                                <img style="width: 50px;" src="<?= array_shift($item->getImageUrl()); ?>">
+                                                <?= $item->title; ?>
+                                            </a>
+                                        </td>
+                                        <td><?= $item->cost; ?></td>
+                                        <td><?= $item->addition_date; ?></td>
+                                        <td><?= $item->count_of_views; ?></td>
+                                        <td><?= $item->count; ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer text-center">
+                    <a href="<?= Yii::$app->urlHelper->to(['item/index']); ?>" class="uppercase">Все товары</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

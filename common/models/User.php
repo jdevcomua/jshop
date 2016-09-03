@@ -22,6 +22,7 @@ use Yii;
  * @property string $password_reset_token
  * @property string $auth_key
  * @property string $password write-only password
+ * @property string $created
  *
  * @property Orders[] $orders
  * @property Vote[] $votes

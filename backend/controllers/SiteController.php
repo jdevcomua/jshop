@@ -2,7 +2,9 @@
 
 namespace backend\controllers;
 
+use common\models\Item;
 use common\models\Orders;
+use common\models\User;
 use common\models\Vote;
 use Yii;
 use common\models\LoginForm;
@@ -61,13 +63,21 @@ class SiteController extends Controller
             ->all();
         $salesArray = ArrayHelper::map($sales, 'day', 'sum');
         $salesValuesMoney = array_values($salesArray);
+
+        $usersCount = User::find()->andWhere('MONTH(created) = MONTH(NOW())')->count();
+        $latest = Item::find()->select(['item.*', 'count(order_item.id) as count'])
+            ->leftJoin('order_item', 'order_item.item_id = item.id')
+            ->groupBy('order_item.item_id')
+            ->orderBy('addition_date desc')->limit(5)->all();
         return $this->render('index', [
             'salesDays' => $salesDays,
             'salesValues' => $salesValues,
             'newOrdersCount' => $newOrdersCount,
             'salesCount' => $salesCount,
             'newVotesCount' => $newVotesCount,
-            'salesValuesMoney' => $salesValuesMoney
+            'salesValuesMoney' => $salesValuesMoney,
+            'latestItems' => $latest,
+            'usersCount' => $usersCount,
         ]);
     }
 

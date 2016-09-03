@@ -19,14 +19,17 @@ class ItemCatController extends Controller
 {
 
     /**
-     * Updates group of existing ItemCat model.
-     * If update is successful, the browser will be redirected to the 'index' page.
+     * Updating or deleting group of existing ItemCat model.
+     * If updating or deleting is successful, the browser will be redirected to the 'index' page.
      */
     public function actionGroup(){
         if (isset(Yii::$app->request->post()['id'])) {
             if (Yii::$app->request->post()['action'] == 'del') {
                 foreach (Yii::$app->request->post()['id'] as $id) {
-                    $this->findModel($id)->delete();
+                    $model = ItemCat::findOne($id);
+                    if ($model) {
+                        $model->deleteWithChildren();
+                    }
                 }
             } elseif (Yii::$app->request->post()['action'] == 'edit') {
                 if(count(Yii::$app->request->post()['id']) == 1){
@@ -72,19 +75,7 @@ class ItemCatController extends Controller
         }
         return $this->render('index', $context);
     }
-
-    /**
-     * Delete group of ItemCat model
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @return \yii\web\Response
-     */
-    public function actionDel(){
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $this->findModel($id)->deleteWithChildren();
-        }
-        return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
-    }
-
+    
     /**
      * Displays a single ItemCat model.
      * @param integer $id

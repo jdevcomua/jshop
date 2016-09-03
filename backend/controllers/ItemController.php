@@ -88,15 +88,15 @@ class ItemController extends Controller
     public function actionCreate()
     {
         $model = new Item();
-        $categories = ItemCat::find()->andFilterWhere(['level' => 1])->all();
-        $categoriesArray = [];
-        foreach ($categories as $category) {
+        $categories = ItemCat::find()->select(['id', 'title'])->all();
+        $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
+        /*foreach ($categories as $category) {
             /* @var $category ItemCat*/
-            if (!empty($category->getChildren()->all())) {
+            /*if (!empty($category->getChildren()->all())) {
                 $categoriesArray2 = [];
                 foreach ($category->getChildren()->all() as $child) {
                     /* @var $child ItemCat*/
-                    if (!empty($child->getChildren()->all())) {
+                    /*if (!empty($child->getChildren()->all())) {
                         $categoriesArray2['> ' . $child->title] = ArrayHelper::map($child->getChildren()->all(), 'id', 'title');
                     } else {
                         $categoriesArray2[$child->id] = $child->title;
@@ -106,7 +106,7 @@ class ItemController extends Controller
             } else {
                 $categoriesArray[$category->id] = $category->title;
             }
-        }
+        }*/
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
             if ($model->save()) {
@@ -196,12 +196,13 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $categories = ItemCat::find()->distinct(true)->all();
-        if ($model->load(Yii::$app->request->post())) {
+        $categories = ItemCat::find()->select(['id', 'title'])->all();
+        $request = Yii::$app->request;
+        if ($model->load($request->post())) {
             if ($model->save()) {
                 $model->upload();
-                if (ItemCat::findOne($this->findModel($model->id)->category_id)->getCharacteristics()->count() > 0) {
-                    return $this->redirect(Yii::$app->urlHelper->to(['item/update-characteristics', 'id' => $model->id]));
+                if ($request->post('action') == 'characteristics') {
+                    return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
                 } else {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $model->id]));
                 }

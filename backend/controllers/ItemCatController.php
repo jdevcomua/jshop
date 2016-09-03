@@ -80,7 +80,7 @@ class ItemCatController extends Controller
      */
     public function actionDel(){
         foreach (Yii::$app->request->post()['id'] as $id) {
-            $this->findModel($id)->delete();
+            $this->findModel($id)->deleteWithChildren();
         }
         return $this->redirect(Yii::$app->urlHelper->to(['item-cat/index']));
     }
@@ -181,7 +181,7 @@ class ItemCatController extends Controller
         if ($category->getItems()->count() > 0) {
             $deleted = false;
         } else {
-            $this->findModel($id)->delete();
+            $this->findModel($id)->deleteWithChildren();
             $deleted = true;
         }
 

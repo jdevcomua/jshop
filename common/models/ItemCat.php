@@ -6,6 +6,7 @@ use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
 use Yii;
 use dosamigos\transliterator\TransliteratorHelper;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "item_cat".
@@ -22,6 +23,10 @@ use dosamigos\transliterator\TransliteratorHelper;
  * @property Characteristic[] $characteristics
  * @property Item[] $items
  * @property ItemCat[] children
+ * 
+ * @method integer|false deleteWithChildren()
+ * @method boolean makeRoot(boolean $runValidation = true, array $attributes = null)
+ * @method boolean appendTo(ActiveRecord $node, boolean $runValidation = true, array $attributes = null)
  */
 class ItemCat extends ModelWithImage
 {
@@ -62,6 +67,9 @@ class ItemCat extends ModelWithImage
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors() {
         return [
             'tree' => [
@@ -74,6 +82,9 @@ class ItemCat extends ModelWithImage
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function transactions()
     {
         return [
@@ -136,6 +147,11 @@ class ItemCat extends ModelWithImage
         return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
     }
 
+    /**
+     * Return url to this category
+     *
+     * @return string
+     */
     public function getUrl()
     {
         return Yii::$app->urlHelper->to(['category/' . $this->id . '-' . $this->getTranslit()]);

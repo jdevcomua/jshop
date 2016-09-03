@@ -1,5 +1,73 @@
 @charset "utf-8";
 
+/* Base for label styling */
+.filters-content [type="checkbox"]:not(:checked),
+.filters-content [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+.filters-content [type="checkbox"]:not(:checked) + label,
+.filters-content [type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+.filters-content [type="checkbox"]:not(:checked) + label:before,
+.filters-content [type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left:0;
+    top: 1px;
+    width: 14px;
+    height: 14px;
+    background: url("/images/sprite.png") no-repeat;
+    background-position: -560px 0;
+}
+/* checked mark aspect */
+.filters-content [type="checkbox"]:not(:checked) + label:after,
+.filters-content [type="checkbox"]:checked + label:after {
+    content: '';
+    position: absolute;
+    left:0;
+    top: 1px;
+    width: 14px;
+    height: 14px;
+    background: url("/images/sprite.png") no-repeat;
+    background-position: -580px 0;
+}
+/* checked mark aspect changes */
+.filters-content [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.filters-content [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* hover style just for information */
+.filters-content label:hover:before {
+    background-position: -560px -20px!important;
+}
+
+.filters-content label:hover:after {
+    background-position: -580px -20px!important;
+}
+
+/* disabled checkbox */
+.filters-content [type="checkbox"]:disabled:not(:checked) + label:before,
+.filters-content [type="checkbox"]:disabled:checked + label:before {
+    background: url("/images/sprite.png") no-repeat;
+    background-position: -600px 0;
+}
+
+.filters-content [type="checkbox"]:disabled:not(:checked) + label:hover:before {
+    background-position: -600px 0!important;
+}
+
 .slider-input {
     width:75px;
     border: 1px solid #dfdfdf;

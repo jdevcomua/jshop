@@ -149,10 +149,11 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                                     <div
                                         class="filters-content <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
                                         <ul>
-                                            <?php foreach ($char->characteristicItems as $characteristicItem) {
+                                            <?php $count = 0;
+                                            foreach ($char->characteristicItems as $characteristicItem) {
                                                 if (!empty($characteristicItem->value)) { ?>
                                                     <li>
-                                                        <div class="frame-label" id="brand_281">
+                                                        <div class="frame-label">
                                                             <?php
                                                             if (array_key_exists($char->id, $selected) && in_array($characteristicItem->value, $selected[$char->id])) {
                                                                 $checked = true;
@@ -162,10 +163,12 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                                                             echo Html::checkbox('filter[' . $char->id . '][]', $checked, [
                                                                 'value' => $characteristicItem->value,
                                                                 'disabled' => ($characteristicItem->count == 0 && !$checked),
-                                                                'label' => $characteristicItem->value .
-                                                                    Html::tag('span', ' (' . $characteristicItem->count . ')'
-                                                                        , ['class' => 'count'])
+                                                                'id' => 'checkbox' . $char->id . $count,
                                                             ]);
+                                                            echo Html::label($characteristicItem->value
+                                                                    . Html::tag('span', ' (' . $characteristicItem->count . ')', ['class' => 'count']),
+                                                                'checkbox' . $char->id . $count);
+                                                            $count++;
                                                             ?>
                                                         </div>
                                                     </li>

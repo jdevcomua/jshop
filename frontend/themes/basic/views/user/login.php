@@ -17,48 +17,44 @@ $this->title = 'Авторизация';
         <h1 class="title"><?php echo \Yii::t('app', 'Авторизация'); ?></h1>
     </div>
 </div>
-<div class="horizontal-form" style="width:50%;float:left;">
+<div class="horizontal-form nice-checkbox" style="width:50%;float:left;">
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-    <?php echo $form->field($model, 'username')->input('text', ['style' => 'width:250px;'])->label(\Yii::t('app', 'Логин'),
-        ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+    <?php echo $form->field($model, 'username')->textInput()->label(\Yii::t('app', 'Логин')); ?>
     <span class="must">*</span>
 
-    <?php echo $form->field($model, 'password')->passwordInput(['style' => 'width:250px;'])->label(\Yii::t('app', 'Пароль'),
-        ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+    <?php echo $form->field($model, 'password')->passwordInput()->label(\Yii::t('app', 'Пароль')); ?>
     <span class="must">*</span>
 
-    <?php echo $form->field($model, 'rememberMe')->checkbox()->label(\Yii::t('app', 'Запомнить меня')) ?>
-
+    <div>
+        <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>" class="d_l_3 isDrop">
+            <?php echo \Yii::t('app', 'Напомнить пароль'); ?>
+        </a>
+    </div>
+    
     <div class="frame-label">
+        <?= Html::checkbox('LoginForm[rememberMe]', $model->rememberMe, ['id' => 'remember-me']); ?>
+        <?= Html::label(Yii::t('app', 'Запомнить меня'), 'remember-me'); ?>
         <span class="title">&nbsp;</span>
         <div class="frame-form-field">
-            <div class="clearfix">
-                            <span class="btn-form f_l m-r_20">
-                                <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Войти') . '</span>',
-                                    ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
-                            </span>
-                <div class="f_l neigh-buttonform f-s_0">
-                    <span class="helper"></span>
-                    <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>" class="d_l_3 isDrop">
-                        <?php echo \Yii::t('app', 'Напомнить пароль'); ?>
-                    </a>
-                </div>
+            <div>
+                <span class="btn-form f_l m-r_20">
+                    <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Войти') . '</span>',
+                        ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
+                </span>
             </div>
         </div>
     </div>
     <div class="drop-footer-style" style="width:315px; padding-right: 50px;">
-        <div class="inside-padd">
             <div class="horizontal-form">
                 <div class="frame-label">
-                    <div class="frame-form-field" style="margin-left: 150px;">
+                    <div class="frame-form-field">
                         <div class="help-block"><?php echo \Yii::t('app', 'Для новых покупателей'); ?>:
                         </div>
                         <a href="<?php echo Yii::$app->urlHelper->to(['register']) ?>"><?php echo \Yii::t('app', 'Регистрация'); ?></a>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

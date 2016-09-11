@@ -147,7 +147,7 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                                     </span>
                                     </div>
                                     <div
-                                        class="filters-content <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
+                                        class="filters-content nice-checkbox <?= !array_key_exists($char->id, $selected) ? 'd_n' : ''; ?>">
                                         <ul>
                                             <?php $count = 0;
                                             foreach ($char->characteristicItems as $characteristicItem) {

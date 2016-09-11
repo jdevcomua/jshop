@@ -1,21 +1,21 @@
 @charset "utf-8";
 
 /* Base for label styling */
-.filters-content [type="checkbox"]:not(:checked),
-.filters-content [type="checkbox"]:checked {
+.nice-checkbox [type="checkbox"]:not(:checked),
+.nice-checkbox [type="checkbox"]:checked {
     position: absolute;
     left: -9999px;
 }
-.filters-content [type="checkbox"]:not(:checked) + label,
-.filters-content [type="checkbox"]:checked + label {
+.nice-checkbox [type="checkbox"]:not(:checked) + label,
+.nice-checkbox [type="checkbox"]:checked + label {
     position: relative;
     padding-left: 20px;
     cursor: pointer;
 }
 
 /* checkbox aspect */
-.filters-content [type="checkbox"]:not(:checked) + label:before,
-.filters-content [type="checkbox"]:checked + label:before {
+.nice-checkbox [type="checkbox"]:not(:checked) + label:before,
+.nice-checkbox [type="checkbox"]:checked + label:before {
     content: '';
     position: absolute;
     left:0;
@@ -26,8 +26,8 @@
     background-position: -560px 0;
 }
 /* checked mark aspect */
-.filters-content [type="checkbox"]:not(:checked) + label:after,
-.filters-content [type="checkbox"]:checked + label:after {
+.nice-checkbox [type="checkbox"]:not(:checked) + label:after,
+.nice-checkbox [type="checkbox"]:checked + label:after {
     content: '';
     position: absolute;
     left:0;
@@ -36,35 +36,36 @@
     height: 14px;
     background: url("/images/sprite.png") no-repeat;
     background-position: -580px 0;
+    visibility: visible!important;
 }
 /* checked mark aspect changes */
-.filters-content [type="checkbox"]:not(:checked) + label:after {
+.nice-checkbox [type="checkbox"]:not(:checked) + label:after {
     opacity: 0;
     transform: scale(0);
 }
 
-.filters-content [type="checkbox"]:checked + label:after {
+.nice-checkbox [type="checkbox"]:checked + label:after {
     opacity: 1;
     transform: scale(1);
 }
 
 /* hover style just for information */
-.filters-content label:hover:before {
+.nice-checkbox label:hover:before {
     background-position: -560px -20px!important;
 }
 
-.filters-content label:hover:after {
+.nice-checkbox label:hover:after {
     background-position: -580px -20px!important;
 }
 
 /* disabled checkbox */
-.filters-content [type="checkbox"]:disabled:not(:checked) + label:before,
-.filters-content [type="checkbox"]:disabled:checked + label:before {
+.nice-checkbox [type="checkbox"]:disabled:not(:checked) + label:before,
+.nice-checkbox [type="checkbox"]:disabled:checked + label:before {
     background: url("/images/sprite.png") no-repeat;
     background-position: -600px 0;
 }
 
-.filters-content [type="checkbox"]:disabled:not(:checked) + label:hover:before {
+.nice-checkbox [type="checkbox"]:disabled:not(:checked) + label:hover:before {
     background-position: -600px 0!important;
 }
 
@@ -1494,3 +1495,16 @@ footer.main-wrap{min-height: 0;}
 .list-delivery > li{overflow: hidden;margin-bottom: 9px;}
 .list-delivery > li > .frame-ico{position: relative;top: 6px;}
 .list-delivery > li > .descr{margin-left: 37px;}
+
+#login-form label {
+    padding-top: 0;
+    width: 100px;
+}
+
+#login-form .frame-label {
+    padding-top: 15px;
+}
+
+#login-form .frame-label .title {
+    width: 140px;
+}

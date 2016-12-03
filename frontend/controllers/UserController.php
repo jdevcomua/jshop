@@ -15,6 +15,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class UserController extends Controller
@@ -30,11 +31,15 @@ class UserController extends Controller
         if ($user->isGuest) {
             return $this->redirect(Yii::$app->urlHelper->to(['login']));
         }
-        if (!empty(Yii::$app->request->post('WishList'))) {
-            $wishList = new WishList();
-            $wishList->load(Yii::$app->request->post());
-            $wishList->user_id = $user->id;
-            $wishList->save();
+        if ($attributes = Yii::$app->request->post('WishList')) {
+            if (key_exists('id', $attributes) && $attributes['id']) {
+                WishList::updateAll($attributes, ['id' => $attributes['id']]);
+            } else {
+                $wishList = new WishList($attributes);
+                $wishList->user_id = $user->id;
+                $wishList->save();
+            }
+
         }
         $changePasswordModel = new ChangePassword();
         if ($changePasswordModel->load(Yii::$app->request->post())) {
@@ -197,6 +202,41 @@ class UserController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionEditWishList($id = null)
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException('Page not found.');
+        }
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $user = Yii::$app->user;
+        if ($user->isGuest) {
+            return [
+                'html' => $this->renderPartial('needLogin'),
+                'title' => 'Необходимо авторизироваться'
+            ];
+        }
+
+        if ($id && ($model = WishList::findOne($id))) {
+            $title = 'Редактировать список';
+        } else {
+            $model = new WishList();
+            $title = 'Создать список';
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+            return [
+                'success' => $model->save()
+            ];
+        } else {
+            return ['html' => $this->renderPartial('wishListForm', [
+                    'model' => $model,
+                ]),
+                'title' => $title,
+            ];
+        }
     }
 
 }

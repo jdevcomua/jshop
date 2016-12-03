@@ -1508,3 +1508,16 @@ footer.main-wrap{min-height: 0;}
 #login-form .frame-label .title {
     width: 140px;
 }
+
+.blue-button {
+    background: #1083c7;
+    height: 31px;
+    padding: 8px 15px;
+    color: #fff;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.blue-button:hover {
+    background: #34a4e7;
+}

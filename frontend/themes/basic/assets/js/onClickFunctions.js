@@ -11,6 +11,17 @@ function openWishWindow(id) {
         }
     });
 }
+function openWishEditWindow(id) {
+    $.ajax({
+        url: '/user/edit-wish-list',
+        dataType: 'json',
+        data: {id: id},
+        success: function (data) {
+            $('#forCenter').data('vid', id);
+            showPopup(data.html, data.title);
+        }
+    });
+}
 function closePopup() {
     $('#forCenter').toggleClass('d_n');
 }

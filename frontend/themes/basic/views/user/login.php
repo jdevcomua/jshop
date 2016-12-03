@@ -14,21 +14,19 @@ $this->title = 'Авторизация';
 
 <div class="f-s_0 title-register without-crumbs">
     <div class="frame-title">
-        <h1 class="title"><?php echo \Yii::t('app', 'Авторизация'); ?></h1>
+        <h1 class="title"><?= \Yii::t('app', 'Авторизация'); ?></h1>
     </div>
 </div>
 <div class="horizontal-form nice-checkbox" style="width:50%;float:left;">
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-    <?php echo $form->field($model, 'username')->textInput()->label(\Yii::t('app', 'Логин')); ?>
-    <span class="must">*</span>
+    <?= $form->field($model, 'username', ['inputTemplate' => '{input}<span class="must">*</span>']); ?>
 
-    <?php echo $form->field($model, 'password')->passwordInput()->label(\Yii::t('app', 'Пароль')); ?>
-    <span class="must">*</span>
+    <?= $form->field($model, 'password', ['inputTemplate' => '{input}<span class="must">*</span>'])->passwordInput(); ?>
 
     <div>
         <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>" class="d_l_3 isDrop">
-            <?php echo \Yii::t('app', 'Напомнить пароль'); ?>
+            <?= \Yii::t('app', 'Напомнить пароль'); ?>
         </a>
     </div>
     
@@ -39,7 +37,7 @@ $this->title = 'Авторизация';
         <div class="frame-form-field">
             <div>
                 <span class="btn-form f_l m-r_20">
-                    <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Войти') . '</span>',
+                    <?= Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Войти') . '</span>',
                         ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
                 </span>
             </div>
@@ -49,9 +47,9 @@ $this->title = 'Авторизация';
             <div class="horizontal-form">
                 <div class="frame-label">
                     <div class="frame-form-field">
-                        <div class="help-block"><?php echo \Yii::t('app', 'Для новых покупателей'); ?>:
+                        <div class="help-block"><?= \Yii::t('app', 'Для новых покупателей'); ?>:
                         </div>
-                        <a href="<?php echo Yii::$app->urlHelper->to(['register']) ?>"><?php echo \Yii::t('app', 'Регистрация'); ?></a>
+                        <a href="<?= Yii::$app->urlHelper->to(['register']) ?>"><?= \Yii::t('app', 'Регистрация'); ?></a>
                     </div>
                 </div>
             </div>
@@ -59,9 +57,11 @@ $this->title = 'Авторизация';
     <?php ActiveForm::end(); ?>
 </div>
 
-<div style="width:40%;float:left;">Войти как пользователь: <br>
-    <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>"><img
-            src="https://s3.eu-central-1.amazonaws.com/umo4ka/401945557389.png"></a>
-    <a href="<?php echo Yii::$app->urlHelper->to(['user/facebook-auth']); ?>"><img
-            src="https://s3.eu-central-1.amazonaws.com/umo4ka/402107608125.png"></a>
+<div class="social-login">Войти как пользователь: <br>
+    <a href="<?= Yii::$app->urlHelper->to(['user/vk-auth']); ?>">
+        <img src="https://s3.eu-central-1.amazonaws.com/umo4ka/401945557389.png">
+    </a>
+    <a href="<?= Yii::$app->urlHelper->to(['user/facebook-auth']); ?>">
+        <img src="https://s3.eu-central-1.amazonaws.com/umo4ka/402107608125.png">
+    </a>
 </div>

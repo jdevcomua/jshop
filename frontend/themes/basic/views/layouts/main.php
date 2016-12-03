@@ -98,7 +98,7 @@ $basicAsset =  BasicAsset::register($this);
                                             <li><?= Html::a(Html::img($basicAsset->baseUrl . '/img/usa.png',['width'=>20]), ['en/' . Yii::$app->controller->route]) ?></li>
                                         <?php endif ?>
                                         <?php if (!Yii::$app->user->isGuest) : ?>
-                                            <li><?= Html::a('Profile', Yii::$app->urlHelper->to(['user/profile']), ['style' =>'color: #1083c7;'])?></li>
+                                            <li><?= Html::a('Профиль', Yii::$app->urlHelper->to(['user/profile']), ['style' =>'color: #1083c7;'])?></li>
                                         <?php endif ?>
                                     </ul>
                                 </nav>
@@ -122,9 +122,9 @@ $basicAsset =  BasicAsset::register($this);
                                                          'items' => [
 
                                                              Yii::$app->user->isGuest ?
-                                                                 ['label' => \Yii::t('app', 'Войти'), 'url' => Yii::$app->urlHelper->to(['login'])] :
+                                                                 ['label' => Yii::t('app', 'Войти'), 'url' => Yii::$app->urlHelper->to(['login'])] :
                                                                  [
-                                                                     'label' => 'Logout (' . $username . ')',
+                                                                     'label' => 'Выйти (' . $username . ')',
                                                                      'url' => Yii::$app->urlHelper->to(['logout']),
                                                                      'linkOptions' => ['data-method' => 'post']
                                                                  ],

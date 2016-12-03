@@ -47,7 +47,7 @@ $this->title = 'Профиль пользователя';
                     <div class="horizontal-form">
                         <?php echo $form->field($model, 'username')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'mail')->textInput(); ?>
+                        <?php echo $form->field($model, 'mail')->textInput(['disabled' => true]); ?>
 
                         <?php echo $form->field($model, 'name')->textInput(); ?>
 

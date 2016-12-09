@@ -10,8 +10,7 @@ class UrlHelper
 
     public function to($url)
     {
-        $newUrl = Yii::$app->language.'/'.current($url);
-        $url[0] = $newUrl;
+        $url['language'] = Yii::$app->language;
         return Url::to($url);
     }
 

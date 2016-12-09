@@ -614,7 +614,7 @@ input.input-search{height: 31px;padding-left: 34px;}
 .frame-kit, .next-kit{display: inline-block;vertical-align: top;}
 .frame-kit{width: 150px;}
 .next-kit, .gen-sum-kit{width: 20px;position: relative;top: 63px;line-height: 0.8;text-align: center;font-size: 24px;}
-.row-kits .next-kit, .row-kits .gen-sum-kit{top: -10px;left: 21px;display: block;}
+.row-kits .next-kit, .row-kits .gen-sum-kit{top: 2px;left: 21px;display: block;}
 .gen-sum-kit{display: inline-block;vertical-align: middle;top: -20px;width: 27px;text-align: left;}
 .complect-gen-sum .price-discount{display: block;}
 .frame-gen-price-buy-complect .price-new{margin-bottom: 5px;}

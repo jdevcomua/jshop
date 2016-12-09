@@ -43,7 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                     ],
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'yii\grid\ActionColumn',
+                        'urlCreator' => function ($action, $model, $key, $index) {
+                            return Yii::$app->urlHelper->to(['banner/' . $action, 'id' => $model->id]);
+                        }
+                    ],
                 ],
             ]); ?>
         </div>

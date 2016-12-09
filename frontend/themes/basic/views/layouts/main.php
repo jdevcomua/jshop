@@ -30,7 +30,7 @@ $basicAsset =  BasicAsset::register($this);
             <div class="content-header">
                 <div class="container">
                     <!--        Logo-->
-                    <a href="<?php echo Yii::$app->urlHelper->to(['/']); ?>" class="logo">
+                    <a href="<?php echo Yii::$app->urlHelper->to(['site/index']); ?>" class="logo">
                         <img src="<?= Url::base() . '/images/logo.png'?>" alt="logo">
                     </a>
                     <div class="left-content-header">
@@ -76,7 +76,7 @@ $basicAsset =  BasicAsset::register($this);
                                         </li>
 
                                         <li>
-                                            <a href="<?php echo Yii::$app->urlHelper->to(['compare']);?>">
+                                            <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']);?>">
                                                 <?php echo \Yii::t('app', 'Сравнение'); ?>        </a>
                                         </li>
 
@@ -122,10 +122,10 @@ $basicAsset =  BasicAsset::register($this);
                                                          'items' => [
 
                                                              Yii::$app->user->isGuest ?
-                                                                 ['label' => Yii::t('app', 'Войти'), 'url' => Yii::$app->urlHelper->to(['login'])] :
+                                                                 ['label' => Yii::t('app', 'Войти'), 'url' => Yii::$app->urlHelper->to(['user/login'])] :
                                                                  [
                                                                      'label' => 'Выйти (' . $username . ')',
-                                                                     'url' => Yii::$app->urlHelper->to(['logout']),
+                                                                     'url' => Yii::$app->urlHelper->to(['user/logout']),
                                                                      'linkOptions' => ['data-method' => 'post']
                                                                  ],
                                                          ],
@@ -143,7 +143,7 @@ $basicAsset =  BasicAsset::register($this);
                             <div id="tinyBask" class="frame-cleaner">
                             <?php if (!Yii::$app->cart->isEmpty()) { ?>
                                 <div id="cartFull" class="btn-bask pointer">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart'])?>"><button type="button" class="btnBask" style="padding-top: 4px;">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart/index'])?>"><button type="button" class="btnBask" style="padding-top: 4px;">
                                         <span class="icon_cleaner"></span>
                                             <span class="text-cleaner">
                                                 <span class="text-el"><?php echo \Yii::t('app', 'корзина'); ?></span>
@@ -165,7 +165,7 @@ $basicAsset =  BasicAsset::register($this);
                                 </div>
                             <?php } else { ?>
                                 <div id="cartFull" class="btn-bask pointer d_n">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart'])?>"><button type="button" class="btnBask"  style="padding-top: 4px;">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart/index'])?>"><button type="button" class="btnBask"  style="padding-top: 4px;">
                                         <span class="icon_cleaner"></span>
                                             <span class="text-cleaner">
                                                 <span class="text-el"><?php echo \Yii::t('app', 'корзина'); ?></span>

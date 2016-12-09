@@ -126,7 +126,7 @@ class UserController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(Yii::$app->urlHelper->to(['/']));
+        return $this->redirect(Yii::$app->urlHelper->to(['site/index']));
     }
 
     /**

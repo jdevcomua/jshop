@@ -107,7 +107,7 @@ function addKit(id) {
     $.ajax({
         url: '/cart/ajaxkit',
         data: {count: 1, item_id: id},
-        dataType: 'text',
+        dataType: 'json',
         success: function (data) {
             var count = +$('#countItems ').html();
             if (count == 0) {
@@ -115,6 +115,7 @@ function addKit(id) {
                 $('#cartFull').toggleClass('d_n');
             }
             $('#countItems ').html(+count + 1);
+            showPopup(data.html, data.title);
         }
     });
 }
@@ -125,7 +126,7 @@ function addToCartFromItemPage(id) {
     $.ajax({
         url: '/cart/ajax',
         data: {count: $('#test').val(), item_id: id},
-        dataType: 'text',
+        dataType: 'json',
         success: function (data) {
             var count = +$('#countItems').html();
             if (count == 0) {
@@ -135,6 +136,7 @@ function addToCartFromItemPage(id) {
             $('#countItems').html(+count + +$('#test').val());
             $('#toCart').toggleClass('d_n');
             $('#inCart').toggleClass('d_n');
+            showPopup(data.html, data.title);
         }
     });
 }

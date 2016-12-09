@@ -1,5 +1,6 @@
 <?php
 
+use budyaga\users\components\PermissionsTreeWidget;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -37,6 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'city',
                 ],
             ]) ?>
+
+            <h3><?= Yii::t('app', 'Права пользователя')?></h3>
+
+            <p><?= Html::a(Yii::t('app', 'Редактировать'), ['permissions', 'id' => $model->id], ['class' => 'btn btn-primary']) ?></p>
+
+            <?= PermissionsTreeWidget::widget(['user' => $model]) ?>
         </div>
     </div>
 </div>

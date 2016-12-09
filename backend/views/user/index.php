@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\UserSearch */
@@ -39,10 +40,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     'mail',
                     'city',
 
-                    ['class' => 'yii\grid\ActionColumn',
-                        'urlCreator' => function ($action, $model, $key, $index) {
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'urlCreator' => function ($action, $model) {
                             return Yii::$app->urlHelper->to(['user/' . $action, 'id' => $model->id]);
-                        }
+                        },
+                        'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}&nbsp;&nbsp;{permissions}',
+                        'buttons' => [
+                            'permissions' => function ($url) {
+                                return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url);
+                            },
+                        ],
+                        'contentOptions' => [
+                            'style' => 'width: 100px;',
+                        ],
                     ],
                 ],
             ]);

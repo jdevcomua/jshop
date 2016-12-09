@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\AssignmentForm;
 use Yii;
 use common\models\User;
 use common\models\search\UserSearch;
@@ -116,5 +117,20 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionPermissions($id)
+    {
+        $modelForm = new AssignmentForm();
+        $modelForm->model = $this->findModel($id);
+
+        if ($modelForm->load(Yii::$app->request->post()) && $modelForm->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'SUCCESS_UPDATE_PERMISSIONS'));
+            return $this->redirect(['view', 'id' => $id]);
+        }
+
+        return $this->render('permissions', [
+            'modelForm' => $modelForm
+        ]);
     }
 }

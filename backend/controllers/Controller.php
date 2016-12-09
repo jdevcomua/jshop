@@ -31,18 +31,12 @@ class Controller extends \yii\web\Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
+                        'actions' => ['login', 'error', 'logout'],
                         'allow' => true,
-                        'roles' => ['@'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['logout'],
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => ['login'],
-                        'roles' => ['?'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],

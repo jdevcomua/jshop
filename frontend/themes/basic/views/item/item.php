@@ -193,7 +193,7 @@ $this->title = $item->title;
                                     <?php if (!Yii::$app->compare->existInList($item->id)) { ?>
                                         <div id="toCompare" class="btn-compare">
                                             <button class="toCompare" type="button" title="В список сравнений"
-                                                    onclick="addToCompareList(<?php echo $item->id; ?>)">
+                                                    onclick="addToCompareList(<?php echo $item->id; ?>, $(this))">
                                                 <span class="icon_compare"></span>
                                                 <span class="text-el d_l">В список сравнений</span>
                                             </button>
@@ -203,7 +203,7 @@ $this->title = $item->title;
                                                style="padding-top: 8px; padding-bottom: 9px;">
                                                 <button class="toCompare" type="button" title="Сравнить товары">
                                                     <span class="icon_compare"></span>
-                                                    <span class="text-el d_l">В список сравнений</span>
+                                                    <span class="text-el d_l">Сравнить товары</span>
                                                 </button>
                                             </a>
                                         </div>
@@ -211,9 +211,9 @@ $this->title = $item->title;
                                         <div class="btn-compare btn-comp-in">
                                             <a href="<?php echo Yii::$app->urlHelper->to(['compare/compare']); ?>"
                                                style="padding-top: 8px; padding-bottom: 9px;">
-                                                <button class="toCompare" type="button" title="В список сравнений">
+                                                <button class="toCompare" type="button" title="Сравнить товары">
                                                     <span class="icon_compare"></span>
-                                                    <span class="text-el d_l">В список сравнений</span>
+                                                    <span class="text-el d_l">Сравнить товары</span>
                                                 </button>
                                             </a>
                                         </div>

@@ -291,7 +291,7 @@ article, .container, .special-proposition .title-proposition-h{max-width: 980px;
 .content-carousel.container, .items-carousel.container, .baner.container{padding: 0;}
 
 .right-catalog{width: 74.5%;float: right;position: relative;z-index: 0;}
-.left-catalog{width: 23.5%;float: left;position: relative;z-index: 1;}
+.left-catalog{width: 23.5%;float: left;position: relative;}
 
 .right-product{width: 232px;float: right;}
 .right-product-left{width: 62%;float: left;}

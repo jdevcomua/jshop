@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use backend\assets\AppAsset;
 
 //use Yii;
-
+$controller = Yii::$app->controller->id;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -174,32 +174,50 @@ AppAsset::register($this);
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
-                    <li><a href="<?= Yii::$app->urlHelper->to(['orders/index'])?>">
-                            <i class="fa fa-file-text-o"></i><span>Заказы</span></a>
+                    <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['orders/index']) ?>">
+                            <i class="fa fa-file-text-o"></i><span>Заказы</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['item/index'])?>">
-                            <i class="fa fa-shopping-cart"></i><span>Товары</span></a>
+                    <li class="<?= $controller == 'item' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['item/index']) ?>">
+                            <i class="fa fa-shopping-cart"></i><span>Товары</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['item-cat/index'])?>">
-                            <i class="fa fa-list"></i><span>Категории</span></a>
+                    <li class="<?= $controller == 'item-cat' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['item-cat/index']) ?>">
+                            <i class="fa fa-list"></i><span>Категории</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['characteristic/index'])?>">
-                            <i class="fa fa-gears"></i><span>Характеристики</span></a>
+                    <li class="<?= $controller == 'characteristic' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['characteristic/index']) ?>">
+                            <i class="fa fa-gears"></i><span>Характеристики</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['user/index'])?>">
-                            <i class="fa fa-users"></i><span>Пользователи</span></a>
+                    <li class="<?= $controller == 'user' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['user/index']) ?>">
+                            <i class="fa fa-users"></i><span>Пользователи</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['vote/index'])?>">
-                            <i class="fa fa-commenting-o"></i><span>Отзывы</span></a>
+                    <li class="<?= $controller == 'vote' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['vote/index']) ?>">
+                            <i class="fa fa-commenting-o"></i><span>Отзывы</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['stock/index'])?>">
-                            <i class="fa    fa-gift"></i><span>Акции</span></a>
+                    <li class="<?= $controller == 'stock' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['stock/index']) ?>">
+                            <i class="fa    fa-gift"></i><span>Акции</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['kit/index'])?>">
-                            <i class="fa fa-suitcase"></i><span>Комплекты</span></a>
+                    <li class="<?= $controller == 'kit' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['kit/index']) ?>">
+                            <i class="fa fa-suitcase"></i><span>Комплекты</span>
+                        </a>
                     </li>
-                    <li><a href="<?= Yii::$app->urlHelper->to(['banner/index'])?>">
-                            <i class="fa fa-bullhorn "></i><span>Баннеры</span></a>
+                    <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['banner/index']) ?>">
+                            <i class="fa fa-bullhorn "></i><span>Баннеры</span>
+                        </a>
                     </li>
                 </ul>
             </section>

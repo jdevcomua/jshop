@@ -29,7 +29,7 @@ $this->title = $name;
             </p>
 
             <?php if ($code == 403) : ?>
-                <a class="btn btn-primary" href="<?= Yii::$app->urlHelper->to(['site/logout']) ?>">Logout</a>
+                <a class="btn btn-primary" href="<?= Yii::$app->urlHelper->to(['site/logout']) ?>">Выйти</a>
             <?php endif; ?>
 
         </div>

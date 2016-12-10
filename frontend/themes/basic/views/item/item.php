@@ -75,16 +75,16 @@ $this->title = $item->title;
             </dl>
         </div>                    <!--End. Payments method form -->
         <!-- Start. Similar Products-->
-        <div class="default-frame">
+        <!--<div class="default-frame">
             <section class="">
                 <div class="default-title">
                     <div class="frame-title">
-                        <div class="title"><?php echo \Yii::t('app', 'Похожие товары'); ?></div>
-                    </div><?php echo \Yii::t('app', ''); ?>
+                        <div class="title"><?php /*echo \Yii::t('app', 'Похожие товары'); */?></div>
+                    </div><?php /*echo \Yii::t('app', ''); */?>
                 </div>
 
             </section>
-        </div>
+        </div>-->
         <!-- End. Similar Products-->
     </div>
     <div class="left-product leftProduct">

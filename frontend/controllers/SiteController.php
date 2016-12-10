@@ -14,6 +14,7 @@ use common\models\WishList;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 class SiteController extends Controller
 {
@@ -67,13 +68,14 @@ class SiteController extends Controller
     /**
      * @param $text string
      * @param $category_id integer
+     * @param $sort string
      * @return string
      */
     public function actionSearch($text, $category_id = null, $sort = null)
     {
-        $items = Item::find()->where(['like', 'item.title', $text])->andFilterWhere(['category_id' => $category_id]);
+        $items = Item::find()->where(['like', 'item.title', addcslashes($text, '"')])->andFilterWhere(['category_id' => $category_id]);
         $categories = ItemCat::find()->select(['item_cat.id', 'item_cat.title', 'count(item_cat.id) as count'])
-            ->innerJoin('item', 'item.category_id = item_cat.id')->where(['like', 'item.title', $text])
+            ->innerJoin('item', 'item.category_id = item_cat.id')->where(['like', 'item.title', addcslashes($text, '"')])
             ->groupBy('item_cat.id')->all();
         $this->sorting($items, $sort);
         $dataProvider = new ActiveDataProvider([
@@ -295,5 +297,23 @@ class SiteController extends Controller
     public function actionDelwish($wish_id)
     {
         return Wish::findOne($wish_id)->delete();
+    }
+    
+    public function actionSearchHint($q = null) {
+        /*$query = new Query;
+
+        $query->select('name')
+            ->from('country')
+            ->where('name LIKE "%' . $q .'%"')
+            ->orderBy('name');
+        $command = $query->createCommand();
+        $data = $command->queryAll();*/
+        $data = Item::find()->select('title')->where(['like', 'title', $q])->all();
+        $out = [];
+        foreach ($data as $d) {
+            $out[] = ['value' => $d->title];
+        }
+        
+        echo Json::encode($out);
     }
 }

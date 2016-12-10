@@ -516,7 +516,7 @@ header{background-color: #000;}
 .phones-header .phone-code{color: #999;}
 .phones-header .phone-number{color: #fff;}
 input.input-search{box-shadow:none !important; background: #000; border-color: #454545;}
-input.input-search:focus{background: #fff; border-color: #fff;}
+input.input-search:focus{background: #fff!important; border-color: #fff;}
 /*/header*/
 
 /*titles*/

@@ -5,6 +5,7 @@
 
 use common\widgets\Alert;
 use frontend\themes\basic\BasicAsset;
+use kartik\typeahead\Typeahead;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use frontend\widgets\category\CategoriesView;
@@ -191,7 +192,7 @@ $basicAsset =  BasicAsset::register($this);
                             <!--                Start. Show search form-->
                             <div class="frame-search-form">
                                 <div class="p_r">
-                                    <form name="search" method="get" action="<?= Yii::$app->urlHelper->to(['search']) ?>">
+                                    <form name="search" method="get" action="<?= Yii::$app->urlHelper->to(['site/search']) ?>">
                                         <span class="btn-search">
                                             <button type="submit"><span
                                                     class="text-el"><?php echo \Yii::t('app', 'поиск'); ?></span>
@@ -199,9 +200,26 @@ $basicAsset =  BasicAsset::register($this);
                                         </span>
                                         <div class="frame-search-input">
                                             <span class="icon_search"></span>
-                                            <input type="text" class="input-search" id="inputString" name="text"
-                                                   required autocomplete="off" value=""
-                                                   placeholder="<?php echo \Yii::t('app', 'Я ищу') ?>">
+                                            <?= Typeahead::widget([
+                                                'name' => 'text',
+                                                'options' => [
+                                                    'id' => 'inputString',
+                                                    'class' => 'input-search',
+                                                    'required' => true,
+                                                    'placeholder' => Yii::t('app', 'Я ищу'),
+                                                ],
+                                                'pluginOptions' => ['highlight' => true],
+                                                'dataset' => [
+                                                    [
+                                                        'remote' => [
+                                                            'url' => Yii::$app->urlHelper->to(['site/search-hint']) . '?q=%QUERY',
+                                                            'wildcard' => '%QUERY'
+                                                        ],
+                                                        'display' => 'value',
+                                                        'limit' => 10
+                                                    ]
+                                                ]
+                                            ]); ?>
                                             <div id="suggestions" class="drop drop-search"></div>
                                         </div>
                                     </form>

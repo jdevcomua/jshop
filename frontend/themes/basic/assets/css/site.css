@@ -519,7 +519,8 @@ p {margin-bottom: 10px;line-height: 18px;}
 .frame-search-form{float: left;width: 572px;}
 .frame-cleaner{width: 158px;float: right;text-align: center;}
 .frame-search-input{margin-right: 79px;display: block;}
-input.input-search{height: 31px;padding-left: 34px;}
+input.input-search{height: 31px;padding-left: 34px;color: #a7a4a4;}
+input.input-search:focus{color: #333;}
 .drop-search{width: 100%;top: 100%;z-index: 1000;}
 .drop-search > .inside-padd{}
 .drop-search .btn-autocomplete{display: block;padding: 6px 17px 10px;}
@@ -1529,4 +1530,8 @@ footer.main-wrap{min-height: 0;}
 .social-login {
     width:50%;
     float:left;
+}
+
+.icon_search {
+    z-index: 999;
 }

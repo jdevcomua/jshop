@@ -57,6 +57,8 @@ class SiteController extends Controller
         $usersCount = User::find()->andWhere('MONTH(created) = MONTH(NOW())')->count();
         $latest = Item::find()->select(['item.*', 'count(order_item.id) as count'])
             ->leftJoin('order_item', 'order_item.item_id = item.id')
+            ->leftJoin('orders', 'order_item.order_id = orders.id')
+            ->where(['orders.payment_status' => 'Оплачен'])
             ->groupBy('order_item.item_id')
             ->orderBy('addition_date desc')->limit(5)->all();
         return $this->render('index', [

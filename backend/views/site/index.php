@@ -17,14 +17,17 @@ $this->title = 'Home Page';
 ?>
 <div class="site-index">
     <div class="row">
+        <div class="col-md-12">
+            <h4>В этом месяце:</h4>
+        </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="ion ion-bag"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">New Orders</span>
+                    <span class="info-box-text">Новые заказы</span>
                     <span class="info-box-number"><?= $newOrdersCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[order_status]' => 'Новый']) ?>"
-                       type="button" class="btn btn-block btn-success btn-flat">Show</a>
+                       type="button" class="btn btn-block btn-success btn-flat">Показать</a>
                 </div>
             </div>
         </div>
@@ -32,10 +35,10 @@ $this->title = 'Home Page';
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Sales</span>
+                    <span class="info-box-text">Продажи</span>
                     <span class="info-box-number"><?= $salesCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[payment_status]' => 'Оплачен']) ?>"
-                       type="button" class="btn btn-block btn-info btn-flat">Show</a>
+                       type="button" class="btn btn-block btn-info btn-flat">Показать</a>
                 </div>
             </div>
         </div>
@@ -43,10 +46,10 @@ $this->title = 'Home Page';
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fa fa-comments-o"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">New Votes</span>
+                    <span class="info-box-text">Отзывы</span>
                     <span class="info-box-number"><?= $newVotesCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['vote/index', 'VoteSearch[checked]' => '0']) ?>"
-                       type="button" class="btn btn-block btn-warning btn-flat">Show</a>
+                       type="button" class="btn btn-block btn-warning btn-flat">Показать</a>
                 </div>
             </div>
         </div>
@@ -54,10 +57,10 @@ $this->title = 'Home Page';
             <div class="info-box">
                 <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">New Members</span>
+                    <span class="info-box-text">Учасники</span>
                     <span class="info-box-number"><?= $usersCount; ?></span>
                     <a href="<?= Yii::$app->urlHelper->to(['user/index', 'sort' => '-created']) ?>"
-                       type="button" class="btn btn-block btn-danger btn-flat">Show</a>
+                       type="button" class="btn btn-block btn-danger btn-flat">Показать</a>
                 </div>
             </div>
         </div>
@@ -122,6 +125,7 @@ $this->title = 'Home Page';
                                 ]
                             ]); ?>
                         </div>
+                        <p>Всего: <?= array_sum($salesValues) ?> шт.</p>
                     </div>
                 </div>
             </div>
@@ -182,6 +186,7 @@ $this->title = 'Home Page';
                                 ]
                             ]); ?>
                         </div>
+                        <p>Всего: <?= array_sum($salesValuesMoney) ?> грн.</p>
                     </div>
                 </div>
             </div>

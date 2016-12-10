@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-md-12">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']);
 
                     echo $form->field($model, 'username');

@@ -18,11 +18,11 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
         'css/AdminLTE.css',
         'css/_all-skins.css',
         'css/font-awesome.min.css',
-        'css/ionicons.min.css'
+        'css/ionicons.min.css',
+        'css/site.css',
     ];
     public $js = [
         'js/app.js',

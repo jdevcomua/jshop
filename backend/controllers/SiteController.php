@@ -8,23 +8,13 @@ use common\models\User;
 use common\models\Vote;
 use Yii;
 use common\models\LoginForm;
+use yii\base\Exception;
+use yii\base\UserException;
 use yii\helpers\ArrayHelper;
+use yii\web\HttpException;
 
 class SiteController extends Controller
 {
-
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
 
     /**
      * Changing the language
@@ -83,6 +73,7 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+        $this->layout = 'guest';
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -100,6 +91,49 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
         return $this->render('index');
+    }
+
+    public function actionError()
+    {
+        if (($exception = Yii::$app->getErrorHandler()->exception) === null) {
+            // action has been invoked not from error handler, but by direct route, so we display '404 Not Found'
+            $exception = new HttpException(404, Yii::t('yii', 'Page not found.'));
+        }
+
+        if ($exception instanceof HttpException) {
+            $code = $exception->statusCode;
+        } else {
+            $code = $exception->getCode();
+        }
+        if ($exception instanceof Exception) {
+            $name = $exception->getName();
+        } else {
+            $name = Yii::t('yii', 'Error');
+        }
+        if ($code) {
+            $name .= " (#$code)";
+        }
+
+        if(empty($code) || $code == 403) {
+            $this->layout = 'guest';
+        }
+
+        if ($exception instanceof UserException) {
+            $message = $exception->getMessage();
+        } else {
+            $message = Yii::t('yii', 'An internal server error occurred.');
+        }
+
+        if (Yii::$app->getRequest()->getIsAjax()) {
+            return "$name: $message";
+        } else {
+            return $this->render('error', [
+                'name' => $name,
+                'message' => $message,
+                'exception' => $exception,
+                'code' => $code,
+            ]);
+        }
     }
 
 }

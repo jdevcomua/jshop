@@ -117,3 +117,18 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+.guest-wrapper .content-wrapper {
+    margin-left: 0;
+    padding-top: 0;
+}
+
+.guest-wrapper .content {
+    margin-left: calc(50% - 250px);
+    padding-top: calc(25% - 160px);
+    width: 500px;
+}
+
+.guest-wrapper .main-footer {
+    margin-left: 0;
+}

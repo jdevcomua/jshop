@@ -78,7 +78,7 @@ $this->title = 'Оформление заказа'; ?>
             <div class="frame-title clearfix">
                 <div class="title f_l"><?php echo \Yii::t('app', 'Мой заказ'); ?></div>
                 <div class="f_r">
-                    <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>"
+                    <a href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>"
                        class="d_l_3 editCart"><?php echo \Yii::t('app', 'Редактировать'); ?></a>
                 </div>
             </div>

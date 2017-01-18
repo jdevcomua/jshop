@@ -13,7 +13,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
 <a href="<?= $value->getUrl(); ?>" class="frame-photo-title">
     <span class="photo-block">
         <span class="helper"></span>
-        <img src="<?= array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
+        <img src="<?= array_shift($value->getImageUrl(\common\models\Item::IMAGE_SMALL)); ?>">
         <?php if ($value->existDiscount()) { ?>
             <span class="product-status action"></span>
         <?php } ?>

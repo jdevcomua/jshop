@@ -203,13 +203,13 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
-    
+
     public function actionEditWishList($id = null)
     {
         if (!Yii::$app->request->isAjax) {
             throw new NotFoundHttpException('Page not found.');
         }
-        
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         $user = Yii::$app->user;
         if ($user->isGuest) {

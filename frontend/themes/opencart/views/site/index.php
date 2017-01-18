@@ -1,31 +1,33 @@
 <?php
 
+use common\models\Banner;
+use common\models\Item;
 use common\models\Stock;
 use frontend\widgets\item\ItemView;
 use frontend\widgets\sliders\flex\FlexSlider;
-use yii\helpers\Html;
+use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 
-/* @var \common\models\WishList[] wishLists */
-/* @var Stock[] $stocks*/
-/* @var yii\data\ActiveDataProvider $dataProvider*/
+/* @var $category \common\models\ItemCat */
+/* @var $stocks Stock[] */
+/* @var $salesCount integer */
+/* @var $itemsDataProvider ActiveDataProvider */
+/* @var $saleItems Item[] */
+/* @var $topItems Item[] */
+/* @var $rightBanner Banner|null */
+/* @var $centerBanners Banner[] */
 ?>
 <?= FlexSlider::widget([
-    'items' =>[
-        Html::img('/img/velosiped1.jpg'),
-        Html::img('/img/velosiped2.jpg'),
-    ],
+    'items' =>$centerBanners,
 ])?>
-<h3>Featured</h3>
+<h3>Избранное</h3>
 <div class="row product-layout">
     <?= ListView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $itemsDataProvider,
+        'layout' => '{items}',
         'itemView' => function ($model, $key, $index, $widget) {
-            return ItemView::widget([
-                'model' => $model,
-            ]);
-        },
-        'layout'   => '{items}',
+            return ItemView::widget(['model' => $model,'count' =>4]);
+        }
     ]);
     ?>
 </div>

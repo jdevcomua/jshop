@@ -13,7 +13,7 @@ use yii\helpers\Url;
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
             <?php foreach($allCategories as $category):?>
-                <li class="dropdown"><a href="<?= $category->getUrl()?>" class="dropdown-toggle" data-toggle="dropdown"><?= $category->title?></a>
+                <li class="dropdown"><a href="<?= $category->getUrl()?>" class="dropdown-toggle" <?php if (!empty($category->children)) :?>data-toggle="dropdown"<?php endif?>><?= $category->title?></a>
                 <?php if (!empty($category->children)) :?>
                     <div class="dropdown-menu">
                         <div class="dropdown-inner">

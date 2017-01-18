@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Url;
 use common\models\Item;
 
 /**@var Item $model*/
+/**@var int $count*/
 ?>
-<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+<div class="col-lg-<?= $count ?> col-md-<?= $count ?> col-sm-6 col-xs-12">
     <div class="product-thumb transition">
         <div class="image">
             <a href="<?= $model->getUrl() ?>">
@@ -15,7 +15,14 @@ use common\models\Item;
         <div class="caption">
             <h4><a href="<?= $model->getUrl() ?>"><?= $model->title ?></a></h4>
             <p><?= $model->description ?></p>
-            <p class="price"><?= $model->cost ?></p>
+            <p class="price">
+                <?php if ($model->existDiscount()): ?>
+                    <span class="price-new"><?= $model->getNewPrice()?></span>
+                    <span class="price-old"><?= $model->cost ?></span>
+                <?php else :?>
+                    <?= $model->cost ?>
+                <?php endif?>
+            </p>
         </div>
         <div class="button-group">
             <button type="button" data-id="<?= $model->id?>" class="cart-add">

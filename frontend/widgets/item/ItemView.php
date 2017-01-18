@@ -15,6 +15,8 @@ class ItemView extends Widget
     public $model;
 
     public $type;
+    /**@var int count elements on row 3,4*/
+    public $count = 3;
 
     public function init()
     {
@@ -24,9 +26,11 @@ class ItemView extends Widget
 
     public function run()
     {
+        $count = 12 / $this->count;
         if ($this->type == self::TYPE_ITEM) {
             return $this->render('item', [
                 'model' => $this->model,
+                'count' => $count,
             ]);
         }elseif($this->type == self::TYPE_CART){
             return $this->render('cart', [

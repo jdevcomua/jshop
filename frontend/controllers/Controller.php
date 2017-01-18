@@ -9,6 +9,7 @@ class Controller extends \yii\web\Controller
 {
     public $layout = '@app/views/layouts/main';
     private $jsVars;
+    public $breadcrumbs = [];
 
     const PAGE_SIZE = 12;
 

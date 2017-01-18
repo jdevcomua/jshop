@@ -2,6 +2,7 @@
 
 namespace frontend\themes\opencart;
 
+use yii\helpers\Url;
 use yii\web\AssetBundle;
 use yii\web\View;
 
@@ -29,4 +30,9 @@ class OpencartAsset extends AssetBundle
     public $cssOptions = [
         'position' => View::POS_HEAD,
     ];
+
+    public function getLogo()
+    {
+        return Url::base() . '/images/logo.png';
+    }
 }

@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use frontend\themes\opencart\OpencartAsset;
+use frontend\widgets\breadcrumb\Breadcrumbs;
 use frontend\widgets\category\CategoriesView;
 use yii\helpers\Url;
 
@@ -97,7 +98,7 @@ $basicAsset = OpencartAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div id="logo">
-                        <a href="<?= Url::to('/')?>"><img src="<?= Url::base() . '/images/logo.png'?>" title="Your Store" alt="Your Store" class="img-responsive"></a>
+                        <a href="<?= Url::to('/')?>"><img src="<?= $basicAsset->getLogo()?>" title="Your Store" alt="Your Store" class="img-responsive"></a>
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -121,6 +122,7 @@ $basicAsset = OpencartAsset::register($this);
     </header>
     <?= CategoriesView::widget();?>
     <div class="container">
+        <?= Breadcrumbs::widget();?>
         <div class="row">
             <div id="content" class="col-sm-12">
                 <?= $content ?>
@@ -131,46 +133,42 @@ $basicAsset = OpencartAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h5>Information</h5>
+                    <div class="inside-padd">
+                        <a href="" class="logo">
+                            <img src="<?= $basicAsset->getLogo()?>" alt="logo">
+                        </a>
+                        <ul style="list-style: none;">
+                            <li><span class="f-s_16">(800) 568 56 56</span></li>
+                            <li><span class="f-s_16">(800) 568 56 56</span></li>
+                            <li>Звоните с 09:00 до 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Информация</h5>
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=4">About
-                                Us</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=6">Delivery
-                                Information</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=3">Privacy
-                                Policy</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=5">Terms
-                                &amp; Conditions</a></li>
+                        <li><a href="" title="О компании">О компании</a></li>
+                        <li><a href="" title="Оптовым покупателям">Оптовым покупателям</a></li>
+                        <li><a href="" title="Доставка и оплата">Доставка и оплата</a></li>
+                        <li><a href="" title="Гарантии">Гарантии</a></li>
+                        <li><a href="" title="Новости">Новости</a></li>
+                        <li><a href="" title="Бренды">Бренды</a></li>
+                        <li><a href="" title="Контакты">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Customer Service</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=information/contact">Contact Us</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/return/add">Returns</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=information/sitemap">Site Map</a></li>
+                    <h5>Наши преимущества</h5>
+                    <ul>
+                        <li>Быстрая доставка</li>
+                        <li>Гибкая система скидок</li>
+                        <li>Полезная консультация</li>
+                        <li>Качественный сервис</li>
+                        <li>Широкий ассортимент</li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Extras</h5>
+                    <h5></h5>
                     <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=product/manufacturer">Brands</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/voucher">Gift Vouchers</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=affiliate/account">Affiliates</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=product/special">Specials</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>My Account</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=account/account">My Account</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/order">Order History</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/wishlist">Wish List</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/newsletter">Newsletter</a></li>
                     </ul>
                 </div>
             </div>

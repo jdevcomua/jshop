@@ -59,15 +59,6 @@ $(document).ready(function(){
 });
 
 
-function openWishWindow(bool, id) {
-    if (bool) {
-        $('#forCenterAuth').toggleClass('d_n');
-    } else {
-        $('#forCenter').toggleClass('d_n');
-        $('#forCenter').attr('vid', id);
-    }
-}
-function closeWishWindow() {
 function openWishWindow(id) {
     $.ajax({
         url: '/popup/add-to-wish',

@@ -1,6 +1,6 @@
 # phpstorm project files
 .idea
-
+vendor
 .git-credentials
 
 composer.lock

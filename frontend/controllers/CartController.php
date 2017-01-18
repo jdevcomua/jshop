@@ -38,7 +38,10 @@ class CartController extends Controller
 
     public function actionAjaxkit($item_id, $count)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         Yii::$app->cart->addItem(Kit::findOne($item_id), $count);
+        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
+            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
     }
 
     public function actionOrder()

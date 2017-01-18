@@ -13,43 +13,45 @@ $this->title = 'Регистрация';
 
 <div class="f-s_0 title-register without-crumbs">
     <div class="frame-title">
-        <h1 class="title"><?php echo \Yii::t('app', 'Регистрация'); ?></h1>
+        <h1 class="title"><?= \Yii::t('app', 'Регистрация'); ?></h1>
     </div>
 </div>
 <div class="frame-register">
     <?php $form = ActiveForm::begin(); ?>
     <div class="horizontal-form">
-        <?php echo $form->field($model, 'username')->input('text', ['style' => 'width:250px;', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        
+        <?= $form->field($model, 'username', ['inputTemplate' => '{input}<span class="must">*</span>']); ?>
 
-        <?php echo $form->field($model, 'password')->passwordInput(['style' => 'width:250px;', 'pattern' => '.{4,25}', 'title' => 'От 4 до 25 символов', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'password', ['inputTemplate' => '{input}<span class="must">*</span>'])->passwordInput(); ?>
 
-        <?php echo $form->field($model, 'mail')->input('text', ['style' => 'width:250px;', 'required' => true])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'mail', ['inputTemplate' => '{input}<span class="must">*</span>']); ?>
 
-        <?php echo $form->field($model, 'name')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'name'); ?>
 
-        <?php echo $form->field($model, 'surname')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'surname'); ?>
 
-        <?php echo $form->field($model, 'phone')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'phone'); ?>
 
-        <?php echo $form->field($model, 'address')->input('text', ['style' => 'width:250px;'])->label(null, ['style' => 'width:100px;float:left;padding-top:3px;']); ?>
+        <?= $form->field($model, 'address'); ?>
 
         <div class="frame-label">
             <span class="title">&nbsp;</span>
             <div class="frame-form-field">
                 <div class="btn-form m-b_15">
-                    <?php echo Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Зарегистрироваться') . '</span>', ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('<span class="text-el" style="color:#fff">' . \Yii::t('app', 'Зарегистрироваться') . '</span>',
+                        ['style' => 'background: #34a4e7;', 'name' => 'login-button']) ?>
                 </div>
-                <p class="help-block"><?php echo \Yii::t('app', 'Я уже зарегистрирован'); ?></p>
+                <p class="help-block"><?= \Yii::t('app', 'Я уже зарегистрирован'); ?></p>
                 <ul class="items items-register-add-ref">
                     <li>
-                        <a href="<?php echo Yii::$app->urlHelper->to(['login']); ?>" type="button">
-                            <span class="text-el d_l_1"><?php echo \Yii::t('app', 'Войти'); ?></span>
+                        <a href="<?= Yii::$app->urlHelper->to(['login']); ?>" type="button">
+                            <span class="text-el d_l_1"><?= \Yii::t('app', 'Войти'); ?></span>
                         </a>
                     </li>
                     <li>
                         <span class="divider">|</span>
                         <button type="button">
-                            <span class="text-el d_l_1"><?php echo \Yii::t('app', 'Напомнить пароль'); ?></span>
+                            <span class="text-el d_l_1"><?= \Yii::t('app', 'Напомнить пароль'); ?></span>
                         </button>
                     </li>
                 </ul>
@@ -57,4 +59,13 @@ $this->title = 'Регистрация';
         </div>
     </div>
     <?php ActiveForm::end(); ?>
+</div>
+
+<div class="social-login">Войти как пользователь: <br>
+    <a href="<?php echo Yii::$app->urlHelper->to(['user/vk-auth']); ?>">
+        <img src="https://s3.eu-central-1.amazonaws.com/umo4ka/401945557389.png">
+    </a>
+    <a href="<?php echo Yii::$app->urlHelper->to(['user/facebook-auth']); ?>">
+        <img src="https://s3.eu-central-1.amazonaws.com/umo4ka/402107608125.png">
+    </a>
 </div>

@@ -5,6 +5,7 @@
 /* @var $model common\models\User */
 /* @var $changePasswordModel \frontend\models\ChangePassword */
 
+use common\models\WishList;
 use Yii;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -46,7 +47,7 @@ $this->title = 'Профиль пользователя';
                     <div class="horizontal-form">
                         <?php echo $form->field($model, 'username')->textInput(); ?>
 
-                        <?php echo $form->field($model, 'mail')->textInput(); ?>
+                        <?php echo $form->field($model, 'mail')->textInput(['disabled' => true]); ?>
 
                         <?php echo $form->field($model, 'name')->textInput(); ?>
 
@@ -158,19 +159,13 @@ $this->title = 'Профиль пользователя';
                             <div class="drop-content2">
                                 <div class="inside-padd">
                                     <div class="horizontal-form big-title">
-                                        <?php $form = ActiveForm::begin(); ?>
-                                        <?= $form->field(new \common\models\WishList(), 'title')->textInput(); ?>
-                                        <!--<label>
-                                            <span class="title">Описание:</span>
-                                            <span class="frame-form-field">
-                                                <textarea name="wlDescription"></textarea>
-                                            </span>
-                                        </label>-->
+                                        <?php $form = ActiveForm::begin(['action' => Yii::$app->urlHelper->to(['profile#wish_list'])]); ?>
+                                        <?= $form->field(new WishList(), 'title')->textInput(); ?>
                                         <div class="frame-label" style="margin-bottom: 0;">
                                             <div class="frame-form-field" style="margin-left: 160px; margin-top: 10px;">
                                                 <div class="btn-def">
-                                                    <?php echo Html::submitButton('<span class="text-el">' . Yii::t('app', 'Создать новый список')
-                                                        . '</span>>', ['class' => 'btn-search', 'style' => 'width: 180px;']) ?>
+                                                    <?php echo Html::submitButton(Html::tag('span', Yii::t('app', 'Создать новый список'),
+                                                        ['class' => 'text-el']), ['class' => 'btn-search', 'style' => 'width: 180px;']) ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -180,8 +175,7 @@ $this->title = 'Профиль пользователя';
                             </div>
                         </div>
                         <?php foreach ($model->getWishLists()->all() as $list) {
-                            /* @var $list \common\models\WishList */
-                            ?>
+                            /* @var $list WishList */ ?>
                             <div id="list-<?php echo $list->id ?>" class="drop-style-2 drop-wishlist-items"
                                  data-rel="list-item">
                                 <div class="drop-header2">
@@ -223,7 +217,8 @@ $this->title = 'Профиль пользователя';
                                     <div class="inside-padd">
                                         <div class="funcs-buttons-wishlist d_i-b">
                                             <div class="btn-edit-WL">
-                                                <button type="button" class="isDrop">
+                                                <button type="button" class="isDrop"
+                                                        onclick="openWishEditWindow(<?= $list->id; ?>)">
                                                     <span class="d_l_1 text-el">Редактировать список</span>
                                                 </button>
                                             </div>

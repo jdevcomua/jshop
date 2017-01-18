@@ -62,7 +62,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                 <div class="frame-count-buy js-variant-17906 js-variant">
                     <?php if (Yii::$app->cart->checkItemInCart($value->id)) { ?>
                         <div id="inCart-<?php echo $value->id ?>" class="btn-buy btn-cart">
-                            <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>" style="padding: 0 9px 0 7px;">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>" style="padding: 0 9px 0 7px;">
                                 <button type="button" class="btnBuy" title="В корзине" style="padding-top: 8px;">
                                     <span class="icon_cleaner icon_cleaner_buy"></span>
                                 </button>
@@ -70,7 +70,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                         </div>
                     <?php } else { ?>
                         <div id="inCart-<?php echo $value->id ?>" class="btn-buy btn-cart d_n">
-                            <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>" style="padding: 0 9px 0 7px;">
+                            <a href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>" style="padding: 0 9px 0 7px;">
                                 <button type="button" class="btnBuy" title="В корзине" style="padding-top: 8px;">
                                     <span class="icon_cleaner icon_cleaner_buy"></span>
                                 </button>
@@ -124,7 +124,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                         <div class="btnWish btn-wish">
                             <?php if ($value->inWishList()) { ?>
                                 <button id="inwish-<?php echo $value->id; ?>" class="inWishlist" title="В списке желаний">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['user/profile#wish_list']) ?>">
                                         <span class="icon_wish" style="background-position: -160px 0;"></span>
                                     </a>
                                 </button>
@@ -135,7 +135,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                                 </button>
                                 <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n"
                                         title="В списке желаний">
-                                    <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
+                                    <a href="<?php echo Yii::$app->urlHelper->to(['user/profile#wish_list']) ?>">
                                         <span class="icon_wish"  style="background-position: -160px 0;"></span>
                                     </a>
                                 </button>

@@ -458,7 +458,7 @@ form .btn-form .text-el, .btn-form input{color: #000;}
 
 /*form*/
 .help-block{color: #999;}
-.must{color: red;}
+.must{color: #e60707;}
 .msg .text-el{color: #666;}
 label.error, .error .text-el{color: #ff7264;}
 .slider{

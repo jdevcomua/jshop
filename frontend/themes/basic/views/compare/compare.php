@@ -86,7 +86,7 @@ $this->title = 'Сравнение товаров';
                                                 <!--Start. Include product template-->
                                                 <ul class="items items-catalog" style="height: 273px;">
                                                     <li class="globalFrameProduct to-cart" data-pos="top">
-                                                        <a href="<?php echo Yii::$app->urlHelper->to(['item', 'id' => $item->id]); ?>"
+                                                        <a href="<?php echo Yii::$app->urlHelper->to(['item/item', 'id' => $item->id]); ?>"
                                                            class="frame-photo-title">
                                                             <span class="photo-block">
                                                                 <span class="helper"></span>
@@ -137,7 +137,7 @@ $this->title = 'Сравнение товаров';
                                                                             <?php if (Yii::$app->cart->checkItemInCart($item->id)) { ?>
                                                                                 <div id="inCart-<?php echo $item->id ?>"
                                                                                      class="btn-buy btn-cart">
-                                                                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>"
+                                                                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>"
                                                                                        style="padding: 0 9px 0 7px;">
                                                                                         <button type="button"
                                                                                                 class="btnBuy"
@@ -151,7 +151,7 @@ $this->title = 'Сравнение товаров';
                                                                             <?php } else { ?>
                                                                                 <div id="inCart-<?php echo $item->id ?>"
                                                                                      class="btn-buy btn-cart d_n">
-                                                                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart']) ?>"
+                                                                                    <a href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>"
                                                                                        style="padding: 0 9px 0 7px;">
                                                                                         <button type="button"
                                                                                                 class="btnBuy"
@@ -189,7 +189,7 @@ $this->title = 'Сравнение товаров';
                                                                                         id="inwish-<?php echo $item->id; ?>"
                                                                                         class="inWishlist"
                                                                                         data-title="В списке желаний">
-                                                                                        <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
+                                                                                        <a href="<?php echo Yii::$app->urlHelper->to(['user/profile#wish_list']) ?>">
                                                                                             <span class="icon_wish"
                                                                                                 style="background-position: -160px 0;"></span>
                                                                                             <span class="text-el d_l">В списке желания</span>
@@ -209,7 +209,7 @@ $this->title = 'Сравнение товаров';
                                                                                         id="inwish-<?php echo $item->id; ?>"
                                                                                         class="inWishlist d_n"
                                                                                         data-title="В списке желаний">
-                                                                                        <a href="<?php echo Yii::$app->urlHelper->to(['profile#wish_list']) ?>">
+                                                                                        <a href="<?php echo Yii::$app->urlHelper->to(['user/profile#wish_list']) ?>">
                                                                                             <span class="icon_wish"
                                                                                                   style="background-position: -160px 0;"></span>
                                                                                             <span class="text-el d_l">В списке желания</span>

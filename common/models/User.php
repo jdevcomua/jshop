@@ -2,7 +2,10 @@
 
 namespace common\models;
 
+use budyaga\users\models\AuthAssignment;
+use budyaga\users\models\AuthItem;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "user".
@@ -27,6 +30,8 @@ use Yii;
  * @property Orders[] $orders
  * @property Vote[] $votes
  * @property WishList[] $wishLists
+ * @property AuthItem[] $assignedRules
+ * @property AuthAssignment[] $assignments
  */
 class User extends Model implements \yii\web\IdentityInterface
 {
@@ -69,9 +74,10 @@ class User extends Model implements \yii\web\IdentityInterface
             [['username','password'],'required'],
             [['username', 'mail', 'vk_id', 'fb_id'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
-            [['username'], 'string', 'length' => [4, 25]],
+            [['username', 'password'], 'string', 'length' => [4, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password'], 'string'],
-            [['mail'], 'email']
+            [['mail'], 'email'],
+            [['username', 'password', 'mail'], 'required'],
 
         ];
     }
@@ -246,6 +252,21 @@ class User extends Model implements \yii\web\IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getAssignments()
+    {
+        return $this->hasMany(AuthAssignment::className(), ['user_id' => 'id']);
+    }
+
+    public function getAssignedRules()
+    {
+        return $this->hasMany(AuthItem::className(), ['name' => 'item_name'])->via('assignments');
+    }
+
+    public function getNotAssignedRules()
+    {
+        return AuthItem::find()->where(['not in', 'name', ArrayHelper::getColumn($this->assignedRules, 'name')])->all();
     }
 
 }

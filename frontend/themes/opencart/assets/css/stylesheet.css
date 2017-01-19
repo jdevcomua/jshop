@@ -613,6 +613,12 @@ footer h5 {
 
 .product-thumb .image a {
     display: block;
+    height: 150px;
+}
+
+.item-description {
+    height: 100px;
+    overflow: hidden;
 }
 
 .product-thumb .image a:hover {
@@ -828,11 +834,11 @@ h2.price {
     line-height: 40px;
 }
 
-.inside-padd ul{
+footer .inside-padd ul{
     padding: 0;
     list-style: none;
 }
 
-.inside-padd ul li{
+footer .inside-padd ul li{
     margin-bottom: 5px;
 }

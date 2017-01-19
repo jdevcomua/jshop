@@ -5,7 +5,7 @@ use common\models\Item;
 /**@var Item $model*/
 /**@var int $count*/
 ?>
-<div class="col-lg-<?= $count ?> col-md-<?= $count ?> col-sm-6 col-xs-12">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="product-thumb transition">
         <div class="image">
             <a href="<?= $model->getUrl() ?>">
@@ -14,7 +14,7 @@ use common\models\Item;
         </div>
         <div class="caption">
             <h4><a href="<?= $model->getUrl() ?>"><?= $model->title ?></a></h4>
-            <p><?= $model->description ?></p>
+            <div class="item-description"><?= $model->description ?></div>
             <p class="price">
                 <?php if ($model->existDiscount()): ?>
                     <span class="price-new"><?= $model->getNewPrice()?></span>

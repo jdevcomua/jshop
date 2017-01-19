@@ -158,7 +158,7 @@ $basicAsset = OpencartAsset::register($this);
                 </div>
                 <div class="col-sm-3">
                     <h5>Наши преимущества</h5>
-                    <ul>
+                    <ul class="list-unstyled">
                         <li>Быстрая доставка</li>
                         <li>Гибкая система скидок</li>
                         <li>Полезная консультация</li>

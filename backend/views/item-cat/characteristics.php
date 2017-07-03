@@ -1,15 +1,17 @@
 <?php
 
+use unclead\multipleinput\TabularInput;
 use yii\bootstrap\ActiveForm;
-use unclead\widgets\TabularInput;
 use yii\helpers\Html;
 use common\models\Characteristic;
 
 /* @var $this yii\web\View */
 /* @var $models Characteristic[] */
+/* @var $category \common\models\ItemCat */
 
-$this->title = Yii::t('app', 'Создать характеристики');
+$this->title = Yii::t('app', 'Характеристики категории: ' . $category->title);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Cats'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['view', 'id' => $category->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-cat-create">

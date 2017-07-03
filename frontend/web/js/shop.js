@@ -1,6 +1,64 @@
 /**
- * Created by umka on 10.01.16.
+ * Created by umka on 10.01.16. *
+ *
+ * .cart-add   - style for add to cart button
+ * #countItems - quantity of elements in cart
+ * #priceItems - price of elements in cart
  */
+
+var Shop = {
+    init:function(){
+        this.Cart.init();
+    },
+    isGuest: true
+};
+var Cart = {
+    countItems: null,
+    priceItems: null,
+    init: function(){
+        var self = this;
+        this.priceItems = $('#priceItems');
+        this.countItems = $('#countItems');
+        $('.cart-add').click(function(){
+            self.add($(this).data('id'));
+        });
+    },
+    setCountItems:function(val){
+        if (this.countItems)
+            this.countItems.html(val);
+    },
+    setPriceItems:function(val){
+        if (this.priceItems)
+            this.priceItems.html(val);
+    },
+    add:function(id, count){
+        var self = this;
+        count = typeof count !== 'undefined' ?  count : 1;
+        $.ajax({
+            url: '/cart/ajax',
+            data: {count: count, item_id: id},
+            dataType: 'json',
+            success: function (data) {
+                if (data.count == 0) {
+                    $('#cartEmpty').toggleClass('d_n');
+                    $('#cartFull').toggleClass('d_n');
+                }
+                self.setCountItems(data.count);
+                self.setPriceItems(data.price);
+                $('#toCart-' + id).toggleClass('d_n');
+                $('#inCart-' + id).toggleClass('d_n');
+            }
+        });
+    }
+};
+
+Shop.Cart = Cart;
+
+$(document).ready(function(){
+    Shop.init();
+});
+
+
 function openWishWindow(id) {
     $.ajax({
         url: '/popup/add-to-wish',
@@ -109,7 +167,7 @@ function addKit(id) {
         data: {count: 1, item_id: id},
         dataType: 'json',
         success: function (data) {
-            var count = +$('#countItems ').html();
+            var count = +$('#countItems').html();
             if (count == 0) {
                 $('#cartEmpty').toggleClass('d_n');
                 $('#cartFull').toggleClass('d_n');

@@ -6,6 +6,10 @@ body {
     line-height: 20px;
 }
 
+.f-s_13{font-size: 13px !important;}
+.f-s_14{font-size: 14px !important;}
+.f-s_16{font-size: 16px !important;}
+
 h1, h2, h3, h4, h5, h6 {
     color: #444;
 }
@@ -145,8 +149,9 @@ div.required .control-label:before {
     margin-left: 15px;
 }
 
-#logo {
+.logo {
     margin: 0 0 10px 0;
+    display: block;
 }
 
 #search {
@@ -608,6 +613,12 @@ footer h5 {
 
 .product-thumb .image a {
     display: block;
+    height: 150px;
+}
+
+.item-description {
+    height: 100px;
+    overflow: hidden;
 }
 
 .product-thumb .image a:hover {
@@ -821,4 +832,13 @@ h2.price {
 
 .flex-direction-nav a:before {
     line-height: 40px;
+}
+
+footer .inside-padd ul{
+    padding: 0;
+    list-style: none;
+}
+
+footer .inside-padd ul li{
+    margin-bottom: 5px;
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\themes\opencart;
 
+use yii\helpers\Url;
 use yii\web\AssetBundle;
 use yii\web\View;
 
@@ -21,7 +22,7 @@ class OpencartAsset extends AssetBundle
         'js/jquery.flexslider-min.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
+        'frontend\assets\AppAsset',
     ];
     public $jsOptions = [
         'position' => View::POS_HEAD,
@@ -29,4 +30,9 @@ class OpencartAsset extends AssetBundle
     public $cssOptions = [
         'position' => View::POS_HEAD,
     ];
+
+    public function getLogo()
+    {
+        return Url::base() . '/images/logo.png';
+    }
 }

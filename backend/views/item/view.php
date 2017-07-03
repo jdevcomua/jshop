@@ -20,15 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <p>
-                <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item/update', 'id' => $model->id]),
+                <?php
+                    echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item/update', 'id' => $model->id]),
+                            ['class' => 'btn btn-primary']) . ' ';
+                    echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['item/delete', 'id' => $model->id]), [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот предмет?'),
+                            'method' => 'post',
+                        ],
+                    ]) . ' ';
+                    echo Html::a(Yii::t('app', 'Создать'), Yii::$app->urlHelper->to(['item/create']),
                         ['class' => 'btn btn-primary']) . ' ';
-                echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['item/delete', 'id' => $model->id]), [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этот предмет?'),
-                        'method' => 'post',
-                    ],
-                ]) ?>
+                ?>
             </p>
 
             <div style="width: 100%;">

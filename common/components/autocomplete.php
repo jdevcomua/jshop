@@ -14,6 +14,7 @@ class Yii extends \yii\BaseYii
  * @property \common\components\Cart $cart
  * @property \common\components\UrlHelper $urlHelper
  * @property \common\components\Compare $compare
+ * @property \frontend\controllers\Controller $controller
  */
 class MyApp extends Application
 {

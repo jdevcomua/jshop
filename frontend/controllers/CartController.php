@@ -23,9 +23,17 @@ class CartController extends Controller
     public function actionAjax($item_id, $count)
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        Yii::$app->cart->addItem(Item::findOne($item_id), $count);
-        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
-            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
+        /**@var Item $item*/
+        $item = Item::findOne($item_id);
+        Yii::$app->cart->addItem($item, $count);
+        return [
+            'count' => Yii::$app->cart->getCount(),
+            'price' => Yii::$app->cart->getSum(),
+        ];
+//        Yii::$app->response->format = Response::FORMAT_JSON;
+//        Yii::$app->cart->addItem(Item::findOne($item_id), $count);
+//        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
+//            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
     }
 
     public function actionAjaxkit($item_id, $count)
@@ -76,8 +84,10 @@ class CartController extends Controller
     public function actionIndex()
     {
         $sum = Yii::$app->cart->getSum();
-        return $this->render('cart', ['models' => Yii::$app->cart->getModels(),
-            'sum' => $sum]);
+        return $this->render('cart', [
+            'models' => Yii::$app->cart->getModels(),
+            'sum' => $sum,
+        ]);
     }
 
     /**

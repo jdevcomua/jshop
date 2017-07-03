@@ -2,13 +2,12 @@
 
 namespace frontend\controllers;
 
+use common\components\Theme;
 use common\models\Banner;
-use common\models\Characteristic;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Stock;
-use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
@@ -30,15 +29,18 @@ class SiteController extends Controller
         foreach ($centerBanners as $centerBanner) {
             $centerBannersImages[] = Html::a(Html::img($centerBanner->getImageUrl()), $centerBanner->url);
         }
-        $items = Item::find()->orderBy('addition_date desc')->limit(6);
+        $items = Item::find()->orderBy('addition_date desc')->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
             'query' => $items,
             'pagination' => false,
         ]);
-        return $this->render('index', ['itemsDataProvider' => $itemsDataProvider, 'stocks' => $stocks,
-            'saleItems' => $salesItemsQuery->all(), 'salesCount' => $salesItemsQuery->count(),
+        return $this->render('index', [
+            'itemsDataProvider' => $itemsDataProvider,
+            'stocks' => $stocks,
+            'saleItems' => $salesItemsQuery->all(),
+            'salesCount' => $salesItemsQuery->count(),
             'topItems' => Item::find()->top()->all(),
             'centerBanners' => $centerBannersImages,
             'rightBanner' => Banner::findOne(['enable' => 1, 'position' => Banner::POSITION_INDEX_RIGHT]),
@@ -96,6 +98,7 @@ class SiteController extends Controller
         $selected = $request->get('filter');
         $items = $this->filter($selected);
 
+        /**@var ItemCat $category*/
         $category = ItemCat::findOne($id);
         $items->andFilterWhere(['category_id' => $id]);
 
@@ -103,6 +106,7 @@ class SiteController extends Controller
             $items->andFilterWhere(['like', 'title', $search]);
         }
         $sort = $request->get('sort');
+        $quantity = $request->get('quantity', self::PAGE_SIZE);
         $this->sorting($items, $sort);
 
         //for filter by price
@@ -126,14 +130,26 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items,
             'pagination' => [
-                'pageSize' => Controller::PAGE_SIZE,
+                'pageSize' => $quantity,
             ]
         ]);
 
-        return $this->render('category', ['items' => $items, 'selected' => empty($selected) ? [] : $selected, 'sort' => $sort,
-            'chars' => $category->characteristics, 'filterCounts' => $filterCounts,
-            'minCost' => $minCost, 'maxCost' => $maxCost, 'leftCost' => $leftCost, 'dataProvider' => $dataProvider,
-            'rightCost' => $rightCost, 'category' => $category, 'count' => $items->count(),]);
+        $this->breadcrumbs = [$category->getUrl() => $category->title];
+        return $this->render('category', [
+            'items' => $items,
+            'selected' => empty($selected) ? [] : $selected,
+            'sort' => $sort,
+            'chars' => $category->characteristics,
+            'filterCounts' => $filterCounts,
+            'minCost' => $minCost,
+            'maxCost' => $maxCost,
+            'leftCost' => $leftCost,
+            'dataProvider' => $dataProvider,
+            'rightCost' => $rightCost,
+            'category' => $category,
+            'count' => $items->count(),
+            'quantity' => $quantity,
+        ]);
     }
 
     /**

@@ -2,7 +2,6 @@
 
 use common\models\Characteristic;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $category \common\models\ItemCat */
 /* @var $this yii\web\View */
@@ -14,6 +13,8 @@ use yii\widgets\ActiveForm;
 /* @var $leftCost string|mixed */
 /* @var $rightCost string|mixed */
 /* @var $filterCounts array */
+
+$this->registerCssFile('/css/filter.css');
 
 if (($category->id != '0') && ($category->getItems()->count() > 1)) {
     echo Html::input('hidden', 'sort', $sort, ['id' => 'sort_input'])
@@ -249,7 +250,7 @@ if (($category->id != '0') && ($category->getItems()->count() > 1)) {
                 <div class="filter-foot">
                     <div class="inside-padd t-a_c">
                         <div class="btn-form">
-                            <?php echo Html::submitButton('<span class="text-el" style="color: #000;" c>' . \Yii::t("app", "Фильтровать") . '</span>'); ?>
+                            <?php echo Html::submitButton('<span class="text-el" style="color: #000;font-size: 13px;" c>' . \Yii::t("app", "Фильтровать") . '</span>'); ?>
 
                         </div>
                     </div>

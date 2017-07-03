@@ -71,6 +71,7 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
+            [['username','password'],'required'],
             [['username', 'mail', 'vk_id', 'fb_id'], 'unique'],
             [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
             [['username', 'password'], 'string', 'length' => [4, 25]],

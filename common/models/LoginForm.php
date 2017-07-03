@@ -3,12 +3,11 @@
 namespace common\models;
 
 use Yii;
-use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
  */
-class LoginForm extends Model
+class LoginForm extends \yii\base\Model
 {
     public $username;
     public $password;
@@ -32,14 +31,11 @@ class LoginForm extends Model
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'Логин'),
-            'password' => Yii::t('app', 'Пароль'),
+            'username'  => Yii::t('app/model','username'),
+            'password'  => Yii::t('app/model','password'),
         ];
     }
 

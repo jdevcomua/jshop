@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Item;
+
 /* @var $category \common\models\ItemCat */
 /* @var $value \common\models\Item */
 
@@ -11,7 +13,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
 <a href="<?= $value->getUrl(); ?>" class="frame-photo-title">
     <span class="photo-block">
         <span class="helper"></span>
-        <img src="<?= array_shift($value->getImageUrl(\common\models\Item::SMALL_IMAGE)); ?>">
+        <img src="<?= array_shift($value->getImageUrl(\common\models\Item::IMAGE_SMALL)); ?>">
         <?php if ($value->existDiscount()) { ?>
             <span class="product-status action"></span>
         <?php } ?>
@@ -131,7 +133,7 @@ $isWish = isset($wishListPage) && $wishListPage == true && isset($wishId);
                                         onclick="openWishWindow(<?php echo $value->id; ?>);">
                                     <span class="icon_wish"></span>
                                 </button>
-                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n" 
+                                <button id="inwish-<?php echo $value->id; ?>" class="inWishlist d_n"
                                         title="В списке желаний">
                                     <a href="<?php echo Yii::$app->urlHelper->to(['user/profile#wish_list']) ?>">
                                         <span class="icon_wish"  style="background-position: -160px 0;"></span>

@@ -4,9 +4,8 @@
 /* @var $content string */
 
 use frontend\themes\opencart\OpencartAsset;
+use frontend\widgets\breadcrumb\Breadcrumbs;
 use frontend\widgets\category\CategoriesView;
-use frontend\widgets\sliders\flex\FlexSlider;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 $basicAsset = OpencartAsset::register($this);
@@ -71,22 +70,24 @@ $basicAsset = OpencartAsset::register($this);
                     <li class="dropdown">
                         <a href="<?= Url::to('user/profile')?>" title="My Account" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            <span class="hidden-xs hidden-sm hidden-md">My Account</span>
+                            <span class="hidden-xs hidden-sm hidden-md"><?= Yii::t('app', 'Профиль')?></span>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="<?= Url::to('user/register')?>">Register</a></li>
-                            <li><a href="<?= Url::to('user/login')?>">Login</a></li>
+                            <li><a href="<?= Url::to('user/register')?>"><?= Yii::t('app', 'Регистрация')?></a></li>
+                            <li><a href="<?= Url::to('user/login')?>"><?= Yii::t('app', 'Авторизация')?></a></li>
                         </ul>
                     </li>
-                    <li><a href="http://demo.opencart.com/index.php?route=account/wishlist" id="wishlist-total"
-                           title="Wish List (0)"><i class="fa fa-heart"></i> <span
-                                class="hidden-xs hidden-sm hidden-md">Wish List (0)</span></a></li>
-                    <li><a href="http://demo.opencart.com/index.php?route=checkout/cart" title="Shopping Cart"><i
-                                class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Shopping Cart</span></a>
+                    <li>
+                        <a href="<?= Url::to('user/Wishlist')?>" id="wishlist-total" title="<?= Yii::t('app', 'Список желаний')?> (0)"><i class="fa fa-heart"></i>
+                            <span class="hidden-xs hidden-sm hidden-md"><?= Yii::t('app', 'Список желаний')?> (0)</span>
+                        </a>
                     </li>
-                    <li><a href="http://demo.opencart.com/index.php?route=checkout/checkout" title="Checkout"><i
-                                class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">Checkout</span></a>
+                    <li>
+                        <a href="<?= Url::to('cart/index')?>" title="Checkout">
+                            <i class="fa fa-share"></i>
+                            <span class="hidden-xs hidden-sm hidden-md"><?= Yii::t('app', 'Оплатить')?></span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -97,27 +98,23 @@ $basicAsset = OpencartAsset::register($this);
             <div class="row">
                 <div class="col-sm-4">
                     <div id="logo">
-                        <a href="<?= Url::to('/')?>"><img src="<?= Url::base() . '/images/logo.png'?>" title="Your Store" alt="Your Store" class="img-responsive"></a>
+                        <a href="<?= Url::to('/')?>"><img src="<?= $basicAsset->getLogo()?>" title="Your Store" alt="Your Store" class="img-responsive"></a>
                     </div>
                 </div>
                 <div class="col-sm-5">
                     <div id="search" class="input-group">
-                        <input type="text" name="search" value="" placeholder="Search" class="form-control input-lg">
-<span class="input-group-btn">
-<button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
-</span>
+                        <input type="text" name="search" value="" placeholder="<?=Yii::t('app', 'Поиск')?>" class="form-control input-lg">
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-lg"><i class="fa fa-search"></i></button>
+                        </span>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div id="cart" class="btn-group btn-block">
-                        <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
-                                class="btn btn-inverse btn-block btn-lg dropdown-toggle"><i
-                                class="fa fa-shopping-cart"></i> <span id="cart-total">0 item(s) - $0.00</span></button>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <p class="text-center">Your shopping cart is empty!</p>
-                            </li>
-                        </ul>
+                        <a class="btn btn-inverse btn-block btn-lg" href="<?= Url::to('cart/index')?>">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span id="cart-total"><span id="countItems"><?= Yii::$app->cart->getCount() ?></span> <?=Yii::t('app', 'товар(ов)')?> - <span id="priceItems"><?= Yii::$app->cart->getSum() ?></span></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -125,200 +122,10 @@ $basicAsset = OpencartAsset::register($this);
     </header>
     <?= CategoriesView::widget();?>
     <div class="container">
+        <?= Breadcrumbs::widget();?>
         <div class="row">
             <div id="content" class="col-sm-12">
-                <?= FlexSlider::widget([
-                    'items' =>[
-                        Html::img('/img/velosiped1.jpg'),
-                        Html::img('/img/velosiped2.jpg'),
-                    ],
-                ])?>
-                <h3>Featured</h3>
-                <div class="row product-layout">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="product-thumb transition">
-                            <div class="image"><a
-                                    href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=43"><img
-                                        src="./Your Store_files/macbook_1-200x200.jpg" alt="MacBook" title="MacBook"
-                                        class="img-responsive"></a></div>
-                            <div class="caption">
-                                <h4>
-                                    <a href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=43">MacBook</a>
-                                </h4>
-                                <p>
-                                    Intel Core 2 Duo processor
-                                    Powered by an Intel Core 2 Duo processor at speeds up to 2.1..</p>
-                                <p class="price">
-                                    $602.00 <span class="price-tax">Ex Tax: $500.00</span>
-                                </p>
-                            </div>
-                            <div class="button-group">
-                                <button type="button" onclick="cart.add(&#39;43&#39;);"><i
-                                        class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
-                                </button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="wishlist.add(&#39;43&#39;);" data-original-title="Add to Wish List"><i
-                                        class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="compare.add(&#39;43&#39;);" data-original-title="Compare this Product">
-                                    <i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="product-thumb transition">
-                            <div class="image"><a
-                                    href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=40"><img
-                                        src="./Your Store_files/iphone_1-200x200.jpg" alt="iPhone" title="iPhone"
-                                        class="img-responsive"></a></div>
-                            <div class="caption">
-                                <h4>
-                                    <a href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=40">iPhone</a>
-                                </h4>
-                                <p>
-                                    iPhone is a revolutionary new mobile phone that allows you to make a call by simply
-                                    tapping a nam..</p>
-                                <p class="price">
-                                    $123.20 <span class="price-tax">Ex Tax: $101.00</span>
-                                </p>
-                            </div>
-                            <div class="button-group">
-                                <button type="button" onclick="cart.add(&#39;40&#39;);"><i
-                                        class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
-                                </button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="wishlist.add(&#39;40&#39;);" data-original-title="Add to Wish List"><i
-                                        class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="compare.add(&#39;40&#39;);" data-original-title="Compare this Product">
-                                    <i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="product-thumb transition">
-                            <div class="image"><a
-                                    href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=42"><img
-                                        src="./Your Store_files/apple_cinema_30-200x200.jpg" alt="Apple Cinema 30&quot;"
-                                        title="Apple Cinema 30&quot;" class="img-responsive"></a></div>
-                            <div class="caption">
-                                <h4>
-                                    <a href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=42">Apple
-                                        Cinema 30"</a></h4>
-                                <p>
-                                    The 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel
-                                    resolution. Designed sp..</p>
-                                <p class="price">
-                                    <span class="price-new">$110.00</span> <span class="price-old">$122.00</span>
-                                    <span class="price-tax">Ex Tax: $90.00</span>
-                                </p>
-                            </div>
-                            <div class="button-group">
-                                <button type="button" onclick="cart.add(&#39;42&#39;);"><i
-                                        class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
-                                </button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="wishlist.add(&#39;42&#39;);" data-original-title="Add to Wish List"><i
-                                        class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="compare.add(&#39;42&#39;);" data-original-title="Compare this Product">
-                                    <i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="product-thumb transition">
-                            <div class="image"><a
-                                    href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=30"><img
-                                        src="./Your Store_files/canon_eos_5d_1-200x200.jpg" alt="Canon EOS 5D"
-                                        title="Canon EOS 5D" class="img-responsive"></a></div>
-                            <div class="caption">
-                                <h4>
-                                    <a href="http://demo.opencart.com/index.php?route=product/product&amp;product_id=30">Canon
-                                        EOS 5D</a></h4>
-                                <p>
-                                    Canon's press material for the EOS 5D states that it 'defines (a) new D-SLR
-                                    category', while we'r..</p>
-                                <p class="price">
-                                    <span class="price-new">$98.00</span> <span class="price-old">$122.00</span>
-                                    <span class="price-tax">Ex Tax: $80.00</span>
-                                </p>
-                            </div>
-                            <div class="button-group">
-                                <button type="button" onclick="cart.add(&#39;30&#39;);"><i
-                                        class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Add to Cart</span>
-                                </button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="wishlist.add(&#39;30&#39;);" data-original-title="Add to Wish List"><i
-                                        class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title=""
-                                        onclick="compare.add(&#39;30&#39;);" data-original-title="Compare this Product">
-                                    <i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="carousel0" class="flexslider carousel">
-
-                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                        <ul class="slides"
-                            style="width: 2200%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/cocacola-130x100.png" alt="Coca Cola" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/nintendo-130x100.png" alt="Nintendo" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/burgerking-130x100.png" alt="Burger King"
-                                    class="img-responsive" draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/starbucks-130x100.png" alt="Starbucks"
-                                    class="img-responsive" draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/canon-130x100.png" alt="Canon" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/sony-130x100.png" alt="Sony" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/redbull-130x100.png" alt="RedBull" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/nfl-130x100.png" alt="NFL" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/harley-130x100.png" alt="Harley Davidson"
-                                    class="img-responsive" draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/dell-130x100.png" alt="Dell" class="img-responsive"
-                                    draggable="false"></li>
-                            <li style="width: 208px; float: left; display: block;"><img
-                                    src="./Your Store_files/disney-130x100.png" alt="Disney" class="img-responsive"
-                                    draggable="false"></li>
-                        </ul>
-                    </div>
-                    <ol class="flex-control-nav flex-control-paging">
-                        <li><a class="flex-active">1</a></li>
-                        <li><a class="">2</a></li>
-                        <li><a class="">3</a></li>
-                    </ol>
-                    <ul class="flex-direction-nav">
-                        <li><a class="flex-prev" href="http://demo.opencart.com/#">Previous</a></li>
-                        <li><a class="flex-next" href="http://demo.opencart.com/#">Next</a></li>
-                    </ul>
-                </div>
-                <script type="text/javascript"><!--
-                    $(window).load(function () {
-                        $('#carousel0').flexslider({
-                            animation: 'slide',
-                            itemWidth: 130,
-                            itemMargin: 100,
-                            minItems: 2,
-                            maxItems: 4
-                        });
-                    });
-                    --></script>
+                <?= $content ?>
             </div>
         </div>
     </div>
@@ -326,46 +133,42 @@ $basicAsset = OpencartAsset::register($this);
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <h5>Information</h5>
+                    <div class="inside-padd">
+                        <a href="" class="logo">
+                            <img src="<?= $basicAsset->getLogo()?>" alt="logo">
+                        </a>
+                        <ul style="list-style: none;">
+                            <li><span class="f-s_16">(800) 568 56 56</span></li>
+                            <li><span class="f-s_16">(800) 568 56 56</span></li>
+                            <li>Звоните с 09:00 до 18:00</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h5>Информация</h5>
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=4">About
-                                Us</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=6">Delivery
-                                Information</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=3">Privacy
-                                Policy</a></li>
-                        <li>
-                            <a href="http://demo.opencart.com/index.php?route=information/information&amp;information_id=5">Terms
-                                &amp; Conditions</a></li>
+                        <li><a href="" title="О компании">О компании</a></li>
+                        <li><a href="" title="Оптовым покупателям">Оптовым покупателям</a></li>
+                        <li><a href="" title="Доставка и оплата">Доставка и оплата</a></li>
+                        <li><a href="" title="Гарантии">Гарантии</a></li>
+                        <li><a href="" title="Новости">Новости</a></li>
+                        <li><a href="" title="Бренды">Бренды</a></li>
+                        <li><a href="" title="Контакты">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Customer Service</h5>
+                    <h5>Наши преимущества</h5>
                     <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=information/contact">Contact Us</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/return/add">Returns</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=information/sitemap">Site Map</a></li>
+                        <li>Быстрая доставка</li>
+                        <li>Гибкая система скидок</li>
+                        <li>Полезная консультация</li>
+                        <li>Качественный сервис</li>
+                        <li>Широкий ассортимент</li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Extras</h5>
+                    <h5></h5>
                     <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=product/manufacturer">Brands</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/voucher">Gift Vouchers</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=affiliate/account">Affiliates</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=product/special">Specials</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>My Account</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="http://demo.opencart.com/index.php?route=account/account">My Account</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/order">Order History</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/wishlist">Wish List</a></li>
-                        <li><a href="http://demo.opencart.com/index.php?route=account/newsletter">Newsletter</a></li>
                     </ul>
                 </div>
             </div>

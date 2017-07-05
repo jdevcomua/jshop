@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /* @var $notChecked yii\data\ActiveDataProvider */
 /* @var $hidden \yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Votes');
+$this->title = Yii::t('app', 'Отзывы');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vote-index">

@@ -10,7 +10,7 @@ use common\models\Characteristic;
 /* @var $category \common\models\ItemCat */
 
 $this->title = Yii::t('app', 'Характеристики категории: ' . $category->title);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Cats'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Категории'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['view', 'id' => $category->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -9,9 +9,9 @@ use yii\helpers\ArrayHelper;
 /* @var $modelForm \backend\models\AssignmentForm */
 
 $this->title = $modelForm->model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'USERS'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Пользователи'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelForm->model->username, 'url' => ['/user/admin/view', 'id' => $modelForm->model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'PERMISSIONS');
+$this->params['breadcrumbs'][] = Yii::t('app', 'Права доступа');
 
 $assets = UsersAsset::register($this);
 ?>

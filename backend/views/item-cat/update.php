@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $models ItemCat */
 /* @var $categories array */
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Cats'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Категории'), 'url' => ['index']];
 if ($count == 'one') {
     $this->title = Yii::t('app', 'Редактировать категорию: ') . ' ' . $model->title;
     $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];

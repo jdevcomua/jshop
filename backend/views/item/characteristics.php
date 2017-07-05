@@ -7,8 +7,13 @@ use kartik\typeahead\Typeahead;
 
 /* @var $characteristics \common\models\Characteristic[] */
 /* @var $this \yii\web\View */
+/* @var $item \common\models\Item */
 
 $this->title = 'Характеристики товара';
+$this->title = Yii::t('app', 'Характеристики товара: ' . $item->title);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Товары'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $item->title, 'url' => ['view', 'id' => $item->id]];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box box-info">
     <div class="box-header with-border">

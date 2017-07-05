@@ -29,7 +29,7 @@ class SiteController extends Controller
         foreach ($centerBanners as $centerBanner) {
             $centerBannersImages[] = Html::a(Html::img($centerBanner->getImageUrl()), $centerBanner->url);
         }
-        $items = Item::find()->orderBy('addition_date desc')->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
+        $items = Item::find()->orderBy('addition_date desc')->limit(Theme::PARAM_ITEMS_ON_FIRST_PAGE);
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([

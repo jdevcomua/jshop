@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $characteristics \yii\data\ActiveDataProvider */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Item Cats'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Категории'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-cat-view">

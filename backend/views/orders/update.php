@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Orders */
 
 $this->title = Yii::t('app', 'Редактировать заказ ') . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Заказы'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

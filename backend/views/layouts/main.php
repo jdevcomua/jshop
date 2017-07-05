@@ -6,6 +6,7 @@
 use common\models\User;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
+use yii\widgets\Breadcrumbs;
 
 //use Yii;
 $controller = Yii::$app->controller->id;
@@ -229,6 +230,11 @@ AppAsset::register($this);
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>\n",
+                    'activeItemTemplate' => "<li class='breadcrumb-item active'>{link}</li>\n",
+                ]) ?>
                 <?= $content ?>
             </section>
         </div>

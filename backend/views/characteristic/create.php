@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $categories array */
 
 $this->title = Yii::t('app', 'Создать характеристику');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Characteristics'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Характеристики'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="characteristic-create">

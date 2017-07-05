@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\User */
 
 $this->title = Yii::t('app', 'Редактировать пользователя: ') . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Пользователи'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Редактироваить');
 ?>

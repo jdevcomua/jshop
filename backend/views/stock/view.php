@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $model common\models\Stock */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stocks'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Акции'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stock-view">

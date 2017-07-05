@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $categories array */
 
 $this->title = Yii::t('app', 'Редактировать товар: ') . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Товары'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
 ?>

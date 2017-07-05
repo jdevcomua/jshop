@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Kit */
 
 $this->title = Yii::t('app', 'Создать комплект');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Kits'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Комплекты'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kit-create">

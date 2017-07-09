@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) . ' ';
                     echo Html::a(Yii::t('app', 'Создать'), Yii::$app->urlHelper->to(['item/create']),
-                        ['class' => 'btn btn-primary']) . ' ';
+                        ['class' => 'btn btn-success']) . ' ';
                 ?>
             </p>
 

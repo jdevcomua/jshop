@@ -26,5 +26,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'newerton\fancybox\FancyBoxAsset',
     ];
 }

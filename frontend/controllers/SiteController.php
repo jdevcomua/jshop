@@ -135,6 +135,7 @@ class SiteController extends Controller
         ]);
 
         $this->breadcrumbs = [$category->getUrl() => $category->title];
+
         return $this->render('category', [
             'items' => $items,
             'selected' => empty($selected) ? [] : $selected,

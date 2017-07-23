@@ -156,7 +156,7 @@ class ItemController extends Controller
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }
 
-        return $this->render('characteristics', ['characteristics' => $characteristics]);
+        return $this->render('characteristics', ['characteristics' => $characteristics, 'item' => $item]);
     }
 
     /**
@@ -184,7 +184,7 @@ class ItemController extends Controller
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }
-        return $this->render('characteristics', ['characteristics' => $characteristics]);
+        return $this->render('characteristics', ['characteristics' => $characteristics, 'item' => $item]);
     }
 
     /**

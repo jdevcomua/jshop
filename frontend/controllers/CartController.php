@@ -26,14 +26,13 @@ class CartController extends Controller
         /**@var Item $item*/
         $item = Item::findOne($item_id);
         Yii::$app->cart->addItem($item, $count);
-        return [
+        /*return [
             'count' => Yii::$app->cart->getCount(),
             'price' => Yii::$app->cart->getSum(),
-        ];
-//        Yii::$app->response->format = Response::FORMAT_JSON;
-//        Yii::$app->cart->addItem(Item::findOne($item_id), $count);
-//        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
-//            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
+        ];*/
+        
+        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
+            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
     }
 
     public function actionAjaxkit($item_id, $count)

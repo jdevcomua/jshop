@@ -109,7 +109,23 @@ class Item extends Model implements CartAdd
         foreach ($this->images as $image) {
             $urls[] = $image->getImageUrl($size);
         }
+        
         return $urls;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOneImageUrl()
+    {
+        if (count($this->images) > 0) {
+            $keys = array_keys($this->images);
+            $firstKey = array_shift($keys);
+
+            return $this->images[$firstKey]->getImageUrl();
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ class Theme extends Object
 {
     const TEMPLATE_BASIC    = 'basic';
     const TEMPLATE_OPENCART = 'opencart';
+    const TEMPLATE_BABYSHOP = 'babyshop';
 
     const PARAM_ITEMS_ON_FIRST_PAGE = 1;
 

@@ -6,6 +6,7 @@
  * #priceItems - price of elements in cart
  */
 
+/*
 var Shop = {
     init:function(){
         this.Cart.init();
@@ -57,6 +58,7 @@ Shop.Cart = Cart;
 $(document).ready(function(){
     Shop.init();
 });
+*/
 
 
 function openWishWindow(id) {
@@ -153,13 +155,14 @@ function addToCart(id) {
     });
 }
 function showPopup(html, title) {
-    var forCenter = $('#forCenter');
+    $.fancybox.open(html);
+    /*var forCenter = $('#forCenter');
     var popup = $('#popup');
     forCenter.find('.title').html(title);
     forCenter.find('.drop-content').html(html);
     forCenter.toggleClass('d_n');
     popup.css('left', ($(window).width() - popup.width())/2);
-    popup.css('top', ($(window).height() - popup.height())/2);
+    popup.css('top', ($(window).height() - popup.height())/2);*/
 }
 function addKit(id) {
     $.ajax({

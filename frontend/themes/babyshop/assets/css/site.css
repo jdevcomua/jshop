@@ -178,3 +178,11 @@ button.in-cart {
 .product-charac table th {
     width: 1%;
 }
+
+.text-center .form-group {
+    text-align: left;
+}
+
+.checkbox {
+    padding-left: 5px;
+}

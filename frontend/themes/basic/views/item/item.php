@@ -370,7 +370,7 @@ $this->title = $item->title;
                                                                     <span class="f-s_0 frame-autor-comment">
                                                                         <span class="icon_comment"></span>
                                                                         <span class="author-comment">
-                                                                            <b><?= isset($vote->user) ? $vote->user->username : 'Гость'; ?></b>
+                                                                            <b><?= isset($vote->user) ? $vote->user->name : 'Гость'; ?></b>
                                                                         </span>
                                                                     </span>
                                                                     <span class="date-comment">

@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <h1><?= $this->title ?></h1>
 
-            <?= $form->field($model, 'username')->textInput(['placeholder' => 'Логин'])->label(false); ?>
+            <?= $form->field($model, 'username')->textInput(); ?>
 
-            <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Пароль'])->label(''); ?>
+            <?= $form->field($model, 'password')->passwordInput(); ?>
 
             <?= $form->field($model, 'rememberMe')->checkbox(['class' => 'input-checkbox'])->label('Запомнить меня'); ?>
 

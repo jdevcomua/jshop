@@ -32,19 +32,27 @@ use yii\helpers\Url;
                     </div> <!-- end search -->
 
                     <div class="site-header__account ultility-item large--left">
-                        <span>
-                            <a href="<?= Yii::$app->urlHelper->to(['user/login']) ?>">
-                                <i class="fa fa-key"></i>
-                                Вход
-                            </a>
-                        </span>
-                        <span>
-                            <a href="<?= Yii::$app->urlHelper->to(['user/register']) ?>">
-                                <i class="fa fa-user"></i>
-                                Регистрация
-                            </a>
-                        </span>
-
+                        <?php if (Yii::$app->user->isGuest) : ?>
+                            <span>
+                                <a href="<?= Yii::$app->urlHelper->to(['user/login']) ?>">
+                                    <i class="fa fa-key"></i>
+                                    Вход
+                                </a>
+                            </span>
+                            <span>
+                                <a href="<?= Yii::$app->urlHelper->to(['user/register']) ?>">
+                                    <i class="fa fa-user"></i>
+                                    Регистрация
+                                </a>
+                            </span>
+                        <?php else: ?>
+                            <span>
+                                <a href="<?= Yii::$app->urlHelper->to(['user/logout']) ?>">
+                                    <i class="fa fa-power-off"></i>
+                                    Выход (<?= Yii::$app->user->identity->mail ?>)
+                                </a>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <!-- end account -->
 

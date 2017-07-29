@@ -14,6 +14,7 @@ use Facebook\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use yii\base\InvalidParamException;
+use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -111,9 +112,10 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -126,6 +128,7 @@ class UserController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+
         return $this->redirect(Yii::$app->urlHelper->to(['site/index']));
     }
 
@@ -135,10 +138,21 @@ class UserController extends Controller
      */
     public function actionRegister()
     {
-        $model = new User();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(Yii::$app->urlHelper->to(['login']));
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
         }
+
+        $model = new User();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->setPassword($model->password);
+            $model->generateAuthKey();
+            if ($model->save()) {
+                if (Yii::$app->getUser()->login($model)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
         return $this->render('register', [
             'model' => $model,
         ]);

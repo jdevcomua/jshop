@@ -5,7 +5,7 @@
 
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl([Yii::$app->request->get('language', '') . '/reset-password', 'token' => $user->password_reset_token]);
 ?>
-Здравствуйте, <?php echo $user->username ?>,
+Здравствуйте!
 
 Вы запросили смену пароля на сайте <?= Yii::$app->name  ?>. Чтобы восстановить пароль, нажмите на ссылку ниже.
 

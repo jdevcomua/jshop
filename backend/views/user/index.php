@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -14,8 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="users-index">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title"><?php echo Html::encode($this->title) . ' ';
-                echo Html::a(Yii::t('app', 'Создать пользователя'), Yii::$app->urlHelper->to(['user/create']),
+            <h3 class="box-title">
+                <?= Html::encode($this->title) ?>
+                <?= Html::a(Yii::t('app', 'Создать пользователя'), Yii::$app->urlHelper->to(['user/create']),
                     ['class' => 'btn btn-success']) ?>
             </h3>
         </div>
@@ -27,22 +29,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterModel' => $searchModel,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
+
                     [
                         'class' => 'yii\grid\CheckboxColumn',
                         'name' => 'id',
                         // you may configure additional properties here
-                        'checkboxOptions' => function ($model, $key, $index, $column) {
+                        'checkboxOptions' => function (User $model) {
                             return ['value' => $model->id];
                         }
                     ],
                     'id',
-                    'name',
                     'mail',
-                    'city',
+                    'name',
+                    'created:datetime',
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'urlCreator' => function ($action, $model) {
+                        'urlCreator' => function ($action, User $model) {
                             return Yii::$app->urlHelper->to(['user/' . $action, 'id' => $model->id]);
                         },
                         'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}&nbsp;&nbsp;{permissions}',

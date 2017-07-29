@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = $model->name;
+$this->title = $model->mail;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Пользователи'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,9 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <p>
-                <?php echo Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['user/update', 'id' => $model->id]),
-                        ['class' => 'btn btn-primary']) . ' ';
-                echo Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['user/delete', 'id' => $model->id]), [
+                <?= Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['user/update', 'id' => $model->id]),
+                        ['class' => 'btn btn-primary']) ?>
+                <?= Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['user/delete', 'id' => $model->id]), [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Yii::t('app', 'Вы уверены, что хотите удалить этого пользователя?'),
@@ -33,13 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'name',
                     'mail',
-                    'city',
+                    'name',
+                    'address',
+                    'phone',
+                    'created',
                 ],
             ]) ?>
 
-            <h3><?= Yii::t('app', 'Права пользователя')?></h3>
+            <h3><?= Yii::t('app', 'Права пользователя') ?></h3>
 
             <p><?= Html::a(Yii::t('app', 'Редактировать'), ['permissions', 'id' => $model->id], ['class' => 'btn btn-primary']) ?></p>
 

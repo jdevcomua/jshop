@@ -11,7 +11,6 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $username
  * @property string $mail
  * @property string $city
  * @property string $name
@@ -24,7 +23,6 @@ use yii\helpers\ArrayHelper;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $auth_key
- * @property string $password write-only password
  * @property string $created
  *
  * @property Orders[] $orders
@@ -35,6 +33,8 @@ use yii\helpers\ArrayHelper;
  */
 class User extends Model implements \yii\web\IdentityInterface
 {
+
+    public $password;
 
     /**
      * @return array
@@ -58,14 +58,12 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username','password'],'required'],
-            [['username', 'mail', 'vk_id', 'fb_id'], 'unique'],
-            [['username', 'mail'], 'trim'],// обрезает пробелы вокруг "username" и "email"
-            [['username', 'password'], 'string', 'length' => [4, 25]],
+            [['mail', 'password'], 'required'],
+            [['mail', 'vk_id', 'fb_id'], 'unique'],
+            [['mail'], 'trim'],// обрезает пробелы вокруг "email"
+            [['password'], 'string', 'length' => [4, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password'], 'string'],
             [['mail'], 'email'],
-            [['username', 'password', 'mail'], 'required'],
-
         ];
     }
 
@@ -76,7 +74,6 @@ class User extends Model implements \yii\web\IdentityInterface
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'username' => Yii::t('app', 'Логин'),
             'mail' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
             'password' => Yii::t('app', 'Пароль'),
@@ -84,6 +81,7 @@ class User extends Model implements \yii\web\IdentityInterface
             'phone' => Yii::t('app', 'Телефон'),
             'name' => Yii::t('app', 'Имя'),
             'surname' => Yii::t('app', 'Фамилия'),
+            'created' => Yii::t('app', 'Время создания'),
         ];
     }
 
@@ -117,7 +115,7 @@ class User extends Model implements \yii\web\IdentityInterface
     /**
      * Validates password
      *
-     * @param  string  $password password to validate
+     * @param  string $password password to validate
      * @return boolean if password provided is valid for current user
      */
     public function validatePassword($password)
@@ -186,7 +184,7 @@ class User extends Model implements \yii\web\IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }

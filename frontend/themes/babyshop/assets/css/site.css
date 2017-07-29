@@ -170,3 +170,11 @@ button.in-cart {
 .filter-content ul {
     padding-left: 5px;
 }
+
+.product-charac table, .product-charac table th, .product-charac table td {
+    border: 1px solid #f3f3f3;
+}
+
+.product-charac table th {
+    width: 1%;
+}

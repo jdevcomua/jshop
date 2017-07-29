@@ -34,8 +34,8 @@ class LoginForm extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'username'  => Yii::t('app/model','username'),
-            'password'  => Yii::t('app/model','password'),
+            'username'  => Yii::t('app/model','Email'),
+            'password'  => Yii::t('app/model','Password'),
         ];
     }
 
@@ -77,7 +77,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = User::findByEmail($this->username);
         }
 
         return $this->_user;

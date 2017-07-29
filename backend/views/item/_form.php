@@ -14,26 +14,36 @@ use kartik\select2\Select2;
 
 <div class="item-form">
     <div style="width: 100%;">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
+        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-        echo $form->field($model, 'category_id')->widget(Select2::classname(), [
-            'data' => $categories,
-            'options' => ['placeholder' => ''],
-            'theme' => Select2::THEME_DEFAULT,
-            'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ]);?>
-
-        <div style="float: left;width:48%; margin-right: 4%;">
-            <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]);?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+                    'data' => $categories,
+                    'options' => ['placeholder' => ''],
+                    'theme' => Select2::THEME_DEFAULT,
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]); ?>
+            </div>
+            <div class="col-md-6" style="padding-top: 30px">
+                <?= $form->field($model, 'active')->checkbox() ?>
+            </div>
         </div>
 
-        <?php echo $form->field($model, 'cost')->textInput(['style' => 'width:48%;']);?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]); ?>
+            </div>
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'cost')->textInput(); ?>
+            </div>
+        </div>
 
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
             'options' => ['rows' => 10],
-            'language' => 'es',
+            'language' => 'ru',
             'clientOptions' => [
                 'plugins' => [
                     "advlist autolink lists link charmap print preview anchor",
@@ -42,7 +52,7 @@ use kartik\select2\Select2;
                 ],
                 'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             ]
-        ]);?>
+        ]); ?>
 
         <?php $images = [];
         if (!$model->isNewRecord) {
@@ -51,7 +61,7 @@ use kartik\select2\Select2;
             }
         }
         echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
-            'options'=>[
+            'options' => [
                 'multiple' => true,
             ],
             'pluginOptions' => [
@@ -72,7 +82,7 @@ use kartik\select2\Select2;
                 'value' => 'save'
             ]); ?>
             <?= Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-info',
                 'name' => 'action',
                 'value' => 'characteristics'
             ]); ?>

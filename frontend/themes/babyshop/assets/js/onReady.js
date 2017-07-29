@@ -19,8 +19,8 @@ $(document).ready(function(){
             }
         });
     });
-    $('.sort_a').click(function () {
-        $('#sort_input').val($(this).data('value'));
+    $('#SortBy').change(function () {
+        $('#sort_input').val($(this).val());
         $('#filterForm').submit();
         return false;
     });

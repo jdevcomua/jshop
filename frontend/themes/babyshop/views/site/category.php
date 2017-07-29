@@ -7,6 +7,7 @@ use yii\widgets\ListView;
 /* @var $category \common\models\ItemCat */
 /* @var $chars array */
 /* @var $selected array */
+/* @var $sort string */
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,16 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="section-header__right">
                 <!-- /snippets/collection-sorting.liquid -->
                 <div class="form-horizontal">
-                    <label for="SortBy">Sort by</label>
+                    <label for="SortBy">Сортировать</label>
                     <select name="SortBy" id="SortBy">
-                        <option value="manual">Featured</option>
-                        <option value="best-selling">Best Selling</option>
-                        <option value="title-ascending">Alphabetically, A-Z</option>
-                        <option value="title-descending">Alphabetically, Z-A</option>
-                        <option value="price-ascending">Price, low to high</option>
-                        <option value="price-descending">Price, high to low</option>
-                        <option value="created-descending">Date, new to old</option>
-                        <option value="created-ascending">Date, old to new</option>
+                        <option value="date"<?= $sort == 'date' ? ' selected' : '' ?>>по дате добавления</option>
+                        <option value="asc"<?= $sort == 'asc' ? ' selected' : '' ?>>по возрастанию цены</option>
+                        <option value="desc"<?= $sort == 'desc' ? ' selected' : '' ?>>по убыванию цены</option>
                     </select>
                 </div>
             </div>
@@ -54,6 +50,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 
-    <?= $this->render('_category-sidebar', ['characteristics' => $chars, 'selected' => $selected, 'category' => $category]) ?>
+    <?= $this->render('_category-sidebar', [
+        'characteristics' => $chars,
+        'selected' => $selected,
+        'category' => $category,
+        'sort' => $sort,
+    ]) ?>
 
 </div>

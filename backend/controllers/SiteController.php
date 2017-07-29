@@ -55,12 +55,11 @@ class SiteController extends Controller
         $salesValuesMoney = array_values($salesArray);
 
         $usersCount = User::find()->andWhere('MONTH(created) = MONTH(NOW())')->count();
-        $latest = Item::find()->select(['item.*', 'count(order_item.id) as count'])
+        $latest = Item::find()->select(['item.*', 'count' => 'count(order_item.count)'])
             ->leftJoin('order_item', 'order_item.item_id = item.id')
-            ->leftJoin('orders', 'order_item.order_id = orders.id')
-            ->where(['orders.payment_status' => 'Оплачен'])
-            ->groupBy('order_item.item_id')
-            ->orderBy('addition_date desc')->limit(5)->all();
+            ->groupBy('item.id')
+            ->orderBy('addition_date desc')->limit(10)->all();
+
         return $this->render('index', [
             'salesDays' => $salesDays,
             'salesValues' => $salesValues,

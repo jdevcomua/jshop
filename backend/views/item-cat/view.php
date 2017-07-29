@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <p>
+                <?= Html::a(Yii::t('app', 'Создать'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
                 <?= Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item-cat/update', 'id' => $model->id]),
                         ['class' => 'btn btn-primary']); ?>
                 <?= Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['item-cat/delete', 'id' => $model->id]), [
@@ -35,6 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'title',
+                    'active:boolean',
+                    [
+                        'attribute' => 'parent_id',
+                        'format' => 'raw',
+                        'value' => $model->parent_id
+                            ? Html::a($model->parent->title, ['category/view', 'id' => $model->parent_id]) : null,
+                    ],
                 ],
             ]); ?>
 

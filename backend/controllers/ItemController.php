@@ -13,7 +13,6 @@ use common\models\CharacteristicItem;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\data\Pagination;
-use common\models\search\CharacteristicItemSearch;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -36,6 +35,7 @@ class ItemController extends Controller
             ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
             ->distinct(true)
             ->all();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -55,6 +55,7 @@ class ItemController extends Controller
             $model->deleteImages();
             $model->delete();
         }
+
         return $this->redirect(['index']);
     }
 
@@ -70,6 +71,7 @@ class ItemController extends Controller
                 ->andFilterWhere(['characteristic_item.item_id' => $id])
                 ->andFilterWhere(['!=', 'characteristic_item.value', '{"ru":""}'])
         ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id), 'characteristics' => $characteristics
         ]);
@@ -87,7 +89,7 @@ class ItemController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Item();
+        $model = new Item(['active' => true]);
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
         /*foreach ($categories as $category) {
@@ -118,6 +120,7 @@ class ItemController extends Controller
                 }
             }
         }
+
         return $this->render('create', [
             'model' => $model,
             'categories' => $categoriesArray
@@ -184,6 +187,7 @@ class ItemController extends Controller
             }
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         }
+
         return $this->render('characteristics', ['characteristics' => $characteristics, 'item' => $item]);
     }
 
@@ -207,6 +211,7 @@ class ItemController extends Controller
                     return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $model->id]));
                 }
             }
+
             return $this->redirect(Yii::$app->urlHelper->to(['item/view', 'id' => $id]));
         } else {
             return $this->render('update', [
@@ -227,6 +232,7 @@ class ItemController extends Controller
         $model = $this->findModel($id);
         $model->deleteImages();
         $model->delete();
+
         return $this->redirect(Yii::$app->urlHelper->to(['item/index']));
     }
 

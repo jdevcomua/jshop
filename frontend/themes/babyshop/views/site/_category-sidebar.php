@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 /* @var $characteristics \common\models\Characteristic[] */
 /* @var $selected array */
 /* @var $category \common\models\ItemCat */
+/* @var $sort string */
 ?>
 <div class="sidebar grid__item large--one-quarter">
     <div class="collection-sidebar">
@@ -15,6 +16,7 @@ use yii\widgets\ActiveForm;
                 'action' => $category->getUrl(),
                 'id' => 'filterForm'
             ]); ?>
+            <?= Html::input('hidden', 'sort', $sort, ['id' => 'sort_input']) ?>
             <div class="widget__content">
                 <?php $i = 0;
                 foreach ($characteristics as $characteristic) :

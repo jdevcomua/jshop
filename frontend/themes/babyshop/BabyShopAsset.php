@@ -38,8 +38,8 @@ class BabyShopAsset extends AssetBundle
         'js/jquery.rateit.js',
         'js/cusel-min-2.5.js',
         'js/jgallery.js',
-        'js/compare.js',
-        'js/onReady.js',*/
+        'js/compare.js',*/
+        'js/onReady.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

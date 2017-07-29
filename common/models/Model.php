@@ -15,7 +15,7 @@ abstract class Model extends \yii\db\ActiveRecord
 
     public abstract function getTranslateColumns();
 
-    public function __get($name)
+    /*public function __get($name)
     {
         if (in_array($name, $this->getTranslateColumns())) {
             $json = parent::__get($name);
@@ -48,6 +48,6 @@ abstract class Model extends \yii\db\ActiveRecord
         } else {
             parent::__set($title, $value);
         }
-    }
+    }*/
 
 }

@@ -29,13 +29,16 @@ class SiteController extends Controller
         foreach ($centerBanners as $centerBanner) {
             $centerBannersImages[] = Html::a(Html::img($centerBanner->getImageUrl()), $centerBanner->url);
         }
-        $items = Item::find()->orderBy('addition_date desc')->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
+
+        $items = Item::find()->andWhere(['active' => true])->orderBy('addition_date desc')
+            ->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
             'query' => $items,
             'pagination' => false,
         ]);
+
         return $this->render('index', [
             'itemsDataProvider' => $itemsDataProvider,
             'stocks' => $stocks,
@@ -105,7 +108,7 @@ class SiteController extends Controller
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);
         }
-        $sort = $request->get('sort');
+        $sort = $request->get('sort', 'date');
         $quantity = $request->get('quantity', self::PAGE_SIZE);
         $this->sorting($items, $sort);
 
@@ -128,7 +131,7 @@ class SiteController extends Controller
             ->indexBy('characteristic_id')->asArray(true)->all();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $items,
+            'query' => $items->andWhere(['active' => true]),
             'pagination' => [
                 'pageSize' => $quantity,
             ]
@@ -137,7 +140,6 @@ class SiteController extends Controller
         $this->breadcrumbs = [$category->getUrl() => $category->title];
 
         return $this->render('category', [
-            'items' => $items,
             'selected' => empty($selected) ? [] : $selected,
             'sort' => $sort,
             'chars' => $category->characteristics,

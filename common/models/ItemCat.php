@@ -19,10 +19,12 @@ use yii\db\ActiveRecord;
  * @property integer $rgt
  * @property integer $depth
  * @property integer $tree
+ * @property integer $active
  *
  * @property Characteristic[] $characteristics
  * @property Item[] $items
- * @property ItemCat[] children
+ * @property ItemCat[] $children
+ * @property ItemCat $parent
  * 
  * @method integer|false deleteWithChildren()
  * @method boolean makeRoot(boolean $runValidation = true, array $attributes = null)
@@ -63,7 +65,7 @@ class ItemCat extends ModelWithImage
         return [
             [['title'], 'required'],
             [['title', 'image'], 'string'],
-            ['parent_id', 'integer']
+            [['parent_id', 'active'], 'integer']
         ];
     }
 
@@ -103,6 +105,7 @@ class ItemCat extends ModelWithImage
             'parent_id' => 'Родительская категория',
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
+            'active' => 'Активно',
         ];
     }
 
@@ -127,7 +130,7 @@ class ItemCat extends ModelWithImage
      */
     public function getChildren()
     {
-        return $this->hasMany(ItemCat::className(), ['parent_id' => 'id']);
+        return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
 
     /**

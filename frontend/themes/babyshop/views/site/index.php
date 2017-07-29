@@ -2,6 +2,8 @@
 use yii\widgets\ListView;
 
 /* @var $itemsDataProvider \yii\data\ActiveDataProvider */
+
+$this->title = Yii::$app->name;
 ?>
 <div class="wrapper" style="margin: 0 -30px;">
     <!-- /templates/snippets/section-custom-top.liquid -->

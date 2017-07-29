@@ -13,7 +13,7 @@ class CategoriesView extends Widget
     public function init()
     {
         parent::init();
-        $this->categories = ItemCat::find()->andFilterWhere(['depth' => 0])->all();
+        $this->categories = ItemCat::find()->andWhere(['depth' => 0, 'active' => true])->all();
     }
 
     public function run()

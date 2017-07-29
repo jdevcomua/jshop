@@ -52,19 +52,6 @@ class User extends Model implements \yii\web\IdentityInterface
         return 'user';
     }
 
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if (isset($this->password)) {
-                $this->setPassword($this->password);
-                $this->password = null;
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /**
      * @inheritdoc
      */
@@ -109,14 +96,14 @@ class User extends Model implements \yii\web\IdentityInterface
     }
 
     /**
-     * Finds user by username
+     * Finds user by email
      *
-     * @param  string      $username
+     * @param  string $email
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByEmail($email)
     {
-        return User::findOne(['username' => $username]);
+        return User::findOne(['mail' => $email]);
     }
 
     /**

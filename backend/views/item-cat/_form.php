@@ -16,6 +16,8 @@ use kartik\file\FileInput;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
     echo $form->field($model, 'title')->textInput(['maxlength' => true]);
+    
+    echo $form->field($model, 'active')->checkbox();
 
     echo $form->field($model, 'parent_id')->widget(Select2::classname(), [
         'data' => $categories,
@@ -50,7 +52,7 @@ use kartik\file\FileInput;
                 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
             ]) . ' ';
         echo Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
-            'class' => 'btn btn-primary', 'name' => 'action', 'value' => 'chars'
+            'class' => 'btn btn-info', 'name' => 'action', 'value' => 'chars'
         ]) ?>
     </div>
 

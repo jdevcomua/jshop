@@ -21,6 +21,8 @@ use Eventviva\ImageResize;
  * @property integer $count_of_views
  * @property string $addition_date
  * @property string $description
+ * @property integer $active
+ * @property integer $top
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -45,6 +47,52 @@ class Item extends Model implements CartAdd
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
     const IMAGE_SMALL = 'small_';
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['category_id', 'count_of_views', 'top', 'active'], 'integer'],
+            [['title', 'cost', 'category_id'], 'required'],
+            ['title', 'trim'],
+            [['addition_date'], 'safe'],
+            [['cost'], 'number'],
+            ['count_of_views', 'default', 'value' => 0],
+            [['title', 'description'], 'string'],
+            //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'category_id' => Yii::t('app', 'Категория'),
+            'title' => Yii::t('app', 'Название'),
+            'cost' => Yii::t('app', 'Стоимость'),
+            'image' => Yii::t('app', 'Изображение'),
+            'categoryTitle' => Yii::t('app', 'Категория'),
+            'count_of_views' => Yii::t('app', 'Количество просмотров'),
+            'newPrice' => Yii::t('app', 'Новая цена'),
+            'description' => Yii::t('app', 'Описание'),
+            'imageFiles' => Yii::t('app', 'Изображения'),
+            'active' => Yii::t('app', 'Активно'),
+            'top' => Yii::t('app', 'Топ'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'item';
+    }
 
     public function extraFields()
     {
@@ -84,14 +132,6 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'item';
-    }
-
-    /**
      * @return string path of dir with images
      */
     public static function getPath()
@@ -126,23 +166,6 @@ class Item extends Model implements CartAdd
         } else {
             return null;
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['category_id', 'count_of_views'], 'integer'],
-            [['title', 'cost', 'category_id'], 'required'],
-            ['title', 'trim'],
-            [['addition_date'], 'safe'],
-            [['cost'], 'number'],
-            ['count_of_views', 'default', 'value' => 0],
-            [['title', 'description'], 'string'],
-            //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
-        ];
     }
 
     /**
@@ -247,25 +270,6 @@ class Item extends Model implements CartAdd
             }
             $image->delete();
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'Категория'),
-            'title' => Yii::t('app', 'Название'),
-            'cost' => Yii::t('app', 'Стоимость'),
-            'image' => Yii::t('app', 'Изображение'),
-            'categoryTitle' => Yii::t('app', 'Категория'),
-            'count_of_views' => Yii::t('app', 'Количество просмотров'),
-            'newPrice' => Yii::t('app', 'Новая цена'),
-            'description' => Yii::t('app', 'Описание'),
-            'imageFiles' => Yii::t('app', 'Изображения'),
-        ];
     }
 
     /**

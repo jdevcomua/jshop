@@ -98,7 +98,7 @@ class ItemCatController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ItemCat();
+        $model = new ItemCat(['active' => true]);
         if ($model->load(Yii::$app->request->post())) {
             $continue = false;
             if ($model->parent_id != 0) {

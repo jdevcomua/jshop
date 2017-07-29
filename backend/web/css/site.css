@@ -132,3 +132,7 @@ a.desc:after {
 .guest-wrapper .main-footer {
     margin-left: 0;
 }
+
+.detail-view th {
+    width: 200px;
+}

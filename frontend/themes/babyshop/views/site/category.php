@@ -15,6 +15,8 @@ use yii\widgets\ListView;
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
+
+$notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0 || $leftCost || $rightCost;
 ?>
 <div class="grid--rev">
     <div class="grid__item large--three-quarters collection-grid">
@@ -24,23 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="rte rte--header space-10"></div>
         </header>
 
-        <div class="collection__sort section-header">
-            <div class="section-header__right">
-                <!-- /snippets/collection-sorting.liquid -->
-                <div class="form-horizontal">
-                    <label for="SortBy">Сортировать</label>
-                    <select name="SortBy" id="SortBy">
-                        <option value="date"<?= $sort == 'date' ? ' selected' : '' ?>>по дате добавления</option>
-                        <option value="asc"<?= $sort == 'asc' ? ' selected' : '' ?>>по возрастанию цены</option>
-                        <option value="desc"<?= $sort == 'desc' ? ' selected' : '' ?>>по убыванию цены</option>
-                    </select>
+        <?php if ($notEmpty) : ?>
+            <div class="collection__sort section-header">
+                <div class="section-header__right">
+                    <!-- /snippets/collection-sorting.liquid -->
+                    <div class="form-horizontal">
+                        <label for="SortBy">Сортировать</label>
+                        <select name="SortBy" id="SortBy">
+                            <option value="date"<?= $sort == 'date' ? ' selected' : '' ?>>по дате добавления</option>
+                            <option value="asc"<?= $sort == 'asc' ? ' selected' : '' ?>>по возрастанию цены</option>
+                            <option value="desc"<?= $sort == 'desc' ? ' selected' : '' ?>>по убыванию цены</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'itemView' => function ($model, $key, $index, $widget) {
+            'itemView' => function ($model) {
                 return $this->render('_item', ['model' => $model]);
             },
             'options' => [
@@ -54,15 +58,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 
-    <?= $this->render('_category-sidebar', [
-        'characteristics' => $chars,
-        'selected' => $selected,
-        'category' => $category,
-        'sort' => $sort,
-        'maxCost' => $maxCost,
-        'minCost' => $minCost,
-        'leftCost' => $leftCost,
-        'rightCost' => $rightCost,
-    ]) ?>
+    <?php if ($notEmpty) : ?>
+        <?= $this->render('_category-sidebar', [
+            'characteristics' => $chars,
+            'selected' => $selected,
+            'category' => $category,
+            'sort' => $sort,
+            'maxCost' => $maxCost,
+            'minCost' => $minCost,
+            'leftCost' => $leftCost,
+            'rightCost' => $rightCost,
+        ]) ?>
+    <?php endif; ?>
 
 </div>

@@ -216,3 +216,8 @@ input.quantity-selector {
 .slider-handle {
     background: #07785c!important;
 }
+
+.grid-uniform .empty {
+    padding-left: 30px;
+    padding-bottom: 50px;
+}

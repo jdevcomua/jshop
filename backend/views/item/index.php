@@ -36,9 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'id',
                     'title',
-                    'cost',
-                    'count_of_views',
-
+                    [
+                        'attribute' => 'cost',
+                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...']),
+                    ],
+                    [
+                        'attribute' => 'count_of_views',
+                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньче чем ...']),
+                    ],
                     [
                         'attribute' => 'categoryTitle',
                         'filter' => $filterByCategories,

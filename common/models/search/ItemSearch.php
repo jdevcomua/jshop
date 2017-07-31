@@ -73,11 +73,11 @@ class ItemSearch extends Item
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'cost' => $this->cost,
         ]);
 
         $query->andFilterWhere(['like', 'item.title', $this->title])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['<', 'cost', $this->cost])
+            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views]);
 
         $query->joinWith(['category' => function ($q) {
             $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');

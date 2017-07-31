@@ -23,6 +23,8 @@ use Eventviva\ImageResize;
  * @property string $description
  * @property integer $active
  * @property integer $top
+ * @property float $self_cost
+ * @property string $link
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -58,9 +60,9 @@ class Item extends Model implements CartAdd
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['addition_date'], 'safe'],
-            [['cost'], 'number'],
+            [['cost', 'self_cost'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
-            [['title', 'description'], 'string'],
+            [['title', 'description', 'link'], 'string'],
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
@@ -83,6 +85,8 @@ class Item extends Model implements CartAdd
             'imageFiles' => Yii::t('app', 'Изображения'),
             'active' => Yii::t('app', 'Активно'),
             'top' => Yii::t('app', 'Топ'),
+            'self_cost' => Yii::t('app', 'Себестоимость'),
+            'link' => Yii::t('app', 'Ссылка'),
         ];
     }
 

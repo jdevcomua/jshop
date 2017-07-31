@@ -44,6 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'categoryTitle',
                             'title',
                             'cost',
+                            'link:url',
+                            'self_cost',
                             [
                                 'attribute' => 'description',
                                 'format' => 'html'

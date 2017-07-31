@@ -41,6 +41,15 @@ use kartik\select2\Select2;
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'link')->textInput(['maxlength' => true]); ?>
+            </div>
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'self_cost')->textInput(); ?>
+            </div>
+        </div>
+
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
             'options' => ['rows' => 10],
             'language' => 'ru',
@@ -50,7 +59,8 @@ use kartik\select2\Select2;
                     "searchreplace visualblocks code fullscreen",
                     "insertdatetime media table contextmenu paste"
                 ],
-                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify " 
+                    . "| bullist numlist outdent indent | link image"
             ]
         ]); ?>
 

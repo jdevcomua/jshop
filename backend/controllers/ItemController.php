@@ -148,7 +148,7 @@ class ItemController extends Controller
                 if (!in_array($characteristic->id, $keys)) {
                     $newChar = new CharacteristicItem(['item_id' => $id, 'characteristic_id' => $characteristic->id, 'value' => '']);
                     $newChar->save();
-                    $characteristics[] = $newChar;
+                    $characteristics[$characteristic->id] = $newChar;
                 }
             }
         }

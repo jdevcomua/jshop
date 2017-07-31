@@ -217,7 +217,7 @@ function deleteFromCart(id, cart_type, $thisitem) {
 }
 function changeCountOfItem(id, cartType, $thisItem) {
     if ($thisItem.val() < 0) {
-        $thisItem.val(array[$thisItem.attr('id').split('-')[1]]);
+        $thisItem.val(1);
         alert('Значение должно быть больше или равно 0');
     } else if ($thisItem.val() == 0) {
         deleteFromCart(id, cartType, $thisItem.parent());

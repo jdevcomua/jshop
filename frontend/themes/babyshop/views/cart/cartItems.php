@@ -33,7 +33,7 @@ use yii\helpers\Url;
 
                 <br>
 
-                <a href="/cart/change?line=1&amp;quantity=0" class="cart__remove">
+                <a class="cart__remove" data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
                     <small>Удалить</small>
                 </a>
             </td>
@@ -44,34 +44,31 @@ use yii\helpers\Url;
             </td>
             <td data-label="Количество">
                 <div class="js-qty">
-                    <button type="button" class="js-qty__adjust js-qty__adjust--minus icon-fallback-text" data-id=""
-                            data-qty="0">
+                    <button type="button" class="js-qty__adjust js-qty__adjust--minus icon-fallback-text">
                         <span class="icon icon-minus" aria-hidden="true"></span>
                         <span class="fallback-text">−</span>
                     </button>
-                    <input type="text" class="js-qty__num" value="1" min="1" data-id="" aria-label="quantity"
-                           pattern="[0-9]*" name="updates[]" id="updates_19044152835">
-                    <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" data-id=""
-                            data-qty="11">
+                    <input type="number" class="js-qty__num" value="<?= $model->count ?>"
+                           data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
+                    <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text">
                         <span class="icon icon-plus" aria-hidden="true"></span>
                         <span class="fallback-text">+</span>
                     </button>
                 </div>
             </td>
             <td data-label="Сумма" class="text-right">
-                    <span class="h6">
-                        <span class="money"><?= $model->count * $item->cost ?> грн.</span>
-                    </span>
+                <span class="h6">
+                    <span class="money price-new"><span class="price"><?= $model->count * $item->cost ?></span> грн.</span>
+                </span>
             </td>
         </tr>
     <?php endforeach; ?>
-
     </tbody>
 </table>
 <div class="grid__item text-right small--one-whole">
     <p>
         <span class="cart__subtotal-title">Сумма</span>
-        <span class="h3 cart__subtotal"><span class="money"><?= $sum ?> грн.</span></span>
+        <span class="h3 cart__subtotal"><span class="money"><span class="sum"><?= $sum ?></span> грн.</span></span>
     </p>
     <a href="<?= Url::to('/cart') ?>" class="btn">Оформить заказ</a>
 </div>

@@ -19,14 +19,39 @@ $(document).ready(function(){
             }
         });
     });
-    $('#SortBy').change(function () {
+    $('#SortBy').change(function () { // выбор значения в дропдауне сортировки на странице каталога
         $('#sort_input').val($(this).val());
         $('#filterForm').submit();
         return false;
     });
+
     $('.show_comment').click(function () {
         $('.hidden-comment').toggleClass('drop');
     });
     var hash = window.location.hash;
     hash && $('ul.nav-tabs a[href="' + hash + '"]').tab('show');
+
+    $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
+        deleteFromCart($(this).data('id'), $(this).data('type'), $(this));
+    });
+
+    $(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
+        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
+    });
+
+    $(document).on('click', '.js-qty__adjust--plus', function(){ // нажатие нопку + количество в корзине
+        var $input = $(this).parent().find('.js-qty__num').first();
+        if ($input.length > 0) {
+            $input.val(+$input.val() + 1);
+            changeCountOfItem($input.data('id'), $input.data('type'), $input);
+        }
+    });
+
+    $(document).on('click', '.js-qty__adjust--minus', function(){ // нажатие нопку - количество в корзине
+        var $input = $(this).parent().find('.js-qty__num').first();
+        if ($input.length > 0) {
+            $input.val(+$input.val() - 1);
+            changeCountOfItem($input.data('id'), $input.data('type'), $input);
+        }
+    });
 });

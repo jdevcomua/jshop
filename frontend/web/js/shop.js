@@ -6,7 +6,6 @@
  * #priceItems - price of elements in cart
  */
 
-/*
 var Shop = {
     init:function(){
         this.Cart.init();
@@ -58,8 +57,6 @@ Shop.Cart = Cart;
 $(document).ready(function(){
     Shop.init();
 });
-*/
-
 
 function openWishWindow(id) {
     $.ajax({

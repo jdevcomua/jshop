@@ -204,3 +204,15 @@ input.quantity-selector {
     line-height: 30px;
     color: grey;
 }
+
+.slider.slider-horizontal {
+    width: 100%;
+}
+
+.slider.slider-horizontal .tooltip {
+    bottom: 15px;
+}
+
+.slider-handle {
+    background: #07785c!important;
+}

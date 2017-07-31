@@ -115,7 +115,7 @@ class SiteController extends Controller
         //for filter by price
         $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
         $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
-        if ($left = $request->get('left') && $right = $request->get('right')) {
+        if (($left = $request->get('left')) && ($right = $request->get('right'))) {
             $leftCost = $left;
             $rightCost = $right;
         } else {

@@ -94,6 +94,7 @@ $imageUrls = $item->getImageUrl();
             <?php } ?>
 
             <br>
+            <br>
             <a href="#"><h6>Доставка новой почтой</h6></a>
 
             <!--<a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="/account/login"

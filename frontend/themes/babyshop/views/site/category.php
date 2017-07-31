@@ -8,6 +8,10 @@ use yii\widgets\ListView;
 /* @var $chars array */
 /* @var $selected array */
 /* @var $sort string */
+/* @var $minCost float */
+/* @var $maxCost float */
+/* @var $leftCost float */
+/* @var $rightCost float */
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -55,6 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'selected' => $selected,
         'category' => $category,
         'sort' => $sort,
+        'maxCost' => $maxCost,
+        'minCost' => $minCost,
+        'leftCost' => $leftCost,
+        'rightCost' => $rightCost,
     ]) ?>
 
 </div>

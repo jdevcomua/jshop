@@ -58,17 +58,17 @@ $imageUrls = $item->getImageUrl();
             <h1><?= $item->title ?></h1>
             <span class="shopify-product-reviews-badge"></span> <!-- end rating -->
 
-            <span id="ProductPrice" class="h2">
-                <span class="money"><?= $item->cost ?> грн.</span>
+            <span id="ProductPrice" class="cost-block">
+                <span class="money h2"><?= $item->cost ?> грн.</span>
+                <span class="product-id">Код товара: <?= $item->id ?></span>
             </span>
-
-            <!-- end price -->
 
             <!--<p class="des-short">
                 To succeed you must believe. When you believe, you will succeed. Bless up. Put it this way, it took me
                 twenty five years to get these plants, twenty five years of blood sweat and tears,...
             </p>--> <!-- end short des -->
             <hr>
+
 
             <?php if ($inCart) { ?>
                 <a id="inCart" href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>">
@@ -92,6 +92,9 @@ $imageUrls = $item->getImageUrl();
                 </div>
 
             <?php } ?>
+
+            <br>
+            <a href="#"><h6>Доставка новой почтой</h6></a>
 
             <!--<a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="/account/login"
                data-toggle="tooltip" title="Add to whistlist">

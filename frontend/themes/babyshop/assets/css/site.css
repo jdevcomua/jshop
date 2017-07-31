@@ -186,3 +186,21 @@ button.in-cart {
 .checkbox {
     padding-left: 5px;
 }
+
+table.characteristic {
+    font-size: 13px;
+}
+
+input.quantity-selector {
+    width: 65px;
+}
+
+.cost-block .money {
+    float: left;
+}
+
+.cost-block .product-id {
+    float: right;
+    line-height: 30px;
+    color: grey;
+}

@@ -12,6 +12,7 @@ class Theme extends Object
     const TEMPLATE_BABYSHOP = 'babyshop';
 
     const PARAM_ITEMS_ON_FIRST_PAGE = 1;
+    const PARAM_ITEMS_ON_CATALOG_PAGE = 2;
 
     public static function getParam($name)
     {

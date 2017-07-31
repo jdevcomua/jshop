@@ -84,10 +84,19 @@ class SiteController extends Controller
             ->groupBy('item_cat.id')->all();
         $this->sorting($items, $sort);
         $dataProvider = new ActiveDataProvider([
-            'query' => $items
+            'query' => $items,
+            'pagination' => [
+                'pageSize' => Theme::getParam(Theme::PARAM_ITEMS_ON_CATALOG_PAGE),
+            ],
         ]);
-        return $this->render('search', ['dataProvider' => $dataProvider, 'count' => $items->count(), 'text' => $text,
-            'categories' => $categories, 'category_id' => $category_id]);
+        return $this->render('search', [
+            'dataProvider' => $dataProvider, 
+            'count' => $items->count(),
+            'text' => $text,
+            'categories' => $categories, 
+            'category_id' => $category_id,
+            'sort' => $sort,
+        ]);
     }
 
     /**
@@ -133,8 +142,8 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => $quantity,
-            ]
+                'pageSize' => Theme::getParam(Theme::PARAM_ITEMS_ON_CATALOG_PAGE),
+            ],
         ]);
 
         $this->breadcrumbs = [$category->getUrl() => $category->title];

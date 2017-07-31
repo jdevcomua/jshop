@@ -21,7 +21,7 @@ use yii\helpers\Url;
                     <div class="site-header__search large--right">
                         <!-- /snippets/search-bar.liquid -->
                         <form action="<?= Url::to(['/search']) ?>" method="get" class="input-group search-bar">
-                            <input type="search" name="q" value="" placeholder="Поиск..."
+                            <input type="search" name="text" value="" placeholder="Поиск..."
                                    class="input-group-field" aria-label="Поиск...">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn icon-fallback-text">

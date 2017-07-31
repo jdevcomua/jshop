@@ -44,7 +44,7 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0 || $leftCost |
 
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'itemView' => function ($model) {
+            'itemView' => function ($model, $key, $index, $widget) {
                 return $this->render('_item', ['model' => $model]);
             },
             'options' => [

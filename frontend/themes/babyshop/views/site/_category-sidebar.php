@@ -54,7 +54,7 @@ $this->registerJs($inputJS);
             <?= Html::input('hidden', 'sort', $sort, ['id' => 'sort_input']) ?>
             <div class="widget__content">
                 <div class="filter-block filter-custom filter-tag" style="width: 90%">
-                    <h5 class="filter-title"></h5>
+                    <h5 class="filter-title">Цена</h5>
                     <p class="text-center">
                         <input name="left" type="number" min="<?= $minCost ?>" max="<?= $maxCost ?>"
                                id="input-number-left" class="slider-input slider-input-left" value="<?= $leftCost ?>">

@@ -181,6 +181,7 @@ function openFilterContent($thisItem) {
     $thisItem.parent('div').find('.filters-content').toggleClass('d_n');
 }
 function addToCartFromItemPage(id) {
+    $.fancybox.close();
     $.ajax({
         url: '/cart/ajax',
         data: {count: $('#test').val(), item_id: id},

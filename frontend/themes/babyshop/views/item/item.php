@@ -85,12 +85,11 @@ $imageUrls = $item->getImageUrl();
                     </button>
                 </a>
                 <div id="toCart">
-                    <label for="test" class="quantity-selector">Количество</label>
-                    <input type="number" id="test" name="quantity" value="1" min="1" class="quantity-selector">
+                    <label for="test" class="quantity-selector">Количество</label><br>
+                    <p><input type="number" id="test" name="quantity" value="1" min="1" class="quantity-selector"></p>
                     <?= Html::button('<i class="fa fa-shopping-cart"></i><span id="AddToCartText">В корзину</span>',
                         ['onClick' => 'addToCartFromItemPage(' . $item->id . ')', 'class' => 'btn btn--secondary']); ?>
                 </div>
-
             <?php } ?>
 
             <br>

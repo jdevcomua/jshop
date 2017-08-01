@@ -56,14 +56,12 @@
     </div><!-- /.product-meta -->
 
     <div class="product-actions">
-        <a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="/account/login"
-           data-toggle="tooltip" title="Add to whistlist">
-            <i class="fa fa-heart"></i><span>Add to Wishlist</span>
+        <a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="#"
+           data-toggle="tooltip" title="Добавить в список желаний">
+            <i class="fa fa-heart"></i><span>В список желаний</span>
         </a>
 
-        <a href="/collections/air-storm/products/baby-einstein-take-along"
-           data-id="baby-einstein-take-along" class="btn product-quick-view btn-quickview"
-           title="Quickview">
+        <a title="Быстрый просмотр" data-id="<?= $model->id ?>" class="btn product-quick-view btn-quickview">
             <i class="fa fa-eye"></i>
         </a>
     </div>

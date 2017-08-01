@@ -33,8 +33,11 @@ class ItemController extends Controller
         $item->count_of_views++;
         $item->save();
 
-        return $this->render('item', ['item' => $item, 'inCart' => Yii::$app->cart->checkItemInCart($id),
-            'message' => $message]);
+        return $this->render('item', [
+            'item' => $item,
+            'inCart' => Yii::$app->cart->checkItemInCart($id),
+            'message' => $message,
+        ]);
     }
 
     /**
@@ -50,6 +53,19 @@ class ItemController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('Страница не найдена.');
+        }
+    }
+
+    public function actionQuickView($id)
+    {
+        $model = $this->findModel($id);
+        if ($model) {
+            return $this->renderAjax('quickview', [
+                'model' => $model,
+                'inCart' => Yii::$app->cart->checkItemInCart($id),
+            ]);
+        } else {
+            return false;
         }
     }
 

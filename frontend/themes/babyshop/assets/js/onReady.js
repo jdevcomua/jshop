@@ -54,4 +54,21 @@ $(document).ready(function(){
             changeCountOfItem($input.data('id'), $input.data('type'), $input);
         }
     });
+
+    $(document).on('click', '.product-quick-view', function(){ // нажатие на кнопку быстрого просмотра товара в каталоге
+        var item_id = $(this).data('id');
+        $.ajax({
+            url: '/item/quick-view',
+            data: {id: item_id},
+            type: 'get',
+            success: function (html) {
+                $.fancybox.open(html);
+            }
+        });
+    });
+
+    $(document).on('click', '.quickview-product .owl-wrapper a', function(){ // нажатие на кнопку быстрого просмотра товара в каталоге
+        var image = $(this).data('image');
+        $('#ProductPhotoImg').attr('src', image);
+    });
 });

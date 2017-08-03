@@ -217,11 +217,12 @@ $this->title = 'Home Page';
                                     <th>Просмотров</th>
                                     <th>Продаж</th>
                                 </tr>
-                                <?php foreach ($latestItems as $item) { ?>
+                                <?php foreach ($latestItems as $item) {
+                                    $images = $item->getImageUrl(); ?>
                                     <tr style="vertical-align: middle;">
                                         <td>
                                             <a href="<?= Yii::$app->urlHelper->to(['item/view', 'id' => $item->id]); ?>">
-                                                <img style="width: 50px;" src="<?= array_shift($item->getImageUrl()); ?>">
+                                                <img style="width: 50px;" src="<?= array_shift($images); ?>">
                                                 <?= $item->title; ?>
                                             </a>
                                         </td>

@@ -46,7 +46,7 @@ class SiteController extends Controller
             'stocks' => $stocks,
             'saleItems' => $salesItemsQuery->all(),
             'salesCount' => $salesItemsQuery->count(),
-            'topItems' => Item::find()->top()->all(),
+            //'topItems' => Item::find()->top()->all(),
             'centerBanners' => $centerBannersImages,
             'rightBanner' => Banner::findOne(['enable' => 1, 'position' => Banner::POSITION_INDEX_RIGHT]),
         ]);

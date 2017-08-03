@@ -33,7 +33,7 @@ class SiteController extends Controller
             ->innerJoin('order_item', 'order_item.order_id = orders.id')
             ->where('MONTH(orders.timestamp) = MONTH(NOW())')
             ->andWhere(['orders.payment_status' => 'Оплачен'])
-            ->groupBy('DATE(orders.timestamp)')
+            ->groupBy('day')
             ->asArray(true)
             ->all();
         $salesArray = ArrayHelper::map($sales, 'day', 'count');
@@ -48,7 +48,7 @@ class SiteController extends Controller
         $sales = Orders::find()->select('DAY(timestamp) AS day, SUM(sum) AS sum')
             ->where('MONTH(timestamp) = MONTH(NOW())')
             ->andWhere(['payment_status' => 'Оплачен'])
-            ->groupBy('DATE(timestamp)')
+            ->groupBy('day')
             ->asArray(true)
             ->all();
         $salesArray = ArrayHelper::map($sales, 'day', 'sum');

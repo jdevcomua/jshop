@@ -1,6 +1,7 @@
 <?php
 /* @var $model \common\models\Item */
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $inCart boolean */
 
@@ -17,7 +18,7 @@ $imageUrls = $model->getImageUrl();
                                 <img src="<?= $imageUrls[0] ?>" alt="<?= $model->title ?>" id="ProductPhotoImg">
                             </a>
                         </div>
-                        <?php if (true) : ?>
+                        <?php if (count($imageUrls) > 1) : ?>
                             <div class="more-views owl-carousel-play margin-top-10">
                                 <div class="owl-carousel owl-theme" style="display: block; opacity: 1;">
                                     <div class="owl-wrapper-outer">
@@ -86,7 +87,7 @@ $imageUrls = $model->getImageUrl();
 
                             <br>
                             <br>
-                            <a href="#"><h6>Доставка новой почтой</h6></a>
+                            <a href="<?= Url::to(['/site/delivery']) ?>"><h6>Доставка новой почтой</h6></a>
                         </div>
 
                     </div>

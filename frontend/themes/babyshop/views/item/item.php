@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $item \common\models\Item */
 /* @var $inCart boolean */
@@ -94,7 +95,7 @@ $imageUrls = $item->getImageUrl();
 
             <br>
             <br>
-            <a href="#"><h6>Доставка новой почтой</h6></a>
+            <a href="<?= Url::to(['/site/delivery']) ?>"><h6>Доставка новой почтой</h6></a>
 
             <!--<a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="/account/login"
                data-toggle="tooltip" title="Add to whistlist">

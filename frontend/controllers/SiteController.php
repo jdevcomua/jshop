@@ -7,6 +7,7 @@ use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\StaticPage;
 use common\models\Stock;
 use common\models\Wish;
 use common\models\WishList;
@@ -14,6 +15,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\web\NotFoundHttpException;
 
 class SiteController extends Controller
 {
@@ -344,4 +346,17 @@ class SiteController extends Controller
         
         echo Json::encode($out);
     }
+    
+    public function actionDelivery()
+    {
+        $page = StaticPage::findOne(['route' => Yii::$app->controller->route]);
+        if ($page) {
+            Yii::$app->view->title = $page->title;
+            Yii::$app->view->params['breadcrumbs'][] = $page->title;
+            return $this->render('delivery', ['page' => $page]);
+        } else {
+            throw new NotFoundHttpException('Страница не найдена');
+        }
+    }
+    
 }

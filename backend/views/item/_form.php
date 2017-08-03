@@ -1,10 +1,10 @@
 <?php
 
-use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 use kartik\select2\Select2;
+use zxbodya\yii2\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
@@ -53,15 +53,16 @@ use kartik\select2\Select2;
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
             'options' => ['rows' => 10],
             'language' => 'ru',
-            'clientOptions' => [
-                'plugins' => [
-                    "advlist autolink lists link charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste"
-                ],
-                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify " 
-                    . "| bullist numlist outdent indent | link image"
-            ]
+            //'compressorRoute' => 'compressor/tinyMceCompressor',
+            /*'fileManager' => [
+                'class' => TinyMceElFinder::className(),
+                'connectorRoute' => 'el-finder/connector',
+            ],*/
+            //'spellcheckerUrl' => '//speller.yandex.net/services/tinyspell',
+            'settings' => [
+                'height' => '500',
+                'convert_urls' => false,
+            ],
         ]); ?>
 
         <?php $images = [];

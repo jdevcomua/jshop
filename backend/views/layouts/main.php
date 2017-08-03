@@ -177,7 +177,7 @@ AppAsset::register($this);
                 <ul class="sidebar-menu">
                     <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['orders/index']) ?>">
-                            <i class="fa fa-file-text-o"></i><span>Заказы</span>
+                            <i class="fa fa-shopping-bag"></i><span>Заказы</span>
                         </a>
                     </li>
                     <li class="<?= $controller == 'item' ? 'active' : '' ?>">
@@ -203,6 +203,11 @@ AppAsset::register($this);
                     <li class="<?= $controller == 'vote' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['vote/index']) ?>">
                             <i class="fa fa-commenting-o"></i><span>Отзывы</span>
+                        </a>
+                    </li>
+                    <li class="<?= $controller == 'static-page' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['static-page/index']) ?>">
+                            <i class="fa fa-file-text-o"></i><span>Статические страницы</span>
                         </a>
                     </li>
                     <li class="<?= $controller == 'stock' ? 'active' : '' ?>">

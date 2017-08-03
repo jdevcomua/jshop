@@ -14,8 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="item-index">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) . ' ';
-                echo Html::a(Yii::t('app', 'Создать товар'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success']) ?>
+            <h3 class="box-title">
+                <?= Html::encode($this->title) ?>
+                <?= Html::a(Yii::t('app', 'Создать товар'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success']) ?>
             </h3>
         </div>
         <div class="box-body">

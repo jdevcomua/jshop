@@ -19,7 +19,8 @@ class CategoriesView extends Widget
     public function run()
     {
         if (Yii::$app->controller->route == 'site/category') {
-            $inCategory = array_shift(explode('-', Yii::$app->request->get('id', '')));
+            $idArray = explode('-', Yii::$app->request->get('id', ''));
+            $inCategory = array_shift($idArray);
             if ($inCategory != '') {
                 /**@var ItemCat $category*/
                 $category = ItemCat::findOne($inCategory);

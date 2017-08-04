@@ -68,15 +68,18 @@ class CartController extends Controller
             if ($model->save()) {
                 Yii::$app->cart->saveOrder($model->id);
                 Yii::$app->cart->resetItems();
-                Yii::$app->mailer
-                    ->compose('order', [
-                        'user' => Yii::$app->user->identity,
-                        'order' => Orders::findOne($model->id)
-                    ])
-                    ->setFrom('litvinova.a95@gmail.com')
-                    ->setTo($model->mail)
-                    ->setSubject('subject')
-                    ->send();
+                if ($model->mail) {
+                    Yii::$app->mailer
+                        ->compose('order', [
+                            'user' => Yii::$app->user->identity,
+                            'order' => Orders::findOne($model->id)
+                        ])
+                        ->setFrom('litvinova.a95@gmail.com')
+                        ->setTo($model->mail)
+                        ->setSubject('subject')
+                        ->send();
+                }
+                
                 return $this->redirect(Yii::$app->urlHelper->to(['cart/order', 'id' => $model->id]));
             }
         }

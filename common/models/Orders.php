@@ -26,12 +26,22 @@ use Yii;
  */
 class Orders extends Model
 {
+
+    const STATUS_NEW = 1;
+    const STATUS_SENT = 3;
+    const STATUS_SHIPPED = 3;
+    const STATUS_CANCELED = 4;
+    const STATUS_CONFIRMED = 5;
+    
+    const PAYMENT_STATUS_PAID = 1;
+    const PAYMENT_STATUS_NOT_PAID = 2;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'orders';
+        return '{{%orders}}';
     }
 
     /**
@@ -40,7 +50,7 @@ class Orders extends Model
     public function rules()
     {
         return [
-            [['phone', 'mail', 'name'], 'required'],
+            [['phone', 'name'], 'required'],
             [['user_id'], 'integer'],
             [['timestamp'], 'safe'],
             ['payment_status', 'default', 'value' => 'Не оплачен'],
@@ -51,7 +61,8 @@ class Orders extends Model
         ];
     }
 
-    public function getCountItems(){
+    public function getCountItems()
+    {
         return count($this->orderItems);
     }
 
@@ -79,6 +90,51 @@ class Orders extends Model
     }
 
     /**
+     * @return array
+     */
+    public static function getStatusTitles()
+    {
+        return [
+            static::STATUS_NEW => 'Новый',
+            static::STATUS_CONFIRMED => 'Подтвержден',
+            static::STATUS_SENT => 'Отправлен',
+            static::STATUS_SHIPPED => 'Доставлен',
+            static::STATUS_CANCELED => 'Отменен',
+        ];
+    }
+    
+    /**
+     * @return array
+     */
+    public static function getPaymentStatusTitles()
+    {
+        return [
+            static::PAYMENT_STATUS_NOT_PAID => 'Не оплачен',
+            static::PAYMENT_STATUS_PAID => 'Оплачен',
+        ];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatusTitle()
+    {
+        $titles = static::getStatusTitles();
+        
+        return key_exists($this->order_status, $titles) ? $titles[$this->order_status] : null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPaymentStatusTitle()
+    {
+        $titles = static::getPaymentStatusTitles();
+        
+        return key_exists($this->payment_status, $titles) ? $titles[$this->payment_status] : null;
+    }
+    
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getOrderItems()
@@ -98,4 +154,5 @@ class Orders extends Model
     {
         return [];
     }
+
 }

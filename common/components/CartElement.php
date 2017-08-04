@@ -8,9 +8,14 @@
 
 namespace common\components;
 
+use common\models\Item;
+
 class CartElement
 {
 
+    /**
+     * @var Item
+     */
     public $model;
 
     public $count;

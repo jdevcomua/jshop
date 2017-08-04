@@ -246,3 +246,19 @@ input[type=number].js-qty__num::-webkit-outer-spin-button {
 .pagination > li > a:hover, .pagination>li>a:focus {
     color: #07785c !important;
 }
+
+.cart-table td > span {
+    margin: 0;
+}
+
+.order-table td {
+    padding: 12px!important;
+}
+
+.order-table .cart__image img {
+    max-width: 75px;
+}
+
+.order-table thead {
+    white-space: nowrap;
+}

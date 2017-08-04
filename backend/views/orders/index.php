@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Orders;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -38,14 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     //'id',
                     [
                         'attribute' => 'order_status',
-                        'filter' => ['Новый' => 'Новый',
-                            'Отправлен' => 'Отправлен',
-                            'Доставлен' => 'Доставлен']
+                        'filter' => Orders::getStatusTitles(),
+                        'value' => function (Orders $model) {
+                            return $model->getStatusTitle();
+                        },
                     ],
                     [
                         'attribute' => 'payment_status',
-                        'filter' => ['Оплачен' => 'Оплачен',
-                            'Не оплачен' => 'Не оплачен']
+                        'filter' => Orders::getPaymentStatusTitles(),
+                        'value' => function (Orders $model) {
+                            return $model->getPaymentStatusTitle();
+                        },
                     ],
                     'timestamp',
                     //'address',

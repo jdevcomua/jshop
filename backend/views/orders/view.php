@@ -1,5 +1,6 @@
 <?php
 
+use common\models\OrderItem;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
@@ -8,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Orders */
 /* @var $orderItems \yii\data\ActiveDataProvider */
 
-$this->title = $model->name;
+$this->title = 'Заказ №' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Заказы'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -37,13 +38,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     'timestamp',
-                    'address',
                     'name',
                     'phone',
-                    'delivery',
+                    'address',
                     'mail',
-                    'payment',
                     'comment',
+                    [
+                        'attribute' => 'order_status',
+                        'value' => $model->getStatusTitle(),
+                    ],
+                    [
+                        'attribute' => 'payment_status',
+                        'value' => $model->getPaymentStatusTitle(),
+                    ],
+                    'sum',
                 ],
             ]); ?>
 
@@ -56,10 +64,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'attribute' => 'item.title',
-                        'value' => function ($data) {
+                        'value' => function (OrderItem $data) {
                             return Html::a(Html::encode($data->item->title), Yii::$app->urlHelper->to(['item/view', 'id' => $data->item->id]));
                         },
                         'format' => 'raw',
+                    ],
+                    [
+                        'label' => 'Цена за шт.',
+                        'value' => function (OrderItem $model) {
+                            return $model->sum/$model->count;
+                        }
                     ],
                     'count',
                     'sum'

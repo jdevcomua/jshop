@@ -49,9 +49,19 @@ class CartController extends Controller
         if (!empty($id)) {
             $order = Orders::findOne($id);
             $orderItems = OrderItem::find()->andFilterWhere(['order_id' => $id])->joinWith('item')->all();
+
             return $this->render('view-order', ['orderItems' => $orderItems, 'order' => $order]);
         }
-        $model = new Orders();
+
+        $model = new Orders(['order_status' => Orders::STATUS_NEW, 'payment_status' => Orders::PAYMENT_STATUS_NOT_PAID]);
+        $user = User::findOne(Yii::$app->user->id);
+        if ($user) {
+            $model->mail = $user->mail;
+            $model->phone = $user->phone;
+            $model->name = $user->name;
+            $model->address = $user->address;
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             $model->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
             $model->sum = Yii::$app->cart->getSum();
@@ -71,9 +81,13 @@ class CartController extends Controller
             }
         }
         $sum = Yii::$app->cart->getSum();
-        $user = User::findOne(Yii::$app->user->id);
-        return $this->render('order', ['models' => Yii::$app->cart->getModels(),
-            'sum' => $sum, 'model' => $model, 'user' => $user]);
+
+        return $this->render('order', [
+            'models' => Yii::$app->cart->getModels(),
+            'sum' => $sum,
+            'model' => $model,
+            'user' => $user
+        ]);
     }
 
     /**

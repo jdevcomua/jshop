@@ -7,8 +7,8 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app', 'Редактировать заказ ') . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Заказы'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
+$this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Изменить');
 ?>
 <div class="orders-update">
     <div class="box box-info">

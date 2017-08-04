@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Orders;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,18 +14,6 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="orders-input">
-        <?= $form->field($model, 'user_id')->textInput(); ?>
-    </div>
-
-    <div class="orders-input">
-        <?= $form->field($model, 'timestamp')->textInput(); ?>
-    </div>
-
-    <div class="orders-input">
-        <?= $form->field($model, 'address')->textInput(); ?>
-    </div>
-
-    <div class="orders-input">
         <?= $form->field($model, 'name')->textInput(); ?>
     </div>
 
@@ -33,15 +22,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="orders-input">
-        <?= $form->field($model, 'delivery')->textInput(); ?>
-    </div>
-
-    <div class="orders-input">
-        <?= $form->field($model, 'mail')->textInput(); ?>
-    </div>
-
-    <div class="orders-input">
-        <?= $form->field($model, 'payment')->textInput(); ?>
+        <?= $form->field($model, 'address')->textInput(); ?>
     </div>
 
     <div class="orders-input">
@@ -49,12 +30,15 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="orders-input">
-        <?= $form->field($model, 'order_status')->dropDownList(['Новый' => 'Новый', 'Отправлен' => 'Отправлен',
-            'Доставлен' => 'Доставлен']); ?>
+        <?= $form->field($model, 'order_status')->dropDownList(Orders::getStatusTitles()); ?>
     </div>
 
     <div class="orders-input">
-        <?= $form->field($model, 'payment_status')->dropDownList(['Оплачен' => 'Оплачен', 'Не оплачен' => 'Не оплачен']); ?>
+        <?= $form->field($model, 'payment_status')->dropDownList(Orders::getPaymentStatusTitles()); ?>
+    </div>
+
+    <div class="orders-input">
+        <?= $form->field($model, 'mail')->textInput(); ?>
     </div>
 
     <div class="clear"></div>
@@ -62,7 +46,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'comment')->textarea(['rows' => 4]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        <?= Html::submitButton('Сохранить',
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']); ?>
     </div>
 

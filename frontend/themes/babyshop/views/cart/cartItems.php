@@ -70,5 +70,5 @@ use yii\helpers\Url;
         <span class="cart__subtotal-title">Сумма</span>
         <span class="h3 cart__subtotal"><span class="money"><span class="sum"><?= $sum ?></span> грн.</span></span>
     </p>
-    <a href="<?= Url::to('/cart') ?>" class="btn">Оформить заказ</a>
+    <a href="<?= Url::to('/cart/order') ?>" class="btn">Оформить заказ</a>
 </div>

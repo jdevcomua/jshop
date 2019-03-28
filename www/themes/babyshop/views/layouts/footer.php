@@ -1,217 +1,119 @@
-<footer class="site-footer">
-    <div class="wrapper">
-        <div class="section-brand radius-10">
-            <div class="brands-carousel owl-carousel owl-theme " id="brands-carousel" data-items="6"
-                 data-pagination="false" data-navigation="true" data-autoPlay="false">
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_1.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
+<footer>
+    <!-- BEGIN INFORMATIVE FOOTER -->
+    <div class="footer-inner">
+        <div class="newsletter-row">
+            <div class="container">
+                <div class="row">
 
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_2.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
+                    <!-- Footer Newsletter -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col1">
+                        <div class="newsletter-wrap">
+                            <h5>Newsletter</h5>
+                            <h4>Get discount 30% off</h4>
+                            <form action="#" method="post" id="newsletter-validate-detail1">
+                                <div id="container_form_news">
+                                    <div id="container_form_news2">
+                                        <input type="text" name="email" id="newsletter1" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address">
+                                        <button type="submit" title="Subscribe" class="button subscribe"><span>Subscribe</span></button>
+                                    </div>
+                                    <!--container_form_news2-->
+                                </div>
+                                <!--container_form_news-->
+                            </form>
+                        </div>
+                        <!--newsletter-wrap-->
+                    </div>
                 </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_3.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
+            </div>
+            <!--footer-column-last-->
+        </div>
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-column">
+                            <h4>Shopping Guide</h4>
+                            <ul class="links">
+                                <li><a href="blog.html" title="How to buy">Blog</a></li>
+                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                <li><a href="#" title="Payment">Payment</a></li>
+                                <li><a href="#" title="Shipment">Shipment</a></li>
+                                <li><a href="#" title="Where is my order?">Where is my order?</a></li>
+                                <li><a href="#" title="Return policy">Return policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-column">
+                            <h4>Style Advisor</h4>
+                            <ul class="links">
+                                <li><a href="login.html" title="Your Account">Your Account</a></li>
+                                <li><a href="#" title="Information">Information</a></li>
+                                <li><a href="#" title="Addresses">Addresses</a></li>
+                                <li><a href="#" title="Addresses">Discount</a></li>
+                                <li><a href="#" title="Orders History">Orders History</a></li>
+                                <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-column">
+                            <h4>Information</h4>
+                            <ul class="links">
+                                <li><a href="sitemap.html" title="Site Map">Site Map</a></li>
+                                <li><a href="#" title="Search Terms">Search Terms</a></li>
+                                <li><a href="#" title="Advanced Search">Advanced Search</a></li>
+                                <li><a href="about_us.html" title="About Us">About Us</a></li>
+                                <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
+                                <li><a href="#" title="Suppliers">Suppliers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-column">
+                            <h4>Contact Us</h4>
+                            <div class="contacts-info">
+                                <address>
+                                    <i class="add-icon"></i>ThemesGround, 789 Main rd,<br>
+                                    Anytown, CA 12345 USA<br>
+                                </address>
+                                <div class="phone-footer"><i class="phone-icon"></i>+ 888 456-7890</div>
+                                <div class="email-footer"><i class="email-icon"></i><a href="mailto:qmarto@example.com">Qmarto@example.com</a></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_4.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_5.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_6.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_7.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_8.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_9.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a class="brand" href="#" title="">
-                        <img
-                            src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/brand_logo_10.jpg?203141088333881552"
-                            alt=""/>
-                    </a>
-                </div>
-
             </div>
         </div>
 
-
-        <div class="site-footer__top">
-            <!-- /templates/snippets/section-custom-bottom.liquid -->
-            <div class="custom-bottom grid">
-                <div class="grid__item large--one-third">
-                    <h4><span>Custom Services</span></h4>
-                    <div class="inner">
-                        <i class="fa fa-phone" aria-hidden="true"></i> +0123 456 789
-                        <i class="fa fa-envelope" aria-hidden="true"></i> support@babyshop.com
-                    </div>
-                </div>
-                <div class="grid__item large--one-third">
-                    <h4><span>Stay Connect</span></h4>
-                    <div class="inner">
-                        <a href="#"><i class="icon icon-google"></i></a>
-                        <a href="#"><i class="icon icon-twitter"></i></a>
-                        <a href="#"><i class="icon icon-facebook"></i></a>
-                        <a href="#"><i class="icon icon-pinterest"></i></a>
-                        <a href="#"><i class="icon icon-rss"></i></a>
-                    </div>
-                </div>
-                <div class="grid__item large--one-third">
-                    <h4><span>Payment Methods</span></h4>
-                    <div class="inner">
-                        
-                        <a class="i-payment" href="#" title=""><img
-                                src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/payment1.jpg?203141088333881552"
-                                alt=""/></a>
-
-
-                        <a class="i-payment" href="#" title=""><img
-                                src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/payment2.jpg?203141088333881552"
-                                alt=""/></a>
-
-
-                        <a class="i-payment" href="#" title=""><img
-                                src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/payment3.jpg?203141088333881552"
-                                alt=""/></a>
-
-
-                        <a class="i-payment" href="#" title=""><img
-                                src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/payment4.jpg?203141088333881552"
-                                alt=""/></a>
-
-
-                        <a class="i-payment" href="#" title=""><img
-                                src="//cdn.shopify.com/s/files/1/1252/2743/t/2/assets/payment5.jpg?203141088333881552"
-                                alt=""/></a>
-
-                    </div>
-                </div>
-            </div>
-        </div> <!--end footer top -->
-
-        <div class="site-footer__main grid">
-
-
-            <div class="grid__item large--one-quarter medium--one-quarter">
-                <h4>Contact</h4>
-                <div class="contact">We'd love to hear from you.<br>
-                    Our Customer Advocate Team: <br>
-                    10601 King William Dr. <br>
-                    Dallas, TX 75220,
-                    United States
-                </div>
-
-            </div>
-            <div class="grid__item large--one-sixth medium--one-sixth">
-                <h4>Categories</h4>
-                <ul>
-
-                    <li><a href="/collections/air-storm">Air Storm</a></li>
-
-                    <li><a href="/collections/big-hero-6">Big Hero 6</a></li>
-
-                    <li><a href="/collections/clementoni">Clementoni</a></li>
-
-                    <li><a href="/collections/hello-kitty">Hello Kitty</a></li>
-
-                    <li><a href="/collections">All collection</a></li>
-
-                </ul>
-            </div>
-            <div class="grid__item large--one-sixth medium--one-sixth">
-                <h4>Infomations</h4>
-                <ul>
-
-                    <li><a href="/apps/help-center">Help center</a></li>
-
-                    <li><a href="/blogs/news">Blog</a></li>
-
-                    <li><a href="/search">Search </a></li>
-
-                    <li><a href="#">Custom link</a></li>
-
-                </ul>
-            </div>
-            <div class="grid__item large--one-sixth medium--one-sixth">
-                <h4>Sitemap</h4>
-                <ul>
-
-                    <li><a href="/pages/about-us">About us</a></li>
-
-                    <li><a href="/pages/frontpage">Home page</a></li>
-
-                    <li><a href="/pages/wish-list">Wishlist</a></li>
-
-                    <li><a href="/pages/contact-us">Contact us</a></li>
-
-                    <li><a href="/pages/shipping-and-returns">Shipping and returns</a></li>
-
-                </ul>
-            </div>
-            <div class="grid__item large--one-quarter medium--one-quarter">
-                <h4>Openning time</h4>
-                <p>
-                    Monday - Friday...........8.00 to 18.00
-                    <br>
-                    Saturday.......................9.00 to 21.00
-                    <br>Sunday.........................10.00 to 21.00</p>
-            </div>
-        </div> <!-- end footer main -->
-
-        <div class="site-footer__copyright text-center bgFull">
-            <p>2016 Fashion Plus. All Rights Reserved. <a target="_blank" rel="nofollow"
-                                                          href="https://www.shopify.com">Powered by Shopify</a></p>
-        </div> <!-- end copy right -->
+        <!--container-->
     </div>
+    <!--footer-inner-->
+
+    <!--footer-middle-->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <div class="social">
+                        <ul>
+                            <li class="fb"><a href="#"></a></li>
+                            <li class="tw"><a href="#"></a></li>
+                            <li class="googleplus"><a href="#"></a></li>
+                            <li class="rss"><a href="#"></a></li>
+                            <li class="pintrest"><a href="#"></a></li>
+                            <li class="linkedin"><a href="#"></a></li>
+                            <li class="youtube"><a href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-xs-12 coppyright"> ©2018 ThemesGround. All Rights Reserved. </div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-bottom-->
+    <!-- BEGIN SIMPLE FOOTER -->
 </footer>

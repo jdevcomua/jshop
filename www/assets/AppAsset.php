@@ -18,14 +18,12 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'js/nouislider/slider.css',
+
     ];
     public $js = [
-        'js/shop.js',
-        'js/nouislider/nouislider.min.js',
+
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'www\widgets\fancybox\FancyBoxAssets',
+
     ];
 }

@@ -7,51 +7,37 @@ use yii\web\View;
 
 class BabyShopAsset extends AssetBundle
 {
-    
-    public $sourcePath = '@app/themes/babyshop/assets';
+    public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'css/animate.css',
-        'css/bootstrap.min.css',
-        'css/elements.css',
-        'css/timber.scss.css',
-        'css/font-awesome.css',
-        'css/jquery.fancybox.css',
-        'css/owl.carousel.css',
-        'css/owl.theme.css',
-        'css/owl.transitions.css',
-        'css/sca-jquery.fancybox.css',
-        'css/sca-quick-view.css',
-        'css/style.scss.css',
-
+        'stylesheet/bootstrap.min.css',
+        'stylesheet/font-awesome.css',
+        'stylesheet/revslider.css',
+        'stylesheet/revslider.css',
+        'stylesheet/owl.carousel.css',
+        'stylesheet/owl.theme.css',
+        'stylesheet/jquery.bxslider.css',
+        'stylesheet/jquery.mobile-menu.css',
+        'stylesheet/style.css',
+        'stylesheet/responsive.css',
     ];
     public $js = [
-        'js/jquery.jcarousellite.js',
+        'js/bootstrap.min.js',
+        'js/jquery.min.js',
+        'js/parallax.js',
+        'js/revslider.js',
+        'js/common.js',
+        'js/jquery.bxslider.min.js',
         'js/owl.carousel.min.js',
-        'js/bootstrap-custom.js',
-        'js/plugins.min.js',
-        'js/modernizr.min.js',
-        /*'js/onClickFunctions.js',
-        'js/settings.js',
-        'js/owl.carousel.min.js',
-        'js/jquery.rateit.js',
-        'js/cusel-min-2.5.js',
-        'js/jgallery.js',
-        'js/compare.js',*/
-        'js/onReady.js',
+        'js/jquery.mobile-menu.min.js',
+        'js/countdown.js',
+        'js/custom.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        //'yii\bootstrap\BootstrapAsset',
-        //'yii\bootstrap\BootstrapPluginAsset',
+//        'yii\web\YiiAsset',
+//        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
         'www\assets\AppAsset',
-    ];
-    public $jsOptions = [
-        'position' => View::POS_HEAD,
-    ];
-    public $cssOptions = [
-        'position' => View::POS_HEAD,
     ];
     
 }

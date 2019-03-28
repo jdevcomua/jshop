@@ -65,7 +65,7 @@ class ModelWithImage extends Model
      */
     public function getPath()
     {
-        return Yii::getAlias('@frontend') . '/web/img/' . ($this->dir != '' ? $this->dir . '/' : '');
+        return Yii::getAlias('@www') . '/web/img/' . ($this->dir != '' ? $this->dir . '/' : '');
     }
 
     /**

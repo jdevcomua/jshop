@@ -21,7 +21,7 @@ $config = [
         'users' => [
             'class' => 'budyaga\users\Module',
             //'userPhotoUrl' => 'http://example.com/uploads/user/photo',
-            //'userPhotoPath' => '@frontend/web/uploads/user/photo'
+            //'userPhotoPath' => '@www/web/uploads/user/photo'
         ],
     ],
     'components' => [

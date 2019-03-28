@@ -140,7 +140,7 @@ class Item extends Model implements CartAdd
      */
     public static function getPath()
     {
-        return Yii::getAlias('@frontend') . '/web/img/';
+        return Yii::getAlias('@www') . '/web/img/';
     }
 
     /**

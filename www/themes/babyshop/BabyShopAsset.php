@@ -32,6 +32,7 @@ class BabyShopAsset extends AssetBundle
         'js/jquery.mobile-menu.min.js',
         'js/countdown.js',
         'js/custom.js',
+        'js/shop.js'
     ];
     public $depends = [
 //        'yii\web\YiiAsset',

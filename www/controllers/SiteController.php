@@ -25,6 +25,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $catIds = null;
+        $cat_sliders = [];
+        do {
+            $category = ItemCat::find()->andFilterWhere(['in', 'parent_id', $catIds])
+                ->andFilterWhere(['active' => (int) true])->all();
+            $catIds = null;
+            if ($category && count($cat_sliders) <= 16 && count($cat_sliders) < count(ItemCat::find()->all())) {
+                foreach ($category as $cat) {
+                    $cat_sliders[] = $cat;
+                    $catIds[] = $cat->id;
+                    if (count($cat_sliders) > 16 && count($cat_sliders) >= count(ItemCat::find()->all())) break;
+                }
+            }
+        } while ((count($cat_sliders) < 16 && count($cat_sliders) < count(ItemCat::find()->all())));
+
+        $special = Item::findOne(['special' => (int) true, 'active' => true]);
+        $best_seller = Item::findAll(['active' => true, 'best_seller' => (int) true]);
+        $deal_week = Item::findAll(['active' => true, 'deal_week' => (int) true]);
         $centerBanners = Banner::find()->where(['enable' => 1, 'position' => Banner::POSITION_INDEX_CENTER])->all();
         $centerBannersImages = [];
         /* @var $centerBanner Banner */
@@ -43,6 +61,10 @@ class SiteController extends Controller
 
         return $this->render('index', [
             'itemsDataProvider' => $itemsDataProvider,
+            'category_slider' => $cat_sliders,
+            'special' => $special,
+            'deal_week' => $deal_week,
+            'best_seller' => $best_seller,
             'stocks' => $stocks,
             'saleItems' => $salesItemsQuery->all(),
             'salesCount' => $salesItemsQuery->count(),

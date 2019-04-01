@@ -24,6 +24,6 @@ class AppAsset extends AssetBundle
 
     ];
     public $depends = [
-
+        'www\widgets\fancybox\FancyBoxAssets'
     ];
 }

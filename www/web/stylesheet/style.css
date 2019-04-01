@@ -748,7 +748,7 @@ ul.currencies_list li a:hover {
 	transform: scale(1.0) rotate(0deg);
 	box-shadow: 0 10px 20px -5px;
 	font-family: 'Rubik', sans-serif;
-
+	min-width: 250px;
 }
 .top-subtotal {
 	color: #131e2c;

@@ -1,7 +1,13 @@
 <?php
 use yii\widgets\ListView;
+use common\models\Item;
+use common\models\ItemCat;
 
 /* @var $itemsDataProvider \yii\data\ActiveDataProvider */
+/* @var $special Item */
+/* @var $best_seller Item[] */
+/* @var $deal_week Item[] */
+/* @var $category_slider ItemCat[] */
 
 $this->title = Yii::$app->name;
 ?>
@@ -40,79 +46,13 @@ $this->title = Yii::$app->name;
                 <div class="slider-items-products">
                     <div id="top-categories" class="product-flexslider hidden-buttons">
                         <div class="slider-items slider-width-col4 products-grid">
+                            <?php foreach ($category_slider as $category) {?>
                             <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p1.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Fruits</div>
+                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->image : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
+                                        <div class="pro-info"><?= $category->title ?></div>
                                     </div>
                                 </a> </div>
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p2.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Salads</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p3.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Vegetables</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p5.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Juices</div>
-                                    </div>
-                                </a> </div>
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p12.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Meats</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p27.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Lettuce</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p8.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Citrus‎</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p11.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Berries</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p9.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Beans</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p6.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Pomegranates</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
-                            <!-- Item -->
-                            <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="products-images/p7.jpg" alt="Fresh Organic Mustard Leaves ">
-                                        <div class="pro-info">Leafy Veg</div>
-                                    </div>
-                                </a> </div>
-                            <!-- End Item -->
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -129,7 +69,7 @@ $this->title = Yii::$app->name;
             </div>
         </div>
     </div>
-
+    <?php if (isset($best_seller)) { ?>
     <!-- best Pro Slider -->
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
@@ -139,238 +79,55 @@ $this->title = Yii::$app->name;
             </div>
             <div id="best-seller" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 products-grid">
+                    <?php foreach ($best_seller as $item) { ?>
                     <div class="item">
                         <div class="item-inner">
                             <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p27.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="new-label new-top-left">Hot</div>
-                                    <div class="sale-label sale-top-left">-15%</div>
+                                <div class="item-img-info"><a href="<?= $item->getUrl() ?>" title="<?= $item->title ?>" class="product-image">
+                                        <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $item->title ?>">
+                                    </a>
+<!--                                    <div class="new-label new-top-left">Hot</div>-->
+                                    <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
+                                        ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
+                                        '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                     <div class="item-box-hover">
                                         <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                            <div class="product-detail-bnt"><a href="<?= $item->getUrl()?>" class="button detail-bnt"><span>Quick View</span></a></div>
+                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                    <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span>Add to Cart</span></button>
                                 </div>
                             </div>
                             <div class="item-info">
                                 <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
+                                    <div class="item-title"><a href="<?= $item->getUrl()?>" title="<?= $item->title?>"><?= $item->title?></a> </div>
                                     <div class="item-content">
                                         <div class="rating">
                                             <div class="ratings">
                                                 <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
+                                                    <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                 </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
                                             </div>
                                         </div>
                                         <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
+                                            <div class="price-box"><span class="regular-price" ><span class="price"><?= number_format((float)$item->cost, 2, '.', '') ?></span> </span> </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Item -->
-                    <div class="item">
-                        <div class="item-inner">
-                            <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p17.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                </div>
-                            </div>
-                            <div class="item-info">
-                                <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                    <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <!-- Item -->
-                    <div class="item">
-                        <div class="item-inner">
-                            <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p7.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                </div>
-                            </div>
-                            <div class="item-info">
-                                <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                    <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <div class="item">
-                        <div class="item-inner">
-                            <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p26.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="sale-label sale-top-left">Sale</div>
-                                    <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                </div>
-                            </div>
-                            <div class="item-info">
-                                <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                    <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item -->
-                    <div class="item">
-                        <div class="item-inner">
-                            <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p5.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="new-label new-top-left">New</div>
-                                    <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                </div>
-                            </div>
-                            <div class="item-info">
-                                <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                    <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <!-- Item -->
-                    <div class="item">
-                        <div class="item-inner">
-                            <div class="item-img">
-                                <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p6.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                    <div class="new-label new-top-left">New</div>
-                                    <div class="item-box-hover">
-                                        <div class="box-inner">
-                                            <div class="product-detail-bnt"><a class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_cart">
-                                    <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                </div>
-                            </div>
-                            <div class="item-info">
-                                <div class="info-inner">
-                                    <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                    <div class="item-content">
-                                        <div class="rating">
-                                            <div class="ratings">
-                                                <div class="rating-box">
-                                                    <div class="rating" style="width:80%"></div>
-                                                </div>
-                                                <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-price">
-                                            <div class="price-box"><span class="regular-price" ><span class="price">$125.00</span> </span> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Item -->
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </section>
+    <?php }?>
+    <?php if (isset($deal_week)) { ?>
     <div class="hot-section">
         <div class="container">
             <div class="row">
@@ -386,297 +143,115 @@ $this->title = Yii::$app->name;
                         <div class="countbox_1 timer-grid"></div>
                     </div>
                     <ul class="products-grid">
+                        <?php foreach ($deal_week as $item) {?>
                         <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
                             <div class="item-inner">
                                 <div class="item-img">
-                                    <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p16.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                        <div class="new-label new-top-left">Hot</div>
+                                    <div class="item-img-info"><a href="<?= $item->getUrl()?>" title="<?=$item->title?>" class="product-image">
+                                            <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?=$item->title?>"></a>
+<!--                                        <div class="new-label new-top-left">Hot</div>-->
+                                        <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
+                                            ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
+                                            '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                         <div class="item-box-hover">
                                             <div class="box-inner">
-                                                <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
+                                                <div class="product-detail-bnt"><a href="<?=$item->getUrl()?>" class="button detail-bnt"><span>Quick View</span></a></div>
+                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a></span> </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="add_cart">
-                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
+                                        <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span>Add to Cart</span></button>
 
                                     </div>
                                 </div>
                                 <div class="item-info">
                                     <div class="info-inner">
-                                        <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
+                                        <div class="item-title"><a href="<?=$item->getUrl()?>" title="<?=$item->title?>"><?=$item->title?></a> </div>
                                         <div class="item-content">
                                             <div class="rating">
                                                 <div class="ratings">
                                                     <div class="rating-box">
-                                                        <div class="rating" style="width:80%"></div>
+                                                        <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                     </div>
-                                                    <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                    <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
                                                 </div>
                                             </div>
                                             <div class="item-price">
-                                                <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
+                                                <div class="price-box"><span class="regular-price"><span class="price"><?= number_format((float)$item->cost, 2, '.', '') ?></span> </span> </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                            <div class="item-inner">
-                                <div class="item-img">
-                                    <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p12.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                        <div class="item-box-hover">
-                                            <div class="box-inner">
-                                                <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="add_cart">
-                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                    </div>
-                                </div>
-                                <div class="item-info">
-                                    <div class="info-inner">
-                                        <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                        <div class="item-content">
-                                            <div class="rating">
-                                                <div class="ratings">
-                                                    <div class="rating-box">
-                                                        <div class="rating" style="width:80%"></div>
-                                                    </div>
-                                                    <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                </div>
-                                            </div>
-                                            <div class="item-price">
-                                                <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                            <div class="item-inner">
-                                <div class="item-img">
-                                    <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p21.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                        <div class="item-box-hover">
-                                            <div class="box-inner">
-                                                <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="add_cart">
-                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                    </div>
-                                </div>
-                                <div class="item-info">
-                                    <div class="info-inner">
-                                        <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                        <div class="item-content">
-                                            <div class="rating">
-                                                <div class="ratings">
-                                                    <div class="rating-box">
-                                                        <div class="rating" style="width:80%"></div>
-                                                    </div>
-                                                    <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                </div>
-                                            </div>
-                                            <div class="item-price">
-                                                <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                            <div class="item-inner">
-                                <div class="item-img">
-                                    <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p3.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                        <div class="sale-label sale-top-right">-40%</div>
-                                        <div class="item-box-hover">
-                                            <div class="box-inner">
-                                                <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="add_cart">
-                                        <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                    </div>
-                                </div>
-                                <div class="item-info">
-                                    <div class="info-inner">
-                                        <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                        <div class="item-content">
-                                            <div class="rating">
-                                                <div class="ratings">
-                                                    <div class="rating-box">
-                                                        <div class="rating" style="width:80%"></div>
-                                                    </div>
-                                                    <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                </div>
-                                            </div>
-                                            <div class="item-price">
-                                                <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <?php }?>
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="testimonials-section slider-items-products">
-                    <div  id="testimonials" class="offer-slider parallax parallax-2">
-                        <div class="slider-items slider-width-col6">
-                            <div class="item">
-                                <div class="avatar"><img src="images/member1.png" alt="Image"></div>
-                                <div class="testimonials">Perfect Themes and the best of all that you have many options to choose! Very fast responding! I highly recommend this theme and these people!</div>
-                                <div class="clients_author"> Smith John <span>Happy Customer</span> </div>
-                            </div>
-                            <div class="item">
-                                <div class="avatar"><img src="images/member2.png" alt="Image"></div>
-                                <div class="testimonials">Code, template and others are very good. The support has served me immediately and solved my problems when I need help. Are to be congratulated.</div>
-                                <div class="clients_author"> Karla Anderson <span>Happy Customer</span> </div>
-                            </div>
-                            <div class="item">
-                                <div class="avatar"><img src="images/member3.png" alt="Image"></div>
-                                <div class="testimonials">Our support and response has been amazing, helping me with several issues I came across and got them solved almost the same day. A pleasure to work with them!</div>
-                                <div class="clients_author"> Stephen Smith <span>Happy Customer</span> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="logo-brand">
-                    <div class="slider-items-products">
-                        <div id="brand-slider" class="product-flexslider hidden-buttons">
-                            <div class="slider-items slider-width-col6">
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand1.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand2.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand3.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand4.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand5.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand6.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand1.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand2.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand3.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand4.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand5.png" alt="Image"></a></div>
-                                </div>
-                                <div class="item">
-                                    <div class="logo-item"><a href="#"><img src="images/brand6.png" alt="Image"></a></div>
-                                </div>
-                                <!-- End Item -->
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Home Lastest Blog Block -->
-    <div class="latest-blog wow bounceInUp animated animated container">
+<!--    <div class="latest-blog wow bounceInUp animated animated container">-->
         <!--exclude For version 6 -->
 
         <!--For version 1,2,3,4,5,6,8 -->
-        <div>
-            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">
-                <div class="blog_inner">
-                    <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img1.jpg" alt="blog image"> </a>
-                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                    </div>
+<!--        <div>-->
+<!--            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">-->
+<!--                <div class="blog_inner">-->
+<!--                    <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img1.jpg" alt="blog image"> </a>-->
+<!--                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>-->
+<!--                    </div>-->
                     <!--blog-img-->
-                    <div class="blog-info">
-                        <div class="post-date">
-                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">26 <span>June</span></time>
-                        </div>
-                        <ul class="post-meta">
-                            <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>
-                            <li><i class="fa fa-comments"></i><a href="#">4 comments</a> </li>
-                        </ul>
-                        <h3><a href="blog-detail.html">Powerful and flexible premium Ecommerce themes</a></h3>
-                        <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec...</p>
-                    </div>
-                </div>
+<!--                    <div class="blog-info">-->
+<!--                        <div class="post-date">-->
+<!--                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">26 <span>June</span></time>-->
+<!--                        </div>-->
+<!--                        <ul class="post-meta">-->
+<!--                            <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>-->
+<!--                            <li><i class="fa fa-comments"></i><a href="#">4 comments</a> </li>-->
+<!--                        </ul>-->
+<!--                        <h3><a href="blog-detail.html">Powerful and flexible premium Ecommerce themes</a></h3>-->
+<!--                        <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec...</p>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!--blog_inner-->
-            </div>
+<!--            </div>-->
             <!--col-lg-4 col-md-4 col-xs-12 col-sm-4-->
-            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">
-                <div class="blog_inner">
-                    <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img2.jpg" alt="blog image"> </a>
-                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                    </div>
+<!--            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">-->
+<!--                <div class="blog_inner">-->
+<!--                    <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img2.jpg" alt="blog image"> </a>-->
+<!--                        <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>-->
+<!--                    </div>-->
                     <!--blog-img-->
-                    <div class="blog-info">
-                        <div class="post-date">
-                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">30 <span>June</span></time>
-                        </div>
-                        <ul class="post-meta">
-                            <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>
-                            <li><i class="fa fa-comments"></i><a href="#">6 comments</a> </li>
-                        </ul>
-                        <h3><a href="blog-detail.html">Awesome template with lot's of features on the board!</a></h3>
-                        <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis erat sed elit bibendum ...</p>
-                    </div>
-                </div>
+<!--                    <div class="blog-info">-->
+<!--                        <div class="post-date">-->
+<!--                            <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">30 <span>June</span></time>-->
+<!--                        </div>-->
+<!--                        <ul class="post-meta">-->
+<!--                            <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>-->
+<!--                            <li><i class="fa fa-comments"></i><a href="#">6 comments</a> </li>-->
+<!--                        </ul>-->
+<!--                        <h3><a href="blog-detail.html">Awesome template with lot's of features on the board!</a></h3>-->
+<!--                        <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis erat sed elit bibendum ...</p>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!--blog_inner-->
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
         <!--END For version 1,2,3,4,5,6,8 -->
         <!--exclude For version 6 -->
         <!--container-->
     </div>
 
-    <!-- Logo Brand Block -->
 
 </div>
+    <?php }?>
+    <?php if (isset($special)) { ?>
 <div class="mid-section">
     <div class="container">
         <div class="row">
-            <h3>Fresh organic foods delivery made easy</h3>
+            <h3><?= $special->title ?></h3>
             <h2>Special Product</h2>
         </div>
         <div class="row">
@@ -689,17 +264,17 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="spl-pro"><a href="product-detail.html" title="Fresh Organic Mustard Leaves "><img src="products-images/p12.jpg" alt="Fresh Organic Mustard Leaves "></a>
+                <div class="spl-pro"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><img src="<?= ($special->images) ? $special->getOneImageUrl() : '/images/product_no_image.jpg'?>" alt="<?= $special->title?>"></a>
                     <div class="item-info">
                         <div class="info-inner">
-                            <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
+                            <div class="item-title"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><?= $special->title?></a> </div>
                             <div class="item-content">
                                 <div class="rating">
                                     <div class="ratings">
                                         <div class="rating-box">
-                                            <div class="rating" style="width:80%"></div>
+                                            <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                         </div>
-                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                        <p class="rating-links"><a href="#" ><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
                                     </div>
                                 </div>
                             </div>
@@ -718,6 +293,7 @@ $this->title = Yii::$app->name;
         </div>
     </div>
 </div>
+    <?php }?>
 <div class="container">
     <div class="row our-features-box">
         <ul>
@@ -753,7 +329,7 @@ $this->title = Yii::$app->name;
     </div>
 </div>
 <!--<div class="wrapper" style="margin: 0 -30px;">-->
-<!--    <!-- /templates/snippets/section-custom-top.liquid -->-->
+    <!-- /templates/snippets/section-custom-top.liquid -->
 <!--    <div class="section-custom-top radius-10">-->
 <!--        <div class="grid">-->
 <!--            <div class="grid__item section-product-new" style="padding-top: 10px;">-->

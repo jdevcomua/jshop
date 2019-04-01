@@ -21,11 +21,6 @@ use yii\helpers\Url;
         /* @var $item Item */
         $item = $model->getModel(); ?>
         <tr class="cart__row table__section">
-            <td data-label="Товар">
-                <a href="<?= $item->getUrl() ?>" class="cart__image">
-                    <img src="<?= $item->getOneImageUrl() ?>" alt="<?= $item->getTitle() ?>">
-                </a>
-            </td>
             <td>
                 <a href="<?= $item->getUrl() ?>" class="h6">
                     <?= $item->getTitle() ?>
@@ -33,7 +28,7 @@ use yii\helpers\Url;
 
                 <br>
 
-                <a class="cart__remove" data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
+                <a href="" class="cart__remove" data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
                     <small>Удалить</small>
                 </a>
             </td>
@@ -44,16 +39,8 @@ use yii\helpers\Url;
             </td>
             <td data-label="Количество">
                 <div class="js-qty">
-                    <button type="button" class="js-qty__adjust js-qty__adjust--minus icon-fallback-text">
-                        <span class="icon icon-minus" aria-hidden="true"></span>
-                        <span class="fallback-text">−</span>
-                    </button>
                     <input type="number" class="js-qty__num" value="<?= $model->count ?>"
                            data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
-                    <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text">
-                        <span class="icon icon-plus" aria-hidden="true"></span>
-                        <span class="fallback-text">+</span>
-                    </button>
                 </div>
             </td>
             <td data-label="Сумма" class="text-right">

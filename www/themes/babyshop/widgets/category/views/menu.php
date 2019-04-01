@@ -3,63 +3,63 @@ use common\models\ItemCat;
 use yii\helpers\Url;
 
 /* @var ItemCat[] $allCategories */
+/* @var ItemCat[] $children */
+/* @var ItemCat[] $child_children */
+/* @var ItemCat $child */
+/* @var ItemCat $child_child */
+/* @var ItemCat $category */
 /* @var $inCategory boolean */
 ?>
 
-<nav class="nav-bar keep-this" role="navigation">
-    <!-- /snippets/menu.liquid -->
-    <div class="medium-down--hide">
-        <!-- begin site-nav -->
-        <ul class="site-nav" id="AccessibleNav">
+ <?php foreach ($allCategories as $category) {
+     $children = $category->getChildren()->all();;
+     if (empty($children))
+         echo '<li class="mega-menu"> 
+            <a class="level-top" href="' . $category->getUrl()  . '"><span>' . $category->title  . '</span></a> </li>';
+     else {?>
 
-            <?php foreach ($allCategories as $category) {
-                $children = $category->getChildren()->all(); ?>
-                <li class="site-nav--has-dropdown" aria-haspopup="true">
-                    <a href="<?= $category->getUrl() ?>" class="site-nav__link">
-                        <?= $category->title; ?>
-                        <?php if (!empty($children)) { ?>
-                            <span class="fa fa-angle-down" aria-hidden="true"></span>
-                        <?php } ?>
-                    </a>
-                    <?php if (!empty($children)) { ?>
-                        <ul class="site-nav__dropdown">
-                            <?php foreach ($children as $childCategory) {
-                                /* @var $childCategory ItemCat */ ?>
-                                <li>
-                                    <a href="<?= $childCategory->getUrl(); ?>">
-                                        <?= $childCategory->title ?>
-                                    </a>
-                                </li>
-                            <?php } ?>
+<li class="mega-menu"> <a class="level-top" href="<?= $category->getUrl() ?>"><span><?= $category->title ?></span></a>
+    <div class="level0-wrapper dropdown-6col">
+        <div class="container">
+            <div class="level0-wrapper2">
+                <div class="col-1">
+                    <div class="nav-block nav-block-center">
+                        <!--mega menu-->
+                        <ul class="level0">
+                            <?php foreach ($children as $child) {
+                                $child_children = $child->getChildren()->all()?>
+                            <li class="level3 nav-6-1 parent item"> <a href="<?= $child->getUrl() ?>"><span><?= $child->title ?></span></a>
+                                <!--sub sub category-->
+                                <?php if(!empty($child_children)) {?>
+                                <ul class="level1">
+                                    <?php foreach ($child_children as $child_child) { ?>
+                                    <li class="level2 nav-6-1-1"> <a href="<?= $child_child->getUrl() ?>"><span><?= $child_child->getUrl() ?></span></a> </li>
+                                    <!--level2 nav-6-1-1-->
+                                   <?php } ?>
+                                </ul>
+                                <?php }?>
+                                <!--level1-->
+                                <!--sub sub category-->
+                            </li>
+                            <?php }?>
                         </ul>
-                    <?php } ?>
-                </li>
-            <?php } ?>
-        </ul>
-        <!-- //site-nav -->
-    </div>
-    <div class="large--hide medium-down--show">
-        <div class="grid">
-            <div class="grid__item one-half">
-                <div class="site-nav--mobile">
-                    <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left"
-                            aria-controls="NavDrawer" aria-expanded="false">
-                        <span class="icon icon-hamburger" aria-hidden="true"></span>
-                        <span class="fallback-text">Меню</span>
-                    </button>
+                        <!--level0-->
+                    </div>
+                    <!--nav-block nav-block-center-->
                 </div>
-            </div>
-            <div class="grid__item one-half text-right">
-                <div class="site-nav--mobile">
-                    <a href="<?= Url::to('cart') ?>" class="js-drawer-open-right site-nav__link"
-                       aria-controls="CartDrawer" aria-expanded="false">
-                        <span class="icon-fallback-text">
-                            <span class="sprite sprite-cart" aria-hidden="true"></span>
-                            <span class="fallback-text">Козина</span>
-                        </span>
-                    </a>
+                <!--col-1-->
+                <div class="col-2">
+                    <div class="menu_image"><a title="" href="<?= $category->getUrl() ?>">
+                            <img alt="menu_image" src="<?= ($category->image) ? $category->image : '/images/category_no_image.jpg'?>"></a></div>
                 </div>
+                <!--col-2-->
             </div>
+            <!--level0-wrapper2-->
         </div>
+        <!--container-->
     </div>
-</nav>
+    <!--level0-wrapper dropdown-6col-->
+    <!--mega menu-->
+</li>
+
+<?php } }?>

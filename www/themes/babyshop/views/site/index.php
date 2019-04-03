@@ -69,7 +69,7 @@ $this->title = Yii::$app->name;
             </div>
         </div>
     </div>
-    <?php if (isset($best_seller)) { ?>
+    <?php if (!empty($best_seller)) { ?>
     <!-- best Pro Slider -->
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
@@ -127,7 +127,7 @@ $this->title = Yii::$app->name;
         </div>
     </section>
     <?php }?>
-    <?php if (isset($deal_week)) { ?>
+    <?php if (!empty($deal_week)) { ?>
     <div class="hot-section">
         <div class="container">
             <div class="row">
@@ -343,7 +343,8 @@ $this->title = Yii::$app->name;
 <!--        <section>-->
 <!--            <div class="inner space-30 section-product-new">-->
 <!--                <div class="arrivals ">-->
-<!--                    --><?//= ListView::widget([
+<?php
+//= ListView::widget([
 //                        'dataProvider' => $itemsDataProvider,
 //                        'itemView' => function ($model, $key, $index, $widget) {
 //                            return $this->render('_item', ['model' => $model]);

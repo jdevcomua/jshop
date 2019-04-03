@@ -33,7 +33,7 @@ use yii\helpers\Url;
                                 <?php if(!empty($child_children)) {?>
                                 <ul class="level1">
                                     <?php foreach ($child_children as $child_child) { ?>
-                                    <li class="level2 nav-6-1-1"> <a href="<?= $child_child->getUrl() ?>"><span><?= $child_child->getUrl() ?></span></a> </li>
+                                    <li class="level2 nav-6-1-1"> <a href="<?= $child_child->getUrl() ?>"><span><?= $child_child->title ?></span></a> </li>
                                     <!--level2 nav-6-1-1-->
                                    <?php } ?>
                                 </ul>

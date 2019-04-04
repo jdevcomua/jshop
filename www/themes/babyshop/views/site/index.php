@@ -294,40 +294,8 @@ $this->title = Yii::$app->name;
     </div>
 </div>
     <?php }?>
-<div class="container">
-    <div class="row our-features-box">
-        <ul>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-truck"></div>
-                    <div class="content">FREE SHIPPING on order over $99</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-support"></div>
-                    <div class="content">Have a question?<br>
-                        +1 800 789 0000</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-money"></div>
-                    <div class="content">100% Money Back Guarantee</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-return"></div>
-                    <div class="content">30 days return Service</div>
-                </div>
-            </li>
-            <li class="last">
-                <div class="feature-box"> <a href="#"><i class="fa fa-apple"></i> download</a> <a href="#"><i class="fa fa-android"></i> download</a> </div>
-            </li>
-        </ul>
-    </div>
 </div>
+
 <!--<div class="wrapper" style="margin: 0 -30px;">-->
     <!-- /templates/snippets/section-custom-top.liquid -->
 <!--    <div class="section-custom-top radius-10">-->

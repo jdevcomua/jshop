@@ -10,6 +10,8 @@ class CategoriesView extends Widget
 {
     private $categories;
 
+    public $view = 'menu';
+
     public function init()
     {
         parent::init();
@@ -34,6 +36,6 @@ class CategoriesView extends Widget
         } else {
             $inCategory = null;
         }
-        return $this->render('menu', ['allCategories' => $this->categories, 'inCategory' => $inCategory]);
+        return $this->render($this->view, ['allCategories' => $this->categories, 'inCategory' => $inCategory]);
     }
 }

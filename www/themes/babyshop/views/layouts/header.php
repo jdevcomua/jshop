@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 ?>
 <header>
@@ -66,10 +67,10 @@ use yii\helpers\Url;
                                     <!-- END For version 1,2,3,4,6 -->
                                 </div>
                                 <ul class="links">
-                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>
-                                    <li><a href="<?= Url::toRoute('user/login') ?>" title="Wishlist">Wishlist</a></li>
-                                    <li><a href="checkout.html" title="Checkout">Checkout</a></li>
-                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>
+<!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
+                                    <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
+                                    <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart">Cart</a></li>
+<!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span>Login</span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span>Registration</span></a></li>
                                 </ul>
@@ -77,8 +78,9 @@ use yii\helpers\Url;
                         </div>
                     </div>
                     <div class="fl-cart-contain">
+                        <?php Pjax::begin() ?>
                         <div class="mini-cart">
-                            <div class="basket"> <a href="<?= Url::to('/cart') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
+                            <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
                             <div class="fl-mini-cart-content" style="display: none;">
                                 <div class="block-subtitle">
                                     <div class="top-subtotal"><?= Yii::$app->cart->getCount() ?> items,
@@ -87,32 +89,37 @@ use yii\helpers\Url;
                                     <!--pull-right-->
                                 </div>
                                 <!--block-subtitle-->
+
+                                <a id="reload_cart" data-pjax="true" href="">Reload</a>
                                 <?php if(!Yii::$app->cart->isEmpty()) { ?>
                                 <ul class="mini-products-list" id="cart-sidebar">
-                                    <?php foreach (Yii::$app->cart->getModels() as $cartElement) {?>
-                                    <li class="item first">
-                                        <div class="item-inner"><a class="product-image" title="<?= $cartElement->model->title?>"
+                                    <?php foreach (Yii::$app->cart->getModels() as $key => $cartElement) {?>
+
+                                    <li class="item <?=($key == 0) ? 'first' : ''?> <?=($key == count(Yii::$app->cart->getModels())-1) ? 'last' : ''?>">
+                                        <div class="item-inner"><a data-pjax = 0 class="product-image" title="<?= $cartElement->model->title?>"
                                                                    href="<?= $cartElement->model->getUrl() ?>"><img alt="<?= $cartElement->model->title?>"
                                                                                                                     src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : '/images/product_no_image.jpg' ?>"></a>
                                             <div class="product-details">
-                                                <div class="access"><a class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>">Remove</a></div>
+
+                                                <div class="access"><a data-pjax="true" href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>">Remove</a></div>
                                                 <!--access-->
                                                 <strong><?= $cartElement->count ?></strong> x <span class="price"><?= $cartElement->model->cost ?></span>
-                                                <p class="product-name"><a href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
+                                                <p class="product-name"><a data-pjax = 0 href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
                                             </div>
                                         </div>
                                     </li>
                                     <?php }?>
                                 </ul>
                                 <?php } ?>
-                                <div class="actions">
-                                    <button class="btn-checkout" title="Checkout" type="button" onClick="window.location='<?= Url::toRoute('cart/index')?>'"><span>Checkout</span></button>
-                                </div>
 
+                                <div class="actions">
+                                    <button data-pjax = 0 class="btn-checkout" title="Checkout" type="button" onClick="window.location='<?= Url::toRoute('cart/index')?>'"><span>Checkout</span></button>
+                                </div>
                                 <!--actions-->
                             </div>
                             <!--fl-mini-cart-content-->
                         </div>
+                        <?php Pjax::end()?>
                     </div>
                     <!--mini-cart-->
                     <div class="collapse navbar-collapse">

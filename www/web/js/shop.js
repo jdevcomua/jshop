@@ -139,26 +139,13 @@ function addToCart(id) {
         data: {count: 1, item_id: id},
         dataType: 'json',
         success: function (data) {
-            var count = +$('#countItems ').html();
-            if (count == 0) {
-                $('#cartEmpty').toggleClass('d_n');
-                $('#cartFull').toggleClass('d_n');
-            }
-            $('#countItems ').html(+count + 1);
-            $('#toCart-' + id).toggleClass('d_n');
-            $('#inCart-' + id).toggleClass('d_n');
+            document.getElementById('reload_cart').click();
             showPopup(data.html, data.title);
         }
     });
 }
 function showPopup(html, title) {
-    $.fancybox.open(html, {
-        opts : {
-            afterClose : function( instance, current ) {
-                location.reload();
-            }
-        }
-    });
+    $.fancybox.open(html);
     /*var forCenter = $('#forCenter');
     var popup = $('#popup');
     forCenter.find('.title').html(title);
@@ -212,14 +199,6 @@ function deleteFromCart(id, cart_type, $thisitem) {
         data: {item_id: id, cart_type: cart_type},
         dataType: 'json',
         success: function (data) {
-            $thisitem.parent().parent().parent().remove();
-            $('.sum').html(data.sumAll);
-            $('#countItems ').html(data.countAll);
-            if (data.countAll == 0) {
-                $('#cartFull').toggleClass('d_n');
-                $('#cartEmpty').toggleClass('d_n');
-            }
-            location.reload();
         }
     });
 }

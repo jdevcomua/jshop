@@ -31,8 +31,8 @@ class CartController extends Controller
             'price' => Yii::$app->cart->getSum(),
         ];*/
         
-        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
-            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
+        return ['html' => $this->renderPartial('cartSuccess', ['model' => $item,
+            'count' => $count]), 'title' => 'Корзина'];
     }
 
     public function actionAjaxkit($item_id, $count)

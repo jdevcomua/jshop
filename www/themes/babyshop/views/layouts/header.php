@@ -78,7 +78,7 @@ use yii\widgets\Pjax;
                         </div>
                     </div>
                     <div class="fl-cart-contain">
-                        <?php Pjax::begin() ?>
+                        <?php Pjax::begin(['id'=>'cart']) ?>
                         <div class="mini-cart">
                             <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
                             <div class="fl-mini-cart-content" style="display: none;">
@@ -90,7 +90,6 @@ use yii\widgets\Pjax;
                                 </div>
                                 <!--block-subtitle-->
 
-                                <a id="reload_cart" data-pjax="true" href="">Reload</a>
                                 <?php if(!Yii::$app->cart->isEmpty()) { ?>
                                 <ul class="mini-products-list" id="cart-sidebar">
                                     <?php foreach (Yii::$app->cart->getModels() as $key => $cartElement) {?>
@@ -101,9 +100,9 @@ use yii\widgets\Pjax;
                                                                                                                     src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : '/images/product_no_image.jpg' ?>"></a>
                                             <div class="product-details">
 
-                                                <div class="access"><a data-pjax="true" href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>">Remove</a></div>
+                                                <div class="access"><a data-pjax="true" data-reload=0 href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>">Remove</a></div>
                                                 <!--access-->
-                                                <strong><?= $cartElement->count ?></strong> x <span class="price"><?= $cartElement->model->cost ?></span>
+                                                <strong><?= $cartElement->count ?></strong> x <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
                                                 <p class="product-name"><a data-pjax = 0 href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
                                             </div>
                                         </div>

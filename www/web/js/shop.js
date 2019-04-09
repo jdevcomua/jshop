@@ -82,6 +82,57 @@ function openWishEditWindow(id) {
 function closePopup() {
     $('#forCenter').toggleClass('d_n');
 }
+
+function setPerPage(page) {
+    $.ajax({
+        url: '',
+        data: {page},
+        type: 'post',
+        success: function () {
+        }
+    });
+}
+
+function setDefaultSort() {
+    $.ajax({
+        url: '',
+        data: {data:'true'},
+        type: 'post',
+        success: function () {
+        }
+    });
+}
+
+function setPriceRange(left, right) {
+    $.ajax({
+        url: '',
+        data: {left,right},
+        type: 'post',
+        success: function () {
+            $.pjax.reload('#itemList');
+        }
+    });
+}
+
+function setSort(sort) {
+    $.ajax({
+        url: '',
+        data: {sort},
+        type: 'post',
+        success: function () {
+        }
+    });
+}
+
+function setListType(listType) {
+    $.ajax({
+        url: '',
+        data: {listType},
+        type: 'post',
+        success: function () {
+        }
+    });
+}
 function addToWishList() {
     var list = '0';
     var textt = '_';
@@ -139,7 +190,12 @@ function addToCart(id) {
         data: {count: 1, item_id: id},
         dataType: 'json',
         success: function (data) {
-            document.getElementById('reload_cart').click();
+            if (document.getElementById('cart_cat')) {
+                $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#cart_cat", async: false});
+            } else {
+                $.pjax.reload({container: "#cart"});
+            }
             showPopup(data.html, data.title);
         }
     });
@@ -192,13 +248,19 @@ function addToCartFromItemPage(id) {
         }
     });
 }
-function deleteFromCart(id, cart_type, $thisitem) {
+function deleteFromCart(id, cart_type, pjax) {
     $.ajax({
-        url: 'cart/delete',
+        url: '/cart/delete',
         async: true,
         data: {item_id: id, cart_type: cart_type},
         dataType: 'json',
         success: function (data) {
+            if (document.getElementById('cart_cat')) {
+                $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#cart_cat", async: false});
+            } else {
+                $.pjax.reload({container: "#cart"});
+            }
         }
     });
 }
@@ -249,8 +311,7 @@ function removeItemFromWishList(id) {
 }
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
-    deleteFromCart($(this).data('id'), $(this).data('type'), $(this));
-
+    deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
 });
 
 $(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине

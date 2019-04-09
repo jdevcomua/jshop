@@ -20,6 +20,19 @@ use yii\web\NotFoundHttpException;
 class SiteController extends Controller
 {
 
+    protected function getDefault($reload = null)
+    {
+        if($reload) {
+            Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            Yii::$app->session->set('listType', 'grid');
+            Yii::$app->session->set('sort', 'date');
+        }else{
+            if(!Yii::$app->session->get('page')) Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            if(!Yii::$app->session->get('listType')) Yii::$app->session->set('listType', 'grid');
+            if(!Yii::$app->session->get('sort')) Yii::$app->session->set('sort', 'date');
+        }
+    }
+
     /**
      * @return string
      */
@@ -79,12 +92,12 @@ class SiteController extends Controller
      * @param $items \yii\db\ActiveQuery
      * @return \yii\db\ActiveQuery
      */
-    public function sorting($items, $sort)
+    protected function sorting($items, $sort)
     {
         switch ($sort) {
             case 'asc' : $items->orderBy('cost asc'); break;
             case 'desc' : $items->orderBy('cost desc'); break;
-            case 'promotions' : $items->join('inner join', 'stock_item', 'stock_item.item_id=item.id'); break;
+            case 'promo' : $items->join('inner join', 'stock_item', 'stock_item.item_id=item.id'); break;
             case 'date' : $items->orderBy('addition_date desc'); break;
             case 'rating' : $items->join('inner join', 'vote', 'vote.item_id=item.id')
                 ->groupBy('vote.item_id')->orderBy('avg(vote.rating) desc'); break;
@@ -129,6 +142,16 @@ class SiteController extends Controller
      */
     public function actionCategory($id)
     {
+        $this->getDefault(Yii::$app->request->post('data'));
+        if (Yii::$app->request->isPost) {
+            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
+            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
+            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
+            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
+            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
+        }
+
         $id = explode('-', $id)[0];
         $request = Yii::$app->request;
         $selected = $request->get('filter');
@@ -141,21 +164,23 @@ class SiteController extends Controller
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);
         }
-        $sort = $request->get('sort', 'date');
+        $sort = (Yii::$app->session->get('sort')) ? Yii::$app->session->get('sort') : 'date';
         $quantity = $request->get('quantity', self::PAGE_SIZE);
         $this->sorting($items, $sort);
 
         //for filter by price
         $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
         $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
-        if (($left = $request->get('left')) && ($right = $request->get('right'))) {
-            $leftCost = $left;
-            $rightCost = $right;
-        } else {
-            $leftCost = $minCost;
-            $rightCost = $maxCost;
-        }
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',0,99.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',100,499.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',500,999.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['>=', 'cost',1000])->count();
 
+        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+            $items->andFilterWhere(['between', 'cost',$left,$right]);
+        } else {
+            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
+        }
         $items->with(['stockItems', 'images', 'stocks']);
 
         $filterCounts = CharacteristicItem::find()->select(['characteristic_id', 'count(characteristic_id) as count'])
@@ -163,10 +188,11 @@ class SiteController extends Controller
             ->where(['category_id' => $id])->groupBy('characteristic_id')
             ->indexBy('characteristic_id')->asArray(true)->all();
 
+        $pager =
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam(Theme::PARAM_ITEMS_ON_CATALOG_PAGE),
+                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
 
@@ -179,9 +205,8 @@ class SiteController extends Controller
             'filterCounts' => $filterCounts,
             'minCost' => $minCost,
             'maxCost' => $maxCost,
-            'leftCost' => $leftCost,
+            'countCosts' => $countCosts,
             'dataProvider' => $dataProvider,
-            'rightCost' => $rightCost,
             'category' => $category,
             'count' => $items->count(),
             'quantity' => $quantity,

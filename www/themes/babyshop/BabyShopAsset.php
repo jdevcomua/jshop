@@ -13,7 +13,6 @@ class BabyShopAsset extends AssetBundle
         'stylesheet/bootstrap.min.css',
         'stylesheet/font-awesome.css',
         'stylesheet/revslider.css',
-        'stylesheet/revslider.css',
         'stylesheet/owl.carousel.css',
         'stylesheet/owl.theme.css',
         'stylesheet/jquery.bxslider.css',
@@ -23,7 +22,6 @@ class BabyShopAsset extends AssetBundle
     ];
     public $js = [
         'js/bootstrap.min.js',
-        'js/jquery.min.js',
         'js/parallax.js',
         'js/revslider.js',
         'js/common.js',
@@ -39,6 +37,7 @@ class BabyShopAsset extends AssetBundle
 //        'yii\bootstrap\BootstrapAsset',
 //        'yii\bootstrap\BootstrapPluginAsset',
         'www\assets\AppAsset',
+        'yii\widgets\PjaxAsset'
     ];
     
 }

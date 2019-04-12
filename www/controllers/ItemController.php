@@ -6,6 +6,7 @@ use common\models\Vote;
 use Yii;
 use common\models\Item;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class ItemController extends Controller
 {
@@ -58,12 +59,13 @@ class ItemController extends Controller
 
     public function actionQuickView($id)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
         $model = $this->findModel($id);
         if ($model) {
-            return $this->renderAjax('quickview', [
+            return ['html' => $this->renderPartial('quickview', [
                 'model' => $model,
-                'inCart' => Yii::$app->cart->checkItemInCart($id),
-            ]);
+            ])];
         } else {
             return false;
         }

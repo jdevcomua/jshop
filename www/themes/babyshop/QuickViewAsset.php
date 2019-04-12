@@ -1,11 +1,19 @@
 <?php
+/**
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
 
 namespace www\themes\babyshop;
 
 use yii\web\AssetBundle;
-use yii\web\View;
 
-class BabyShopAsset extends AssetBundle
+/**
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @since 2.0
+ */
+class QuickViewAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
@@ -37,5 +45,4 @@ class BabyShopAsset extends AssetBundle
         'www\assets\AppAsset',
         'yii\widgets\PjaxAsset'
     ];
-    
 }

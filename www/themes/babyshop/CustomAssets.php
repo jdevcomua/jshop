@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace www\assets;
+namespace www\themes\babyshop;
 
 use yii\web\AssetBundle;
 
@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class CustomAssets extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
@@ -21,10 +21,12 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
-        'js/cloud-zoom.js'
+        'js/custom.js',
+        'js/shop.js'
     ];
     public $depends = [
-        'yii\web\JqueryAsset',
-        'www\widgets\fancybox\FancyBoxAssets'
+        'www\themes\babyshop\BabyShopAsset',
     ];
 }
+
+

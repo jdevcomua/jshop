@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-
+\www\themes\babyshop\CustomAssets::register($this);
 \www\themes\babyshop\BabyShopAsset::register($this);
 ?>
 <!DOCTYPE html>

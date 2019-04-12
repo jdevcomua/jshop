@@ -46,7 +46,7 @@ class Cart extends Component
         $array = $this->getArray();
         if ($this->checkItem($item)) {
             $key = $this->getSubArrayKey($item);
-            $array[$key]['count']++;
+            $array[$key]['count'] += $count;
         } else {
             $array[] = ['id' => $item->getId(),
                 'type' => $item->getType(),

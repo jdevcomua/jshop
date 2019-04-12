@@ -150,6 +150,7 @@ class SiteController extends Controller
             if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
             if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
             if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
         }
 
         $id = explode('-', $id)[0];
@@ -188,16 +189,37 @@ class SiteController extends Controller
             ->where(['category_id' => $id])->groupBy('characteristic_id')
             ->indexBy('characteristic_id')->asArray(true)->all();
 
-        $pager =
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
                 'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
-
+        $mapData = [];
+        foreach ($dataProvider->getModels() as $key => $model){
+            $mapData[$model->id] = $key;
+        }
+//var_dump($modalId);
         $this->breadcrumbs = [$category->getUrl() => $category->title];
 
+
+        if (Yii::$app->request->isPjax) {
+            return $this->renderAjax('category', [
+                'selected' => empty($selected) ? [] : $selected,
+                'sort' => $sort,
+                'chars' => $category->characteristics,
+                'filterCounts' => $filterCounts,
+                'minCost' => $minCost,
+                'maxCost' => $maxCost,
+                'countCosts' => $countCosts,
+                'dataProvider' => $dataProvider,
+                'category' => $category,
+                'count' => $items->count(),
+                'quantity' => $quantity,
+                'mapData' => $mapData,
+                'isajax' => true,
+            ]);
+        }
         return $this->render('category', [
             'selected' => empty($selected) ? [] : $selected,
             'sort' => $sort,
@@ -210,6 +232,8 @@ class SiteController extends Controller
             'category' => $category,
             'count' => $items->count(),
             'quantity' => $quantity,
+            'mapData' => $mapData,
+            'isajax' => false,
         ]);
     }
 

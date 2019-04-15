@@ -21,7 +21,6 @@ use common\components\Theme;
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
-var_dump(Yii::$app->session->get('lastQuickView'));
 
 $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
 
@@ -386,11 +385,9 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
     </div>
     <!--container-->
 </section>
-<button id="showModal" data-toggle="modal" data-target="#modal" ></button>
-<?php Pjax::begin(['id'=>'quick-view-modal','enablePushState' => false]);
-\www\themes\babyshop\QuickViewAsset::register($this); ?>
+<?php Pjax::begin(['id'=>'quick-view-modal','enablePushState' => false]);?>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLable" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="width: 720px">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 720px">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="popup1" style="display: block;">
@@ -399,7 +396,6 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
 
 
                         $modalModel = $dataProvider->getModels()[$mapData[Yii::$app->session->get('lastQuickView')]];
-                    $imageUrls = $modalModel->getImageUrl();
                     ?>
 
                     <div class="quick-view-box">
@@ -416,26 +412,12 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
                                     <div class="product-image">
                                         <div class="product-full"> <img id="product-zoom" src="<?= ($modalModel->images) ? $modalModel->getOneImageUrl() : '/images/product_no_image.jpg' ?>" data-zoom-image="<?= ($modalModel->images) ? $modalModel->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="product-image"/> </div>
                                         <div class="more-views">
-                                            <div class="slider-items-products">
-                                                <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
-                                                    <div class="slider-items slider-width-col4 block-content">
-                                                        <?php if(!$imageUrls) {?>
-                                                            <div class="more-views-items"> <a href="#" data-image="/images/product_no_image.jpg" data-zoom-image="/images/product_no_image.jpg"> <img id="product-zoom"  src="/images/product_no_image.jpg" alt="product-image"/> </a></div>
-                                                            <div class="more-views-items"> <a href="#" data-image="/images/product_no_image.jpg" data-zoom-image="/images/product_no_image.jpg"> <img id="product-zoom"  src="/images/product_no_image.jpg" alt="product-image"/> </a></div>
-                                                            <div class="more-views-items"> <a href="#" data-image="/images/product_no_image.jpg" data-zoom-image="/images/product_no_image.jpg"> <img id="product-zoom"  src="/images/product_no_image.jpg" alt="product-image"/> </a></div>
-                                                            <div class="more-views-items"> <a href="#" data-image="/images/product_no_image.jpg" data-zoom-image="/images/product_no_image.jpg"> <img id="product-zoom"  src="/images/product_no_image.jpg" alt="product-image"/> </a></div>
-                                                            <div class="more-views-items"> <a href="#" data-image="/images/product_no_image.jpg" data-zoom-image="/images/product_no_image.jpg"> <img id="product-zoom"  src="/images/product_no_image.jpg" alt="product-image"/> </a></div>
-                                                        <?php } else {
-                                                            foreach ($imageUrls as $url) {?>
-                                                                <div class="more-views-items"> <a href="#" data-image="<?=$url?>" data-zoom-image="<?=$url?>"> <img id="product-zoom"  src="<?=$url?>" alt="product-image"/> </a></div>
-                                                            <?php }}?>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <!-- end: more-images -->
                                 </div>
+
                                 <!--End For version 1,2,6-->
                                 <!-- For version 3 -->
                                 <div class="product-shop col-lg- col-sm-7 col-xs-12">
@@ -444,7 +426,7 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
                                     </button>
 
                                     <div class="product-name">
-                                        <h1><?= $modalModel->title ?> . <?php var_dump($isajax)?></h1>
+                                        <h1><?= $modalModel->title ?></h1>
                                     </div>
                                     <div class="ratings">
                                         <div class="rating-box">
@@ -454,27 +436,43 @@ $notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
                                     </div>
                                     <div class="price-block">
                                         <div class="price-box">
-                                            <?php if($discount = $modalModel->existDiscount())
+                                            <?php if($discount  = $modalModel->existDiscount())
                                                 echo '<p class="availability in-stock"><span>In Stock</span></p>
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price">' . $modalModel->getNewPrice() . '</span> </p>';
-                                            else echo ' <p class="price"> <span class="price-label">Price</span> <span id="product-price-48" class="price"> ' . $modalModel->cost . ' </span> </p>'?>
+                                <p class="special-price"><span class="price">Special Price</span> <span id="product-price-48" class="price">' . number_format((float)$modalModel->getNewPrice(), 2, '.', '') . '</span> </p>';
+                                            else echo ' <p class="price"> <span class="price-label">Price</span> <span id="product-price-48" class="price"> ' . number_format((float)$modalModel->cost, 2, '.', '') . ' </span> </p>'?>
                                         </div>
                                     </div>
                                     <div class="add-to-box">
                                         <div class="add-to-cart">
                                             <div class="pull-left">
                                                 <div class="custom pull-left">
-                                                    <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                                    <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                                                    <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
+                                                    <button data-pjax="0" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+                                                    <input data-pjax="0" type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                    <button data-pjax="0" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                                 </div>
                                             </div>
-                                            <button onclick="addToCart(<?= $modalModel->id ?>)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                                            <button data-pjax="0" onclick="addToCart(<?= $modalModel->id ?>)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
                                         </div>
 
                                     </div>
                                     <div class="short-description">
-                                        <?= $modalModel->description ?>
+                                        <?php
+                                        $text = $modalModel->description;
+                                        $max_lengh = 300;
+
+                                        if(mb_strlen($text, "UTF-8") > $max_lengh) {
+                                            $text_cut = mb_substr($text, 0, $max_lengh, "UTF-8");
+                                            $text_explode = explode(" ", $text_cut);
+
+                                            unset($text_explode[count($text_explode) - 1]);
+
+                                            $text_implode = implode(" ", $text_explode);
+
+                                            echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" href="'.$modalModel->getUrl().'">Learn More</a>';
+                                        } else {
+                                            echo $text;
+                                        }
+                                        ?>
                                     </div>
                                     <div class="email-addto-box">
                                         <ul class="add-to-links">

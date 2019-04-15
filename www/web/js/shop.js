@@ -214,13 +214,10 @@ function quickView(id) {
         type: 'post',
         success: function (data) {
             $.pjax.reload({container: "#quick-view-modal"});
-            jQuery('#product-zoom').elevateZoom({
-                zoomType: "inner",
-                cursor: "crosshair",
-                zoomWindowFadeIn: 500,
-                zoomWindowFadeOut: 750,
-                gallery: 'gallery_01'
-            });
+
+            $('#quick-view-modal')
+                .on('pjax:end',   function() { $('#modal').modal() });
+
         }
     });
 }
@@ -341,6 +338,7 @@ function removeItemFromWishList(id) {
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
 });
+
 
 
 $(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине

@@ -12340,7 +12340,7 @@ button.button span span {
 /*************Newsletter POPUP Start***************/
 /* Newsletter POPUP Start */
 
-#fade {
+.fade {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -12350,7 +12350,7 @@ button.button span span {
 	filter: alpha(opacity=70);
 	-moz-opacity: 0.8;
 	-khtml-opacity: 0.8;
-	opacity: 0.8;
+	opacity: 0.5;
 	z-index: 1000;
 	display: none;
 }
@@ -12396,7 +12396,7 @@ button.button span span {
 }	
 	
 .quick-view-box .product-essential {border:none; box-shadow:none; border-radius:10px}
-.quick-view-box .short-description {display:none}
+.quick-view-box .short-description {display:block}
 .quick-view-box .shipping-pro {display:none}
 .quick-view-box .container{width:715px; margin-bottom:0px}
 .quick-view-box  .product-view .product-name h1 {font-size:26px;}

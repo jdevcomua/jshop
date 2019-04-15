@@ -78,7 +78,7 @@ use yii\widgets\Pjax;
                         </div>
                     </div>
                     <div class="fl-cart-contain">
-                        <?php Pjax::begin(['id'=>'cart']) ?>
+                        <?php Pjax::begin(['id'=>'cart','enablePushState' => false]) ?>
                         <div class="mini-cart">
                             <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
                             <div class="fl-mini-cart-content" style="display: none;">

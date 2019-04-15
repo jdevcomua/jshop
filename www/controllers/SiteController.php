@@ -203,23 +203,7 @@ class SiteController extends Controller
         $this->breadcrumbs = [$category->getUrl() => $category->title];
 
 
-        if (Yii::$app->request->isPjax) {
-            return $this->renderAjax('category', [
-                'selected' => empty($selected) ? [] : $selected,
-                'sort' => $sort,
-                'chars' => $category->characteristics,
-                'filterCounts' => $filterCounts,
-                'minCost' => $minCost,
-                'maxCost' => $maxCost,
-                'countCosts' => $countCosts,
-                'dataProvider' => $dataProvider,
-                'category' => $category,
-                'count' => $items->count(),
-                'quantity' => $quantity,
-                'mapData' => $mapData,
-                'isajax' => true,
-            ]);
-        }
+
         return $this->render('category', [
             'selected' => empty($selected) ? [] : $selected,
             'sort' => $sort,

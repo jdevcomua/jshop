@@ -7,6 +7,7 @@ use yii\helpers\Url;
 /* @var $content string */
 \www\themes\babyshop\CustomAssets::register($this);
 \www\themes\babyshop\BabyShopAsset::register($this);
+\www\themes\babyshop\QuickViewAsset::register($this);
 ?>
 <!DOCTYPE html>
 <?php $this->beginPage() ?>

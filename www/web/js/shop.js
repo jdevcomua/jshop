@@ -335,12 +335,61 @@ function removeItemFromWishList(id) {
     });
 }
 
+function setRating(rating) {
+    $('#vote-rating').val(rating);
+    for (var i=1;i<=5;i++)
+        $('.star-'+i).removeClass('active');
+    $('.star-'+rating).addClass('active');
+}
+
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
 });
 
+$(document).on('click', '#see_reviews', function(){ // изменение значения количество в корзине
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#reviews_tabs").offset().top - 260
+    }, 800);
+    $('#reviews_button').parent().addClass('active');
+    $('#description_button').parent().removeClass('active');
+    $('#tags_button').parent().removeClass('active');
+});
 
+$(document).on('click', '#add_reviews', function(){ // изменение значения количество в корзине
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#add-review").offset().top - 200
+    }, 800);
+    $('#reviews_button').parent().addClass('active');
+    $('#description_button').parent().removeClass('active');
+    $('#tags_button').parent().removeClass('active');
+});
+
+$(document).on('click', '#all_description', function(){ // изменение значения количество в корзине
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#product_tabs_description").offset().top - 260
+    }, 800);
+    $('#reviews_button').parent().removeClass('active');
+    $('#description_button').parent().addClass('active');
+    $('#tags_button').parent().removeClass('active');
+});
 
 $(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
     changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
 });
+
+$(document).ready(function () {
+    $('.star-'+$('#vote-rating').val()).addClass('active');
+    setTimeout(function() {
+        if (window.location.hash) {
+            var hash = window.location.hash.substr(1);
+            var scrollPos = $('a[name="'+hash+'"]').offset().top;
+            $("html, body").animate({ scrollTop: scrollPos }, 1000);
+        }
+    }, 1);
+});
+
+document.getElementById('').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Скрипт сработал');
+}, false);
+

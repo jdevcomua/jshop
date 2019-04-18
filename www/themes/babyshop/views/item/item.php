@@ -2,9 +2,12 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /* @var $item \common\models\Item */
 /* @var $inCart boolean */
+/* @var $message string */
+/* @var $related \common\models\Item[] */
 
 $this->title = $item->title;
 $this->params['breadcrumbs'][] = ['label' => $item->category->title, 'url' => $item->category->getUrl()];
@@ -13,228 +16,289 @@ $this->params['breadcrumbs'][] = $this->title;
 $imageUrls = $item->getImageUrl();
 ?>
 <div>
+<div class="main-container col1-layout wow bounceInUp animated">
+    <div class="main">
+        <div class="col-main">
+            <!-- Endif Next Previous Product -->
+            <div class="product-view wow bounceInUp animated">
+                <div id="messages_product_view"></div>
+                <!--product-next-prev-->
+                <div class="product-essential container">
+                    <div class="row">
+                            <!--End For version 1, 2, 6 -->
+                            <!-- For version 3 -->
+                            <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                                <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
+                                    ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
+                                    '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
+                                <div class="product-image">
+                                    <div class="product-full"> <img id="product-zoom" src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" data-zoom-image="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="product-image"/> </div>
+                                    <?php if(count($imageUrls) >=2) {?>
+                                    <div class="more-views">
+                                        <div class="slider-items-products">
+                                            <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
+                                                <div class="slider-items slider-width-col4 block-content">
+                                                    <?php foreach ($imageUrls as $url) {?>
+                                                    <div class="more-views-items"> <a href="#" data-image="<?=$url?>" data-zoom-image="<?=$url?>"> <img id="product-zoom0"  src="<?=$url?>" alt="product-image"/> </a></div>
+                                                    <?php }?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                <!-- end: more-images -->
+                            </div>
+                            <!--End For version 1,2,6-->
+                            <!-- For version 3 -->
+                            <div class="product-shop col-lg- col-sm-7 col-xs-12">
+<!--                                <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>-->
+                                <div class="product-name">
+                                    <h1><?$item->title?></h1>
+                                </div>
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
+                                    </div>
+                                    <p class="rating-links"><a id="see_reviews" href="#reviews_tabs" data-toggle="tab"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a id="add_reviews" href="#reviews_tabs" data-toggle="tab">Add Review</a> </p>
+                                </div>
+                                <div class="price-block">
+                                    <div class="price-box">
+                                        <?php if($discount  = $item->existDiscount())
+                                            echo '<p class="availability in-stock"><span>In Stock</span></p>
+                                <p class="special-price"><span class="price">Special Price</span> <span id="product-price-48" class="price">' . number_format((float)$item->getNewPrice(), 2, '.', '') . '</span> </p>';
+                                        else echo ' <p class="price"> <span class="price-label">Price</span> <span id="product-price-48" class="price"> ' . number_format((float)$item->cost, 2, '.', '') . ' </span> </p>'?>
+                                    </div>
+                                </div>
+                                <div class="add-to-box">
+                                    <div class="add-to-cart">
+                                        <div class="pull-left">
+                                            <div class="custom pull-left">
+                                                <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+                                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
+                                            </div>
+                                        </div>
+                                        <button data-pjax="0" onclick="addToCart(<?= $item->id ?>)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                                    </div>
 
-    <div class="grid product-single">
-        <div class="grid__item large--one-half text-center">
-            <?php if (count($imageUrls) > 0) : ?>
-                <div class="grid">
-                    <div id="ProductPhoto"
-                         class="product-single__photos grid__item large--four-fifths medium--four-fifths small--four-fifths right">
-                        <a href="<?= $imageUrls[0] ?>" class="cloud-zoom" title="<?= $item->title ?>">
-                            <img src="<?= $imageUrls[0] ?>" alt="<?= $item->title ?>" id="ProductPhotoImg">
-                        </a>
-                    </div>
+                                </div>
+                                <div class="short-description">
+                                    <?php
+                                    $text = $item->description;
+                                    $max_lengh = 300;
 
-                    <?php if (count($imageUrls) > 1) : ?>
-                        <div class="left grid__item large--one-fifth medium--one-fifth small--one-fifth"
-                             id="ProductThumbnails">
-                            <div class="lite-carousel-play special-collection">
-                                <a class="prev carousel-md" href="#">
-                                    <span class="fa fa-angle-up"></span>
-                                </a>
-                                <div data-carousel="lite" data-visible="4">
-                                    <ul class="product-single__thumbnails" id="ProductThumbs">
-                                        <?php foreach ($imageUrls as $imageUrl) : ?>
-                                            <li class="product__thumbnails">
-                                                <a href="<?= $imageUrl ?>" class="product-single__thumbnail thumb-link"
-                                                   data-rel="<?= $imageUrl ?>">
-                                                    <img src="<?= $imageUrl ?>" alt="<?= $item->title ?>">
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
+                                    if(mb_strlen($text, "UTF-8") > $max_lengh) {
+                                        $text_cut = mb_substr($text, 0, $max_lengh, "UTF-8");
+                                        $text_explode = explode(" ", $text_cut);
+
+                                        unset($text_explode[count($text_explode) - 1]);
+
+                                        $text_implode = implode(" ", $text_explode);
+
+                                        echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" id="all_description" href="#product_tabs_description" data-toggle="tab">Learn More</a>';
+                                    } else {
+                                        echo $text;
+                                    }
+                                    ?>
+                                </div>
+                                <div class="email-addto-box">
+                                    <ul class="add-to-links">
+                                        <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
+                                      </ul>
+                                    <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
+                                </div>
+                                <div class="social">
+                                    <ul class="link">
+                                        <li class="fb"><a href="#"></a></li>
+                                        <li class="tw"><a href="#"></a></li>
+                                        <li class="googleplus"><a href="#"></a></li>
+                                        <li class="rss"><a href="#"></a></li>
+                                        <li class="pintrest"><a href="#"></a></li>
+                                        <li class="linkedin"><a href="#"></a></li>
+                                        <li class="youtube"><a href="#"></a></li>
                                     </ul>
                                 </div>
-                                <a class="next carousel-md" href="#">
-                                    <span class="fa fa-angle-down"></span>
-                                </a>
+                            </div>
+                            <!--product-shop-->
+                            <!--Detail page static block for version 3-->
+                    </div>
+                </div>
+<!--                product-essential-->
+                <div class="product-collateral container">
+                    <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+                        <li class="active"> <a id="description_button" href="#product_tabs_description" data-toggle="tab"> Product Description </a> </li>
+                        <li><a id="tags_button" href="#product_tabs_tags" data-toggle="tab">Tags</a></li>
+                        <li> <a id="reviews_button" href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
+                    </ul>
+                    <div id="productTabContent" class="tab-content">
+                        <div class="tab-pane  in active" id="product_tabs_description">
+                            <div class="std">
+                                <?= $item->description ?>
                             </div>
                         </div>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-        </div>
+                        <div class="tab-pane " id="product_tabs_tags">
+                            <div class="box-collateral box-tags">
+                                <div class="tags">
+                                    <form id="addTagForm" action="#" method="get">
+                                        <div class="form-add-tags">
 
-        <div class="grid__item large--one-half">
-
-            <h1><?= $item->title ?></h1>
-            <span class="shopify-product-reviews-badge"></span> <!-- end rating -->
-
-            <span id="ProductPrice" class="cost-block">
-                <span class="money h2"><?= $item->cost ?> грн.</span>
-                <span class="product-id">Код товара: <?= $item->id ?></span>
-            </span>
-
-            <!--<p class="des-short">
-                To succeed you must believe. When you believe, you will succeed. Bless up. Put it this way, it took me
-                twenty five years to get these plants, twenty five years of blood sweat and tears,...
-            </p>--> <!-- end short des -->
-            <hr>
-
-
-            <?php if ($inCart) { ?>
-                <a id="inCart" href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>">
-                    <button type="button" class="btn btn--secondary">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span id="AddToCartText">В корзине</span>
-                    </button>
-                </a>
-            <?php } else { ?>
-                <a id="inCart" class="d_n" href="<?php echo Yii::$app->urlHelper->to(['cart/index']) ?>">
-                    <button type="button" class="btn btn--secondary">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span id="AddToCartText">В корзине</span>
-                    </button>
-                </a>
-                <div id="toCart">
-                    <label for="test" class="quantity-selector">Количество</label><br>
-                    <p><input type="number" id="test" name="quantity" value="1" min="1" class="quantity-selector"></p>
-                    <?= Html::button('<i class="fa fa-shopping-cart"></i><span id="AddToCartText">В корзину</span>',
-                        ['onClick' => 'addToCartFromItemPage(' . $item->id . ')', 'class' => 'btn btn--secondary']); ?>
-                </div>
-            <?php } ?>
-
-            <br>
-            <br>
-            <a href="<?= Url::to(['/site/delivery']) ?>"><h6>Доставка новой почтой</h6></a>
-
-            <!--<a class="btn btn--secondary wishlist  awe-button product-quick-whistlist" href="/account/login"
-               data-toggle="tooltip" title="Add to whistlist">
-                <i class="fa fa-heart"></i><span>В список желаний</span>
-            </a>-->
-
-        </div>
-    </div>
-
-    <div class="product-tabs">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs tab-v7" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#product-detail" aria-controls="home" role="tab" data-toggle="tab">Описание</a>
-            </li>
-
-            <li role="presentation">
-                <a href="#product-shipping" data-toggle="tab">Характеристики</a>
-            </li>
-
-            <li role="presentation">
-                <a href="#product-reviews" aria-controls="product-reviews" role="tab" data-toggle="tab">Отзывы</a>
-            </li>
-
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="product-detail">
-                <div class="product-description rte">
-                    <?= $item->description; ?>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="product-shipping">
-                <div class="product-charac patch-product-view showHidePart">
-                    <table border="0" cellpadding="4" cellspacing="0" class="characteristic">
-                        <tbody>
-                        <?php foreach ($item->characteristicItems as $value) {
-                            if (!empty($value->value)) : ?>
-                                <tr>
-                                    <th>
-                                        <?= $value->characteristic->title ?>
-                                    </th>
-                                    <td>
-                                        <?= $value->value ?>
-                                    </td>
-                                </tr>
-                            <?php endif;
-                        } ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="product-reviews">
-
-                <div id="shopify-product-reviews" data-id="6156548739"
-
-                <div class="spr-container">
-                    <div class="spr-header">
-                        <h2 class="spr-header-title">Customer Reviews</h2>
-                        <div class="spr-summary">
-                            <span class="spr-summary-caption">No reviews yet</span>
-                            <span class="spr-summary-actions">
-                                <a href="#" class="spr-summary-actions-newreview">Write a review</a>
-                            </span>
+                                            <div class="input-box">
+                                                <input class="input-text" name="productTagName" id="productTagName" type="text" value="enter your tags">
+                                                <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span>Add Tags</span> </button>
+                                            </div>
+                                            <!--input-box-->
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--tags-->
+                                <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane  in" id="reviews_tabs">
+                            <div class="woocommerce-Reviews">
+                                <div>
+                                    <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
+                                    <h2 class="woocommerce-Reviews-title"><?=$item->getAvgRating()['count']?> reviews for <span><?=$item->title?></span></h2>
+                                    <ol class="commentlist">
+                                        <?php if ($item->getAvgRating()['count'] == 0) { ?>
+                                            <p>No reviews</p>
+                                        <?php } else {
+                                            $votes = $item->getCheckedVotes();
+                                            echo \yii\widgets\ListView::widget([
+                                                'dataProvider' => $votes,
+                                                'itemView' => function ($model, $key, $index, $widget) {
+                                                    return $this->render('_item_comment', ['model' => $model]);
+                                                },
+                                                'layout' => ' 
+                                {items}
+                                <div class="pages">
+                                   {pager}
+                                </div>'
+                                                ]);
+                                        } ?>
+                                    </ol>
+                                    <?php \yii\widgets\Pjax::end() ?>
+                                </div>
+                                <div id="add-review">
+                                    <div>
+                                        <div class="comment-respond">
+                                            <span class="comment-reply-title">Add a review </span>
+                                            <?php \yii\widgets\Pjax::begin() ?>
+                                            <?php $form = ActiveForm::begin(['options' => ['class' => 'comment-form', 'data-pjax' => true]]); ?>
+                                            <?php if(Yii::$app->user->isGuest) {?>
+                                            <label><span class="required">Sign up before writing a review!</span></label>
+                                            <?php } else { ?>
+                                                <p class="comment-notes"><?= $message?></p>
+                                                <p class="comment-notes">Required fields are marked <span class="required">*</span></p>
+                                                <div class="comment-form-rating">
+                                                    <label id="rating">Your rating <span class="required">*</span></label>
+                                                    <p class="stars">
+                                                        <span>
+                                                            <a class="star-1" onclick="setRating(1)" >1</a>
+                                                            <a class="star-2" onclick="setRating(2)" >2</a>
+                                                            <a class="star-3" onclick="setRating(3)" >3</a>
+                                                            <a class="star-4" onclick="setRating(4)" >4</a>
+                                                            <a class="star-5" onclick="setRating(5)" >5</a>
+                                                            <?= $form->field($vote, 'rating')->textInput(['class'=>'hidden'])->label(false)->error(['message' => 'Put your rating, please!']) ?>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <p class="comment-form-comment">
+                                                    <label>Your review <span class="required">*</span></label>
+                                                    <textarea id="vote-text " name="Vote[text]" cols="45" rows="8" required></textarea>
+                                                </p>
+<!--                                                <p class="comment-form-author">-->
+<!--                                                    <label for="author">Name <span class="required">*</span></label>-->
+<!--                                                    <input id="author" name="author" type="text" value="" size="30" required></p>-->
+<!--                                                <p class="comment-form-email">-->
+<!--                                                    <label for="email">Email <span class="required">*</span></label>-->
+<!--                                                    <input id="email" name="email" type="email" value="" size="30"  required></p>-->
+                                                <p class="form-submit">
+                                                    <?= Html::submitButton('Submit') ?>
+                                                </p>
+                                            <?php } ?>
+                                            <?php ActiveForm::end(); ?>
+                                            <?php \yii\widgets\Pjax::end() ?>
+                                        </div><!-- #respond -->
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="spr-content">
-                        <div class="spr-form" id="form_6156548739" style="display: none;">
-                            <form method="post" action="//productreviews.shopifycdn.com/api/reviews/create"
-                                  id="new-review-form_6156548739" class="new-review-form">
-                                <h3 class="spr-form-title">Write a review</h3>
-                                <fieldset class="spr-form-contact">
-                                    <div class="spr-form-contact-name">
-                                        <label class="spr-form-label" for="review_author_6156548739">Name</label>
-                                        <input class="spr-form-input spr-form-input-text " id="review_author_6156548739"
-                                               type="text" name="review[author]" value="" placeholder="Enter your name">
-                                    </div>
-                                    <div class="spr-form-contact-email">
-                                        <label class="spr-form-label" for="review_email_6156548739">Email</label>
-                                        <input class="spr-form-input spr-form-input-email " id="review_email_6156548739"
-                                               type="email" name="review[email]" value=""
-                                               placeholder="john.smith@example.com">
-                                    </div>
-                                </fieldset>
 
-                                <fieldset class="spr-form-review">
+                <!--product-collateral-->
+                <div class="box-additional">
+                    <!-- BEGIN RELATED PRODUCTS -->
+                    <div class="related-pro container">
+                        <div class="slider-items-products">
+                            <div class="new_title center">
+                                <h2>Related Products</h2>
+                            </div>
+                            <div id="related-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col4 products-grid">
+                                    <?php foreach ($related as $product) { ?>
+                                    <!-- Item -->
+                                    <div class="item">
+                                        <div class="item-inner">
+                                            <div class="item-img">
+                                                <div class="item-img-info"><a data-pjax="0" href="<?=$product->getUrl()?>" title="<?= $product->title?>" class="product-image">
+                                                        <img src="<?= ($product->images) ? $product->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $product->title?>"></a>
+                                                    <?php if($discount = $product->getMaxDiscount()) echo  ($discount->type == 1)
+                                                        ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
+                                                        '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
+                                                    <div class="item-box-hover">
+                                                        <div class="box-inner">
+                                                            <div class="product-detail-bnt"><a  href=""  onclick="quickView(<?= $product->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
+                                                            <div class="actions"><span class="add-to-links"><a href="#" data-pjax="true" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
 
-                                    <div class="spr-form-review-rating">
-                                        <label class="spr-form-label" for="review[rating]">Rating</label>
-                                        <div class="spr-form-input spr-starrating ">
-                                            <a href="#" class="spr-icon spr-icon-star spr-icon-star-empty"
-                                               data-value="1">&nbsp;</a>
-                                            <a href="#" class="spr-icon spr-icon-star spr-icon-star-empty"
-                                               data-value="2">&nbsp;</a>
-                                            <a href="#" class="spr-icon spr-icon-star spr-icon-star-empty"
-                                               data-value="3">&nbsp;</a>
-                                            <a href="#" class="spr-icon spr-icon-star spr-icon-star-empty"
-                                               data-value="4">&nbsp;</a>
-                                            <a href="#" class="spr-icon spr-icon-star spr-icon-star-empty"
-                                               data-value="5">&nbsp;</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="add_cart">
+                                                    <button class="button btn-cart" onclick="addToCart(<?= $product->id?>)" type="button"><span>Add to Cart</span></button>
+                                                </div>
+                                            </div>
+                                            <div class="item-info">
+                                                <div class="info-inner">
+                                                    <div class="item-title"><a data-pjax="0" href="<?=$product->getUrl()?>" title="<?= $product->title?>"><?= $product->title?></a> </div>
+                                                    <div class="item-content">
+                                                        <div class="rating">
+                                                            <div class="ratings">
+                                                                <div class="rating-box">
+                                                                    <div class="rating" style="width:<?= (int) $product->getAvgRating()['avg'] / 5 * 100?>%"></div>
+                                                                </div>
+                                                                <p class="rating-links"><a data-pjax="0" href="#"><?= $product->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="item-price">
+                                                            <div class="price-box"><span class="regular-price"><span class="price"><?= number_format((float)$product->cost, 2, '.', '') ?></span> </span> </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="spr-form-review-title">
-                                        <label class="spr-form-label" for="review_title_6156548739">Review Title</label>
-                                        <input class="spr-form-input spr-form-input-text " id="review_title_6156548739"
-                                               type="text" name="review[title]" value=""
-                                               placeholder="Give your review a title">
-                                    </div>
-
-                                    <div class="spr-form-review-body">
-                                        <label class="spr-form-label" for="review_body_6156548739">Body of Review <span
-                                                class="spr-form-review-body-charactersremaining">(1500)</span></label>
-                                        <div class="spr-form-input">
-                                            <textarea class="spr-form-input spr-form-input-textarea "
-                                                      id="review_body_6156548739" data-product-id="6156548739"
-                                                      name="review[body]" rows="10"
-                                                      placeholder="Write your comments here"></textarea>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="spr-form-actions">
-                                    <input type="submit"
-                                           class="spr-button spr-button-primary button button-primary btn btn-primary"
-                                           value="Submit Review">
-                                </fieldset>
-                            </form>
+                                    <!-- End Item -->
+                                    <?php } ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="spr-reviews" id="reviews_6156548739" style="display: none"></div>
                     </div>
+                    <!-- end related product -->
 
                 </div>
+                <!-- end related product -->
             </div>
+            <!--box-additional-->
+            <!--product-view-->
         </div>
     </div>
+    <!--col-main-->
 </div>
 
+</div>

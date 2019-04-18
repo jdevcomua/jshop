@@ -38,6 +38,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->request->isPost) {
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+        }
+
         $catIds = null;
         $cat_sliders = [];
         do {

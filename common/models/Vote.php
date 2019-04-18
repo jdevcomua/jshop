@@ -47,7 +47,7 @@ class Vote extends Model
     public function rules()
     {
         return [
-            [['item_id', 'text'], 'required'],
+            [['item_id', 'text', 'rating'], 'required'],
             [['item_id', 'user_id', 'rating', 'checked'], 'integer'],
             [['timestamp'], 'safe'],
             [['text'], 'string'],

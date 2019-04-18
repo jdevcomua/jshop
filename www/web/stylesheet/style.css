@@ -9067,7 +9067,11 @@ button.button.btn-add:before {
     color: #fed700;
 }
 
-.comment-respond .form-submit input[type=submit] {
+.woocommerce-Reviews .comment-respond .stars a.active {
+	color: #fed700;
+}
+
+.comment-respond .form-submit button {
     display: inline-block;
     height: 44px;
     line-height: 48px;

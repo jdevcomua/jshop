@@ -18,11 +18,16 @@ class ItemController extends Controller
      */
     public function actionItem($id)
     {
+        if (Yii::$app->request->isPost) {
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+        }
+
         $id = explode('-', $id)[0];
         $item = $this->findModel($id);
+        $related = Item::find()->where(['category_id' => $item->category_id, 'active' => 1])->andFilterWhere(['!=', 'id', $item->id])->all();
         $message = null;
         $vote = new Vote();
-        
+
         if ($vote->load(Yii::$app->request->post())) {
             $vote->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
             $vote->item_id = $id;
@@ -35,8 +40,9 @@ class ItemController extends Controller
         $item->save();
 
         return $this->render('item', [
+            'vote' => $vote,
             'item' => $item,
-            'inCart' => Yii::$app->cart->checkItemInCart($id),
+            'related' => $related,
             'message' => $message,
         ]);
     }

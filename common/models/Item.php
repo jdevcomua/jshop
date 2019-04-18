@@ -5,6 +5,8 @@ namespace common\models;
 use common\models\query\ItemQuery;
 use Yii;
 use common\components\CartAdd;
+use yii\data\ActiveDataProvider;
+use yii\debug\models\timeline\DataProvider;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
@@ -415,6 +417,22 @@ class Item extends Model implements CartAdd
     public function getVotes()
     {
         return $this->hasMany(Vote::className(), ['item_id' => 'id'])->joinWith('user');
+    }
+
+    /**
+     * @return ActiveDataProvider
+     */
+    public function getCheckedVotes()
+    {
+        $all_votes = Vote::find()->where(['item_id' => $this->id])->joinWith('user')->andFilterWhere(['>', 'rating', 0])->andWhere(['vote.checked' => 1]);
+        $votes = new ActiveDataProvider([
+            'query' => $all_votes,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
+
+        return $votes;
     }
 
     /**

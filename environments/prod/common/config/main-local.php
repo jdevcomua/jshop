@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=freemark_sdeldn',
+            'dsn' => 'mysql:host=freemark.mysql.tools;dbname=freemark_sdeldn',
             'username' => 'freemark_sdeldn',
             'password' => '4eTe3S~8v^',
             'charset' => 'utf8',

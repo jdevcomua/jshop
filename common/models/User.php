@@ -25,6 +25,8 @@ use yii\helpers\ArrayHelper;
  * @property string $auth_key
  * @property string $created
  *
+ * @property string $username
+ *
  * @property Orders[] $orders
  * @property Vote[] $votes
  * @property WishList[] $wishLists
@@ -111,6 +113,11 @@ class User extends Model implements \yii\web\IdentityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getUserName()
+    {
+        return $this->name . ' ' . $this->surname;
     }
 
     /**

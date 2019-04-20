@@ -214,10 +214,8 @@ function quickView(id) {
         type: 'post',
         success: function (data) {
             $.pjax.reload({container: "#quick-view-modal"});
-
             $('#quick-view-modal')
                 .on('pjax:end',   function() { $('#modal').modal() });
-
         }
     });
 }
@@ -299,7 +297,7 @@ function changeCountOfItem(id, cartType, $thisItem) {
         $.ajax({
             url: 'cart/change',
             async: false,
-            data: {id: +id, count: +$thisItem.val(), cart_type: cartType},
+            data: {id: +id, count: $('#qty').val(), cart_type: cartType},
             dataType: 'json',
             success: function (data) {
                 $('.sum').html(data.sumAll);
@@ -334,7 +332,23 @@ function removeItemFromWishList(id) {
         }
     });
 }
-
+function refreshCarts() {
+        $.pjax.reload({container: "#cart", async: false});
+        $.pjax.reload({container: "#cart_cat", async: false});
+        if (document.getElementById('total_sum'))
+            $.pjax.reload({container: "#total_sum", async: false});
+    return false;
+}
+function cleanCart() {
+    $.ajax({
+        url: '/cart/ajax-reset',
+        data: {},
+        dataType: 'json',
+        success: function () {
+           refreshCarts();
+        }
+    });
+}
 function setRating(rating) {
     $('#vote-rating').val(rating);
     for (var i=1;i<=5;i++)
@@ -373,8 +387,19 @@ $(document).on('click', '#all_description', function(){ // изменение з
     $('#tags_button').parent().removeClass('active');
 });
 
-$(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
-    changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
+$(document).on('click', '#update_cart_button', function(){ // изменение значения количество в корзине
+    refreshCarts();
+});
+
+$(document).on('click', '#empty_cart_button', function(){ // изменение значения количество в корзине
+    cleanCart();
+});
+
+$(document).on('input', '.js-qty__num', function(){ // изменение значения количество в корзине
+    if($('#qty').val() !== '') {
+        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
+        refreshCarts();
+    }
 });
 
 $(document).ready(function () {
@@ -387,9 +412,3 @@ $(document).ready(function () {
         }
     }, 1);
 });
-
-document.getElementById('').addEventListener('click', function(e) {
-    e.preventDefault();
-    alert('Скрипт сработал');
-}, false);
-

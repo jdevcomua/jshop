@@ -9918,7 +9918,7 @@ a.edit-bnt:hover {
 .cart-collaterals {
     padding: 0px 25px;
     position: relative;
-    z-index: 1000;
+    z-index: 100;
     margin-top: 0px;
     padding-bottom: 30px;
     background-color: #fff;

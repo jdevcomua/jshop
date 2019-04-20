@@ -43,6 +43,12 @@ class CartController extends Controller
             'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
     }
 
+    public function actionAjaxReset()
+    {
+        Yii::$app->cart->resetItems();
+        return true;
+    }
+
     public function actionOrder()
     {
         $id = Yii::$app->request->get('id');

@@ -24,5 +24,15 @@ return [
                 'encryption' => 'ssl',
             ],
         ],
+        [
+            'class' => 'sergeymakinen\yii\slacklog\Target',
+            'levels' => ['error'],
+            'except' => [
+                'yii\web\HttpException:*',
+            ],
+            'webhookUrl' => 'https://hooks.slack.com/services/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',
+            'username' => 'Error - Prod',
+            'iconEmoji' => ':poop:',
+        ],
     ],
 ];

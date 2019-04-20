@@ -8,36 +8,77 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="grid">
-    <div class="grid__item large--one-third push--large--one-third text-center">
-        <div class="note form-success" id="ResetSuccess" style="display:none;">
-            We've sent you an email with a link to update your password.
-        </div>
 
-        <div id="CustomerLoginForm" class="form-vertical">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+<div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
 
-            <h1><?= $this->title ?></h1>
+    <div class="main">
+        <div class="account-login container">
+            <!--page-title-->
 
-            <?= $form->field($model, 'mail')->textInput(); ?>
+            <?php $form = ActiveForm::begin(['id' => 'register-form']); ?>
+            <fieldset class="col2-set">
+                <div class="col-1 new-users">
+                    <strong>Register and unlock the opportunity: </strong>
+                    <div class="content">
 
-            <?= $form->field($model, 'password')->passwordInput(); ?>
+                        <p>Leave feedback</p>
+                        <p> Use wish list</p>
 
-            <?= $form->field($model, 'name')->textInput(); ?>
+                    </div>
+                </div>
+                <div class="col-2 registered-users">
+                    <strong>Registered Customers</strong>
+                    <div class="content">
 
-            <?= $form->field($model, 'address')->textInput(); ?>
+                        <p>If you have an account with us, please log in.</p>
+                        <ul class="form-list">
+                            <li>
+                                <label for="email">Email Address<em class="required">*</em></label>
+                                <div class="input-box">
+                                    <input type="text" name="User[mail]" value="" id="user-mail" class="input-text required-entry validate-email" title="Email Address">
+                                </div>
+                            </li>
+                            <li>
+                                <label for="pass">Password<em class="required">*</em></label>
+                                <div class="input-box">
+                                    <input type="password" name="User[password]" class="input-text required-entry validate-password" id="user-password" title="Password">
+                                </div>
+                            </li>
+                            <li>
+                                <label for="email">User Name</label>
+                                <div class="input-box">
+                                    <input type="text" name="User[name]" value="" id="user-name" class="input-text" title="Email Address">
+                                </div>
+                            </li>
+                            <li>
+                                <label for="email">Address</label>
+                                <div class="input-box">
+                                    <input type="text" name="User[address]" value="" id="user-address" class="input-text" title="Email Address">
+                                </div>
+                            </li>
+                            <li>
+                                <label for="email">Phone number</label>
+                                <div class="input-box">
+                                    <input type="text" name="User[phone]" value="" id="user-phone" class="input-text" title="Email Address">
+                                </div>
+                            </li>
+                        </ul>
 
-            <?= $form->field($model, 'phone')->textInput(); ?>
+                        <p class="required">* Required Fields</p>
 
-            <p>
-                <?= Html::submitButton('Зерегистрироваться', ['class' => 'btn btn--full']) ?>
-            </p>
+                        <div class="buttons-set">
 
-            <p><a href="<?= Yii::$app->urlHelper->to(['login']) ?>">Вход</a></p>
+                            <?= Html::submitButton('Register', ['class' => 'button login']) ?>
 
-            <p><a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>">Восстановить пароль</a></p>
-
+                           <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>"  class="forgot-word">Forgot Your Password?</a>
+                        </div> <!--buttons-set-->
+                    </div> <!--content-->
+                </div>
+            </fieldset> <!--col2-set-->
             <?php ActiveForm::end(); ?>
-        </div>
-    </div>
-</div>
+
+        </div> <!--account-login-->
+
+    </div><!--main-container-->
+
+</div> <!--col1-layout-->

@@ -196,7 +196,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => 1//Theme::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];

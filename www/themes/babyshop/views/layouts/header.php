@@ -71,8 +71,12 @@ use yii\widgets\Pjax;
                                     <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
                                     <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart">Cart</a></li>
 <!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
+                                    <?php if (Yii::$app->user->isGuest) { ?>
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span>Login</span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span>Registration</span></a></li>
+                                    <?php } else { ?>
+                                    <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span>Logout</span></a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>

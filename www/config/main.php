@@ -73,6 +73,7 @@ $config = [
                 'register'=>'user/register',
                 'profile'=>'user/profile',
                 'wishlist'=>'user/wishlist',
+                'reset-password'=>'user/reset-password',
                 'compare'=>'compare/compare',
                 '<controller>/<action>/<id>' => '<controller>/<action>',
                 '<controller>/<action>' => '<controller>/<action>',

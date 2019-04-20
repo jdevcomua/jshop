@@ -29,7 +29,7 @@ class ItemController extends Controller
     {
         $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $dataProvider->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         $categories = Item::find()
             ->select(['i.title'])
             ->join('JOIN', 'item_cat i', 'item.category_id = i.id')

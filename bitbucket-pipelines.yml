@@ -15,4 +15,4 @@ pipelines:
               MODE: 'script'
               SERVER: 'freemark.ftp.tools'
               COMMAND: './deploy.sh'
-              SSH_KEY: $MY_SSH_KEY' # Optional
+              SSH_KEY: $MY_SSH_KEY'

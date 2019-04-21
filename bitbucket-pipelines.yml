@@ -14,5 +14,5 @@ pipelines:
               SSH_USER: 'freemark'
               MODE: 'script'
               SERVER: 'freemark.ftp.tools'
-              COMMAND: 'deploy.sh'
-              SSH_KEY: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAFFehor4ORN/0XOIwpkyJ8mB7LtE9uKhZPz04itn5D3DNSIO1OjzTpAY+0EDdVgXDQMrWI94NIkU9Eb35Slscw0cMpVXticlML+BtMEN/+JFvIg0JfG8yxfzutvSkiw4j31/xq8psTjjRhkZXgW59ThcWuWMtLmUFhayUNvKaOQJbplnxR4CS5Q1Jnu+/FkLpDkRMVNYAfoUhHPLcM952saXMF9sddBr41NYgfm1wJz5es7pbp7SS6N3IwRnMrn+ZGlverpYUPPVriLAJWs8AasioFSd3RkcZPpiRb/T97nujKxB4JU6Lj4nkaTRupfwSWX4mRO8bh00QDkIjypWn1LCiEwUJCIRAe2d25MRwwnAQI3C84LO5h3t5WCM6o3JqcbTPTkrbgzDbdEK4FgNkiYjVjihkmqyUYVLi0yLzRIPiITHenpvJS2bkaz2zhDjWdgAXDnQrEJ7qgcE4yFCAR+/bRefwZYjSqptIu1GISdq9BOBds55QysSGxmt8b6ZM4VA4aNLg/3RI09ybQ01mUZeVHXz/KmG6PMzoR+HIQhQ9WL6WcbbY1io8reHktFLJ9I1dUuXtfhWJN2mK7I1mibU3JLUm8xrRi8j9Ku5Av7jv1PlUm7gemW3UEPLtla4BNm4HR2CFSY/OMyH8XYt8HkHGx0HwClcwbXsu9rtc+w== freemark@web113.ukraine.com.ua' # Optional
+              COMMAND: './deploy.sh'
+              SSH_KEY: $MY_SSH_KEY' # Optional

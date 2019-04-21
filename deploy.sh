@@ -2,5 +2,5 @@
 
 cd /home/freemark/sdelivery.dn.ua
 git pull origin master
-php ~/composer install
-php yii migrate
+/usr/local/php71/bin/php ~/composer install
+/usr/local/php71/bin/php yii migrate

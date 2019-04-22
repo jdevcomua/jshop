@@ -38,6 +38,8 @@ class User extends Model implements \yii\web\IdentityInterface
 
     public $password;
 
+    public $confirm_password;
+
     /**
      * @return array
      */
@@ -62,6 +64,8 @@ class User extends Model implements \yii\web\IdentityInterface
         return [
             [['mail'], 'required'],
             [['password'], 'required', 'on' => 'vPass'],
+            ['confirm_password', 'compare', 'compareAttribute' => 'password', 'operator' => '==', 'on' => 'adminPass'],
+            ['password', 'compare', 'compareAttribute' => 'confirm_password', 'operator' => '==', 'on' => 'adminPass'],
             [['mail', 'vk_id', 'fb_id'], 'unique'],
             [['mail'], 'trim'],// обрезает пробелы вокруг "email"
             [['password'], 'string', 'length' => [4, 25]],

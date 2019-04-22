@@ -51,7 +51,13 @@ class UserController extends Controller
     {
         $model = new User();
 
+        $model->setScenario('adminPass');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->password != '') {
+                $model->setPassword($model->password);
+                $model->save();
+            }
             return $this->redirect(Yii::$app->urlHelper->to(['user/view', 'id' => $model->id]));
         } else {
             return $this->render('create', [
@@ -70,7 +76,13 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model->setScenario('adminPass');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->password != '') {
+                $model->setPassword($model->password);
+                $model->save();
+            }
             return $this->redirect(Yii::$app->urlHelper->to(['user/view', 'id' => $id]));
         } else {
             return $this->render('update', [

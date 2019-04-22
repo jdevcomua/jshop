@@ -14,9 +14,22 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'name')->textInput(['maxlength' => true]);
 
+    echo $form->field($model, 'surname')->textInput(['maxlength' => true]);
+
     echo $form->field($model, 'mail')->textInput(['maxlength' => true, 'type' => 'email']);
 
-    echo $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
+    echo $form->field($model, 'city')->textInput(['maxlength' => true]);
+
+    echo $form->field($model, 'address')->textInput(['maxlength' => true]);
+
+    echo $form->field($model, 'phone')->textInput(['maxlength' => true]);
+
+    echo $form->field($model, 'fb_id')->textInput(['maxlength' => true]);
+
+    echo $form->field($model, 'password')->textInput(['maxlength' => true]);
+
+    echo $form->field($model, 'confirm_password')->textInput(['maxlength' => true]);
+    ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'),

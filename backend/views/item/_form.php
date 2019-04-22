@@ -27,8 +27,29 @@ use zxbodya\yii2\tinymce\TinyMce;
                     ],
                 ]); ?>
             </div>
-            <div class="col-md-6" style="padding-top: 30px">
+            <div class="col-md-6" style="">
+                <?= $form->field($model, 'barcode')->textInput(['maxlength' => true]); ?>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
                 <?= $form->field($model, 'active')->checkbox() ?>
+                <?= $form->field($model, 'best_seller')->checkbox() ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'special')->checkbox() ?>
+                <?= $form->field($model, 'deal_week')->checkbox() ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'code')->textInput(['maxlength' => true]); ?>
+            </div>
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'quantity')->textInput(); ?>
             </div>
         </div>
 

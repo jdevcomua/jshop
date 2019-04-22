@@ -23,6 +23,9 @@ use Eventviva\ImageResize;
  * @property integer $count_of_views
  * @property string $addition_date
  * @property string $description
+ * @property string $barcode
+ * @property string $code
+ * @property float $quantity
  * @property integer $active
  * @property integer $top
  * @property float $self_cost
@@ -65,9 +68,10 @@ class Item extends Model implements CartAdd
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['addition_date'], 'safe'],
-            [['cost', 'self_cost'], 'number'],
+            [['cost', 'self_cost', 'quantity'], 'number'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
+            [['code', 'barcode'], 'string', 'length' => '20']
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
@@ -92,6 +96,12 @@ class Item extends Model implements CartAdd
             'top' => Yii::t('app', 'Топ'),
             'self_cost' => Yii::t('app', 'Себестоимость'),
             'link' => Yii::t('app', 'Ссылка'),
+            'best_seller' => Yii::t('app', 'Топ продаж'),
+            'special' => Yii::t('app', 'Спец. предложение'),
+            'deal_week' => Yii::t('app', 'Топ недели'),
+            'quantity' => Yii::t('app', 'Количество '),
+            'barcode' => Yii::t('app', 'Штрихкод'),
+            'code' => Yii::t('app', 'Артикул'),
         ];
     }
 

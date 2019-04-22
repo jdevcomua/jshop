@@ -50,11 +50,11 @@ class Orders extends Model
     public function rules()
     {
         return [
-            [['phone', 'name'], 'required'],
+            [['phone', 'name', 'address'], 'required'],
             [['user_id'], 'integer'],
             [['timestamp'], 'safe'],
-            ['payment_status', 'default', 'value' => 'Не оплачен'],
-            ['order_status', 'default', 'value' => 'Новый'],
+            ['payment_status', 'default', 'value' => Orders::PAYMENT_STATUS_NOT_PAID],
+            ['order_status', 'default', 'value' => Orders::STATUS_NEW],
             [['sum'], 'number'],
             [['mail'], 'email'],
             [['address', 'name', 'delivery', 'payment', 'phone', 'comment'], 'string'],

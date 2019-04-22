@@ -55,20 +55,19 @@ class CartController extends Controller
         if (!empty($id)) {
             $order = Orders::findOne($id);
             $orderItems = OrderItem::find()->andFilterWhere(['order_id' => $id])->joinWith('item')->all();
-
             return $this->render('view-order', ['orderItems' => $orderItems, 'order' => $order]);
         }
 
-        $model = new Orders(['order_status' => Orders::STATUS_NEW, 'payment_status' => Orders::PAYMENT_STATUS_NOT_PAID]);
+        $model = new Orders();
         $user = User::findOne(Yii::$app->user->id);
         if ($user) {
             $model->mail = $user->mail;
             $model->phone = $user->phone;
-            $model->name = $user->name;
+            $model->name = $user->name . ' ' . $user->surname;
             $model->address = $user->address;
         }
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ( $model->load(Yii::$app->request->post()) && Yii::$app->request->post('send') == true) {
             $model->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
             $model->sum = Yii::$app->cart->getSum();
             if ($model->save()) {
@@ -80,13 +79,21 @@ class CartController extends Controller
                             'user' => Yii::$app->user->identity,
                             'order' => Orders::findOne($model->id)
                         ])
-                        ->setFrom('litvinova.a95@gmail.com')
+                        ->setFrom(Yii::$app->params['adminEmail'])
                         ->setTo($model->mail)
                         ->setSubject('subject')
                         ->send();
                 }
-                
-                return $this->redirect(Yii::$app->urlHelper->to(['cart/order', 'id' => $model->id]));
+                Yii::$app->session->setFlash('success','Success checkout!');
+                Yii::$app->mailer
+                    ->compose('order', [
+                        'order' => Orders::findOne($model->id)
+                    ])
+                    ->setFrom(Yii::$app->params['adminEmail'])
+                    ->setTo(Yii::$app->params['orderEmail'])
+                    ->setSubject('subject')
+                    ->send();
+                return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/profile']));
             }
         }
         $sum = Yii::$app->cart->getSum();

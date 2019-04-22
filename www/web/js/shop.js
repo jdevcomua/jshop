@@ -356,6 +356,21 @@ function setRating(rating) {
     $('.star-'+rating).addClass('active');
 }
 
+$('#submit_step_one').on('click', function(){
+    if(!$('#order-form')[0].checkValidity()) {
+        $('#submit').click();
+    } else {
+        document.getElementById('checkout-step-address').style.display = 'none';
+        $('#opc-address').removeClass('allow active');
+        document.getElementById('checkout-step-review').style.display = '';
+        $('#opc-review').addClass('allow active');
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#opc-review").offset().top - 200
+        }, 800);
+        $('#address_view').text('Address: ' + $('#orders-address').val());
+    }
+});
+
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
 });

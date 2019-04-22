@@ -6347,6 +6347,20 @@ button.button.continue:before {
 	font-size: 12px;
 	padding-right: 8px;
 }
+
+button.button.return-cart:before {
+	content: "\f07a";
+	font-family: FontAwesome;
+	font-size: 12px;
+	padding-right: 8px;
+}
+
+button.button.send:before {
+	content: "\f0d6";
+	font-family: FontAwesome;
+	font-size: 12px;
+	padding-right: 8px;
+}
 .dashboard .welcome-msg {
 	text-align: left;
 	padding: 20px;
@@ -9906,11 +9920,11 @@ a.edit-bnt:hover {
 }
 .discount {
 	margin-top: 25px;
-	min-height: 360px;
+	min-height: 260px;
 }
 .totals {
 	margin-top: 25px;
-	min-height: 360px;
+	min-height: 260px;
 }
 #discount-coupon-form {
 	padding:15px 0px;

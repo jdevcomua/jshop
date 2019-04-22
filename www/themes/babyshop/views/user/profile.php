@@ -3,10 +3,9 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model common\models\User */
-/* @var $changePasswordModel \frontend\models\ChangePassword */
+/* @var $changePasswordModel \www\models\ChangePassword */
 
 use common\models\WishList;
-use Yii;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\models\Orders;

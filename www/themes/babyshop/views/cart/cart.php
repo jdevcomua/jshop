@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="main-container col1-layout wow bounceInUp animated">
 
     <div class="main">
+        <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
         <div class="cart wow bounceInUp animated">
 
             <div class="table-responsive shopping-cart-tbl  container">
@@ -136,7 +137,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <strong>Grand Total</strong>
                                         </td>
                                         <td style="" class="a-right">
-                                            <strong><span class="price"><?=$sum?></span></strong>
+                                            <strong><span class="price"><?=number_format((float)$sum, 2, '.', '')?></span></strong>
                                         </td>
                                     </tr>
                                     </tfoot>
@@ -145,15 +146,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td style="" class="a-left" colspan="1">
                                             Subtotal    </td>
                                         <td style="" class="a-right">
-                                            <span class="price"><?=$sum?></span>    </td>
+                                            <span class="price"><?=number_format((float)$sum, 2, '.', '')?></span>    </td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <?php Pjax::end() ?>
                                 <ul class="checkout">
                                     <li>
-                                        <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick=""><span>Proceed to Checkout</span></button>
-                                    </li><br>
+                                        <form action="<?=\yii\helpers\Url::toRoute('cart/order')?>" >
+                                            <button type="submit" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick=""><span>Proceed to Checkout</span></button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div><!--inner-->
                         </div><!--totals-->
@@ -169,8 +172,3 @@ $this->params['breadcrumbs'][] = $this->title;
     </div><!--main-container-->
 
 </div> <!--col1-layout-->
-
-<h3 class="page_name"><?= $this->title ?></h3>
-<?= $this->render('cartItems', [
-    'models' => $models, 'sum' => $sum
-]) ?>

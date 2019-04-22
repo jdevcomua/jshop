@@ -237,7 +237,7 @@ $this->title = 'Home Page';
                     </div>
                 </div>
                 <div class="box-footer text-center">
-                    <a href="<?= Yii::$app->urlHelper->to(['item/index']); ?>" class="uppercase">Все товары</a>
+                    <a href="<?= Yii::$app->urlHelper->to(['item/index']); ?>" class="uppercase">Все товары магазина</a>
                 </div>
             </div>
         </div>

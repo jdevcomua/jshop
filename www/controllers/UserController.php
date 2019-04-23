@@ -92,7 +92,6 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
-            var_dump($accessToken);
             $userNode = $fb->get('/me', $accessToken)->getGraphUser();
         } catch(FacebookResponseException $e) {
             return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
@@ -108,7 +107,7 @@ class UserController extends Controller
             $user->save();
         }
         Yii::$app->user->login($user, 3600*24);
-        return $this->goBack();
+        return $this->goHome();
     }
 
     public function actionLogin()

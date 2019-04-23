@@ -1,6 +1,7 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
+    'domain' => 'https://sdelivery.dn.ua/',
     'supportEmail' => 'litvinova.a95@gmail.com',
     'user.passwordResetTokenExpire' => 3600,
     'amazonKey' => 'AKIAIR2NVD2HK4P7BW4Q',

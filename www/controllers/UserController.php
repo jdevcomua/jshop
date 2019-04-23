@@ -87,16 +87,16 @@ class UserController extends Controller
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v2.5',
+            'default_graph_version' => 'v3.2',
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
             $userNode = $fb->get('/me', $accessToken)->getGraphUser();
         } catch(FacebookResponseException $e) {
-            return $this->redirect($helper->getLoginUrl('http://shop.loc/user/facebook-auth', ['user_friends,public_profile,email']));
+            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         } catch(FacebookSDKException $e) {
-            return $this->redirect($helper->getLoginUrl('http://shop.loc/user/facebook-auth', ['user_friends,public_profile,email']));
+            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         }
         $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
         if (empty($user)) {

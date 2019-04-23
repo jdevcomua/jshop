@@ -262,6 +262,15 @@ class SiteController extends Controller
     }
 
     /**
+     * @param integer $id of promotion
+     * @return string
+     */
+    public function actionPolitic()
+    {
+        return $this->render('politic');
+    }
+
+    /**
      * @param $item_id integer
      */
     public function actionCompare($item_id)

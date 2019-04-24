@@ -110,17 +110,20 @@ class UserController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
 //            exit;
         }
-        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
-        if (empty($user)) {
-            $user = new User();
-            $user->fb_id = $userNode->getId();
-            $user->mail = $userNode->getEmail();
-            $user->name = $userNode->getFirstName();
-            $user->surname = $userNode->getLastName();
-            $user->save();
+        if (isset($accessToken)) {
+            $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
+            if (empty($user)) {
+                $user = new User();
+                $user->fb_id = $userNode->getId();
+                $user->mail = $userNode->getEmail();
+                $user->name = $userNode->getFirstName();
+                $user->surname = $userNode->getLastName();
+                $user->save();
+            }
+            Yii::$app->user->login($user, 3600 * 24);
+            return $this->goBack();
         }
-        Yii::$app->user->login($user, 3600*24);
-        return $this->goBack();
+        return var_dump($_GET);
     }
 
     public function actionLogin()

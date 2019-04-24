@@ -103,7 +103,6 @@ class UserController extends Controller
             var_dump('1' . $e->getMessage() );
             var_dump(Yii::$app->session->get('fb_access_token'));
             exit;
-            return $this->redirect(urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email'])));
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
             return $this->redirect(urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email'])));
@@ -128,6 +127,14 @@ class UserController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $fb = new Facebook([
+            'app_id' => Yii::$app->params['fbAppId'],
+            'app_secret' => Yii::$app->params['fbSecretKey'],
+            'default_graph_version' => 'v3.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+
+        $loginUrl = urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -135,6 +142,7 @@ class UserController extends Controller
         }
         return $this->render('login', [
             'model' => $model,
+            'loginUrl' => $loginUrl
         ]);
     }
 

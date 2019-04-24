@@ -91,7 +91,7 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken();
+            $accessToken = $helper->getAccessToken(Yii::$app->params['domain'] . 'user/facebook-auth');
 
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -102,8 +102,6 @@ class UserController extends Controller
         } catch (\Exception $e){
             echo $e->getMessage();
         }
-        var_dump(isset($accessToken) ? $accessToken : null);
-        var_dump($_GET);
         if (! isset($accessToken)) {
             if ($helper->getError()) {
                 header('HTTP/1.0 401 Unauthorized');

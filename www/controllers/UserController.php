@@ -102,6 +102,8 @@ class UserController extends Controller
             exit;
         }
         if (isset($userNode)) {
+            var_dump($userNode);
+            exit;
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
             if (empty($user)) {
                 $user = new User();
@@ -138,8 +140,6 @@ class UserController extends Controller
             'model' => $model,
             'loginUrl' => $loginUrl
         ]);
-
-        https://www.facebook.com/v3.2/dialog/oauth?client_id=1278586458955080&state=79d549f585569ee06c5e31ed6a4cbfc3&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https://sdelivery.dn.ua/user/facebook-auth&scope=public_profile,email
     }
 
     public function actionLogout()

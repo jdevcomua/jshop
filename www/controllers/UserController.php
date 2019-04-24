@@ -92,11 +92,12 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
 
-            if (!Yii::$app->session->get('fb_access_token')) {
+            if (Yii::$app->session->get('fb_access_token') != null) {
                 $accessToken = $helper->getAccessToken();
                 Yii::$app->session->set('fb_access_token',$accessToken);
+            } else {
+                $response = $fb->get('/me', Yii::$app->session->get('fb_access_token'));
             }
-            $response = $fb->get('/me',Yii::$app->session->get('fb_access_token'));
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             var_dump(Yii::$app->session->get('fb_access_token'));

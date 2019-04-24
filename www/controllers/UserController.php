@@ -92,7 +92,8 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
-            $response = $fb->get('/me?fields=id,name,email', $accessToken);
+            if (!Yii::$app->session->get('fb_access_token'))  Yii::$app->session->set('fb_access_token',$accessToken);
+            $response = $fb->get('/me',Yii::$app->session->get('fb_access_token'));
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             return $this->redirect(urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email'])));
@@ -107,6 +108,7 @@ class UserController extends Controller
             $user->fb_id = $userNode['id'];
             $user->name = explode(' ', $userNode['name'])[0];
             $user->surname = explode(' ', $userNode['name'])[2];
+            $user->mail = $userNode['email'];
             $user->save();
         }
         Yii::$app->user->login($user, 3600*24);

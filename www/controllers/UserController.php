@@ -92,7 +92,9 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
-            $response = $fb->get('/me', $accessToken);
+            $response = $fb->get('/me',array (
+                'fields' => 'id','email','name'
+            ), $accessToken);
             $userNode = $response->getGraphUser();
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );

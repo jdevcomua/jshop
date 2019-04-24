@@ -87,7 +87,7 @@ class UserController extends Controller
             'default_graph_version' => 'v2.10',
         ]);
         Yii::$app->session->open();
-        var_dump($_SESSION);
+        var_dump(session_id());
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
@@ -96,6 +96,7 @@ class UserController extends Controller
             exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
+            var_dump($helper->getError());
             exit;
         }
         echo '<h3>Access Token</h3>';

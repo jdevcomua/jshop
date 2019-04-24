@@ -92,7 +92,9 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         var_dump($_GET);
         try {
-            $accessToken = $helper->getAccessToken();
+            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
+            var_dump($accessToken);
+            exit;
             if (Yii::$app->session->get('fb_access_token') == null) {
                 Yii::$app->session->set('fb_access_token',$accessToken);
             } else {

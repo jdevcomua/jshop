@@ -91,7 +91,7 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken(Yii::$app->params['domain'] . 'user/facebook-auth');
+            $accessToken = $helper->getAccessToken();
             $userNode = $fb->get('/me?fields=id,name,email', $accessToken)->getGraphUser();
         } catch(FacebookResponseException $e) {
             var_dump($helper->getError());
@@ -101,17 +101,17 @@ class UserController extends Controller
             return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         }
         var_dump($userNode);
-//        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
-//        if (empty($user)) {
-//            $user = new User();
-//            $user->fb_id = $userNode->getId();
-//            $user->mail = $userNode->getEmail();
-//            $user->name = $userNode->getFirstName();
-//            $user->surname = $userNode->getLastName();
-//            $user->save();
-//        }
-//        Yii::$app->user->login($user, 3600*24);
-        return $this->goHome();
+        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
+        if (empty($user)) {
+            $user = new User();
+            $user->fb_id = $userNode->getId();
+            $user->mail = $userNode->getEmail();
+            $user->name = $userNode->getFirstName();
+            $user->surname = $userNode->getLastName();
+            $user->save();
+        }
+        if(Yii::$app->user->login($user, 3600*24))return $this->goBack();
+        else return '123';
     }
 
     public function actionLogin()

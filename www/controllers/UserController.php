@@ -87,7 +87,7 @@ class UserController extends Controller
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v3.2',
+            'default_graph_version' => 'v2.8',
         ]);
         $helper = $fb->getRedirectLoginHelper();
         var_dump($_GET);
@@ -125,19 +125,24 @@ class UserController extends Controller
 
     public function actionLogin()
     {
+        if (!Yii::$app->session->isActive) {
+            Yii::$app->session->open();
+        }
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
         $fb = new Facebook([
-            'app_id' => '1278586458955080',
-            'app_secret' => '9025f7e15e75980534f81a9dcbacd121',
-            'default_graph_version' => 'v3.2',
+            'app_id' => Yii::$app->params['fbAppId'],
+            'app_secret' => Yii::$app->params['fbSecretKey'],
+            'default_graph_version' => 'v2.8',
         ]);
         $helper = $fb->getRedirectLoginHelper();
 
-        $loginUrl = ($helper->getLoginUrl(urldecode(Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile','email']));
+        $loginUrl = ($helper->getLoginUrl((Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile','email']));
 
-//        $loginUrl = str_replace('')
+        $loginUrl = str_replace('%2F','/', $loginUrl);
+        $loginUrl = str_replace('%3A',':', $loginUrl);
+        $loginUrl = str_replace('%2C',',', $loginUrl);
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

@@ -91,9 +91,8 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
-
+            $accessToken = $helper->getAccessToken();
             if (Yii::$app->session->get('fb_access_token') == null) {
-                $accessToken = $helper->getAccessToken();
                 Yii::$app->session->set('fb_access_token',$accessToken);
             } else {
                 $response = $fb->get('/me', Yii::$app->session->get('fb_access_token'));

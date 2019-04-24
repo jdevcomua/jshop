@@ -99,6 +99,8 @@ class UserController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
 //            exit;
         }
+        var_dump($accessToken->getValue());
+        var_dump($_GET);
         if (! isset($accessToken)) {
             if ($helper->getError()) {
                 header('HTTP/1.0 401 Unauthorized');
@@ -116,16 +118,16 @@ class UserController extends Controller
         // Logged in
         var_dump($accessToken->getValue());
         exit;
-        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
-        if (empty($user)) {
-            $user = new User();
-            $user->fb_id = $userNode->getId();
-            $user->mail = $userNode->getEmail();
-            $user->name = $userNode->getFirstName();
-            $user->surname = $userNode->getLastName();
-            $user->save();
-        }
-        Yii::$app->user->login($user, 3600*24);
+//        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
+//        if (empty($user)) {
+//            $user = new User();
+//            $user->fb_id = $userNode->getId();
+//            $user->mail = $userNode->getEmail();
+//            $user->name = $userNode->getFirstName();
+//            $user->surname = $userNode->getLastName();
+//            $user->save();
+//        }
+//        Yii::$app->user->login($user, 3600*24);
         return $this->goBack();
     }
 

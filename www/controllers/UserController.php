@@ -87,33 +87,19 @@ class UserController extends Controller
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v2.8',
+            'default_graph_version' => 'v3.2',
         ]);
         $helper = $fb->getRedirectLoginHelper();
-        var_dump($_GET);
         try {
-            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
-            var_dump($accessToken);
-            exit;
-            if (Yii::$app->session->get('fb_access_token') == null) {
-                Yii::$app->session->set('fb_access_token',$accessToken);
-            } else {
-                $response = $fb->get('/me', Yii::$app->session->get('fb_access_token'));
-                $userNode = $response->getGraphUser();
-            }
+            $accessToken = $helper->getAccessToken();
+            $response = $fb->get('/me', $accessToken);
+            $userNode = $response->getGraphUser();
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
-            var_dump(Yii::$app->session->get('fb_access_token'));
             exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
-            $loginUrl = ($helper->getLoginUrl((Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile','email']));
-
-            $loginUrl = str_replace('%2F','/', $loginUrl);
-            $loginUrl = str_replace('%3A',':', $loginUrl);
-            $loginUrl = str_replace('%2C',',', $loginUrl);
-
-            return $this->redirect($loginUrl);
+            exit;
         }
         if (isset($userNode)) {
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
@@ -135,12 +121,22 @@ class UserController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $fb = new Facebook([
+            'app_id' => Yii::$app->params['fbAppId'],
+            'app_secret' => Yii::$app->params['fbSecretKey'],
+            'default_graph_version' => 'v3.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+
+        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']);
+
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
         return $this->render('login', [
             'model' => $model,
+            'loginUrl' => $loginUrl
         ]);
 
         https://www.facebook.com/v3.2/dialog/oauth?client_id=1278586458955080&state=79d549f585569ee06c5e31ed6a4cbfc3&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https://sdelivery.dn.ua/user/facebook-auth&scope=public_profile,email

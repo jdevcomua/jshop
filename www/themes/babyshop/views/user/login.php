@@ -21,9 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-1 new-users">
                         <strong>Sign in from social network</strong>
                         <div class="content">
-                            <div class="buttons-set"><form action="<?= $loginUrl ?>">
-                                    <button type="submit" title="Create an Account" class="button facebook-account"><span><span>Join with Facebook</span></span></button>
-                                </form>
+                            <div class="buttons-set">
+<!--<form action="-->--><?////= $loginUrl ?><!--<!--">-->
+<!--                                    <button type="submit" title="Create an Account" class="button facebook-account"><span><span>Join with Facebook</span></span></button>-->
+<!--                                </form>-->
+                                <a href="<?= $loginUrl?>">Facebook</a>
                             </div>
                         </div>
                         <br>

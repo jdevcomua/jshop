@@ -143,8 +143,6 @@ class UserController extends Controller
         $userNode = $response->getGraphUser();
 
         if (isset($userNode)) {
-            var_dump($userNode);
-            exit;
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
             if (empty($user)) {
                 $user = new User();

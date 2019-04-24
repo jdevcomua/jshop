@@ -84,13 +84,13 @@ class UserController extends Controller
         if (!Yii::$app->session->isActive) {
             Yii::$app->session->open();
         }
+        $fb = new Facebook([
+            'app_id' => Yii::$app->params['fbAppId'],
+            'app_secret' => Yii::$app->params['fbSecretKey'],
+            'default_graph_version' => 'v3.2',
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
         try {
-            $fb = new Facebook([
-                'app_id' => Yii::$app->params['fbAppId'],
-                'app_secret' => Yii::$app->params['fbSecretKey'],
-                'default_graph_version' => 'v3.2',
-            ]);
-            $helper = $fb->getRedirectLoginHelper();
             $accessToken = $helper->getAccessToken();
             $response = $fb->get('/me', $accessToken);
             $userNode = $response->getGraphUser();

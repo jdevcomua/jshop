@@ -166,7 +166,7 @@ class UserController extends Controller
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v3.2',
+            'default_graph_version' => 'v2.10',
         ]);
         $helper = $fb->getRedirectLoginHelper();
 

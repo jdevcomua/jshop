@@ -84,11 +84,11 @@ class UserController extends Controller
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v3.2',
+            'default_graph_version' => 'v2.10',
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken(Yii::$app->params['domain'] . 'user/facebook-auth');
+            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             exit;

@@ -133,7 +133,7 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
 
-        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']);
+        $loginUrl = $helper->getLoginUrl(urldecode(Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile,email']);
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

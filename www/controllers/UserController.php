@@ -97,6 +97,7 @@ class UserController extends Controller
                 Yii::$app->session->set('fb_access_token',$accessToken);
             } else {
                 $response = $fb->get('/me', Yii::$app->session->get('fb_access_token'));
+                $userNode = $response->getGraphUser();
             }
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
@@ -107,17 +108,18 @@ class UserController extends Controller
             var_dump('2' . $e->getMessage());
             return $this->redirect(urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email'])));
         }
-        $userNode = $response->getGraphUser();
-        $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
-        if (empty($user)) {
-            $user = new User();
-            $user->fb_id = $userNode['id'];
-            $user->name = explode(' ', $userNode['name'])[0];
-            $user->surname = explode(' ', $userNode['name'])[2];
-            $user->mail = $userNode['email'];
-            $user->save();
+        if (isset($userNode)) {
+            $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
+            if (empty($user)) {
+                $user = new User();
+                $user->fb_id = $userNode['id'];
+                $user->name = explode(' ', $userNode['name'])[0];
+                $user->surname = explode(' ', $userNode['name'])[2];
+                $user->mail = $userNode['email'];
+                $user->save();
+            }
+            Yii::$app->user->login($user, 3600 * 24);
         }
-        Yii::$app->user->login($user, 3600*24);
         return $this->goBack();
     }
 

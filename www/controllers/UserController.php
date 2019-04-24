@@ -84,23 +84,24 @@ class UserController extends Controller
         if (!Yii::$app->session->isActive) {
             Yii::$app->session->open();
         }
-        $fb = new Facebook([
-            'app_id' => Yii::$app->params['fbAppId'],
-            'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v2.10',
-        ]);
-        $helper = $fb->getRedirectLoginHelper();
         try {
+            $fb = new Facebook([
+                'app_id' => Yii::$app->params['fbAppId'],
+                'app_secret' => Yii::$app->params['fbSecretKey'],
+                'default_graph_version' => 'v3.2',
+            ]);
+            $helper = $fb->getRedirectLoginHelper();
             $accessToken = $helper->getAccessToken();
-            $userNode = $fb->get('/me?fields=id,name,email', $accessToken)->getGraphUser();
+            $response = $fb->get('/me', $accessToken);
+            $userNode = $response->getGraphUser();
         } catch(FacebookResponseException $e) {
-            var_dump($helper->getError());
-            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
         } catch(FacebookSDKException $e) {
-            var_dump($helper->getError());
-            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
         }
-        var_dump($userNode);
+
         $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
         if (empty($user)) {
             $user = new User();
@@ -110,8 +111,8 @@ class UserController extends Controller
             $user->surname = $userNode->getLastName();
             $user->save();
         }
-        if(Yii::$app->user->login($user, 3600*24))return $this->goBack();
-        else return '123';
+        Yii::$app->user->login($user, 3600*24);
+        return $this->goBack();
     }
 
     public function actionLogin()

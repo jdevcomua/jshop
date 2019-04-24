@@ -92,14 +92,17 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
+
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
 //            exit;
         } catch(FacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
 //            exit;
+        } catch (\Exception $e){
+            echo $e->getMessage();
         }
-        var_dump($accessToken->getValue());
+        var_dump(isset($accessToken) ? $accessToken : null);
         var_dump($_GET);
         if (! isset($accessToken)) {
             if ($helper->getError()) {

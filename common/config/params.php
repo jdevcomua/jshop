@@ -9,8 +9,6 @@ return [
     'amazonBucket' => 'umo4ka',
     'vkAppId' => '5231107',
     'vkSecretKey' => 'bzvW6ULy2hUZhf7Nn48C',
-    'fbAppId' => '1278586458955080',
-    'fbSecretKey' => '9025f7e15e75980534f81a9dcbacd121',
     'myServerImageLink' => 'http://www.dev/img/',
     'amazonImageLink' => 'https://s3.eu-central-1.amazonaws.com/umo4ka/',
     'pageSize' => 20,

@@ -92,8 +92,6 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
-            $response = $fb->get('/me', $accessToken);
-            $userNode = $response->getGraphUser();
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
 //            exit;
@@ -101,7 +99,8 @@ class UserController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
 //            exit;
         }
-
+var_dump(Yii::$app->params['fbAppId'] . PHP_EOL);
+        var_dump(Yii::$app->params['fbSecretKey'] . PHP_EOL);
         if (! isset($accessToken)) {
             if ($helper->getError()) {
                 header('HTTP/1.0 401 Unauthorized');
@@ -118,6 +117,7 @@ class UserController extends Controller
 
         // Logged in
         var_dump($accessToken->getValue());
+        exit;
         $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
         if (empty($user)) {
             $user = new User();

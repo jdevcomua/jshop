@@ -86,11 +86,12 @@ class UserController extends Controller
             'app_secret' => Yii::$app->params['fbSecretKey'],
             'default_graph_version' => 'v2.10',
         ]);
+        if(!session_id())
         Yii::$app->session->open();
         var_dump(session_id());
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
+            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth/');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             exit;

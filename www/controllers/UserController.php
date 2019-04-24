@@ -91,8 +91,11 @@ class UserController extends Controller
 
         var_dump($_SESSION );
         $helper = $fb->getRedirectLoginHelper();
+        var_dump($_SESSION );
         try {
-            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth/');
+            var_dump($_SESSION );
+            $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
+            var_dump($_SESSION );
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             var_dump($_SESSION );
@@ -158,8 +161,6 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-        if($_SESSION == null)
-            Yii::$app->session->open();
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -169,8 +170,8 @@ class UserController extends Controller
             'default_graph_version' => 'v2.10',
         ]);
         $helper = $fb->getRedirectLoginHelper();
-
-        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']);
+        $permissions = ['email']; // Optional permissions
+        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', $permissions);
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

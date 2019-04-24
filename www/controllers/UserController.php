@@ -94,9 +94,13 @@ class UserController extends Controller
             $accessToken = $helper->getAccessToken();
             $userNode = $fb->get('/me', $accessToken)->getGraphUser();
         } catch(FacebookResponseException $e) {
-            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
+            var_dump($e->getMessage());
+            exit;
+//            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         } catch(FacebookSDKException $e) {
-            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
+            $e->getMessage();
+            exit;
+//            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         }
         $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
         if (empty($user)) {

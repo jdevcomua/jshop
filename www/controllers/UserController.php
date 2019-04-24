@@ -88,7 +88,7 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken();
+            $accessToken = $helper->getAccessToken(Yii::$app->params['domain'] . 'user/facebook-auth');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
             exit;

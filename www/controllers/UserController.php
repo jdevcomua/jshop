@@ -95,10 +95,12 @@ class UserController extends Controller
             $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth/');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
-//            exit;
+            var_dump($_SESSION . PHP_EOL);
+            exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
-//            exit;
+            var_dump($_SESSION . PHP_EOL);
+            exit;
         }
         var_dump($_SESSION . PHP_EOL);
         echo '<h3>Access Token</h3>';

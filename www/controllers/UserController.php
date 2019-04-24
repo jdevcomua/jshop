@@ -106,6 +106,8 @@ class UserController extends Controller
 //            return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
 //        }
         $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
+        var_dump($user);
+        exit;
         if (empty($user)) {
             $user = new User();
             $user->fb_id = $userNode['id'];

@@ -128,13 +128,13 @@ class UserController extends Controller
             return $this->goHome();
         }
         $fb = new Facebook([
-            'app_id' => Yii::$app->params['fbAppId'],
-            'app_secret' => Yii::$app->params['fbSecretKey'],
+            'app_id' => '1278586458955080',
+            'app_secret' => '9025f7e15e75980534f81a9dcbacd121',
             'default_graph_version' => 'v3.2',
         ]);
         $helper = $fb->getRedirectLoginHelper();
 
-        $loginUrl = urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
+        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']);
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

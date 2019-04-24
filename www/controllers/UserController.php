@@ -100,16 +100,17 @@ class UserController extends Controller
             var_dump($helper->getError());
             return $this->redirect($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email']));
         }
-        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
-        if (empty($user)) {
-            $user = new User();
-            $user->fb_id = $userNode->getId();
-            $user->mail = $userNode->getEmail();
-            $user->name = $userNode->getFirstName();
-            $user->surname = $userNode->getLastName();
-            $user->save();
-        }
-        Yii::$app->user->login($user, 3600*24);
+        var_dump($userNode);
+//        $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
+//        if (empty($user)) {
+//            $user = new User();
+//            $user->fb_id = $userNode->getId();
+//            $user->mail = $userNode->getEmail();
+//            $user->name = $userNode->getFirstName();
+//            $user->surname = $userNode->getLastName();
+//            $user->save();
+//        }
+//        Yii::$app->user->login($user, 3600*24);
         return $this->goHome();
     }
 

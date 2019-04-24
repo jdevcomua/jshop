@@ -6,17 +6,18 @@
 image: php:7.1.1
 
 pipelines:
-  default:
+  branches:
+    master:
     - step:
         script:
-          - pipe: atlassian/ssh-run:0.1.1
-            variables:
-              SSH_USER: 'freemark'
-              MODE: 'script'
-              SERVER: 'freemark.ftp.tools'
-              COMMAND: './deploy.sh'
-              SSH_KEY: $MY_SSH_KEY
-          - pipe: atlassian/slack-notify:0.2.4
-            variables:
-              WEBHOOK_URL: 'https://hooks.slack.com/services/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'
-              MESSAGE: 'Deploy Success!'
+        - pipe: atlassian/ssh-run:0.1.1
+          variables:
+            SSH_USER: 'freemark'
+            MODE: 'script'
+            SERVER: 'freemark.ftp.tools'
+            COMMAND: './deploy.sh'
+            SSH_KEY: $MY_SSH_KEY
+        - pipe: atlassian/slack-notify:0.2.4
+          variables:
+            WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+            MESSAGE: 'Deploy Success!'

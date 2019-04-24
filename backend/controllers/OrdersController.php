@@ -35,6 +35,7 @@ class OrdersController extends Controller
      * Displays a single Orders model.
      * @param integer $id
      * @return mixed
+     * @throws
      */
     public function actionView($id)
     {
@@ -69,6 +70,7 @@ class OrdersController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws
      */
     public function actionUpdate($id)
     {
@@ -88,6 +90,7 @@ class OrdersController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws
      */
     public function actionDelete($id)
     {

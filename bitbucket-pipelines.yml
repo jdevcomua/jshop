@@ -6,8 +6,9 @@
 image: php:7.1.1
 
 pipelines:
-  default:
-    - step:
+  branches:
+    master:
+      - step:
         script:
           - pipe: atlassian/ssh-run:0.1.1
             variables:

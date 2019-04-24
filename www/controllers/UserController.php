@@ -86,6 +86,7 @@ class UserController extends Controller
             'app_secret' => Yii::$app->params['fbSecretKey'],
             'default_graph_version' => 'v2.10',
         ]);
+        var_dump($_SESSION);
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth');
@@ -96,6 +97,24 @@ class UserController extends Controller
             var_dump('2' . $e->getMessage());
             exit;
         }
+        echo '<h3>Access Token</h3>';
+        var_dump($accessToken->getValue());
+
+// The OAuth 2.0 client handler helps us manage access tokens
+        $oAuth2Client = $fb->getOAuth2Client();
+        if (! $accessToken->isLongLived()) {
+// Exchanges a short-lived access token for a long-lived one
+            try {
+                $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+            } catch (FacebookSDKException $e) {
+                echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
+                exit;
+            }
+
+            echo '<h3>Long-lived</h3>';
+            var_dump($accessToken->getValue());
+        }
+
         $_SESSION['fb_access_token'] = (string) $accessToken;
 
         try {

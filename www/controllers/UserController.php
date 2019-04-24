@@ -86,6 +86,7 @@ class UserController extends Controller
             'app_secret' => Yii::$app->params['fbSecretKey'],
             'default_graph_version' => 'v2.10',
         ]);
+        Yii::$app->session->open();
         var_dump($_SESSION);
         $helper = $fb->getRedirectLoginHelper();
         try {

@@ -89,17 +89,17 @@ class UserController extends Controller
             'default_graph_version' => 'v2.10',
         ]);
 
-        var_dump($_SESSION . PHP_EOL);
+        var_dump($_SESSION );
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth/');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
-            var_dump($_SESSION . PHP_EOL);
+            var_dump($_SESSION );
             exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
-            var_dump($_SESSION . PHP_EOL);
+            var_dump($_SESSION);
             exit;
         }
         var_dump($_SESSION . PHP_EOL);
@@ -158,6 +158,8 @@ class UserController extends Controller
 
     public function actionLogin()
     {
+        if($_SESSION == null)
+            Yii::$app->session->open();
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

@@ -81,25 +81,26 @@ class UserController extends Controller
 
     public function actionFacebookAuth()
     {
+        if($_SESSION == null)
+            Yii::$app->session->open();
         $fb = new Facebook([
             'app_id' => Yii::$app->params['fbAppId'],
             'app_secret' => Yii::$app->params['fbSecretKey'],
             'default_graph_version' => 'v2.10',
         ]);
-        if(!session_id())
-        Yii::$app->session->open();
-        var_dump(session_id());
+
+        var_dump($_SESSION . PHP_EOL);
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken('https://sdelivery.dn.ua/user/facebook-auth/');
         } catch(FacebookResponseException $e) {
             var_dump('1' . $e->getMessage() );
-            exit;
+//            exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
-            var_dump($helper->getError());
-            exit;
+//            exit;
         }
+        var_dump($_SESSION . PHP_EOL);
         echo '<h3>Access Token</h3>';
         var_dump($accessToken->getValue());
 
@@ -124,11 +125,11 @@ class UserController extends Controller
             // Get the \Facebook\GraphNodes\GraphUser object for the current user.
             // If you provided a 'default_access_token', the '{access-token}' is optional.
             $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender', $_SESSION['fb_access_token']);
-        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
-        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (FacebookSDKException $e) {
             // When validation fails or other local issues
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;

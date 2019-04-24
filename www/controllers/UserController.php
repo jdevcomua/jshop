@@ -92,16 +92,24 @@ class UserController extends Controller
         $helper = $fb->getRedirectLoginHelper();
         try {
             $accessToken = $helper->getAccessToken();
+        } catch(FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+//            exit;
+        } catch(FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+//            exit;
+        }
+
+        try {
             $response = $fb->get('/me', $accessToken);
             $userNode = $response->getGraphUser();
         } catch(FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
+//            exit;
         } catch(FacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
+//            exit;
         }
-
         $user = User::find()->andFilterWhere(['fb_id' => $userNode->getId()])->one();
         if (empty($user)) {
             $user = new User();

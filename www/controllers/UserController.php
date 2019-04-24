@@ -105,8 +105,13 @@ class UserController extends Controller
             exit;
         } catch(FacebookSDKException $e) {
             var_dump('2' . $e->getMessage());
-            exit;
-//            return $this->redirect(urldecode($helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', ['public_profile,email'])));
+            $loginUrl = ($helper->getLoginUrl((Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile','email']));
+
+            $loginUrl = str_replace('%2F','/', $loginUrl);
+            $loginUrl = str_replace('%3A',':', $loginUrl);
+            $loginUrl = str_replace('%2C',',', $loginUrl);
+
+            return $this->redirect($loginUrl);
         }
         if (isset($userNode)) {
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
@@ -125,32 +130,15 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-        if (!Yii::$app->session->isActive) {
-            Yii::$app->session->open();
-        }
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        $fb = new Facebook([
-            'app_id' => Yii::$app->params['fbAppId'],
-            'app_secret' => Yii::$app->params['fbSecretKey'],
-            'default_graph_version' => 'v2.8',
-        ]);
-        $helper = $fb->getRedirectLoginHelper();
-
-        $loginUrl = ($helper->getLoginUrl((Yii::$app->params['domain'] . 'user/facebook-auth'), ['public_profile','email']));
-
-        $loginUrl = str_replace('%2F','/', $loginUrl);
-        $loginUrl = str_replace('%3A',':', $loginUrl);
-        $loginUrl = str_replace('%2C',',', $loginUrl);
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
         return $this->render('login', [
             'model' => $model,
-            'loginUrl' => $loginUrl
         ]);
 
         https://www.facebook.com/v3.2/dialog/oauth?client_id=1278586458955080&state=79d549f585569ee06c5e31ed6a4cbfc3&response_type=code&sdk=php-sdk-5.7.0&redirect_uri=https://sdelivery.dn.ua/user/facebook-auth&scope=public_profile,email

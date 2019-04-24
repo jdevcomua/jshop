@@ -99,8 +99,6 @@ class UserController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
 //            exit;
         }
-var_dump(Yii::$app->params['fbAppId'] . PHP_EOL);
-        var_dump(Yii::$app->params['fbSecretKey'] . PHP_EOL);
         if (! isset($accessToken)) {
             if ($helper->getError()) {
                 header('HTTP/1.0 401 Unauthorized');

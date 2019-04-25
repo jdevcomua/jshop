@@ -10397,8 +10397,8 @@ button.button.new-address:before {
 	margin-top: 10px;
 }
 
-button.button.facebook-account { background: #929bb4; color:#fff}
-button.button.facebook-account:hover {background: #131e2c;}
+button.button.facebook-account { background: #4267b2; color:#fff}
+button.button.facebook-account:hover {background: #2a497e;}
 
 button.button.facebook-account:before {
 	content: "\f09a";

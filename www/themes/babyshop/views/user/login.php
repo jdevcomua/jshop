@@ -4,6 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
+/* @var $loginUrl string */
 /* @var $model common\models\LoginForm */
 
 $this->title = 'Вход';
@@ -22,10 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         <strong>Sign in from social network</strong>
                         <div class="content">
                             <div class="buttons-set">
-<!--<form action="-->--><?////= $loginUrl ?><!--<!--">-->
-<!--                                    <button type="submit" title="Create an Account" class="button facebook-account"><span><span>Join with Facebook</span></span></button>-->
-<!--                                </form>-->
-                                <a href="<?= $loginUrl?>">Facebook</a>
+                                <button type="submit" title="Create an Account" class="button facebook-account" onclick="location.replace('<?=$loginUrl?>');"><span><span>Join with Facebook</span></span></button>
+<!--                                <a title="Login with Facebook" class="facebook-account" href="--><?//= $loginUrl?><!--"><span><span>Join with Facebook</span></span></a>-->
                             </div>
                         </div>
                         <br>

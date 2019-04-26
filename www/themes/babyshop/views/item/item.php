@@ -104,7 +104,7 @@ $imageUrls = $item->getImageUrl();
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
+                                        <li> <a class="link-wishlist" href=""  onclick="addToWishList(<?= $item->id ?>); return false;" ><span>Add to Wishlist</span></a></li>
                                       </ul>
                                     <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
                                 </div>
@@ -253,7 +253,7 @@ $imageUrls = $item->getImageUrl();
                                                     <div class="item-box-hover">
                                                         <div class="box-inner">
                                                             <div class="product-detail-bnt"><a  href=""  onclick="quickView(<?= $product->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                            <div class="actions"><span class="add-to-links"><a href="#" data-pjax="true" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                                                            <div class="actions"><span class="add-to-links"><a href="" onclick="addToWishList(<?= $product->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
 
                                                         </div>
                                                     </div>

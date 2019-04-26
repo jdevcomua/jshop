@@ -2,8 +2,10 @@
 
 namespace www\controllers;
 
+use common\models\Item;
 use common\models\User;
 use common\models\WishList;
+use common\models\Wish;
 use www\models\ChangePassword;
 use www\models\PasswordResetRequestForm;
 use www\models\ResetPasswordForm;
@@ -14,6 +16,7 @@ use Facebook\Facebook;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use yii\base\InvalidParamException;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
@@ -215,13 +218,29 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionWishlist($id)
+    public function actionWishlist()
     {
-        $model = WishList::findOne($id);
-        if (empty($model)) {
-            return $this->redirect(Yii::$app->urlHelper->to(['/']));
+        if (Yii::$app->user->isGuest)
+            return $this->redirect('user/login');
+        if (Yii::$app->request->isPost && is_array(Yii::$app->request->post('qty')))
+        {
+            foreach (Yii::$app->request->post('qty') as $item_id => $count) {
+                $item = Item::findOne($item_id);
+                Yii::$app->cart->addItem($item, $count);
+            }
         }
+        $model = WishList::findOne(['user_id' => Yii::$app->user->id]);
+        if (empty($model)) {
+            $model = new  WishList();
+            $model->user_id = Yii::$app->user->id;
+            $model->save();
+         }
+        $wishDataProvider = new ActiveDataProvider([
+            'query' => Wish::find()->where(['list_id' => $model->id])->with('item'),
+            'pagination' => false,
+        ]);
         return $this->render('wishlist', [
+            'wishDataProvider' => $wishDataProvider,
             'list' => $model
         ]);
     }

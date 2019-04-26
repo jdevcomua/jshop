@@ -93,7 +93,7 @@ $this->title = Yii::$app->name;
                                     <div class="item-box-hover">
                                         <div class="box-inner">
                                             <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@ $this->title = Yii::$app->name;
                                         <div class="item-box-hover">
                                             <div class="box-inner">
                                                 <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a></span> </div>
+                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a></span> </div>
                                             </div>
                                         </div>
                                     </div>

@@ -10407,6 +10407,10 @@ button.button.facebook-account:before {
 	padding-right: 8px;
 }
 
+li.current > a {
+	color: #80b435;
+}
+
 button.button.create-account { background:#80b435; color:#fff}
 button.button.create-account:hover {background: #131e2c;}
 

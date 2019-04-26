@@ -16,6 +16,7 @@ use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class SiteController extends Controller
 {
@@ -373,19 +374,29 @@ class SiteController extends Controller
      * @param $item_id integer
      * @param $list_id integer
      */
-    public function actionWish($item_id, $list_id)
+    public function actionWish($item_id)
     {
-        if ($list_id == '0') {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if(Yii::$app->user->isGuest){
+            $html = "<p>Register for use Wish List</p>";
+            return ['html' => $html];
+        }
+        $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
+        if (empty($wishList)){
             $wishList = new WishList();
             $wishList->user_id = Yii::$app->user->id;
-            $wishList->title = Yii::$app->request->get('textt');
             $wishList->save();
-            $list_id = $wishList->id;
         }
-        $wish = new Wish();
-        $wish->list_id = $list_id;
-        $wish->item_id = $item_id;
-        $wish->save();
+        if(empty(Wish::findOne(['list_id' => $wishList->id, 'item_id' => $item_id]))) {
+            $wish = new Wish();
+            $wish->list_id = $wishList->id;
+            $wish->item_id = $item_id;
+            $wish->save();
+            $html = "New wish added";
+        } else {
+            $html = "Item already are added at wish list";
+        }
+        return ['html' => $html];
     }
 
     /**

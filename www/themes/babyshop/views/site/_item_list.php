@@ -41,6 +41,6 @@
         </div>
         <div class="actions">
             <button class="button btn-cart ajx-cart" data-pjax="true" onclick="addToCart(<?= $model->id?>)" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-            <span class="add-to-links"> <a title="Add to Wishlist" data-pjax="true" class="button link-wishlist" href="#"><span>Add to Wishlist</span></a> </span> </div>
+            <span class="add-to-links"> <a title="Add to Wishlist"  onclick="addToWishList(<?= $model->id ?>)" class="button link-wishlist" href=""><span>Add to Wishlist</span></a> </span> </div>
     </div>
 </li>

@@ -21,9 +21,6 @@ use common\components\Theme;
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
-
-$notEmpty = $dataProvider->totalCount > 0 || count($selected) > 0;
-
 ?>
 <section class="main-container col2-left-layout bounceInUp animated">
     <!-- For version 1, 2, 3, 8 -->

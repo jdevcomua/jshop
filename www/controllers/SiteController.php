@@ -113,31 +113,69 @@ class SiteController extends Controller
     }
 
     /**
-     * @param $text string
+     * @param $search string
      * @param $category_id integer
      * @param $sort string
      * @return string
      */
-    public function actionSearch($text, $category_id = null, $sort = null)
+    public function actionSearch($search = '')
     {
-        $items = Item::find()->where(['like', 'item.title', addcslashes($text, '"')])->andFilterWhere(['category_id' => $category_id]);
-        $categories = ItemCat::find()->select(['item_cat.id', 'item_cat.title', 'count(item_cat.id) as count'])
-            ->innerJoin('item', 'item.category_id = item_cat.id')->where(['like', 'item.title', addcslashes($text, '"')])
-            ->groupBy('item_cat.id')->all();
+        $this->getDefault(Yii::$app->request->post('data'));
+        if (Yii::$app->request->isPost) {
+            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
+            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
+            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
+            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
+            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+        }
+
+        $request = Yii::$app->request;
+        $items = Item::find()->where(['like', 'title', $search]);
+
+        $sort = (Yii::$app->session->get('sort')) ? Yii::$app->session->get('sort') : 'date';
         $this->sorting($items, $sort);
+
+        //for filter by price
+        $minCost =Item::find()->where(['like', 'title', $search])->min('cost');
+        $maxCost = Item::find()->where(['like', 'title', $search])->max('cost');
+        $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['between', 'cost',0,99.99])->count();
+        $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['between', 'cost',100,499.99])->count();
+        $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['between', 'cost',500,999.99])->count();
+        $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['>=', 'cost',1000])->count();
+
+        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+            $items->andFilterWhere(['between', 'cost',$left,$right]);
+        } else {
+            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
+        }
+        $items->with(['stockItems', 'images', 'stocks']);
+
+//        var_dump($items->asArray()->all());
+
         $dataProvider = new ActiveDataProvider([
-            'query' => $items,
+            'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam(Theme::PARAM_ITEMS_ON_CATALOG_PAGE),
+                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
+        $mapData = [];
+        foreach ($dataProvider->getModels() as $key => $model){
+            $mapData[$model->id] = $key;
+        }
+//var_dump($modalId);
+        $this->breadcrumbs = ['Search - ' . $search];
+
+
         return $this->render('search', [
-            'dataProvider' => $dataProvider, 
-            'count' => $items->count(),
-            'text' => $text,
-            'categories' => $categories, 
-            'category_id' => $category_id,
             'sort' => $sort,
+            'minCost' => $minCost,
+            'maxCost' => $maxCost,
+            'countCosts' => $countCosts,
+            'dataProvider' => $dataProvider,
+            'count' => $items->count(),
+            'search' => $search
         ]);
     }
 
@@ -197,7 +235,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => 1//Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];

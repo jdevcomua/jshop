@@ -359,7 +359,8 @@ jQuery(window).on("load", function() {
                     n.preventDefault();
                     var i = e(this).closest("form"),
                         s = i.find("input");
-                    e("#showSearchTerm").text(s.val()), t()
+                    if(s.val()) location.replace('/search/'+s.val());
+                    else location.replace('/search');
                 })
             })
           

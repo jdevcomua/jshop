@@ -68,14 +68,15 @@ use yii\widgets\Pjax;
                                 </div>
                                 <ul class="links">
 <!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
-                                    <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
                                     <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart">Cart</a></li>
 <!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
                                     <?php if (Yii::$app->user->isGuest) { ?>
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span>Login</span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span>Registration</span></a></li>
                                     <?php } else { ?>
-                                    <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span>Logout</span></a></li>
+                                        <li><a href="<?= Url::toRoute('user/profile') ?>" title="Wishlist">Profile</a></li>
+                                        <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
+                                        <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span>Logout</span></a></li>
                                     <?php } ?>
                                 </ul>
                             </div>
@@ -126,9 +127,9 @@ use yii\widgets\Pjax;
                     </div>
                     <!--mini-cart-->
                     <div class="collapse navbar-collapse">
-                        <form class="navbar-form" role="search">
+                        <form class="navbar-form" role="search" method="get" action="">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input id="search" name="search" type="text" class="form-control" placeholder="Search">
                                 <span class="input-group-btn">
                   <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
                   </span> </div>
@@ -140,3 +141,31 @@ use yii\widgets\Pjax;
         </div>
     </div>
 </header>
+<?php if(Yii::$app->controller->route != 'site/index' ) {?>
+<div class="page-heading">
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul>
+                        <li class="home"> <a href="<?=Url::home()?>" title="Go to Home Page">Home</a> <span>&rsaquo; </span> </li>
+                        <?php for ($key = 0; $key < count($breadcrumbs = ($this->params['breadcrumbs']));$key++) {
+                            if(is_array($breadcrumbs[$key])) {?>
+                                <li class="home"> <a href="<?=$breadcrumbs[$key]['url']?>" title="<?=$breadcrumbs[$key]['label']?>"><?=$breadcrumbs[$key]['label']?></a> <span>&rsaquo; </span> </li>
+                            <?php } else { ?>
+                                <li class="category1601"> <strong><?= $breadcrumbs[$key] ?></strong> </li>
+                            <?php }?>
+                        <?php }?>
+                    </ul>
+                </div>
+                <!--col-xs-12-->
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </div>
+    <div class="page-title">
+        <h2><?=$this->title?></h2>
+    </div>
+</div>
+<?php } ?>

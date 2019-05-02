@@ -59,6 +59,7 @@ $config = [
                 '<language:(ru|en)>/<module>/<controller>'=>'<module>/<controller>/index',*/
                 '/'=>'site/index',
                 'site'=>'site/index',
+                'search/<search>'=>'site/search',
                 'search'=>'site/search',
                 'site/img/*'=>'img/*',
                 'cart'=>'cart/index',

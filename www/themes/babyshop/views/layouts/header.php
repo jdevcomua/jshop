@@ -74,7 +74,7 @@ use yii\widgets\Pjax;
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span>Login</span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span>Registration</span></a></li>
                                     <?php } else { ?>
-                                        <li><a href="<?= Url::toRoute('user/profile') ?>" title="Wishlist">Profile</a></li>
+                                        <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="Wishlist">Dashboard</a></li>
                                         <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
                                         <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span>Logout</span></a></li>
                                     <?php } ?>

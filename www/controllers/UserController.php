@@ -3,6 +3,7 @@
 namespace www\controllers;
 
 use common\models\Item;
+use common\models\Orders;
 use common\models\User;
 use common\models\WishList;
 use common\models\Wish;
@@ -17,6 +18,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
+use yii\debug\models\timeline\DataProvider;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
@@ -35,16 +37,46 @@ class UserController extends Controller
         if ($user->isGuest) {
             return $this->redirect(Yii::$app->urlHelper->to(['login']));
         }
-        if ($attributes = Yii::$app->request->post('WishList')) {
-            if (key_exists('id', $attributes) && $attributes['id']) {
-                WishList::updateAll($attributes, ['id' => $attributes['id']]);
-            } else {
-                $wishList = new WishList($attributes);
-                $wishList->user_id = $user->id;
-                $wishList->save();
-            }
-
+        $model = User::findOne($user->id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
         }
+        return $this->render('profile', ['model' => $model]);
+    }
+
+    public function actionDashboard()
+    {
+        $user = Yii::$app->user;
+        if ($user->isGuest) {
+            return $this->redirect(Yii::$app->urlHelper->to(['login']));
+        }
+
+        $model = User::findOne($user->id);
+
+        $orderDataProvider = new ActiveDataProvider([
+            'query' => Orders::find()->where(['user_id' => $model->id])->orderBy('timestamp DESC')->limit(5),
+            'pagination' => false
+        ]);
+
+        return $this->render('dashboard', ['model' => $model, 'orderDataProvider' => $orderDataProvider]);
+    }
+
+    public function actionOrderlist()
+    {
+        $model = User::findOne(Yii::$app->user->id);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Orders::find()->where(['user_id' => $model->id])->orderBy('timestamp DESC'),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('orderlist', ['dataProvider' => $dataProvider]);
+    }
+
+    public function actionChangePassword()
+    {
         $changePasswordModel = new ChangePassword();
         if ($changePasswordModel->load(Yii::$app->request->post())) {
             if ($changePasswordModel->validate() && $changePasswordModel->changePassword()) {
@@ -52,11 +84,7 @@ class UserController extends Controller
                 $changePasswordModel = new ChangePassword();
             }
         }
-        $model = User::findOne($user->id);
-        if ($model->load(Yii::$app->request->post())) {
-            $model->save();
-        }
-        return $this->render('profile', ['model' => $model, 'changePasswordModel' => $changePasswordModel]);
+        return $this->render('change-password', ['changePasswordModel' => $changePasswordModel]);
     }
 
     public function actionVkAuth()

@@ -1,15 +1,13 @@
 <?php
-
+use common\models\WishList;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use common\models\Orders;
+use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model common\models\User */
-/* @var $wishDataProvider \yii\data\ActiveDataProvider */
-/* @var $list \common\models\WishList */
-
-$this->title = 'My Wishlist';
+$this->title = 'Change password';
 $this->params['breadcrumbs'][] = ['label' => 'Account Dashboard', 'url' => '/dashboard'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,56 +15,54 @@ $this->params['breadcrumbs'][] = $this->title;
 <section class="main-container col2-right-layout">
     <div class="main container">
         <div class="row">
-            <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
-                <div class="my-account">
+            <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
 
-                    <?php Pjax::begin(['id' => 'wishlist'])?>
-                    <div class="my-wishlist">
-                        <?php $form = \yii\widgets\ActiveForm::begin(['options' => ['data-pjax' => true]])?>
-                            <fieldset>
-                                <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                                <?= \yii\widgets\ListView::widget([
-                                    'dataProvider' => $wishDataProvider,
-                                    'itemView' => function ($model, $key, $index, $widget) {
-                                        return $this->render('_item_wish', ['model' => $model ]);
-                                    },
-                                     'layout' => '
-                                      <div class="table-responsive">
-                                    <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
-                                        <thead>
-                                        <tr class="first last">
-                                            <th class="customer-wishlist-item-image"></th>
-                                            <th class="customer-wishlist-item-info"></th>
-                                            <th class="customer-wishlist-item-quantity">Quantity</th>
-                                            <th class="customer-wishlist-item-price">Price</th>
-                                            <th class="customer-wishlist-item-cart"></th>
-                                            <th class="customer-wishlist-item-remove"></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                         {items}
-                                        </tbody>
-                                    </table>
+            <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
+
+                    <!--page-title-->
+                    <!-- BEGIN DASHBOARD-->
+                    <div class="dashboard">
+
+                        <?php $form = ActiveForm::begin(); ?>
+                        <ol class="one-page-checkout">
+                            <li  class="section allow active">
+                                <div class="step a-item" style="">
+                                    <fieldset class="group-select">
+                                        <ul class="">
+                                            <li>
+                                                <fieldset>
+                                                    <ul>
+                                                        <li class="fields">
+                                                            <div class="input-box">
+                                                                <label for="orders-address">Old password<span class="required">*</span></label>
+                                                                <?= $form->field($changePasswordModel, 'oldPassword')->input('password',['class' => 'input-text'])->label(false) ?>
+                                                            </div>
+                                                        </li>
+                                                        <li class="fields">
+                                                            <div class="input-box">
+                                                                <label for="orders-address">New password<span class="required">*</span></label>
+                                                                <?= $form->field($changePasswordModel, 'newPassword')->input('password',['class' => 'input-text'])->label(false) ?>
+                                                            </div>
+                                                        </li>
+                                                        <li class="fields">
+                                                            <div class="input-box">
+                                                                <label for="orders-mail">Repeat new password<span class="required">*</span></label>
+                                                                <?= $form->field($changePasswordModel, 'confirmNewPassword')->input('password',['class' => 'input-text'])->label(false) ?>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </fieldset>
+                                            </li>
+                                            <li>
+                                                <button class="button" type="submit" ><?php echo \Yii::t('app', 'Изменить пароль'); ?></button>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
                                 </div>
-                                <div class="buttons-set buttons-set2">
-                                    <button type="submit" title="Add All to Cart" onClick="addAllWItemsToCart()" class="button btn-add"><span>Add All to Cart</span></button>
-                                    <button type="button" name="do" title="Update Wishlist" data-pjax="true" onclick="$.pjax.reload(\'#wishlist\'); return false;"  class="button btn-update"><span>Update Wishlist</span></button>
-                                </div>',
-                                    'pager' => [
-                                        'disabledListItemSubTagOptions' => ['tag' => 'a']
-                                    ],
-                                    'emptyText' =>  '<div class="table-responsive" align="center">
-                                            <p>No items at your Wishlist!</p>
-                                            </div>
-                                            <div class="buttons-set buttons-set2">
-                                                <button type="button" data-pjax="true" onclick="$.pjax.reload(\'#wishlist\'); return false;" name="do" title="Update Wishlist" class="button btn-update"><span>Update Wishlist</span></button>
-                                            </div>'
-                                ]); ?>
-                            </fieldset>
-                        <?php \yii\widgets\ActiveForm::end()?>
+                            </li>
+                        </ol>
+                        <?php ActiveForm::end(); ?>
                     </div>
-                    <?php Pjax::end()?>
-                </div>
             </section>
             <!--col-main col-sm-9 wow bounceInUp animated-->
             <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
@@ -76,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <ul>
                             <li><a href="<?= Url::toRoute('user/dashboard') ?>"><span> Account Dashboard</span></a></li>
                             <li><a href="<?= Url::toRoute('user/profile') ?>"><span> Account Information</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> Change password</span></a></li>
+                            <li class="current"><a href="<?= Url::toRoute('user/change-password') ?>"><span> Change password</span></a></li>
                             <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> My Orders</span></a></li>
-                            <li class="current"><a href="<?= Url::toRoute('user/wishlist') ?>">My Wishlist</a></li>
-<!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->
+                            <li><a href="<?= Url::toRoute('user/wishlist') ?>">My Wishlist</a></li>
+                            <!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->
                         </ul>
                     </div>
                     <!--block-content-->

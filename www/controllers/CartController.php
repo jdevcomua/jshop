@@ -9,6 +9,8 @@ use common\models\OrderItem;
 use Yii;
 use common\models\User;
 use common\components\CartAdd;
+use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Response;
 
 class CartController extends Controller
@@ -33,6 +35,34 @@ class CartController extends Controller
         
         return ['html' => $this->renderPartial('cartSuccess', ['model' => $item,
             'count' => $count]), 'title' => 'Корзина'];
+    }
+
+    public function actionOldOrder($order_id)
+    {
+        $model = Orders::findOne($order_id);
+        $itemsDataProvider = new ActiveDataProvider([
+            'query' => OrderItem::find()->where(['order_id' => $model->id]),
+            'pagination' => [
+                'pageSize' => 5,
+            ]
+        ]);
+        if ($model->user_id == Yii::$app->user->id)
+        return $this->render('old_order', [
+            'model' => $model,
+            'itemsDataProvider' => $itemsDataProvider
+        ]);
+        else return $this->redirect(Url::home());
+    }
+
+    public function actionReorder($order_id)
+    {
+        $model = Orders::findOne($order_id);
+        foreach ($model->orderItems as $orderItem)
+        {
+            Yii::$app->cart->addItem($orderItem->item, $orderItem->count);
+        }
+
+        return $this->redirect(Url::toRoute('cart/index'));
     }
 
     public function actionAjaxkit($item_id, $count)

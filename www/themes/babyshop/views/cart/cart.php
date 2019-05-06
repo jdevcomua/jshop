@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 $this->title = 'Корзина';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php var_dump(Yii::getAlias('@www'). '/web/img/'); ?>
 <div class="main-container col1-layout wow bounceInUp animated">
 
     <div class="main">

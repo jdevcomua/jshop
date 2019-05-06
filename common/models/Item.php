@@ -204,11 +204,11 @@ class Item extends Model implements CartAdd
                 $image->storage = self::MY_SERVER;
                 $image->item_id = $this->id;
 
-                $smallImage = new ImageResize(Item::getPath() . $fileName);
-                $smallImage->quality_jpg = 100;
-                $smallImage->quality_png= 100;
-                $smallImage->resizeToBestFit(200, 160);
-                $smallImage->save(Item::getPath() . self::IMAGE_SMALL . $fileName);
+//                $smallImage = new ImageResize(Item::getPath() . $fileName);
+//                $smallImage->quality_jpg = 100;
+//                $smallImage->quality_png= 100;
+//                $smallImage->resizeToBestFit(200, 160);
+//                $smallImage->save(Item::getPath() . self::IMAGE_SMALL . $fileName);
 
                 $image->small = self::IMAGE_SMALL . $fileName;
                 $image->save();

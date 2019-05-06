@@ -195,6 +195,7 @@ class Item extends Model implements CartAdd
         if (Yii::$app->params['imageStorage'] == self::AMAZON) {
             $this->uploadToAmazon();
         } elseif (Yii::$app->params['imageStorage'] == self::MY_SERVER) {
+            try {
             $files = UploadedFile::getInstances($this, 'imageFiles');
             foreach ($files as $file) {
                 $fileName = $this->id . mt_rand() . '.' . $file->extension;
@@ -212,6 +213,10 @@ class Item extends Model implements CartAdd
 
                 $image->small = self::IMAGE_SMALL . $fileName;
                 $image->save();
+                }
+            } catch (\Exception $exception) {
+                var_dump($exception->getMessage());
+                exit;
             }
         }
     }

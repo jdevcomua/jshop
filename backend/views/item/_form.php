@@ -89,7 +89,7 @@ use zxbodya\yii2\tinymce\TinyMce;
         <?php $images = [];
         if (!$model->isNewRecord) {
             foreach ($model->getImageUrl() as $url) {
-                $images[] = Html::img($url, ['width' => '120px']);
+                $images[] = Html::img($url, ['width' => '200px']);
             }
         }
         echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
@@ -97,11 +97,14 @@ use zxbodya\yii2\tinymce\TinyMce;
                 'multiple' => true,
             ],
             'pluginOptions' => [
+                'allowedFileExtensions' => ['jpg', 'jpeg', 'png'],
                 'initialPreview' => $images,
                 'initialPreviewConfig' => [
                     'width' => '120px'
                 ],
                 'showUpload' => false,
+                'maxFileSize' => 1024*5,
+                'showRemove' => true,
                 'overwriteInitial' => false,
                 'maxFileCount' => 3
             ]

@@ -19,22 +19,6 @@ class Controller extends \yii\web\Controller
         return parent::beforeAction($action);
     }
 
-    public function render($view, $params = [])
-    {
-        $inlineScript = "\n";
-        $this->addJSVar('isGuest', Yii::$app->user->isGuest);
-        foreach($this->jsVars as $name=>$value) {
-            switch($value){
-                case is_bool($value): $value = $value ? 'true' : 'false'; break;
-                case is_numeric($value): $value = (int)$value;break;
-                default: $value = "'{$value}'";
-            }
-            $inlineScript .= "Shop.{$name} = {$value};\n";
-        }
-        $this->view->registerJs($inlineScript, View::POS_HEAD, 'js-vars');
-        return parent::render($view, $params);
-    }
-
     protected function addJSVar($name, $value)
     {
         $this->jsVars[$name] = $value;

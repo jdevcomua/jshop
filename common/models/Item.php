@@ -69,6 +69,7 @@ class Item extends Model implements CartAdd
             ['title', 'trim'],
             [['addition_date'], 'safe'],
             [['cost', 'self_cost', 'quantity'], 'number'],
+            [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
             [['code', 'barcode'], 'string', 'max' => '20']

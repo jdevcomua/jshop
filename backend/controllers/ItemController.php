@@ -26,7 +26,7 @@ class ItemController extends Controller
         return [
             'uploadPhoto' => [
                 'class' => 'budyaga\cropper\actions\UploadAction',
-                'url' => Yii::$app->params['myServerImageLink'] . 'img',
+                'url' => Yii::$app->params['myServerImageLink'],
                 'path' => '@www/web/img',
             ]
         ];

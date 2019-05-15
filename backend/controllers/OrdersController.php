@@ -24,7 +24,7 @@ class OrdersController extends Controller
     {
         $searchModel = new OrdersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $dataProvider->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

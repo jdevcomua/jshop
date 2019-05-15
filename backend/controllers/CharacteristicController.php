@@ -60,7 +60,7 @@ class CharacteristicController extends Controller
     {
         $searchModel = new CharacteristicSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $dataProvider->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         $categories = Characteristic::find()
             ->select(['i.title'])
             ->join('JOIN', 'item_cat i', 'characteristic.category_id = i.id')

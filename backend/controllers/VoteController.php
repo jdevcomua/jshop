@@ -24,15 +24,15 @@ class VoteController extends Controller
     {
         $searchModel = new VoteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $dataProvider->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         $notChecked = new ActiveDataProvider([
             'query' => Vote::find()->andFilterWhere(['checked' => Vote::STATUS_NOT_CHECKED])->orderBy('timestamp')
         ]);
-        $notChecked->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $notChecked->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         $hidden = new ActiveDataProvider([
             'query' => Vote::find()->andFilterWhere(['checked' => Vote::STATUS_HIDDEN])->orderBy('timestamp')
         ]);
-        $hidden->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $hidden->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

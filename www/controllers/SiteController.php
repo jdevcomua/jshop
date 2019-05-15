@@ -200,10 +200,14 @@ class SiteController extends Controller
         $request = Yii::$app->request;
         $selected = $request->get('filter');
         $items = $this->filter($selected);
-
+        $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
         $category = ItemCat::findOne($id);
-        $items->andFilterWhere(['category_id' => $id]);
+        $subcategory = ItemCat::find()->where(['parent_id'=>$id])->all();
+        foreach ($subcategory as $sc){
+            $items->orFilterWhere(['category_id' => $sc->id]);
+        }
+
 
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);
@@ -378,7 +382,8 @@ class SiteController extends Controller
         $query = Item::find();
         $filterWhere = self::getItemIdsForFilter($filters);
         if (is_array($filterWhere)) {
-            $query->andFilterWhere(['in', 'item.id', $filterWhere]);
+            $query->andFilterWhere(['id', 'item.id', $filterWhere] );
+
         } else {
             $query->where('false');
         }

@@ -159,4 +159,22 @@ class ItemCat extends ModelWithImage
     {
         return Yii::$app->urlHelper->to(['category/' . $this->id . '-' . $this->getTranslit()]);
     }
+
+    /**
+     * @return array
+     */
+    public function getFamily()
+    {
+        $childrenIdList[] = $this->id;
+        $main_children = $this->children;
+        foreach ($main_children as $child)
+        {
+            $childrenIdList[] = $child->id;
+            if ($child->children)
+                foreach ($child->children as $grandchild) {
+                    $childrenIdList[] = $grandchild->id;
+                }
+        }
+        return $childrenIdList;
+    }
 }

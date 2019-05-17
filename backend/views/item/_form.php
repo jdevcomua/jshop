@@ -92,23 +92,13 @@ use zxbodya\yii2\tinymce\TinyMce;
                 $images[] = Html::img($url, ['width' => '200px']);
             }
         }
-        echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
-            'options' => [
-                'multiple' => true,
-            ],
-            'pluginOptions' => [
-                'allowedFileExtensions' => ['jpg', 'jpeg', 'png'],
-                'initialPreview' => $images,
-                'initialPreviewConfig' => [
-                    'width' => '120px'
-                ],
-                'showUpload' => false,
-                'maxFileSize' => 1024*5,
-                'showRemove' => true,
-                'overwriteInitial' => false,
-                'maxFileCount' => 3
-            ]
-        ]); ?>
+      ?>
+
+        <?php echo $form->field($model, 'imageFiles')->widget(\budyaga\cropper\Widget::className(), [
+            'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
+            'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
+            'aspectRatio' => '4:4'
+        ]) ?>
 
         <div class="form-group"><br>
             <?= Html::submitButton(Yii::t('app', 'Сохранить'), [

@@ -21,6 +21,17 @@ use yii\helpers\ArrayHelper;
 class ItemController extends Controller
 {
 
+    public function actions()
+    {
+        return [
+            'uploadPhoto' => [
+                'class' => 'budyaga\cropper\actions\UploadAction',
+                'url' => Yii::$app->params['myServerImageLink'],
+                'path' => '@www/web/img',
+            ]
+        ];
+    }
+
     /**
      * Lists all Item models.
      * @return mixed
@@ -202,8 +213,10 @@ class ItemController extends Controller
         $model = $this->findModel($id);
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $request = Yii::$app->request;
+
         if ($model->load($request->post())) {
             if ($model->save()) {
+                $model->imageFiles = $request->post()['Item']['imageFiles'];
                 $model->upload();
                 if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));

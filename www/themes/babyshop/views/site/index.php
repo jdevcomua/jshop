@@ -19,18 +19,18 @@ $this->title = Yii::$app->name;
                     <ul>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='images/slide-img1.jpg'><img src='images/slide-img2.jpg'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image1" />
                             <div class="info">
-                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='220'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span>Fresh Food</span></div>
-                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'>Simply <span>delicious</span></div>
-                                <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='520'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="buy-btn">Shop Now</a></div>
-                                <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'>We supply highly quality organic products</div>
+                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='220'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span><?= Yii::t('app','Fresh Food')?></span></div>
+                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><?= Yii::t('app','Simply')?> <span><?= Yii::t('app','delicious')?></span></div>
+                                <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='520'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="buy-btn"><?= Yii::t('app','Shop Now')?></a></div>
+                                <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><?= Yii::t('app','We supply highly quality organic products')?></div>
                             </div>
                         </li>
                         <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='images/slide-img3.jpg'><img src='images/slide-img3.jpg'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image2"  />
                             <div class="info">
-                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='220'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span>Fresh Look</span></div>
-                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span>100%</span> Organic</div>
-                                <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='520'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="buy-btn">Shop Now</a></div>
-                                <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'>Farm Fresh Produce Right to Your Door</div>
+                                <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0'  data-y='220'  data-endspeed='500'  data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span><?= Yii::t('app','Fresh Look')?></span></div>
+                                <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0'  data-y='300'  data-endspeed='500'  data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span>100%</span> <?= Yii::t('app','Organic')?></div>
+                                <div class='tp-caption sfb  tp-resizeme ' data-x='0'  data-y='520'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="buy-btn"><?= Yii::t('app','Shop Now')?></a></div>
+                                <div    class='tp-caption Title sft  tp-resizeme ' data-x='0'  data-y='420'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><?= Yii::t('app','Farm Fresh Produce Right to Your Door')?></div>
                             </div>
                         </li>
                     </ul>
@@ -74,9 +74,10 @@ $this->title = Yii::$app->name;
     <section class=" wow bounceInUp animated">
         <div class="best-pro slider-items-products container">
             <div class="new_title">
-                <h2>Best Seller</h2>
-                <h4>So you get to know me better</h4>
+                <h2><?= Yii::t('app','Best Seller')?></h2>
+                <h4><?= Yii::t('app','So you get to know me better')?></h4>
             </div>
+
             <div id="best-seller" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 products-grid">
                     <?php foreach ($best_seller as $item) { ?>
@@ -92,13 +93,13 @@ $this->title = Yii::$app->name;
                                         '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                     <div class="item-box-hover">
                                         <div class="box-inner">
-                                            <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                                            <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span><?= Yii::t('app','Quick View')?></span></a></div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="add_cart">
-                                    <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span>Add to Cart</span></button>
+                                    <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span><?= Yii::t('app','Add to Cart')?></span></button>
                                 </div>
                             </div>
                             <div class="item-info">
@@ -110,7 +111,7 @@ $this->title = Yii::$app->name;
                                                 <div class="rating-box">
                                                     <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                 </div>
-                                                <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#"><?= Yii::t('app','Add Review')?></a> </p>
                                             </div>
                                         </div>
                                         <div class="item-price">
@@ -132,9 +133,9 @@ $this->title = Yii::$app->name;
         <div class="container">
             <div class="row">
                 <div class="ad-info">
-                    <h2>Hurry Up!</h2>
-                    <h3>Deal of the week</h3>
-                    <h4>From our family farm right to your doorstep.</h4>
+                    <h2><?= Yii::t('app','Hurry Up!')?></h2>
+                    <h3><?= Yii::t('app','Deal of the week')?></h3>
+                    <h4><?= Yii::t('app','From our family farm right to your doorstep.')?></h4>
                 </div>
             </div>
             <div class="row">
@@ -155,13 +156,13 @@ $this->title = Yii::$app->name;
                                             '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                         <div class="item-box-hover">
                                             <div class="box-inner">
-                                                <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a></span> </div>
+                                                <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span><?= Yii::t('app','Quick View')?></span></a></div>
+                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span><?= Yii::t('app','Add to Wishlist')?></span></a></span> </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="add_cart">
-                                        <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span>Add to Cart</span></button>
+                                        <button class="button btn-cart" type="button" onclick='addToCart(<?=$item->id?>)'><span><?= Yii::t('app','Add to Cart')?></span></button>
 
                                     </div>
                                 </div>
@@ -174,7 +175,7 @@ $this->title = Yii::$app->name;
                                                     <div class="rating-box">
                                                         <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                     </div>
-                                                    <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                    <p class="rating-links"><a href="#"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#"><?= Yii::t('app','Add Review')?></a> </p>
                                                 </div>
                                             </div>
                                             <div class="item-price">
@@ -252,15 +253,15 @@ $this->title = Yii::$app->name;
     <div class="container">
         <div class="row">
             <h3><?= $special->title ?></h3>
-            <h2>Special Product</h2>
+            <h2><?= Yii::t('app','Special Product')?></h2>
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="block1"> <strong>fresh from our farm</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
+                <div class="block1"> <strong><?= Yii::t('app','fresh from our farm')?></strong>
+                    <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.')?></p>
                 </div>
-                <div class="block2"> <strong>100% organic Foods</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
+                <div class="block2"> <strong><?= Yii::t('app','100% organic Foods')?></strong>
+                    <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.')?></p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -283,11 +284,11 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="block3"> <strong>Good for health</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
+                <div class="block3"> <strong><?= Yii::t('app','Good for health')?></strong>
+                    <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.')?></p>
                 </div>
-                <div class="block4"> <strong>Safe From Pesticides</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
+                <div class="block4"> <strong><?= Yii::t('app','Safe From Pesticides')?></strong>
+                    <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.')?></p>
                 </div>
             </div>
         </div>

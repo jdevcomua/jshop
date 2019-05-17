@@ -27,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!-- BEGIN DASHBOARD-->
                     <div class="dashboard">
                         <div class="welcome-msg">
-                            <p class="hello"><strong>Hello, john doe!</strong></p>
-                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                            <p class="hello"><strong><?= Yii::t('app','Hello, john doe!')?></strong></p>
+                            <p><?= Yii::t('app','From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.')?></p>
                         </div>
                         <div class="recent-orders">
-                            <div class="title-buttons"> <strong>Recent Orders</strong> <a href="<?= Url::toRoute('user/orderlist')?>">View All</a> </div>
+                            <div class="title-buttons"> <strong><?= Yii::t('app','Recent Orders')?></strong> <a href="<?= Url::toRoute('user/orderlist')?>"><?= Yii::t('app','View All')?></a> </div>
                             <div class="table-responsive">
                                 <?= \yii\grid\GridView::widget([
                                     'dataProvider' => $orderDataProvider,
@@ -43,21 +43,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'class' => 'yii\grid\DataColumn',
                                             'attribute' => 'id',
                                             'headerOptions' => ['class' => 'text-center'],
-                                            'label' => 'Order #',
+                                            'label' => Yii::t('app', 'Order #'),
                                             'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
                                         ],
                                         [
                                             'class' => 'yii\grid\DataColumn',
                                             'attribute' => 'timestamp',
                                             'headerOptions' => ['class' => 'text-center'],
-                                            'label' => 'Date',
+                                            'label' => Yii::t('app', 'Date'),
                                             'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
                                         ],
                                         [
                                             'class' => 'yii\grid\DataColumn',
                                             'attribute' => 'sum',
                                             'headerOptions' => ['class' => 'text-center'],
-                                            'label' => 'Order total',
+                                            'label' => Yii::t('app', 'Order total'),
                                             'contentOptions' => ['style' => 'width: 1;', 'class' => 'text-center'],
                                             'value' => function ($model, $key, $index, $widget) {
                                                 return number_format((float)$model->sum, 2, '.', '');
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'class' => 'yii\grid\DataColumn',
                                             'attribute' => 'order_status',
                                             'headerOptions' => ['class' => 'text-center'],
-                                            'label' => 'Status Order',
+                                            'label' => Yii::t('app', 'Order status'),
                                             'contentOptions' => ['style' => 'width: 1;', 'class' => 'text-center'],
                                             'value' => function ($model, $key, $index, $widget) {
                                                 return Orders::getStatusTitles()[$model->order_status];
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'class' => 'yii\grid\DataColumn',
                                             'attribute' => 'payment_status',
                                             'headerOptions' => ['class' => 'text-center'],
-                                            'label' => 'Status payment',
+                                            'label' => Yii::t('app', 'Payment status'),
                                             'contentOptions' => ['style' => 'width: 1;', 'class' => 'text-center'],
                                             'value' => function ($model, $key, $index, $widget) {
                                                 return Orders::getPaymentStatusTitles()[$model->payment_status];
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'label' => ' ',
                                             'contentOptions' => ['style' => 'width: 20%;', 'class' => 'text-center'],
                                             'value' => function ($model, $key, $index, $widget) {
-                                                return '<span class="nobr"> <a href="' . Url::to(['cart/old-order', 'order_id' => $model->id]) . '">View Order</a> <span class="separator">|</span> <a href="' . Url::to(['cart/reorder', 'order_id' => $model->id]) . '" class="link-reorder">Reorder</a> </span>';
+                                                return '<span class="nobr"> <a href="' . Url::to(['cart/old-order', 'order_id' => $model->id]) . '">'. Yii::t('app', 'View Order').'</a> <span class="separator">|</span> <a href="' . Url::to(['cart/reorder', 'order_id' => $model->id]) . '" class="link-reorder">'. Yii::t('app', 'Reorder').'</a> </span>';
                                             }
                                         ],
 
@@ -102,18 +102,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!--recent-orders-->
                         <div class="box-account">
                             <div class="page-title">
-                                <h2>Account Information</h2>
+                                <h2><?= Yii::t('app','Account Information')?></h2>
                             </div>
                             <div class="col2-set">
                                 <div class="col-1">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h5>Contact Information</h5>
-                                            <a href="<?=Url::toRoute('user/profile')?>">Edit</a> </div>
+                                            <h5><?= Yii::t('app','Contact Information')?></h5>
+                                            <a href="<?=Url::toRoute('user/profile')?>"><?= Yii::t('app','Edit')?></a> </div>
                                         <!--box-title-->
                                         <div class="box-content">
                                             <p> <?=$model->mail?><br>
-                                                <a href="<?=Url::toRoute('user/change-password')?>">Change Password</a> </p>
+                                                <a href="<?=Url::toRoute('user/change-password')?>"><?= Yii::t('app','Change Password')?></a> </p>
                                         </div>
                                         <!--box-content-->
                                     </div>
@@ -122,8 +122,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="col-1">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h5>Person Information</h5>
-                                            <a href="<?=Url::toRoute('user/profile')?>">Edit</a> </div>
+                                            <h5><?= Yii::t('app','Person Information')?></h5>
+                                            <a href="<?=Url::toRoute('user/profile')?>"><?= Yii::t('app','Edit')?></a> </div>
                                         <!--box-title-->
                                         <div class="box-content">
                                             <p> <?= $model->username . '<br>' . $model->name . ' ' . $model->surname . '<br>' . $model->phone . '<br>' .$model->address . '<br>' ?></p>
@@ -141,14 +141,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <!--col-main col-sm-9 wow bounceInUp animated-->
             <aside class="col-right sidebar col-sm-3 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">
                 <div class="block block-account">
-                    <div class="block-title"> My Account </div>
+                    <div class="block-title"> <?= Yii::t('app','My Account')?> </div>
                     <div class="block-content">
                         <ul>
-                            <li class="current"><a href="<?= Url::toRoute('user/dashboard') ?>"><span> Account Dashboard</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/profile') ?>"><span> Account Information</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> Change password</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> My Orders</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/wishlist') ?>">My Wishlist</a></li>
+                            <li class="current"><a href="<?= Url::toRoute('user/dashboard') ?>"><span> <?= Yii::t('app','Account Dashboard')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/profile') ?>"><span> <?= Yii::t('app','Account Information')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> <?= Yii::t('app','Change password')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> <?= Yii::t('app','My Orders')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/wishlist') ?>"><?= Yii::t('app','My Wishlist')?></a></li>
                             <!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->
                         </ul>
                     </div>
@@ -167,29 +167,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="carousel-inner">
                                 <div class="item active"><img src="/images/slide2.jpg" alt="slide3">
                                     <div class="carousel-caption">
-                                        <h4>Fruit Shop</h4>
-                                        <h3><a title=" Sample Product" href="/product-detail.html">Up to 70% Off</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a></div>
+                                        <h4><?= Yii::t('app','Fruit Shop')?></h4>
+                                        <h3><a title=" Sample Product" href="/product-detail.html"><?= Yii::t('app','Up to 70% Off')?></a></h3>
+                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a></div>
                                 </div>
                                 <div class="item"><img src="/images/slide3.jpg" alt="slide1">
                                     <div class="carousel-caption">
-                                        <h4>Black Grapes</h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html">Mega Sale</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a>
+                                        <h4><?= Yii::t('app','Black Grapes')?></h4>
+                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Mega Sale')?></a></h3>
+                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
                                     </div>
                                 </div>
                                 <div class="item"><img src="/images/slide1.jpg" alt="slide2">
                                     <div class="carousel-caption">
-                                        <h4>Food Farm</h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html">Up to 50% Off</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a>
+                                        <h4><?= Yii::t('app','Food Farm')?></h4>
+                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Up to 50% Off')?></a></h3>
+                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
                                     </div>
                                 </div>
                             </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only">Next</span> </a></div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only"><?= Yii::t('app','Previous')?></span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only"><?= Yii::t('app','Next')?></span> </a></div>
                     </div>
                 </div>
             </aside>

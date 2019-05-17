@@ -17,19 +17,20 @@
             $text = $model->description;
             $max_lengh = 300;
 
-            if(mb_strlen($text, "UTF-8") > $max_lengh) {
+            if(mb_strlen($text, "UTF-8") > $max_lengh):
                 $text_cut = mb_substr($text, 0, $max_lengh, "UTF-8");
                 $text_explode = explode(" ", $text_cut);
 
                 unset($text_explode[count($text_explode) - 1]);
 
                 $text_implode = implode(" ", $text_explode);
+                ?>
 
-                echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" href="'.$model->getUrl().'">Learn More</a>';
-            } else {
-                echo $text;
-            }
-            ?>
+                <?= $text_implode?>... <a class="link-learn" title="Learn More" data-pjax="0" href="<?=$model->getUrl()?>"><?= Yii::t('app','Learn More')?></a>
+            <?php else: ?>
+                <?= $text?>
+
+            <?php endif;?>
         </div>
         <div class="price-box">
             <?php if($model->existDiscount()) {?>
@@ -40,7 +41,7 @@
             <?php }?>
         </div>
         <div class="actions">
-            <button class="button btn-cart ajx-cart" data-pjax="true" onclick="addToCart(<?= $model->id?>)" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-            <span class="add-to-links"> <a title="Add to Wishlist"  onclick="addToWishList(<?= $model->id ?>)" class="button link-wishlist" href=""><span>Add to Wishlist</span></a> </span> </div>
+            <button class="button btn-cart ajx-cart" data-pjax="true" onclick="addToCart(<?= $model->id?>)" title="Add to Cart" type="button"><span><?= Yii::t('app','Add to Cart')?></span></button>
+            <span class="add-to-links"> <a title="Add to Wishlist"  onclick="addToWishList(<?= $model->id ?>)" class="button link-wishlist" href=""><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
     </div>
 </li>

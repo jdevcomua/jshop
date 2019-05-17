@@ -8,13 +8,13 @@
                     <!-- Footer Newsletter -->
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col1">
                         <div class="newsletter-wrap">
-                            <h5>Newsletter</h5>
-                            <h4>Get discount 30% off</h4>
+                            <h5><?= Yii::t('app','Newsletter')?></h5>
+                            <h4><?= Yii::t('app','Get discount 30% off')?></h4>
                             <form action="#" method="post" id="newsletter-validate-detail1">
                                 <div id="container_form_news">
                                     <div id="container_form_news2">
                                         <input type="text" name="email" id="newsletter1" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address">
-                                        <button type="submit" title="Subscribe" class="button subscribe"><span>Subscribe</span></button>
+                                        <button type="submit" title="Subscribe" class="button subscribe"><span><?= Yii::t('app','Subscribe')?></span></button>
                                     </div>
                                     <!--container_form_news2-->
                                 </div>
@@ -32,46 +32,46 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column">
-                            <h4>Shopping Guide</h4>
+                            <h4><?= Yii::t('app','Shopping Guide')?></h4>
                             <ul class="links">
-                                <li><a href="blog.html" title="How to buy">Blog</a></li>
-                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
-                                <li><a href="#" title="Payment">Payment</a></li>
-                                <li><a href="#" title="Shipment">Shipment</a></li>
-                                <li><a href="#" title="Where is my order?">Where is my order?</a></li>
-                                <li><a href="#" title="Return policy">Return policy</a></li>
+                                <li><a href="blog.html" title="How to buy"><?= Yii::t('app','Blog')?></a></li>
+                                <li><a href="faq.html" title="FAQs"><?= Yii::t('app','FAQs')?></a></li>
+                                <li><a href="#" title="Payment"><?= Yii::t('app','Payment')?></a></li>
+                                <li><a href="#" title="Shipment"><?= Yii::t('app','Shipment')?></a></li>
+                                <li><a href="#" title="Where is my order?"><?= Yii::t('app','Where is my order?')?></a></li>
+                                <li><a href="#" title="Return policy"><?= Yii::t('app','Return policy')?></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column">
-                            <h4>Style Advisor</h4>
+                            <h4><?= Yii::t('app','Style Advisor')?></h4>
                             <ul class="links">
-                                <li><a href="login.html" title="Your Account">Your Account</a></li>
-                                <li><a href="#" title="Information">Information</a></li>
-                                <li><a href="#" title="Addresses">Addresses</a></li>
-                                <li><a href="#" title="Addresses">Discount</a></li>
-                                <li><a href="#" title="Orders History">Orders History</a></li>
-                                <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                                <li><a href="login.html" title="Your Account"><?= Yii::t('app','Your Account')?></a></li>
+                                <li><a href="#" title="Information"><?= Yii::t('app','Information')?></a></li>
+                                <li><a href="#" title="Addresses"><?= Yii::t('app','Addresses')?></a></li>
+                                <li><a href="#" title="Addresses"><?= Yii::t('app','Discount')?></a></li>
+                                <li><a href="#" title="Orders History"><?= Yii::t('app','Orders History')?></a></li>
+                                <li><a href="#" title="Order Tracking"><?= Yii::t('app','Order Tracking')?></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column">
-                            <h4>Information</h4>
+                            <h4><?= Yii::t('app','Information')?></h4>
                             <ul class="links">
-                                <li><a href="sitemap.html" title="Site Map">Site Map</a></li>
-                                <li><a href="#" title="Search Terms">Search Terms</a></li>
-                                <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-                                <li><a href="about_us.html" title="About Us">About Us</a></li>
-                                <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-                                <li><a href="#" title="Suppliers">Suppliers</a></li>
+                                <li><a href="sitemap.html" title="Site Map"><?= Yii::t('app','Site Map')?></a></li>
+                                <li><a href="#" title="Search Terms"><?= Yii::t('app','Search Terms')?></a></li>
+                                <li><a href="#" title="Advanced Search"><?= Yii::t('app','Advanced Search')?></a></li>
+                                <li><a href="about_us.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
+                                <li><a href="contact_us.html" title="Contact Us"><?= Yii::t('app','Contact Us')?></a></li>
+                                <li><a href="#" title="Suppliers"><?= Yii::t('app','Suppliers')?></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column">
-                            <h4>Contact Us</h4>
+                            <h4><?= Yii::t('app','Contact Us')?></h4>
                             <div class="contacts-info">
                                 <address>
                                     <i class="add-icon"></i>ThemesGround, 789 Main rd,<br>
@@ -107,7 +107,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12 coppyright"> ©2018 ThemesGround. All Rights Reserved. </div>
+                <div class="col-sm-4 col-xs-12 coppyright"> <?= Yii::t('app','©2019 Copyright')?></div>
                 <div class="col-xs-12 col-sm-4">
                     <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
                 </div>

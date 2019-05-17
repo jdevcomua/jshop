@@ -10,10 +10,10 @@ use yii\helpers\Url;
 <table class="cart-table full table--responsive">
     <thead class="cart__row cart__header-labels">
     <tr>
-        <th colspan="2" class="text-center">Товар</th>
-        <th class="text-center">Цена</th>
-        <th class="text-center">Количество</th>
-        <th class="text-right">Сумма</th>
+        <th colspan="2" class="text-center"><?=Yii::t('app','Product')?></th>
+        <th class="text-center"><?=Yii::t('app','Price')?></th>
+        <th class="text-center"><?=Yii::t('app','Number')?></th>
+        <th class="text-right"><?=Yii::t('app','Amount')?></th>
     </tr>
     </thead>
     <tbody>
@@ -29,23 +29,23 @@ use yii\helpers\Url;
                 <br>
 
                 <a href="" class="cart__remove" data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
-                    <small>Удалить</small>
+                    <small><?=Yii::t('app','Delete')?></small>
                 </a>
             </td>
-            <td data-label="Цена">
+            <td data-label="Price">
                     <span class="h6">
-                        <span class="money"><?= $item->cost ?> грн.</span>
+                        <span class="money"><?= $item->cost ?> <?=Yii::t('app','UAH')?></span>
                     </span>
             </td>
-            <td data-label="Количество">
+            <td data-label="Number">
                 <div class="js-qty">
                     <input type="number" class="js-qty__num" value="<?= $model->count ?>"
                            data-id="<?= $item->getId(); ?>" data-type="<?= $item->getType(); ?>">
                 </div>
             </td>
-            <td data-label="Сумма" class="text-right">
+            <td data-label="Amount" class="text-right">
                 <span class="h6">
-                    <span class="money price-new"><span class="price"><?= $model->count * $item->cost ?></span> грн.</span>
+                    <span class="money price-new"><span class="price"><?= $model->count * $item->cost ?></span> <?=Yii::t('app','UAH')?></span>
                 </span>
             </td>
         </tr>
@@ -54,8 +54,8 @@ use yii\helpers\Url;
 </table>
 <div class="grid__item text-right small--one-whole">
     <p>
-        <span class="cart__subtotal-title">Сумма</span>
-        <span class="h3 cart__subtotal"><span class="money"><span class="sum"><?= $sum ?></span> грн.</span></span>
+        <span class="cart__subtotal-title"><?=Yii::t('app','Amount')?></span>
+        <span class="h3 cart__subtotal"><span class="money"><span class="sum"><?= $sum ?></span> <?=Yii::t('app','UAH')?></span></span>
     </p>
-    <a href="<?= Url::to('/cart/order') ?>" class="btn">Оформить заказ</a>
+    <a href="<?= Url::to('/cart/order') ?>" class="btn"><?=Yii::t('app','Checkout')?></a>
 </div>

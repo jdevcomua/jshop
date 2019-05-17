@@ -45,7 +45,7 @@ $this->registerJs($inputJS);
 <div class="sidebar grid__item large--one-quarter">
     <div class="collection-sidebar">
         <div class="filter-blocks widget">
-            <h4 class="widget__title">Фильтры</h4>
+            <h4 class="widget__title"><?=Yii::t('app', 'Filters')?></h4>
             <?php $form = ActiveForm::begin([
                 'method' => 'get',
                 'action' => $category->getUrl(),
@@ -54,7 +54,7 @@ $this->registerJs($inputJS);
             <?= Html::input('hidden', 'sort', $sort, ['id' => 'sort_input']) ?>
             <div class="widget__content">
                 <div class="filter-block filter-custom filter-tag" style="width: 90%">
-                    <h5 class="filter-title">Цена</h5>
+                    <h5 class="filter-title">Price</h5>
                     <p class="text-center">
                         <input name="left" type="number" min="<?= $minCost ?>" max="<?= $maxCost ?>"
                                id="input-number-left" class="slider-input slider-input-left" value="<?= $leftCost ?>">
@@ -125,7 +125,7 @@ $this->registerJs($inputJS);
                         </div>
                     <?php endif;
                 endforeach; ?>
-                <?= Html::submitButton('Фильтровать', ['class' => 'btn']) ?>
+                <?= Html::submitButton('Filter', ['class' => 'btn']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

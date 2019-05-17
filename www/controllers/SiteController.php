@@ -202,10 +202,9 @@ class SiteController extends Controller
         $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
         $category = ItemCat::findOne($id);
-        $subcategory = ItemCat::find()->where(['parent_id'=>$id])->all();
-        foreach ($subcategory as $sc){
-            $items->orFilterWhere(['category_id' => $sc->id]);
-        }
+        $category_ids = $category->getFamily();
+        $items->orFilterWhere(['in','category_id',$category_ids]);
+
 
 
         if ($search = $request->get('search')) {
@@ -216,12 +215,12 @@ class SiteController extends Controller
         $this->sorting($items, $sort);
 
         //for filter by price
-        $minCost = Item::find()->andFilterWhere(['category_id' => $id])->min('cost');
-        $maxCost = Item::find()->andFilterWhere(['category_id' => $id])->max('cost');
-        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',0,99.99])->count();
-        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',100,499.99])->count();
-        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['between', 'cost',500,999.99])->count();
-        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $id])->andFilterWhere(['>=', 'cost',1000])->count();
+        $minCost = Item::find()->andFilterWhere(['category_id' => $category_ids])->min('cost');
+        $maxCost = Item::find()->andFilterWhere(['category_id' => $category_ids])->max('cost');
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',0,99.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',100,499.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',500,999.99])->count();
+        $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['>=', 'cost',1000])->count();
 
         if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
             $items->andFilterWhere(['between', 'cost',$left,$right]);

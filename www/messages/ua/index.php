@@ -183,4 +183,10 @@ return array(
     'Add All to Cart' => 'Додати все в кошик',
     'Update Wishlist' => 'Оновити список бажань',
     'No items at your Wishlist!' => 'Немає товарів в вашому списку побажань!',
+    'Searching results' => 'Результати пошуку',
+    'FREE SHOPPING on order over $99'=>'БЕЗКОШТОВНИЙ ПОКУПКА на замовлення понад $99',
+    'Have a question?'=>'Є питання?',
+    'Money Back Guarantee'=>'Гарантія повернення грошей',
+    '30 days return Service'=>'30 днів повернення',
+    'download'=>'завантажити',
 );

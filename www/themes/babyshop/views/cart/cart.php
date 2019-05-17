@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $models CartElement[] */
 /* @var $sum double */
 
-$this->title = 'Basket';
+$this->title =  Yii::t('app','Basket');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-container col1-layout wow bounceInUp animated">

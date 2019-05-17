@@ -15,8 +15,8 @@ use yii\widgets\ListView;
 /* @var $sort string */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 
-$this->title = 'Результаты поиска «' . $search . '»';
-$this->params['breadcrumbs'][] = 'Поиск';
+$this->title = Yii::t('app','Searching results'). '«' . $search . '»';
+$this->params['breadcrumbs'][] = Yii::t('app','Search');
 ?>
 <section class="main-container col2-left-layout bounceInUp animated">
     <!-- For version 1, 2, 3, 8 -->
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Поиск';
                                     <!-- Item -->
                                     <div class="item"> <a href="#"><img alt="" src="/images/category-img1.jpg"></a>
                                         <div class="cat-img-title cat-bg cat-box">
-                                            <div class="small-tag"><?= Yii::t('app','Season 2018')?></div>
+                                            <div class="small-tag"><?= Yii::t('app','Season')?>2018</div>
                                             <h2 class="cat-heading"><?= Yii::t('app','Organic')?> <span><?= Yii::t('app','World')?></span></h2>
                                             <p><?= Yii::t('app','GET 40% OFF &sdot; Free Delivery ')?></p>
                                         </div>

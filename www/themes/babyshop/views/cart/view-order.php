@@ -3,7 +3,7 @@
 /* @var $order \common\models\Orders */
 /* @var $orderItems \common\models\OrderItem[] */
 
-$this->title = 'Order №' . $order->id;
+$this->title =  Yii::t('app','Order #'). $order->id;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="grid">

@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="toolbar">   
                            ' . $sorter . '
                             <div class="sort-by">
-                                <label class="left">Sort By : </label>
+                                <label class="left">'. Yii::t('app', 'Sort By') .': </label>
                                 <ul>
                                     <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.Theme::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
                                         <ul>
@@ -234,7 +234,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <!--side-nav-categories-->
                 <div class="block block-layered-nav">
-                    <div class="block-title"> <?= Yii::t('app','Shop By')?> </div>
+                    <div class="block-title"> <?= Yii::t('app','Shop by')?> </div>
                     <div class="block-content">
                         <p class="block-subtitle"><?= Yii::t('app','Shopping Options')?></p>
                         <dl id="narrow-by-list">
@@ -315,12 +315,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="block block-list block-cart">
-                    <div class="block-title"> My Cart </div>
+                    <div class="block-title"> <?=Yii::t('app','My Cart')?> </div>
                     <div class="block-content">
                         <?php Pjax::begin(['id'=>'cart_cat']) ?>
                         <div class="summary">
-                            <p class="amount">There is <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?></a><?= Yii::t('app','in your cart.')?> </p>
-                            <p class="subtotal"> <span class="label">Cart Subtotal :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
+                            <p class="amount"><?=Yii::t('app','There is')?> <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?></a><?= Yii::t('app','in your cart.')?> </p>
+                            <p class="subtotal"> <span class="label"><?=Yii::t('app','Cart Subtotal')?> :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
                         </div>
                         <div class="ajax-checkout">
                             <button type="button" title="Checkout" class="button button-checkout" onClick="window.location='<?= Url::toRoute('cart/index')?>'"> <span><?= Yii::t('app','Checkout')?></span> </button>

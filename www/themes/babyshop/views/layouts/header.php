@@ -11,8 +11,8 @@ use yii\widgets\Pjax;
                     <div class="header-banner">
                         <div class="assetBlock">
                             <div id="slideshow">
-                                <p><?= Yii::t('app','Special Offers! - Get ')?><span>50%</span> <?= Yii::t('app','off on vegetables')?></p>
-                                <p><?= Yii::t('app','Sale')?><span>40%</span> <?= Yii::t('app','of  on bulk shopping!')?> </p>
+                                <p><?= Yii::t('app','Special Offers! - Get')?> <span>50%</span> <?= Yii::t('app','off on vegetables')?></p>
+                                <p><?= Yii::t('app','Sale')?> <span>40%</span> <?= Yii::t('app','of  on bulk shopping!')?> </p>
                             </div>
                         </div>
                     </div>

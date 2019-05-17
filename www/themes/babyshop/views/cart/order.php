@@ -10,8 +10,8 @@ use yii\widgets\Pjax;
 /* @var $user \common\models\User */
 /* @var $models \common\components\CartElement[] */
 
-$this->title = 'Checkout';
-$this->params['breadcrumbs'][] = ['label' => 'Basket', 'url' => ['/cart']];
+$this->title = Yii::t('app','Checkout');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Basket'), 'url' => ['/cart']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -11,7 +11,7 @@ use common\models\Orders;
 /* @var $user \common\models\User */
 /* @var $itemsDataProvider \yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app','Заказ #' . $model->id);
+$this->title = Yii::t('app','Order #') . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Корзина'), 'url' => ['/cart']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

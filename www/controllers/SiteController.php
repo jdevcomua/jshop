@@ -76,7 +76,7 @@ class SiteController extends Controller
             'query' => $items,
             'pagination' => false,
         ]);
-
+        echo Yii::t('app','Login');
         return $this->render('index', [
             'itemsDataProvider' => $itemsDataProvider,
             'category_slider' => $cat_sliders,

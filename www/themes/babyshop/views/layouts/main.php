@@ -91,14 +91,18 @@ use yii\widgets\Pjax;
                                                     <div class="rating-box">
                                                         <div class="rating" style="width:<?= (int) $modalModel->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                     </div>
-                                                    <p class="rating-links"><a data-pjax="0" href="<?=$modalModel->getUrl()?>"><?= $modalModel->getAvgRating()['count']?> Review(s)</a>  </p>
+                                                    <p class="rating-links"><a data-pjax="0" href="<?=$modalModel->getUrl()?>"><?= $modalModel->getAvgRating()['count']?> <?= Yii::t('app','Review(s)')?></a>  </p>
                                                 </div>
                                                 <div class="price-block">
                                                     <div class="price-box">
-                                                        <?php if($discount  = $modalModel->existDiscount())
-                                                            echo '<p class="availability in-stock"><span>In Stock</span></p>
-                                <p class="special-price"><span class="price">Special Price</span> <span id="product-price-48" class="price">' . number_format((float)$modalModel->getNewPrice(), 2, '.', '') . '</span> </p>';
-                                                        else echo ' <p class="price"> <span class="price-label">Price</span> <span id="product-price-48" class="price"> ' . number_format((float)$modalModel->cost, 2, '.', '') . ' </span> </p>'?>
+                                                        <?php if($discount  = $modalModel->existDiscount()):?>
+                                                            <p class="availability in-stock"><span><?= Yii::t('app','In Stock')?></span></p>
+                                                            <p class="special-price">
+                                                                <span class="price"><?= Yii::t('app','Special Price')?></span>
+                                                                <span id="product-price-48" class="price"><?= number_format((float)$modalModel->getNewPrice(), 2, '.', '') ?></span>
+                                                            </p>
+                                                        <?php else: ?> <p class="price"> <span class="price-label"><?= Yii::t('app','Price')?></span> <span id="product-price-48" class="price"> <?=number_format((float)$modalModel->cost, 2, '.', '')?> </span> </p>
+                                                        <?php endif;?>
                                                     </div>
                                                 </div>
                                                 <div class="add-to-box">
@@ -110,7 +114,7 @@ use yii\widgets\Pjax;
                                                                 <button data-pjax="0" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                                             </div>
                                                         </div>
-                                                        <button data-pjax="0" onclick="addToCart(<?= $modalModel->id ?>)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                                                        <button data-pjax="0" onclick="addToCart(<?= $modalModel->id ?>)" class="button btn-cart" title="Add to Cart" type="button"><?= Yii::t('app','Add to Cart')?></button>
                                                     </div>
 
                                                 </div>
@@ -119,23 +123,23 @@ use yii\widgets\Pjax;
                                                     $text = $modalModel->description;
                                                     $max_lengh = 300;
 
-                                                    if(mb_strlen($text, "UTF-8") > $max_lengh) {
+                                                    if(mb_strlen($text, "UTF-8") > $max_lengh) :
                                                         $text_cut = mb_substr($text, 0, $max_lengh, "UTF-8");
                                                         $text_explode = explode(" ", $text_cut);
 
                                                         unset($text_explode[count($text_explode) - 1]);
 
                                                         $text_implode = implode(" ", $text_explode);
-
-                                                        echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" href="'.$modalModel->getUrl().'">Learn More</a>';
-                                                    } else {
-                                                        echo $text;
-                                                    }
+                                                        ?>
+                                                        <?= $text_implode?>...<a class="link-learn" title="Learn More" data-pjax="0" href="<?=$modalModel->getUrl()?>"><?= Yii::t('app','Learn More')?></a>;
+                                                    <?php else:?>
+                                                        <?=$text?>
+                                                    <?php endif;?>
                                                     ?>
                                                 </div>
                                                 <div class="email-addto-box">
                                                     <ul class="add-to-links">
-                                                        <li> <a class="link-wishlist" href="#"><span>Add to Wishlist</span></a></li>
+                                                        <li> <a class="link-wishlist" href="#"><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
                                                     </ul>
                                                     <!--                    <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>-->
                                                 </div>
@@ -162,30 +166,30 @@ use yii\widgets\Pjax;
             <li>
                 <div class="feature-box">
                     <div class="icon-truck"></div>
-                    <div class="content">FREE SHIPPING on order over $99</div>
+                    <div class="content"><?= Yii::t('app','FREE SHOPPING on order over $99')?></div>
                 </div>
             </li>
             <li>
                 <div class="feature-box">
                     <div class="icon-support"></div>
-                    <div class="content">Have a question?<br>
+                    <div class="content"><?= Yii::t('app','Have a question?')?><br>
                         +1 800 789 0000</div>
                 </div>
             </li>
             <li>
                 <div class="feature-box">
                     <div class="icon-money"></div>
-                    <div class="content">100% Money Back Guarantee</div>
+                    <div class="content">100% <?= Yii::t('app','Money Back Guarantee')?></div>
                 </div>
             </li>
             <li>
                 <div class="feature-box">
                     <div class="icon-return"></div>
-                    <div class="content">30 days return Service</div>
+                    <div class="content"><?= Yii::t('app','30 days return Service')?></div>
                 </div>
             </li>
             <li class="last">
-                <div class="feature-box"> <a href="#"><i class="fa fa-apple"></i> download</a> <a href="#"><i class="fa fa-android"></i> download</a> </div>
+                <div class="feature-box"> <a href="#"><i class="fa fa-apple"></i> <?= Yii::t('app','download')?></a> <a href="#"><i class="fa fa-android"></i> <?= Yii::t('app','download')?></a> </div>
             </li>
         </ul>
     </div>
@@ -212,7 +216,7 @@ use yii\widgets\Pjax;
             </div>
         </li>
         <li>
-            <div class="home"><a href="<?= Url::home() ?>">Home</a> </div>
+            <div class="home"><a href="<?= Url::home() ?>"><?= Yii::t('app','Home')?></a> </div>
         </li>
 
         <?= \www\widgets\category\CategoriesView::widget(['view' => 'mob-menu']) ?>
@@ -221,11 +225,11 @@ use yii\widgets\Pjax;
     <div class="top-links">
         <ul class="links">
             <!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
-            <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist">Wishlist</a></li>
-            <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart">Cart</a></li>
+            <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist"><?= Yii::t('app','Wishlist')?></a></li>
+            <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
             <!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
-            <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span>Login</span></a></li>
-            <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span>Registration</span></a></li>
+            <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span><?= Yii::t('app','Login')?></span></a></li>
+            <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span><?= Yii::t('app','Registration')?></span></a></li>
         </ul>
     </div>
 </div>

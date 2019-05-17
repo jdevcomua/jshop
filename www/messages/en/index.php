@@ -20,6 +20,7 @@ return [
     "В корзину" => "To cart",
     "все" => "all",
     'корзина' => 'cart',
+    'мама'=>'mother',
     'Доставка и оплата' => 'Delivery and payment',
     'Самовывоз' => 'Free On Truck',
     'Со склада магазина' => 'From a warehouse store',

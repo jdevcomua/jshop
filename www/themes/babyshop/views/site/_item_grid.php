@@ -30,7 +30,7 @@
                             <div class="rating-box">
                                 <div class="rating" style="width:<?= (int) $model->getAvgRating()['avg'] / 5 * 100?>%"></div>
                             </div>
-                            <p class="rating-links"><a data-pjax="0" href="#"><?= $model->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                            <p class="rating-links"><a data-pjax="0" href="#"><?= $model->getAvgRating()['count']?><?= Yii::t('app','Review(s)')?> </a> <span class="separator">|</span> <a href="#"><?= Yii::t('app','Add Review')?></a> </p>
                         </div>
                     </div>
                     <div class="item-price">

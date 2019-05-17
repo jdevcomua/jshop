@@ -11,8 +11,8 @@ use common\models\Orders;
 /* @var $user \common\models\User */
 /* @var $itemsDataProvider \yii\data\ActiveDataProvider */
 
-$this->title = 'Заказ #' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/cart']];
+$this->title = Yii::t('app','Order #') . $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Корзина'), 'url' => ['/cart']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -26,27 +26,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'id',
                         [
-                            'label' => 'Пользователь',
+                            'label' => 'User',
                             'value' => $model->user->name . ' ' . $model->user->surname,
                         ],
                         'timestamp:datetime',
                         'mail:email',
                         'phone',
                         [
-                            'label' => 'Стоимость',
+                            'label' => 'Cost',
                             'value' => number_format((float)$model->sum, 2, '.', ''),
                         ],
                         [
-                            'label' => 'Статус заказа',
+                            'label' => 'Order status',
                             'value' => Orders::getStatusTitles()[$model->order_status],
                         ],
                         [
-                            'label' => 'Статус оплаты',
+                            'label' => 'Payment status',
                             'value' => Orders::getPaymentStatusTitles()[$model->payment_status],
                         ],
                         'comment:html',
                         [
-                            'label' => 'Корзина',
+                            'label' => 'Basket',
                             'format' => 'html',
                             'value' => \yii\grid\GridView::widget([
                                 'dataProvider' => $itemsDataProvider,
@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'attribute' => 'item_id',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'format' => 'html',
-                                        'label' => 'Товар',
+                                        'label' => Yii::t('app','Product'),
                                         'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
                                         'value' => function ($model, $key, $index, $widget) {
                                             return "<a href='" . $model->item->getUrl() . "' >" . $model->item->title . "</a>";
@@ -69,14 +69,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => 'yii\grid\DataColumn',
                                         'attribute' => 'count',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'label' => 'Количесво',
+                                        'label' => Yii::t('app','Number'),
                                         'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
                                     ],
                                     [
                                         'class' => 'yii\grid\DataColumn',
                                         'attribute' => 'sum',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'label' => 'Стоимость позиции',
+                                        'label' => Yii::t('app','Cost of position'),
                                         'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
                                         'value' => function ($model, $key, $index, $widget) {
                                             return number_format((float)$model->sum, 2, '.', '');
@@ -93,11 +93,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <aside class="col-right sidebar col-sm-3 wow bounceInUp animated animated" style="visibility: visible;">
                 <div id="checkout-progress-wrapper">
                     <div class="block block-progress">
-                        <div class="block-title"> Your Checkout </div>
+                        <div class="block-title"> <?=Yii::t('app','Your Checkout')?> </div>
                         <div class="block-content">
                             <dl>
                                 <div id="shipping_method-progress-opcheckout">
-                                    <dt> Shipping Method : <?= (Yii::$app->user->isGuest) ? 'Not registered' : 'Registered' ?> </dt>
+                                    <dt> <?=Yii::t('app','Shipping Method')?> : <?= (Yii::$app->user->isGuest) ? 'Not registered' : 'Registered' ?> </dt>
                                 </div>
                                 <!--                                <div id="payment-progress-opcheckout">-->
                                 <!--                                    <dt> Payment Method</dt>-->

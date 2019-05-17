@@ -20,7 +20,7 @@
 
                     $text_implode = implode(" ", $text_explode);
 
-                    echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" href="'.$model->item->getUrl().'">Learn More</a>';
+                    echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" href="'.$model->item->getUrl().'">'. Yii::t('app', 'Learn More').'</a>';
                 } else {
                     echo $text;
                 }
@@ -38,7 +38,7 @@
         </div>
     </td>
     <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-            <button type="button" title="Add to Cart" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart"><span><span>Add to Cart</span></span></button>
+            <button type="button" title="Add to Cart" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart"><span><span><?= Yii::t('app','Add to Cart')?></span></span></button>
         </div>
     <td class="wishlist-cell5 customer-wishlist-item-remove last"><a href="" onClick="removeWish(<?=$model->id?>);" title="Clear Cart" class="remove-item"><span><span></span></span></a></td>
 </tr>

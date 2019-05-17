@@ -4,7 +4,7 @@
 <div class="sidebar grid__item large--one-quarter">
     <div class="collection-sidebar">
         <div class="widget-category widget highlight">
-            <h4 class="widget__title">Категории</h4>
+            <h4 class="widget__title"><?= Yii::t('app','Categories')?></h4>
             <div class="widget__content">
                 <ul class="menu">
                     <?php foreach ($categories as $category) : ?>

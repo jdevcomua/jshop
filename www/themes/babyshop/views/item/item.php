@@ -60,14 +60,23 @@ $imageUrls = $item->getImageUrl();
                                     <div class="rating-box">
                                         <div class="rating" style="width:<?= (int) $item->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                     </div>
-                                    <p class="rating-links"><a id="see_reviews" href="#reviews_tabs" data-toggle="tab"><?= $item->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a id="add_reviews" href="#reviews_tabs" data-toggle="tab">Add Review</a> </p>
+                                    <p class="rating-links"><a id="see_reviews" href="#reviews_tabs" data-toggle="tab"><?= $item->getAvgRating()['count']?> <?=Yii::t('app','Review(s)')?></a> <span class="separator">|</span> <a id="add_reviews" href="#reviews_tabs" data-toggle="tab"><?=Yii::t('app','Add Review')?></a> </p>
                                 </div>
                                 <div class="price-block">
                                     <div class="price-box">
-                                        <?php if($discount  = $item->existDiscount())
-                                            echo '<p class="availability in-stock"><span>In Stock</span></p>
-                                <p class="special-price"><span class="price">Special Price</span> <span id="product-price-48" class="price">' . number_format((float)$item->getNewPrice(), 2, '.', '') . '</span> </p>';
-                                        else echo ' <p class="price"> <span class="price-label">Price</span> <span id="product-price-48" class="price"> ' . number_format((float)$item->cost, 2, '.', '') . ' </span> </p>'?>
+                                        <?php if($discount  = $item->existDiscount()): ?>
+                                            <p class="availability in-stock">
+                                                <span><?= Yii::t('app','In Stock')?></span>
+                                            </p>
+                                            <p class="special-price">
+                                                <span class="price">Special Price</span>
+                                                <span id="product-price-48" class="price">
+                                                    <?= number_format((float)$item->getNewPrice(), 2, '.', '')?>
+                                                </span>
+                                            </p>
+                                        <?php else: ?>
+                                            <p class="price"> <span class="price-label"><?= Yii::t('app','Price')?></span> <span id="product-price-48" class="price"> <?=number_format((float)$item->cost, 2, '.', '') ?> </span> </p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="add-to-box">
@@ -79,7 +88,7 @@ $imageUrls = $item->getImageUrl();
                                                 <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                             </div>
                                         </div>
-                                        <button data-pjax="0" onclick="addToCart(<?= $item->id ?>)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                                        <button data-pjax="0" onclick="addToCart(<?= $item->id ?>)" class="button btn-cart" title="Add to Cart" type="button"><?= Yii::t('app','Add to Cart')?></button>
                                     </div>
 
                                 </div>
@@ -104,9 +113,9 @@ $imageUrls = $item->getImageUrl();
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <li> <a class="link-wishlist" href=""  onclick="addToWishList(<?= $item->id ?>); return false;" ><span>Add to Wishlist</span></a></li>
+                                        <li> <a class="link-wishlist" href=""  onclick="addToWishList(<?= $item->id ?>); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
                                       </ul>
-                                    <p class="email-friend"><a href="#" class=""><span>Email to a Friend</span></a></p>
+                                    <p class="email-friend"><a href="#" class=""><span><?= Yii::t('app','Email to a Friend')?></span></a></p>
                                 </div>
                                 <div class="social">
                                     <ul class="link">
@@ -127,9 +136,9 @@ $imageUrls = $item->getImageUrl();
 <!--                product-essential-->
                 <div class="product-collateral container">
                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                        <li class="active"> <a id="description_button" href="#product_tabs_description" data-toggle="tab"> Product Description </a> </li>
-                        <li><a id="tags_button" href="#product_tabs_tags" data-toggle="tab">Tags</a></li>
-                        <li> <a id="reviews_button" href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
+                        <li class="active"> <a id="description_button" href="#product_tabs_description" data-toggle="tab"><?= Yii::t('app','Product Description')?></a> </li>
+                        <li><a id="tags_button" href="#product_tabs_tags" data-toggle="tab"><?= Yii::t('app','Tags')?></a></li>
+                        <li> <a id="reviews_button" href="#reviews_tabs" data-toggle="tab"><?= Yii::t('app','Reviews')?></a> </li>
                     </ul>
                     <div id="productTabContent" class="tab-content">
                         <div class="tab-pane  in active" id="product_tabs_description">
@@ -145,7 +154,7 @@ $imageUrls = $item->getImageUrl();
 
                                             <div class="input-box">
                                                 <input class="input-text" name="productTagName" id="productTagName" type="text" value="enter your tags">
-                                                <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span>Add Tags</span> </button>
+                                                <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span><?= Yii::t('app','Add Tags')?></span> </button>
                                             </div>
                                             <!--input-box-->
                                         </div>
@@ -183,16 +192,16 @@ $imageUrls = $item->getImageUrl();
                                 <div id="add-review">
                                     <div>
                                         <div class="comment-respond">
-                                            <span class="comment-reply-title">Add a review </span>
+                                            <span class="comment-reply-title"><?= Yii::t('app','Add a review')?> </span>
                                             <?php \yii\widgets\Pjax::begin() ?>
                                             <?php $form = ActiveForm::begin(['options' => ['class' => 'comment-form', 'data-pjax' => true]]); ?>
                                             <?php if(Yii::$app->user->isGuest) {?>
-                                            <label><span class="required">Sign up before writing a review!</span></label>
+                                            <label><span class="required"><?= Yii::t('app','Sign up before writing a review!')?></span></label>
                                             <?php } else { ?>
                                                 <p class="comment-notes"><?= $message?></p>
-                                                <p class="comment-notes">Required fields are marked <span class="required">*</span></p>
+                                                <p class="comment-notes"><?= Yii::t('app','Required fields are marked')?> <span class="required">*</span></p>
                                                 <div class="comment-form-rating">
-                                                    <label id="rating">Your rating <span class="required">*</span></label>
+                                                    <label id="rating"><?= Yii::t('app','Your rating')?> <span class="required">*</span></label>
                                                     <p class="stars">
                                                         <span>
                                                             <a class="star-1" onclick="setRating(1)" >1</a>
@@ -205,7 +214,7 @@ $imageUrls = $item->getImageUrl();
                                                     </p>
                                                 </div>
                                                 <p class="comment-form-comment">
-                                                    <label>Your review <span class="required">*</span></label>
+                                                    <label><?= Yii::t('app','Your review')?> <span class="required">*</span></label>
                                                     <textarea id="vote-text " name="Vote[text]" cols="45" rows="8" required></textarea>
                                                 </p>
 <!--                                                <p class="comment-form-author">-->
@@ -236,7 +245,7 @@ $imageUrls = $item->getImageUrl();
                     <div class="related-pro container">
                         <div class="slider-items-products">
                             <div class="new_title center">
-                                <h2>Related Products</h2>
+                                <h2><?= Yii::t('app','Related Products')?></h2>
                             </div>
                             <div id="related-slider" class="product-flexslider hidden-buttons">
                                 <div class="slider-items slider-width-col4 products-grid">
@@ -259,7 +268,7 @@ $imageUrls = $item->getImageUrl();
                                                     </div>
                                                 </div>
                                                 <div class="add_cart">
-                                                    <button class="button btn-cart" onclick="addToCart(<?= $product->id?>)" type="button"><span>Add to Cart</span></button>
+                                                    <button class="button btn-cart" onclick="addToCart(<?= $product->id?>)" type="button"><span><?= Yii::t('app','Add to Cart')?></span></button>
                                                 </div>
                                             </div>
                                             <div class="item-info">
@@ -271,7 +280,7 @@ $imageUrls = $item->getImageUrl();
                                                                 <div class="rating-box">
                                                                     <div class="rating" style="width:<?= (int) $product->getAvgRating()['avg'] / 5 * 100?>%"></div>
                                                                 </div>
-                                                                <p class="rating-links"><a data-pjax="0" href="#"><?= $product->getAvgRating()['count']?> Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
+                                                                <p class="rating-links"><a data-pjax="0" href="#"><?= $product->getAvgRating()['count']?><?= Yii::t('app','Review(s)')?> </a> <span class="separator">|</span> <a href="#"><?= Yii::t('app','Add Review')?></a> </p>
                                                             </div>
                                                         </div>
                                                         <div class="item-price">

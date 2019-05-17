@@ -13,7 +13,7 @@ use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-$this->title = 'Account Information';
+$this->title = Yii::t('app', 'Account Information');
 $this->params['breadcrumbs'][] = ['label' => 'Account Dashboard', 'url' => '/dashboard'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -34,37 +34,37 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <ul>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-address">Username</label>
+                                                            <label for="orders-address"><?=Yii::t('app', 'Username')?></label>
                                                             <?= $form->field($model, 'username')->textInput(['class' => 'input-text'])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-address">Mail<span class="required">*</span></label>
+                                                            <label for="orders-address"><?=Yii::t('app', 'Mail')?><span class="required">*</span></label>
                                                             <?= $form->field($model, 'mail')->textInput(['class' => 'input-text', 'disabled' => true])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-mail">Name</label>
+                                                            <label for="orders-mail"><?=Yii::t('app', 'Name')?></label>
                                                             <?= $form->field($model, 'name')->textInput(['class' => 'input-text'])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-address">Surname</label>
+                                                            <label for="orders-address"><?=Yii::t('app', 'Surname')?></label>
                                                             <?= $form->field($model, 'surname')->textInput(['class' => 'input-text'])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-address">Phone number</label>
+                                                            <label for="orders-address"><?=Yii::t('app', 'Phone number')?></label>
                                                             <?= $form->field($model, 'phone')->textInput(['class' => 'input-text'])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-mail">Address</label>
+                                                            <label for="orders-mail"><?=Yii::t('app', 'Address')?></label>
                                                             <?= $form->field($model, 'address')->textInput(['class' => 'input-text'])->label(false) ?>
                                                         </div>
                                                     </li>
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             </fieldset>
                                         </li>
                                         <li>
-                                            <button class="button" type="submit" ><?php echo \Yii::t('app', 'Сохранить'); ?></button>
+                                            <button class="button" type="submit" ><?php echo Yii::t('app', 'Save'); ?></button>
                                         </li>
                                     </ul>
                                 </fieldset>
@@ -88,11 +88,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="block-title"> My Account </div>
                     <div class="block-content">
                         <ul>
-                            <li><a href="<?= Url::toRoute('user/dashboard') ?>"><span> Account Dashboard</span></a></li>
-                            <li class="current"><a href="<?= Url::toRoute('user/profile') ?>"><span> Account Information</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> Change password</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> My Orders</span></a></li>
-                            <li><a href="<?= Url::toRoute('user/wishlist') ?>">My Wishlist</a></li>
+                            <li><a href="<?= Url::toRoute('user/dashboard') ?>"><span> <?=Yii::t('app', 'Account Dashboard')?></span></a></li>
+                            <li class="current"><a href="<?= Url::toRoute('user/profile') ?>"><span> <?=Yii::t('app', 'Account Information')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> <?=Yii::t('app', 'Change password')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> <?=Yii::t('app', 'My Orders')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/wishlist') ?>"> <?=Yii::t('app', 'My Wishlist')?></a></li>
                             <!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->
                         </ul>
                     </div>
@@ -111,29 +111,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="carousel-inner">
                                 <div class="item active"><img src="/images/slide2.jpg" alt="slide3">
                                     <div class="carousel-caption">
-                                        <h4>Fruit Shop</h4>
-                                        <h3><a title=" Sample Product" href="/product-detail.html">Up to 70% Off</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a></div>
+                                        <h4><?=Yii::t('app', 'Fruit Shop')?></h4>
+                                        <h3><a title=" Sample Product" href="/product-detail.html"><?=Yii::t('app', 'Up to 70% Off')?></a></h3>
+                                        <p><?=Yii::t('app', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?=Yii::t('app', 'Buy Now')?></a></div>
                                 </div>
                                 <div class="item"><img src="/images/slide3.jpg" alt="slide1">
                                     <div class="carousel-caption">
-                                        <h4>Black Grapes</h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html">Mega Sale</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a>
+                                        <h4><?=Yii::t('app', 'Black Grapes')?></h4>
+                                        <h3><a title=" Sample Product" href="product-detail.html"><?=Yii::t('app', 'Mega Sale')?></a></h3>
+                                        <p><?=Yii::t('app', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?=Yii::t('app', 'Buy Now')?></a>
                                     </div>
                                 </div>
                                 <div class="item"><img src="/images/slide1.jpg" alt="slide2">
                                     <div class="carousel-caption">
-                                        <h4>Food Farm</h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html">Up to 50% Off</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a class="link" href="#">Buy Now</a>
+                                        <h4><?=Yii::t('app', 'Food Farm')?></h4>
+                                        <h3><a title=" Sample Product" href="product-detail.html"><?=Yii::t('app', 'Up to 50% Off')?></a></h3>
+                                        <p><?=Yii::t('app', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
+                                        <a class="link" href="#"><?=Yii::t('app', 'Buy Now')?></a>
                                     </div>
                                 </div>
                             </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only">Next</span> </a></div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only"><?=Yii::t('app', 'Previous')?></span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only"><?=Yii::t('app', 'Next')?></span> </a></div>
                     </div>
                 </div>
             </aside>

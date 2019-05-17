@@ -62,9 +62,10 @@ class ItemCatController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new ItemCatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->setPagination(new Pagination(['pageSize' => PAGE_SIZE]));
+        $dataProvider->setPagination(new Pagination(['pageSize' =>Yii::$app->params['pageSize']]));
         $context = [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

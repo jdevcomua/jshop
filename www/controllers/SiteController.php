@@ -76,7 +76,6 @@ class SiteController extends Controller
             'query' => $items,
             'pagination' => false,
         ]);
-
         return $this->render('index', [
             'itemsDataProvider' => $itemsDataProvider,
             'category_slider' => $cat_sliders,
@@ -200,12 +199,13 @@ class SiteController extends Controller
         $request = Yii::$app->request;
         $selected = $request->get('filter');
         $items = $this->filter($selected);
-
+        $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
         $category = ItemCat::findOne($id);
         $category_ids = $category->getFamily();
+        $items->orFilterWhere(['in','category_id',$category_ids]);
 
-        $items->andFilterWhere(['in', 'category_id', $category_ids]);
+
 
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);
@@ -380,7 +380,8 @@ class SiteController extends Controller
         $query = Item::find();
         $filterWhere = self::getItemIdsForFilter($filters);
         if (is_array($filterWhere)) {
-            $query->andFilterWhere(['in', 'item.id', $filterWhere]);
+            $query->andFilterWhere(['id', 'item.id', $filterWhere] );
+
         } else {
             $query->where('false');
         }

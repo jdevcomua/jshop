@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $models CartElement[] */
 /* @var $sum double */
 
-$this->title = 'Корзина';
+$this->title =  Yii::t('app','Basket');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-container col1-layout wow bounceInUp animated">
@@ -30,20 +30,20 @@ $this->params['breadcrumbs'][] = $this->title;
                             </colgroup><thead>
                             <tr class="first last">
                                 <th rowspan="1">&nbsp;</th>
-                                <th rowspan="1"><span class="nobr">Product Name</span></th>
+                                <th rowspan="1"><span class="nobr"><?=Yii::t('app','Product Name')?></span></th>
                                 <th rowspan="1"></th>
-                                <th class="a-center" colspan="1"><span class="nobr">Unit Price</span></th>
-                                <th rowspan="1" class="a-center">Qty</th>
-                                <th class="a-center" colspan="1">Subtotal</th>
+                                <th class="a-center" colspan="1"><span class="nobr"><?=Yii::t('app','Unit Price')?></span></th>
+                                <th rowspan="1" class="a-center"><?=Yii::t('app','Qty')?></th>
+                                <th class="a-center" colspan="1"><?=Yii::t('app','Subtotal')?></th>
                                 <th rowspan="1" class="a-center">&nbsp;</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr class="first last">
                                 <td colspan="50" class="a-right last">
-                                    <button type="button" title="Continue Shopping" class="button btn-continue" onclick="window.location.replace('<?=\yii\helpers\Url::home()?>');"><span><span>Continue Shopping</span></span></button>
-                                    <button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update" id="update_cart_button"><span><span>Update Cart</span></span></button>
-                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span><span>Clear Cart</span></span></button>
+                                    <button type="button" title="Continue Shopping" class="button btn-continue" onclick="window.location.replace('<?=\yii\helpers\Url::home()?>');"><span><span><?=Yii::t('app','Continue Shopping')?></span></span></button>
+                                    <button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update" id="update_cart_button"><span><span><?=Yii::t('app','Update Cart')?></span></span></button>
+                                    <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span><span><?=Yii::t('app','Clear Cart')?></span></span></button>
 
                                 </td>
                             </tr>
@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </td>
                                 <td class="a-center last">
 
-                                    <a href="" title="Remove item"  data-id="<?= $model->model->getId(); ?>" data-type="<?= $model->model->getType(); ?>" data-pjax="true" class="button cart__remove remove-item"><span><span>Remove item</span></span></a></td>
+                                    <a href="" title="Remove item"  data-id="<?= $model->model->getId(); ?>" data-type="<?= $model->model->getType(); ?>" data-pjax="true" class="button cart__remove remove-item"><span><span><?=Yii::t('app','Remove item')?></span></span></a></td>
                             </tr>
                             <?php } ?>
                             </tbody>
@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div class="col-sm-4">
                         <div class="totals">
-                            <h3>Shopping Cart Total</h3>
+                            <h3><?=Yii::t('app','Shopping Cart Total')?></h3>
                             <div class="inner">
                                 <?php Pjax::begin(['id' => 'total_sum']) ?>
                                 <table id="shopping-cart-totals-table" class="table shopping-cart-table-total">
@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </colgroup><tfoot>
                                     <tr>
                                         <td style="" class="a-left" colspan="1">
-                                            <strong>Grand Total</strong>
+                                            <strong><?=Yii::t('app','Grand Total')?></strong>
                                         </td>
                                         <td style="" class="a-right">
                                             <strong><span class="price"><?=number_format((float)$sum, 2, '.', '')?></span></strong>
@@ -144,7 +144,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <tbody>
                                     <tr>
                                         <td style="" class="a-left" colspan="1">
-                                            Subtotal    </td>
+                                            <?=Yii::t('app','Subtotal')?>
+                                                </td>
                                         <td style="" class="a-right">
                                             <span class="price"><?=number_format((float)$sum, 2, '.', '')?></span>    </td>
                                     </tr>
@@ -154,7 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <ul class="checkout">
                                     <li>
                                         <form action="<?=\yii\helpers\Url::toRoute('cart/order')?>" >
-                                            <button type="submit" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick=""><span>Proceed to Checkout</span></button>
+                                            <button type="submit" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick=""><span><?=Yii::t('app','Proceed to Checkout')?></span></button>
                                         </form>
                                     </li>
                                 </ul>

@@ -15,7 +15,7 @@ class Controller extends \yii\web\Controller
 
     public function beforeAction($action)
     {
-        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'en');
+        Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         return parent::beforeAction($action);
     }
 

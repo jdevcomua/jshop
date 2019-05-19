@@ -141,7 +141,7 @@ class ItemCatController extends Controller
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
             $continue = false;
-            if ($model->isAttributeChanged('parent_id')) {
+            if ($model->parent_id && $model->isAttributeChanged('parent_id', false)) {
                 $parent = ItemCat::findOne($model->parent_id);
                 if ($parent) {
                     $continue = $model->appendTo($parent);

@@ -22,7 +22,8 @@ class ItemCatController extends Controller
      * Updating or deleting group of existing ItemCat model.
      * If updating or deleting is successful, the browser will be redirected to the 'index' page.
      */
-    public function actionGroup(){
+    public function actionGroup()
+    {
         if (isset(Yii::$app->request->post()['id'])) {
             if (Yii::$app->request->post()['action'] == 'del') {
                 foreach (Yii::$app->request->post()['id'] as $id) {

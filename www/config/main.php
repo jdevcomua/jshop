@@ -19,8 +19,7 @@ $config = [
     'language' => 'en',
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'KZ0u56ukNp3p5W82jnpJmisKu8wDUDdY',
+            'csrfParam' => '_csrf-www',
         ],
         'cart' => [
             'class' => 'common\components\Cart',

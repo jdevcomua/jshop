@@ -10,6 +10,7 @@ return array(
     'Information' => 'Информация',
     'Addresses' => 'Адрес',
     'Discount' => 'Скидка',
+    'Orders History' => 'История заказов',
     'Order History' => 'История заказов',
     'Order Tracking' => 'Отслеживание заказа',
     'Site Map' => 'Карта сайта',
@@ -189,6 +190,8 @@ return array(
     'Money Back Guarantee'=>'Гарантия возврата денег',
     '30 days return Service'=>'30 дней возврата',
     'download'=>'Скачать',
-    ''=>'',
-    ''=>'',
+    'Suppliers'=>'Поставщики',
+    'Sign up for our newsletter'=>'Подпишитесь на нашу рассылку',
+    'Enter your email address'=>'Введите ваш адрес электронной почты',
+    'Company'=>'Компания',
 );

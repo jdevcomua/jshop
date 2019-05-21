@@ -23,7 +23,7 @@ use yii\widgets\Pjax;
     <div id="header">
         <div class="container">
             <div class="header-container row">
-                <div class="logo"> <a href="<?= Url::home() ?>" title="index">
+                <div class="logo"> <a href="<?= Url::home() ?>" title="<?=Yii::t('app','Home')?>">
                         <div><img src="/images/logo.png" alt="logo"></div>
                     </a> </div>
                 <div class="fl-nav-menu">
@@ -43,7 +43,7 @@ use yii\widgets\Pjax;
 
                 <div class="fl-header-right">
                     <div class="fl-links">
-                        <div class="no-js"> <a title="Company" class="clicker"></a>
+                        <div class="no-js"> <a title="<?=Yii::t('app','Company')?>" class="clicker"></a>
                             <div class="fl-nav-links">
                                 <div class="language-currency">
                                     <div class="fl-language">

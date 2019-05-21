@@ -13,8 +13,8 @@
                             <form action="#" method="post" id="newsletter-validate-detail1">
                                 <div id="container_form_news">
                                     <div id="container_form_news2">
-                                        <input type="text" name="email" id="newsletter1" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address">
-                                        <button type="submit" title="Subscribe" class="button subscribe"><span><?= Yii::t('app','Subscribe')?></span></button>
+                                        <input type="text" name="email" id="newsletter1" title="<?=Yii::t('app','Sign up for our newsletter')?>" class="input-text required-entry validate-email" placeholder="<?=Yii::t('app','Enter your email address')?>">
+                                        <button type="submit" title="<?= Yii::t('app','Subscribe')?>" class="button subscribe"><span><?= Yii::t('app','Subscribe')?></span></button>
                                     </div>
                                     <!--container_form_news2-->
                                 </div>
@@ -38,8 +38,8 @@
                                 <li><a href="faq.html" title="FAQs"><?= Yii::t('app','FAQs')?></a></li>
                                 <li><a href="#" title="Payment"><?= Yii::t('app','Payment')?></a></li>
                                 <li><a href="#" title="Shipment"><?= Yii::t('app','Shipment')?></a></li>
-                                <li><a href="#" title="Where is my order?"><?= Yii::t('app','Where is my order?')?></a></li>
-                                <li><a href="#" title="Return policy"><?= Yii::t('app','Return policy')?></a></li>
+                                <li><a href="#" title="Where is my order?"><?= Yii::t('app','Where is my order')?>?</a></li>
+                                <li><a href="#" title="Return policy"><?= Yii::t('app','Return Policy')?></a></li>
                             </ul>
                         </div>
                     </div>

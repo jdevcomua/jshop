@@ -35,7 +35,7 @@ use yii\widgets\Pjax;
                             <!-- BEGIN NAV -->
                             <ul id="nav" class="hidden-xs">
 
-                                <li> <a class="level-top" href="<?= Url::home() ?>"><span>Home</span></a></li>
+                                <li> <a class="level-top" href="<?= Url::home() ?>"><span><?=Yii::t('app','Home')?></span></a></li>
                                 <?= \www\widgets\category\CategoriesView::widget() ?>
 
 

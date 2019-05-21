@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td style="text-align:center;padding:5px 0 20px">
-                <a href= "<?=Yii::$app->params['domain']?>admin/orders/view?id=<?=$order->id?>">Ссылка</a>
+                <a href= "<?=Url::to(['order/view','id'=>$order->id]) ?>">Ссылка</a>
             </td>
         </tr>
         </tbody>

@@ -32,20 +32,14 @@ use kartik\file\FileInput;
     if (!$model->isNewRecord && !empty($model->image)) {
         $images[] = Html::img($model->getImageUrl(), ['width' => '120px']);
     }
-    echo $form->field($model, 'imageFile')->widget(FileInput::classname(), [
-        'options' => [
-            'multiple' => false,
-        ],
-        'pluginOptions' => [
-            'initialPreview' => $images,
-            'initialPreviewConfig' => [
-                'width' => '120px'
-            ],
-            'showUpload' => false,
-            'overwriteInitial' => true,
-            'maxFileCount' => 1
-        ]
-    ]); ?>
+    echo $form->field($model, 'imageFile')->widget(
+        \backend\widget\CropWidget\CropWidget::className(), [
+        'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
+        'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
+        'aspectRatio' => '4:4',
+
+    ]);
+    ?>
     <br>
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [

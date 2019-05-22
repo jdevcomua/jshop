@@ -93,15 +93,12 @@ use zxbodya\yii2\tinymce\TinyMce;
         }
       ?>
 
-           <?php
-               echo $form->field($model, 'imageFiles')->widget(
-                       \backend\widget\CropWidget\CropWidget::className(), [
-                    'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
-                    'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
-                    'aspectRatio' => '4:4',
-
+           <?= $form->field($model, 'imageFiles')->widget(
+               \backend\widget\CropWidget\CropWidget::class, [
+               'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
+               'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
+               'aspectRatio' => '4:4',
                ]);
-
            ?>
 
         <div class="form-group"><br>

@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/app.js',
-        'js/onClickFunctions.js'
+//        'js/onClickFunctions.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -175,8 +175,11 @@
 function croperSuccess(response){
     img = document.getElementById("newphoto");
     img.src =response['filelink'];
+    img.className = 'imgVisible';
     span = document.getElementById("spanfornewfoto");
-    if(span.className != 'span'){
-        span.className += 'span';
+    button_delete = document.getElementById("deleteimage");
+    button_delete.className = 'spanVisible';
+    if(span.className != 'spanNone'){
+        span.className = 'spanNone';
     }
 }

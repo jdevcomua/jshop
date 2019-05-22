@@ -100,7 +100,17 @@ class ItemController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Item(['active' => true]);
+
+        if(Yii::$app->request->isAjax){
+            if($model->id!=NULL){
+                $data = Yii::$app->request->post();
+                $i = $data['idimage'];
+                $image= Image::findOne(['item_id'=>$model->id]);
+                $model->deleteImages($image);
+            }
+        }
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
         /*foreach ($categories as $category) {
@@ -123,6 +133,7 @@ class ItemController extends Controller
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
             if ($model->save()) {
+                $model->imageFiles= substr(parse_url($model->imageFiles, PHP_URL_PATH),5);
                 $model->upload();
                 if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
@@ -214,9 +225,26 @@ class ItemController extends Controller
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $request = Yii::$app->request;
 
+        if(Yii::$app->request->isAjax){
+            if($model->id!=NULL){
+                $data = Yii::$app->request->post();
+                $i = $data['idmodel'];
+                $image= Image::findOne(['item_id'=>$i]);
+                $model->deleteImages($image);
+            }
+        }
+
         if ($model->load($request->post())) {
             if ($model->save()) {
-                $model->imageFiles = $request->post()['Item']['imageFiles'];
+                $image = Image::findOne(['item_id'=>$id]);
+                $model->imageFiles= substr(parse_url($model->imageFiles, PHP_URL_PATH),5);
+                if($image!=NULL){
+                    if($image->name !== $model->imageFiles){
+
+                        $model->deleteImages($image);
+
+                    }
+                }
                 $model->upload();
                 if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));

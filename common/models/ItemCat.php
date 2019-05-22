@@ -25,6 +25,7 @@ use yii\db\ActiveRecord;
  * @property Item[] $items
  * @property ItemCat[] $children
  * @property ItemCat $parent
+ * @property string $imageUrl
  * 
  * @method integer|false deleteWithChildren()
  * @method boolean makeRoot(boolean $runValidation = true, array $attributes = null)
@@ -143,7 +144,7 @@ class ItemCat extends ModelWithImage
     }
 
     /**
-     * @return ItemCat
+     * @return \yii\db\ActiveQuery
      */
     public function getParent()
     {

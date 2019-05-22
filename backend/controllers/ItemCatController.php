@@ -22,7 +22,8 @@ class ItemCatController extends Controller
      * Updating or deleting group of existing ItemCat model.
      * If updating or deleting is successful, the browser will be redirected to the 'index' page.
      */
-    public function actionGroup(){
+    public function actionGroup()
+    {
         if (isset(Yii::$app->request->post()['id'])) {
             if (Yii::$app->request->post()['action'] == 'del') {
                 foreach (Yii::$app->request->post()['id'] as $id) {
@@ -81,6 +82,7 @@ class ItemCatController extends Controller
      * Displays a single ItemCat model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -131,6 +133,7 @@ class ItemCatController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -138,7 +141,7 @@ class ItemCatController extends Controller
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
             $continue = false;
-            if ($model->oldAttributes['parent_id']  != $model->parent_id) {
+            if ($model->parent_id && $model->isAttributeChanged('parent_id', false)) {
                 $parent = ItemCat::findOne($model->parent_id);
                 if ($parent) {
                     $continue = $model->appendTo($parent);
@@ -157,7 +160,8 @@ class ItemCatController extends Controller
         }
         $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
         return $this->render('update', [
-            'model' => $model, 'count' => 'one', 'categories' => $categoriesArray
+            'model' => $model,
+            'categories' => $categoriesArray,
         ]);
     }
 
@@ -166,6 +170,7 @@ class ItemCatController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionDelete($id)
     {

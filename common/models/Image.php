@@ -61,7 +61,7 @@ class Image extends \yii\db\ActiveRecord
      * @param string $size
      * @return string
      */
-    public function getImageUrl($size = '')
+    public function getImageUrl()
     {
         return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->name;
     }

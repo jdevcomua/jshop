@@ -53,6 +53,7 @@ class Item extends Model implements CartAdd
 
     public $count;
     const WEB_IMG = '/web/img/';
+    const IMG = '/img/';
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';

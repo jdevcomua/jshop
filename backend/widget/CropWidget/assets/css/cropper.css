@@ -26,7 +26,10 @@
     border: 2px dashed lightgrey;
     text-align: center;
     vertical-align: center;
-
+    pointer-events:auto;
+}
+.disable{
+    pointer-events: none;
 }
 .spanNone{
      display: none;!important;

@@ -19,16 +19,21 @@ $image = Image::findOne(['item_id'=>$model->id]);
     <?= Html::hiddenInput('width', $widget->width, ['class' => 'width-input']); ?>
     <?= Html::hiddenInput('height', $widget->height, ['class' => 'height-input']); ?>
     <div class="new-photo" style="height: <?= $widget->cropAreaHeight; ?>px; width: <?= $widget->cropAreaWidth; ?>px;">
-        <input class="spanNone" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
-        <div class="dropzone">
+
             <?php if ($image != NULL):?>
-                <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
-                <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$image->name?>">
+                <input class="" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
+                <div class="dropzone disable" id="dropzone">
+                    <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
+                    <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$image->name?>">
+                </div>
             <?php else: ?>
-                <span id="spanfornewfoto"><?= $widget->label;?></span>
+                <input class="spanNone" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
+                <div class="dropzone" id="dropzone">
+                    <span id="spanfornewfoto"><?= $widget->label;?></span>
                     <img id="newphoto">
+                </div>
             <?php endif;?>
-        </div>
+
     </div>
 
 

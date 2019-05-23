@@ -172,14 +172,42 @@
     };
 })(jQuery);
 
+
 function croperSuccess(response){
-    img = document.getElementById("newphoto");
+    var img = document.getElementById("newphoto");
     img.src =response['filelink'];
     img.className = 'imgVisible';
+
     span = document.getElementById("spanfornewfoto");
-    button_delete = document.getElementById("deleteimage");
-    button_delete.className = 'spanVisible';
     if(span.className != 'spanNone'){
         span.className = 'spanNone';
     }
+
+    button_delete = document.getElementById("deleteimage");
+    button_delete.className = 'spanVisible';
+
+    var dropzone = document.getElementById("dropzone");
+    dropzone.className += ' disable';
+
+}
+function deleteImage(ev, th) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    var content = th.id;
+    var image = document.getElementById("newphoto");
+    image.className =' imgNone';
+    var buttondelete = document.getElementById("deleteimage");
+    buttondelete.className ='spanNone';
+    var span = document.getElementById("spanfornewfoto");
+    span.className ='spanVisible';
+    var dropzone = document.getElementById("dropzone");
+    dropzone.className = 'dropzone';
+    $.ajax({
+        url: window.location.href,
+        type: 'POST',
+        data: {
+            idmodel:content,
+        },
+    });
+    return false;
 }

@@ -6,7 +6,7 @@ use common\models\query\ItemQuery;
 use Yii;
 use common\components\CartAdd;
 use yii\data\ActiveDataProvider;
-use yii\debug\models\timeline\DataProvider;
+use SplFileInfo;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
@@ -249,6 +249,15 @@ class Item extends Model implements CartAdd
             $image->save();
         }
     }
+    public function urlRename()
+    {
+        $info = new SplFileInfo($this->imageFiles);
+        $path_parts = pathinfo($this->imageFiles);
+        $newname = Yii::getAlias('@www') .self::WEB_IMG.$path_parts['filename'].'_255.'.$info->getExtension();
+        rename(Yii::getAlias('@www') .self::WEB_IMG.basename($this->imageFiles), $newname);
+
+        return basename($newname);
+    }
 
     /**
      * @return S3\S3Client
@@ -272,19 +281,12 @@ class Item extends Model implements CartAdd
      */
     public function deleteImages($image)
     {
-//            if ($image->storage == self::AMAZON) {
-//                $client = $this->createAmazonClient();
-//                $client->deleteObject([
-//                    'Bucket' => Yii::$app->params['amazonBucket'],
-//                    'Key' => $image->name
-//                ]);
-//            } elseif ($image->storage == self::MY_SERVER) {
-        if (file_exists(Yii::getAlias('@www') .WEB_IMG.$image->name)) {
-            unlink( Yii::getAlias('@www') .WEB_IMG.$image->name);
-            $image->delete();
+        if($image!=NULL){
+            if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$image->name)) {
+                unlink( Yii::getAlias('@www') .self::WEB_IMG.$image->name);
+            }
+        $image->delete();
         }
-//            }
-//        }
     }
 
     /**

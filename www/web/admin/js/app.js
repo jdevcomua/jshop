@@ -761,23 +761,3 @@ function _init() {
     });
   };
 }(jQuery));
-
-function deleteImage(ev, th) {
-  ev.stopPropagation();
-  ev.preventDefault();
-  var content = th.id;
-  var image = document.getElementById("newphoto");
-  image.className =' imgNone';
-  var buttondelete = document.getElementById("deleteimage");
-  buttondelete.className ='spanNone';
-  var span = document.getElementById("spanfornewfoto");
-  span.className ='spanVisible';
-  $.ajax({
-    url: window.location.href,
-    type: 'POST',
-    data: {
-      idmodel:content,
-    },
-  });
-  return false;
-}

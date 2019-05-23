@@ -8,8 +8,8 @@ use Yii;
 class CropWidget extends \budyaga\cropper\Widget
 {
     public $uploadParameter = 'file';
-    public $width = 270;
-    public $height = 270;
+    public $width = 255;
+    public $height = 255;
     public $label = '';
     public $uploadUrl;
     public $noPhotoImage = '';

@@ -26,26 +26,12 @@ class ModelWithImage extends Model
         return [];
     }
 
-    public function upload()
+    public function deleteImage()
     {
-        $file = UploadedFile::getInstance($this, 'imageFile');
-        if (isset($file)) {
-            $this->deleteImage(false);
-            $fileName = $this->id . mt_rand() . '.' . $file->extension;
-            $file->saveAs($this->getPath() . $fileName);
-            $this->image = $fileName;
-            $this->save();
-        }
-    }
-
-    public function deleteImage($save = true)
-    {
-        $oldImage = $this->getPath() . $this->image;
-        if (!empty($this->image) && file_exists($oldImage) && !is_dir($oldImage)) {
-            unlink($oldImage);
-            $this->image = null;
-            if ($save) {
-                $this->save();
+        if($this->image!=NULL){
+            if (file_exists(Yii::getAlias('@www') .Item::WEB_IMG.$this->image)) {
+                unlink( Yii::getAlias('@www') .Item::WEB_IMG. $this->image);
+                $this->image = NULL;
             }
         }
     }
@@ -73,7 +59,7 @@ class ModelWithImage extends Model
      */
     public function getImageUrl()
     {
-        return Yii::$app->params['myServerImageLink'] . ($this->dir != '' ? $this->dir . '/' : '') . $this->image;
+        return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->image;
     }
 
 }

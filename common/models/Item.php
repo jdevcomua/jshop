@@ -33,6 +33,7 @@ use Eventviva\ImageResize;
  * @property float $special
  * @property float $deal_week
  * @property string $link
+ * @property string $image
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -52,6 +53,7 @@ class Item extends Model implements CartAdd
     public $imageFiles;
 
     public $count;
+    public $image;
     const WEB_IMG = '/web/img/';
     const IMG = '/img/';
     const CART_TYPE = 1;

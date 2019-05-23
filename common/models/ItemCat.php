@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
+use SplFileInfo;
 use Yii;
 use dosamigos\transliterator\TransliteratorHelper;
 use yii\db\ActiveRecord;
@@ -118,6 +119,15 @@ class ItemCat extends ModelWithImage
         return $this->hasMany(Item::className(), ['category_id' => 'id']);
     }
 
+    public function urlRename()
+    {
+        $info = new SplFileInfo($this->image);
+        $path_parts = pathinfo($this->image);
+        $newname = Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'].'_255.'.$info->getExtension();
+        rename(Yii::getAlias('@www') .Item::WEB_IMG.basename($this->image), $newname);
+
+        return basename($newname);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

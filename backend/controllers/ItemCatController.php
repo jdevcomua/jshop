@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Characteristic;
+use common\models\Image;
 use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
@@ -102,7 +103,14 @@ class ItemCatController extends Controller
     public function actionCreate()
     {
         $model = new ItemCat(['active' => true]);
+        if(Yii::$app->request->isAjax){
+            $model->deleteImage();
+            return true;
+        }
+
+
         if ($model->load(Yii::$app->request->post())) {
+            $model->image= $model->urlRename();
             $continue = false;
             if ($model->parent_id != 0) {
                 $parent = ItemCat::findOne($model->parent_id);
@@ -114,7 +122,7 @@ class ItemCatController extends Controller
                 $continue = $model->makeRoot();
             }
             if ($continue) {
-                $model->upload();
+
                 if (Yii::$app->request->post()['action'] == 'save') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
                 } elseif (Yii::$app->request->post()['action'] == 'chars') {
@@ -137,9 +145,21 @@ class ItemCatController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax){
+            $model->deleteImage();
+            return true;
+        }
+        $image = $model->image;
+        if($image == NULL){
+            $image = '1';
+        }
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
+            if($image!== $model->image){
+                $model->image= $model->urlRename();
+            }
             $continue = false;
             if ($model->parent_id && $model->isAttributeChanged('parent_id', false)) {
                 $parent = ItemCat::findOne($model->parent_id);
@@ -150,7 +170,6 @@ class ItemCatController extends Controller
                 $continue = $model->save();
             }
             if ($continue) {
-                $model->upload();
                 if ($request->post('action') == 'save') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
                 } else if ($request->post('action') == 'chars') {

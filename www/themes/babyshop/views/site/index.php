@@ -48,7 +48,7 @@ $this->title = Yii::$app->name;
                         <div class="slider-items slider-width-col4 products-grid">
                             <?php foreach ($category_slider as $category) {?>
                             <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->image : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
+                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->getImageUrl() : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
                                         <div class="pro-info"><?= $category->title ?></div>
                                     </div>
                                 </a> </div>
@@ -94,7 +94,7 @@ $this->title = Yii::$app->name;
                                     <div class="item-box-hover">
                                         <div class="box-inner">
                                             <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>

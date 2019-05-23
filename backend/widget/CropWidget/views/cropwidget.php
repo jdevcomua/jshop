@@ -4,6 +4,7 @@ use backend\widget\CropWidget\CropWidget;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use common\models\Image;
+use common\models\ItemCat;
 
 /**
  * @var \yii\db\ActiveRecord $model
@@ -11,6 +12,10 @@ use common\models\Image;
  *
  */
 $image = Image::findOne(['item_id'=>$model->id]);
+$catmodel = new ItemCat();
+if($model->image ){
+    $catmodel->image = $model->image;
+}
 
 ?>
 
@@ -25,6 +30,12 @@ $image = Image::findOne(['item_id'=>$model->id]);
                 <div class="dropzone disable" id="dropzone">
                     <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
                     <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$image->name?>">
+                </div>
+            <?php elseif($catmodel->image != NULL): ?>
+                <input class="" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
+                <div class="dropzone disable" id="dropzone">
+                    <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
+                    <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$model->image?>">
                 </div>
             <?php else: ?>
                 <input class="spanNone" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">

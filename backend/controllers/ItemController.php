@@ -25,7 +25,7 @@ class ItemController extends Controller
     {
         return [
             'uploadPhoto' => [
-                'class' => 'budyaga\cropper\actions\UploadAction',
+                'class' => 'backend\widget\CropWidget\actions\UploadAction',
                 'url' => Yii::$app->params['myServerImageLink'],
                 'path' => '@www/web/img',
             ]
@@ -244,7 +244,6 @@ class ItemController extends Controller
 
         if ($model->load($request->post())) {
             if ($model->save()) {
-
                 if($image->name !== $model->imageFiles){
                     $model->imageFiles = $model->urlRename();
                     $model->deleteImages($image);

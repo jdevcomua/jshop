@@ -289,6 +289,7 @@ class Item extends Model implements CartAdd
                 unlink( Yii::getAlias('@www') .self::WEB_IMG.$image->name);
             }
         $image->delete();
+            return NULL;
         }
     }
 

@@ -104,13 +104,17 @@ class ItemCatController extends Controller
     {
         $model = new ItemCat(['active' => true]);
         if(Yii::$app->request->isAjax){
-            $model->deleteImage();
+            $model->image = $model->deleteImage();
+            $model->save();
             return true;
+
         }
 
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->image= $model->urlRename();
+            if($model->image!=NULL){
+                $model->image= $model->urlRename();
+            }
             $continue = false;
             if ($model->parent_id != 0) {
                 $parent = ItemCat::findOne($model->parent_id);
@@ -148,12 +152,14 @@ class ItemCatController extends Controller
 
         $model = $this->findModel($id);
         if(Yii::$app->request->isAjax){
-            $model->deleteImage();
+            $model->image = $model->deleteImage();
+            $model->save();
             return true;
         }
         $image = $model->image;
         if($image == NULL){
             $image = '1';
+            $model->image ='0';
         }
         $request = Yii::$app->request;
         if ($model->load($request->post())) {

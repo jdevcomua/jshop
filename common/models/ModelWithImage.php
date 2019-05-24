@@ -19,7 +19,7 @@ class ModelWithImage extends Model
     /**
      * @var UploadedFile
      */
-    public $imageFile;
+    public $imageFiles;
     
     public function getTranslateColumns()
     {
@@ -28,12 +28,12 @@ class ModelWithImage extends Model
 
     public function deleteImage()
     {
-        if($this->image!=NULL){
-            if (file_exists(Yii::getAlias('@www') .Item::WEB_IMG.$this->image)) {
-                unlink( Yii::getAlias('@www') .Item::WEB_IMG. $this->image);
-                $this->image = NULL;
-            }
+
+        if (file_exists(Yii::getAlias('@www') .Item::WEB_IMG.$this->image)) {
+            unlink( Yii::getAlias('@www') .Item::WEB_IMG. $this->image);
+            return NULL;
         }
+
     }
 
     public function beforeDelete()

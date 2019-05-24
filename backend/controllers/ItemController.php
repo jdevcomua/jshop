@@ -237,15 +237,16 @@ class ItemController extends Controller
         }
 
         if(Yii::$app->request->isAjax){
-                $image= Image::findOne(['item_id'=>$id]);
-                $model->deleteImages($image);
-                return true;
+            $imagey= Image::findOne(['item_id'=>$id]);
+            $model->imageFiles = $model->deleteImages($imagey);
+            return true;
         }
 
         if ($model->load($request->post())) {
             if ($model->save()) {
+
                 if($image->name !== $model->imageFiles){
-                    $model->imageFiles= $model->urlRename();
+                    $model->imageFiles = $model->urlRename();
                     $model->deleteImages($image);
                     $model->upload();
                 }

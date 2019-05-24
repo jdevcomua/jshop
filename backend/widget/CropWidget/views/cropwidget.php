@@ -11,10 +11,15 @@ use common\models\ItemCat;
  * @var CropWidget $widget
  *
  */
-$image = Image::findOne(['item_id'=>$model->id]);
+
 $catmodel = new ItemCat();
-if($model->image ){
+if($model->image){
     $catmodel->image = $model->image;
+    $image=NULL;
+}elseif($model->imageFiles){
+    $image = Image::findOne(['item_id'=>$model->id]);
+}else{
+    $image=NULL;
 }
 
 ?>

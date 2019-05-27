@@ -1,15 +1,19 @@
 <?php
+/**
+ * @var \yii\db\ActiveRecord $model
+ * @var CropWidget $widget
+ * @var ItemCat $catmodel
+ * @var Image $image
+ */
 
 use backend\widget\CropWidget\CropWidget;
+use common\models\Image;
+use common\models\ItemCat;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 
 
-/**
- * @var \yii\db\ActiveRecord $model
- * @var CropWidget $widget
- *
- */
+
 ?>
 
 <div class="cropper-widget">

@@ -26,7 +26,7 @@ class ItemController extends Controller
         return [
             'uploadPhoto' => [
                 'class' => 'backend\widget\CropWidget\actions\UploadAction',
-                'url' => Yii::$app->params['myServerImageLink'],
+                'url' => Yii::$app->getRequest()->getHostInfo() . Item::IMG,
                 'path' => '@www/web/img',
             ]
         ];

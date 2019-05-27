@@ -32,7 +32,7 @@ $imageUrls = $item->getImageUrl();
                                     ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
                                     '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                 <div class="product-image">
-                                    <div class="product-full"> <img id="product-zoom" src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" data-zoom-image="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="product-image"/> </div>
+                                    <div class="product-full"> <img id="product-zoom" src="<?=$item->getOneImageUrl()?>" data-zoom-image="<?=$item->getOneImageUrl()?>" alt="product-image"/> </div>
                                     <?php if(count($imageUrls) >=2) {?>
                                     <div class="more-views">
                                         <div class="slider-items-products">
@@ -255,7 +255,7 @@ $imageUrls = $item->getImageUrl();
                                         <div class="item-inner">
                                             <div class="item-img">
                                                 <div class="item-img-info"><a data-pjax="0" href="<?=$product->getUrl()?>" title="<?= $product->title?>" class="product-image">
-                                                        <img src="<?= ($product->images) ? $product->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $product->title?>"></a>
+                                                        <img src="<?= $product->getOneImageUrl()?>" alt="<?= $product->title?>"></a>
                                                     <?php if($discount = $product->getMaxDiscount()) echo  ($discount->type == 1)
                                                         ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
                                                         '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>

@@ -31,7 +31,9 @@ class ModelWithImage extends Model
 
         if (file_exists(Yii::getAlias('@www') .Item::WEB_IMG.$this->image)) {
             unlink( Yii::getAlias('@www') .Item::WEB_IMG. $this->image);
-            return NULL;
+            return true;
+        }else{
+            return false;
         }
 
     }

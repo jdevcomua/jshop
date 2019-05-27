@@ -4,7 +4,7 @@
  */
 ?>
 <tr id="item_32" class="">
-    <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="<?=$model->item->getUrl()?>" title="<?=$model->item->title?>"> <img src="<?= ($model->item->images) ? $model->item->getOneImageUrl() : '/images/product_no_image.jpg'?>" width="80" height="80" alt="<?=$model->item->title?>"> </a></td>
+    <td class="wishlist-cell0 customer-wishlist-item-image"><a class="product-image" href="<?=$model->item->getUrl()?>" title="<?=$model->item->title?>"> <img src="<?=$model->item->getOneImageUrl()?>" width="80" height="80" alt="<?=$model->item->title?>"> </a></td>
     <td class="wishlist-cell1 customer-wishlist-item-info"><h3 class="product-name"><a href="<?=$model->item->getUrl()?>" title="<?=$model->item->title?>"><?=$model->item->title?></a></h3>
         <div class="description std">
             <div class="inner">

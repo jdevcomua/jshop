@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <li class="item <?=($key == count($models)-1) ? 'last1' : ''?>">
                                                 <div class="item-inner"><a data-pjax=0 class="product-image" title="<?= $cartElement->model->title?>"
                                                                            href="<?= $cartElement->model->getUrl() ?>"><img alt="<?= $cartElement->model->title?>"
-                                                                                                                            src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : '/images/product_no_image.jpg' ?>"></a>
+                                                                                                                            src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : Yii::$app->params['defaultKitImage'] ?>"></a>
                                                     <div class="product-details">
                                                         <!--access-->
                                                         <strong><?= $cartElement->count ?></strong> x <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>

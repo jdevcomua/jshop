@@ -55,6 +55,7 @@ class Item extends Model implements CartAdd
     public $count;
     public $image;
     const WEB_IMG = '/web/img/';
+    const SIZE = '_400.';
     const IMG = '/img/';
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
@@ -188,7 +189,7 @@ class Item extends Model implements CartAdd
 
             return $this->images[$firstKey]->getImageUrl();
         } else {
-            return null;
+            return Yii::$app->params['defaultKitImage'];
         }
     }
 
@@ -254,12 +255,7 @@ class Item extends Model implements CartAdd
     }
     public function urlRename()
     {
-        $info = new SplFileInfo($this->imageFiles);
-        $path_parts = pathinfo($this->imageFiles);
-        $newname = Yii::getAlias('@www') .self::WEB_IMG.$path_parts['filename'].'_255.'.$info->getExtension();
-        rename(Yii::getAlias('@www') .self::WEB_IMG.basename($this->imageFiles), $newname);
-
-        return basename($newname);
+        return basename($this->imageFiles);
     }
 
     /**
@@ -288,8 +284,29 @@ class Item extends Model implements CartAdd
             if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$image->name)) {
                 unlink( Yii::getAlias('@www') .self::WEB_IMG.$image->name);
             }
+            $info = new SplFileInfo($image->name);
+            $path_parts = pathinfo($image->name);
+            $cropimg = $path_parts['filename'] . Item::SIZE . $info->getExtension();
+
+            if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$cropimg)) {
+                unlink( Yii::getAlias('@www') .self::WEB_IMG.$cropimg);
+            }
         $image->delete();
             return NULL;
+        }
+    }
+    public function deleteImagesFromServer($imagename){
+
+        if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$imagename)) {
+            var_dump($imagename);
+            unlink( Yii::getAlias('@www') .self::WEB_IMG.$imagename);
+        }
+        $info = new SplFileInfo($imagename);
+        $path_parts = pathinfo($imagename);
+        $cropimg = $path_parts['filename'] . Item::SIZE . $info->getExtension();
+
+        if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$cropimg)) {
+            unlink( Yii::getAlias('@www') .self::WEB_IMG.$cropimg);
         }
     }
 

@@ -88,21 +88,26 @@ class UploadAction extends Action
                         'error' => Yii::t('cropper', 'ERROR_NO_SAVE_DIR')]
                     ;
                 } else {
-                    $saveOptions = ['jpeg_quality' => $this->jpegQuality, 'png_compression_level' => $this->pngCompressionLevel];
-                    $origin->save($this->path . $model->{$this->uploadParam}->name, $saveOptions);
-                    $info = new SplFileInfo($model->{$this->uploadParam}->name);
-                    $path_parts = pathinfo($model->{$this->uploadParam}->name);
-                    $newname = Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'].'_origin.'.$info->getExtension();
-                    rename(Yii::getAlias('@www') .Item::WEB_IMG.$model->{$this->uploadParam}->name, $newname);
 
-                    if ($image->save($this->path . $model->{$this->uploadParam}->name, $saveOptions)) {
-                        $result = [
-                            'filelink' => $this->url . $model->{$this->uploadParam}->name
-                        ];
-                    } else {
-                        $result = [
-                            'error' => Yii::t('cropper', 'ERROR_CAN_NOT_UPLOAD_FILE')
-                        ];
+                    $saveOptions = ['jpeg_quality' => $this->jpegQuality, 'png_compression_level' => $this->pngCompressionLevel];
+
+                    if($origin->save($this->path . $model->{$this->uploadParam}->name, $saveOptions)) {
+                        $info = new SplFileInfo($model->{$this->uploadParam}->name);
+                        $path_parts = pathinfo($model->{$this->uploadParam}->name);
+                        $newname = $path_parts['filename'] . Item::SIZE . $info->getExtension();
+
+
+
+                        if ($image->save($this->path . $newname, $saveOptions)) {
+
+                            $result = [
+                                'filelink' => $this->url . $model->{$this->uploadParam}->name
+                            ];
+                        } else {
+                            $result = [
+                                'error' => Yii::t('cropper', 'ERROR_CAN_NOT_UPLOAD_FILE')
+                            ];
+                        }
                     }
                 }
             }

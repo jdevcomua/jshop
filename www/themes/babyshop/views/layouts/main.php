@@ -69,7 +69,7 @@ use yii\widgets\Pjax;
                                                     ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
                                                     '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                                 <div class="product-image">
-                                                    <div class="product-full"> <img id="product-zoom" src="<?= ($modalModel->images) ? $modalModel->getOneImageUrl() : '/images/product_no_image.jpg' ?>" data-zoom-image="<?= ($modalModel->images) ? $modalModel->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="product-image"/> </div>
+                                                    <div class="product-full"> <img id="product-zoom" src="<?=$modalModel->getOneImageUrl()?>" data-zoom-image="<?=$modalModel->getOneImageUrl()?>" alt="product-image"/> </div>
                                                     <div class="more-views">
 
                                                     </div>

@@ -174,10 +174,19 @@
 
 
 function croperSuccess(response){
-    var img = document.getElementById("newphoto");
-    img.src =response['filelink'];
-    img.className = 'imgVisible';
 
+    var i = -1;
+    var url = response['filelink'].split('.');
+    url.forEach(function add() {
+        i++;
+    });
+    url[i-1] = url[i-1]+'_400';
+    var src =   url.join('.');
+
+    var img = document.getElementById("newphoto");
+    img.src =src;
+    img.className = 'imgVisible';
+    img.alt = response['filelink'];
     span = document.getElementById("spanfornewfoto");
     if(span.className != 'spanNone'){
         span.className = 'spanNone';
@@ -206,7 +215,7 @@ function deleteImage(ev, th) {
         url: window.location.href,
         type: 'POST',
         data: {
-            idmodel:content,
+            src:image.getAttribute("alt"),
         },
     });
     return false;

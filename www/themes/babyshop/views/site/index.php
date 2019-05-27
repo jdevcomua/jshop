@@ -85,7 +85,7 @@ $this->title = Yii::$app->name;
                         <div class="item-inner">
                             <div class="item-img">
                                 <div class="item-img-info"><a href="<?= $item->getUrl() ?>" title="<?= $item->title ?>" class="product-image">
-                                        <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $item->title ?>">
+                                        <img src="<?=$item->getOneImageUrl()?>" alt="<?= $item->title ?>">
                                     </a>
 <!--                                    <div class="new-label new-top-left">Hot</div>-->
                                     <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
@@ -149,7 +149,7 @@ $this->title = Yii::$app->name;
                             <div class="item-inner">
                                 <div class="item-img">
                                     <div class="item-img-info"><a href="<?= $item->getUrl()?>" title="<?=$item->title?>" class="product-image">
-                                            <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?=$item->title?>"></a>
+                                            <img src="<?=$item->getOneImageUrl()?>" alt="<?=$item->title?>"></a>
 <!--                                        <div class="new-label new-top-left">Hot</div>-->
                                         <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
                                             ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
@@ -265,7 +265,7 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="spl-pro"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><img src="<?= ($special->images) ? $special->getOneImageUrl() : '/images/product_no_image.jpg'?>" alt="<?= $special->title?>"></a>
+                <div class="spl-pro"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><img src="<?=$special->getOneImageUrl()?>" alt="<?= $special->title?>"></a>
                     <div class="item-info">
                         <div class="info-inner">
                             <div class="item-title"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><?= $special->title?></a> </div>

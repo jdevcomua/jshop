@@ -108,11 +108,15 @@ class ItemController extends Controller
         $model = new Item(['active' => true]);
 
         if(Yii::$app->request->isAjax){
-                $data = Yii::$app->request->post();
-                $i = $data['idimage'];
-                $image= Image::findOne(['item_id'=>$model->id]);
-                $model->deleteImages($image);
 
+                $image= Image::findOne(['item_id'=>$model->id]);
+                if($image!=NULL){
+                    $model->deleteImages($image);
+                }else{
+                    $data = Yii::$app->request->post();
+                    $imageurl = $data['src'];
+                    $model->deleteImagesFromServer(basename($imageurl));
+                }
         }
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
@@ -231,15 +235,21 @@ class ItemController extends Controller
         $image = Image::findOne(['item_id'=>$id]);
         if($image == NULL){
             $image = new Image;
-            $image->name = '1';
+            $image->name = 'noimage';
         }else{
             $model->imageFiles = $image->name;
         }
 
         if(Yii::$app->request->isAjax){
-            $imagey= Image::findOne(['item_id'=>$id]);
-            $model->imageFiles = $model->deleteImages($imagey);
-            return true;
+
+            $image= Image::findOne(['item_id'=>$model->id]);
+            if($image!=NULL){
+                $model->deleteImages($image);
+            }else{
+                $data = Yii::$app->request->post();
+                $imageurl = $data['src'];
+                $model->deleteImagesFromServer(basename($imageurl));
+            }
         }
 
         if ($model->load($request->post())) {

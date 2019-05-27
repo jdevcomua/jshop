@@ -121,12 +121,8 @@ class ItemCat extends ModelWithImage
 
     public function urlRename()
     {
-        $info = new SplFileInfo($this->image);
-        $path_parts = pathinfo($this->image);
-        $newname = Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'].'_255.'.$info->getExtension();
-        rename(Yii::getAlias('@www') .Item::WEB_IMG.basename($this->image), $newname);
 
-        return basename($newname);
+        return basename($this->image);
     }
     /**
      * @return \yii\db\ActiveQuery

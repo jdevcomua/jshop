@@ -3,25 +3,13 @@
 use backend\widget\CropWidget\CropWidget;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
-use common\models\Image;
-use common\models\ItemCat;
+
 
 /**
  * @var \yii\db\ActiveRecord $model
  * @var CropWidget $widget
  *
  */
-
-$catmodel = new ItemCat();
-if($model->image){
-    $catmodel->image = $model->image;
-    $image=NULL;
-}elseif($model->imageFiles){
-    $image = Image::findOne(['item_id'=>$model->id]);
-}else{
-    $image=NULL;
-}
-
 ?>
 
 <div class="cropper-widget">
@@ -57,7 +45,7 @@ if($model->image){
     Modal::begin([
         'header'=>'<h4>'.Yii::t('app','Image').'</h4>',
         'id' => 'modal',
-        'size' =>'modal-md'
+        'size' =>'modal-lg'
     ]);
 ?>
     <?= Html::activeHiddenInput($model, $widget->attribute, ['class' => 'photo-field']); ?>

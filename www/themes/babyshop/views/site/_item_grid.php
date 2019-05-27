@@ -5,7 +5,7 @@
     <div class="item-inner">
         <div class="item-img">
             <div class="item-img-info"><a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>" class="product-image">
-                    <img src="<?= ($model->images) ? $model->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $model->title?>"></a>
+                    <img src="<?=$model->getOneImageUrl()?>" alt="<?= $model->title?>"></a>
                 <?php if($discount = $model->getMaxDiscount()) echo  ($discount->type == 1)
                     ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
                     '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>

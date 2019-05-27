@@ -42,6 +42,8 @@
 
 .imgVisible{
     display:inline;
+    max-width: 400px;
+    max-height: 400px;
 }
 .imgNone{
     display: none;

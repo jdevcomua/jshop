@@ -277,34 +277,33 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @param array $images
+     * @param Image|null $image
+     * @throws \Exception|\Throwable in case delete failed.
      */
     public function deleteImages($image)
     {
-        if($image!=NULL){
-            if (file_exists(self::routeToFile($image->name))) {
-                unlink( self::routeToFile($image->name));
+        if(!empty($image)){
+            if (file_exists($this->pathToFile($image->name))) {
+                unlink( $this->pathToFile($image->name));
             }
 
-            if (file_exists(self::routeToFile($this->renameImgToSize($image->name)))) {
-                unlink( self::routeToFile($this->renameImgToSize($image->name)));
+            if (file_exists($this->pathToFile($image->name, self::SIZE))) {
+                unlink( $this->pathToFile($image->name, self::SIZE));
             }
 
-        $image->delete();
-            return null;
+            $image->delete();
         }
     }
 
-    public function deleteImagesFromServer($imageName){
-
-        if (file_exists($this->routeToFile($imageName))){
-            unlink( self::routeToFile($imageName));
+    public function deleteImagesFromServer($imageName)
+    {
+        if (file_exists($this->pathToFile($imageName))){
+            unlink( $this->pathToFile($imageName));
         }
 
-        if (file_exists(self::routeToFile($this->renameImgToSize($imageName)))){
-            unlink(self::routeToFile($this->renameImgToSize($imageName)));
+        if (file_exists($this->pathToFile($imageName, self::SIZE))){
+            unlink($this->pathToFile($imageName, self::SIZE));
         }
-        return null;
     }
 
     /**
@@ -517,12 +516,14 @@ class Item extends Model implements CartAdd
         return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
     }
 
-    public function routeToFile($fileName){
-        return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
-    }
-    public function renameImgToSize($image){
-        $info = new SplFileInfo($image);
-        $path_parts = pathinfo($image);
-        return $path_parts['filename'] . self::SIZE . $info->getExtension();
+    public function pathToFile($fileName, $size = null)
+    {
+        if(!empty($size)){
+            $info = new SplFileInfo($fileName);
+            $path_parts = pathinfo($fileName);
+            return Yii::getAlias('@www') .self::WEB_IMG.$path_parts['filename'] . $size . $info->getExtension();
+        }else{
+            return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
+        }
     }
 }

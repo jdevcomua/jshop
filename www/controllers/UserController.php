@@ -7,6 +7,7 @@ use common\models\Orders;
 use common\models\User;
 use common\models\WishList;
 use common\models\Wish;
+
 use www\models\ChangePassword;
 use www\models\PasswordResetRequestForm;
 use www\models\ResetPasswordForm;
@@ -23,6 +24,7 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\helpers\Url;
 
 class UserController extends Controller
 {
@@ -200,8 +202,7 @@ class UserController extends Controller
         ]);
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email']; // Optional permissions
-        $loginUrl = $helper->getLoginUrl(Yii::$app->params['domain'] . 'user/facebook-auth', $permissions);
-
+        $loginUrl = $helper->getLoginUrl(Yii::$app->getRequest()->getHostInfo() . '/user/facebook-auth', $permissions);
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

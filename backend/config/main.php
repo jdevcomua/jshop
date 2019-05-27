@@ -97,6 +97,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         'allowedIPs' => ['*']
     ];
+    $config['components']['assetManager']['forceCopy'] = true;
 }
 
 return $config;

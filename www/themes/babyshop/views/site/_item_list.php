@@ -3,7 +3,7 @@
 ?>
 
 <li class="item ">
-    <div class="product-image"> <a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>"> <img class="small-image" src="<?= ($model->images) ? $model->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $model->title?>"></a> </div>
+    <div class="product-image"> <a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>"> <img class="small-image" src="<?= $model->getOneImageUrl()?>" alt="<?= $model->title?>"></a> </div>
     <div class="product-shop">
         <h2 class="product-name"><a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>"><?= $model->title?></a></h2>
         <div class="ratings">

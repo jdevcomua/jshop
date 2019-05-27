@@ -245,7 +245,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <li> <a class="price-range" onclick="setPriceRange(0,99.99)" href=""><span class="price">0.00</span> - <span class="price">99.99</span></a> (<?= $countCosts[0] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(100,499.99)" href=""><span class="price">100.00</span> - <span class="price">499.99</span></a> (<?= $countCosts[1] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(500,999.99)" href=""><span class="price">500.00</span> - <span class="price">999.99</span></a> (<?= $countCosts[2] ?>) </li>
-                                    <li> <a class="price-range" onclick="setPriceRange(1000,-1)" href=""><span class="price">1000.00</span><?= Yii::t('app','and above')?> </a> (<?= $countCosts[3] ?>) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(1000,-1)" href=""><span class="price">1000.00</span> <?= Yii::t('app','and above')?> </a> (<?= $countCosts[3] ?>) </li>
                                 </ol>
                             </dd>
 <!--                            <dt class="even">Manufacturer</dt>-->
@@ -319,7 +319,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="block-content">
                         <?php Pjax::begin(['id'=>'cart_cat']) ?>
                         <div class="summary">
-                            <p class="amount"><?=Yii::t('app','There is')?> <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?></a><?= Yii::t('app','in your cart.')?> </p>
+                            <p class="amount"><?=Yii::t('app','There is')?> <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?> </a><?= Yii::t('app','in your cart.')?> </p>
                             <p class="subtotal"> <span class="label"><?=Yii::t('app','Cart Subtotal')?> :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
                         </div>
                         <div class="ajax-checkout">
@@ -333,7 +333,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <li class="item <?=($key == count(Yii::$app->cart->getModels())-1) ? 'last1' : ''?>">
                                         <div class="item-inner"><a data-pjax=0 class="product-image" title="<?= $cartElement->model->title?>"
                                                                    href="<?= $cartElement->model->getUrl() ?>"><img alt="<?= $cartElement->model->title?>"
-                                                                                                                    src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : '/images/product_no_image.jpg' ?>"></a>
+                                                                                                                    src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : Yii::$app->params['defaultKitImage'] ?>"></a>
                                             <div class="product-details">
 
                                                 <div class="access"><a data-reload = "1" href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>"><?= Yii::t('app','Remove')?></a></div>

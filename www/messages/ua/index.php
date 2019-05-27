@@ -189,4 +189,9 @@ return array(
     'Money Back Guarantee'=>'Гарантія повернення грошей',
     '30 days return Service'=>'30 днів повернення',
     'download'=>'завантажити',
+    'Orders History' => 'Історія замовлень',
+    'Suppliers'=>'Постачальники',
+    'Sign up for our newsletter'=>'Підпишіться на наші новини',
+    'Enter your email address'=>'Введіть адресу вашої електронної пошти',
+    'Company'=>'Компанія',
 );

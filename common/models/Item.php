@@ -6,7 +6,7 @@ use common\models\query\ItemQuery;
 use Yii;
 use common\components\CartAdd;
 use yii\data\ActiveDataProvider;
-use yii\debug\models\timeline\DataProvider;
+use SplFileInfo;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
@@ -33,6 +33,7 @@ use Eventviva\ImageResize;
  * @property float $special
  * @property float $deal_week
  * @property string $link
+ * @property string $image
  *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -52,11 +53,16 @@ class Item extends Model implements CartAdd
     public $imageFiles;
 
     public $count;
-
+    public $image;
+    const WEB_IMG = '/web/img/';
+    const SIZE = '_400.';
+    const IMG = '/img/';
     const CART_TYPE = 1;
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
     const IMAGE_SMALL = 'small_';
+
+
 
     /**
      * @inheritdoc
@@ -67,7 +73,7 @@ class Item extends Model implements CartAdd
             [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
-            [['addition_date'], 'safe'],
+            [['addition_date','imageFiles'], 'safe'],
             [['cost', 'self_cost', 'quantity'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
@@ -184,7 +190,7 @@ class Item extends Model implements CartAdd
 
             return $this->images[$firstKey]->getImageUrl();
         } else {
-            return null;
+            return Yii::$app->params['defaultKitImage'];
         }
     }
 
@@ -193,15 +199,12 @@ class Item extends Model implements CartAdd
      */
     public function upload()
     {
-        if (Yii::$app->params['imageStorage'] == self::AMAZON) {
-            $this->uploadToAmazon();
-        } elseif (Yii::$app->params['imageStorage'] == self::MY_SERVER) {
+
             try {
 //            foreach ($files as $file) {
                 $image = new Image();
-                $image->name = array_pop(explode('/', $this->imageFiles));
+                $image->name = $this->imageFiles;
                 if($image->name)
-                $image->storage = self::MY_SERVER;
                 $image->item_id = $this->id;
                 $image->save();
 //                }
@@ -209,7 +212,7 @@ class Item extends Model implements CartAdd
                 var_dump($exception->getMessage());
                 exit;
             }
-        }
+
     }
 
     public function beforeSave($insert)
@@ -251,6 +254,10 @@ class Item extends Model implements CartAdd
             $image->save();
         }
     }
+    public function urlRename()
+    {
+        return basename($this->imageFiles);
+    }
 
     /**
      * @return S3\S3Client
@@ -270,26 +277,32 @@ class Item extends Model implements CartAdd
     }
 
     /**
-     * @param array $images
+     * @param Image|null $image
+     * @throws \Exception|\Throwable in case delete failed.
      */
-    public function deleteImages($images = [])
+    public function deleteImages($image)
     {
-        if (empty($images)) {
-            $images = $this->images;
-        }
-        foreach ($images as $image) {
-            if ($image->storage == self::AMAZON) {
-                $client = $this->createAmazonClient();
-                $client->deleteObject([
-                    'Bucket' => Yii::$app->params['amazonBucket'],
-                    'Key' => $image->name
-                ]);
-            } elseif ($image->storage == self::MY_SERVER) {
-                if (file_exists(Item::getPath() . $image->name)) {
-                    unlink(Item::getPath() . $image->name);
-                }
+        if(!empty($image)){
+            if (file_exists($this->pathToFile($image->name))) {
+                unlink( $this->pathToFile($image->name));
             }
+
+            if (file_exists($this->pathToFile($image->name, self::SIZE))) {
+                unlink( $this->pathToFile($image->name, self::SIZE));
+            }
+
             $image->delete();
+        }
+    }
+
+    public function deleteImagesFromServer($imageName)
+    {
+        if (file_exists($this->pathToFile($imageName))){
+            unlink( $this->pathToFile($imageName));
+        }
+
+        if (file_exists($this->pathToFile($imageName, self::SIZE))){
+            unlink($this->pathToFile($imageName, self::SIZE));
         }
     }
 
@@ -501,5 +514,16 @@ class Item extends Model implements CartAdd
     public function getUrl()
     {
         return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
+    }
+
+    public function pathToFile($fileName, $size = null)
+    {
+        if(!empty($size)){
+            $info = new SplFileInfo($fileName);
+            $path_parts = pathinfo($fileName);
+            return Yii::getAlias('@www') .self::WEB_IMG.$path_parts['filename'] . $size . $info->getExtension();
+        }else{
+            return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
+        }
     }
 }

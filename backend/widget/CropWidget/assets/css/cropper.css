@@ -1,0 +1,50 @@
+.new-photo-area {
+    border: dashed 2px #EEEEEE;
+    box-sizing: content-box;
+    margin: 20px 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.new-photo-area .cropper-label {
+    cursor: pointer;
+    padding: 10px;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+.new-photo-area .cropper-label span {
+    display: table-cell;
+    vertical-align: middle;
+}
+.new-photo-area img {
+    visibility: hidden;
+}
+
+.dropzone{
+    padding: 13px;
+    height: 100%;
+    border: 2px dashed lightgrey;
+    text-align: center;
+    vertical-align: center;
+    pointer-events:auto;
+}
+.disable{
+    pointer-events: none;
+}
+.spanNone{
+     display: none;!important;
+     float:right;
+     z-index: 16777272;
+ }
+.spanVisible{
+    display:inline;
+}
+
+.imgVisible{
+    display:inline;
+    max-width: 400px;
+    max-height: 400px;
+}
+.imgNone{
+    display: none;
+}

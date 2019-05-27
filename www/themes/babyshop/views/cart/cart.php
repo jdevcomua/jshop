@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php foreach ($models as $model) {?>
                             <tr class="odd">
                                 <td class="image hidden-table"><a href="<?= $model->model->getUrl()?>" title="<?= $model->model->title?>" class="product-image">
-                                        <img src="<?= ($model->model->images) ? $model->model->getOneImageUrl() : '/images/product_no_image.jpg' ?>" width="75" alt="<?= $model->model->title?>"></a></td>
+                                        <img src="<?=$model->model->getOneImageUrl()?>" width="75" alt="<?= $model->model->title?>"></a></td>
                                 <td>
                                     <h2 class="product-name">
                                         <a href="<?= $model->model->getUrl()?>"><?= $model->model->title?></a>

@@ -61,15 +61,8 @@ class Image extends \yii\db\ActiveRecord
      * @param string $size
      * @return string
      */
-    public function getImageUrl($size = '')
+    public function getImageUrl()
     {
-        if (!empty($size) && empty($this->small)) {
-            $size = '';
-        }
-        if ($this->storage == Item::MY_SERVER) {
-            return Yii::$app->params['myServerImageLink'] . $size . $this->name;
-        } elseif ($this->storage == Item::AMAZON) {
-            return Yii::$app->params['amazonImageLink'] . $size . $this->name;
-        }
+        return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->name;
     }
 }

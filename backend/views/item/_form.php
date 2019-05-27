@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\file\FileInput;
 use kartik\select2\Select2;
 use zxbodya\yii2\tinymce\TinyMce;
 
@@ -94,11 +93,13 @@ use zxbodya\yii2\tinymce\TinyMce;
         }
       ?>
 
-        <?php echo $form->field($model, 'imageFiles')->widget(\budyaga\cropper\Widget::className(), [
-            'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
-            'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
-            'aspectRatio' => '4:4'
-        ]) ?>
+           <?= $form->field($model, 'imageFiles')->widget(
+               \backend\widget\CropWidget\CropWidget::class, [
+               'uploadUrl' => \yii\helpers\Url::toRoute('/item/uploadPhoto'),
+               'noPhotoImage' => ($model->isNewRecord) ? '' : $model->getOneImageUrl(),
+               'aspectRatio' => '4:4',
+               ]);
+           ?>
 
         <div class="form-group"><br>
             <?= Html::submitButton(Yii::t('app', 'Сохранить'), [
@@ -118,3 +119,6 @@ use zxbodya\yii2\tinymce\TinyMce;
     </div>
 
 </div>
+<script>
+
+</script>

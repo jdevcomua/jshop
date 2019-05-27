@@ -48,7 +48,7 @@ $this->title = Yii::$app->name;
                         <div class="slider-items slider-width-col4 products-grid">
                             <?php foreach ($category_slider as $category) {?>
                             <div class="item"> <a href="#">
-                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->image : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
+                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->getImageUrl() : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
                                         <div class="pro-info"><?= $category->title ?></div>
                                     </div>
                                 </a> </div>
@@ -85,7 +85,7 @@ $this->title = Yii::$app->name;
                         <div class="item-inner">
                             <div class="item-img">
                                 <div class="item-img-info"><a href="<?= $item->getUrl() ?>" title="<?= $item->title ?>" class="product-image">
-                                        <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?= $item->title ?>">
+                                        <img src="<?=$item->getOneImageUrl()?>" alt="<?= $item->title ?>">
                                     </a>
 <!--                                    <div class="new-label new-top-left">Hot</div>-->
                                     <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
@@ -94,7 +94,7 @@ $this->title = Yii::$app->name;
                                     <div class="item-box-hover">
                                         <div class="box-inner">
                                             <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="Add to Wishlist"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@ $this->title = Yii::$app->name;
                             <div class="item-inner">
                                 <div class="item-img">
                                     <div class="item-img-info"><a href="<?= $item->getUrl()?>" title="<?=$item->title?>" class="product-image">
-                                            <img src="<?= ($item->images) ? $item->getOneImageUrl() : '/images/product_no_image.jpg' ?>" alt="<?=$item->title?>"></a>
+                                            <img src="<?=$item->getOneImageUrl()?>" alt="<?=$item->title?>"></a>
 <!--                                        <div class="new-label new-top-left">Hot</div>-->
                                         <?php if($discount = $item->getMaxDiscount()) echo  ($discount->type == 1)
                                             ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
@@ -265,7 +265,7 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="spl-pro"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><img src="<?= ($special->images) ? $special->getOneImageUrl() : '/images/product_no_image.jpg'?>" alt="<?= $special->title?>"></a>
+                <div class="spl-pro"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><img src="<?=$special->getOneImageUrl()?>" alt="<?= $special->title?>"></a>
                     <div class="item-info">
                         <div class="info-inner">
                             <div class="item-title"><a href="<?= $special->getUrl()?>" title="<?= $special->title?>"><?= $special->title?></a> </div>

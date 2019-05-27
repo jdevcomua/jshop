@@ -23,7 +23,7 @@ use yii\widgets\Pjax;
     <div id="header">
         <div class="container">
             <div class="header-container row">
-                <div class="logo"> <a href="<?= Url::home() ?>" title="index">
+                <div class="logo"> <a href="<?= Url::home() ?>" title="<?=Yii::t('app','Home')?>">
                         <div><img src="/images/logo.png" alt="logo"></div>
                     </a> </div>
                 <div class="fl-nav-menu">
@@ -35,7 +35,7 @@ use yii\widgets\Pjax;
                             <!-- BEGIN NAV -->
                             <ul id="nav" class="hidden-xs">
 
-                                <li> <a class="level-top" href="<?= Url::home() ?>"><span>Home</span></a></li>
+                                <li> <a class="level-top" href="<?= Url::home() ?>"><span><?=Yii::t('app','Home')?></span></a></li>
                                 <?= \www\widgets\category\CategoriesView::widget() ?>
 
 
@@ -43,7 +43,7 @@ use yii\widgets\Pjax;
 
                 <div class="fl-header-right">
                     <div class="fl-links">
-                        <div class="no-js"> <a title="Company" class="clicker"></a>
+                        <div class="no-js"> <a title="<?=Yii::t('app','Company')?>" class="clicker"></a>
                             <div class="fl-nav-links">
                                 <div class="language-currency">
                                     <div class="fl-language">
@@ -102,7 +102,7 @@ use yii\widgets\Pjax;
                                     <li class="item <?=($key == 0) ? 'first' : ''?> <?=($key == count(Yii::$app->cart->getModels())-1) ? 'last' : ''?>">
                                         <div class="item-inner"><a data-pjax = 0 class="product-image" title="<?= $cartElement->model->title?>"
                                                                    href="<?= $cartElement->model->getUrl() ?>"><img alt="<?= $cartElement->model->title?>"
-                                                                                                                    src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : '/images/product_no_image.jpg' ?>"></a>
+                                                                                                                    src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : Yii::$app->params['defaultKitImage'] ?>"></a>
                                             <div class="product-details">
 
                                                 <div class="access"><a data-pjax="true" data-reload=0 href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>"><?= Yii::t('app','Remove')?></a></div>

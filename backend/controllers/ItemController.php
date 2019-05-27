@@ -108,35 +108,14 @@ class ItemController extends Controller
         $model = new Item(['active' => true]);
 
         if(Yii::$app->request->isAjax){
-
-                $image= Image::findOne(['item_id'=>$model->id]);
-                if($image!=NULL){
-                    $model->deleteImages($image);
-                }else{
-                    $data = Yii::$app->request->post();
-                    $imageurl = $data['src'];
-                    $model->deleteImagesFromServer(basename($imageurl));
-                }
+            $imageUrl = Yii::$app->request->post('src');
+            $model->deleteImagesFromServer(basename($imageUrl));
+            return NULL;
         }
+
+
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
-        /*foreach ($categories as $category) {
-            /* @var $category ItemCat*/
-            /*if (!empty($category->getChildren()->all())) {
-                $categoriesArray2 = [];
-                foreach ($category->getChildren()->all() as $child) {
-                    /* @var $child ItemCat*/
-                    /*if (!empty($child->getChildren()->all())) {
-                        $categoriesArray2['> ' . $child->title] = ArrayHelper::map($child->getChildren()->all(), 'id', 'title');
-                    } else {
-                        $categoriesArray2[$child->id] = $child->title;
-                    }
-                }
-                $categoriesArray[$category->title] = $categoriesArray2;
-            } else {
-                $categoriesArray[$category->id] = $category->title;
-            }
-        }*/
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
             if ($model->save()) {
@@ -155,6 +134,7 @@ class ItemController extends Controller
             'model' => $model,
             'categories' => $categoriesArray
         ]);
+
     }
 
     /**

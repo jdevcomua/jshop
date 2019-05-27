@@ -63,6 +63,7 @@ class Item extends Model implements CartAdd
     const IMAGE_SMALL = 'small_';
 
 
+
     /**
      * @inheritdoc
      */
@@ -281,33 +282,29 @@ class Item extends Model implements CartAdd
     public function deleteImages($image)
     {
         if($image!=NULL){
-            if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$image->name)) {
-                unlink( Yii::getAlias('@www') .self::WEB_IMG.$image->name);
+            if (file_exists(self::routeToFile($image->name))) {
+                unlink( self::routeToFile($image->name));
             }
-            $info = new SplFileInfo($image->name);
-            $path_parts = pathinfo($image->name);
-            $cropimg = $path_parts['filename'] . Item::SIZE . $info->getExtension();
 
-            if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$cropimg)) {
-                unlink( Yii::getAlias('@www') .self::WEB_IMG.$cropimg);
+            if (file_exists(self::routeToFile($this->renameImgToSize($image->name)))) {
+                unlink( self::routeToFile($this->renameImgToSize($image->name)));
             }
+
         $image->delete();
-            return NULL;
+            return null;
         }
     }
-    public function deleteImagesFromServer($imagename){
 
-        if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$imagename)) {
-            var_dump($imagename);
-            unlink( Yii::getAlias('@www') .self::WEB_IMG.$imagename);
-        }
-        $info = new SplFileInfo($imagename);
-        $path_parts = pathinfo($imagename);
-        $cropimg = $path_parts['filename'] . Item::SIZE . $info->getExtension();
+    public function deleteImagesFromServer($imageName){
 
-        if (file_exists(Yii::getAlias('@www') .self::WEB_IMG.$cropimg)) {
-            unlink( Yii::getAlias('@www') .self::WEB_IMG.$cropimg);
+        if (file_exists($this->routeToFile($imageName))){
+            unlink( self::routeToFile($imageName));
         }
+
+        if (file_exists(self::routeToFile($this->renameImgToSize($imageName)))){
+            unlink(self::routeToFile($this->renameImgToSize($imageName)));
+        }
+        return null;
     }
 
     /**
@@ -518,5 +515,14 @@ class Item extends Model implements CartAdd
     public function getUrl()
     {
         return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
+    }
+
+    public function routeToFile($fileName){
+        return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
+    }
+    public function renameImgToSize($image){
+        $info = new SplFileInfo($image);
+        $path_parts = pathinfo($image);
+        return $path_parts['filename'] . self::SIZE . $info->getExtension();
     }
 }

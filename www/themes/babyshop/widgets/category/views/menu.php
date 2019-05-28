@@ -34,11 +34,6 @@ use yii\helpers\Url;
                     <!--nav-block nav-block-center-->
                 </div>
                 <!--col-1-->
-                <div class="col-2">
-                    <div class="menu_image"><a title="" href="<?= $category->getUrl() ?>">
-                            <img alt="menu_image" src="<?= ($category->image) ? $category->imageUrl : '/images/category_no_image.jpg'?>"></a></div>
-                </div>
-                <!--col-2-->
             </div>
             <!--level0-wrapper2-->
         </div>

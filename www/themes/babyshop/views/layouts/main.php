@@ -135,8 +135,7 @@ use yii\widgets\Pjax;
                                                     <?php else:?>
                                                         <?=$text?>
                                                     <?php endif;?>
-                                                    ?>
-                                                </div>
+                                                    </div>
                                                 <div class="email-addto-box">
                                                     <ul class="add-to-links">
                                                         <li> <a class="link-wishlist" href="#"><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>

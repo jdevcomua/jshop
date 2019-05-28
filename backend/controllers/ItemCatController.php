@@ -147,10 +147,11 @@ class ItemCatController extends Controller
 
         $model = $this->findModel($id);
         if(Yii::$app->request->isAjax){
-            $model->deleteImage();
+            $imageUrl = Yii::$app->request->post('src');
+            $model->deleteImage(basename($imageUrl));
             $model->image=NULL;
             $model->save();
-
+            return null;
         }
         $image = $model->image;
         if($image === NULL){

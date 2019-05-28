@@ -110,7 +110,7 @@ class ItemController extends Controller
         if(Yii::$app->request->isAjax){
             $imageUrl = Yii::$app->request->post('src');
             $model->deleteImagesFromServer(basename($imageUrl));
-            return NULL;
+            return null;
         }
 
 
@@ -226,10 +226,10 @@ class ItemController extends Controller
             if($image!=NULL){
                 $model->deleteImages($image);
             }else{
-                $data = Yii::$app->request->post();
-                $imageurl = $data['src'];
-                $model->deleteImagesFromServer(basename($imageurl));
+                $imageUrl = Yii::$app->request->post('src');
+                $model->deleteImagesFromServer(basename($imageUrl));
             }
+            return null;
         }
 
         if ($model->load($request->post())) {

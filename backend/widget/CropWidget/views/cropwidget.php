@@ -1,15 +1,19 @@
 <?php
+/**
+ * @var \yii\db\ActiveRecord $model
+ * @var CropWidget $widget
+ * @var ItemCat $catmodel
+ * @var Image $image
+ */
 
 use backend\widget\CropWidget\CropWidget;
+use common\models\Image;
+use common\models\ItemCat;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
 
 
-/**
- * @var \yii\db\ActiveRecord $model
- * @var CropWidget $widget
- *
- */
+
 ?>
 
 <div class="cropper-widget">
@@ -22,13 +26,13 @@ use yii\helpers\Html;
                 <input class="" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
                 <div class="dropzone disable" id="dropzone">
                     <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
-                    <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$image->name?>">
+                    <img id="newphoto" src="<?=$image->getImageUrl()?>">
                 </div>
             <?php elseif($catmodel->image != NULL): ?>
                 <input class="" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">
                 <div class="dropzone disable" id="dropzone">
                     <span id="spanfornewfoto" class="spanNone"><?= $widget->label;?></span>
-                    <img id="newphoto" src="<?=Yii::$app->getRequest()->getHostInfo()?>/img/<?=$model->image?>">
+                    <img id="newphoto" src="<?=$model->getImageUrl()?>">
                 </div>
             <?php else: ?>
                 <input class="spanNone" type="button" id="deleteimage" onclick="deleteImage(event, this)" value="X" style="margin-bottom: 0;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border:  1px solid transparent;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;color: #fff;background-color: #d9534f;float: right">

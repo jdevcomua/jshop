@@ -184,4 +184,10 @@ class ItemCat extends ModelWithImage
         }
         return $childrenIdList;
     }
+    public function getImageUrl()
+    {
+        $info = new SplFileInfo($this->image);
+        $path_parts = pathinfo($this->image);
+        return Yii::$app->getRequest()->getHostInfo().Item::IMG.$path_parts['filename'] .Item::SIZE. $info->getExtension();
+    }
 }

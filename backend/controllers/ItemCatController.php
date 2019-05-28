@@ -153,13 +153,13 @@ class ItemCatController extends Controller
 
         }
         $image = $model->image;
-        if($image == NULL){
+        if($image === NULL){
             $image = 'noname';
-            $model->image ='noname1';
+            $model->image ='noname';
         }
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
-            if($image!== $model->image){
+            if($image !== $model->image){
                 $model->image= $model->urlRename();
             }
             $continue = false;

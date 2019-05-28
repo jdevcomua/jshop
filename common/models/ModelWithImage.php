@@ -36,6 +36,7 @@ class ModelWithImage extends Model
         if (file_exists($this->pathToFile($imageName, Item::SIZE))){
             unlink($this->pathToFile($imageName, Item::SIZE));
         }
+        $this->image = null;
     }
     /**
      * @return string path of dir with images

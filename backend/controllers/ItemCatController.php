@@ -104,10 +104,12 @@ class ItemCatController extends Controller
     {
         $model = new ItemCat(['active' => true]);
         if(Yii::$app->request->isAjax){
-            $model->deleteImage();
+            $imageUrl = Yii::$app->request->post('src');
+            $model->deleteImage(basename($imageUrl));
+            return null;
         }
         if ($model->load(Yii::$app->request->post())) {
-            if($model->image!=NULL){
+            if(!isset($model->image)){
                 $model->image= $model->urlRename();
             }
             $continue = false;
@@ -149,18 +151,13 @@ class ItemCatController extends Controller
         if(Yii::$app->request->isAjax){
             $imageUrl = Yii::$app->request->post('src');
             $model->deleteImage(basename($imageUrl));
-            $model->image=NULL;
             $model->save();
             return null;
         }
         $image = $model->image;
-        if($image === NULL){
-            $image = 'noname';
-            $model->image ='noname';
-        }
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
-            if($image !== $model->image){
+            if(!isset($model->image) && $image !== $model->image){
                 $model->image= $model->urlRename();
             }
             $continue = false;

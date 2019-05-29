@@ -82,7 +82,7 @@
                                                                        style="text-decoration:none;line-height:0;">
                                                                         <img border="0"
                                                                              style="display:block;background-color:#ffffff;max-width: 80px; max-height: 55px;"
-                                                                             src="<?php $orderItem->item->getOneImageUrl(); ?>">
+                                                                             src="<?php echo $orderItem->item->getOneImageUrl(); ?>">
                                                                     </a>
                                                                 </td>
                                                                 <td style="padding-top:5px;padding-bottom:5px;vertical-align:top">

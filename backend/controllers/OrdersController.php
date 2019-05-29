@@ -154,8 +154,6 @@ class OrdersController extends Controller
                     $model->save();
                 }
             }
-
-
         }
         return $this->redirect(['index']);
     }

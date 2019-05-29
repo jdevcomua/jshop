@@ -123,7 +123,7 @@ class CartController extends Controller
                     ->setTo(Yii::$app->params['orderEmail'])
                     ->setSubject('subject')
                     ->send();
-                return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/profile']));
+                return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/dashboard']));
             }
         }
         $sum = Yii::$app->cart->getSum();

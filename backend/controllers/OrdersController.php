@@ -122,7 +122,7 @@ class OrdersController extends Controller
             if (Yii::$app->request->post('action') == 'paid') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->payment_status = 'Оплачен';
+                    $model->payment_status = '1';
                     $model->save();
                 }
             } elseif(Yii::$app->request->post('action') == 'delete') {
@@ -132,13 +132,13 @@ class OrdersController extends Controller
             } elseif(Yii::$app->request->post('action') == 'sent') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->order_status = 'Отправлен';
+                    $model->order_status = '2';
                     $model->save();
                 }
             } elseif(Yii::$app->request->post('action') == 'delivered') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->order_status = 'Доставлен';
+                    $model->order_status = '3';
                     $model->save();
                 }
             }

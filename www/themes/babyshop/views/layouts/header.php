@@ -120,7 +120,7 @@ use yii\widgets\Pjax;
                                     <button data-pjax = 0 class="btn-checkout" title="Checkout" type="button" onClick="window.location='<?= Url::toRoute('cart/index')?>'"><span><?= Yii::t('app','Checkout')?></span></button>
                                 </div>
                                 <!--actions-->
-                            </div>`
+                            </div>
                             <!--fl-mini-cart-content-->
                         </div>
                         <?php Pjax::end()?>
@@ -141,3 +141,32 @@ use yii\widgets\Pjax;
         </div>
     </div>
 </header>
+
+<?php if(Yii::$app->controller->route != 'site/index' ) {?>
+    <div class="page-heading">
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul>
+                            <li class="home"> <a href="<?=Url::home()?>" title="Go to Home Page"><?= Yii::t('app','Home')?></a> <span>&rsaquo; </span> </li>
+                            <?php for ($key = 0; $key < count($breadcrumbs = ($this->params['breadcrumbs']));$key++) {
+                                if(is_array($breadcrumbs[$key])) {?>
+                                    <li class="home"> <a href="<?=$breadcrumbs[$key]['url']?>" title="<?=$breadcrumbs[$key]['label']?>"><?=$breadcrumbs[$key]['label']?></a> <span>&rsaquo; </span> </li>
+                                <?php } else { ?>
+                                    <li class="category1601"> <strong><?= $breadcrumbs[$key] ?></strong> </li>
+                                <?php }?>
+                            <?php }?>
+                        </ul>
+                    </div>
+                    <!--col-xs-12-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </div>
+        <div class="page-title">
+            <h2><?=$this->title?></h2>
+        </div>
+    </div>
+<?php } ?>

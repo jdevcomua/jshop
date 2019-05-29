@@ -141,7 +141,21 @@ class OrdersController extends Controller
                     $model->order_status = '3';
                     $model->save();
                 }
+            } elseif(Yii::$app->request->post('action') == 'confirmed') {
+                foreach ($models as $model) {
+                    /* @var $model Orders */
+                    $model->order_status = '5';
+                    $model->save();
+                }
+            } elseif(Yii::$app->request->post('action') == 'canceled') {
+                foreach ($models as $model) {
+                    /* @var $model Orders */
+                    $model->order_status = '4';
+                    $model->save();
+                }
             }
+
+
         }
         return $this->redirect(['index']);
     }

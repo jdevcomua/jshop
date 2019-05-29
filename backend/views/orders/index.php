@@ -71,6 +71,8 @@ $this->params['breadcrumbs'][] = $this->title;
             echo Html::submitButton('Оплачен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'paid']) . ' ';
             echo Html::submitButton('Отправлен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'sent']) . ' ';
             echo Html::submitButton('Доставлен', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'delivered']) . ' ';
+            echo Html::submitButton('Подтвержден', ['class' => 'btn btn-success', 'name' => 'action', 'value' => 'confirmed']) . ' ';
+            echo Html::submitButton('Отменен', ['class' => 'btn btn-warning', 'name' => 'action', 'value' => 'canceled']) . ' ';
             echo Html::submitButton('Удалить', ['class' => 'btn btn-danger', 'name' => 'action', 'value' => 'delete']);
             echo Html::endForm(); ?>
         </div>

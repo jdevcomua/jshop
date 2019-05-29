@@ -9485,6 +9485,13 @@ button.button.submit:before {
 .product-view .box-up-sell .subtitle {
 	margin-right: 0;
 }
+.mini-products-list .item{
+	margin-top: 10px;
+}
+.mini-products-list{
+	display: flex;
+	flex-direction: column;
+}
 .mini-products-list .price-box * {
 	display: inline;
 }

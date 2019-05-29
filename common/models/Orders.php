@@ -28,7 +28,7 @@ class Orders extends Model
 {
 
     const STATUS_NEW = 1;
-    const STATUS_SENT = 3;
+    const STATUS_SENT = 2;
     const STATUS_SHIPPED = 3;
     const STATUS_CANCELED = 4;
     const STATUS_CONFIRMED = 5;

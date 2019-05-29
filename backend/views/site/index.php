@@ -26,7 +26,7 @@ $this->title = 'Home Page';
                 <div class="info-box-content">
                     <span class="info-box-text">Новые заказы</span>
                     <span class="info-box-number"><?= $newOrdersCount; ?></span>
-                    <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[order_status]' => 'Новый']) ?>"
+                    <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[order_status]' => '1']) ?>"
                        type="button" class="btn btn-block btn-success btn-flat">Показать</a>
                 </div>
             </div>
@@ -37,7 +37,7 @@ $this->title = 'Home Page';
                 <div class="info-box-content">
                     <span class="info-box-text">Продажи</span>
                     <span class="info-box-number"><?= $salesCount; ?></span>
-                    <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[payment_status]' => 'Оплачен']) ?>"
+                    <a href="<?= Yii::$app->urlHelper->to(['orders/index', 'OrdersSearch[payment_status]' => '1']) ?>"
                        type="button" class="btn btn-block btn-info btn-flat">Показать</a>
                 </div>
             </div>

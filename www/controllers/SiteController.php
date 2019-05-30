@@ -442,11 +442,11 @@ class SiteController extends Controller
 
     /**
      * @param $wish_id integer
-     * @return string
+     * @return false|int
      */
     public function actionDelwish($wish_id)
     {
-        Wish::findOne($wish_id)->delete();
+        return Wish::findOne($wish_id)->delete();
     }
     
     public function actionSearchHint($q = null) {

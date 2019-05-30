@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </table>
                                 </div>
                                 <div class="buttons-set buttons-set2">
-                                    <button type="submit" title="Add All to Cart" onClick="addAllWItemsToCart()" class="button btn-add"><span>'.Yii::t('app', 'Add All to Cart').'</span></button>
+                                    <button type="submit" title="Add All to Cart" class="button btn-add"><span>'.Yii::t('app', 'Add All to Cart').'</span></button>
                                     <button type="button" name="do" title="Update Wishlist" data-pjax="true" onclick="$.pjax.reload(\'#wishlist\'); return false;"  class="button btn-update"><span>'.Yii::t('app', 'Update Wishlist').'</span></button>
                                 </div>',
                                     'pager' => [

@@ -28,7 +28,6 @@ use yii\helpers\Url;
 
 class UserController extends Controller
 {
-
     /**
      * View page of user
      * @return string
@@ -282,17 +281,19 @@ class UserController extends Controller
     public function actionForgotPassword()
     {
         $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Проверьте свою электронную почту для получения дальнейших инструкций');
-                return $this->redirect('login');
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate()){
+                if ($model->sendEmail()) {
+                    Yii::$app->session->destroy();
+                    Yii::$app->session->setFlash('success', 'Проверьте свою электронную почту для получения дальнейших инструкций');
+                    return $this->redirect('login');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                }
+            }else{
+                Yii::$app->session->setFlash('error', 'Проверьте правильность вводимых даных.');
             }
-        } else {
-            Yii::$app->session->setFlash('error', 'Проверьте правильность вводимых даных.');
         }
-
         return $this->render('forgotPassword', [
             'model' => $model,
         ]);

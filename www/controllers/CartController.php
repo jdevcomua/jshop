@@ -112,6 +112,7 @@ class CartController extends Controller
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setTo($model->mail)
                         ->setSubject('subject')
+                        ->setHtmlBody('<br>das</br>')
                         ->send();
                 }
                 Yii::$app->session->setFlash('success','Success checkout!');

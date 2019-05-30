@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "acae86c650a3e28a4d27731c6f022aa1",
-    "content-hash": "1c025a50cebeaab5ce5f330f8eccda17",
+    "hash": "7e234fc1d6b5b4112d8f3055881d9049",
+    "content-hash": "bb4bb45c6826da100869100ae4eb1d43",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -150,29 +150,6 @@
             ]
         },
         {
-            "name": "bower-asset/fancybox",
-            "version": "V2.1.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fancyapps/fancybox.git",
-                "reference": "b708e8060cefd45c97981143f85d4094e3d6e18c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fancyapps/fancybox/zipball/b708e8060cefd45c97981143f85d4094e3d6e18c",
-                "reference": "b708e8060cefd45c97981143f85d4094e3d6e18c",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.10",
-                "bower-asset/jquery-mousewheel": "~3.1.3"
-            },
-            "type": "bower-asset",
-            "license": [
-                "GPLv3"
-            ]
-        },
-        {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "source": {
@@ -228,25 +205,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "bower-asset/jquery-mousewheel",
-            "version": "3.1.13",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jquery/jquery-mousewheel.git",
-                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/67289b6b2aa0066d7d78a5807f520387135ffb22",
-                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.2.2"
-            },
-            "type": "bower-asset"
         },
         {
             "name": "bower-asset/jquery-ui",
@@ -1042,7 +1000,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/bbef99c63808f5f87b80eab674387a90dd33e137",
+                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/bf6a5fcd5e853e33cdb67c860b6bf53d943b3962",
                 "reference": "bbef99c63808f5f87b80eab674387a90dd33e137",
                 "shasum": ""
             },
@@ -2204,51 +2162,6 @@
             "time": "2018-11-05 12:31:44"
         },
         {
-            "name": "newerton/yii2-fancybox",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/newerton/yii2-fancybox.git",
-                "reference": "46893e3c2d3ae5917c80cfd556e29bc9528c4497"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/newerton/yii2-fancybox/zipball/46893e3c2d3ae5917c80cfd556e29bc9528c4497",
-                "reference": "46893e3c2d3ae5917c80cfd556e29bc9528c4497",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fancybox": "~2.1.5",
-                "bower-asset/jquery-mousewheel": ">=3.1.13",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "newerton\\fancybox\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Newerton Vargas de Araujo",
-                    "email": "newerton.araujo@gmail.com"
-                }
-            ],
-            "description": "fancyBox is a tool that offers a nice and elegant way to add zooming functionality for images, html content and multi-media on your webpages.",
-            "keywords": [
-                "extension",
-                "fancyapps",
-                "fancybox",
-                "yii2"
-            ],
-            "time": "2017-03-29 03:56:27"
-        },
-        {
             "name": "sergeymakinen/yii2-log-message",
             "version": "v2.1.0",
             "source": {
@@ -3253,6 +3166,48 @@
     ],
     "packages-dev": [
         {
+            "name": "bower-asset/fancybox",
+            "version": "V2.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fancyapps/fancybox.git",
+                "reference": "b708e8060cefd45c97981143f85d4094e3d6e18c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fancyapps/fancybox/zipball/b708e8060cefd45c97981143f85d4094e3d6e18c",
+                "reference": "b708e8060cefd45c97981143f85d4094e3d6e18c",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.10",
+                "bower-asset/jquery-mousewheel": "~3.1.3"
+            },
+            "type": "bower-asset",
+            "license": [
+                "GPLv3"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery-mousewheel",
+            "version": "3.1.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-mousewheel.git",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.2"
+            },
+            "type": "bower-asset"
+        },
+        {
             "name": "fzaninotto/faker",
             "version": "v1.8.0",
             "source": {
@@ -3548,8 +3503,7 @@
         "kartik-v/yii2-datecontrol": 20,
         "kartik-v/yii2-widgets": 20,
         "zxbodya/yii2-tinymce": 20,
-        "zxbodya/yii2-elfinder": 20,
-        "newerton/yii2-fancybox": 20
+        "zxbodya/yii2-elfinder": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

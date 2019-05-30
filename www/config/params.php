@@ -2,7 +2,7 @@
 use common\components\Theme;
 
 return [
-    'adminEmail'    => 'admin@example.com',
+    'adminEmail'    => 'lordweyder333@gmail.com',
     'orderEmail'    => 'admin@example.com',
     'fbAppId' => '1278586458955080',
     'fbSecretKey' => '9025f7e15e75980534f81a9dcbacd121',

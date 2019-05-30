@@ -11,6 +11,7 @@ use common\models\StaticPage;
 use common\models\Stock;
 use common\models\Wish;
 use common\models\WishList;
+use http\Exception;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
@@ -442,11 +443,11 @@ class SiteController extends Controller
 
     /**
      * @param $wish_id integer
-     * @return false|int
+     * @return string
      */
     public function actionDelwish($wish_id)
     {
-        return Wish::findOne($wish_id)->delete();
+        Wish::findOne($wish_id)->delete();
     }
     
     public function actionSearchHint($q = null) {

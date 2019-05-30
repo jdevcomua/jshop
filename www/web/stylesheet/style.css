@@ -10129,7 +10129,7 @@ button.button.btn-proceed-checkout span {
 
 .edit-wishlist {display:none}
 
-#wishlist-table a.remove-item {
+#wishlist-table .remove-item {
 	padding: 0px 11px;
 	color: #333;
 	background-color: inherit;
@@ -10146,7 +10146,7 @@ button.button.btn-proceed-checkout span {
 	line-height:48px;
 	text-align:center
 }
-#wishlist-table a.remove-item:before {
+#wishlist-table .remove-item:before {
 	content: "\f014";
 	font-family: FontAwesome;
 	font-size:16px

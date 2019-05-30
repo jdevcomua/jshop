@@ -333,7 +333,7 @@ function removeWish(id) {
         url: '/site/delwish',
         data: {wish_id: id},
         dataType: 'json',
-        success: function () {
+        complete: function () {
             $.pjax.reload({container: '#wishlist'})
         }
     });
@@ -434,7 +434,7 @@ $(document).on('input', '.js-qty__num', function(){ // изменение зна
 });
 
 $('#wishlist').on('pjax:end', function(){ // изменение значения количество в корзине
-    showPopup('All wish list items add to cart');
+    // showPopup('All wish list items add to cart');
     refreshCarts();
 });
 

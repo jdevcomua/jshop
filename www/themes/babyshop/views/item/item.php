@@ -88,7 +88,7 @@ $imageUrls = $item->getImageUrl();
                                                 <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                             </div>
                                         </div>
-                                        <button data-pjax="0" onclick="addToCart(<?= $item->id ?>)" class="button btn-cart" title="Add to Cart" type="button"><?= Yii::t('app','Add to Cart')?></button>
+                                        <button data-pjax="0" onclick="addToCart(<?= $item->id ?>)" class="button btn-cart" title="<?= Yii::t('app','Add to Cart')?>" type="button"><?= Yii::t('app','Add to Cart')?></button>
                                     </div>
 
                                 </div>

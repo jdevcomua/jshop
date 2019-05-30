@@ -11,7 +11,6 @@ use common\models\StaticPage;
 use common\models\Stock;
 use common\models\Wish;
 use common\models\WishList;
-use http\Exception;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;

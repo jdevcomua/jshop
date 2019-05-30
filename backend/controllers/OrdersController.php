@@ -132,13 +132,13 @@ class OrdersController extends Controller
             } elseif(Yii::$app->request->post('action') == 'sent') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->order_status = STATUS_SENT;
+                    $model->order_status = Orders::STATUS_SENT;
                     $model->save();
                 }
             } elseif(Yii::$app->request->post('action') == 'delivered') {
                 foreach ($models as $model) {
                     /* @var $model Orders */
-                    $model->order_status = STATUS_SHIPPED;
+                    $model->order_status = Orders::STATUS_SHIPPED;
                     $model->save();
                 }
             } elseif(Yii::$app->request->post('action') == 'confirmed') {

@@ -284,7 +284,6 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate()){
                 if ($model->sendEmail()) {
-                    Yii::$app->session->destroy();
                     Yii::$app->session->setFlash('success', 'Проверьте свою электронную почту для получения дальнейших инструкций');
                     return $this->redirect('login');
                 } else {

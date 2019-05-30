@@ -448,3 +448,12 @@ $(document).ready(function () {
         }
     }, 1);
 });
+function orderCheck(check,event) {
+    if(check == 0){
+        showPopup('Cart is empty');
+        event.preventDefault();
+        return false;
+    }else{
+        return true;
+    }
+}

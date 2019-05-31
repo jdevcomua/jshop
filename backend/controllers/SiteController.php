@@ -32,22 +32,22 @@ class SiteController extends Controller
         $sales = Orders::find()->select('DAY(orders.timestamp) AS day, COUNT(orders.timestamp) AS count')
             ->innerJoin('order_item', 'order_item.order_id = orders.id')
             ->where('MONTH(orders.timestamp) = MONTH(NOW())')
-            ->andWhere(['orders.payment_status' => 'Оплачен'])
+            ->andWhere(['orders.payment_status' => Orders::PAYMENT_STATUS_PAID])
             ->groupBy('day')
             ->asArray(true)
             ->all();
         $salesArray = ArrayHelper::map($sales, 'day', 'count');
         $salesDays = array_keys($salesArray);
         $salesValues = array_values($salesArray);
-        $newOrdersCount = Orders::find()->where(['order_status' => '1'])->count();
+        $newOrdersCount = Orders::find()->where(['order_status' => Orders::STATUS_NEW])->count();
         $salesCount = Orders::find()
-            ->where(['payment_status' => '1'])
+            ->where(['payment_status' => Orders::PAYMENT_STATUS_PAID])
             ->andWhere('MONTH(orders.timestamp) = MONTH(NOW())')
             ->count();
         $newVotesCount = Vote::find()->where(['checked' => Vote::STATUS_NOT_CHECKED])->count();
         $sales = Orders::find()->select('DAY(timestamp) AS day, SUM(sum) AS sum')
             ->where('MONTH(timestamp) = MONTH(NOW())')
-            ->andWhere(['payment_status' => '1'])
+            ->andWhere(['payment_status' => Orders::PAYMENT_STATUS_PAID])
             ->groupBy('day')
             ->asArray(true)
             ->all();

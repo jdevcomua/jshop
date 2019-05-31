@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Image;
 use common\models\ItemCat;
 use common\models\search\ItemSearch;
+use common\models\Wish;
 use yii\base\Model;
 use Yii;
 use common\models\Item;
@@ -64,8 +65,9 @@ class ItemController extends Controller
         foreach (Yii::$app->request->post()['id'] as $id) {
 
             $model = $this->findModel($id);
+            Wish::find()->where(['item_id'=>$id])->all()->delete();
             $image = Image::findOne(['item_id'=>$id]);
-            if(!isset($image)){
+            if(isset($image)){
                 $model->deleteImages($image);
             }
             $model->delete();
@@ -266,7 +268,7 @@ class ItemController extends Controller
     {
             $model = $this->findModel($id);
             $image = Image::findOne(['item_id'=>$id]);
-            if(!isset($image)){
+            if(isset($image)){
                 $model->deleteImages($image);
             }
             $model->delete();

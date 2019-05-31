@@ -109,7 +109,7 @@ class ItemCatController extends Controller
             return null;
         }
         if ($model->load(Yii::$app->request->post())) {
-            if(!isset($model->image)){
+            if(isset($model->image)){
                 $model->image= $model->urlRename();
             }
             $continue = false;

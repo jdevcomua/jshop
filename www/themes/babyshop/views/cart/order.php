@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <section class="col-main col-sm-9 wow bounceInUp animated animated" style="visibility: visible;">
                 <?php $form = ActiveForm::begin(['options' => ['id'=> 'order-form','class' => 'comment-form']]); ?>
+
                 <ol class="one-page-checkout" id="checkoutSteps">
                     <li id="opc-address" class="section allow active">
                         <div class="step-title"> <span class="number">1</span>
@@ -29,48 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <fieldset class="group-select">
                                 <ul class="">
                                     <li id="billing-new-address-form">
-                                        <fieldset>
-                                            <ul>
-                                                <li class="fields">
-                                                    <div class="customer-name">
-                                                        <div class="input-box name-firstname">
-                                                            <label for="orders-name"><?=Yii::t('app','Name and Surname')?><span class="required">*</span></label>
-                                                            <div class="input-box1">
-                                                                <input type="text" id="orders-name" name="Orders[name]" style="margin-bottom: 2px;margin-left: 2px;" value="<?=$model->name?>" title="First Name" maxlength="255" class="input-text required-entry" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="fields">
-                                                    <div class="customer-phone">
-                                                        <div class="input-box phone">
-                                                            <label for="orders-phone"><?=Yii::t('app','Phone number')?><span class="required">*</span></label>
-                                                            <div class="input-box1">
-                                                                <input type="text" id="orders-phone" name="Orders[phone]" style="margin-bottom: 2px;margin-left: 2px;" value="<?= $model->phone ?>" title="Phone number" maxlength="255" class="input-text required-entry" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="fields">
-                                                    <div class="input-box">
-                                                        <label for="orders-address"><?=Yii::t('app','Address')?> - <?= $model->address?><span class="required">*</span></label>
-                                                        <input type="text" id="orders-address" name="Orders[address]" style="margin-bottom: 2px;margin-left: 2px;" value="<?= $model->address ?>" title="Address" class="input-text required-entry" required>
-                                                    </div>
-                                                </li>
-                                                <li class="fields">
-                                                    <div class="input-box">
-                                                        <label for="orders-mail"><?=Yii::t('app','Mail')?></label>
-                                                        <input type="email" id="orders-mail" name="Orders[mail]" style="margin-bottom: 2px;margin-left: 2px;" value="<?= $model->mail ?>" title="Email" class="input-text">
-                                                    </div>
-                                                </li>
-                                                <li class="fields">
-                                                    <div class="input-box">
-                                                        <label for="orders-address"><?=Yii::t('app','Comment')?></label>
-                                                        <textarea style="border-radius: 39px" id="orders-comment" style="margin-bottom: 2px;margin-left: 2px;" name="Orders[comment]"  title="Comment" class="input-text"></textarea>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </fieldset>
+                                        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class'=>'input-text required-entry', 'required'=> true])->label(Yii::t('app','Name and Surname').'<span class="required">*</span>'); ?>
+                                        <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Phone number').'<span class="required">*</span>'); ?>
+                                        <?= $form->field($model, 'address')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Address').'<span class="required">*</span>'); ?>
+                                        <?= $form->field($model, 'mail')->textInput(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Mail'));?>
+                                        <?= $form->field($model, 'comment')->textarea(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Comment'));?>
                                     </li>
                                 </ul>
                                 <div class="buttons-set" id="billing-buttons-container">

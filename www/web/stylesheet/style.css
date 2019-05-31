@@ -6431,7 +6431,7 @@ button.button.send:before {
 	border: 1px solid #d1d1d1;
 	padding: 10px 15px;
 	outline: none;
-	width: 98%;
+	width: 50%;
 }
 .group-select li .input-box input.input-text, .group-select li .input-box textarea {
 	/*width: 275px;*/
@@ -8925,7 +8925,7 @@ button.button.btn-add:before {
 
 .comment-form input[type="text"], .comment-form input[type="email"] {
     width: 60%;
-    margin-bottom: 15px;
+    margin-bottom: auto;
 }
 .comment-form input {
     padding: 8px 10px;

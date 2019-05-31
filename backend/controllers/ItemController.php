@@ -65,7 +65,7 @@ class ItemController extends Controller
 
             $model = $this->findModel($id);
             $image = Image::findOne(['item_id'=>$id]);
-            if($image!=NULL){
+            if(!isset($image)){
                 $model->deleteImages($image);
             }
             $model->delete();
@@ -266,7 +266,7 @@ class ItemController extends Controller
     {
             $model = $this->findModel($id);
             $image = Image::findOne(['item_id'=>$id]);
-            if($image!=NULL){
+            if(!isset($image)){
                 $model->deleteImages($image);
             }
             $model->delete();

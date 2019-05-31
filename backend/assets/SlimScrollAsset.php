@@ -14,9 +14,7 @@ class SlimScrollAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/grimmlink/jquery-slimscroll';
 
-
     public $js = [
         'jquery.slimscroll.min.js',
-
     ];
 }

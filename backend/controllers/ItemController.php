@@ -264,11 +264,13 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $model->deleteImages();
-        $model->delete();
-
-        return $this->redirect(Yii::$app->urlHelper->to(['item/index']));
+            $model = $this->findModel($id);
+            $image = Image::findOne(['item_id'=>$id]);
+            if($image!=NULL){
+                $model->deleteImages($image);
+            }
+            $model->delete();
+        return $this->redirect(['index']);
     }
 
     /**

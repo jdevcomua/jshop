@@ -112,6 +112,7 @@ class CartController extends Controller
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setTo($model->mail)
                         ->setSubject('subject')
+                        ->setHtmlBody('<br>das</br>')
                         ->send();
                 }
                 Yii::$app->session->setFlash('success','Success checkout!');
@@ -123,7 +124,7 @@ class CartController extends Controller
                     ->setTo(Yii::$app->params['orderEmail'])
                     ->setSubject('subject')
                     ->send();
-                return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/profile']));
+                return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/dashboard']));
             }
         }
         $sum = Yii::$app->cart->getSum();

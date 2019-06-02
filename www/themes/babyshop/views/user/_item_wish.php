@@ -37,8 +37,16 @@
             <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price"><?=number_format((float)$model->item->getNewPrice(), 2, '.', '') ?></span> </span> </div>
         </div>
     </td>
-    <td class="wishlist-cell4 customer-wishlist-item-cart"><div class="cart-cell">
-            <button type="button" title="Add to Cart" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart"><span><span><?= Yii::t('app','Add to Cart')?></span></span></button>
+    <td class="wishlist-cell4 customer-wishlist-item-cart">
+        <div class="cart-cell">
+            <button  title="<?=Yii::t('app','Add to Cart')?>" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart">
+                <span><?= Yii::t('app','Add to Cart')?></span>
+            </button>
         </div>
-    <td class="wishlist-cell5 customer-wishlist-item-remove last"><a href="" onClick="removeWish(<?=$model->id?>);" title="Clear Cart" class="remove-item"><span><span></span></span></a></td>
+    </td>
+    <td class="wishlist-cell5 customer-wishlist-item-remove last">
+        <div class="cart-cell">
+            <button type="button" title="<?=Yii::t('app','Delete the Wish')?>" onClick="removeWish(<?=$model->id?>);" class="button remove-item"><span></span></button>
+        </div>
+    </td>
 </tr>

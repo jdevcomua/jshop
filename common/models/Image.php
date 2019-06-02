@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use SplFileInfo;
 use Yii;
 
 /**
@@ -63,6 +64,9 @@ class Image extends \yii\db\ActiveRecord
      */
     public function getImageUrl()
     {
-        return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->name;
+        $info = new SplFileInfo($this->name);
+        $path_parts = pathinfo($this->name);
+        return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']
+            . Item::SIZE. $info->getExtension();
     }
 }

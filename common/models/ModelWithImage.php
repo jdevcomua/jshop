@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use SplFileInfo;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -26,28 +27,17 @@ class ModelWithImage extends Model
         return [];
     }
 
-    public function deleteImage()
+    public function deleteImage($imageName)
     {
-
-        if (file_exists(Yii::getAlias('@www') .Item::WEB_IMG.$this->image)) {
-            unlink( Yii::getAlias('@www') .Item::WEB_IMG. $this->image);
-            return true;
-        }else{
-            return false;
+        if (file_exists($this->pathToFile($imageName))){
+            unlink( $this->pathToFile($imageName));
         }
 
-    }
-
-    public function beforeDelete()
-    {
-        if (parent::beforeDelete()) {
-            $this->deleteImage();
-            return true;
-        } else {
-            return false;
+        if (file_exists($this->pathToFile($imageName, Item::SIZE))){
+            unlink($this->pathToFile($imageName, Item::SIZE));
         }
+        $this->image = null;
     }
-
     /**
      * @return string path of dir with images
      */
@@ -62,6 +52,17 @@ class ModelWithImage extends Model
     public function getImageUrl()
     {
         return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->image;
+    }
+
+    public function pathToFile($fileName, $size = null)
+    {
+        if(!empty($size)){
+            $info = new SplFileInfo($fileName);
+            $path_parts = pathinfo($fileName);
+            return Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'] . $size . $info->getExtension();
+        }else{
+            return Yii::getAlias('@www') .Item::WEB_IMG.$fileName;
+        }
     }
 
 }

@@ -1772,7 +1772,7 @@ select#billing-address-select {
 	width: 100%;
 }
 .group-select li input.input-text, .group-select li textarea {
-	width: 100%;
+	width: 50%;
 }
 .group-select li select {
 	width: 100% !important;

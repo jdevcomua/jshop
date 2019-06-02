@@ -262,3 +262,6 @@ input[type=number].js-qty__num::-webkit-outer-spin-button {
 .order-table thead {
     white-space: nowrap;
 }
+.input-text{
+    margin-bottom: 0;!important;
+}

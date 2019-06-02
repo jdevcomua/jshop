@@ -1,4 +1,7 @@
 <?php
+
+use common\models\Image;
+
 return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'litvinova.a95@gmail.com',

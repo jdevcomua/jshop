@@ -69,7 +69,7 @@ class User extends Model implements \yii\web\IdentityInterface
             [['mail', 'vk_id', 'fb_id'], 'unique'],
             [['mail'], 'trim'],// обрезает пробелы вокруг "email"
             [['password'], 'string', 'length' => [4, 25]],
-            [['name', 'surname', 'address', 'phone', 'access_token', 'password'], 'string'],
+            [['name', 'surname', 'address', 'phone', 'access_token', 'password','city'], 'string'],
             [['mail'], 'email'],
         ];
     }

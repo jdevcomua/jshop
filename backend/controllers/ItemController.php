@@ -26,7 +26,7 @@ class ItemController extends Controller
         return [
             'uploadPhoto' => [
                 'class' => 'backend\widget\CropWidget\actions\UploadAction',
-                'url' => Yii::$app->params['myServerImageLink'],
+                'url' => Yii::$app->getRequest()->getHostInfo() . Item::IMG,
                 'path' => '@www/web/img',
             ]
         ];
@@ -65,7 +65,7 @@ class ItemController extends Controller
 
             $model = $this->findModel($id);
             $image = Image::findOne(['item_id'=>$id]);
-            if($image!=NULL){
+            if(isset($image)){
                 $model->deleteImages($image);
             }
             $model->delete();
@@ -110,7 +110,7 @@ class ItemController extends Controller
         if(Yii::$app->request->isAjax){
             $imageUrl = Yii::$app->request->post('src');
             $model->deleteImagesFromServer(basename($imageUrl));
-            return NULL;
+            return null;
         }
 
 
@@ -226,10 +226,10 @@ class ItemController extends Controller
             if($image!=NULL){
                 $model->deleteImages($image);
             }else{
-                $data = Yii::$app->request->post();
-                $imageurl = $data['src'];
-                $model->deleteImagesFromServer(basename($imageurl));
+                $imageUrl = Yii::$app->request->post('src');
+                $model->deleteImagesFromServer(basename($imageUrl));
             }
+            return null;
         }
 
         if ($model->load($request->post())) {
@@ -264,11 +264,13 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $model->deleteImages();
-        $model->delete();
-
-        return $this->redirect(Yii::$app->urlHelper->to(['item/index']));
+            $model = $this->findModel($id);
+            $image = Image::findOne(['item_id'=>$id]);
+            if(isset($image)){
+                $model->deleteImages($image);
+            }
+            $model->delete();
+        return $this->redirect(['index']);
     }
 
     /**

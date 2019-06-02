@@ -333,7 +333,7 @@ function removeWish(id) {
         url: '/site/delwish',
         data: {wish_id: id},
         dataType: 'json',
-        success: function () {
+        complete: function () {
             $.pjax.reload({container: '#wishlist'})
         }
     });
@@ -373,8 +373,9 @@ function setRating(rating) {
 }
 
 $('#submit_step_one').on('click', function(){
+
     if(!$('#order-form')[0].checkValidity()) {
-        $('#submit').click();
+
     } else {
         document.getElementById('checkout-step-address').style.display = 'none';
         $('#opc-address').removeClass('allow active');
@@ -385,6 +386,7 @@ $('#submit_step_one').on('click', function(){
         }, 800);
         $('#address_view').text('Address: ' + $('#orders-address').val());
     }
+    $('#submit').click();
 });
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
@@ -434,7 +436,7 @@ $(document).on('input', '.js-qty__num', function(){ // изменение зна
 });
 
 $('#wishlist').on('pjax:end', function(){ // изменение значения количество в корзине
-    showPopup('All wish list items add to cart');
+    // showPopup('All wish list items add to cart');
     refreshCarts();
 });
 
@@ -448,3 +450,12 @@ $(document).ready(function () {
         }
     }, 1);
 });
+function orderCheck(check,event) {
+    if(check == 0){
+        showPopup('Cart is empty');
+        event.preventDefault();
+        return false;
+    }else{
+        return true;
+    }
+}

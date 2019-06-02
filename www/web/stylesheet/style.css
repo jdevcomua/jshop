@@ -3933,7 +3933,6 @@ margin: 0 0;
 
 .featured-pro .pro-img .pro-info {
 	color: #383838;
-	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0.5px;
 	margin: auto;
@@ -6432,7 +6431,7 @@ button.button.send:before {
 	border: 1px solid #d1d1d1;
 	padding: 10px 15px;
 	outline: none;
-	width: 98%;
+	width: 50%;
 }
 .group-select li .input-box input.input-text, .group-select li .input-box textarea {
 	/*width: 275px;*/
@@ -8926,7 +8925,7 @@ button.button.btn-add:before {
 
 .comment-form input[type="text"], .comment-form input[type="email"] {
     width: 60%;
-    margin-bottom: 15px;
+    margin-bottom: auto;
 }
 .comment-form input {
     padding: 8px 10px;
@@ -9484,6 +9483,13 @@ button.button.submit:before {
 }
 .product-view .box-up-sell .subtitle {
 	margin-right: 0;
+}
+.mini-products-list .item{
+	margin-top: 10px;
+}
+.mini-products-list{
+	display: flex;
+	flex-direction: column;
 }
 .mini-products-list .price-box * {
 	display: inline;
@@ -10122,7 +10128,7 @@ button.button.btn-proceed-checkout span {
 
 .edit-wishlist {display:none}
 
-#wishlist-table a.remove-item {
+#wishlist-table .remove-item {
 	padding: 0px 11px;
 	color: #333;
 	background-color: inherit;
@@ -10139,7 +10145,7 @@ button.button.btn-proceed-checkout span {
 	line-height:48px;
 	text-align:center
 }
-#wishlist-table a.remove-item:before {
+#wishlist-table .remove-item:before {
 	content: "\f014";
 	font-family: FontAwesome;
 	font-size:16px

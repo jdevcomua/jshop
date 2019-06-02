@@ -155,7 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <ul class="checkout">
                                     <li>
                                         <form action="<?=\yii\helpers\Url::toRoute('cart/order')?>" >
-                                            <button type="submit" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick=""><span><?=Yii::t('app','Proceed to Checkout')?></span></button>
+                                            <button type="submit" title="Proceed to Checkout" class="button btn-proceed-checkout" onClick="orderCheck(<?php if($sum==0){echo 0;}else{echo 1;}?>,event)"><span><?=Yii::t('app','Proceed to Checkout')?></span></button>
                                         </form>
                                     </li>
                                 </ul>

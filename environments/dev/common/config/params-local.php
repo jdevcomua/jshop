@@ -1,4 +1,4 @@
 <?php
 return [
-    'myServerImageLink' => '/img/',
+    'serverUrl' => 'http://jshop.loc',
 ];

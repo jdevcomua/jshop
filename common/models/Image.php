@@ -66,6 +66,7 @@ class Image extends \yii\db\ActiveRecord
     {
         $info = new SplFileInfo($this->name);
         $path_parts = pathinfo($this->name);
-        return Yii::$app->params['myServerImageLink'].$path_parts['filename'] .Item::SIZE. $info->getExtension();
+        return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']
+            . Item::SIZE. $info->getExtension();
     }
 }

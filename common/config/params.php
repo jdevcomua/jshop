@@ -13,6 +13,5 @@ return [
     'vkSecretKey' => 'bzvW6ULy2hUZhf7Nn48C',
     'amazonImageLink' => 'https://s3.eu-central-1.amazonaws.com/umo4ka/',
     'pageSize' => 20,
-    'myServerImageLink' => '/img/',
     'defaultKitImage' => '/images/noimage.png',
 ];

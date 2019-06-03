@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $item \common\models\Item */
 /* @var $inCart boolean */
 /* @var $message string */
+/* @var $vote \common\models\Vote */
 /* @var $related \common\models\Item[] */
 
 $this->title = $item->title;

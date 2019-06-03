@@ -188,6 +188,6 @@ class ItemCat extends ModelWithImage
     {
         $info = new SplFileInfo($this->image);
         $path_parts = pathinfo($this->image);
-        return Yii::$app->params['myServerImageLink'].Item::IMG.$path_parts['filename'] .Item::SIZE. $info->getExtension();
+        return Yii::$app->params['myServerImageLink'].$path_parts['filename'] .Item::SIZE. $info->getExtension();
     }
 }

@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\Orders;
 use common\models\User;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
@@ -11,6 +12,7 @@ use yii\widgets\Breadcrumbs;
 //use Yii;
 $controller = Yii::$app->controller->id;
 AppAsset::register($this);
+$newOrdersCount = Orders::find()->where(['order_status' => Orders::STATUS_NEW])->count();
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -177,7 +179,7 @@ AppAsset::register($this);
                 <ul class="sidebar-menu">
                     <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['orders/index']) ?>">
-                            <i class="fa fa-shopping-bag"></i><span>Заказы</span>
+                            <i class="fa fa-shopping-bag"></i><span>Заказы</span><?php if(!empty($newOrdersCount)):?><div id="new_order_count"><?=$newOrdersCount?></div><?php endif;?>
                         </a>
                     </li>
                     <li class="<?= $controller == 'item' ? 'active' : '' ?>">
@@ -223,6 +225,11 @@ AppAsset::register($this);
                     <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['banner/index']) ?>">
                             <i class="fa fa-bullhorn "></i><span>Баннеры</span>
+                        </a>
+                    </li>
+                    <li class="<?= $controller == 'slider' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['slider/index']) ?>">
+                            <i class="fa fa-sliders"></i><span>Слайдер</span>
                         </a>
                     </li>
                 </ul>

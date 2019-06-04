@@ -64,5 +64,17 @@ class ModelWithImage extends Model
             return Yii::getAlias('@www') .Item::WEB_IMG.$fileName;
         }
     }
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'image');
+        if (isset($file)) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $this->deleteImage($fileName);
+            $file->saveAs($this->getPath() . $fileName);
+            $this->image = $fileName;
+            $this->save();
+            return true;
+        }
+    }
 
 }

@@ -204,7 +204,7 @@ class SiteController extends Controller
         $items = $this->filter($selected);
         $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
-        $category = ItemCat::findOne($id);
+        $category = ItemCat::findModel($id);
         $category_ids = $category->getFamily();
         $items->orFilterWhere(['in','category_id',$category_ids]);
 

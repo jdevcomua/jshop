@@ -11272,18 +11272,18 @@ address {
 .social a {
 	transition: background 400ms ease-in-out;
 }
-.payment-accept {
+.language-change {
 	color: #333333;
 	font-size: 14px;
 	margin: auto;
 	overflow: hidden;
 	float: right
 }
-.payment-accept img {
+.language-change img {
 	margin-right: 10px;
 
 }
-.payment-accept img:hover {
+.language-change img:hover {
 	opacity: 1
 }
 .glyphicon-remove1:before {
@@ -12989,6 +12989,10 @@ select#shipping-address-select {
   position: absolute;
   width: 100%;
   z-index: 9;
+}
+.flag{
+	width: 32px;
+	height: 21px;
 }
 
 

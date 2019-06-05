@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property integer $parent_id
  * @property string $image
+ * @property string $parse_url
  * @property integer $lft
  * @property integer $rgt
  * @property integer $depth
@@ -66,7 +67,7 @@ class ItemCat extends ModelWithImage
     {
         return [
             [['title'], 'required'],
-            [['title', 'image'], 'string'],
+            [['title', 'image','parse_url'], 'string'],
             [['parent_id', 'active'], 'integer']
         ];
     }
@@ -108,6 +109,7 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
+            'parse_url' => 'URL',
         ];
     }
 

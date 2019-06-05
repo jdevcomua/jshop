@@ -4,6 +4,7 @@ namespace common\models;
 
 use SplFileInfo;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "slider".
@@ -16,15 +17,18 @@ use Yii;
  * @property int $type
  */
 
-const MAIN_SLIDER = 1;
-const CATEGORY_MIDLE_SLIDER = 2;
-const CATEGORY_LEFT_SLIDER = 3;
+
 
 class Slider extends ModelWithImage
 {
     /**
      * {@inheritdoc}
      */
+    const MAIN_SLIDER = 1;
+    const CATEGORY_MIDLE_SLIDER = 2;
+    const CATEGORY_LEFT_SLIDER = 3;
+    public $imageFile;
+
     public static function tableName()
     {
         return 'slider';
@@ -37,7 +41,8 @@ class Slider extends ModelWithImage
     {
         return [
             [['type'], 'integer'],
-            [['title', 'largeTitle', 'description', 'image'], 'string', 'max' => 255],
+            [['title', 'largeTitle', 'description'], 'string', 'max' => 255],
+            [[ 'image'], 'file'],
         ];
     }
 
@@ -60,15 +65,26 @@ class Slider extends ModelWithImage
         return Yii::$app->getRequest()->getHostInfo().Item::IMG.$this->image;
     }
 
-    public function pathToFile($fileName, $size = null)
+    public function beforeDelete()
     {
-        if(!empty($size)){
-            $info = new SplFileInfo($fileName);
-            $path_parts = pathinfo($fileName);
-            return Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'] . $size . $info->getExtension();
+        if(isset($this->image) && file_exists($this->pathToFile($this->image))){
+            return unlink( $this->pathToFile($this->image));
         }else{
-            return Yii::getAlias('@www') .Item::WEB_IMG.$fileName;
+            return true;
+        }
+
+    }
+
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        if (isset($file)) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $this->deleteImage($fileName);
+            $file->saveAs($this->getPath() . $fileName);
+            $this->image = $fileName;
         }
     }
+
 
 }

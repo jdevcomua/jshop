@@ -67,9 +67,11 @@ class SliderController extends Controller
     {
         $model = new Slider();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
             $model->upload();
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -87,14 +89,11 @@ class SliderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $image = $model->image;
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
+        if ($model->load(Yii::$app->request->post())){
             $model->upload();
-            if(empty($model->image)){
-                $model->image=$image;
-                $model->save();
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -111,11 +110,6 @@ class SliderController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = Slider::findOne($id);
-        if(!empty($model->image))
-        {
-            $model->deleteImage($model->image);
-        }
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
@@ -139,15 +133,9 @@ class SliderController extends Controller
     public function actionDel()
     {
         foreach (Yii::$app->request->post()['id'] as $id) {
-
             $model = Slider::findOne($id);
-            if(!empty($model->image))
-            {
-                $model->deleteImage($model->image);
-            }
             $model->delete();
         }
-
         return $this->redirect(['index']);
     }
 }

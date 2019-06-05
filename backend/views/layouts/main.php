@@ -12,7 +12,6 @@ use yii\widgets\Breadcrumbs;
 //use Yii;
 $controller = Yii::$app->controller->id;
 AppAsset::register($this);
-$newOrdersCount = Orders::find()->where(['order_status' => Orders::STATUS_NEW])->count();
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -179,7 +178,7 @@ $newOrdersCount = Orders::find()->where(['order_status' => Orders::STATUS_NEW])-
                 <ul class="sidebar-menu">
                     <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['orders/index']) ?>">
-                            <i class="fa fa-shopping-bag"></i><span>Заказы</span><?php if(!empty($newOrdersCount)):?><div id="new_order_count"><?=$newOrdersCount?></div><?php endif;?>
+                            <i class="fa fa-shopping-bag"></i><span>Заказы</span><?php if(!empty(Yii::$app->controller->countNewOrder)):?><div id="new_order_count"><?=Yii::$app->controller->countNewOrder?></div><?php endif;?>
                         </a>
                     </li>
                     <li class="<?= $controller == 'item' ? 'active' : '' ?>">

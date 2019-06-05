@@ -8,19 +8,22 @@
 
 namespace backend\controllers;
 
+use common\models\Orders;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use Yii;
+
 
 class Controller extends \yii\web\Controller
 {
 
     //public $layout = 'main3';
-
+    public $countNewOrder;
 
     public function beforeAction($action)
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
+        $action->controller->countNewOrder = Orders::find()->where(['order_status' => Orders::STATUS_NEW])->count();
         return parent::beforeAction($action);
     }
 

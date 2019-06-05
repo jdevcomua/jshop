@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
     $image = Html::img($model->getImageUrl(), ['width' => '120px']);
     }
     ?>
-    <?= $form->field($model, 'image')->widget(FileInput::classname(), [
+    <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
         'options' => [
             'multiple' => false,
         ],

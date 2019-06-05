@@ -38,7 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'largeTitle',
             'description',
-            'image',
+            [
+                'attribute'=>'image',
+                'value'=>$model->getImageUrl(),
+                'format'=>['image',['width'=>'300']]
+            ],
+
             'type',
         ],
     ]) ?>

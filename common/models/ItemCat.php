@@ -6,6 +6,7 @@ use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
 use SplFileInfo;
 use Yii;
+use yii\web\NotFoundHttpException;
 use dosamigos\transliterator\TransliteratorHelper;
 use yii\db\ActiveRecord;
 
@@ -190,5 +191,13 @@ class ItemCat extends ModelWithImage
         $path_parts = pathinfo($this->image);
         return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']
             . Item::SIZE. $info->getExtension();
+    }
+    public function findModel($id)
+    {
+        if (($model = ItemCat::findOne(['id' => $id, 'active' => true])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Страница не найдена.');
+        }
     }
 }

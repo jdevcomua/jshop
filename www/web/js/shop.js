@@ -349,10 +349,15 @@ function removeItemFromWishList(id) {
     });
 }
 function refreshCarts() {
+    if (document.getElementById('cart'))
         $.pjax.reload({container: "#cart", async: false});
+
+    if (document.getElementById('cart_cat'))
         $.pjax.reload({container: "#cart_cat", async: false});
-        if (document.getElementById('total_sum'))
-            $.pjax.reload({container: "#total_sum", async: false});
+
+    if (document.getElementById('total_sum'))
+        $.pjax.reload({container: "#total_sum", async: false});
+
     return false;
 }
 function cleanCart() {

@@ -109,7 +109,6 @@
                 </div>
                 <div class="col-sm-4 col-xs-12 coppyright"> <?= Yii::t('app','©2019 Copyright')?></div>
                 <div class="col-xs-12 col-sm-4">
-                    <div class="language-change"> <img class="flag" src="images/ukraine-flag-icon-64.png" alt="ukraine"> <img class="flag" src="images/russia-flag-icon-64.png" alt="russia"> <img class="flag" src="images/united-kingdom-flag-icon-64.png" alt="united-kingdom"></div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Slider;
 use common\models\StaticPage;
 use common\models\Stock;
 use common\models\Wish;
@@ -58,6 +59,7 @@ class SiteController extends Controller
             }
         } while ((count($cat_sliders) < 16 && count($cat_sliders) < count(ItemCat::find()->all())));
 
+        $slider = Slider::find()->all();
         $special = Item::findOne(['special' => (int) true, 'active' => true]);
         $best_seller = Item::findAll(['active' => true, 'best_seller' => (int) true]);
         $deal_week = Item::findAll(['active' => true, 'deal_week' => (int) true]);
@@ -87,6 +89,7 @@ class SiteController extends Controller
             'salesCount' => $salesItemsQuery->count(),
             //'topItems' => Item::find()->top()->all(),
             'centerBanners' => $centerBannersImages,
+            'slider' => $slider,
             'rightBanner' => Banner::findOne(['enable' => 1, 'position' => Banner::POSITION_INDEX_RIGHT]),
         ]);
     }
@@ -201,7 +204,7 @@ class SiteController extends Controller
         $items = $this->filter($selected);
         $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
-        $category = ItemCat::findOne($id);
+        $category = ItemCat::findModel($id);
         $category_ids = $category->getFamily();
         $items->orFilterWhere(['in','category_id',$category_ids]);
 

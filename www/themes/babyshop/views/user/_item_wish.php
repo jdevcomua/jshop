@@ -39,7 +39,7 @@
     </td>
     <td class="wishlist-cell4 customer-wishlist-item-cart">
         <div class="cart-cell">
-            <button  title="<?=Yii::t('app','Add to Cart')?>" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart">
+            <button type="button"  title="<?=Yii::t('app','Add to Cart')?>" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart">
                 <span><?= Yii::t('app','Add to Cart')?></span>
             </button>
         </div>

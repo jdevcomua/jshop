@@ -26,7 +26,6 @@ class Slider extends ModelWithImage
      */
     const MAIN_SLIDER = 1;
     const CATEGORY_MIDLE_SLIDER = 2;
-    const CATEGORY_LEFT_SLIDER = 3;
     public $imageFile;
 
     public static function tableName()
@@ -84,6 +83,13 @@ class Slider extends ModelWithImage
             $file->saveAs($this->getPath() . $fileName);
             $this->image = $fileName;
         }
+    }
+    public static function getSliderTypes()
+    {
+        return [
+            static::MAIN_SLIDER => 'Главное меню',
+            static::CATEGORY_MIDLE_SLIDER => 'Центральный слайдер категории',
+        ];
     }
 
 

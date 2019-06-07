@@ -20,7 +20,7 @@ $this->title = Yii::$app->name;
                 <div id='thm-rev-slider' class='rev_slider fullwidthabanner'>
                     <ul>
                         <?php foreach ($slider as $s):
-                            if($s->type===1):?>
+                            if($s->type === Slider::MAIN_SLIDER):?>
 
                             <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='img/<?=$s->image?>'><img src='img/<?=$s->image?>'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image" />
                                 <div class="info">

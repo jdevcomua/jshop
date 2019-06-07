@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-main col-sm-9 col-sm-push-3 product-grid">
                 <div class="pro-coloumn">
                     <div class="category-description std">
-                        <div class="slider-items-products" style="height: 240px">
+                        <div class="slider-items-products">
                             <div id="category-desc-slider" class="product-flexslider hidden-buttons" >
                                 <div class="slider-items slider-width-col1 owl-carousel owl-theme">
                                     <?php foreach ($slider as $s):

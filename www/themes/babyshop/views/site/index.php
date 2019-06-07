@@ -46,7 +46,7 @@ $this->title = Yii::$app->name;
                         <div class="slider-items slider-width-col4 products-grid">
                             <?php foreach ($category_slider as $category) {?>
                             <div class="item"> <a href="<?= $category->getUrl()?>">
-                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->getImageUrl() : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
+                                    <div class="pro-img"><img src="<?= $category->getImageUrl() ?>" alt="<?= $category->title ?>">
                                         <div class="pro-info"><?= $category->title ?></div>
                                     </div>
                                 </a> </div>

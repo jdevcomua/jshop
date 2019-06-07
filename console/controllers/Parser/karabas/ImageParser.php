@@ -6,10 +6,10 @@
  * Time: 10:56
  */
 
-namespace console\components\Parser\karabas;
+namespace console\controllers\Parser\karabas;
 
 
-use console\components\Parser\HttpParser;
+use console\controllers\Parser\HttpParser;
 use Exception;
 use phpQuery;
 

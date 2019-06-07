@@ -1,5 +1,5 @@
 <?php
-namespace console\components\Parser;
+namespace console\controllers\Parser;
 
 use Exception;
 use phpQuery;
@@ -27,7 +27,7 @@ abstract class HttpParser
     protected $data;
 
     /** @var string[] $langs */
-    protected $langs = ['ru', 'uk'];
+    protected $langs = ['ru'];
 
     /** @var int $timeout */
     protected $timeout;
@@ -66,7 +66,9 @@ abstract class HttpParser
         foreach ($this->langs as $lang) {
             $default_opts = ['http' => ['method' => 'GET', 'header' => "{$header}language={$lang}"]];
             $context = stream_context_get_default($default_opts);
+
             $this->contents[$lang] = $this->download($this->link, $context);
+
         }
 
         return $this;

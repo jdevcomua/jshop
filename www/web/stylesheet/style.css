@@ -381,6 +381,9 @@ display: table-cell;
 	z-index: 100;
 	background-color: #fff;
 }
+.no-js{
+	cursor: pointer;
+}
 .search-bar.search-bar-open .search-icon, .no-js .search-bar .search-icon {
 	z-index: 11;
 }
@@ -12684,7 +12687,7 @@ select#shipping-address-select {
 
 }
 .fl-links .clicker:before {
-	content: '\f0c9';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 20px;
 	padding-left: 4px;

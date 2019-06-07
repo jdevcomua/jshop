@@ -43,39 +43,15 @@ use yii\widgets\Pjax;
 
                 <div class="fl-header-right">
                     <div class="fl-links">
-                        <div class="no-js"> <a title="<?=Yii::t('app','Company')?>" class="clicker"></a>
+                        <div class="no-js"> <a  href="<?= Url::toRoute('user/dashboard') ?>" title="<?=Yii::t('app','Dashboard')?>" class="clicker"></a>
                             <div class="fl-nav-links">
-                                <div class="language-currency">
-                                    <div class="fl-language">
-                                        <ul class="lang">
-                                            <li><a href="#"> <img src="/images/english.png" alt="English"> <span><?= Yii::t('app','English')?></span> </a></li>
-                                            <li><a href="#"> <img src="/images/francais.png" alt="French"> <span><?= Yii::t('app','French')?></span> </a></li>
-                                            <li><a href="#"> <img src="/images/german.png" alt="German"> <span><?= Yii::t('app','German')?></span> </a></li>
-                                        </ul>
-                                    </div>
-                                    <!--fl-language-->
-                                    <!-- END For version 1,2,3,4,6 -->
-                                    <!-- For version 1,2,3,4,6 -->
-                                    <div class="fl-currency">
-                                        <ul class="currencies_list">
-                                            <li><a href="#" title="EGP"> £</a></li>
-                                            <li><a href="#" title="EUR"> €</a></li>
-                                            <li><a href="#" title="USD"> $</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--fl-currency-->
-                                    <!-- END For version 1,2,3,4,6 -->
-                                </div>
                                 <ul class="links">
-<!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
-                                    <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
-<!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
                                     <?php if (Yii::$app->user->isGuest) { ?>
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span><?= Yii::t('app','Login')?></span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span><?= Yii::t('app','Registration')?></span></a></li>
                                     <?php } else { ?>
-                                        <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="Wishlist"><?= Yii::t('app','Dashboard')?></a></li>
-                                        <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist"><?= Yii::t('app','Wishlist')?></a></li>
+                                        <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="<?= Yii::t('app','Dashboard')?>"><?= Yii::t('app','Dashboard')?></a></li>
+                                        <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="<?= Yii::t('app','Wishlist')?>"><?= Yii::t('app','Wishlist')?></a></li>
                                         <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span><?= Yii::t('app','Logout')?></span></a></li>
                                     <?php } ?>
                                 </ul>

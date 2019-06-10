@@ -8,8 +8,9 @@ use keltstr\simplehtmldom\SimpleHTMLDom;
 use phpQuery;
 
 
-class CityParser extends  HttpParser
+class CategoryParser extends  HttpParser
 {
+    const TIMEOUT = 60;
     public static $sel = [
         'menu' => '.main-menu-item',
         'main-menu' => '.main-menu',
@@ -42,7 +43,7 @@ class CityParser extends  HttpParser
                 $block_name = pq($block_li->elements[$j]);
                 $block_name = $block_name->find(self::$sel['text']);
                 $data[$count]['name'] = trim($block_name->text());
-                var_dump($data[$count]['name']);
+//                var_dump($data[$count]['name']);
                 $block_sub_menu = pq($block_list->elements[$j]);
                 $block_sub_menu = $block_sub_menu->find(self::$sel['sub_menu_item']);
                 $block_sub_menu = $block_sub_menu->find(self::$sel['sub_menu_item_a']);
@@ -51,17 +52,20 @@ class CityParser extends  HttpParser
                     $data_sub_menu[$count_sub_menu]['link'] = parse_url($this->link)['scheme'].'://'.parse_url($this->link)['host'] . $block_sub_menu_text->attr('href');;
                     $block_sub_menu_text = $block_sub_menu_text->find(self::$sel['sub_menu_item_text']);
                     $data_sub_menu[$count_sub_menu]['name'] = trim($block_sub_menu_text->text());
-                    var_dump($data_sub_menu[$count_sub_menu]['name']);
-                    var_dump($data_sub_menu[$count_sub_menu]['link']);
+//                    var_dump($data_sub_menu[$count_sub_menu]['name']);
+//                    var_dump($data_sub_menu[$count_sub_menu]['link']);
+                    $link = new SubCategoryParse($data_sub_menu[$count_sub_menu]['link'], self::TIMEOUT);
+                    $link->downloadContent()->parseData();
                     $count_sub_menu++;
                 }
                 $count++;
             }
         }
 
-        $this->data = $data;
+        $this->data = $data;/*Need to change*/
         return $this;
     }
+
 
     function download($url, $context = null)
     {
@@ -81,17 +85,4 @@ class CityParser extends  HttpParser
 
         return $content;
     }
-//try{
-//$request = $this->client->get($url);
-//$this->lastResponse = $request->send();
-//
-//$page = SimpleHTMLDom::str_get_html($this->lastResponse->content);
-//foreach($page->find('.main-menu-item') as $maincategory){
-//$cat_name = $maincategory->find('.main-menu-item-text');
-//$cat_name = reset($cat_name)->plaintext;
-//echo $cat_name;
-//}
-//}catch(Exception $e){
-//    echo $e->getMessage() .' '. $e->getCode() .' '. $e->getLine() . ' ' .$e->getFile();
-//}
 }

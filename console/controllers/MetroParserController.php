@@ -8,8 +8,8 @@ use common\models\Business;
 use common\models\City;
 use common\models\ParseKarabas;
 use common\models\SystemLog;
-use console\controllers\Parser\karabas\CityParser;
-use console\controllers\Parser\karabas\ConcertParse;
+use console\controllers\Parser\karabas\CategoryParser;
+use console\controllers\Parser\karabas\SubCategoryParse;
 use console\controllers\Parser\karabas\ImageParser;
 use DateTimeZone;
 use Yii;
@@ -18,10 +18,6 @@ use yii\console\Controller;
 class MetroParserController extends Controller
 {
     const TIMEOUT = 60;
-    const CITY_CACHE = 'city_data';
-    const IS_FILM = 0;
-    const IS_CHECKED = 0;
-    const AFISHA_CATEGORY_ID = 8;
 
     private $afishaTypes = [
         'newyear',
@@ -57,12 +53,10 @@ class MetroParserController extends Controller
     /**
      * Парсит список городов и добавляет в кеш
      */
-    public function actionParseCity(){
-        $link = new CityParser('https://metro.zakaz.ua/ru/', self::TIMEOUT);
+    public function actionParseCategory(){
+        $link = new CategoryParser('https://metro.zakaz.ua/ru/', self::TIMEOUT);
         $link->downloadContent()->parseData();
-        $categories = $link->getData();
 
-//        var_dump($categories);
     }
 
     /**
@@ -92,7 +86,7 @@ class MetroParserController extends Controller
         Yii::$app->language = 'ru-RU';
 
         foreach ($this->afishaTypes as $afishaType){
-            $link = new CityParser('https://karabas.com/' . $afishaType . '/', self::TIMEOUT);
+            $link = new CategoryParser('https://karabas.com/' . $afishaType . '/', self::TIMEOUT);
             $link->downloadContent()->parseData();
             $cities = $link->getData();
 
@@ -297,7 +291,7 @@ class MetroParserController extends Controller
                 //если город активный и пропаршен
                 if ($city_in_db->title == $city['name']){
                     //парсим список концертов
-                    $link = new ConcertParse($city['link'], self::TIMEOUT);
+                    $link = new SubCategoryParse($city['link'], self::TIMEOUT);
                     $link->downloadContent()->parseData();
                     $concerts = $link->getData();
                     if (!isset($concerts)){

@@ -12997,6 +12997,9 @@ select#shipping-address-select {
 	width: 32px;
 	height: 21px;
 }
+.count-of-item{
+	width: 10%;
+}
 
 
 /*	Testimonials */

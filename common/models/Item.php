@@ -26,6 +26,7 @@ use Eventviva\ImageResize;
  * @property string $barcode
  * @property string $code
  * @property float $quantity
+ * @property integer $metric
  * @property integer $active
  * @property integer $top
  * @property float $self_cost
@@ -61,6 +62,8 @@ class Item extends Model implements CartAdd
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
     const IMAGE_SMALL = 'small_';
+    const METRIC_PIECES = 1;
+    const METRIC_KG = 2;
 
 
 
@@ -70,11 +73,11 @@ class Item extends Model implements CartAdd
     public function rules()
     {
         return [
-            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week'], 'integer'],
+            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','metric'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['addition_date','imageFiles'], 'safe'],
-            [['cost', 'self_cost', 'quantity'], 'number'],
+                [['cost', 'self_cost', 'quantity'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
@@ -93,6 +96,7 @@ class Item extends Model implements CartAdd
             'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
+            'metric' => Yii::t('app', 'Метрика измерения'),
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
             'count_of_views' => Yii::t('app', 'Количество просмотров'),
@@ -525,5 +529,18 @@ class Item extends Model implements CartAdd
         }else{
             return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
         }
+    }
+    public static function getMetric()
+    {
+        return [
+            static::METRIC_PIECES => 'шт.',
+            static::METRIC_KG => 'кг',
+        ];
+    }
+    public function getMetricTitle()
+    {
+        $titles = static::getMetric();
+
+        return key_exists($this->metric, $titles) ? $titles[$this->metric] : null;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use \yii\widgets\MaskedInput;
 
 /* @var $this \yii\web\View */
 /* @var $model common\models\User */
@@ -45,7 +46,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $form->field($model, 'address')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'Address'))?>
                             </li>
                             <li>
-                                <?= $form->field($model, 'phone')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'Phone number'))?>
+                                <?= $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-box input-text',
+                                    'mask' => '+38 (099) 999-99-99',
+                                    'options' => [
+                                        'class' => 'input-box input-text',
+                                        'id' => 'phone2',
+                                        'placeholder' => Yii::t('app', 'Phone number')
+                                    ],
+                                    'clientOptions' => [
+                                        'clearIncomplete' => true
+                                    ]
+                                ])->label(Yii::t('app', 'Phone number')) ?>
                             </li>
                         </ul>
 

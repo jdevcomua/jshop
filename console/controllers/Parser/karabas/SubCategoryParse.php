@@ -26,6 +26,8 @@ class SubCategoryParse extends  HttpParser
 
         $blocks = $document->find(self::$sel['category']);
 
+        $parse = json_encode($document);
+        dg($document);
         $count = 0;
         for ($i = 0; $i < count($blocks); $i++) {
             $block_ru = pq($blocks->elements[$i]);

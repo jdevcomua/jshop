@@ -103,7 +103,7 @@ use yii\widgets\Pjax;
                     </div>
                     <!--mini-cart-->
                     <div class="collapse navbar-collapse">
-                        <form class="navbar-form" role="search" method="get" action="">
+                        <form class="navbar-form" role="search" method="get" action="search">
                             <div class="input-group">
                                 <input id="search" name="search" type="text" class="form-control" placeholder="Search">
                                 <span class="input-group-btn">

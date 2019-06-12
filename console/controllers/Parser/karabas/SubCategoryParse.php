@@ -5,6 +5,8 @@ namespace console\controllers\Parser\karabas;
 use console\controllers\Parser\HttpParser;
 use Exception;
 use phpQuery;
+use yii\base\Object;
+use yii\helpers\Json;
 
 class SubCategoryParse extends  HttpParser
 {
@@ -24,24 +26,69 @@ class SubCategoryParse extends  HttpParser
         $document = $this->contents['ru'];
         $data = [];
 
-        $blocks = $document->find(self::$sel['category']);
+        $blocks = $document->find('script[type="text/react-state"]');
 
-        $parse = json_encode($document);
-        dg($document);
-        $count = 0;
-        for ($i = 0; $i < count($blocks); $i++) {
-            $block_ru = pq($blocks->elements[$i]);
-            $block_li = $block_ru->find(self::$sel['sub_menu']);
-            for ($i = 0; $i < count($block_li); $i++) {
-                $block_text = pq($block_li->elements[$i]);
-                $block_text = $block_text->find(self::$sel['sub_menu_text']);
-                $data[$count]['link'] = parse_url($this->link)['scheme'].'://'.parse_url($this->link)['host'] . $block_text->attr('href');;
-                $data[$count]['name'] = trim($block_text->text());
-                $link = new ItemParse( $data[$count]['link'], self::TIMEOUT);
-                $link->downloadContent()->parseData();
-                var_dump($data[$count]['name']);
-                $count++;
-            }
+
+        $blocks = str_replace("\n", '',$blocks->text());
+        $blocks = str_replace("", '',$blocks);
+        $blocks = str_replace('\"', '"',$blocks);
+        $blocks = str_replace('\\\'', '\'',$blocks);
+        $blocks = str_replace('}{', '},{',$blocks);
+
+
+        $blocks = Json::decode('['.$blocks.']');
+        $myCurl = curl_init();
+
+        curl_setopt_array($myCurl, array(
+            CURLOPT_URL => 'https://metro.zakaz.ua/api/query.json',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode([
+                'meta'=>new \stdClass(),
+                'request'=>[
+                    [
+                        'args'=>['store_id'=>'48215611','slugs'=>['bread'],'facets'=>[],'sort'=>'catalog','extended'=>true],
+                        'v'=>'0.1',
+                        'type'=>'store.products',
+                        'id'=>'catalog',
+                        'offset'=>2,
+                        'join'=>[
+                            [
+                                'apply_as'=>'facets_base',
+                                'on'=>['slug','slug'],
+                                'request'=>[
+                                    'v'=>'0.1',
+                                    'type'=>'store.facets',
+                                    'args'=>[
+                                        'store_id'=>'$request.[-2].args.store_id',
+                                        'slug'=>'$request.[-2].args.slugs|first',
+                                        'basic_facets'=>[]
+                                    ]
+                                ]
+                            ],
+                            [
+                                'apply_as'=>'category_tree',
+                                'on'=>['slug','requested_slug'],
+                                'request'=>[
+                                    'v'=>'0.1',
+                                    'type'=>'store.department_tree',
+                                    'args'=>[
+                                        'store_id'=>'$request.[-2].args.store_id',
+                                        'slug'=>'$request.[-2].args.slugs|first'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+            ])
+        ));
+
+        $response = curl_exec($myCurl);curl_close($myCurl);
+        $response = Json::decode('['.$response.']');
+        dg($response);
+        for ($i = 0; $i < count($blocks[0]['catalog'][0]['items']); $i++) {
+            var_dump($blocks[0]['catalog'][0]['items'][$i]['name']);
         }
         die;
         $this->data = $data;/*Need to change*/

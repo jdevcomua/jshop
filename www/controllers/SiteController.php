@@ -207,7 +207,7 @@ class SiteController extends Controller
         $category = ItemCat::findModel($id);
         $category_ids = $category->getFamily();
         $items->orFilterWhere(['in','category_id',$category_ids]);
-
+        $slider = Slider::find()->all();
 
 
         if ($search = $request->get('search')) {
@@ -264,6 +264,7 @@ class SiteController extends Controller
             'category' => $category,
             'count' => $items->count(),
             'quantity' => $quantity,
+            'slider' => $slider,
             'mapData' => $mapData,
             'isajax' => false,
         ]);

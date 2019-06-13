@@ -67,7 +67,7 @@ class SliderController extends Controller
     {
         $model = new Slider();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->upload();
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);

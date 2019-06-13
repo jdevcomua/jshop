@@ -187,7 +187,6 @@ class Item extends Model implements CartAdd
         if (count($this->images) > 0) {
             $keys = array_keys($this->images);
             $firstKey = array_shift($keys);
-
             return $this->images[$firstKey]->getImageUrl();
         } else {
             return Yii::$app->params['defaultKitImage'];

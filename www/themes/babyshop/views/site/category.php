@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Slider;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
@@ -17,7 +18,7 @@ use common\components\Theme;
 /* @var $minCost float */
 /* @var $maxCost float */
 /* @var $countCosts string[] */
-
+/* @var $slider Slider[] */
 
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,29 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="pro-coloumn">
                     <div class="category-description std">
                         <div class="slider-items-products">
-                            <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                            <div id="category-desc-slider" class="product-flexslider hidden-buttons" >
                                 <div class="slider-items slider-width-col1 owl-carousel owl-theme">
-
-                                    <!-- Item -->
-                                    <div class="item"> <a href="#"><img alt="" src="/images/category-img1.jpg"></a>
-                                        <div class="cat-img-title cat-bg cat-box">
-                                            <div class="small-tag"><?= Yii::t('app','Season')?> 2018</div>
-                                            <h2 class="cat-heading"><?= Yii::t('app','Organic')?> <span><?= Yii::t('app','World')?></span></h2>
-                                            <p><?= Yii::t('app','GET 40% OFF &sdot; Free Delivery')?> </p>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-
-                                    <!-- Item -->
-                                    <div class="item"> <a href="#"><img alt="" src="/images/category-img2.jpg"></a>
-                                        <div class="cat-img-title cat-bg cat-box">
-                                            <div class="small-tag"><?= Yii::t('app','Green World')?></div>
-                                            <h2 class="cat-heading"><?= Yii::t('app','Vegetable')?> <span><?= Yii::t('app','Sale')?></span></h2>
-                                            <p><?= Yii::t('app','Save 70% on all items')?></p>
-                                        </div>
-                                        <!-- End Item -->
-
-                                    </div>
+                                    <?php foreach ($slider as $s):
+                                        if($s->type === Slider::CATEGORY_MIDLE_SLIDER):?>
+                                            <!-- Item -->
+                                            <div class="item"> <a href="#"><img alt="<?= $s->title?>" src="<?=$s->getImageUrl()?>"></a>
+                                                <div class="cat-img-title cat-bg cat-box">
+                                                    <div class="small-tag"><?= $s->title?></div>
+                                                    <h2 class="cat-heading"><?= $s->largeTitle?></h2>
+                                                    <p><?= $s->description?> </p>
+                                                </div>
+                                            </div>
+                                            <!-- End Item -->
+                                        <?php endif;endforeach;?>
                                 </div>
                             </div>
                         </div>
@@ -275,42 +267,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--                                </ol>-->
 <!--                            </dd>-->
                         </dl>
-                    </div>
-                </div>
-                <div class="custom-slider">
-                    <div>
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active"><img src="/images/slide2.jpg" alt="slide3">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Fruit Shop')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Up to 70% Off')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a></div>
-                                </div>
-                                <div class="item"><img src="/images/slide3.jpg" alt="slide1">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Black Grapes')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Mega Sale')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
-                                    </div>
-                                </div>
-                                <div class="item"><img src="/images/slide1.jpg" alt="slide2">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Food Farm')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Up to 50% Off')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only"><?= Yii::t('app','Previous')?></span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only"><?= Yii::t('app','Next')?></span> </a></div>
                     </div>
                 </div>
 

@@ -3,11 +3,11 @@
 use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Slider;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Slider */
 /* @var $form yii\widgets\ActiveForm */
-
 ?>
 
 <div class="slider-form">
@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
         ]
     ]);  ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList(Slider::getSliderTypes(),[ 'prompt' => Yii::t('app','Выберите тип слайдера')]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

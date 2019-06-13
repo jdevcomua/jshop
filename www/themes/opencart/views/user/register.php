@@ -22,7 +22,7 @@ use yii\helpers\Url;
             <legend><?= Yii::t('app', 'Ваши персональные данные');?></legend>
             <?= $form->field($model, 'username'); ?>
             <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'От 4 до 25 символов']); ?>
-            <?= $form->field($model, 'mail'); ?>
+            <?= $form->field($model, 'email'); ?>
             <?= $form->field($model, 'name'); ?>
             <?= $form->field($model, 'surname'); ?>
             <?= $form->field($model, 'phone'); ?>

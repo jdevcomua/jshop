@@ -35,7 +35,6 @@ use Eventviva\ImageResize;
  * @property float $deal_week
  * @property string $link
  * @property string $image
- *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
  * @property OrderItem[] $orderItems
@@ -45,6 +44,8 @@ use Eventviva\ImageResize;
  * @property Kit[] $kits
  * @property Image[] $images
  * @property Stock[] $stocks
+ *
+ * @property string $metricTitle
  */
 class Item extends Model implements CartAdd
 {

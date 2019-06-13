@@ -12,7 +12,7 @@ class m190610_123042_add_metric_column_to_item_table extends Migration
      */
     public function up()
     {
-        $this->addColumn('item', 'metric', $this->integer()->null());
+        $this->renameColumn('user', 'mail','email');
     }
 
     /**
@@ -20,6 +20,6 @@ class m190610_123042_add_metric_column_to_item_table extends Migration
      */
     public function down()
     {
-        $this->dropColumn('item', 'metric');
+        $this->renameColumn('user', 'email','mail');
     }
 }

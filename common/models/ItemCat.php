@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property integer $parent_id
  * @property string $image
  * @property string $parse_url
+ * @property string $slug
  * @property integer $lft
  * @property integer $rgt
  * @property integer $depth
@@ -67,7 +68,7 @@ class ItemCat extends ModelWithImage
     {
         return [
             [['title'], 'required'],
-            [['title', 'image','parse_url'], 'string'],
+            [['title', 'image','parse_url','slug'], 'string'],
             [['parent_id', 'active'], 'integer']
         ];
     }
@@ -77,13 +78,6 @@ class ItemCat extends ModelWithImage
      */
     public function behaviors() {
         return [
-            'tree' => [
-                'class' => NestedSetsBehavior::className(),
-                 'treeAttribute' => 'tree',
-                // 'leftAttribute' => 'lft',
-                // 'rightAttribute' => 'rgt',
-                // 'depthAttribute' => 'depth',
-            ],
         ];
     }
 
@@ -110,6 +104,7 @@ class ItemCat extends ModelWithImage
             'imageFile' => 'Изображение',
             'active' => 'Активно',
             'parse_url' => 'URL',
+            'slug'=>'Slug'
         ];
     }
 

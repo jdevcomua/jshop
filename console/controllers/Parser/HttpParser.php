@@ -7,7 +7,7 @@ use yii;
 
 abstract class HttpParser
 {
-    const DEFAULT_TIMEOUT = 10;
+    const DEFAULT_TIMEOUT = 10000;
     
     const DOWNLOAD_STATUS_OK = 1;
     const DOWNLOAD_STATUS_ERROR = 2;

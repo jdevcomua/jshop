@@ -10,15 +10,13 @@ use phpQuery;
 
 class CategoryParser extends  HttpParser
 {
-    const TIMEOUT = 60;
+    const TIMEOUT = 180;
     public static $sel = [
         'menu' => '.main-menu-item',
         'main-menu' => '.main-menu',
-        'text' => ' .main-menu-item-text',
         'sub_menu'=>'.menu-submenu',
         'sub_menu_item'=>'.menu-submenu-item',
         'sub_menu_item_a'=>'a',
-        'sub_menu_item_text'=>'u',
 
     ];
 
@@ -34,36 +32,26 @@ class CategoryParser extends  HttpParser
 
         $blocks = $document->find(self::$sel['main-menu']);
         $count = 0;
-        $count_sub_menu = 0;
         for ($i = 0; $i < count($blocks); $i++) {
             $block_ru = pq($blocks->elements[$i]);
             $block_li = $block_ru->find(self::$sel['menu']);
             $block_list=$block_ru->find(self::$sel['sub_menu']);
+
             for ($j = 0; $j < count($block_li); $j++) {
-                $block_name = pq($block_li->elements[$j]);
-                $block_name = $block_name->find(self::$sel['text']);
-                $data[$count]['name'] = trim($block_name->text());
-//                var_dump($data[$count]['name']);
                 $block_sub_menu = pq($block_list->elements[$j]);
                 $block_sub_menu = $block_sub_menu->find(self::$sel['sub_menu_item']);
                 $block_sub_menu = $block_sub_menu->find(self::$sel['sub_menu_item_a']);
-                for ($u = 0; $u < count($block_sub_menu); $u++) {
-                    $block_sub_menu_text = pq($block_sub_menu->elements[$u]);
-                    $data_sub_menu[$count_sub_menu]['link'] = parse_url($this->link)['scheme'].'://'.parse_url($this->link)['host'] . $block_sub_menu_text->attr('href');;
-                    $block_sub_menu_text = $block_sub_menu_text->find(self::$sel['sub_menu_item_text']);
-                    $data_sub_menu[$count_sub_menu]['name'] = trim($block_sub_menu_text->text());
-//                    var_dump($data_sub_menu[$count_sub_menu]['name']);
-//                    var_dump($data_sub_menu[$count_sub_menu]['link']);
-                    $link = new SubCategoryParse($data_sub_menu[$count_sub_menu]['link'], self::TIMEOUT);
-                    $link->downloadContent()->parseData();
-                    $count_sub_menu++;
-                }
+                $block_sub_menu_text = pq($block_sub_menu->elements[0]);
+                $data_sub_menu[$count]['link'] = parse_url($this->link)['scheme'].'://'.parse_url($this->link)['host'] . $block_sub_menu_text->attr('href');
+                $link = new SubCategoryParse($data_sub_menu[$count]['link'], self::TIMEOUT);
+                $link->downloadContent()->parseData();
                 $count++;
+
+
             }
         }
 
-        $this->data = $data;/*Need to change*/
-        return $this;
+        return null;
     }
 
 

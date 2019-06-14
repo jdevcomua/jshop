@@ -47,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'code',
                             'quantity',
                             'cost',
+                            [
+                                'attribute' => 'metric',
+                                'value' => $model->getMetricTitle(),
+                            ],
                             'link:url',
                             'self_cost',
                             [

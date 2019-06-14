@@ -84,7 +84,7 @@ $imageUrls = $item->getImageUrl();
                                         <div class="pull-left">
                                             <div class="custom pull-left">
                                                 <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty"> <?=$item->getMetricTitle()?>
                                                 <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                             </div>
                                         </div>
@@ -118,14 +118,10 @@ $imageUrls = $item->getImageUrl();
                                     <p class="email-friend"><a href="#" class=""><span><?= Yii::t('app','Email to a Friend')?></span></a></p>
                                 </div>
                                 <div class="social">
-                                    <ul class="link">
+                                    <ul>
                                         <li class="fb"><a href="#"></a></li>
-                                        <li class="tw"><a href="#"></a></li>
-                                        <li class="googleplus"><a href="#"></a></li>
-                                        <li class="rss"><a href="#"></a></li>
-                                        <li class="pintrest"><a href="#"></a></li>
-                                        <li class="linkedin"><a href="#"></a></li>
-                                        <li class="youtube"><a href="#"></a></li>
+                                        <li class="instagram"><a href="#"></a></li>
+                                        <li class="viber-grey"><a href="#"></a></li>
                                     </ul>
                                 </div>
                             </div>

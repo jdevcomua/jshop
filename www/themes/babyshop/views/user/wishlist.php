@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <tr class="first last">
                                             <th class="customer-wishlist-item-image"></th>
                                             <th class="customer-wishlist-item-info"></th>
-                                            <th class="customer-wishlist-item-quantity">'.Yii::t('app', 'Quantity').'</th>
                                             <th class="customer-wishlist-item-price">'.Yii::t('app', 'Price').'</th>
                                             <th class="customer-wishlist-item-cart"></th>
                                             <th class="customer-wishlist-item-remove"></th>

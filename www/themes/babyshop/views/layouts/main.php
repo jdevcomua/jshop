@@ -110,7 +110,7 @@ use yii\widgets\Pjax;
                                                         <div class="pull-left">
                                                             <div class="custom pull-left">
                                                                 <button data-pjax="0" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                                                <input data-pjax="0" type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                                <input data-pjax="0" type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty"> <?=$modalModel->getMetricTitle() ?>
                                                                 <button data-pjax="0" onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                                             </div>
                                                         </div>
@@ -203,10 +203,10 @@ use yii\widgets\Pjax;
     <ul>
         <li>
             <div class="mm-search">
-                <form id="search1" name="search">
+                <form role="search" method="get" action="search">
                     <div class="input-group">
 
-                        <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term" id="srch-term">
+                        <input type="text" class="form-control simple" placeholder="Search ..." name="search" id="search">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
                         </div>

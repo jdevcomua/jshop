@@ -46,22 +46,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p><?=Yii::t('app', 'If you have an account with us, please log in.')?></p>
                             <ul class="form-list">
                                 <li>
-                                    <label for="email"><?=Yii::t('app', 'Email Address')?><em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="text" name="LoginForm[username]" value="" id="loginform-username" class="input-text required-entry validate-email" title="Email Address">
-                                    </div>
+                                    <?= $form->field($model, 'mail')->textInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Адрес электронной почты').'<span class="required">*</span>')?>
                                 </li>
                                 <li>
-                                    <label for="pass"><?=Yii::t('app', 'Password')?><em class="required">*</em></label>
-                                    <div class="input-box">
-                                        <input type="password" name="LoginForm[password]" class="input-text required-entry validate-password" id="loginform-password" title="Password">
-                                    </div>
+                                    <?= $form->field($model, 'password')->passwordInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Пароль').'<span class="required">*</span>') ?>
                                 </li>
                             </ul>
 
                             <p class="required">*<?=Yii::t('app', 'Required Fields')?> </p>
 
-                            <?= $form->field($model, 'rememberMe')->checkbox(['class' => 'input-checkbox'])->label(Yii::t('app', 'Remember me')); ?>
+                            <?= $form->field($model, 'rememberMe')->checkbox(['class' => 'input-checkbox','value'=>false])->label(Yii::t('app', 'Remember me')); ?>
 
 
                             <div class="buttons-set">

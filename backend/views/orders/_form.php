@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="orders-input">
-        <?= $form->field($model, 'mail')->textInput(); ?>
+        <?= $form->field($model, 'email')->textInput(); ?>
     </div>
 
     <div class="clear"></div>

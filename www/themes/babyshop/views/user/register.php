@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use \yii\widgets\MaskedInput;
 
 /* @var $this \yii\web\View */
 /* @var $model common\models\User */
@@ -33,34 +34,29 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p><?=Yii::t('app', 'If you have an account with us, please log in.')?></p>
                         <ul class="form-list">
                             <li>
-                                <label for="email"><?=Yii::t('app', 'Email Address')?><em class="required">*</em></label>
-                                <div class="input-box">
-                                    <input type="text" name="User[mail]" value="" id="user-mail" class="input-text required-entry validate-email" title="Email Address">
-                                </div>
+                                <?= $form->field($model, 'mail')->textInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Адрес электронной почты').'<em class="required">*</em>')?>
                             </li>
                             <li>
-                                <label for="pass"><?=Yii::t('app', 'Password')?><em class="required">*</em></label>
-                                <div class="input-box">
-                                    <input type="password" name="User[password]" class="input-text required-entry validate-password" id="user-password" title="Password">
-                                </div>
+                                <?= $form->field($model, 'password')->passwordInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app', 'Password').'<em class="required">*</em>')?>
                             </li>
                             <li>
-                                <label for="email"><?=Yii::t('app', 'User Name')?></label>
-                                <div class="input-box">
-                                    <input type="text" name="User[name]" value="" id="user-name" class="input-text" title="Email Address">
-                                </div>
+                                <?= $form->field($model, 'name')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'User Name'))?>
                             </li>
                             <li>
-                                <label for="email"><?=Yii::t('app', 'Address')?></label>
-                                <div class="input-box">
-                                    <input type="text" name="User[address]" value="" id="user-address" class="input-text" title="Email Address">
-                                </div>
+                                <?= $form->field($model, 'address')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'Address'))?>
                             </li>
                             <li>
-                                <label for="email"><?=Yii::t('app', 'Phone number')?></label>
-                                <div class="input-box">
-                                    <input type="text" name="User[phone]" value="" id="user-phone" class="input-text" title="Email Address">
-                                </div>
+                                <?= $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-box input-text',
+                                    'mask' => '+38 (099) 999-99-99',
+                                    'options' => [
+                                        'class' => 'input-box input-text',
+                                        'id' => 'phone2',
+                                        'placeholder' => Yii::t('app', 'Phone number')
+                                    ],
+                                    'clientOptions' => [
+                                        'clearIncomplete' => true
+                                    ]
+                                ])->label(Yii::t('app', 'Phone number')) ?>
                             </li>
                         </ul>
 
@@ -68,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <div class="buttons-set">
 
-                            <?= Html::submitButton('Register', ['class' => 'button login']) ?>
+                            <?= Html::submitButton(Yii::t('app', 'Register'), ['class' => 'button login']) ?>
 
                            <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>"  class="forgot-word"><?=Yii::t('app', 'Forgot Your Password?')?></a>
                         </div> <!--buttons-set-->

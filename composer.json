@@ -28,7 +28,7 @@
         "kartik-v/yii2-widget-typeahead": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
         "kartik-v/yii2-widgets": "@dev",
-        "unclead/yii2-multiple-input": "*",
+        "unclead/yii2-multiple-input": "~2.0",
         "eventviva/php-image-resize": "1.5.*",
         "zxbodya/yii2-tinymce": "*@dev",
         "zxbodya/yii2-elfinder": "*@dev",

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79a0b68647b511a84f4e7ef3e5441f49",
-    "content-hash": "a3095ff53364c795b4f2b9ec5b6c011c",
+    "hash": "67be2507f983003a0047b0ecc4f57189",
+    "content-hash": "bed142901e141d5d080fc534b7860728",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -2679,16 +2679,16 @@
         },
         {
             "name": "unclead/yii2-multiple-input",
-            "version": "2.21.1",
+            "version": "2.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclead/yii2-multiple-input.git",
-                "reference": "92a62a07aee6e6a58f0594545ccf0cf3ca6b2979"
+                "reference": "2e04be2c8ddda80462a67841e177a6e384a02e55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclead/yii2-multiple-input/zipball/92a62a07aee6e6a58f0594545ccf0cf3ca6b2979",
-                "reference": "92a62a07aee6e6a58f0594545ccf0cf3ca6b2979",
+                "url": "https://api.github.com/repos/unclead/yii2-multiple-input/zipball/2e04be2c8ddda80462a67841e177a6e384a02e55",
+                "reference": "2e04be2c8ddda80462a67841e177a6e384a02e55",
                 "shasum": ""
             },
             "require": {
@@ -2724,7 +2724,7 @@
                 "yii2 multiple input",
                 "yii2 tabular input"
             ],
-            "time": "2019-04-13 10:20:42"
+            "time": "2019-06-09 09:28:15"
         },
         {
             "name": "yiisoft/yii2",
@@ -3695,7 +3695,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

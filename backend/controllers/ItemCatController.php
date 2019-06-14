@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Characteristic;
 use common\models\Image;
+use common\models\Parse;
 use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
@@ -133,9 +134,23 @@ class ItemCatController extends Controller
         }
         $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
         return $this->render('create', [
-            'model' => $model, 'categories' => $categoriesArray
+            'model' => $model, 'categories' => $categoriesArray,
         ]);
     }
+    public function actionAddParseUrl($id)
+    {
+        $model = new Parse();
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (Yii::$app->request->post()['action'] == 'save') {
+                return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
+            }
+        }
+        return $this->render('add-parse-url', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Updates an existing ItemCat model.
@@ -180,6 +195,7 @@ class ItemCatController extends Controller
         return $this->render('update', [
             'model' => $model,
             'categories' => $categoriesArray,
+            'parse'=>(empty($parse))?[new Parse()]:$parse
         ]);
     }
 

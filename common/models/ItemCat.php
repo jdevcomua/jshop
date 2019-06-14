@@ -6,6 +6,7 @@ use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
 use SplFileInfo;
 use Yii;
+use yii\web\NotFoundHttpException;
 use dosamigos\transliterator\TransliteratorHelper;
 use yii\db\ActiveRecord;
 
@@ -16,8 +17,6 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property integer $parent_id
  * @property string $image
- * @property string $parse_url
- * @property string $slug
  * @property integer $lft
  * @property integer $rgt
  * @property integer $depth
@@ -68,7 +67,7 @@ class ItemCat extends ModelWithImage
     {
         return [
             [['title'], 'required'],
-            [['title', 'image','parse_url','slug'], 'string'],
+            [['title', 'image'], 'string'],
             [['parent_id', 'active'], 'integer']
         ];
     }
@@ -78,6 +77,13 @@ class ItemCat extends ModelWithImage
      */
     public function behaviors() {
         return [
+            'tree' => [
+                'class' => NestedSetsBehavior::className(),
+                 'treeAttribute' => 'tree',
+                // 'leftAttribute' => 'lft',
+                // 'rightAttribute' => 'rgt',
+                // 'depthAttribute' => 'depth',
+            ],
         ];
     }
 
@@ -103,8 +109,6 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
-            'parse_url' => 'URL',
-            'slug'=>'Slug'
         ];
     }
 

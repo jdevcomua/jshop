@@ -22,6 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a(Yii::t('app', 'Создать'), Yii::$app->urlHelper->to(['item-cat/create']), ['class' => 'btn btn-success']) ?>
                 <?= Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to(['item-cat/update', 'id' => $model->id]),
                         ['class' => 'btn btn-primary']); ?>
+                <?= Html::a(Yii::t('app', 'Добавить парс урл'), Yii::$app->urlHelper->to(['item-cat/add-parse-url', 'id' => $model->id]),
+                    ['class' => 'btn btn-primary']); ?>
                 <?= Html::a(Yii::t('app', 'Удалить'), Yii::$app->urlHelper->to(['item-cat/delete', 'id' => $model->id]), [
                     'class' => 'btn btn-danger',
                     'data' => [

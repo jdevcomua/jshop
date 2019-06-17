@@ -1,6 +1,6 @@
 <?php
 
-namespace console\controllers\Parser\karabas;
+namespace console\controllers\Parser\metro;
 
 use common\models\ItemCat;
 use common\models\Item;
@@ -16,29 +16,28 @@ class ItemParse
         $categories = ItemCat::find()->all();
         foreach ($categories as $category){
             for ($i = 1;$i<100;$i++){
-                $items = $this->parseItem($i, $category->slug);
-                if(!empty($items)){
-                    for ($i = 0;$i<count($items);$i++){
-                        $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();
-                        if(!isset($item))
-                            $item = new Item();
-                        $item->title = $items[$i]['name'];
+                foreach ($category->slug() as $slug){
+                    $items = $this->parseItem($i, $slug);
+                    if(!empty($items)){
+                        for ($i = 0;$i<count($items);$i++){
+                            $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();
+                            if(!isset($item))
+                                $item = new Item();
+                            $item->title = $items[$i]['name'];
 
-                        $item->category_id = $category->id;
+                            $item->category_id = $category->id;
+                            $item->active = 1;
+                            $item->cost = $items[$i]['price']/100;
+                            $item->barcode = $items[$i]['ean'];
+                            $item->code = $items[$i]['sku'];
 
-                        $item->cost = $items[$i]['price']/100;
-                        $item->barcode = $items[$i]['ean'];
-                        $item->code = $items[$i]['sku'];
-
-                        if(!$item->isAttributeChanged('$category->id')){
-                            $item->save();
+                            if(!$item->isAttributeChanged('$category->id')){
+                                $item->save();
+                            }
                         }
-
                     }
                 }
-
             }
-
         }
         return false;
     }

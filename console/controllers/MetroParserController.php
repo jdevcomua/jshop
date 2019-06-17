@@ -4,8 +4,8 @@ namespace console\controllers;
 
 
 
-use console\controllers\Parser\karabas\CategoryParser;
-use console\controllers\Parser\karabas\ItemParse;
+use console\controllers\Parser\metro\CategoryParser;
+use console\controllers\Parser\metro\ItemParse;
 use yii\console\Controller;
 
 class MetroParserController extends Controller
@@ -46,11 +46,11 @@ class MetroParserController extends Controller
     /**
      * Парсит список городов и добавляет в кеш
      */
-    public function actionParseCategory(){
+    public function actionParseCategory(){//парс всех категорий из сайта метро(осторожно на сайте метро около 1000 категорий)
         $link = new CategoryParser('https://metro.zakaz.ua/ru/', self::TIMEOUT);
         $link->downloadContent()->parseData();
     }
-    public function actionParseItem(){
+    public function actionParseItem(){//парс всех айтемов по категориям которые находяться в базе
         $link = new ItemParse();
         $link->parseData();
     }

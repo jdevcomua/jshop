@@ -1,6 +1,6 @@
 <?php
 
-namespace console\controllers\Parser\karabas;
+namespace console\controllers\Parser\metro;
 
 use common\models\ItemCat;
 use console\controllers\Parser\HttpParser;

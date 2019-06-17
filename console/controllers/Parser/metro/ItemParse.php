@@ -21,17 +21,20 @@ class ItemParse
                     if(!empty($items)){
                         for ($i = 0;$i<count($items);$i++){
                             $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();
-                            if(!isset($item))
+                            if(!isset($item)){
                                 $item = new Item();
-                            $item->title = $items[$i]['name'];
+                                $item->title = $items[$i]['name'];
 
-                            $item->category_id = $category->id;
-                            $item->active = 1;
-                            $item->cost = $items[$i]['price']/100;
-                            $item->barcode = $items[$i]['ean'];
-                            $item->code = $items[$i]['sku'];
-
-                            if(!$item->isAttributeChanged('$category->id')){
+                                $item->category_id = $category->id;
+                                $item->active = 1;
+                                $item->cost = $items[$i]['price']/100;
+                                $item->metro_cost = $items[$i]['price']/100;
+                                $item->barcode = $items[$i]['ean'];
+                                $item->code = $items[$i]['sku'];
+                                $item->save();
+                            }else{
+                                $item->category_id = $category->id;
+                                $item->metro_cost = $items[$i]['price']/100;
                                 $item->save();
                             }
                         }

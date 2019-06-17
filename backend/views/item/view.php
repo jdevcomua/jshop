@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'code',
                             'quantity',
                             'cost',
+                            'metro_cost',
                             'link:url',
                             'self_cost',
                             [

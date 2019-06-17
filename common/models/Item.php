@@ -20,6 +20,7 @@ use Eventviva\ImageResize;
  * @property integer $category_id
  * @property string $title
  * @property double $cost
+ * @property double $metro_cost
  * @property integer $count_of_views
  * @property string $addition_date
  * @property string $description
@@ -74,7 +75,7 @@ class Item extends Model implements CartAdd
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['addition_date','imageFiles'], 'safe'],
-            [['cost', 'self_cost', 'quantity'], 'number'],
+            [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
@@ -109,6 +110,7 @@ class Item extends Model implements CartAdd
             'quantity' => Yii::t('app', 'Количество '),
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
+            'metro_cost' =>Yii::t('app', 'Цена метро')
         ];
     }
 

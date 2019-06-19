@@ -50,8 +50,6 @@ use Eventviva\ImageResize;
  * @property Kit[] $kits
  * @property Image[] $images
  * @property Stock[] $stocks
- *
- * @property string $metricTitle
  */
 class Item extends Model implements CartAdd
 {

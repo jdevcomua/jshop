@@ -2,4 +2,3 @@
 .idea
 vendor
 .git-credentials
-composer.lock

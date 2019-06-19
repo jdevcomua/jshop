@@ -1,6 +1,8 @@
 <?php
 
+use common\models\Parse;
 use yii\helpers\Html;
+use unclead\multipleinput\MultipleInput;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use kartik\file\FileInput;
@@ -8,6 +10,7 @@ use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $categories array */
 /* @var $categories array */
 ?>
 

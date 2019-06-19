@@ -774,3 +774,16 @@ $(document).ready(function() {
 
 });
 
+
+function deleteParser(ev, th, block) {
+  ev.preventDefault();
+  var  data= block.id;
+  var element = document.getElementById(data);
+  element.parentNode.removeChild(element);
+  $.ajax({
+    url: window.location.href,
+    type: 'POST',
+    data: {id: data,
+    },
+  });
+}

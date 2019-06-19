@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "03c009a67da9b40cb0b9c8fd4bd5a987",
-    "content-hash": "9aab20020d70899602195f8bcdbd9d05",
+    "hash": "67be2507f983003a0047b0ecc4f57189",
+    "content-hash": "bed142901e141d5d080fc534b7860728",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -264,22 +264,6 @@
             ]
         },
         {
-            "name": "bower-asset/slimscroll",
-            "version": "v1.3.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rochal/jQuery-slimScroll.git",
-                "reference": "cf39d364e777ef95574c30c42d3b85cb2bf325d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rochal/jQuery-slimScroll/zipball/cf39d364e777ef95574c30c42d3b85cb2bf325d3",
-                "reference": "cf39d364e777ef95574c30c42d3b85cb2bf325d3",
-                "shasum": null
-            },
-            "type": "bower-asset"
-        },
-        {
             "name": "bower-asset/yii2-pjax",
             "version": "2.0.7.1",
             "source": {
@@ -453,57 +437,6 @@
             "time": "2018-03-26 11:24:36"
         },
         {
-            "name": "conquer/slimscroll",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/borodulin/yii2-slimscroll.git",
-                "reference": "ed48557561f4b51271fb1662985f7cd1b0d2a5cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/borodulin/yii2-slimscroll/zipball/ed48557561f4b51271fb1662985f7cd1b0d2a5cf",
-                "reference": "ed48557561f4b51271fb1662985f7cd1b0d2a5cf",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/slimscroll": "~1.3.3",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "conquer\\slimscroll\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrey Borodulin",
-                    "email": "borodulin@gmail.com",
-                    "homepage": "https://github.com/borodulin/yii2-slimscroll"
-                }
-            ],
-            "description": "Yii2 slimscroll widget",
-            "homepage": "https://github.com/borodulin/yii2-slimscroll",
-            "keywords": [
-                "extension",
-                "slimscroll",
-                "widget",
-                "yii2"
-            ],
-            "time": "2015-09-02 13:40:43"
-        },
-        {
             "name": "creocoder/yii2-nested-sets",
             "version": "0.9.0",
             "source": {
@@ -653,6 +586,46 @@
                 "validator"
             ],
             "time": "2018-12-04 22:38:24"
+        },
+        {
+            "name": "electrolinux/phpquery",
+            "version": "0.9.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/electrolinux/phpquery.git",
+                "reference": "6cb8afcfe8cd4ce45f2f8c27d561383037c27a3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/6cb8afcfe8cd4ce45f2f8c27d561383037c27a3a",
+                "reference": "6cb8afcfe8cd4ce45f2f8c27d561383037c27a3a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "phpQuery/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobiasz Cudnik",
+                    "email": "tobiasz.cudnik@gmail.com",
+                    "homepage": "https://github.com/TobiaszCudnik",
+                    "role": "Developer"
+                },
+                {
+                    "name": "didier Belot",
+                    "role": "Packager"
+                }
+            ],
+            "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
+            "homepage": "http://code.google.com/p/phpquery/",
+            "time": "2013-03-21 12:39:33"
         },
         {
             "name": "eventviva/php-image-resize",
@@ -2261,6 +2234,53 @@
             "time": "2018-11-05 12:31:44"
         },
         {
+            "name": "keltstr/yii2-simplehtmldom",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/keltstr/yii2-simplehtmldom.git",
+                "reference": "eaecdcce9fbbca8c655522b6516af9f7c1cb5164"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/keltstr/yii2-simplehtmldom/zipball/eaecdcce9fbbca8c655522b6516af9f7c1cb5164",
+                "reference": "eaecdcce9fbbca8c655522b6516af9f7c1cb5164",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.210.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "keltstr\\simplehtmldom\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "WTFPL"
+            ],
+            "authors": [
+                {
+                    "name": "keltstr",
+                    "email": "keltstr@gmail.com"
+                }
+            ],
+            "description": "\"PHP Simple HTML DOM Parser\" rev.210 adapted to Yii2 psr-4(namespace autoload class) based on serhatozles/yii2-simplehtmldom(rev.196)",
+            "keywords": [
+                "extension",
+                "simple_html_dom",
+                "simplehtmldom",
+                "yii2"
+            ],
+            "time": "2014-12-23 05:37:04"
+        },
+        {
             "name": "sergeymakinen/yii2-log-message",
             "version": "v2.1.0",
             "source": {
@@ -2659,16 +2679,16 @@
         },
         {
             "name": "unclead/yii2-multiple-input",
-            "version": "2.21.1",
+            "version": "2.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclead/yii2-multiple-input.git",
-                "reference": "92a62a07aee6e6a58f0594545ccf0cf3ca6b2979"
+                "reference": "2e04be2c8ddda80462a67841e177a6e384a02e55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclead/yii2-multiple-input/zipball/92a62a07aee6e6a58f0594545ccf0cf3ca6b2979",
-                "reference": "92a62a07aee6e6a58f0594545ccf0cf3ca6b2979",
+                "url": "https://api.github.com/repos/unclead/yii2-multiple-input/zipball/2e04be2c8ddda80462a67841e177a6e384a02e55",
+                "reference": "2e04be2c8ddda80462a67841e177a6e384a02e55",
                 "shasum": ""
             },
             "require": {
@@ -2704,7 +2724,7 @@
                 "yii2 multiple input",
                 "yii2 tabular input"
             ],
-            "time": "2019-04-13 10:20:42"
+            "time": "2019-06-09 09:28:15"
         },
         {
             "name": "yiisoft/yii2",
@@ -2977,16 +2997,16 @@
         },
         {
             "name": "yiisoft/yii2-httpclient",
-            "version": "2.0.8",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-httpclient.git",
-                "reference": "4a41e008aa571bce690e4a992dedb61275d31a35"
+                "reference": "cf532447447216bd8cb167689ac18f4e7dc1c1a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/4a41e008aa571bce690e4a992dedb61275d31a35",
-                "reference": "4a41e008aa571bce690e4a992dedb61275d31a35",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/cf532447447216bd8cb167689ac18f4e7dc1c1a7",
+                "reference": "cf532447447216bd8cb167689ac18f4e7dc1c1a7",
                 "shasum": ""
             },
             "require": {
@@ -3023,7 +3043,7 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2019-04-16 12:34:40"
+            "time": "2019-05-14 13:33:37"
         },
         {
             "name": "yiisoft/yii2-imagine",
@@ -3305,6 +3325,73 @@
                 "bower-asset/jquery": ">=1.2.2"
             },
             "type": "bower-asset"
+        },
+        {
+            "name": "bower-asset/slimscroll",
+            "version": "v1.3.8",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:rochal/jQuery-slimScroll.git",
+                "reference": "cf39d364e777ef95574c30c42d3b85cb2bf325d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rochal/jQuery-slimScroll/zipball/cf39d364e777ef95574c30c42d3b85cb2bf325d3",
+                "reference": "cf39d364e777ef95574c30c42d3b85cb2bf325d3",
+                "shasum": null
+            },
+            "type": "bower-asset"
+        },
+        {
+            "name": "conquer/slimscroll",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/borodulin/yii2-slimscroll.git",
+                "reference": "ed48557561f4b51271fb1662985f7cd1b0d2a5cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/borodulin/yii2-slimscroll/zipball/ed48557561f4b51271fb1662985f7cd1b0d2a5cf",
+                "reference": "ed48557561f4b51271fb1662985f7cd1b0d2a5cf",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/slimscroll": "~1.3.3",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "conquer\\slimscroll\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrey Borodulin",
+                    "email": "borodulin@gmail.com",
+                    "homepage": "https://github.com/borodulin/yii2-slimscroll"
+                }
+            ],
+            "description": "Yii2 slimscroll widget",
+            "homepage": "https://github.com/borodulin/yii2-slimscroll",
+            "keywords": [
+                "extension",
+                "slimscroll",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-09-02 13:40:43"
         },
         {
             "name": "fzaninotto/faker",
@@ -3602,12 +3689,15 @@
         "kartik-v/yii2-datecontrol": 20,
         "kartik-v/yii2-widgets": 20,
         "zxbodya/yii2-tinymce": 20,
-        "zxbodya/yii2-elfinder": 20
+        "zxbodya/yii2-elfinder": 20,
+        "keltstr/yii2-simplehtmldom": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

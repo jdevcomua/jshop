@@ -17,7 +17,6 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property integer $parent_id
  * @property string $image
- * @property string $parse_url
  * @property integer $lft
  * @property integer $rgt
  * @property integer $depth
@@ -68,7 +67,7 @@ class ItemCat extends ModelWithImage
     {
         return [
             [['title'], 'required'],
-            [['title', 'image','parse_url'], 'string'],
+            [['title', 'image'], 'string'],
             [['parent_id', 'active'], 'integer']
         ];
     }
@@ -110,7 +109,7 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
-            'parse_url' => 'URL',
+            'parse_url'=>'URL для парсинга'
         ];
     }
 
@@ -142,6 +141,18 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
+    public function slug()
+    {
+        $i=0;
+        $slugs = [];
+        $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
+        foreach ($parsers as $parser){
+            $slugs[$i]=$parser->slug;
+        }
+
+        return $slugs;
+    }
+
 
     /**
      * @inheritdoc

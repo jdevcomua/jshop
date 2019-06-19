@@ -127,20 +127,20 @@ class Item extends Model implements CartAdd
         ];
     }
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                ],
-                // если вместо метки времени UNIX используется datetime:
-                'value' => new Expression('NOW()'),
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            [
+//                'class' => TimestampBehavior::className(),
+//                'attributes' => [
+//                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+//                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+//                ],
+//                // если вместо метки времени UNIX используется datetime:
+//                'value' => new Expression('NOW()'),
+//            ],
+//        ];
+//    }
 
     public static function getAdditionTitles()
     {

@@ -13,6 +13,6 @@ deploy_prod:
   environment:
     name: Production
   script:
-    - ssh freemark@freemark.ftp.tools "cd sdelivery.dn.ua && ./deploy.sh"
+    - ssh freemark@freemark.ftp.tools "./deploy.sh" -v
   only:
     - master

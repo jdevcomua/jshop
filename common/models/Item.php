@@ -10,6 +10,9 @@ use SplFileInfo;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 use dosamigos\transliterator\TransliteratorHelper;
 use Eventviva\ImageResize;
 
@@ -22,7 +25,8 @@ use Eventviva\ImageResize;
  * @property double $cost
  * @property double $metro_cost
  * @property integer $count_of_views
- * @property string $addition_date
+ * @property string $created_at
+ * @property string $updated_at
  * @property string $description
  * @property string $barcode
  * @property string $code
@@ -74,7 +78,7 @@ class Item extends Model implements CartAdd
             [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
-            [['addition_date','imageFiles'], 'safe'],
+            [['created_at','imageFiles','updated_at'], 'safe'],
             [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
@@ -94,6 +98,8 @@ class Item extends Model implements CartAdd
             'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
+            'created_at'=>Yii::t('app', 'Дата создание'),
+            'updated_at'=>Yii::t('app', 'Дата обновления'),
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
             'count_of_views' => Yii::t('app', 'Количество просмотров'),
@@ -111,6 +117,21 @@ class Item extends Model implements CartAdd
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
             'metro_cost' =>Yii::t('app', 'Цена метро')
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 

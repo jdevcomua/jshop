@@ -109,6 +109,7 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
+            'parse_url'=>'URL для парсинга'
         ];
     }
 
@@ -140,6 +141,18 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
+    public function slug()
+    {
+        $i=0;
+        $slugs = [];
+        $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
+        foreach ($parsers as $parser){
+            $slugs[$i]=$parser->slug;
+        }
+
+        return $slugs;
+    }
+
 
     /**
      * @inheritdoc
@@ -189,8 +202,12 @@ class ItemCat extends ModelWithImage
     {
         $info = new SplFileInfo($this->image);
         $path_parts = pathinfo($this->image);
-        return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']
-            . Item::SIZE. $info->getExtension();
+        if(file_exists(Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension())){
+            return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension();
+        }else{
+            return Yii::$app->params['defaultKitImage'];
+        }
+
     }
     public function findModel($id)
     {

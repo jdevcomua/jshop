@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'code',
                             'quantity',
                             'cost',
+                            'metro_cost',
                             [
                                 'attribute' => 'metric',
                                 'value' => $model->getMetricTitle(),
@@ -58,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'html'
                             ],
                             'count_of_views',
+                            'updated_at',
                         ],
                     ]);
                     echo '<p>' . Html::a(Yii::t('app', 'Редактировать'), Yii::$app->urlHelper->to([

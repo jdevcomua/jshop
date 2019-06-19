@@ -25,7 +25,8 @@ use yii\widgets\Pjax;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">
-
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
 
     <!-- CSS Style -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">

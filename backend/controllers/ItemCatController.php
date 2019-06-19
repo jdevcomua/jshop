@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Characteristic;
 use common\models\Image;
+use common\models\Parse;
 use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
@@ -87,11 +88,17 @@ class ItemCatController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->request->isAjax){
+            $parseId = Yii::$app->request->post('id');
+            Parse::findOne($parseId)->delete();
+            return null;
+        }
         $characteristics = new ActiveDataProvider([
             'query' => ItemCat::findOne($id)->getCharacteristics()
         ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id), 'characteristics' => $characteristics
+            'model' => $this->findModel($id), 'characteristics' => $characteristics,'parsers'=>Parse::find()->where(['category_id'=>$id])->all(),
         ]);
     }
 
@@ -133,9 +140,26 @@ class ItemCatController extends Controller
         }
         $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
         return $this->render('create', [
-            'model' => $model, 'categories' => $categoriesArray
+            'model' => $model, 'categories' => $categoriesArray,
         ]);
     }
+    public function actionAddParseUrl($id)
+    {
+        $model = new Parse();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->category_id = $id;
+            $model->slug = str_replace("https://metro.zakaz.ua/ru/", '',$model->url);
+            $model->slug = str_replace(" ", '',$model->slug);
+            $model->slug = str_replace("/", '',$model->slug);
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $id]);
+            }
+        }
+        return $this->render('addParseUrl', [
+            'model' => $model,
+        ]);
+    }
+
 
     /**
      * Updates an existing ItemCat model.
@@ -180,6 +204,7 @@ class ItemCatController extends Controller
         return $this->render('update', [
             'model' => $model,
             'categories' => $categoriesArray,
+            'parse'=>(empty($parse))?[new Parse()]:$parse
         ]);
     }
 

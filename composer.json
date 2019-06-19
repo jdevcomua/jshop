@@ -15,6 +15,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.1.0",
+        "ext-curl": "*",
+        "ext-json": "*",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "^2.1",
@@ -26,7 +28,7 @@
         "kartik-v/yii2-widget-typeahead": "*",
         "kartik-v/yii2-datecontrol": "dev-master",
         "kartik-v/yii2-widgets": "@dev",
-        "unclead/yii2-multiple-input": "*",
+        "unclead/yii2-multiple-input": "~2.0",
         "eventviva/php-image-resize": "1.5.*",
         "zxbodya/yii2-tinymce": "*@dev",
         "zxbodya/yii2-elfinder": "*@dev",
@@ -37,7 +39,11 @@
         "kartik-v/yii2-slider": "*",
         "sergeymakinen/yii2-slack-log": "^2.0",
         "budyaga/yii2-cropper": "*",
-        "grimmlink/jquery-slimscroll": "^1.3"
+        "grimmlink/jquery-slimscroll": "^1.3",
+        "yiisoft/yii2-httpclient": "^2.0",
+        "keltstr/yii2-simplehtmldom": "dev-master",
+        "electrolinux/phpquery": "^0.9.6"
+
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -569,16 +569,18 @@ class Item extends Model implements CartAdd
             return Yii::getAlias('@www') .self::WEB_IMG.$fileName;
         }
     }
-    public static function getMetric()
+
+    public static function getMetrics()
     {
         return [
             static::METRIC_PIECES => 'шт.',
             static::METRIC_KG => 'кг',
         ];
     }
+
     public function getMetricTitle()
     {
-        $titles = static::getMetric();
+        $titles = static::getMetrics();
 
         return key_exists($this->metric, $titles) ? $titles[$this->metric] : null;
     }

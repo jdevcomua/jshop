@@ -109,6 +109,7 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
+            'parse_url'=>'URL для парсинга'
         ];
     }
 
@@ -140,6 +141,18 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
+    public function slug()
+    {
+        $i=0;
+        $slugs = [];
+        $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
+        foreach ($parsers as $parser){
+            $slugs[$i]=$parser->slug;
+        }
+
+        return $slugs;
+    }
+
 
     /**
      * @inheritdoc

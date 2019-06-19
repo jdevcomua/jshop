@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ItemCat;
 use yii\helpers\Html;
 
 
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <?php echo $this->render('_form', [
-                'model' => $model, 'categories' => $categories
+                'model' => $model, 'categories' => $categories,
             ]) ?>
         </div>
     </div>

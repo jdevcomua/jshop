@@ -10,6 +10,9 @@ use SplFileInfo;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 use dosamigos\transliterator\TransliteratorHelper;
 use Eventviva\ImageResize;
 
@@ -20,8 +23,10 @@ use Eventviva\ImageResize;
  * @property integer $category_id
  * @property string $title
  * @property double $cost
+ * @property double $metro_cost
  * @property integer $count_of_views
- * @property string $addition_date
+ * @property string $created_at
+ * @property string $updated_at
  * @property string $description
  * @property string $barcode
  * @property string $code
@@ -29,6 +34,7 @@ use Eventviva\ImageResize;
  * @property integer $metric
  * @property integer $active
  * @property integer $top
+ * @property integer $tracker_of_addition
  * @property float $self_cost
  * @property float $best_seller
  * @property float $special
@@ -65,6 +71,8 @@ class Item extends Model implements CartAdd
     const IMAGE_SMALL = 'small_';
     const METRIC_PIECES = 1;
     const METRIC_KG = 2;
+    const ADDITION_BY_ADMIN = 0;
+    const ADDITION_BY_PARSER = 1;
 
 
 
@@ -74,16 +82,23 @@ class Item extends Model implements CartAdd
     public function rules()
     {
         return [
-            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','metric'], 'integer'],
+            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','tracker_of_addition','metric'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
-            [['addition_date','imageFiles'], 'safe'],
-                [['cost', 'self_cost', 'quantity'], 'number'],
+            [['created_at','imageFiles','updated_at'], 'safe'],
+                [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
             [['code', 'barcode'], 'string', 'max' => '20']
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
+        ];
+    }
+    public static function getAdditionTitles()
+    {
+        return [
+            static::ADDITION_BY_ADMIN => 'Админом',
+            static::ADDITION_BY_PARSER => 'Через парсер',
         ];
     }
 
@@ -97,6 +112,8 @@ class Item extends Model implements CartAdd
             'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
+            'created_at'=>Yii::t('app', 'Дата создание'),
+            'updated_at'=>Yii::t('app', 'Дата обновления'),
             'metric' => Yii::t('app', 'Метрика измерения'),
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
@@ -114,6 +131,23 @@ class Item extends Model implements CartAdd
             'quantity' => Yii::t('app', 'Количество '),
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
+            'metro_cost' =>Yii::t('app', 'Цена метро'),
+            'tracker_of_addition'=>Yii::t('app', 'Добавлено:')
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 

@@ -59,6 +59,11 @@ class ItemSearch extends Item
                     'asc' => ['item_cat.title' => SORT_ASC],
                     'desc' => ['item_cat.title' => SORT_DESC],
                     'label' => 'Category Title'
+                ],
+                'tracker_of_addition' => [
+                    'asc' => ['item.tracker_of_addition' => SORT_ASC],
+                    'desc' => ['item.tracker_of_addition' => SORT_DESC],
+                    'label' => 'Добавлено'
                 ]
             ]
         ]);
@@ -73,12 +78,12 @@ class ItemSearch extends Item
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-        ]);
+            'tracker_of_addition' => $this->tracker_of_addition,
+            ]);
 
         $query->andFilterWhere(['like', 'item.title', $this->title])
             ->andFilterWhere(['<', 'cost', $this->cost])
-            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views])
-            ->andFilterWhere(['tracker_of_addition'=> $this->tracker_of_addition]);
+            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views]);
         $query->joinWith(['category' => function ($q) {
             $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
         }]);

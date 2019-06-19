@@ -10,6 +10,9 @@ use SplFileInfo;
 use yii\web\UploadedFile;
 use Aws\S3;
 use Aws\Sdk;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 use dosamigos\transliterator\TransliteratorHelper;
 use Eventviva\ImageResize;
 
@@ -20,6 +23,7 @@ use Eventviva\ImageResize;
  * @property integer $category_id
  * @property string $title
  * @property double $cost
+ * @property double $metro_cost
  * @property integer $count_of_views
  * @property string $addition_date
  * @property string $description
@@ -35,6 +39,7 @@ use Eventviva\ImageResize;
  * @property float $deal_week
  * @property string $link
  * @property string $image
+ *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
  * @property OrderItem[] $orderItems
@@ -77,8 +82,8 @@ class Item extends Model implements CartAdd
             [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','metric'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
-            [['addition_date','imageFiles'], 'safe'],
-                [['cost', 'self_cost', 'quantity'], 'number'],
+            [['created_at','imageFiles','updated_at'], 'safe'],
+            [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
@@ -97,6 +102,8 @@ class Item extends Model implements CartAdd
             'category_id' => Yii::t('app', 'Категория'),
             'title' => Yii::t('app', 'Название'),
             'cost' => Yii::t('app', 'Стоимость'),
+            'created_at'=>Yii::t('app', 'Дата создание'),
+            'updated_at'=>Yii::t('app', 'Дата обновления'),
             'metric' => Yii::t('app', 'Метрика измерения'),
             'image' => Yii::t('app', 'Изображение'),
             'categoryTitle' => Yii::t('app', 'Категория'),
@@ -114,6 +121,22 @@ class Item extends Model implements CartAdd
             'quantity' => Yii::t('app', 'Количество '),
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
+            'metro_cost' =>Yii::t('app', 'Цена метро')
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -192,6 +215,7 @@ class Item extends Model implements CartAdd
         if (count($this->images) > 0) {
             $keys = array_keys($this->images);
             $firstKey = array_shift($keys);
+
             return $this->images[$firstKey]->getImageUrl();
         } else {
             return Yii::$app->params['defaultKitImage'];

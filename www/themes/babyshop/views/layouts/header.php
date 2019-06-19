@@ -43,39 +43,15 @@ use yii\widgets\Pjax;
 
                 <div class="fl-header-right">
                     <div class="fl-links">
-                        <div class="no-js"> <a title="<?=Yii::t('app','Company')?>" class="clicker"></a>
+                        <div class="no-js"> <a  href="<?= Url::toRoute('user/dashboard') ?>" title="<?=Yii::t('app','Dashboard')?>" class="clicker"></a>
                             <div class="fl-nav-links">
-                                <div class="language-currency">
-                                    <div class="fl-language">
-                                        <ul class="lang">
-                                            <li><a href="#"> <img src="/images/english.png" alt="English"> <span><?= Yii::t('app','English')?></span> </a></li>
-                                            <li><a href="#"> <img src="/images/francais.png" alt="French"> <span><?= Yii::t('app','French')?></span> </a></li>
-                                            <li><a href="#"> <img src="/images/german.png" alt="German"> <span><?= Yii::t('app','German')?></span> </a></li>
-                                        </ul>
-                                    </div>
-                                    <!--fl-language-->
-                                    <!-- END For version 1,2,3,4,6 -->
-                                    <!-- For version 1,2,3,4,6 -->
-                                    <div class="fl-currency">
-                                        <ul class="currencies_list">
-                                            <li><a href="#" title="EGP"> £</a></li>
-                                            <li><a href="#" title="EUR"> €</a></li>
-                                            <li><a href="#" title="USD"> $</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--fl-currency-->
-                                    <!-- END For version 1,2,3,4,6 -->
-                                </div>
                                 <ul class="links">
-<!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
-                                    <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
-<!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
                                     <?php if (Yii::$app->user->isGuest) { ?>
                                     <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span><?= Yii::t('app','Login')?></span></a></li>
                                     <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span><?= Yii::t('app','Registration')?></span></a></li>
                                     <?php } else { ?>
-                                        <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="Wishlist"><?= Yii::t('app','Dashboard')?></a></li>
-                                        <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist"><?= Yii::t('app','Wishlist')?></a></li>
+                                        <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="<?= Yii::t('app','Dashboard')?>"><?= Yii::t('app','Dashboard')?></a></li>
+                                        <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="<?= Yii::t('app','Wishlist')?>"><?= Yii::t('app','Wishlist')?></a></li>
                                         <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span><?= Yii::t('app','Logout')?></span></a></li>
                                     <?php } ?>
                                 </ul>
@@ -107,7 +83,7 @@ use yii\widgets\Pjax;
 
                                                 <div class="access"><a data-pjax="true" data-reload=0 href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>"><?= Yii::t('app','Remove')?></a></div>
                                                 <!--access-->
-                                                <strong><?= $cartElement->count ?></strong> x <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
+                                                <strong><?= $cartElement->count ?></strong> <?=$cartElement->model->getMetricTitle()?> X <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
                                                 <p class="product-name"><a data-pjax = 0 href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
                                             </div>
                                         </div>
@@ -127,7 +103,7 @@ use yii\widgets\Pjax;
                     </div>
                     <!--mini-cart-->
                     <div class="collapse navbar-collapse">
-                        <form class="navbar-form" role="search" method="get" action="">
+                        <form class="navbar-form" role="search" method="get" action="search">
                             <div class="input-group">
                                 <input id="search" name="search" type="text" class="form-control" placeholder="Search">
                                 <span class="input-group-btn">

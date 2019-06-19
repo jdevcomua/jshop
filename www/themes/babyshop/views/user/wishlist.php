@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <tr class="first last">
                                             <th class="customer-wishlist-item-image"></th>
                                             <th class="customer-wishlist-item-info"></th>
-                                            <th class="customer-wishlist-item-quantity">'.Yii::t('app', 'Quantity').'</th>
                                             <th class="customer-wishlist-item-price">'.Yii::t('app', 'Price').'</th>
                                             <th class="customer-wishlist-item-cart"></th>
                                             <th class="customer-wishlist-item-remove"></th>
@@ -76,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <ul>
                             <li><a href="<?= Url::toRoute('user/dashboard') ?>"><span> <?=Yii::t('app', 'Account Dashboard')?></span></a></li>
                             <li><a href="<?= Url::toRoute('user/profile') ?>"><span> <?=Yii::t('app', 'Account Information')?></span></a></li>
-                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> <?=Yii::t('app', 'Change password')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span> <?=Yii::t('app', 'Change Password')?></span></a></li>
                             <li><a href="<?= Url::toRoute('user/orderlist') ?>"><span> <?=Yii::t('app', 'My Orders')?></span></a></li>
                             <li class="current"><a href="<?= Url::toRoute('user/wishlist') ?>"> <?=Yii::t('app', 'My Wishlist')?></a></li>
 <!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->

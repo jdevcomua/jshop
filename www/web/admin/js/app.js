@@ -761,6 +761,19 @@ function _init() {
     });
   };
 }(jQuery));
+$(document).ready(function() {
+
+  //миллисекунды зацикливания вызова функции ниже
+  setInterval (blinke_funk, 1000);
+
+  function blinke_funk() {
+    var blinke_speed = 700; //миллисекунды анимации
+
+    $("#new_order_count").fadeIn(blinke_speed).fadeOut(blinke_speed);
+  }
+
+});
+
 
 function deleteParser(ev, th, block) {
   ev.preventDefault();

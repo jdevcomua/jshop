@@ -65,8 +65,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <span class="price"><?= number_format((float)$model->model->getNewPrice(), 2, '.', '') ?></span>
                                     </span>
                                 </td>
-                                <td class="a-center movewishlist">
+                                <td class="a-center movewishlist count-of-item">
                                     <input id="qty" name="qty" data-id="<?= $model->model->getId(); ?>" data-type="<?= $model->model->getType(); ?>" value="<?=$model->count?>" size="4" title="Qty" class="input-text qty js-qty__num" maxlength="12">
+                                    <?=$model->model->getMetricTitle()?>
                                 </td>
                                 <td class="a-right movewishlist">
                                     <span class="cart-price">

@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $mail
+ * @property string $email
  * @property string $city
  * @property string $name
  * @property string $surname
@@ -62,7 +62,7 @@ class User extends Model implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['mail'], 'required'],
+            [['email'], 'required'],
             [['password'], 'required', 'on' => 'vPass'],
             ['confirm_password', 'compare', 'compareAttribute' => 'password', 'operator' => '==', 'on' => 'adminPass'],
             ['password', 'compare', 'compareAttribute' => 'confirm_password', 'operator' => '==', 'on' => 'adminPass'],
@@ -81,7 +81,7 @@ class User extends Model implements \yii\web\IdentityInterface
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'mail' => Yii::t('app', 'E-mail'),
+            'email' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
             'password' => Yii::t('app', 'Пароль'),
             'address' => Yii::t('app', 'Адрес'),
@@ -108,7 +108,7 @@ class User extends Model implements \yii\web\IdentityInterface
      */
     public static function findByEmail($email)
     {
-        return User::findOne(['mail' => $email]);
+        return User::findOne(['email' => $email]);
     }
 
     /**

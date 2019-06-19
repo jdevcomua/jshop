@@ -70,6 +70,15 @@ use zxbodya\yii2\tinymce\TinyMce;
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'metric')->dropDownList($model->getMetric(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
             'options' => ['rows' => 10],
             'language' => 'ru',

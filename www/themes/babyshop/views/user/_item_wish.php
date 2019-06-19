@@ -27,19 +27,13 @@
                 ?>
             </div>
         </div>
-    <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity"><div class="cart-cell">
-            <div class="add-to-cart-alt">
-                <input type="text" pattern="\d*" class="input-text qty validate-not-negative-number" name="qty[<?=$model->item->id?>]" id="qty-<?= $model->item->id ?>" value="1">
-            </div>
-        </div>
-    </td>
     <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price"><div class="cart-cell">
             <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price"><?=number_format((float)$model->item->getNewPrice(), 2, '.', '') ?></span> </span> </div>
         </div>
     </td>
     <td class="wishlist-cell4 customer-wishlist-item-cart">
         <div class="cart-cell">
-            <button  title="<?=Yii::t('app','Add to Cart')?>" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart">
+            <button type="button"  title="<?=Yii::t('app','Add to Cart')?>" onClick="addToCart(<?=$model->item->id?>);" class="button btn-cart">
                 <span><?= Yii::t('app','Add to Cart')?></span>
             </button>
         </div>

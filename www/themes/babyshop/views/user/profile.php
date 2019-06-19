@@ -11,6 +11,7 @@ use yii\bootstrap\ActiveForm;
 use common\models\Orders;
 use yii\widgets\ListView;
 use yii\helpers\Url;
+use yii\widgets\MaskedInput;
 use yii\widgets\Pjax;
 
 $this->title = Yii::t('app', 'Account Information');
@@ -34,12 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 <ul>
                                                     <li class="fields">
                                                         <div class="input-box">
-                                                            <label for="orders-address"><?=Yii::t('app', 'Username')?></label>
-                                                            <?= $form->field($model, 'username')->textInput(['class' => 'input-text'])->label(false) ?>
-                                                        </div>
-                                                    </li>
-                                                    <li class="fields">
-                                                        <div class="input-box">
                                                             <label for="orders-address"><?=Yii::t('app', 'Mail')?><span class="required">*</span></label>
                                                             <?= $form->field($model, 'mail')->textInput(['class' => 'input-text', 'disabled' => true])->label(false) ?>
                                                         </div>
@@ -59,7 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <li class="fields">
                                                         <div class="input-box">
                                                             <label for="orders-address"><?=Yii::t('app', 'Phone number')?></label>
-                                                            <?= $form->field($model, 'phone')->textInput(['class' => 'input-text'])->label(false) ?>
+                                                            <?= $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-box input-text',
+                                                                'mask' => '+38 (099) 999-99-99',
+                                                                'options' => [
+                                                                    'class' => 'input-box input-text',
+                                                                    'id' => 'phone2',
+                                                                    'placeholder' => Yii::t('app', 'Phone number')
+                                                                ],
+                                                                'clientOptions' => [
+                                                                    'clearIncomplete' => true
+                                                                ]
+                                                            ])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">

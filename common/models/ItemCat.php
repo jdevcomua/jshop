@@ -202,7 +202,19 @@ class ItemCat extends ModelWithImage
     {
         $info = new SplFileInfo($this->image);
         $path_parts = pathinfo($this->image);
-        return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']
-            . Item::SIZE. $info->getExtension();
+        if(file_exists(Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension())){
+            return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension();
+        }else{
+            return Yii::$app->params['defaultKitImage'];
+        }
+
+    }
+    public function findModel($id)
+    {
+        if (($model = ItemCat::findOne(['id' => $id, 'active' => true])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Страница не найдена.');
+        }
     }
 }

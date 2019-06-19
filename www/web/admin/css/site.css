@@ -136,3 +136,12 @@ a.desc:after {
 .detail-view th {
     width: 200px;
 }
+#new_order_count{
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 15px;
+    float: right;
+    margin-right: 15px;
+    padding-left: 5px;
+}

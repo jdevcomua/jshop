@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-12">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']);
 
-                    echo $form->field($model, 'username');
+                    echo $form->field($model, 'mail');
 
                     echo $form->field($model, 'password')->passwordInput();
 

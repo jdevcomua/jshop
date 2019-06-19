@@ -381,6 +381,9 @@ display: table-cell;
 	z-index: 100;
 	background-color: #fff;
 }
+.no-js{
+	cursor: pointer;
+}
 .search-bar.search-bar-open .search-icon, .no-js .search-bar .search-icon {
 	z-index: 11;
 }
@@ -11134,12 +11137,12 @@ address {
 .social .fb a:hover {
 	background: #3C5B9B;
 }
-.social .tw a:before {
-	content: "\f099";
+.social .instagram a:before {
+	content: "\f16d";
 	font-family: FontAwesome;
 }
-.social .tw a {
-	background: #359BED;
+.social .instagram a {
+	background: #FD1D1D;
 	font-size: 18px;
 	border-radius: 3px;
 	line-height: 35px;
@@ -11150,15 +11153,15 @@ address {
 	text-align: center;
 	padding: 0;
 }
-.social .tw a:hover {
-	background: #359BED;
+.social .instagram a:hover {
+	background: #FD1D1D;
 }
-.social .googleplus a:before {
-	content: "\f0d5";
-	font-family: FontAwesome;
+.social .viber a:before {
+	content: url('https://api.iconify.design/fa-brands:viber.svg?color=white&height=18');
+	vertical-align: -0.125em;
 }
-.social .googleplus a {
-	background: #E33729;
+.social .viber a {
+	background: #59267c;
 	font-size: 18px;
 	border-radius: 3px;
 	line-height: 35px;
@@ -11169,17 +11172,15 @@ address {
 	text-align: center;
 	padding: 0;
 }
-.social .googleplus a:hover {
-	background: #E33729;
+.social .viber a:hover {
+	background: #59267c;
 }
-.social .rss a:before {
-	content: "\f09e";
-	font-family: FontAwesome;
+.social .viber-grey a:before {
+	content: url('https://api.iconify.design/fa-brands:viber.svg?color=grey&height=18');
+	vertical-align: -0.125em;
 }
-.social .rss a {
-	content: "\f09e";
-	font-family: FontAwesome;
-	background: #FD9F13;
+.social .viber-grey a {
+	background: #59267c;
 	font-size: 18px;
 	border-radius: 3px;
 	line-height: 35px;
@@ -11190,71 +11191,10 @@ address {
 	text-align: center;
 	padding: 0;
 }
-.social .rss a:hover {
-	background: #FD9F13;
+.social .viber-grey a:hover {
+	background: #59267c;
 }
-.social .pintrest a:before {
-	content: "\f0d3";
-	font-family: FontAwesome;
-}
-.social .pintrest a {
-	content: "\f0d3";
-	font-family: FontAwesome;
-	background: #cb2027;
-	font-size: 18px;
-	border-radius: 3px;
-	line-height: 35px;
-	display: inline-block;
 
-	width: 35px;
-	height: 35px;
-	color: #fff;
-	text-align: center;
-	padding: 0;
-}
-.social .pintrest a:hover {
-	background: #cb2027;
-}
-.social .linkedin a:before {
-	content: "\f0e1";
-	font-family: FontAwesome;
-}
-.social .linkedin a {
-	content: "\f0e1";
-	font-family: FontAwesome;
-	background: #027ba5;
-	font-size: 18px;
-	border-radius: 3px;
-	line-height: 35px;
-	display: inline-block;
-	width: 35px;
-	height: 35px;
-	color: #fff;
-	text-align: center;
-	padding: 0;
-}
-.social .linkedin a:hover {
-	background: #027ba5;
-}
-.social .youtube a:before {
-	content: "\f167";
-	font-family: FontAwesome;
-}
-.social .youtube a {
-	background: #F03434;
-	font-size: 18px;
-	border-radius: 3px;
-	line-height: 35px;
-	display: inline-block;
-	width: 35px;
-	height: 35px;
-	color: #fff;
-	text-align: center;
-	padding: 0;
-}
-.social .youtube a:hover {
-	background: #F03434;
-}
 .social {
 	float: left;
 	margin-top: 4px;
@@ -11272,18 +11212,18 @@ address {
 .social a {
 	transition: background 400ms ease-in-out;
 }
-.payment-accept {
+.language-change {
 	color: #333333;
 	font-size: 14px;
 	margin: auto;
 	overflow: hidden;
 	float: right
 }
-.payment-accept img {
+.language-change img {
 	margin-right: 10px;
 
 }
-.payment-accept img:hover {
+.language-change img:hover {
 	opacity: 1
 }
 .glyphicon-remove1:before {
@@ -11943,7 +11883,7 @@ button.button span span {
     margin: 0;
     text-align: left;
     left: 50px;
-    top: 5px;
+    top: 25px;
     margin: 11% 0px;
     position: absolute;
     width: 48.5%;
@@ -12684,7 +12624,7 @@ select#shipping-address-select {
 
 }
 .fl-links .clicker:before {
-	content: '\f0c9';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 20px;
 	padding-left: 4px;
@@ -12989,6 +12929,13 @@ select#shipping-address-select {
   position: absolute;
   width: 100%;
   z-index: 9;
+}
+.flag{
+	width: 32px;
+	height: 21px;
+}
+.count-of-item{
+	width: 10%;
 }
 
 

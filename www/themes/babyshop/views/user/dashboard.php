@@ -112,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <a href="<?=Url::toRoute('user/profile')?>"><?= Yii::t('app','Edit')?></a> </div>
                                         <!--box-title-->
                                         <div class="box-content">
-                                            <p> <?=$model->mail?><br>
+                                            <p> <?=$model->email?><br>
                                                 <a href="<?=Url::toRoute('user/change-password')?>"><?= Yii::t('app','Change Password')?></a> </p>
                                         </div>
                                         <!--box-content-->

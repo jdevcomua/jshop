@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <p><?=Yii::t('app', 'If you have an account with us, please log in.')?></p>
                             <ul class="form-list">
                                 <li>
-                                    <?= $form->field($model, 'mail')->textInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Адрес электронной почты').'<span class="required">*</span>')?>
+                                    <?= $form->field($model, 'email')->textInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Адрес электронной почты').'<span class="required">*</span>')?>
                                 </li>
                                 <li>
                                     <?= $form->field($model, 'password')->passwordInput(['class' => 'input-box input-text required-entry'])->label(Yii::t('app/model','Пароль').'<span class="required">*</span>') ?>

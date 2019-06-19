@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <li class="fields">
                                                         <div class="input-box">
                                                             <label for="orders-address"><?=Yii::t('app', 'Mail')?><span class="required">*</span></label>
-                                                            <?= $form->field($model, 'mail')->textInput(['class' => 'input-text', 'disabled' => true])->label(false) ?>
+                                                            <?= $form->field($model, 'email')->textInput(['class' => 'input-text', 'disabled' => true])->label(false) ?>
                                                         </div>
                                                     </li>
                                                     <li class="fields">

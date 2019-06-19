@@ -33,6 +33,7 @@ use Eventviva\ImageResize;
  * @property float $quantity
  * @property integer $active
  * @property integer $top
+ * @property integer $tracker_of_addition
  * @property float $self_cost
  * @property float $best_seller
  * @property float $special
@@ -66,6 +67,8 @@ class Item extends Model implements CartAdd
     const MY_SERVER = 'my_server';
     const AMAZON = 'amazon';
     const IMAGE_SMALL = 'small_';
+    const ADDITION_BY_ADMIN = 0;
+    const ADDITION_BY_PARSER = 1;
 
 
 
@@ -75,7 +78,7 @@ class Item extends Model implements CartAdd
     public function rules()
     {
         return [
-            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week'], 'integer'],
+            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','tracker_of_addition'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['created_at','imageFiles','updated_at'], 'safe'],
@@ -85,6 +88,13 @@ class Item extends Model implements CartAdd
             [['title', 'description', 'link'], 'string'],
             [['code', 'barcode'], 'string', 'max' => '20']
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
+        ];
+    }
+    public static function getAdditionTitles()
+    {
+        return [
+            static::ADDITION_BY_ADMIN => 'Админом',
+            static::ADDITION_BY_PARSER => 'Через парсер',
         ];
     }
 
@@ -116,7 +126,8 @@ class Item extends Model implements CartAdd
             'quantity' => Yii::t('app', 'Количество '),
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
-            'metro_cost' =>Yii::t('app', 'Цена метро')
+            'metro_cost' =>Yii::t('app', 'Цена метро'),
+            'tracker_of_addition'=>Yii::t('app', 'Добавлено:')
         ];
     }
 

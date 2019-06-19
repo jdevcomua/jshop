@@ -26,7 +26,9 @@ class ItemParse
                                 $item->title = $items[$i]['name'];
 
                                 $item->category_id = $category->id;
+                                $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
                                 $item->active = 1;
+                                $item->self_cost = $items[$i]['price']/100;
                                 $item->cost = $items[$i]['price']/100;
                                 $item->metro_cost = $items[$i]['price']/100;
                                 $item->barcode = $items[$i]['ean'];
@@ -34,6 +36,8 @@ class ItemParse
                                 $item->save();
                             }else{
                                 $item->category_id = $category->id;
+                                $item->self_cost = $items[$i]['price']/100;
+                                $item->cost = $items[$i]['price']/100;
                                 $item->metro_cost = $items[$i]['price']/100;
                                 $item->save();
                             }

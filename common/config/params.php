@@ -7,6 +7,7 @@ return [
     'supportEmail' => 'litvinova.a95@gmail.com',
     'user.passwordResetTokenExpire' => 3600,
     'amazonKey' => 'AKIAIR2NVD2HK4P7BW4Q',
+    'serverUrl' => 'http://jshop.jdev.com.ua',
     'amazonSecret' => '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',
     'amazonBucket' => 'umo4ka',
     'vkAppId' => '5231107',

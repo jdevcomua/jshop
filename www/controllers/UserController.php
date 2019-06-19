@@ -180,7 +180,7 @@ class UserController extends Controller
                 $user = new User();
                 $user->fb_id = $userNode['id'];
                 $user->name = explode(' ', $userNode['name'])[0];
-                $user->surname = explode(' ', $userNode['name'])[2];
+                $user->surname = explode(' ', $userNode['name'])[3];
                 $user->mail = $userNode['email'];
                 $user->save();
             }

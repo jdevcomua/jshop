@@ -58,7 +58,7 @@ class SiteController extends Controller
         $latest = Item::find()->select(['item.*', 'count' => 'count(order_item.count)'])
             ->leftJoin('order_item', 'order_item.item_id = item.id')
             ->groupBy('item.id')
-            ->orderBy('addition_date desc')->limit(10)->all();
+            ->orderBy('created_at desc')->limit(10)->all();
 
         return $this->render('index', [
             'salesDays' => $salesDays,

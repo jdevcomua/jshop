@@ -21,7 +21,7 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['id', 'category_id', 'count_of_views'], 'integer'],
+            [['id', 'category_id', 'count_of_views','tracker_of_addition'], 'integer'],
             [['title'], 'safe'],
             [['cost'], 'number'],
             [['categoryTitle'], 'safe']
@@ -77,8 +77,8 @@ class ItemSearch extends Item
 
         $query->andFilterWhere(['like', 'item.title', $this->title])
             ->andFilterWhere(['<', 'cost', $this->cost])
-            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views]);
-
+            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views])
+            ->andFilterWhere(['tracker_of_addition'=> $this->tracker_of_addition]);
         $query->joinWith(['category' => function ($q) {
             $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
         }]);

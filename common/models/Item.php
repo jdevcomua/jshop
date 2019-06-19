@@ -94,13 +94,6 @@ class Item extends Model implements CartAdd
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
-    public static function getAdditionTitles()
-    {
-        return [
-            static::ADDITION_BY_ADMIN => 'Админом',
-            static::ADDITION_BY_PARSER => 'Через парсер',
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -149,6 +142,20 @@ class Item extends Model implements CartAdd
                 'value' => new Expression('NOW()'),
             ],
         ];
+    }
+
+    public static function getAdditionTitles()
+    {
+        return [
+            static::ADDITION_BY_ADMIN => 'Админом',
+            static::ADDITION_BY_PARSER => 'Через парсер',
+        ];
+    }
+    public function getAdditionTitle()
+    {
+        $titles = static::getAdditionTitles();
+
+        return key_exists($this->tracker_of_addition, $titles) ? $titles[$this->tracker_of_addition] : null;
     }
 
     /**

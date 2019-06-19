@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use \common\models\Item;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -48,6 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'categoryTitle',
                         'filter' => $filterByCategories,
+                    ],
+                    [
+                        'attribute' => 'tracker_of_addition',
+                        'filter' => Item::getAdditionTitles(),
+                        'value' => function (Item $model) {
+                            return $model->getAdditionTitle();
+                        },
                     ],
                     ['class' => 'yii\grid\ActionColumn',
                         'urlCreator' => function ($action, $model, $key, $index) {

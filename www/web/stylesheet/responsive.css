@@ -503,7 +503,7 @@ width:300px;
 	padding-right: 0px
 }
 .toplinks .links div .fl-links ul .clicker:before {
-	content: '\f15b';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 13px;
 	padding-left: 4px;
@@ -736,7 +736,7 @@ ul.slideshow {
 	font-size: 14px;
 	top:0;
 	width: 100%;
-	margin-top:8%;
+	margin-top:20px;
 	padding-bottom:10px;
 	padding-top:10px;
 	padding-left:20px
@@ -1443,7 +1443,7 @@ footer .footer-inner {
 	width: 15px;
 	height: 15px;
 }
-.cat-img-title.cat-box {
+.cat-img-title .cat-box {
 	font-size: 14px;
 	top:0;
 	width:70%;
@@ -1560,7 +1560,7 @@ footer .footer-inner {
 	padding-right: 0px
 }
 .toplinks .links div .fl-links ul .clicker:before {
-	content: '\f15b';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 13px;
 	padding-left: 4px;
@@ -2158,7 +2158,6 @@ footer .co-info {
 .cat-img-title.cat-box {
 	margin: 0;
 	text-align: left;
-	top: 11%;
 	width:70%
 }
 .category-description .small-tag span {

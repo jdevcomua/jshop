@@ -138,7 +138,7 @@ AppAsset::register($this);
                             if ($user) : ?>
                                 <li class="dropdown user user-menu">
                                     <a href="<?= Yii::$app->urlHelper->to(['user/view', 'id' => $user->id]); ?>" class="dropdown-toggle">
-                                        <span class="hidden-xs"><?= $user->mail; ?></span>
+                                        <span class="hidden-xs"><?= $user->email; ?></span>
                                     </a>
                                 </li>
                                 <li class="dropdown user user-menu">

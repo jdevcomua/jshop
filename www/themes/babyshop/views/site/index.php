@@ -20,7 +20,7 @@ $this->title = Yii::$app->name;
                 <div id='thm-rev-slider' class='rev_slider fullwidthabanner'>
                     <ul>
                         <?php foreach ($slider as $s):
-                            if($s->type===1):?>
+                            if($s->type === Slider::MAIN_SLIDER):?>
 
                             <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='img/<?=$s->image?>'><img src='img/<?=$s->image?>'  data-bgposition='left top'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="slider-image" />
                                 <div class="info">
@@ -46,7 +46,7 @@ $this->title = Yii::$app->name;
                         <div class="slider-items slider-width-col4 products-grid">
                             <?php foreach ($category_slider as $category) {?>
                             <div class="item"> <a href="<?= $category->getUrl()?>">
-                                    <div class="pro-img"><img src="<?= ($category->image) ? $category->getImageUrl() : '/images/category_no_image.jpg' ?>" alt="<?= $category->title ?>">
+                                    <div class="pro-img"><img src="<?= $category->getImageUrl() ?>" alt="<?= $category->title ?>">
                                         <div class="pro-info"><?= $category->title ?></div>
                                     </div>
                                 </a> </div>

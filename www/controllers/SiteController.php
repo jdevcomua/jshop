@@ -68,7 +68,7 @@ class SiteController extends Controller
             $centerBannersImages[] = Html::a(Html::img($centerBanner->getImageUrl()), $centerBanner->url);
         }
 
-        $items = Item::find()->andWhere(['active' => true])->orderBy('addition_date desc')
+        $items = Item::find()->andWhere(['active' => true])->orderBy('created_at desc')
             ->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
@@ -102,12 +102,12 @@ class SiteController extends Controller
             case 'asc' : $items->orderBy('cost asc'); break;
             case 'desc' : $items->orderBy('cost desc'); break;
             case 'promo' : $items->join('inner join', 'stock_item', 'stock_item.item_id=item.id'); break;
-            case 'date' : $items->orderBy('addition_date desc'); break;
+            case 'date' : $items->orderBy('created_at desc'); break;
             case 'rating' : $items->join('inner join', 'vote', 'vote.item_id=item.id')
                 ->groupBy('vote.item_id')->orderBy('avg(vote.rating) desc'); break;
             case 'top' : $items->join('inner join', 'order_item', 'order_item.item_id=item.id')
                 ->groupBy('order_item.item_id')->orderBy('count(order_item.count) desc'); break;
-            case 'new' : $items->orderBy('addition_date desc'); break;
+            case 'new' : $items->orderBy('created_at desc'); break;
         }
     }
 

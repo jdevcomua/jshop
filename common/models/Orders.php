@@ -51,6 +51,7 @@ class Orders extends Model
     {
         return [
             [['phone', 'name', 'address'], 'required'],
+            [['address','name'],'max' => 50],
             [['user_id'], 'integer'],
             [['timestamp'], 'safe'],
             ['payment_status', 'default', 'value' => Orders::PAYMENT_STATUS_NOT_PAID],

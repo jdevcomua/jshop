@@ -68,7 +68,7 @@ class User extends Model implements \yii\web\IdentityInterface
             ['password', 'compare', 'compareAttribute' => 'confirm_password', 'operator' => '==', 'on' => 'adminPass'],
             [['email', 'vk_id', 'fb_id'], 'unique'],
             [['email'], 'trim'],// обрезает пробелы вокруг "email"
-            [['address','name','surname'],'max' => 50],
+            [['address','surname'],'max' => 50],
             [['password'], 'string', 'length' => [6, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password','city'], 'string'],
             [['email'], 'email'],

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class'=>'input-text required-entry', 'required'=> true])->label(Yii::t('app','Name and Surname').'<span class="required">*</span>'); ?>
                                         <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Phone number').'<span class="required">*</span>'); ?>
                                         <?= $form->field($model, 'address')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Address').'<span class="required">*</span>'); ?>
-                                        <?= $form->field($model, 'mail')->textInput(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Mail'));?>
+                                        <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Mail'));?>
                                         <?= $form->field($model, 'comment')->textarea(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Comment'));?>
                                     </li>
                                 </ul>

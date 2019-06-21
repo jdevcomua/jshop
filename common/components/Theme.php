@@ -15,13 +15,13 @@ class Theme extends Object
     const PARAM_ITEMS_ON_CATALOG_PAGE_12 = 2;
     const PARAM_ITEMS_ON_CATALOG_PAGE_18 = 3;
 
-    const PARAM_ITEMS_SORT_DATE = 'дата';
-    const PARAM_ITEMS_SORT_ASC = 'по возрастанию';
+    const PARAM_ITEMS_SORT_DATE = 'date';
+    const PARAM_ITEMS_SORT_ASC = 'asc';
     const PARAM_ITEMS_SORT_DESC = 'desc';
-    const PARAM_ITEMS_SORT_NEW = 'новый';
-    const PARAM_ITEMS_SORT_RATING = 'рейтинг';
-    const PARAM_ITEMS_SORT_TOP = 'лучший';
-    const PARAM_ITEMS_SORT_PROM = 'промо';
+    const PARAM_ITEMS_SORT_NEW = 'new';
+    const PARAM_ITEMS_SORT_RATING = 'rating';
+    const PARAM_ITEMS_SORT_TOP = 'top';
+    const PARAM_ITEMS_SORT_PROM = 'promo';
 
     public static function getParam($name)
     {
@@ -57,13 +57,13 @@ class Theme extends Object
     public static function getSortName()
     {
         return [
-            Theme::PARAM_ITEMS_SORT_DATE => Theme::PARAM_ITEMS_SORT_DATE,
-            Theme::PARAM_ITEMS_SORT_ASC => Theme::PARAM_ITEMS_SORT_ASC,
-            Theme::PARAM_ITEMS_SORT_DESC => Theme::PARAM_ITEMS_SORT_DESC,
-            Theme::PARAM_ITEMS_SORT_NEW => Theme::PARAM_ITEMS_SORT_NEW,
-            Theme::PARAM_ITEMS_SORT_RATING => Theme::PARAM_ITEMS_SORT_RATING,
-            Theme::PARAM_ITEMS_SORT_TOP => Theme::PARAM_ITEMS_SORT_TOP,
-            Theme::PARAM_ITEMS_SORT_PROM => Theme::PARAM_ITEMS_SORT_PROM,
+            Theme::PARAM_ITEMS_SORT_DATE => \Yii::t('app','date'),
+            Theme::PARAM_ITEMS_SORT_ASC => \Yii::t('app','asc'),
+            Theme::PARAM_ITEMS_SORT_DESC => \Yii::t('app','desc'),
+            Theme::PARAM_ITEMS_SORT_NEW => \Yii::t('app','new'),
+            Theme::PARAM_ITEMS_SORT_RATING => \Yii::t('app','rating'),
+            Theme::PARAM_ITEMS_SORT_TOP => \Yii::t('app','top'),
+            Theme::PARAM_ITEMS_SORT_PROM => \Yii::t('app','promo'),
         ];
     }
 }

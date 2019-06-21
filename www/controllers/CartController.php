@@ -91,7 +91,7 @@ class CartController extends Controller
         $model = new Orders();
         $user = User::findOne(Yii::$app->user->id);
         if ($user) {
-            $model->mail = $user->mail;
+            $model->email = $user->email;
             $model->phone = $user->phone;
             $model->name = $user->name . ' ' . $user->surname;
             $model->address = $user->address;
@@ -103,14 +103,14 @@ class CartController extends Controller
             if ($model->save()) {
                 Yii::$app->cart->saveOrder($model->id);
                 Yii::$app->cart->resetItems();
-                if ($model->mail) {
+                if ($model->email) {
                     Yii::$app->mailer
                         ->compose('order', [
                             'user' => Yii::$app->user->identity,
                             'order' => Orders::findOne($model->id)
                         ])
                         ->setFrom(Yii::$app->params['adminEmail'])
-                        ->setTo($model->mail)
+                        ->setTo($model->email)
                         ->setSubject('subject')
                         ->setHtmlBody('<br>das</br>')
                         ->send();

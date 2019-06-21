@@ -15,13 +15,13 @@ class Theme extends Object
     const PARAM_ITEMS_ON_CATALOG_PAGE_12 = 2;
     const PARAM_ITEMS_ON_CATALOG_PAGE_18 = 3;
 
-    const PARAM_ITEMS_SORT_DATE = 'date';
-    const PARAM_ITEMS_SORT_ASC = 'asc';
-    const PARAM_ITEMS_SORT_DESC = 'desc';
-    const PARAM_ITEMS_SORT_NEW = 'new';
-    const PARAM_ITEMS_SORT_RATING = 'rating';
-    const PARAM_ITEMS_SORT_TOP = 'top';
-    const PARAM_ITEMS_SORT_PROM = 'promo';
+    const PARAM_ITEMS_SORT_DATE = 'дата';
+    const PARAM_ITEMS_SORT_ASC = 'по возрастанию';
+    const PARAM_ITEMS_SORT_DESC = 'по убыванию';
+    const PARAM_ITEMS_SORT_NEW = 'новый';
+    const PARAM_ITEMS_SORT_RATING = 'рейтинг';
+    const PARAM_ITEMS_SORT_TOP = 'лучший';
+    const PARAM_ITEMS_SORT_PROM = 'промо';
 
     public static function getParam($name)
     {

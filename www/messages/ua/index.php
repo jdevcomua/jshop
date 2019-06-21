@@ -196,5 +196,7 @@ return array(
     'Company'=>'Компанія',
     'Forgot password'=>'Забули пароль',
     'Enter email. Link to reset the password will be sent to the specified address.'=>'Введіть адресу електронної пошти. Посилання для скидання пароля буде надіслано на вказану адресу.',
-
+    'Continue Shopping'=>'Продовжити покупки',
+    'Update Cart'=>'Оновити кошик',
+    'Clear Cart'=>'Очистити кошик',
 );

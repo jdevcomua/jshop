@@ -196,5 +196,7 @@ return array(
     'Company'=>'Компания',
     'Forgot password'=>'Забыли пароль',
     'Enter email. Link to reset the password will be sent to the specified address.'=>'Введите адрес электронной почты. Ссылка для сброса пароля будет отправлена ​​на указанный адрес.',
-
+    'Continue Shopping'=>'Продолжить покупки',
+    'Update Cart'=>'Обновить корзину',
+    'Clear Cart'=>'Очистить корзину',
 );

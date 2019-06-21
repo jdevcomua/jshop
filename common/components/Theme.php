@@ -17,7 +17,7 @@ class Theme extends Object
 
     const PARAM_ITEMS_SORT_DATE = 'дата';
     const PARAM_ITEMS_SORT_ASC = 'по возрастанию';
-    const PARAM_ITEMS_SORT_DESC = 'по убыванию';
+    const PARAM_ITEMS_SORT_DESC = 'desc';
     const PARAM_ITEMS_SORT_NEW = 'новый';
     const PARAM_ITEMS_SORT_RATING = 'рейтинг';
     const PARAM_ITEMS_SORT_TOP = 'лучший';

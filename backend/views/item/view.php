@@ -59,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'format' => 'html'
                             ],
                             'count_of_views',
+                            'created_at',
                             'updated_at',
                         ],
                     ]);

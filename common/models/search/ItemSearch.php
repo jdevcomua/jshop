@@ -22,7 +22,7 @@ class ItemSearch extends Item
     {
         return [
             [['id', 'category_id', 'count_of_views','tracker_of_addition'], 'integer'],
-            [['title'], 'safe'],
+            [['title','updated_at'], 'safe'],
             [['cost'], 'number'],
             [['categoryTitle'], 'safe']
         ];
@@ -54,17 +54,12 @@ class ItemSearch extends Item
 
         $dataProvider->setSort([
             'attributes' => [
-                'id', 'title', 'cost', 'count_of_views',
+                'id', 'title', 'cost', 'count_of_views','updated_at','tracker_of_addition',
                 'categoryTitle' => [
                     'asc' => ['item_cat.title' => SORT_ASC],
                     'desc' => ['item_cat.title' => SORT_DESC],
                     'label' => 'Category Title'
                 ],
-                'tracker_of_addition' => [
-                    'asc' => ['item.tracker_of_addition' => SORT_ASC],
-                    'desc' => ['item.tracker_of_addition' => SORT_DESC],
-                    'label' => 'Добавлено'
-                ]
             ]
         ]);
 
@@ -83,7 +78,8 @@ class ItemSearch extends Item
 
         $query->andFilterWhere(['like', 'item.title', $this->title])
             ->andFilterWhere(['<', 'cost', $this->cost])
-            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views]);
+            ->andFilterWhere(['<', 'count_of_views', $this->count_of_views])
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at]);
         $query->joinWith(['category' => function ($q) {
             $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
         }]);

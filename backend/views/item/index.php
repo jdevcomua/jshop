@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'id',
                     'title',
+                    'updated_at',
                     [
                         'attribute' => 'cost',
                         'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...']),

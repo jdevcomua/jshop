@@ -86,7 +86,8 @@ class ItemController extends Controller
                 ->andFilterWhere(['characteristic_item.item_id' => $id])
                 ->andFilterWhere(['!=', 'characteristic_item.value', '{"ru":""}'])
         ]);
-
+        $model = $this->findModel($id);
+        dg($model->getImageUrl());
         return $this->render('view', [
             'model' => $this->findModel($id), 'characteristics' => $characteristics
         ]);

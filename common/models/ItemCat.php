@@ -38,6 +38,8 @@ class ItemCat extends ModelWithImage
     
     public $count;
     public $dir = 'categories';
+    const ALCOHOL = 'Алкогольные напитки';
+    const TOBACOO = 'Табачные изделия';
 
     /**
      * @inheritdoc

@@ -12938,6 +12938,9 @@ select#shipping-address-select {
 .count-of-item{
 	width: 10%;
 }
+.fadeContainer{
+	filter: blur(2px);
+}
 
 
 /*	Testimonials */

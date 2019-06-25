@@ -4,6 +4,7 @@ use common\models\Slider;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use \common\models\ItemCat;
 use www\themes\babyshop\QuickViewAsset;
 use common\components\Theme;
 use lavrentiev\widgets\toastr\Notification;
@@ -24,21 +25,23 @@ use lavrentiev\widgets\toastr\Notification;
 $this->title = $category->title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <section class="main-container col2-left-layout bounceInUp animated">
     <?php
-    if($category->title == 'Алкогольные напитки' || $category->title == 'Табачные изделия'
-        || $category->parent->title == 'Алкогольные напитки'|| $category->parent->title == 'Табачные изделия'){
-        Notification::widget([
+    if($category->title == ItemCat::ALCOHOL || $category->title == ItemCat::TOBACOO):
+        ?>
+        <div id='forAdults'>
+        <?=Notification::widget([
             'type' => Notification::TYPE_SUCCESS,
             'title' => '18+',
             'message' => Yii::t('app','Категория только для совершеннолетних'),
             'options' => [
-                "closeButton" => true,
+                "closeButton" => false,
                 "debug" => false,
                 "newestOnTop" => false,
                 "progressBar" => false,
                 "positionClass" => Notification::POSITION_TOP_CENTER,
-                "preventDuplicates" => false,
+                "preventDuplicates" => true,
                 "onclick" => null,
                 "showDuration" => "300",
                 "hideDuration" => "1000",
@@ -50,7 +53,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 "hideMethod" => "fadeOut"
             ]
         ]);
-    }?>
+        ?>
+        </div>
+    <?php endif;?>
     <!-- For version 1, 2, 3, 8 -->
     <!-- For version 1, 2, 3 -->
     <div class="container">

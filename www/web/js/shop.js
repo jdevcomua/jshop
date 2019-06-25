@@ -464,3 +464,21 @@ function orderCheck(check,event) {
         return true;
     }
 }
+$(document).ready(function() { // Ждём загрузки страницы
+    var element = document.getElementById('forAdults');
+    if(element){
+        var conteiner = document.getElementById('itemList');
+        conteiner.className +=' fadeContainer';
+
+    }
+});
+$(document).on('click','.toast-success',function(){
+    var conteiner = document.getElementById('itemList');
+    conteiner.className ='';
+
+});
+$(document).on('click','.toast-close-button',function(){
+    var conteiner = document.getElementById('itemList');
+    conteiner.className ='';
+
+});

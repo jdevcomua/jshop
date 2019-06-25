@@ -174,9 +174,11 @@ class CartController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         Yii::$app->cart->setItem($id, $cart_type, $count);
         $sumItem = Yii::$app->cart->getSumForItem($id, $cart_type);
-        return ['sumAll' => Yii::$app->cart->getSum(), 'sumItem' => $sumItem['newPrice'],
-            'countItem' => Yii::$app->cart->getCountForItem($id, $cart_type), 
-            'countAll' =>  Yii::$app->cart->getCount(), 'oldPriceItem' => $sumItem['oldPrice']
+        return ['sumAll' => Yii::$app->cart->getSum(),
+                'sumItem' => $sumItem['newPrice'],
+                'countItem' => Yii::$app->cart->getCountForItem($id, $cart_type),
+                'countAll' =>  Yii::$app->cart->getCount(),
+                'oldPriceItem' => $sumItem['oldPrice']
         ];
     }
 

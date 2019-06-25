@@ -582,6 +582,6 @@ class Item extends Model implements CartAdd
     {
         $titles = static::getMetrics();
 
-        return key_exists($this->metric, $titles) ? $titles[$this->metric] : null;
+        return key_exists($this->metric, $titles) ? $titles[$this->metric] : 'шт.';
     }
 }

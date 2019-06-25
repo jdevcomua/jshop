@@ -31,7 +31,7 @@ class Seo extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description', 'keywords', 'url'], 'string', 'max' => 255],
-            [['h1', 'description', 'keywords', 'url'], 'string', 'max' => 255],
+            [['h1'], 'string', 'max' => 50],
         ];
     }
 
@@ -46,6 +46,8 @@ class Seo extends \yii\db\ActiveRecord
             'description' => 'Description',
             'keywords' => 'Keywords',
             'url' => 'Url',
+            'h1'=>'H1',
         ];
+
     }
 }

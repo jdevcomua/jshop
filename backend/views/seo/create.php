@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Slider */
+/* @var $model common\models\Seo */
 
-$this->title = 'Создать Slider';
-$this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
+$this->title = 'Создать Seo';
+$this->params['breadcrumbs'][] = ['label' => 'Seos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="slider-create">
+<div class="seo-create">
     <div class="box box-info">
         <div class="box-header with-border">
             <h3 class="box-title"><?= Html::encode($this->title) ?></h3>

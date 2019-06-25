@@ -18,12 +18,10 @@ use yii\widgets\Pjax;
     <!-- Basic page needs ================================================== -->
     <meta charset="utf-8">
     <?php echo Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <meta name="theme-color" content="#07785c">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Default Description">
-    <meta name="keywords" content="fashion, store, E-commerce">
+
     <link rel="icon" href="#" type="image/x-icon">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 
@@ -32,6 +30,15 @@ use yii\widgets\Pjax;
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600,800,400' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i,900" rel="stylesheet">
+    <?php if(isset(Yii::$app->controller->seo)):?>
+        <title><?= Yii::$app->controller->seo->title ?></title>
+        <meta name="description" content="<?= Yii::$app->controller->seo->description?>">
+        <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords?>">
+    <?php else:?>
+        <title><?= Html::encode($this->title) ?></title>
+        <meta name="description" content="Default Description">
+        <meta name="keywords" content="fashion, store, E-commerce">
+    <?php endif;?>
 
 </head>
 <body>

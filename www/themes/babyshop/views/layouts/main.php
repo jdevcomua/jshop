@@ -21,7 +21,7 @@ use yii\widgets\Pjax;
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <meta name="theme-color" content="#07785c">
-
+    <H1>Sdelivery</H1>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">

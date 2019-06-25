@@ -12,7 +12,7 @@ class m190625_163748_add_h1_column_to_seo_table extends Migration
      */
     public function up()
     {
-        $this->addColumn('seo', 'h1', $this->string(50)->notNull());
+        $this->addColumn('seo', 'h1', $this->string(50));
     }
 
     /**

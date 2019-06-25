@@ -12,6 +12,7 @@ use Yii;
  * @property string $description
  * @property string $keywords
  * @property string $url
+ * @property string $h1
  */
 class Seo extends \yii\db\ActiveRecord
 {
@@ -30,6 +31,7 @@ class Seo extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description', 'keywords', 'url'], 'string', 'max' => 255],
+            [['h1', 'description', 'keywords', 'url'], 'string', 'max' => 255],
         ];
     }
 

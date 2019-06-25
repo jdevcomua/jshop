@@ -18,7 +18,7 @@ class SearchSeo extends Seo
     {
         return [
             [['id'], 'integer'],
-            [['title', 'description', 'keywords', 'url'], 'safe'],
+            [['title', 'description', 'keywords', 'url','h1'], 'safe'],
         ];
     }
 
@@ -64,6 +64,7 @@ class SearchSeo extends Seo
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
+            ->andFilterWhere(['like', 'h1', $this->h1])
             ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;

@@ -1,13 +1,9 @@
 <?php
 
-use common\models\ItemCat;
-use common\models\Parse;
 use yii\helpers\Html;
-use unclead\multipleinput\MultipleInput;
 use unclead\multipleinput\TabularInput;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
-use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */

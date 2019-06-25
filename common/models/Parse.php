@@ -33,6 +33,7 @@ class Parse extends \yii\db\ActiveRecord
             [['category_id'], 'integer'],
             [['url', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemCat::className(), 'targetAttribute' => ['category_id' => 'id']],
+            ['url','url'],
         ];
     }
 

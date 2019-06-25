@@ -63,24 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-main col-sm-9 col-sm-push-3 product-grid">
                 <div class="pro-coloumn">
                     <div class="category-description std">
-                        <div class="slider-items-products">
-                            <div id="category-desc-slider" class="product-flexslider hidden-buttons" >
-                                <div class="slider-items slider-width-col1 owl-carousel owl-theme">
-                                    <?php foreach ($slider as $s):
-                                        if($s->type === Slider::CATEGORY_MIDLE_SLIDER):?>
-                                            <!-- Item -->
-                                            <div class="item"> <a href="#"><img alt="<?= $s->title?>" src="<?=$s->getImageUrl()?>"></a>
-                                                <div class="cat-img-title cat-bg cat-box">
-                                                    <div class="small-tag"><?= $s->title?></div>
-                                                    <h2 class="cat-heading"><?= $s->largeTitle?></h2>
-                                                    <p><?= $s->description?> </p>
-                                                </div>
-                                            </div>
-                                            <!-- End Item -->
-                                        <?php endif;endforeach;?>
-                                </div>
-                            </div>
-                        </div>
+                        <h1><?=$this->title?></h1>
                     </div>
                     <?php Pjax::begin(['id'=>'itemList']) ?>
                     <?php if (Yii::$app->session->get('listType') == 'grid') {
@@ -147,29 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     {pager}
                                 </div>
                                 <div class="product-option-right">
-                                    <div class="sort-by">
-                                        <label class="left">'. Yii::t('app', 'Sort By') .': </label>
-                                        <ul>
-                                            <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.Theme::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
-                                                <ul>
-                                                    '.Theme::getSort(Yii::$app->session->get('sort')).'
-                                                   
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <a class="button-asc left default-sort" href="" onclick="setDefaultSort()" title="Set Descending Direction"><span>X</span></a> </div>
-                                    <div class="pager">
-                                        <div class="limiter">
-                                            <label>'. Yii::t('app', 'View') .': </label>
-                                            <ul>
-                                                <li><a href="" onclick="setPerPage('.Yii::$app->session->get('page').')">' . Theme::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
-                                                    <ul>
-                                                        '.Theme::getPagination(Yii::$app->session->get('page')).'
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>',

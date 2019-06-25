@@ -11856,6 +11856,8 @@ button.button span span {
 
 /*  custom-slider  */
 .category-description {
+	border: 1px #eaeaea solid;
+	padding-left: 10%;
 	overflow: hidden;
 	margin:0px;
 

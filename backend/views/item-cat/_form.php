@@ -1,14 +1,17 @@
 <?php
 
+use common\models\ItemCat;
 use common\models\Parse;
 use yii\helpers\Html;
 use unclead\multipleinput\MultipleInput;
+use unclead\multipleinput\TabularInput;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
+/* @var $parse common\models\Parse */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $categories array */
 /* @var $categories array */
@@ -30,6 +33,25 @@ use kartik\file\FileInput;
             'allowClear' => true
         ],
     ]);
+
+    echo  TabularInput::widget([
+        'models' => $model->parse,
+        'attributeOptions' => [
+            'enableAjaxValidation'      => false,
+            'enableClientValidation'    => false,
+            'validateOnChange'          => false,
+            'validateOnSubmit'          => true,
+            'validateOnBlur'            => false,
+        ],
+        'columns' => [
+            [
+                'name'  => 'url',
+                'title' => 'url',
+                'type'  => \unclead\multipleinput\MultipleInputColumn::TYPE_TEXT_INPUT,
+            ],
+        ]
+    ]);
+
 
     $images = [];
     if (!$model->isNewRecord && !empty($model->image)) {

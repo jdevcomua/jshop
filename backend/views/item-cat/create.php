@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ItemCat;
+use common\models\Parse;
 use yii\helpers\Html;
 
 

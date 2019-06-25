@@ -304,6 +304,7 @@ function deleteFromCart(id, cart_type, pjax) {
     });
 }
 function changeCountOfItem(id, cartType, $thisItem) {
+    "use strict";
     if ($thisItem.val() < 0) {
         $thisItem.val(1);
         alert('Значение должно быть больше или равно 0');
@@ -313,7 +314,7 @@ function changeCountOfItem(id, cartType, $thisItem) {
         $.ajax({
             url: 'cart/change',
             async: false,
-            data: {id: +id, count: $('#qty').val(), cart_type: cartType},
+            data: {id: +id, count: $thisItem.val(), cart_type: cartType},
             dataType: 'json',
             success: function (data) {
                 $('.sum').html(data.sumAll);
@@ -433,9 +434,9 @@ $(document).on('click', '#empty_cart_button', function(){ // изменение 
     cleanCart();
 });
 
-$(document).on('input', '.js-qty__num', function(){ // изменение значения количество в корзине
+$(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
     if($('#qty').val() !== '') {
-        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
+        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this),$(this).val());
         refreshCarts();
     }
 });
@@ -477,7 +478,7 @@ $(document).on('click','.toast-success',function(){
     conteiner.className ='';
 
 });
-$(document).on('click','.toast-close-button',function(){
+$(document).on('click','.toast-success',function(){
     var conteiner = document.getElementById('itemList');
     conteiner.className ='';
 

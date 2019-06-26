@@ -30,7 +30,21 @@ use yii\widgets\Pjax;
                     <nav>
                         <div class="mm-toggle-wrap">
                             <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label"><?= Yii::t('app','Menu')?></span> </div>
+                            <div class="fl-cart-contain">
+                                <div class="mini-cart">
+                                    <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
+                                    <div class="fl-mini-cart-content" style="display: none;">
+                                        <div class="actions">
+                                            <button data-pjax = 0 class="btn-checkout" title="Checkout" type="button" onClick="window.location='<?= Url::toRoute('cart/index')?>'"><span><?= Yii::t('app','Checkout')?></span></button>
+                                        </div>
+                                        <!--actions-->
+                                    </div>
+                                    <!--fl-mini-cart-content-->
+                                </div>
+                            </div>
                         </div>
+
+
                         <div class="nav-inner">
                             <!-- BEGIN NAV -->
                             <ul id="nav" class="hidden-xs">

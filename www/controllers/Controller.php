@@ -19,7 +19,7 @@ class Controller extends \yii\web\Controller
     public function beforeAction($action)
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        $action->controller->seo = Seo::findOne(['url'=> $action->controller->base_url()]);
+        $action->controller->seo = Seo::findOne(['url'=> $action->controller->current_url()]);
         return parent::beforeAction($action);
     }
 
@@ -38,7 +38,7 @@ class Controller extends \yii\web\Controller
         Yii::$app->language = $lang;
         return $this->redirect(Yii::$app->urlHelper->to(['/']));
     }
-    function base_url($atRoot=FALSE, $atCore=FALSE, $parse=FALSE){
+    function current_url($atRoot=FALSE, $atCore=FALSE, $parse=FALSE){
         if (isset($_SERVER['HTTP_HOST'])) {
             $http = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http';
             $hostname = $_SERVER['HTTP_HOST'];

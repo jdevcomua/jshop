@@ -72,7 +72,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?php echo $form->field($model, 'metric')->dropDownList($model->getMetric(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
+                <?php echo $form->field($model, 'metric')->dropDownList($model->getMetrics(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
             </div>
             <div class="col-md-6">
 

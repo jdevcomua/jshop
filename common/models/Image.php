@@ -66,7 +66,7 @@ class Image extends \yii\db\ActiveRecord
     {
         $info = new SplFileInfo($this->name);
         $path_parts = pathinfo($this->name);
-        if(file_exists(Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension())){
+        if(file_exists(  Yii::getAlias('@www') . '/web'. Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension())){
             return Yii::$app->params['serverUrl'] . Item::IMG . $path_parts['filename']. Item::SIZE. $info->getExtension();
         }else{
             return Yii::$app->params['defaultKitImage'];

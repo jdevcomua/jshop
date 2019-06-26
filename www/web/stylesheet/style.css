@@ -619,6 +619,7 @@ ul.currencies_list li a:hover {
 	font-size: 13px;
 	line-height: normal;
 	font-weight: normal;
+	word-wrap:break-word;
 }
 .fl-mini-cart-content .product-name a:hover {
 	font-size: 13px;
@@ -3617,8 +3618,8 @@ margin: 0 0;
 .products-grid .item .item-inner .item-info .info-inner .item-title a {
 	text-decoration: none;
 	font-weight:500;
-	color:#292929
-
+	color:#292929;
+	word-wrap:break-word;
 }
 .products-grid .item .item-inner .item-info .info-inner .item-title a:hover {
 	color: #6ca218;
@@ -8353,9 +8354,10 @@ ul.shipping-pro li {
 	margin: 0;
 }
 .product-view .product-name {
-	white-space: normal;
+
 }
 .product-view .product-name h1 {
+	word-wrap:break-word;
 	font-size: 34px;
 	margin: 0 0 2px;
 	text-align: left;
@@ -9779,8 +9781,10 @@ button.button#empty_cart_button:before {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 }
+
 #shopping-cart-table .product-name a {
 	text-transform: none;
+	word-wrap:break-word;
 }
 #shopping-cart-table.data-table .price {
 	font-weight: 600;

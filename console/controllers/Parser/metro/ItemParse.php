@@ -15,7 +15,7 @@ class ItemParse
     {
         $categories = ItemCat::find()->all();
         foreach ($categories as $category){
-            for ($i = 1;$i<100;$i++){
+            for ($i = 1;$i<50;$i++){
                 foreach ($category->slug() as $slug){
                     $items = $this->parseItem($i, $slug);
                     if(!empty($items)){
@@ -24,7 +24,9 @@ class ItemParse
                             if(!isset($item)){
                                 $item = new Item();
                                 $item->title = $items[$i]['name'];
-
+                                $ful_info = $this->parseDescription($items[$i]['ean']);
+                                if(isset($ful_info[0]['responses'][0]['data']['items'][0]['legend'][0]))
+                                $item->description = $ful_info[0]['responses'][0]['data']['items'][0]['legend'][0];
                                 $item->category_id = $category->id;
                                 $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
                                 $item->active = 1;
@@ -51,7 +53,7 @@ class ItemParse
 
     /**
      * @param $offset integer
-     * @param $category ItemCat
+     * @param $category string
      * @return bool|mixed|string
      */
     public function parseItem($offset, $category){
@@ -104,6 +106,32 @@ class ItemParse
         $response = curl_exec($myCurl);curl_close($myCurl);
         $response = Json::decode('['.$response.']');
         return $response[0]['responses'][0]['data']['items'][0]['items'];
+    }
+    public function parseDescription($ean){
+        $myCurl = curl_init();
+        curl_setopt_array($myCurl, array(
+            CURLOPT_URL => 'https://metro.zakaz.ua/api/query.json',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode([
+                'meta'=>new \stdClass(),
+                'request'=>[
+                    [
+                        'args'=>[
+                            'store_id'=>'48215611',
+                            'eans'=>[$ean]
+                        ],
+                        'v'=>'0.1',
+                        'type'=>'product.details',
+                        'id'=>'product_'.$ean.'_full',
+                    ]
+                ]
+            ]),
+        ));
+
+        $response = curl_exec($myCurl);curl_close($myCurl);
+        $response = Json::decode('['.$response.']');
+        return $response;
     }
 
     /**

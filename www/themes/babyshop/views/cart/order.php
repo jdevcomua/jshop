@@ -72,8 +72,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <br>
                                 <div class="buttons-set" id="billing-buttons-container">
                                     <input class="hidden" name="send" value="true">
-                                    <button id="return_cart" type="button" title="Return Cart" class="button return-cart" onClick="location.replace('<?= \yii\helpers\Url::toRoute('cart/index') ?>')"><span>Edit Cart</span></button>
-                                    <button id="submit" type="submit" title="Submit" class="button send" onClick="orderCheck(<?php if($sum==0){echo 0;}else{echo 1;}?>,event)"><span><?=Yii::t('app','Submit')?></span></button>
+                                    <button id="return_cart" type="button" title="Return Cart" class="button return-cart button-order" onClick="location.replace('<?= \yii\helpers\Url::toRoute('cart/index') ?>')"><span>Edit Cart</span></button>
+                                    <button id="submit" type="submit" title="Submit" class="button send button-order" onClick="orderCheck(<?php if($sum==0){echo 0;}else{echo 1;}?>,event)"><span><?=Yii::t('app','Submit')?></span></button>
                                 </div>
                             </div>
                         </div>

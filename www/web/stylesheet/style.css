@@ -12946,6 +12946,10 @@ select#shipping-address-select {
 .down{
 	height: 40px;
 }
+.button-order{
+	margin-top: 10px;
+	width: 140px;
+}
 
 
 /*	Testimonials */

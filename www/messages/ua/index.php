@@ -207,4 +207,8 @@ return array(
     'top'=>'топ',
     'promo'=>'промо',
     'Date'=>'Дата',
+    'enter your tags'=>'введіть свої теги',
+    'reviews for'=>'відгуків на',
+    'Related Products'=>'Супутні Tовари',
+    'Submit'=>'Надіслати',
 );

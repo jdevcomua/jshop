@@ -149,7 +149,7 @@ $imageUrls = $item->getImageUrl();
                                         <div class="form-add-tags">
 
                                             <div class="input-box">
-                                                <input class="input-text" name="productTagName" id="productTagName" type="text" value="enter your tags">
+                                                <input class="input-text" name="productTagName" id="productTagName" type="text" value="<?= Yii::t('app','enter your tags')?>">
                                                 <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span><?= Yii::t('app','Add Tags')?></span> </button>
                                             </div>
                                             <!--input-box-->
@@ -157,17 +157,17 @@ $imageUrls = $item->getImageUrl();
                                     </form>
                                 </div>
                                 <!--tags-->
-                                <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
+                                <p class="note"><?= Yii::t('app','Use spaces to separate tags. Use single quotes (\') for phrases.')?></p>
                             </div>
                         </div>
                         <div class="tab-pane  in" id="reviews_tabs">
                             <div class="woocommerce-Reviews">
                                 <div>
                                     <?php \yii\widgets\Pjax::begin(['enablePushState' => false]) ?>
-                                    <h2 class="woocommerce-Reviews-title"><?=$item->getAvgRating()['count']?> reviews for <span><?=$item->title?></span></h2>
+                                    <h2 class="woocommerce-Reviews-title"><?=$item->getAvgRating()['count']?> <?= Yii::t('app','reviews for')?> <span><?=$item->title?></span></h2>
                                     <ol class="commentlist">
                                         <?php if ($item->getAvgRating()['count'] == 0) { ?>
-                                            <p>No reviews</p>
+                                            <p><?= Yii::t('app','No reviews')?></p>
                                         <?php } else {
                                             $votes = $item->getCheckedVotes();
                                             echo \yii\widgets\ListView::widget([
@@ -220,7 +220,7 @@ $imageUrls = $item->getImageUrl();
 <!--                                                    <label for="email">Email <span class="required">*</span></label>-->
 <!--                                                    <input id="email" name="email" type="email" value="" size="30"  required></p>-->
                                                 <p class="form-submit">
-                                                    <?= Html::submitButton('Submit') ?>
+                                                    <?= Html::submitButton(Yii::t('app','Submit')) ?>
                                                 </p>
                                             <?php } ?>
                                             <?php ActiveForm::end(); ?>

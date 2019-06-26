@@ -6353,6 +6353,7 @@ button.button.continue:before {
 }
 
 button.button.return-cart:before {
+	width: 300px;
 	content: "\f07a";
 	font-family: FontAwesome;
 	font-size: 12px;

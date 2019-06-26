@@ -466,7 +466,6 @@ width:300px;
 }
 .mm-toggle-wrap {
 	display: block;
-	width: 100%;
 }
 .toplinks div.links div a {
 	padding: 3px 5px;
@@ -1161,7 +1160,6 @@ footer address span {
 	/* overflow: hidden; */
     /* top: 150px; */
 	clear: both;
-	float: left;
 	margin-top: 15px;
 	margin-left: 10px;
 }
@@ -1523,7 +1521,6 @@ footer .footer-inner {
 }
 .mm-toggle-wrap {
 	display: block;
-	width: 100%;
 }
 .toplinks div.links div a {
 	padding: 3px 10px;

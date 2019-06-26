@@ -227,7 +227,7 @@ $this->title = 'Home Page';
                                             </a>
                                         </td>
                                         <td><?= $item->cost; ?></td>
-                                        <td><?= $item->addition_date; ?></td>
+                                        <td><?= $item->created_at; ?></td>
                                         <td><?= $item->count_of_views; ?></td>
                                         <td><?= $item->count; ?></td>
                                     </tr>

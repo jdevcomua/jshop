@@ -84,7 +84,7 @@ class Item extends Model implements CartAdd
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['created_at','imageFiles','updated_at'], 'safe'],
-                [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
+            [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],

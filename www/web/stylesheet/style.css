@@ -8353,7 +8353,7 @@ ul.shipping-pro li {
 	margin: 0;
 }
 .product-view .product-name {
-
+	white-space: normal;
 }
 .product-view .product-name h1 {
 	font-size: 34px;

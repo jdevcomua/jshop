@@ -9696,6 +9696,7 @@ button.button.submit:before {
 }
 
 .related-pro .owl-item .item {
+	width: 241px;
 	margin:0;
 	padding:15px 0px 24px 0px
 

@@ -32,7 +32,7 @@ use yii\widgets\Pjax;
                             <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label"><?= Yii::t('app','Menu')?></span> </div>
                         </div>
                         <div class="fl-cart-contain mm-toggle-wrap">
-                            <?php Pjax::begin(['id'=>'cart','enablePushState' => false]) ?>
+                            <?php Pjax::begin(['id'=>'mobile_cart','enablePushState' => false]) ?>
                             <div class="mini-cart">
                                 <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
                                 <div class="fl-mini-cart-content" style="display: none;">
@@ -74,7 +74,7 @@ use yii\widgets\Pjax;
                             </div>
                             <?php Pjax::end()?>
                         </div>
-                    </nav>
+
                         <div class="nav-inner">
                             <!-- BEGIN NAV -->
                             <ul id="nav" class="hidden-xs">
@@ -145,6 +145,7 @@ use yii\widgets\Pjax;
                         </div>
                         <?php Pjax::end()?>
                     </div>
+
                     <!--mini-cart-->
                     <div class="collapse navbar-collapse">
                         <form class="navbar-form" role="search" method="get" action="search">

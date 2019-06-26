@@ -190,9 +190,11 @@ function addToCartWishList() {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
             showPopup(data.html);
         }
@@ -213,9 +215,11 @@ function addToCart(id) {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
             showPopup(data.html);
         }
@@ -296,9 +300,11 @@ function deleteFromCart(id, cart_type, pjax) {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
         }
     });
@@ -355,6 +361,9 @@ function removeItemFromWishList(id) {
 function refreshCarts() {
     if (document.getElementById('cart'))
         $.pjax.reload({container: "#cart", async: false});
+
+    if (document.getElementById('mobile_cart'))
+        $.pjax.reload({container: "#mobile_cart", async: false});
 
     if (document.getElementById('cart_cat'))
         $.pjax.reload({container: "#cart_cat", async: false});

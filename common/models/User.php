@@ -66,11 +66,11 @@ class User extends Model implements \yii\web\IdentityInterface
             [['password'], 'required', 'on' => 'vPass'],
             ['confirm_password', 'compare', 'compareAttribute' => 'password', 'operator' => '==', 'on' => 'adminPass'],
             ['password', 'compare', 'compareAttribute' => 'confirm_password', 'operator' => '==', 'on' => 'adminPass'],
-            [['mail', 'vk_id', 'fb_id'], 'unique'],
-            [['mail'], 'trim'],// обрезает пробелы вокруг "email"
+            [['email', 'vk_id', 'fb_id'], 'unique'],
+            [['email'], 'trim'],// обрезает пробелы вокруг "email"
             [['password'], 'string', 'length' => [4, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password','city'], 'string'],
-            [['mail'], 'email'],
+            [['email'], 'email'],
         ];
     }
 

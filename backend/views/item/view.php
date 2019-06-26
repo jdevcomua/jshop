@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'code',
                             'quantity',
                             'cost',
+                            'metro_cost',
                             [
                                 'attribute' => 'metric',
                                 'value' => $model->getMetricTitle(),

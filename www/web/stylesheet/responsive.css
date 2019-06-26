@@ -503,7 +503,7 @@ width:300px;
 	padding-right: 0px
 }
 .toplinks .links div .fl-links ul .clicker:before {
-	content: '\f15b';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 13px;
 	padding-left: 4px;
@@ -1560,7 +1560,7 @@ footer .footer-inner {
 	padding-right: 0px
 }
 .toplinks .links div .fl-links ul .clicker:before {
-	content: '\f15b';
+	content: '\f007';
 	font-family: FontAwesome;
 	font-size: 13px;
 	padding-left: 4px;

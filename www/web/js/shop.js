@@ -308,9 +308,12 @@ function changeCountOfItem(id, cartType, $thisItem) {
     if ($thisItem.val() < 0) {
         $thisItem.val(1);
         alert('Значение должно быть больше или равно 0');
-    } else if ($thisItem.val() == 0) {
+    } else if ($thisItem.val() === "0") {
         deleteFromCart(id, cartType, $thisItem.parent());
-    } else {
+
+    } else if ($thisItem.val() == '') {
+        $thisItem.val(1);
+    }else {
         $.ajax({
             url: 'cart/change',
             async: false,

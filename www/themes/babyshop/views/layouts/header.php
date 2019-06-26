@@ -31,9 +31,39 @@ use yii\widgets\Pjax;
                         <div class="mm-toggle-wrap">
                             <div class="mm-toggle"><i class="icon-align-justify"></i><span class="mm-label"><?= Yii::t('app','Menu')?></span> </div>
                             <div class="fl-cart-contain">
+                                <?php Pjax::begin(['id'=>'cart','enablePushState' => false]) ?>
                                 <div class="mini-cart">
                                     <div class="basket"> <a data-pjax = 0 href="<?= Url::toRoute('cart/index') ?>"><span> <?= Yii::$app->cart->getCount() ?> </span></a> </div>
                                     <div class="fl-mini-cart-content" style="display: none;">
+                                        <div class="block-subtitle">
+                                            <div class="top-subtotal"><?= Yii::$app->cart->getCount() ?> <?= Yii::t('app','Items')?>,
+                                                <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </div>
+                                            <!--top-subtotal-->
+                                            <!--pull-right-->
+                                        </div>
+                                        <!--block-subtitle-->
+
+                                        <?php if(!Yii::$app->cart->isEmpty()) { ?>
+                                            <ul class="mini-products-list" id="cart-sidebar">
+                                                <?php foreach (Yii::$app->cart->getModels() as $key => $cartElement) {?>
+
+                                                    <li class="item <?=($key == 0) ? 'first' : ''?> <?=($key == count(Yii::$app->cart->getModels())-1) ? 'last' : ''?>">
+                                                        <div class="item-inner"><a data-pjax = 0 class="product-image" title="<?= $cartElement->model->title?>"
+                                                                                   href="<?= $cartElement->model->getUrl() ?>"><img alt="<?= $cartElement->model->title?>"
+                                                                                                                                    src="<?= ($cartElement->model->images) ? (is_array($urls = $cartElement->model->getOneImageUrl()) ? $urls[0] : $urls) : Yii::$app->params['defaultKitImage'] ?>"></a>
+                                                            <div class="product-details">
+
+                                                                <div class="access"><a data-pjax="true" data-reload=0 href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>"><?= Yii::t('app','Remove')?></a></div>
+                                                                <!--access-->
+                                                                <strong><?= $cartElement->count ?></strong> <?=$cartElement->model->getMetricTitle()?> X <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
+                                                                <p class="product-name"><a data-pjax = 0 href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                <?php }?>
+                                            </ul>
+                                        <?php } ?>
+
                                         <div class="actions">
                                             <button data-pjax = 0 class="btn-checkout" title="Checkout" type="button" onClick="window.location='<?= Url::toRoute('cart/index')?>'"><span><?= Yii::t('app','Checkout')?></span></button>
                                         </div>
@@ -41,6 +71,7 @@ use yii\widgets\Pjax;
                                     </div>
                                     <!--fl-mini-cart-content-->
                                 </div>
+                                <?php Pjax::end()?>
                             </div>
                         </div>
 

@@ -1535,6 +1535,7 @@ a:focus {
  * --------------
  */
 .box {
+  word-break: break-word;
   position: relative;
   border-radius: 3px;
   background: #ffffff;

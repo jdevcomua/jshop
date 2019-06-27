@@ -56,9 +56,9 @@ class Orders extends Model
             ['payment_status', 'default', 'value' => Orders::PAYMENT_STATUS_NOT_PAID],
             ['order_status', 'default', 'value' => Orders::STATUS_NEW],
             [['sum'], 'number'],
-            [['email'], 'email'],
             [['address', 'name', 'delivery', 'payment', 'phone', 'comment'], 'string'],
-            [['address','name'],'string','length' => [0, 50]],
+            [['address','name','email'],'string','length' => [0, 50]],
+            [['email'], 'email'],
         ];
     }
 

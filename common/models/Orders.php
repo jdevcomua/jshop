@@ -58,7 +58,7 @@ class Orders extends Model
             [['sum'], 'number'],
             [['email'], 'email'],
             [['address', 'name', 'delivery', 'payment', 'phone', 'comment'], 'string'],
-            [['address','name','surname'],'string','length' => [0, 50]],
+            [['address','name'],'string','length' => [0, 50]],
         ];
     }
 

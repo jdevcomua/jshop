@@ -12700,7 +12700,7 @@ select#shipping-address-select {
 	font-size: 12px;
 	line-height: 25px;
 	text-transform: uppercase;
-	z-index: 100;
+	z-index: 1001;
 	border-top: 0;
 	display: block;
 	position: absolute;
@@ -12747,6 +12747,7 @@ select#shipping-address-select {
 	height: auto;
 	background-color: rgba(246, 59, 52, 0.45);
 	display: block;
+	z-index: 1000;
 }
 
 .offer-inner {padding-left:5px; padding-right:5px}
@@ -12964,6 +12965,10 @@ select#shipping-address-select {
 		display: none !important;
 	}
 }
+#w0-error-0, #w0-success-0{
+	z-index: 99!important;
+}
+
 
 
 /*	Testimonials */

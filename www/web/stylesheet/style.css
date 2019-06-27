@@ -12340,7 +12340,7 @@ button.button span span {
 	-moz-opacity: 0.8;
 	-khtml-opacity: 0.8;
 	opacity: 0.5;
-	z-index: 99;
+	z-index: 1000;
 	display: none;
 }
 .popup1 {
@@ -12678,7 +12678,7 @@ select#shipping-address-select {
 	font-size: 12px;
 	line-height: 25px;
 	text-transform: uppercase;
-	z-index: 100;
+	z-index: 1001;
 	border-top: 0;
 	width: 250px;
 	position: absolute;
@@ -12958,6 +12958,11 @@ select#shipping-address-select {
 .button-order{
 	margin-top: 10px;
 	width: 140px;
+}
+@media (max-width: 767px) {
+	.product-detail-bnt {
+		display: none !important;
+	}
 }
 
 

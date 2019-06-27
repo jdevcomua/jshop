@@ -13,19 +13,21 @@ use kartik\file\FileInput;
 ?>
 
 <div class="item-cat-form">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
+            echo $form->field($model, 'url')->textInput(['maxlength' => true]);
 
-    echo $form->field($model, 'url')->textInput(['maxlength' => true]);
+            ?>
+            <br>
+            <div class="form-group">
+                <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [
+                        'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
+                    ]) . ' ';?>
+            </div>
 
-    ?>
-    <br>
-    <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('app', 'Сохранить') : Yii::t('app', 'Сохранить'), [
-                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'name' => 'action', 'value' => 'save'
-            ]) . ' ';?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

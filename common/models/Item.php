@@ -88,7 +88,9 @@ class Item extends Model implements CartAdd
             [['cost', 'self_cost', 'quantity'], 'compare', 'compareValue' => 0 , 'operator' => '>'],
             ['count_of_views', 'default', 'value' => 0],
             [['title', 'description', 'link'], 'string'],
-            [['code', 'barcode'], 'string', 'max' => '20']
+            [['code', 'barcode'], 'string', 'max' => '20'],
+            [['title'], 'string', 'max' => '63'],
+
             //[['imageFiles'], 'file', 'extensions' => 'png, jpg'],
         ];
     }

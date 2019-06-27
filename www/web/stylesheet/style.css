@@ -9355,6 +9355,7 @@ a.button.view-all {
 	border-right: 0px solid #eaeaea;
 	border-bottom: 1px solid #eaeaea;
 	padding: 15px 20px;
+	word-break: break-word;
 }
 #customer-reviews ul {
 	margin: auto;

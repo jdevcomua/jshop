@@ -29,7 +29,7 @@ class m170729_152053_default_admin extends Migration
 
     public function safeDown()
     {
-        $user = User::findOne(['email' => static::EMAIL]);
+        $user = User::findOne(['mail' => static::EMAIL]);
         if ($user) {
             $user->delete();
         }

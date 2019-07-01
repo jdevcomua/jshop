@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\Breadcrumbs;
 
 /* @var $item \common\models\Item */
 /* @var $inCart boolean */
@@ -10,6 +11,10 @@ use yii\widgets\ActiveForm;
 /* @var $related \common\models\Item[] */
 
 $this->title = $item->title;
+if(isset($item->category->parent->parent))
+    $this->params['breadcrumbs'][] = ['label' => $item->category->parent->parent->title, 'url' => $item->category->parent->parent->getUrl()];
+if(isset($item->category->parent))
+    $this->params['breadcrumbs'][] = ['label' => $item->category->parent->title, 'url' => $item->category->parent->getUrl()];
 $this->params['breadcrumbs'][] = ['label' => $item->category->title, 'url' => $item->category->getUrl()];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -24,6 +29,14 @@ $imageUrls = $item->getImageUrl();
                 <div id="messages_product_view"></div>
                 <!--product-next-prev-->
                 <div class="product-essential container">
+                    <section class="content">
+                        <?= Breadcrumbs::widget([
+                            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                            'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>\n",
+                            'activeItemTemplate' => "<li class='breadcrumb-item active'>{link}</li>\n",
+                            'options' =>['class' => 'breadcrumb item-breadcrumb'],
+                        ]) ?>
+                    </section>
                     <div class="row">
                             <!--End For version 1, 2, 6 -->
                             <!-- For version 3 -->

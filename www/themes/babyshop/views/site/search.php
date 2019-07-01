@@ -26,33 +26,6 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
             <div class="col-main col-sm-9 col-sm-push-3 product-grid">
                 <div class="pro-coloumn">
                     <div class="category-description std">
-                        <div class="slider-items-products">
-                            <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                                <div class="slider-items slider-width-col1 owl-carousel owl-theme">
-
-                                    <!-- Item -->
-                                    <div class="item"> <a href="#"><img alt="" src="/images/category-img1.jpg"></a>
-                                        <div class="cat-img-title cat-bg cat-box">
-                                            <div class="small-tag"><?= Yii::t('app','Season')?>2018</div>
-                                            <h2 class="cat-heading"><?= Yii::t('app','Organic')?> <span><?= Yii::t('app','World')?></span></h2>
-                                            <p><?= Yii::t('app','GET 40% OFF &sdot; Free Delivery ')?></p>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-
-                                    <!-- Item -->
-                                    <div class="item"> <a href="#"><img alt="" src="/images/category-img2.jpg"></a>
-                                        <div class="cat-img-title cat-bg cat-box">
-                                            <div class="small-tag"><?= Yii::t('app','Green World')?></div>
-                                            <h2 class="cat-heading"><?= Yii::t('app','Vegetable')?> <span><?= Yii::t('app','sale')?></span></h2>
-                                            <p><?= Yii::t('app','Save 70% on all items')?></p>
-                                        </div>
-                                        <!-- End Item -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <?php Pjax::begin(['id'=>'itemList']) ?>
                     <?php if (Yii::$app->session->get('listType') == 'grid') {

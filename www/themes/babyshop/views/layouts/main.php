@@ -22,8 +22,7 @@ use yii\widgets\Pjax;
     <meta name="theme-color" content="#07785c">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="#" type="image/x-icon">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
+
 
     <!-- CSS Style -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">

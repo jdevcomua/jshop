@@ -8175,7 +8175,7 @@ a.button.detail-bnt span {
 	-webkit-transform: translate3d(0, 0, 0)
 }
 .product-essential {
-padding:30px;
+	padding:15px 30px 30px;
     position: relative;
     margin-top: 0px;
     background-color: #fff;
@@ -11866,7 +11866,6 @@ button.button span span {
 /*  custom-slider  */
 .category-description {
 	border: 1px #eaeaea solid;
-	padding-left: 10%;
 	overflow: hidden;
 	margin:0px;
 
@@ -11876,7 +11875,7 @@ button.button span span {
 	padding: 0px
 }
 .category-description a {
-	display: block
+	display: inline-block;
 }
 .category-image {
 	display: block;
@@ -12968,7 +12967,15 @@ select#shipping-address-select {
 #w0-error-0, #w0-success-0{
 	z-index: 99!important;
 }
-
+.item-breadcrumb{
+	background-color: #fff;
+}
+.category-breadcrumb{
+	background-color: #fff;
+	margin-bottom: 0px;
+	margin-left: 20px;
+	padding-left: 0px;
+}
 
 
 /*	Testimonials */

@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Slider;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
@@ -23,7 +24,11 @@ use lavrentiev\widgets\toastr\Notification;
 /* @var $slider Slider[] */
 
 $this->title = $category->title;
-$this->params['breadcrumbs'][] = $this->title;
+if(isset($category->parent->parent))
+    $this->params['breadcrumbs'][] = ['label' => $category->parent->parent->title, 'url' => $category->parent->parent->getUrl()];
+if(isset($category->parent))
+    $this->params['breadcrumbs'][] = ['label' => $category->parent->title, 'url' => $category->parent->getUrl()];
+$this->params['breadcrumbs'][] = $category->title;
 ?>
 
 <section class="main-container col2-left-layout bounceInUp animated">
@@ -63,7 +68,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-main col-sm-9 col-sm-push-3 product-grid">
                 <div class="pro-coloumn">
                     <div class="category-description std">
-                        <h1><?=$this->title?></h1>
+                        <section class="content">
+                            <?= Breadcrumbs::widget([
+                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                                'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>\n",
+                                'activeItemTemplate' => "<li class='breadcrumb-item active'>{link}</li>\n",
+                                'options' =>['class' => 'breadcrumb category-breadcrumb'],
+                            ]) ?>
+                        </section>
+                        <h1 style="margin-top: 0px; margin-left: 10%"><?=$this->title?></h1>
                     </div>
                     <?php Pjax::begin(['id'=>'itemList']) ?>
                     <?php if (Yii::$app->session->get('listType') == 'grid') {

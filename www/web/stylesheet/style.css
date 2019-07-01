@@ -8648,7 +8648,7 @@ content: "\f00c";
 .add-to-cart .qty {
     height: 48px;
     text-align: center;
-    width: 30px;
+    width: 73px;
     vertical-align: top;
     color: #333e48;
 }
@@ -12947,7 +12947,7 @@ select#shipping-address-select {
 	height: 21px;
 }
 .count-of-item{
-	width: 10%;
+	width: 15%;
 }
 .fadeContainer{
 	filter: blur(2px);

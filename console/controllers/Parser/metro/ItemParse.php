@@ -4,6 +4,7 @@ namespace console\controllers\Parser\metro;
 
 use common\models\ItemCat;
 use common\models\Item;
+use common\models\Log;
 use Exception;
 use phpQuery;
 use yii\helpers\Json;
@@ -13,42 +14,49 @@ class ItemParse
 
     public function parseData()
     {
-        $categories = ItemCat::find()->all();
-        foreach ($categories as $category){
-            for ($i = 1;$i<50;$i++){
+        try{
+            $categories = ItemCat::find()->all();
+            foreach ($categories as $category){
                 foreach ($category->slug() as $slug){
-                    $items = $this->parseItem($i, $slug);
-                    if(!empty($items)){
-                        for ($i = 0;$i<count($items);$i++){
-                            $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();
-                            if(!isset($item)){
-                                $item = new Item();
-                                $item->title = $items[$i]['name'];
-                                $ful_info = $this->parseDescription($items[$i]['ean']);
-                                if(isset($ful_info[0]['responses'][0]['data']['items'][0]['legend'][0]))
-                                $item->description = $ful_info[0]['responses'][0]['data']['items'][0]['legend'][0];
-                                $item->category_id = $category->id;
-                                $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
-                                $item->active = 1;
-                                $item->self_cost = $items[$i]['price']/100;
-                                $item->cost = $items[$i]['price']/100;
-                                $item->metro_cost = $items[$i]['price']/100;
-                                $item->barcode = $items[$i]['ean'];
-                                $item->code = $items[$i]['sku'];
-                                $item->save();
-                            }else{
-                                $item->category_id = $category->id;
-                                $item->self_cost = $items[$i]['price']/100;
-                                $item->cost = $items[$i]['price']/100;
-                                $item->metro_cost = $items[$i]['price']/100;
-                                $item->save();
+                    for ($i = 1;$i<50;$i++){
+                        $items = $this->parseItem($i, $slug);
+                        if(!empty($items)){
+                            for ($i = 0;$i<count($items);$i++){
+                                $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();
+                                if(!isset($item)){
+                                    $item = new Item();
+                                    $item->title = $items[$i]['name'];
+                                    $ful_info = $this->parseDescription($items[$i]['ean']);
+                                    if(isset($ful_info[0]['responses'][0]['data']['items'][0]['legend'][0]))
+                                    $item->description = $ful_info[0]['responses'][0]['data']['items'][0]['legend'][0];
+                                    $item->category_id = $category->id;
+                                    $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
+                                    $item->active = 1;
+                                    $item->self_cost = $items[$i]['price']/100;
+                                    $item->cost = $items[$i]['price']/100;
+                                    $item->metro_cost = $items[$i]['price']/100;
+                                    $item->barcode = $items[$i]['ean'];
+                                    $item->code = $items[$i]['sku'];
+                                    $item->save();
+                                }else{
+                                    $item->category_id = $category->id;
+                                    $item->self_cost = $items[$i]['price']/100;
+                                    $item->cost = $items[$i]['price']/100;
+                                    $item->metro_cost = $items[$i]['price']/100;
+                                    $item->save();
+                                }
                             }
                         }
                     }
                 }
             }
+            return true;
+        }catch (Exception $exception){
+            $log = new Log();
+            $log->message = $exception->getMessage();
+            echo $log->message;
+            $log->save();
         }
-        return false;
     }
 
     /**

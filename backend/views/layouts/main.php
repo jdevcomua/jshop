@@ -236,6 +236,11 @@ AppAsset::register($this);
                             <i class="fa fa-search"></i><span>Seo</span>
                         </a>
                     </li>
+                    <li class="<?= $controller == 'log' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['log/index']) ?>">
+                            <i class="fa fa-terminal"></i></i><span>Logs</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

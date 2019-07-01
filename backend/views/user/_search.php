@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'name');
 
-    echo $form->field($model, 'mail');
+    echo $form->field($model, 'email');
 
     echo $form->field($model, 'city'); ?>
 

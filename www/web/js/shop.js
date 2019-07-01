@@ -190,9 +190,11 @@ function addToCartWishList() {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
             showPopup(data.html);
         }
@@ -213,9 +215,11 @@ function addToCart(id) {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
             showPopup(data.html);
         }
@@ -296,24 +300,31 @@ function deleteFromCart(id, cart_type, pjax) {
         success: function (data) {
             if (document.getElementById('cart_cat')) {
                 $.pjax.reload({container: "#cart", async: false});
+                $.pjax.reload({container: "#mobile_cart", async: false});
                 $.pjax.reload({container: "#cart_cat", async: false});
             } else {
                 $.pjax.reload({container: "#cart"});
+                $.pjax.reload({container: "#mobile_cart", async: false});
             }
         }
     });
 }
 function changeCountOfItem(id, cartType, $thisItem) {
+    "use strict";
     if ($thisItem.val() < 0) {
         $thisItem.val(1);
         alert('Значение должно быть больше или равно 0');
-    } else if ($thisItem.val() == 0) {
+    } else if ($thisItem.val() === "0") {
         deleteFromCart(id, cartType, $thisItem.parent());
-    } else {
+    } else if ($thisItem.val() == '') {
+        alert('Значение не можеть быть пустым');
+    }else if (isNaN($thisItem.val())) {
+        alert('Значение должно быть числовым значением');
+    }else {
         $.ajax({
             url: 'cart/change',
             async: false,
-            data: {id: +id, count: $('#qty').val(), cart_type: cartType},
+            data: {id: +id, count: $thisItem.val(), cart_type: cartType},
             dataType: 'json',
             success: function (data) {
                 $('.sum').html(data.sumAll);
@@ -351,6 +362,9 @@ function removeItemFromWishList(id) {
 function refreshCarts() {
     if (document.getElementById('cart'))
         $.pjax.reload({container: "#cart", async: false});
+
+    if (document.getElementById('mobile_cart'))
+        $.pjax.reload({container: "#mobile_cart", async: false});
 
     if (document.getElementById('cart_cat'))
         $.pjax.reload({container: "#cart_cat", async: false});
@@ -433,11 +447,10 @@ $(document).on('click', '#empty_cart_button', function(){ // изменение 
     cleanCart();
 });
 
-$(document).on('input', '.js-qty__num', function(){ // изменение значения количество в корзине
-    if($('#qty').val() !== '') {
-        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this));
-        refreshCarts();
-    }
+$(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
+    changeCountOfItem($(this).data('id'), $(this).data('type'), $(this),$(this).val());
+    refreshCarts();
+
 });
 
 $('#wishlist').on('pjax:end', function(){ // изменение значения количество в корзине
@@ -464,3 +477,21 @@ function orderCheck(check,event) {
         return true;
     }
 }
+$(document).ready(function() { // Ждём загрузки страницы
+    var element = document.getElementById('forAdults');
+    if(element){
+        var conteiner = document.getElementById('itemList');
+        conteiner.className +=' fadeContainer';
+
+    }
+});
+$(document).on('click','.toast-success',function(){
+    var conteiner = document.getElementById('itemList');
+    conteiner.className ='';
+
+});
+$(document).on('click','.toast-success',function(){
+    var conteiner = document.getElementById('itemList');
+    conteiner.className ='';
+
+});

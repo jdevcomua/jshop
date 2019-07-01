@@ -110,6 +110,7 @@ class ItemCatController extends Controller
     public function actionCreate()
     {
         $model = new ItemCat(['active' => true]);
+        $model->parse = [new Parse()];
         if(Yii::$app->request->isAjax){
             $model->image = Yii::$app->request->post('src');
             $model->deleteImage($model->urlRename());
@@ -132,6 +133,13 @@ class ItemCatController extends Controller
             if ($continue) {
 
                 if (Yii::$app->request->post()['action'] == 'save') {
+                    $id = ItemCat::findOne(['title'=>$model->title])->id;
+                    $data = Yii::$app->request->post('Parse', []);
+                    foreach (array_keys($data) as $index) {
+                        $parses[$index] = new Parse();
+                    }
+                    Model::loadMultiple($parses, Yii::$app->request->post());
+                    $this->saveParses($parses,$id);
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $model->id]));
                 } elseif (Yii::$app->request->post()['action'] == 'chars') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/characteristics', 'id' => $model->id]));
@@ -160,6 +168,23 @@ class ItemCatController extends Controller
         ]);
     }
 
+    /**
+     * @param Parse[] $parses
+     * @param integer $id
+     */
+    public function saveParses($parses, $id){
+        foreach ($parses as $parse){
+            $parse->url = trim($parse->url);
+            $p = Parse::findOne(['category_id'=>$id,'url'=>$parse->url]);
+            if(!isset($p) && $parse->url!==''){
+                $parse->category_id = $id;
+                $parse->slug = str_replace("https://metro.zakaz.ua/ru/", '',$parse->url);
+                $parse->slug = str_replace(" ", '',$parse->slug);
+                $parse->slug = str_replace("/", '',$parse->slug);
+                $parse->save();
+            }
+        }
+    }
 
     /**
      * Updates an existing ItemCat model.
@@ -172,6 +197,8 @@ class ItemCatController extends Controller
     {
 
         $model = $this->findModel($id);
+        if($model->parse==[])
+            $model->parse = [new Parse()];
         if(Yii::$app->request->isAjax){
             $model->image = Yii::$app->request->post('src');
             $model->deleteImage($model->urlRename());
@@ -180,6 +207,16 @@ class ItemCatController extends Controller
         }
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
+            $data = Yii::$app->request->post('Parse', []);
+            foreach (array_keys($data) as $index) {
+                $parses[$index] = new Parse();
+            }
+            Model::loadMultiple($parses, Yii::$app->request->post());
+            $oldParses = Parse::find()->where(['category_id'=>$id])->all();
+            foreach ($oldParses as $oldParse){
+                $oldParse->delete();
+            }
+            $this->saveParses($parses,$id);
             if($model->isAttributeChanged('image')){
                 $model->image= $model->urlRename();
             }

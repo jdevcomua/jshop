@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return $this->render('_item_wish', ['model' => $model ]);
                                     },
                                      'layout' => '
-                                      <div class="table-responsive">
+                                      <div class="table">
                                     <table class="clean-table linearize-table data-table table-striped" id="wishlist-table">
                                         <thead>
                                         <tr class="first last">

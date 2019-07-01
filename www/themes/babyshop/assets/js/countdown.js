@@ -6,7 +6,10 @@ if (typeof(BackColor)=="undefined")
 if (typeof(ForeColor)=="undefined")
 	ForeColor= "black";
 if (typeof(DisplayFormat)=="undefined")
-	DisplayFormat = "<div class='day box-time-date'><span class='time-num time-day'>%%D%%</span>Days</div><div class='hour box-time-date'><span class='time-num'>%%H%%</span>Hrs</div><div class='min box-time-date'><span class='time-num'>%%M%%</span>Mins</div><div class='sec box-time-date'><span class='time-num'>%%S%%</span>Secs</div>";
+	DisplayFormat = "<div class='day box-time-date'><span class='time-num time-day'>%%D%%</span>Дней</div>" +
+		"<div class='hour box-time-date'><span class='time-num'>%%H%%</span>Часов</div>" +
+		"<div class='min box-time-date'><span class='time-num'>%%M%%</span>Минут</div>" +
+		"<div class='sec box-time-date'><span class='time-num'>%%S%%</span>Секунд</div>";
 if (typeof(CountActive)=="undefined")
 	CountActive = true;
 if (typeof(FinishMessage)=="undefined")

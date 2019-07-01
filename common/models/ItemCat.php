@@ -28,7 +28,7 @@ use yii\db\ActiveRecord;
  * @property ItemCat[] $children
  * @property ItemCat $parent
  * @property string $imageUrl
- * 
+ * @property Parse[] $parse
  * @method integer|false deleteWithChildren()
  * @method boolean makeRoot(boolean $runValidation = true, array $attributes = null)
  * @method boolean appendTo(ActiveRecord $node, boolean $runValidation = true, array $attributes = null)
@@ -38,6 +38,8 @@ class ItemCat extends ModelWithImage
     
     public $count;
     public $dir = 'categories';
+    const ALCOHOL = 'Алкогольные напитки';
+    const TOBACOO = 'Табачные изделия';
 
     /**
      * @inheritdoc
@@ -170,7 +172,14 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
     }
-
+    public function getParse()
+    {
+        return $this->hasMany(Parse::className(), ['category_id' => 'id']);
+    }
+    public function setParse($value)
+    {
+        return $this->parse = $value;
+    }
     /**
      * Return url to this category
      *

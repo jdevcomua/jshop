@@ -57,13 +57,13 @@ class Theme extends Object
     public static function getSortName()
     {
         return [
-            Theme::PARAM_ITEMS_SORT_DATE => Theme::PARAM_ITEMS_SORT_DATE,
-            Theme::PARAM_ITEMS_SORT_ASC => Theme::PARAM_ITEMS_SORT_ASC,
-            Theme::PARAM_ITEMS_SORT_DESC => Theme::PARAM_ITEMS_SORT_DESC,
-            Theme::PARAM_ITEMS_SORT_NEW => Theme::PARAM_ITEMS_SORT_NEW,
-            Theme::PARAM_ITEMS_SORT_RATING => Theme::PARAM_ITEMS_SORT_RATING,
-            Theme::PARAM_ITEMS_SORT_TOP => Theme::PARAM_ITEMS_SORT_TOP,
-            Theme::PARAM_ITEMS_SORT_PROM => Theme::PARAM_ITEMS_SORT_PROM,
+            Theme::PARAM_ITEMS_SORT_DATE => \Yii::t('app','date'),
+            Theme::PARAM_ITEMS_SORT_ASC => \Yii::t('app','asc'),
+            Theme::PARAM_ITEMS_SORT_DESC => \Yii::t('app','desc'),
+            Theme::PARAM_ITEMS_SORT_NEW => \Yii::t('app','new'),
+            Theme::PARAM_ITEMS_SORT_RATING => \Yii::t('app','rating'),
+            Theme::PARAM_ITEMS_SORT_TOP => \Yii::t('app','top'),
+            Theme::PARAM_ITEMS_SORT_PROM => \Yii::t('app','promo'),
         ];
     }
 }

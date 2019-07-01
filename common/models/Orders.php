@@ -14,7 +14,7 @@ use Yii;
  * @property string $name
  * @property string $phone
  * @property string $delivery
- * @property string $mail
+ * @property string $email
  * @property string $payment
  * @property double $sum
  * @property string $order_status
@@ -56,8 +56,10 @@ class Orders extends Model
             ['payment_status', 'default', 'value' => Orders::PAYMENT_STATUS_NOT_PAID],
             ['order_status', 'default', 'value' => Orders::STATUS_NEW],
             [['sum'], 'number'],
-            [['mail'], 'email'],
             [['address', 'name', 'delivery', 'payment', 'phone', 'comment'], 'string'],
+            [['address','name','email'],'string','length' => [0, 50]],
+            [['comment'],'string','length' => [0, 255]],
+            [['email'], 'email'],
         ];
     }
 
@@ -79,7 +81,7 @@ class Orders extends Model
             'name' => Yii::t('app', 'Имя и фамилия'),
             'phone' => Yii::t('app', 'Телефон'),
             'delivery' => Yii::t('app', 'Способ доставки'),
-            'mail' => 'E-mail',
+            'email' => 'E-mail',
             'payment' => Yii::t('app', 'Способ оплаты'),
             'sum' => 'Сумма',
             'order_status' => 'Статус заказа',

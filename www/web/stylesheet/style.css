@@ -619,6 +619,7 @@ ul.currencies_list li a:hover {
 	font-size: 13px;
 	line-height: normal;
 	font-weight: normal;
+	word-wrap:break-word;
 }
 .fl-mini-cart-content .product-name a:hover {
 	font-size: 13px;
@@ -3604,6 +3605,7 @@ margin: 0 0;
 	display: none;
 }
 .products-grid .item .item-inner .item-info .info-inner .item-title {
+	height: 75px;
 	margin-bottom: 10px;
 	padding:0px 15px;
 	padding-top: 20px;
@@ -3616,8 +3618,8 @@ margin: 0 0;
 .products-grid .item .item-inner .item-info .info-inner .item-title a {
 	text-decoration: none;
 	font-weight:500;
-	color:#292929
-
+	color:#292929;
+	word-wrap:break-word;
 }
 .products-grid .item .item-inner .item-info .info-inner .item-title a:hover {
 	color: #6ca218;
@@ -6205,6 +6207,7 @@ font-size: 14px;
 
 }
 .one-page-checkout {
+	word-wrap: break-word;
 	list-style: none;
     padding: 25px;
     position: relative;
@@ -6327,7 +6330,6 @@ legend {
 	display: none;
 }
 .group-select li .input-box {
-	float: left;
 	width: 50%;
 }
 .group-select .require {
@@ -6351,6 +6353,7 @@ button.button.continue:before {
 }
 
 button.button.return-cart:before {
+	width: 300px;
 	content: "\f07a";
 	font-family: FontAwesome;
 	font-size: 12px;
@@ -7532,7 +7535,7 @@ ol#compare-items li:last-child {
 	outline: medium none;
 	padding:5px 15px 6px 15px;
 	position: relative;
-	width: 100px;
+	width: 130px;
 	float: left;
 	color: #333;
 	border: 1px solid #ddd;
@@ -8355,6 +8358,7 @@ ul.shipping-pro li {
 
 }
 .product-view .product-name h1 {
+	word-wrap:break-word;
 	font-size: 34px;
 	margin: 0 0 2px;
 	text-align: left;
@@ -8393,15 +8397,15 @@ ul.shipping-pro li {
 
 }
 .product-view .product-shop .add-to-box .btn-cart {
+	white-space: normal;
 	background: #ed6663;
 	color: #fff;
 	font-size: 18px;
 	text-shadow: none;
 	padding: 16px 30px;
 	float: left;
-	margin-top: 0px;
+	margin-top: 10px;
 	font-weight: 500;
-	margin-left: 10px;
 	border:none;
 	border-radius: 999px;
 	font-family: 'Rubik', sans-serif;
@@ -8674,6 +8678,8 @@ content: "\f00c";
 }
 
 .product-view .product-shop .add-to-box .custom {
+	margin-right: 10px;
+	margin-top: 10px;
     background: #fff;
     border: 1px #ddd solid;
     border-radius: 999px;
@@ -9349,6 +9355,7 @@ a.button.view-all {
 	border-right: 0px solid #eaeaea;
 	border-bottom: 1px solid #eaeaea;
 	padding: 15px 20px;
+	word-break: break-word;
 }
 #customer-reviews ul {
 	margin: auto;
@@ -9691,6 +9698,7 @@ button.button.submit:before {
 }
 
 .related-pro .owl-item .item {
+	width: 241px;
 	margin:0;
 	padding:15px 0px 24px 0px
 
@@ -9776,8 +9784,10 @@ button.button#empty_cart_button:before {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 }
+
 #shopping-cart-table .product-name a {
 	text-transform: none;
+	word-wrap:break-word;
 }
 #shopping-cart-table.data-table .price {
 	font-weight: 600;
@@ -9790,7 +9800,7 @@ button.button#empty_cart_button:before {
     margin: 0 !important;
     outline: medium none;
     padding: 8px 10px;
-    width: 40px;
+    width: 70px;
     text-align: center;
 	border-radius: 999px;
 }
@@ -11855,6 +11865,8 @@ button.button span span {
 
 /*  custom-slider  */
 .category-description {
+	border: 1px #eaeaea solid;
+	padding-left: 10%;
 	overflow: hidden;
 	margin:0px;
 
@@ -12666,7 +12678,7 @@ select#shipping-address-select {
 	font-size: 12px;
 	line-height: 25px;
 	text-transform: uppercase;
-	z-index: 100;
+	z-index: 1001;
 	border-top: 0;
 	width: 250px;
 	position: absolute;
@@ -12688,7 +12700,7 @@ select#shipping-address-select {
 	font-size: 12px;
 	line-height: 25px;
 	text-transform: uppercase;
-	z-index: 100;
+	z-index: 1001;
 	border-top: 0;
 	display: block;
 	position: absolute;
@@ -12735,6 +12747,7 @@ select#shipping-address-select {
 	height: auto;
 	background-color: rgba(246, 59, 52, 0.45);
 	display: block;
+	z-index: 1000;
 }
 
 .offer-inner {padding-left:5px; padding-right:5px}
@@ -12937,6 +12950,25 @@ select#shipping-address-select {
 .count-of-item{
 	width: 10%;
 }
+.fadeContainer{
+	filter: blur(2px);
+}
+.down{
+	height: 40px;
+}
+.button-order{
+	margin-top: 10px;
+	width: 140px;
+}
+@media (max-width: 767px) {
+	.product-detail-bnt {
+		display: none !important;
+	}
+}
+#w0-error-0, #w0-success-0{
+	z-index: 99!important;
+}
+
 
 
 /*	Testimonials */

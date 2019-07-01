@@ -18,13 +18,10 @@ use yii\widgets\Pjax;
     <!-- Basic page needs ================================================== -->
     <meta charset="utf-8">
     <?php echo Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <meta name="theme-color" content="#07785c">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Default Description">
-    <meta name="keywords" content="fashion, store, E-commerce">
+
     <link rel="icon" href="#" type="image/x-icon">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 
@@ -33,13 +30,32 @@ use yii\widgets\Pjax;
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600,800,400' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i,900" rel="stylesheet">
+    <?php if(isset(Yii::$app->controller->seo)):?>
+        <title><?= Yii::$app->controller->seo->title ?></title>
+        <meta name="description" content="<?= Yii::$app->controller->seo->description?>">
+        <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords?>">
+        <?php
+            $tagOne = "<h1>";
+            $tagTwo = "</h1>";
+            $startTagPos = strrpos($content, $tagOne);
+            $endTagPos = strrpos($content, $tagTwo);
+            if($startTagPos && $endTagPos){
+                $tagLength = $endTagPos - $startTagPos;
+                $content = substr_replace($content, $tagOne . Yii::$app->controller->seo->h1 . $tagTwo, $startTagPos, $tagLength);
+            }
+        ?>
+    <?php else:?>
+        <title><?= Html::encode($this->title) ?></title>
+        <meta name="description" content="Default Description">
+        <meta name="keywords" content="fashion, store, E-commerce">
+    <?php endif;?>
 
 </head>
 <body>
 <?php $this->beginBody() ?>
 
     <div id="page">
-        <?= $this->render('header') ?>
+        <?= $this->render('header')  ?>
         <!--container-->
 
         <?= $content ?>
@@ -156,43 +172,10 @@ use yii\widgets\Pjax;
             </div>
         </div>
         <?php Pjax::end() ?>
-
+        <div class="down"></div>
     </div>
 
-<div class="container">
-    <div class="row our-features-box">
-        <ul>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-truck"></div>
-                    <div class="content"><?= Yii::t('app','FREE SHOPPING on order over $99')?></div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-support"></div>
-                    <div class="content"><?= Yii::t('app','Have a question?')?><br>
-                        +1 800 789 0000</div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-money"></div>
-                    <div class="content">100% <?= Yii::t('app','Money Back Guarantee')?></div>
-                </div>
-            </li>
-            <li>
-                <div class="feature-box">
-                    <div class="icon-return"></div>
-                    <div class="content"><?= Yii::t('app','30 days return Service')?></div>
-                </div>
-            </li>
-            <li class="last">
-                <div class="feature-box"> <a href="#"><i class="fa fa-apple"></i> <?= Yii::t('app','download')?></a> <a href="#"><i class="fa fa-android"></i> <?= Yii::t('app','download')?></a> </div>
-            </li>
-        </ul>
-    </div>
-</div>
+
 
 <?= $this->render('footer') ?>
 <!-- End For version 1,2,3,4,6 -->
@@ -223,12 +206,16 @@ use yii\widgets\Pjax;
     </ul>
     <div class="top-links">
         <ul class="links">
-            <!--                                    <li><a href="dashboard.html" title="My Account">My Account</a></li>-->
-            <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="Wishlist"><?= Yii::t('app','Wishlist')?></a></li>
-            <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
-            <!--                                    <li><a href="blog.html" title="Blog"><span>Blog</span></a></li>-->
-            <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span><?= Yii::t('app','Login')?></span></a></li>
-            <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span><?= Yii::t('app','Registration')?></span></a></li>
+            <?php if (Yii::$app->user->isGuest) { ?>
+                <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
+                <li ><a href="<?= Url::toRoute('user/login') ?>" title="Login"><span><?= Yii::t('app','Login')?></span></a></li>
+                <li class="last"><a href="<?= Url::toRoute('user/register') ?>" title="Registration"><span><?= Yii::t('app','Registration')?></span></a></li>
+            <?php } else { ?>
+                <li><a href="<?= Url::toRoute('cart/index') ?>" title="Cart"><?= Yii::t('app','Cart')?></a></li>
+                <li><a href="<?= Url::toRoute('user/dashboard') ?>" title="<?= Yii::t('app','Dashboard')?>"><?= Yii::t('app','Dashboard')?></a></li>
+                <li><a href="<?= Url::toRoute('user/wishlist') ?>" title="<?= Yii::t('app','Wishlist')?>"><?= Yii::t('app','Wishlist')?></a></li>
+                <li ><a href="<?= Url::toRoute('user/logout') ?>" title="Logout"><span><?= Yii::t('app','Logout')?></span></a></li>
+            <?php } ?>
         </ul>
     </div>
 </div>

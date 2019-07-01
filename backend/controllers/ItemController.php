@@ -86,7 +86,6 @@ class ItemController extends Controller
                 ->andFilterWhere(['characteristic_item.item_id' => $id])
                 ->andFilterWhere(['!=', 'characteristic_item.value', '{"ru":""}'])
         ]);
-
         return $this->render('view', [
             'model' => $this->findModel($id), 'characteristics' => $characteristics
         ]);
@@ -118,6 +117,7 @@ class ItemController extends Controller
         $categoriesArray = ArrayHelper::map($categories, 'id', 'title');
         $request = Yii::$app->request;
         if ($model->load($request->post())) {
+            $model->metric = Item::METRIC_PIECES;
             if ($model->save()) {
                 $model->imageFiles= $model->urlRename();
 

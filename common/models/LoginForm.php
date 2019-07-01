@@ -9,7 +9,7 @@ use Yii;
  */
 class LoginForm extends \yii\base\Model
 {
-    public $mail;
+    public $email;
     public $password;
     public $rememberMe = true;
 
@@ -23,19 +23,19 @@ class LoginForm extends \yii\base\Model
     {
         return [
             // username and password are both required
-            [['mail', 'password'], 'required'],
+            [['email', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            [['mail'], 'email'],
+            [['email'], 'email'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'mail'  => Yii::t('app/model','Адрес электронной почты'),
+            'email'  => Yii::t('app/model','Адрес электронной почты'),
             'password'  => Yii::t('app/model','Пароль'),
         ];
     }
@@ -78,7 +78,7 @@ class LoginForm extends \yii\base\Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByEmail($this->mail);
+            $this->_user = User::findByEmail($this->email);
         }
 
         return $this->_user;

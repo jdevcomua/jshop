@@ -221,7 +221,7 @@ AppAsset::register($this);
                             <i class="fa fa-suitcase"></i><span>Комплекты</span>
                         </a>
                     </li>
-                    <li class="<?= $controller == 'orders' ? 'active' : '' ?>">
+                    <li class="<?= $controller == 'banner' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['banner/index']) ?>">
                             <i class="fa fa-bullhorn "></i><span>Баннеры</span>
                         </a>
@@ -229,6 +229,11 @@ AppAsset::register($this);
                     <li class="<?= $controller == 'slider' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['slider/index']) ?>">
                             <i class="fa fa-sliders"></i><span>Слайдер</span>
+                        </a>
+                    </li>
+                    <li class="<?= $controller == 'seo' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['seo/index']) ?>">
+                            <i class="fa fa-search"></i><span>Seo</span>
                         </a>
                     </li>
                 </ul>

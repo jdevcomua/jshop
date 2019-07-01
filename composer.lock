@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "67be2507f983003a0047b0ecc4f57189",
-    "content-hash": "bed142901e141d5d080fc534b7860728",
+    "hash": "39baee607f0ac0efbe86010c0889158e",
+    "content-hash": "027f89349fdde078a1fa9d02188f5230",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -262,6 +262,25 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bower-asset/toastr",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:johnpapa/toastr-bower.git",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johnpapa/toastr-bower/zipball/e648a870a60103bbc3986c1fe2b2de86ea4a9569",
+                "reference": "e648a870a60103bbc3986c1fe2b2de86ea4a9569",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6.3"
+            },
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/yii2-pjax",
@@ -2176,7 +2195,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widgets/zipball/8c108835456d529984e6acd173455954958b1b18",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widgets/zipball/a849573b7662c96cf8097be0cc76e1269328160e",
                 "reference": "8c108835456d529984e6acd173455954958b1b18",
                 "shasum": ""
             },
@@ -2279,6 +2298,52 @@
                 "yii2"
             ],
             "time": "2014-12-23 05:37:04"
+        },
+        {
+            "name": "lavrentiev/yii2-toastr",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lavrentiev/yii2-toastr.git",
+                "reference": "7acb5ac0838752449529f664b2c32a77a824a21d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lavrentiev/yii2-toastr/zipball/7acb5ac0838752449529f664b2c32a77a824a21d",
+                "reference": "7acb5ac0838752449529f664b2c32a77a824a21d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/toastr": "^2.1",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lavrentiev\\widgets\\toastr\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Eugene Lavrentiev (RyanTedder)",
+                    "email": "lavrentiev.e@gmail.com",
+                    "homepage": "https://github.com/lavrentiev"
+                }
+            ],
+            "description": "Simple javascript toast notifications",
+            "homepage": "https://github.com/lavrentiev/yii2-toastr",
+            "keywords": [
+                "extension",
+                "jquery",
+                "notification",
+                "toastr",
+                "yii2"
+            ],
+            "time": "2018-01-14 13:22:15"
         },
         {
             "name": "sergeymakinen/yii2-log-message",
@@ -3690,7 +3755,8 @@
         "kartik-v/yii2-widgets": 20,
         "zxbodya/yii2-tinymce": 20,
         "zxbodya/yii2-elfinder": 20,
-        "keltstr/yii2-simplehtmldom": 20
+        "keltstr/yii2-simplehtmldom": 20,
+        "lavrentiev/yii2-toastr": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

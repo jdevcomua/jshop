@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'value' => $model->user->name . ' ' . $model->user->surname,
                         ],
                         'timestamp:datetime',
-                        'mail:email',
+                        'email:email',
                         'phone',
                         [
                             'label' => 'Cost',

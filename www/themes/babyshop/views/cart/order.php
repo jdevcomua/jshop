@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -31,9 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <ul class="">
                                     <li id="billing-new-address-form">
                                         <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class'=>'input-text required-entry', 'required'=> true])->label(Yii::t('app','Name and Surname').'<span class="required">*</span>'); ?>
-                                        <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Phone number').'<span class="required">*</span>'); ?>
+                                        <?= $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-text required-entry',
+                                            'mask' => '+38 (099) 999-99-99',
+                                            'options' => [
+                                                'class' => 'input-box input-text',
+
+                                                'placeholder' => Yii::t('app', 'Phone number')
+                                            ],
+                                            'clientOptions' => [
+                                                'clearIncomplete' => true
+                                            ]
+                                        ])->label(Yii::t('app','Phone number').'<span class="required">*</span>');?>
+
                                         <?= $form->field($model, 'address')->textInput(['maxlength' => true, 'class'=>'input-text required-entry','required'=> true])->label(Yii::t('app','Address').'<span class="required">*</span>'); ?>
-                                        <?= $form->field($model, 'mail')->textInput(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Mail'));?>
+                                        <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Mail'));?>
                                         <?= $form->field($model, 'comment')->textarea(['maxlength' => true, 'class'=>'input-text'])->label(Yii::t('app','Comment'));?>
                                     </li>
                                 </ul>
@@ -72,8 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <br>
                                 <div class="buttons-set" id="billing-buttons-container">
                                     <input class="hidden" name="send" value="true">
-                                    <button id="return_cart" type="button" title="Return Cart" class="button return-cart" onClick="location.replace('<?= \yii\helpers\Url::toRoute('cart/index') ?>')"><span>Edit Cart</span></button>
-                                    <button id="submit" type="submit" title="Submit" class="button send" onClick="orderCheck(<?php if($sum==0){echo 0;}else{echo 1;}?>,event)"><span><?=Yii::t('app','Submit')?></span></button>
+                                    <button id="return_cart" type="button" title="Return Cart" class="button return-cart" onClick="location.replace('<?= \yii\helpers\Url::toRoute('cart/index') ?>')"><span><?=Yii::t('app','Edit Cart')?></span></button>
+                                    <button id="submit" type="submit" title="Submit" class="button send button-order" onClick="orderCheck(<?php if($sum==0){echo 0;}else{echo 1;}?>,event)"><span><?=Yii::t('app','Submit')?></span></button>
                                 </div>
                             </div>
                         </div>

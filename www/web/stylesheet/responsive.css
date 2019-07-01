@@ -466,7 +466,6 @@ width:300px;
 }
 .mm-toggle-wrap {
 	display: block;
-	width: 100%;
 }
 .toplinks div.links div a {
 	padding: 3px 5px;
@@ -1161,7 +1160,6 @@ footer address span {
 	/* overflow: hidden; */
     /* top: 150px; */
 	clear: both;
-	float: left;
 	margin-top: 15px;
 	margin-left: 10px;
 }
@@ -1302,7 +1300,7 @@ footer address span {
 	border: none
 }
 .mini-cart .basket a span {
-	margin-top: -8px;
+	margin-top: -20px;
 	background: #131e2c;
 	color: #fff;
 	right: 5px;
@@ -1523,7 +1521,6 @@ footer .footer-inner {
 }
 .mm-toggle-wrap {
 	display: block;
-	width: 100%;
 }
 .toplinks div.links div a {
 	padding: 3px 10px;
@@ -1618,7 +1615,7 @@ ul.navmenu {
 	min-width: 40px !important;
 	height: 50px;
 	padding: 0px 10px;
-	line-height: 50px;
+	line-height: 30px;
 }
 .the-slideshow .slideshow .slide img {
 	width: 100%;
@@ -1887,7 +1884,6 @@ label {
 }
 .fl-cart-contain {
 	right: 8px;
-	top: 10px;
 }
 .offer-inner .left {
 	width: 100%;

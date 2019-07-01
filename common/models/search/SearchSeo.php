@@ -2,29 +2,28 @@
 
 namespace common\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
+use common\models\Seo;
 
 /**
- * UsersSearch represents the model behind the search form about `common\models\Users`.
+ * SearchSeo represents the model behind the search form of `common\models\Seo`.
  */
-class UserSearch extends User
+class SearchSeo extends Seo
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'city'], 'safe'],
+            [['title', 'description', 'keywords', 'url','h1'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -41,7 +40,9 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = Seo::find();
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,13 +56,16 @@ class UserSearch extends User
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'city', $this->city]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'keywords', $this->keywords])
+            ->andFilterWhere(['like', 'h1', $this->h1])
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

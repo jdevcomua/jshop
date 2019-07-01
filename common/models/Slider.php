@@ -25,7 +25,7 @@ class Slider extends ModelWithImage
      * {@inheritdoc}
      */
     const MAIN_SLIDER = 1;
-    const CATEGORY_MIDLE_SLIDER = 2;
+    const BRAND_SLIDER = 2;
     public $imageFile;
 
     public static function tableName()
@@ -53,11 +53,11 @@ class Slider extends ModelWithImage
     {
         return [
             'id' => 'ID',
-            'title' => Yii::t('app','Title'),
-            'largeTitle' => Yii::t('app','Large Title'),
-            'description' => Yii::t('app','Description'),
-            'image' => Yii::t('app','Image'),
-            'type' => Yii::t('app','Type'),
+            'title' => Yii::t('app','Название'),
+            'largeTitle' => Yii::t('app','Длинное Название'),
+            'description' => Yii::t('app','Описание'),
+            'image' => Yii::t('app','Рисунок'),
+            'type' => Yii::t('app','Тип'),
         ];
     }
     public function getImageUrl()
@@ -89,8 +89,14 @@ class Slider extends ModelWithImage
     {
         return [
             static::MAIN_SLIDER => 'Главное меню',
-            static::CATEGORY_MIDLE_SLIDER => 'Центральный слайдер категории',
+            static::BRAND_SLIDER => 'Cлайдер брендов',
         ];
+    }
+    public function getSliderType()
+    {
+        $titles = static::getSliderTypes();
+
+        return key_exists($this->type, $titles) ? $titles[$this->type] : null;
     }
 
 

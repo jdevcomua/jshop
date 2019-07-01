@@ -295,6 +295,26 @@ $this->title = Yii::$app->name;
     <?php }?>
 </div>
 
+<div class="row">
+    <div class="logo-brand">
+        <div class="slider-items-products">
+            <div id="brand-slider" class="product-flexslider hidden-buttons">
+                <div class="slider-items slider-width-col6">
+                    <!-- Item -->
+                    <?php foreach ($slider as $s):
+                        if($s->type === Slider::BRAND_SLIDER):?>
+                            <div class="item">
+                                <div class="logo-item"><a href="#"><img src="img/<?=$s->image?>" alt="Image" width="166px"></a></div>
+                            </div>
+                            <!-- End Item -->
+                    <?php endif;endforeach;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--<div class="wrapper" style="margin: 0 -30px;">-->
     <!-- /templates/snippets/section-custom-top.liquid -->
 <!--    <div class="section-custom-top radius-10">-->

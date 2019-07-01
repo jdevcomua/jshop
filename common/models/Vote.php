@@ -50,7 +50,7 @@ class Vote extends Model
             [['item_id', 'text', 'rating'], 'required'],
             [['item_id', 'user_id', 'rating', 'checked'], 'integer'],
             [['timestamp'], 'safe'],
-            [['text'], 'string'],
+            [['text'],'string','length' => [0, 500]],
             [['checked'], 'default', 'value' => self::STATUS_NOT_CHECKED],
         ];
     }

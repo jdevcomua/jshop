@@ -99,7 +99,7 @@ class UserController extends Controller
         if (empty($user)) {
             $user = new User();
             $user->vk_id = $token['user_id'];
-            $user->mail = $token['email'];
+            $user->email = $token['email'];
             $user_info = $vk->api('users.get', array(
                 'user_ids' => $token['user_id']
             ));
@@ -180,8 +180,8 @@ class UserController extends Controller
                 $user = new User();
                 $user->fb_id = $userNode['id'];
                 $user->name = explode(' ', $userNode['name'])[0];
-                $user->surname = explode(' ', $userNode['name'])[2];
-                $user->mail = $userNode['email'];
+                $user->surname = explode(' ', $userNode['name'])[3];
+                $user->email = $userNode['email'];
                 $user->save();
             }
             Yii::$app->user->login($user, 3600 * 24);

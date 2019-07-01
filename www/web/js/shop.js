@@ -316,9 +316,10 @@ function changeCountOfItem(id, cartType, $thisItem) {
         alert('Значение должно быть больше или равно 0');
     } else if ($thisItem.val() === "0") {
         deleteFromCart(id, cartType, $thisItem.parent());
-
     } else if ($thisItem.val() == '') {
-        $thisItem.val(1);
+        alert('Значение не можеть быть пустым');
+    }else if (isNaN($thisItem.val())) {
+        alert('Значение должно быть числовым значением');
     }else {
         $.ajax({
             url: 'cart/change',
@@ -447,10 +448,9 @@ $(document).on('click', '#empty_cart_button', function(){ // изменение 
 });
 
 $(document).on('change', '.js-qty__num', function(){ // изменение значения количество в корзине
-    if($('#qty').val() !== '') {
-        changeCountOfItem($(this).data('id'), $(this).data('type'), $(this),$(this).val());
-        refreshCarts();
-    }
+    changeCountOfItem($(this).data('id'), $(this).data('type'), $(this),$(this).val());
+    refreshCarts();
+
 });
 
 $('#wishlist').on('pjax:end', function(){ // изменение значения количество в корзине

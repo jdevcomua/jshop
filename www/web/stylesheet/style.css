@@ -6207,6 +6207,7 @@ font-size: 14px;
 
 }
 .one-page-checkout {
+	word-wrap: break-word;
 	list-style: none;
     padding: 25px;
     position: relative;
@@ -9799,7 +9800,7 @@ button.button#empty_cart_button:before {
     margin: 0 !important;
     outline: medium none;
     padding: 8px 10px;
-    width: 40px;
+    width: 70px;
     text-align: center;
 	border-radius: 999px;
 }

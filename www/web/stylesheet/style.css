@@ -12976,6 +12976,19 @@ select#shipping-address-select {
 	margin-left: 20px;
 	padding-left: 0px;
 }
+.order_check{
+	margin-top: 10px;
+	font-size: 30px;
+	width: 270px;
+}
+.check_fancybox{
+	height: 40px !important;
+}
+.wish_check{
+	margin-top: 10px;
+	font-size: 30px;
+	width: 360px;
+}
 
 
 /*	Testimonials */

@@ -558,7 +558,12 @@ class Item extends Model implements CartAdd
 
     public function getUrl()
     {
-        return Yii::$app->urlHelper->to(['item/' . $this->id . '-' . $this->getTranslit()]);
+        $url = Yii::$app->params['serverUrl']. '/item/' . $this->id . '-' . $this->getTranslit();
+        $seo = Seo::findOne(['url'=>$url]);
+        if(isset($seo)&& !empty($seo->new_url)){
+            return Yii::$app->urlHelper->to(['/item/'. str_replace('/item/', '',str_replace(Yii::$app->params['serverUrl'], '',$seo->new_url))]);
+        }
+        return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $this->getTranslit()]);
     }
 
     public function pathToFile($fileName, $size = null)

@@ -13,6 +13,7 @@ use Yii;
  * @property string $keywords
  * @property string $url
  * @property string $h1
+ * @property string $new_url
  */
 class Seo extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class Seo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'keywords', 'url'], 'string', 'max' => 255],
+            [['title', 'description', 'keywords', 'url','new_url'], 'string', 'max' => 255],
             [['h1'], 'string', 'max' => 50],
         ];
     }
@@ -47,6 +48,7 @@ class Seo extends \yii\db\ActiveRecord
             'keywords' => 'Keywords',
             'url' => 'Url',
             'h1'=>'H1',
+            'new_url'=>'New Url',
         ];
 
     }

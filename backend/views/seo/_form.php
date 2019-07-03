@@ -22,6 +22,8 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'h1')->textInput(['maxlength' => true]) ?>
 
+        <?= $form->field($model, 'new_url')->textInput(['maxlength' => true])->label('Новый урл(Должно состоять в начале из того же номера товара или категории, а потом любой текст)') ?>
+
         <div class="form-group">
             <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
         </div>

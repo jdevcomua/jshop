@@ -96,7 +96,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <?php $images = [];
         if (!$model->isNewRecord) {
-            foreach ($model->getImageUrl() as $url) {
+            foreach ($model->getImageUrls() as $url) {
                 $images[] = Html::img($url, ['width' => '200px']);
             }
         }

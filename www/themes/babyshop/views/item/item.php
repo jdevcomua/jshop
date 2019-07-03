@@ -18,7 +18,7 @@ if(isset($item->category->parent))
 $this->params['breadcrumbs'][] = ['label' => $item->category->title, 'url' => $item->category->getUrl()];
 $this->params['breadcrumbs'][] = $this->title;
 
-$imageUrls = $item->getImageUrl();
+$imageUrls = $item->getImageUrls();
 ?>
 <div>
 <div class="main-container col1-layout wow bounceInUp animated">
@@ -96,8 +96,8 @@ $imageUrls = $item->getImageUrl();
                                     <div class="add-to-cart">
                                         <div class="pull-left">
                                             <div class="custom pull-left">
-                                                <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty"> <?=$item->getMetricTitle()?>
+                                                <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+                                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="6" id="qty" name="qty"> <?=$item->getMetricTitle()?>
                                                 <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                                             </div>
                                         </div>

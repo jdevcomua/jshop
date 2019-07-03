@@ -110,7 +110,7 @@ $this->title = 'Оформление заказа'; ?>
                                                     <a class="frame-photo-title" href="<?= $value->getUrl(); ?>">
                                                         <span class="photo-block">
                                                             <span class="helper"></span>
-                                                            <img src="<?= array_shift($value->getImageUrl()); ?>">
+                                                            <img src="<?= array_shift($value->getImageUrls()); ?>">
                                                         </span>
                                                         <span class="title"><?= $value->title; ?></span>
                                                     </a>
@@ -128,7 +128,7 @@ $this->title = 'Оформление заказа'; ?>
                                        class="frame-photo-title">
                                         <span class="photo-block">
                                             <span class="helper"></span>
-                                            <img src="<?php echo array_shift($item->getImageUrl()) ?>" alt="">
+                                            <img src="<?php echo array_shift($item->getImageUrls()) ?>" alt="">
                                         </span>
                                         <span class="title"><?php echo $item->title ?></span>
                                     </a>

@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </span>
                                 </td>
                                 <td class="a-center movewishlist count-of-item">
-                                    <input id="qty" name="qty" data-id="<?= $model->model->getId(); ?>" data-type="<?= $model->model->getType(); ?>" value="<?=$model->count?>" size="4" title="Qty" class="input-text qty js-qty__num" maxlength="12">
+                                    <input id="qty" name="qty" data-id="<?= $model->model->getId(); ?>" data-type="<?= $model->model->getType(); ?>" value="<?=$model->count?>" size="4" title="Qty" class="input-text qty js-qty__num" maxlength="6">
                                     <?=$model->model->getMetricTitle()?>
                                 </td>
                                 <td class="a-right movewishlist">

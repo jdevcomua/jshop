@@ -218,7 +218,7 @@ $this->title = 'Home Page';
                                     <th>Продаж</th>
                                 </tr>
                                 <?php foreach ($latestItems as $item) {
-                                    $images = $item->getImageUrl(); ?>
+                                    $images = $item->getImageUrls(); ?>
                                     <tr style="vertical-align: middle;">
                                         <td>
                                             <a href="<?= Yii::$app->urlHelper->to(['item/view', 'id' => $item->id]); ?>">

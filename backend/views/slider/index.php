@@ -1,5 +1,5 @@
 <?php
-
+use \common\models\Slider;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -38,7 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'largeTitle',
                     'description',
                     'image',
-                    //'type',
+                    [
+                        'attribute' => 'type',
+                        'filter' => Slider::getSliderTypes(),
+                        'value' => function (Slider $model) {
+                            return $model->getSliderType();
+                        },
+                    ],
+
 
                     ['class' => 'yii\grid\ActionColumn',
                         'urlCreator' => function ($action, $model, $key, $index) {

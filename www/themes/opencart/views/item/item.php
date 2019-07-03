@@ -93,7 +93,7 @@ use yii\helpers\Html;
                                     <div class="row">
                                         <div  class="span12">
                                             <div id="owl-demo" class="owl-carousel">
-                                                <?php foreach ($item->getImageUrl() as $url) { ?>
+                                                <?php foreach ($item->getImageUrls() as $url) { ?>
                                                     <div class="item" align="center">
                                                         <img  src="<?php echo $url; ?>">
                                                     </div>
@@ -265,7 +265,7 @@ use yii\helpers\Html;
                                                             <div class="frame-photo-title">
                                             <span class="photo-block">
                                                 <span class="helper"></span>
-                                                <img src="<?php echo array_shift($item->getImageUrl()); ?>">
+                                                <img src="<?php echo array_shift($item->getImageUrls()); ?>">
                                                                                           </span>
                                                                 <span class="title"><?php echo $item->getTitle()?></span>
                                                             </div>
@@ -295,7 +295,7 @@ use yii\helpers\Html;
                                                             <a href="http://active.imagecmsdemo.net/shop/product/perchatki-velosipednye-cyclotech-racer" class="frame-photo-title">
                                             <span class="photo-block">
                                                 <span class="helper"></span>
-                                                <img src="<?php echo array_shift($kitItem->item->getImageUrl()); ?>">
+                                                <img src="<?php echo array_shift($kitItem->item->getImageUrls()); ?>">
 
 
                                                                                             </span>

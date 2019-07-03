@@ -90,7 +90,7 @@ $this->title = 'Сравнение товаров';
                                                            class="frame-photo-title">
                                                             <span class="photo-block">
                                                                 <span class="helper"></span>
-                                                                <img src="<?= array_shift($item->getImageUrl()); ?>">
+                                                                <img src="<?= array_shift($item->getImageUrls()); ?>">
                                                             </span>
                                                             <span class="title"><?php echo $item->title; ?></span>
                                                         </a>

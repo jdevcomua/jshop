@@ -11,7 +11,7 @@ use yii\base\Model;
  */
 class PasswordResetRequestForm extends Model
 {
-    public $mail;
+    public $email;
 
     /**
      * @inheritdoc
@@ -19,10 +19,10 @@ class PasswordResetRequestForm extends Model
     public function rules()
     {
         return [
-            ['mail', 'filter', 'filter' => 'trim'],
-            ['mail', 'required'],
-            ['mail', 'email'],
-            ['mail', 'exist',
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'message' => 'There is no user with such email.'
             ],
@@ -38,7 +38,7 @@ class PasswordResetRequestForm extends Model
     {
         /* @var $user User */
         $user = User::findOne([
-            'mail' => $this->mail,
+            'email' => $this->email,
         ]);
 
         if ($user) {
@@ -48,8 +48,8 @@ class PasswordResetRequestForm extends Model
 
             if ($user->save()) {
                 return \Yii::$app->mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
-                    ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
-                    ->setTo($this->mail)
+                    ->setFrom([\Yii::$app->params['adminEmail'] => \Yii::$app->name . ' robot'])
+                    ->setTo($this->email)
                     ->setSubject('Сброс пароля, ' . \Yii::$app->name)
                     ->send();
             }

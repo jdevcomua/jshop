@@ -212,7 +212,7 @@ use common\models\Orders;
                                                                class="frame-photo-title">
                                                                 <span class="photo-block">
                                                                     <span class="helper"></span>
-                                                                    <img src="<?php echo array_shift($item->getImageUrl()); ?>"></span>
+                                                                    <img src="<?php echo array_shift($item->getImageUrls()); ?>"></span>
                                                             <span class="title"><?php echo $item->title; ?></span>
                                                             </a>
                                                             <!-- End. Photo & Name product -->

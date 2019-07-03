@@ -28,10 +28,10 @@ class Orders extends Model
 {
 
     const STATUS_NEW = 1;
-    const STATUS_SENT = 2;
-    const STATUS_SHIPPED = 3;
-    const STATUS_CANCELED = 4;
-    const STATUS_CONFIRMED = 5;
+    const STATUS_CONFIRMED = 2;
+    const STATUS_SENT = 3;
+    const STATUS_SHIPPED = 4;
+    const STATUS_CANCELED = 5;
     
     const PAYMENT_STATUS_PAID = 1;
     const PAYMENT_STATUS_NOT_PAID = 2;

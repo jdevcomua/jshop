@@ -8648,7 +8648,7 @@ content: "\f00c";
 .add-to-cart .qty {
     height: 48px;
     text-align: center;
-    width: 30px;
+    width: 73px;
     vertical-align: top;
     color: #333e48;
 }
@@ -12947,7 +12947,7 @@ select#shipping-address-select {
 	height: 21px;
 }
 .count-of-item{
-	width: 10%;
+	width: 15%;
 }
 .fadeContainer{
 	filter: blur(2px);
@@ -12975,6 +12975,19 @@ select#shipping-address-select {
 	margin-bottom: 0px;
 	margin-left: 20px;
 	padding-left: 0px;
+}
+.order_check{
+	margin-top: 10px;
+	font-size: 30px;
+	width: 270px;
+}
+.check_fancybox{
+	height: 40px !important;
+}
+.wish_check{
+	margin-top: 10px;
+	font-size: 30px;
+	width: 360px;
 }
 
 

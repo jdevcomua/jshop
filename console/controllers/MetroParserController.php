@@ -4,6 +4,7 @@ namespace console\controllers;
 
 
 
+use common\models\Log;
 use console\controllers\Parser\metro\CategoryParser;
 use console\controllers\Parser\metro\ItemParse;
 use yii\console\Controller;
@@ -52,7 +53,13 @@ class MetroParserController extends Controller
     }
     public function actionParseItem(){//парс всех айтемов по категориям которые находяться в базе
         $link = new ItemParse();
-        $link->parseData();
+        if($link->parseData()){
+            $log = new Log();
+            $log->message='Parse success';
+            echo $log->message;
+            $log->save();
+        }
+
     }
 
 

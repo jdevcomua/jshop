@@ -27,6 +27,12 @@
                 ?>
             </div>
         </div>
+    <td class="wishlist-cell2 customer-wishlist-item-quantity" data-rwd-label="Quantity" style="display: none"><div class="cart-cell">
+            <div class="add-to-cart-alt">
+                <input type="text" pattern="\d*" class="input-text qty validate-not-negative-number" name="qty[<?=$model->item->id?>]" id="qty-<?= $model->item->id ?>" value="1">
+            </div>
+        </div>
+    </td>
     <td class="wishlist-cell3 customer-wishlist-item-price" data-rwd-label="Price"><div class="cart-cell">
             <div class="price-box"> <span class="regular-price" id="product-price-2"> <span class="price"><?=number_format((float)$model->item->getNewPrice(), 2, '.', '') ?></span> </span> </div>
         </div>

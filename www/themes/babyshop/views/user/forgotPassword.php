@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <li>
                                 <label for="email"><?= Yii::t('app','Email Address')?><em class="required">*</em></label>
                                 <div class="input-box">
-                                    <input type="text" name="PasswordResetRequestForm[mail]" value="" id="passwordresetrequestform-mail" class="input-text required-entry validate-email" title="Email Address">
+                                    <input type="text" name="PasswordResetRequestForm[email]" value="" id="passwordresetrequestform-email" class="input-text required-entry validate-email" title="Email Address">
                                 </div>
                             </li>
                         </ul>

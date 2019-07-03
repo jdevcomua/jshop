@@ -177,12 +177,18 @@ class UserController extends Controller
         if (isset($userNode)) {
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
             if (empty($user)) {
-                $user = new User();
-                $user->fb_id = $userNode['id'];
-                $user->name = explode(' ', $userNode['name'])[0];
-                $user->surname = explode(' ', $userNode['name'])[3];
-                $user->email = $userNode['email'];
-                $user->save();
+                $user = User::findOne(['email'=>$userNode['email']]);
+                if(isset($user)){
+                    $user->fb_id = $userNode['id'];
+                    $user->save();
+                }else{
+                    $user = new User();
+                    $user->fb_id = $userNode['id'];
+                    $user->name = explode(' ', $userNode['name'])[0];
+                    $user->surname = explode(' ', $userNode['name'])[3];
+                    $user->email = $userNode['email'];
+                    $user->save();
+                }
             }
             Yii::$app->user->login($user, 3600 * 24);
         }
@@ -203,8 +209,12 @@ class UserController extends Controller
         $permissions = ['email']; // Optional permissions
         $loginUrl = $helper->getLoginUrl(Yii::$app->getRequest()->getHostInfo() . '/user/facebook-auth', $permissions);
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->facebook()){
+                Yii::$app->session->setFlash('error', 'Вы зарегестрированы через Facebook, создайте свой пароль');
+                return $this->redirect(Yii::$app->urlHelper->to(['user/forgot-password']));
+            }elseif($model->login())
+                return $this->redirect(Yii::$app->urlHelper->to(['site/index']));
         }
         return $this->render('login', [
             'model' => $model,
@@ -287,7 +297,7 @@ class UserController extends Controller
                     Yii::$app->session->setFlash('success', 'Проверьте свою электронную почту для получения дальнейших инструкций');
                     return $this->redirect('login');
                 } else {
-                    Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                    Yii::$app->session->setFlash('error', 'К сожалению, мы не можем сбросить пароль для предоставленной электронной почты');
                 }
             }else{
                 Yii::$app->session->setFlash('error', 'Проверьте правильность вводимых даных.');

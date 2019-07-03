@@ -45,8 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value'=>$model->getImageUrl(),
                         'format'=>['image',['width'=>'300']]
                     ],
-
-                    'type',
+                    [
+                        'attribute'=>'type',
+                        'value'=>$model->getSliderType(),
+                    ],
                 ],
             ]) ?>
         </div>

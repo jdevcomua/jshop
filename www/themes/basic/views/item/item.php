@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $inCart boolean */
 /* @var $this \yii\web\View */
 \frontend\widgets\sliders\flex\FlexSliderAsset::register($this);
-$imageUrls = $item->getImageUrl();
+$imageUrls = $item->getImageUrls();
 $this->title = $item->title;
 ?>
 

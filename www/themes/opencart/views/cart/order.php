@@ -119,7 +119,7 @@ use Yii;
                                                class="frame-photo-title">
                                                 <span class="photo-block">
                                                     <span class="helper"></span>
-                                                    <img src="<?php echo array_shift($item->getImageUrl()) ?>" alt="">
+                                                    <img src="<?php echo array_shift($item->getImageUrls()) ?>" alt="">
                                                 </span>
                                                 <span class="title"><?php echo $item->title ?></span></a></td>
                                         <td>

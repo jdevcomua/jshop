@@ -9,7 +9,7 @@ use common\models\Item;
     <div class="product-thumb transition">
         <div class="image">
             <a href="<?= $model->getUrl() ?>">
-                <img src="<?= array_shift($model->getImageUrl(Item::IMAGE_SMALL)) ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>" class="img-responsive">
+                <img src="<?= array_shift($model->getImageUrls(Item::IMAGE_SMALL)) ?>" alt="<?= $model->title ?>" title="<?= $model->title ?>" class="img-responsive">
             </a>
         </div>
         <div class="caption">

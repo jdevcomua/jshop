@@ -42,7 +42,7 @@ use Yii;
                                        class="frame-photo-title">
                                                                 <span class="photo-block">
                                                                     <span class="helper"></span>
-                                                                    <img src="<?php echo $item->getImageUrl(); ?>"></span>
+                                                                    <img src="<?php echo $item->getImageUrls(); ?>"></span>
                                         <span class="title"><?php echo $item->title; ?></span>
                                     </a>
                                     <!-- End. Photo & Name product -->

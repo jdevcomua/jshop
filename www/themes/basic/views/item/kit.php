@@ -9,7 +9,7 @@
                 <span class="photo-block kit-photo-block">
                     <span class="helper"></span>
                     <img
-                        src="<?php echo array_shift($item->getImageUrl()); ?>">
+                        src="<?php echo array_shift($item->getImageUrls()); ?>">
                 </span>
                 <span class="title"><?php echo $item->getTitle() ?></span>
             </div>
@@ -40,7 +40,7 @@
                     <a href="<?= $kitItem->item->getUrl(); ?>" class="frame-photo-title">
                         <span class="photo-block kit-photo-block">
                             <span class="helper"></span>
-                            <img src="<?= array_shift($kitItem->item->getImageUrl()); ?>">
+                            <img src="<?= array_shift($kitItem->item->getImageUrls()); ?>">
                         </span>
                         <span class="title">
                             <?= $kitItem->item->getTitle(); ?>

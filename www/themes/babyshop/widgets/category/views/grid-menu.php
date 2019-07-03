@@ -21,6 +21,7 @@ use yii\helpers\Url;
         $children = $category->getChildren()->all();
         $open_parent=0;
         $open_parent_child=0;
+        if(isset(Yii::$app->controller->actionParams['id'])){
             foreach ($children as $ch){
                 if($ch->id === (int)Yii::$app->controller->actionParams['id']){
                     $open_parent=$ch->parent->id;
@@ -35,6 +36,7 @@ use yii\helpers\Url;
                     }
                 }
             }
+        }
         if (empty($children))
             echo '<li> <a href="' . $category->getUrl()  . '">' . $category->title  . '</a> </li>';
         else{

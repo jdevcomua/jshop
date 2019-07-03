@@ -18,7 +18,7 @@ if(isset($item->category->parent))
 $this->params['breadcrumbs'][] = ['label' => $item->category->title, 'url' => $item->category->getUrl()];
 $this->params['breadcrumbs'][] = $this->title;
 
-$imageUrls = $item->getImageUrl();
+$imageUrls = $item->getImageUrls();
 ?>
 <div>
 <div class="main-container col1-layout wow bounceInUp animated">

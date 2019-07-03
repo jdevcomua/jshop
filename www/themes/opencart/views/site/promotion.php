@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
                             <a href="<?php echo Yii::$app->urlHelper->to(['item/' . $value->id . '-' . $value->getTranslit()]); ?>"
                                class="frame-photo-title">
                                 <span class="photo-block"><span class="helper"></span><img
-                                        src="<?php echo array_shift($value->getImageUrl()); ?>">
+                                        src="<?php echo array_shift($value->getImageUrls()); ?>">
                                     <?php if ($value->existDiscount()) { ?>
                                         <span class="product-status action"></span>
                                     <?php } ?>

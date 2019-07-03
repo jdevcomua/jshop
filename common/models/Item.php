@@ -215,13 +215,13 @@ class Item extends Model implements CartAdd
      * @param string $size of image
      * @return array
      */
-    public function getImageUrl($size = '')
+    public function getImageUrls($size = '')
     {
         $urls = [];
         foreach ($this->images as $image) {
             $urls[] = $image->getImageUrl($size);
         }
-        
+
         return $urls;
     }
 

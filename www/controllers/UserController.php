@@ -177,12 +177,18 @@ class UserController extends Controller
         if (isset($userNode)) {
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
             if (empty($user)) {
-                $user = new User();
-                $user->fb_id = $userNode['id'];
-                $user->name = explode(' ', $userNode['name'])[0];
-                $user->surname = explode(' ', $userNode['name'])[3];
-                $user->email = $userNode['email'];
-                $user->save();
+                $user = User::findOne(['email'=>$userNode['email']]);
+                if(isset($user)){
+                    $user->fb_id = $userNode['id'];
+                    $user->save();
+                }else{
+                    $user = new User();
+                    $user->fb_id = $userNode['id'];
+                    $user->name = explode(' ', $userNode['name'])[0];
+                    $user->surname = explode(' ', $userNode['name'])[3];
+                    $user->email = $userNode['email'];
+                    $user->save();
+                }
             }
             Yii::$app->user->login($user, 3600 * 24);
         }

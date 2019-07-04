@@ -1,12 +1,12 @@
 <?php
 
-use common\models\ItemCat;
-use common\models\Parse;
+
 use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
+/* @var $seo common\models\Seo */
 /* @var $categories array */
 
 $this->title = Yii::t('app', 'Создать категорию');
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <?php echo $this->render('_form', [
-                'model' => $model, 'categories' => $categories,
+                'model' => $model, 'categories' => $categories,'seo'=>$seo,
             ]) ?>
         </div>
     </div>

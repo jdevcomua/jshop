@@ -7,7 +7,6 @@ use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ItemCat */
-/* @var $parse common\models\Parse */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $categories array */
 /* @var $categories array */
@@ -47,8 +46,38 @@ use kartik\select2\Select2;
             ],
         ]
     ]);
+    ?>
+    <div class="box-header with-border">
+        <h3 class="box-title">Seo</h3>
+    </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($seo, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($seo, 'description')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза после которая находиться после номера элемента)') ?>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+    <?php
     $images = [];
     if (!$model->isNewRecord && !empty($model->image)) {
         $images[] = Html::img($model->getImageUrl(), ['width' => '120px']);

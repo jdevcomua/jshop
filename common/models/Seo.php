@@ -32,6 +32,7 @@ class Seo extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description', 'keywords', 'url','new_url'], 'string', 'max' => 255],
+            [['url'], 'unique'],
             [['h1'], 'string', 'max' => 50],
         ];
     }

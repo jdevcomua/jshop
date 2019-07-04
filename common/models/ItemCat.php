@@ -190,7 +190,10 @@ class ItemCat extends ModelWithImage
         $url = Yii::$app->params['serverUrl']. '/category/' . $this->id . '-' . $this->getTranslit();
         $seo = Seo::findOne(['url'=>$url]);
         if(isset($seo)&& !empty($seo->new_url)){
-            return Yii::$app->urlHelper->to(['/category/'. str_replace('/category/', '',str_replace(Yii::$app->params['serverUrl'], '',$seo->new_url))]);
+            $new_url = str_replace(Yii::$app->params['serverUrl'], '',$seo->new_url);
+            $new_url = str_replace('/category/', '',$new_url);
+            $new_url = str_replace( $this->id . '-', '',$new_url);
+            return Yii::$app->urlHelper->to(['/category/' . $this->id . '-' . $new_url]);
         }
         return Yii::$app->urlHelper->to(['/category/' . $this->id . '-' . $this->getTranslit()]);
     }

@@ -7,6 +7,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Item */
+/* @var $seo common\models\Seo */
 /* @var $form yii\widgets\ActiveForm */
 /* @var $categories array */
 ?>
@@ -72,7 +73,39 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?php echo $form->field($model, 'metric')->dropDownList($model->getMetrics(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
+                <?php echo $form->field($model, 'metric')
+                    ->dropDownList($model->getMetrics(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="box-header with-border">
+            <h3 class="box-title">Seo</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'title')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($seo, 'description')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза после которая находиться после номера элемента)') ?>
             </div>
             <div class="col-md-6">
 

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Characteristic;
 use common\models\Image;
 use common\models\Parse;
+use common\models\Seo;
 use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
@@ -111,6 +112,7 @@ class ItemCatController extends Controller
     {
         $model = new ItemCat(['active' => true]);
         $model->parse = [new Parse()];
+        $seo = new Seo();
         if(Yii::$app->request->isAjax){
             $model->image = Yii::$app->request->post('src');
             $model->deleteImage($model->urlRename());
@@ -133,6 +135,10 @@ class ItemCatController extends Controller
             if ($continue) {
 
                 if (Yii::$app->request->post()['action'] == 'save') {
+                    if($seo->load(Yii::$app->request->post())){
+                        $seo->url = Yii::$app->params['serverUrl'] . '/category/' . $model->id . '-' . $model->getTranslit();
+                        $seo->save();
+                    }
                     $id = ItemCat::findOne(['title'=>$model->title])->id;
                     $data = Yii::$app->request->post('Parse', []);
                     foreach (array_keys($data) as $index) {
@@ -148,7 +154,7 @@ class ItemCatController extends Controller
         }
         $categoriesArray = ArrayHelper::map(ItemCat::find()->all(), 'id', 'title');
         return $this->render('create', [
-            'model' => $model, 'categories' => $categoriesArray,
+            'model' => $model, 'categories' => $categoriesArray,'seo'=>$seo,
         ]);
     }
     public function actionAddParseUrl($id)
@@ -199,6 +205,9 @@ class ItemCatController extends Controller
         $model = $this->findModel($id);
         if($model->parse==[])
             $model->parse = [new Parse()];
+        $seo = Seo::findOne(['url'=>Yii::$app->params['serverUrl'] . '/category/' . $model->id . '-' . $model->getTranslit()]);
+        if(!isset($seo))
+            $seo = new Seo();
         if(Yii::$app->request->isAjax){
             $model->image = Yii::$app->request->post('src');
             $model->deleteImage($model->urlRename());
@@ -229,6 +238,10 @@ class ItemCatController extends Controller
             } else {
                 $continue = $model->save();
             }
+            if($seo->load($request->post())){
+                $seo->url = Yii::$app->params['serverUrl'] . '/category/' . $model->id . '-' . $model->getTranslit();
+                $seo->save();
+            }
             if ($continue) {
                 if ($request->post('action') == 'save') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item-cat/view', 'id' => $id]));
@@ -241,7 +254,7 @@ class ItemCatController extends Controller
         return $this->render('update', [
             'model' => $model,
             'categories' => $categoriesArray,
-            'parse'=>(empty($parse))?[new Parse()]:$parse
+            'seo'=>$seo,
         ]);
     }
 

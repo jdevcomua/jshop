@@ -20,6 +20,14 @@ class Controller extends \yii\web\Controller
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $action->controller->seo = Seo::findOne(['url'=> $action->controller->current_url()]);
+        if(!isset($action->controller->seo)){
+            $new_url = str_replace(Yii::$app->params['serverUrl'], '',$action->controller->current_url());
+            $new_url = str_replace('/item/', '',$new_url);
+            $new_url = str_replace('/category/', '',$new_url);
+            $new_url = str_replace( (int)$new_url . '-', '',$new_url);
+            $action->controller->seo = Seo::findOne(['new_url'=> $new_url]);
+        }
+
         return parent::beforeAction($action);
     }
 

@@ -12989,6 +12989,9 @@ select#shipping-address-select {
 	font-size: 30px;
 	width: 360px;
 }
+.cart_success .product-name{
+	width: 260px;
+}
 
 
 /*	Testimonials */

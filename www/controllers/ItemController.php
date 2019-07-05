@@ -2,6 +2,7 @@
 
 namespace www\controllers;
 
+use common\models\Seo;
 use common\models\Vote;
 use Yii;
 use common\models\Item;
@@ -27,6 +28,13 @@ class ItemController extends Controller
         $related = Item::find()->where(['category_id' => $item->category_id, 'active' => 1])->andFilterWhere(['!=', 'id', $item->id])->all();
         $message = null;
         $vote = new Vote();
+        $seo = Seo::findOne(['new_url'=>$item->strReplaceUrl($item->getUrl())]);
+        if(isset($seo) && !empty($seo->h1)){
+            $item->h1 = $seo->h1;
+        }else{
+            $item->h1 = $item->title;
+        }
+
 
         if ($vote->load(Yii::$app->request->post())) {
             $vote->user_id = Yii::$app->user->isGuest ? null : Yii::$app->user->id;
@@ -44,6 +52,7 @@ class ItemController extends Controller
             'item' => $item,
             'related' => $related,
             'message' => $message,
+
         ]);
     }
 

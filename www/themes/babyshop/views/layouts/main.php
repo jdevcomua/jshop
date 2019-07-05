@@ -33,16 +33,6 @@ use yii\widgets\Pjax;
         <title><?= Yii::$app->controller->seo->title ?></title>
         <meta name="description" content="<?= Yii::$app->controller->seo->description?>">
         <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords?>">
-        <?php
-            $tagOne = "<h1>";
-            $tagTwo = "</h1>";
-            $startTagPos = strrpos($content, $tagOne);
-            $endTagPos = strrpos($content, $tagTwo);
-            if($startTagPos && $endTagPos){
-                $tagLength = $endTagPos - $startTagPos;
-                $content = substr_replace($content, $tagOne . Yii::$app->controller->seo->h1 . $tagTwo, $startTagPos, $tagLength);
-            }
-        ?>
     <?php else:?>
         <title><?= Html::encode($this->title) ?></title>
         <meta name="description" content="Default Description">

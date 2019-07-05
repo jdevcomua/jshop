@@ -40,6 +40,7 @@ use Eventviva\ImageResize;
  * @property float $special
  * @property float $deal_week
  * @property string $link
+ * @property string $h1
  * @property string $image
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
@@ -60,6 +61,7 @@ class Item extends Model implements CartAdd
 
     public $count;
     public $image;
+    public $h1;
     const WEB_IMG = '/web/img/';
     const SIZE = '_400.';
     const IMG = '/img/';
@@ -561,12 +563,16 @@ class Item extends Model implements CartAdd
         $url = Yii::$app->params['serverUrl']. '/item/' . $this->id . '-' . $this->getTranslit();
         $seo = Seo::findOne(['url'=>$url]);
         if(isset($seo)&& !empty($seo->new_url)){
-            $new_url = str_replace(Yii::$app->params['serverUrl'], '',$seo->new_url);
-            $new_url = str_replace('/item/', '',$new_url);
-            $new_url = str_replace( $this->id . '-', '',$new_url);
-            return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $new_url]);
+            return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $this->strReplaceUrl($seo->new_url)]);
         }
         return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $this->getTranslit()]);
+    }
+
+    public function strReplaceUrl($url){
+        $new_url = str_replace(Yii::$app->params['serverUrl'], '',$url);
+        $new_url = str_replace('/item/', '',$new_url);
+        $new_url = str_replace( $this->id . '-', '',$new_url);
+        return $new_url;
     }
 
     public function pathToFile($fileName, $size = null)

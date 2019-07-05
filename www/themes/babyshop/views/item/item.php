@@ -67,7 +67,7 @@ $imageUrls = $item->getImageUrls();
                             <div class="product-shop col-lg- col-sm-7 col-xs-12">
 <!--                                <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>-->
                                 <div class="product-name">
-                                    <h1><?=$item->title?></h1>
+                                    <h1><?=$item->h1?></h1>
                                 </div>
                                 <div class="ratings">
                                     <div class="rating-box">

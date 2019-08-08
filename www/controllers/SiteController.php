@@ -7,6 +7,7 @@ use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Seo;
 use common\models\Slider;
 use common\models\StaticPage;
 use common\models\Stock;
@@ -208,7 +209,12 @@ class SiteController extends Controller
         $category_ids = $category->getFamily();
         $items->orFilterWhere(['in','category_id',$category_ids]);
         $slider = Slider::find()->all();
-
+        $seo = Seo::findOne(['new_url'=> $category->strReplaceUrl($category->getUrl())]);
+        if(isset($seo) && !empty($seo->h1)){
+            $category->h1 = $seo->h1;
+        }else{
+            $category->h1 = $category->title;
+        }
 
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);

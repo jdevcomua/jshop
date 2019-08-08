@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $category->title;
                                 'options' =>['class' => 'breadcrumb category-breadcrumb'],
                             ]) ?>
                         </section>
-                        <h1 style="margin-top: 0px; margin-left: 10%"><?=$this->title?></h1>
+                        <h1 style="margin-top: 0px; margin-left: 10%"><?=$category->h1?></h1>
                     </div>
                     <?php Pjax::begin(['id'=>'itemList']) ?>
                     <?php if (Yii::$app->session->get('listType') == 'grid') {

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Image;
 use common\models\ItemCat;
 use common\models\search\ItemSearch;
+use common\models\Seo;
 use yii\base\Model;
 use Yii;
 use common\models\Item;
@@ -105,7 +106,7 @@ class ItemController extends Controller
     {
 
         $model = new Item(['active' => true]);
-
+        $seo = new Seo();
         if(Yii::$app->request->isAjax){
             $imageUrl = Yii::$app->request->post('src');
             $model->deleteImagesFromServer(basename($imageUrl));
@@ -120,8 +121,11 @@ class ItemController extends Controller
             $model->metric = Item::METRIC_PIECES;
             if ($model->save()) {
                 $model->imageFiles= $model->urlRename();
-
                 $model->upload();
+                if($seo->load($request->post())){
+                    $seo->url = Yii::$app->params['serverUrl'] . '/item/' . $model->id . '-' . $model->getTranslit();
+                    $seo->save();
+                }
                 if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
                 } else {
@@ -132,7 +136,8 @@ class ItemController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'categories' => $categoriesArray
+            'categories' => $categoriesArray,
+            'seo'=>$seo,
         ]);
 
     }
@@ -210,6 +215,9 @@ class ItemController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $seo = Seo::findOne(['url'=>Yii::$app->params['serverUrl'] . '/item/' . $model->id . '-' . $model->getTranslit()]);
+        if(!isset($seo))
+            $seo = new Seo();
         $categories = ItemCat::find()->select(['id', 'title'])->all();
         $request = Yii::$app->request;
         $image = Image::findOne(['item_id'=>$id]);
@@ -239,7 +247,10 @@ class ItemController extends Controller
                     $model->deleteImages($image);
                     $model->upload();
                 }
-
+                if($seo->load($request->post())){
+                    $seo->url = Yii::$app->params['serverUrl'] . '/item/' . $model->id . '-' . $model->getTranslit();
+                    $seo->save();
+                }
                 if ($request->post('action') == 'characteristics') {
                     return $this->redirect(Yii::$app->urlHelper->to(['item/characteristics', 'id' => $model->id]));
                 } else {
@@ -252,6 +263,7 @@ class ItemController extends Controller
             return $this->render('update', [
                 'model' => $model,
                 'categories' => ArrayHelper::map($categories, 'id', 'title'),
+                'seo'=>$seo,
             ]);
         }
     }

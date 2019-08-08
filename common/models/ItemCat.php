@@ -22,6 +22,7 @@ use yii\db\ActiveRecord;
  * @property integer $depth
  * @property integer $tree
  * @property integer $active
+ * @property string $h1
  *
  * @property Characteristic[] $characteristics
  * @property Item[] $items
@@ -37,6 +38,7 @@ class ItemCat extends ModelWithImage
 {
     
     public $count;
+    public $h1;
     public $dir = 'categories';
     const ALCOHOL = 'Алкогольные напитки';
     const TOBACOO = 'Табачные изделия';
@@ -190,9 +192,16 @@ class ItemCat extends ModelWithImage
         $url = Yii::$app->params['serverUrl']. '/category/' . $this->id . '-' . $this->getTranslit();
         $seo = Seo::findOne(['url'=>$url]);
         if(isset($seo)&& !empty($seo->new_url)){
-            return Yii::$app->urlHelper->to(['/category/'. str_replace('/category/', '',str_replace(Yii::$app->params['serverUrl'], '',$seo->new_url))]);
+            return Yii::$app->urlHelper->to(['/category/' . $this->id . '-' . $this->strReplaceUrl($seo->new_url)]);
         }
         return Yii::$app->urlHelper->to(['/category/' . $this->id . '-' . $this->getTranslit()]);
+    }
+
+    public function strReplaceUrl($url){
+        $new_url = str_replace(Yii::$app->params['serverUrl'], '',$url);
+        $new_url = str_replace('/category/', '',$new_url);
+        $new_url = str_replace( $this->id . '-', '',$new_url);
+        return $new_url;
     }
 
     /**

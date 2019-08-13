@@ -9,6 +9,7 @@ use yii\base\DynamicModel;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
 use budyaga\cropper\Widget;
@@ -74,14 +75,19 @@ class UploadAction extends Action
                 $width = $request->post('width', $this->width);
                 $height = $request->post('height', $this->height);
                 $origin = self::ensureImageInterfaceInstance($file->tempName . $request->post('filename'));
-                $image = Image::crop(
-                    $origin,
-                    intval($request->post('w')),
-                    intval($request->post('h')),
-                    [$request->post('x'), $request->post('y')]
-                )->resize(
-                    new Box($width, $height)
-                );
+
+                if(!empty($request->post('w')) && !empty($request->post('h'))){
+                    $image = Image::crop(
+                        $origin,
+                        intval($request->post('w')),
+                        intval($request->post('h')),
+                        [$request->post('x'), $request->post('y')]
+                    )->resize(
+                        new Box($width, $height)
+                    );
+                }else{
+                    throw new NotFoundHttpException('Высота и ширина пустые');
+                }
 
                 if (!file_exists($this->path) || !is_dir($this->path)) {
                     $result = [

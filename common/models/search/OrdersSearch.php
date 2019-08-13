@@ -48,6 +48,7 @@ class OrdersSearch extends Orders
             'sort' => [
                 'defaultOrder' => [
                     'order_status' => SORT_ASC,
+                    'timestamp' => SORT_DESC,
                 ],
             ],
         ]);

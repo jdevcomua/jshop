@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'fb_id')->textInput(['maxlength' => true]);
 
-    echo $form->field($model, 'password')->textInput(['maxlength' => true]);
+    echo $form->field($model, 'password')->textInput(['maxlength' => true, 'required'=> true]);
 
     echo $form->field($model, 'confirm_password')->textInput(['maxlength' => true]);
     ?>

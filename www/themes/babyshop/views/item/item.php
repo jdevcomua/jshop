@@ -130,13 +130,7 @@ $imageUrls = $item->getImageUrls();
                                       </ul>
                                     <p class="email-friend"><a href="#" class=""><span><?= Yii::t('app','Email to a Friend')?></span></a></p>
                                 </div>
-                                <div class="social">
-                                    <ul>
-                                        <li class="fb"><a href="#"></a></li>
-                                        <li class="instagram"><a href="#"></a></li>
-                                        <li class="viber-grey"><a href="#"></a></li>
-                                    </ul>
-                                </div>
+                                <div id="share"></div>
                             </div>
                             <!--product-shop-->
                             <!--Detail page static block for version 3-->

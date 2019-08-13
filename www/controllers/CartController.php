@@ -115,14 +115,14 @@ class CartController extends Controller
                         ->send();
                 }
                 Yii::$app->session->setFlash('success','Заказ успешно выполнен!');
-//                Yii::$app->mailer
-//                    ->compose('order', [
-//                        'order' => Orders::findOne($model->id)
-//                    ])
-//                    ->setFrom(Yii::$app->params['adminEmail'])
-//                    ->setTo(Yii::$app->params['orderEmail'])
-//                    ->setSubject('Новый заказ №'.$model->id)
-//                    ->send();
+                Yii::$app->mailer
+                    ->compose('order', [
+                        'order' => Orders::findOne($model->id)
+                    ])
+                    ->setFrom(Yii::$app->params['adminEmail'])
+                    ->setTo(Yii::$app->params['orderEmail'])
+                    ->setSubject('Новый заказ №'.$model->id)
+                    ->send();
                 return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/dashboard']));
             }
         }

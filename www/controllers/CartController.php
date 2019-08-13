@@ -112,10 +112,10 @@ class CartController extends Controller
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setTo($model->email)
                         ->setSubject('subject')
-                        ->setHtmlBody('<br>das</br>')
+                        ->setHtmlBody('<br>Order</br>')
                         ->send();
                 }
-                Yii::$app->session->setFlash('success','Success checkout!');
+                Yii::$app->session->setFlash('success','Заказ успешно выполнен!');
                 Yii::$app->mailer
                     ->compose('order', [
                         'order' => Orders::findOne($model->id)

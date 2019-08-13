@@ -64,20 +64,11 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($model, 'link')->textInput(['maxlength' => true]); ?>
-            </div>
-            <div class="col-md-6">
-                <?php echo $form->field($model, 'self_cost')->textInput(); ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
                 <?php echo $form->field($model, 'metric')
                     ->dropDownList($model->getMetrics(),['prompt' => Yii::t('app','Выберите метрику')]); ?>
             </div>
             <div class="col-md-6">
-
+                <?php echo $form->field($model, 'self_cost')->textInput(); ?>
             </div>
         </div>
 

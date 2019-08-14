@@ -218,7 +218,7 @@ $imageUrls = $item->getImageUrls();
                                                 </div>
                                                 <p class="comment-form-comment">
                                                     <label><?= Yii::t('app','Your review')?> <span class="required">*</span></label>
-                                                    <textarea id="vote-text " name="Vote[text]" cols="45" rows="8" required></textarea>
+                                                    <?= $form->field($vote, 'text')->textarea(['cols'=>45,'rows'=>8])->label(false) ?>
                                                 </p>
 <!--                                                <p class="comment-form-author">-->
 <!--                                                    <label for="author">Name <span class="required">*</span></label>-->

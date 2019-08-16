@@ -499,3 +499,12 @@ $(document).on('click','.toast-success',function(){
     conteiner.className ='';
 
 });
+
+$("#share").jsSocials({
+    text: 'Я купил(а) '+$('.product-name h1').text()+' на Sdelivery',
+    showLabel: false,
+    showCount: false,
+    url:"https://sdelivery.dn.ua/",
+    shareIn: "popup",
+    shares: ["facebook", "twitter"]
+});

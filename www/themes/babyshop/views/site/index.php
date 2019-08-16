@@ -295,7 +295,7 @@ $this->title = Yii::$app->name;
     <?php }?>
 </div>
 
-<div class="row">
+<div>
     <div class="logo-brand">
         <div class="slider-items-products">
             <div id="brand-slider" class="product-flexslider hidden-buttons">

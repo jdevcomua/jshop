@@ -6085,12 +6085,13 @@ ul#magicat li .open-close, .block-layered-nav dt .toggleBtn {
     position: relative;
 }
 .box-category > ul > li > a {
-    color: #292929;
-    text-transform: uppercase;
-    display: block;
-    font-size: 14px;
-    font-weight:500;
-    letter-spacing:0.5px
+	color: #292929;
+	text-transform: uppercase;
+	display: block;
+	font-size: 14px;
+	font-weight:500;
+	letter-spacing:0.5px;
+    word-break: break-word;
 }
 .box-category > ul > li ul {
     display: none;

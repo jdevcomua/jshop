@@ -37,6 +37,7 @@ class ModelWithImage extends Model
             unlink($this->pathToFile($imageName, Item::SIZE));
         }
         $this->image = null;
+        return $this->save();
     }
     /**
      * @return string path of dir with images
@@ -59,9 +60,9 @@ class ModelWithImage extends Model
         if(!empty($size)){
             $info = new SplFileInfo($fileName);
             $path_parts = pathinfo($fileName);
-            return Yii::getAlias('@www') .Item::WEB_IMG.$path_parts['filename'] . $size . $info->getExtension();
+            return $this->getPath() . $path_parts['filename'] . $size . $info->getExtension();
         }else{
-            return Yii::getAlias('@www') .Item::WEB_IMG.$fileName;
+            return $this->getPath() .$fileName;
         }
     }
 

@@ -130,13 +130,7 @@ $imageUrls = $item->getImageUrls();
                                       </ul>
                                     <p class="email-friend"><a href="#" class=""><span><?= Yii::t('app','Email to a Friend')?></span></a></p>
                                 </div>
-                                <div class="social">
-                                    <ul>
-                                        <li class="fb"><a href="#"></a></li>
-                                        <li class="instagram"><a href="#"></a></li>
-                                        <li class="viber-grey"><a href="#"></a></li>
-                                    </ul>
-                                </div>
+                                <div id="share"></div>
                             </div>
                             <!--product-shop-->
                             <!--Detail page static block for version 3-->
@@ -224,7 +218,7 @@ $imageUrls = $item->getImageUrls();
                                                 </div>
                                                 <p class="comment-form-comment">
                                                     <label><?= Yii::t('app','Your review')?> <span class="required">*</span></label>
-                                                    <textarea id="vote-text " name="Vote[text]" cols="45" rows="8" required></textarea>
+                                                    <?= $form->field($vote, 'text')->textarea(['cols'=>45,'rows'=>8])->label(false) ?>
                                                 </p>
 <!--                                                <p class="comment-form-author">-->
 <!--                                                    <label for="author">Name <span class="required">*</span></label>-->

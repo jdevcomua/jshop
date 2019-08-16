@@ -111,18 +111,17 @@ class CartController extends Controller
                         ])
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setTo($model->email)
-                        ->setSubject('subject')
-                        ->setHtmlBody('<br>das</br>')
+                        ->setSubject('Новый заказ №'.$model->id)
                         ->send();
                 }
-                Yii::$app->session->setFlash('success','Success checkout!');
+                Yii::$app->session->setFlash('success','Заказ успешно выполнен!');
                 Yii::$app->mailer
                     ->compose('order', [
                         'order' => Orders::findOne($model->id)
                     ])
                     ->setFrom(Yii::$app->params['adminEmail'])
                     ->setTo(Yii::$app->params['orderEmail'])
-                    ->setSubject('subject')
+                    ->setSubject('Новый заказ №'.$model->id)
                     ->send();
                 return $this->redirect((Yii::$app->user->isGuest) ? Yii::$app->urlHelper->to(['cart/index']) : Yii::$app->urlHelper->to(['user/dashboard']));
             }

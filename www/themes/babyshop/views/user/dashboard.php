@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <section class="main-container col2-right-layout">
+    <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
     <div class="main container">
         <div class="row">
             <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated" style="visibility: visible;">

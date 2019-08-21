@@ -391,21 +391,24 @@ function setRating(rating) {
     $('.star-'+rating).addClass('active');
 }
 
-$('#submit_step_one').on('click', function(){
+$('#submit_step_one').on('click', async function(){
+    await $('#order-form').yiiActiveForm('validate', true);
+    setTimeout(function () {
+        var validate = $('#order-form').find('.has-error').length;
+        if(validate){
+        } else {
+            document.getElementById('checkout-step-address').style.display = 'none';
+            $('#opc-address').removeClass('allow active');
+            document.getElementById('checkout-step-review').style.display = '';
+            $('#opc-review').addClass('allow active');
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#opc-review").offset().top - 200
+            }, 800);
+            $('#address_view').text('Address: ' + $('#orders-address').val());
+        }
+    },1000);
 
-    if(!$('#order-form')[0].checkValidity()) {
 
-    } else {
-        document.getElementById('checkout-step-address').style.display = 'none';
-        $('#opc-address').removeClass('allow active');
-        document.getElementById('checkout-step-review').style.display = '';
-        $('#opc-review').addClass('allow active');
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("#opc-review").offset().top - 200
-        }, 800);
-        $('#address_view').text('Address: ' + $('#orders-address').val());
-    }
-    $('#submit').click();
 });
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине

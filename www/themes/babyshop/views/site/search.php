@@ -292,7 +292,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                             <p class="subtotal"> <span class="label"><?= Yii::t('app','Cart Subtotal')?> :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
                         </div>
                         <div class="ajax-checkout">
-                            <button type="button" title="Checkout" class="button button-checkout" onClick="window.location='<?= Url::toRoute('cart/index')?>'"> <span><?= Yii::t('app','Checkout')?></span> </button>
+                            <button type="button" title="Checkout" class="button button-checkout" onClick="window.location='<?= Url::toRoute('cart/index')?>'" style="white-space: normal;"> <span><?= Yii::t('app','Checkout')?></span> </button>
                         </div>
 
                         <?php if(!Yii::$app->cart->isEmpty()) { ?>

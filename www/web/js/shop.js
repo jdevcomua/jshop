@@ -213,13 +213,16 @@ function addToCart(id) {
         dataType: 'json',
         success: function (data) {
             if (document.getElementById('cart_cat')) {
-                $.pjax.reload({container: '#cart', async: false});
+                if($('#cart').length){
+                    $.pjax.reload({container: '#cart', async: false});
+                }
                 $.pjax.reload({container: '#mobile_cart', async: false});
                 $.pjax.reload({container: '#cart_cat', async: false});
             } else {
                 $.pjax.reload({container: '#mobile_cart', async: false});
-                $.pjax.reload({container: '#cart'});
-
+                if($('#cart').length){
+                    $.pjax.reload({container: '#cart',async: false});
+                }
             }
             showPopup(data.html);
         }

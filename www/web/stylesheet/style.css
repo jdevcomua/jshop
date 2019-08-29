@@ -9356,7 +9356,7 @@ a.button.view-all {
 	border-right: 0px solid #eaeaea;
 	border-bottom: 1px solid #eaeaea;
 	padding: 15px 20px;
-	word-break: break-word;
+	/*word-break: break-word;*/
 }
 #customer-reviews ul {
     margin: auto;
@@ -12555,8 +12555,8 @@ select#shipping-address-select {
     border-bottom:1px #eaeaea solid;
 
 }
-.table-striped>tbody>tr:nth-child(odd) {
-    background-color: #fff;
+.table-striped>tbody>tr {
+    background-color: #fff !important;
 }
 .data-table thead th:first-child {
     background-color: #fff;

@@ -11,7 +11,7 @@ Text Domain:  Qmarto
 
 1. Body
 
-2. Layout 
+2. Layout
 
 3. Header
 
@@ -26,7 +26,7 @@ Text Domain:  Qmarto
 	6b. offer slider
 
 	6c. bestsell slider
- 
+
 	6d. featured slider
 
 	6e. special slider
@@ -34,7 +34,7 @@ Text Domain:  Qmarto
 	6f. Other Slider
 
 
-7. Products Grid 
+7. Products Grid
 
 8. Products List
 
@@ -58,7 +58,7 @@ Text Domain:  Qmarto
 	12k. Block: Tags
 	12l. Block: Subscribe
 	12m Block: Recently Viewed
-	12n. Block: Reorder 
+	12n. Block: Reorder
 	12m. Block: Banner
 
 13. custom-slider
@@ -70,10 +70,10 @@ Text Domain:  Qmarto
 	15a. Product Images
 	15b. Product Shop
 	15c.  Product Collatera
-	
+
 16. related slider & upsell slider
 
-17. Global Messages 
+17. Global Messages
 
 18. bottom banner
 
@@ -654,6 +654,9 @@ ul.currencies_list li a:hover {
 
 }
 .mini-cart .basket a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #333;
     margin: 0px;
     line-height: 17px;
@@ -662,7 +665,6 @@ ul.currencies_list li a:hover {
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.5px;
     font-weight: normal;
-    display: block;
     line-height: 80px;
     height: 80px;
     -webkit-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
@@ -675,19 +677,18 @@ ul.currencies_list li a:hover {
 }
 .mini-cart .basket a span {
     background: #fff;
-    display: inline-block;
     color: #333;
-    width: 25px;
+    min-width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 999px;
     font-size: 12px;
     height: 25px;
     line-height: 26px;
-    text-align: center;
-    vertical-align: top;
-    margin-top: 0px;
     position: absolute;
     font-weight: 700;
-    right: 29px;
+    top: 2px;
     border: 1px solid #ddd;
 }
 .fl-mini-cart-content .pull-right {
@@ -705,7 +706,6 @@ ul.currencies_list li a:hover {
     content: '\f291';
     font-family: FontAwesome;
     font-size: 20px;
-    padding-right: 5px;
     color:#ed6663
 
 }

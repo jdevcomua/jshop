@@ -416,6 +416,7 @@ $('#submit_step_one').on('click', async function(){
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
+    $.pjax.reload({container: '#total_sum', async: false});
 });
 
 $(document).on('click', '#see_reviews', function(){ // изменение значения количество в корзине

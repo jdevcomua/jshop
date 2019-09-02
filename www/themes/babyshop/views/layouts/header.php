@@ -24,7 +24,7 @@ use yii\widgets\Pjax;
         <div class="container">
             <div class="header-container row">
                 <div class="logo"> <a href="<?= Url::home() ?>" title="<?=Yii::t('app','Home')?>">
-                        <div><img src="/images/logo.png" alt="logo"></div>
+                        <div><img src="/images/logo_new.png" alt="logo"></div>
                     </a> </div>
                 <div class="fl-nav-menu">
                     <nav>

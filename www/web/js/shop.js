@@ -394,8 +394,8 @@ function setRating(rating) {
     $('.star-'+rating).addClass('active');
 }
 
-$('#submit_step_one').on('click', async function(){
-    await $('#order-form').yiiActiveForm('validate', true);
+$('#submit_step_one').on('click', function(){
+    $('#order-form').yiiActiveForm('validate', true);
     setTimeout(function () {
         var validate = $('#order-form').find('.has-error').length;
         if(validate){

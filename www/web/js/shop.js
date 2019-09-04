@@ -213,13 +213,16 @@ function addToCart(id) {
         dataType: 'json',
         success: function (data) {
             if (document.getElementById('cart_cat')) {
-                $.pjax.reload({container: '#cart', async: false});
+                if($('#cart').length){
+                    $.pjax.reload({container: '#cart', async: false});
+                }
                 $.pjax.reload({container: '#mobile_cart', async: false});
                 $.pjax.reload({container: '#cart_cat', async: false});
             } else {
                 $.pjax.reload({container: '#mobile_cart', async: false});
-                $.pjax.reload({container: '#cart'});
-
+                if($('#cart').length){
+                    $.pjax.reload({container: '#cart',async: false});
+                }
             }
             showPopup(data.html);
         }
@@ -392,24 +395,28 @@ function setRating(rating) {
 }
 
 $('#submit_step_one').on('click', function(){
+    $('#order-form').yiiActiveForm('validate', true);
+    setTimeout(function () {
+        var validate = $('#order-form').find('.has-error').length;
+        if(validate){
+        } else {
+            document.getElementById('checkout-step-address').style.display = 'none';
+            $('#opc-address').removeClass('allow active');
+            document.getElementById('checkout-step-review').style.display = '';
+            $('#opc-review').addClass('allow active');
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#opc-review").offset().top - 200
+            }, 800);
+            $('#address_view').text('Address: ' + $('#orders-address').val());
+        }
+    },1000);
 
-    if(!$('#order-form')[0].checkValidity()) {
 
-    } else {
-        document.getElementById('checkout-step-address').style.display = 'none';
-        $('#opc-address').removeClass('allow active');
-        document.getElementById('checkout-step-review').style.display = '';
-        $('#opc-review').addClass('allow active');
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("#opc-review").offset().top - 200
-        }, 800);
-        $('#address_view').text('Address: ' + $('#orders-address').val());
-    }
-    $('#submit').click();
 });
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
+    $.pjax.reload({container: '#total_sum', async: false});F
 });
 
 $(document).on('click', '#see_reviews', function(){ // изменение значения количество в корзине

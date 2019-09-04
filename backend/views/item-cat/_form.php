@@ -41,7 +41,7 @@ use kartik\select2\Select2;
         'columns' => [
             [
                 'name'  => 'url',
-                'title' => 'url',
+                'title' => 'URl(Для парсинга из МЕТРО)',
                 'type'  => \unclead\multipleinput\MultipleInputColumn::TYPE_TEXT_INPUT,
             ],
         ]
@@ -71,7 +71,7 @@ use kartik\select2\Select2;
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза после которая находиться после номера элемента)') ?>
+            <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
         </div>
         <div class="col-md-6">
 

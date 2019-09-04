@@ -96,7 +96,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза после которая находиться после номера элемента)') ?>
+                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
             </div>
             <div class="col-md-6">
 

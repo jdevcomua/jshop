@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $inCategory boolean */
 
 ?>
-<li class="mega-menu"> <a class="level-top" href="" ><span><?= Yii::t('app','Categories') ?></span></a>
+<li class="mega-menu"> <a class="level-top" ><span><?= Yii::t('app','Categories') ?></span></a>
 
 
     <div class="level0-wrapper dropdown-6col">

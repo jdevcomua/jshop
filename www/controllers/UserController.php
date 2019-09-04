@@ -192,7 +192,7 @@ class UserController extends Controller
             }
             Yii::$app->user->login($user, 3600 * 24);
         }
-        return $this->goBack();
+        return $this->redirect(Yii::$app->urlHelper->to(['site/index']));
     }
 
     public function actionLogin()

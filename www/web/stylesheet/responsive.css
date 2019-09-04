@@ -364,7 +364,6 @@ footer address {
 .owl-pagination {
 	top: -20px;
 	right: auto;
-	width: 100%;
 }
 .owl-theme .owl-controls .owl-page span {
 	width: 14px;
@@ -1302,7 +1301,6 @@ footer address span {
 	margin-top: -20px;
 	background: #131e2c;
 	color: #fff;
-	right: 5px;
 }
 .navbar-form .search-btn {
 	height: 50px;
@@ -1434,7 +1432,6 @@ footer .footer-inner {
 .owl-pagination {
 	top: -20px;
 	right: auto;
-	width: 100%;
 }
 .owl-theme .owl-controls .owl-page span {
 	width: 15px;

@@ -25,8 +25,6 @@ class QuickViewAsset extends AssetBundle
         'stylesheet/owl.theme.css',
         'stylesheet/jquery.bxslider.css',
         'stylesheet/jquery.mobile-menu.css',
-        'stylesheet/style.css',
-        'stylesheet/responsive.css',
     ];
     public $js = [
         'js/bootstrap.min.js',

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "banner".
@@ -19,6 +20,11 @@ class Banner extends ModelWithImage
     const POSITION_INDEX_CENTER = 1;
     const POSITION_INDEX_RIGHT = 2;
     public $dir = 'banners';
+
+    /**
+     * @var UploadedFile
+     */
+    public $imageFile;
     
     /**
      * @inheritdoc
@@ -72,6 +78,28 @@ class Banner extends ModelWithImage
             case Banner::POSITION_INDEX_CENTER: return 'Главная страница, центр'; break;
             default: return '';
         }
+    }
+
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        if (isset($file)) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            $this->deleteImage($fileName);
+            $file->saveAs($this->getPath() . $fileName);
+            $this->image = $fileName;
+            $this->save();
+        }
+    }
+
+    public function getImageUrl()
+    {
+        if(file_exists(Yii::getAlias('@www') . '/web'. Item::IMG .'banners/'. $this->image)){
+            return Yii::$app->params['serverUrl'] . Item::IMG .'banners/'. $this->image;
+        }else{
+            return Yii::$app->params['defaultKitImage'];
+        }
+
     }
     
 }

@@ -88,7 +88,11 @@ class BannerController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if(!empty($model->image)){
+            $model->deleteImage($model->image);
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }

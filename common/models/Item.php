@@ -51,6 +51,7 @@ use Eventviva\ImageResize;
  * @property Kit[] $kits
  * @property Image[] $images
  * @property Stock[] $stocks
+ * @property string $url
  */
 class Item extends Model implements CartAdd
 {
@@ -563,9 +564,9 @@ class Item extends Model implements CartAdd
         $url = Yii::$app->params['serverUrl']. '/item/' . $this->id . '-' . $this->getTranslit();
         $seo = Seo::findOne(['url'=>$url]);
         if(isset($seo)&& !empty($seo->new_url)){
-            return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $this->strReplaceUrl($seo->new_url)]);
+            return Yii::$app->params['serverUrl'].'/item/' . $this->id . '-' . $this->strReplaceUrl($seo->new_url);
         }
-        return Yii::$app->urlHelper->to(['/item/' . $this->id . '-' . $this->getTranslit()]);
+        return Yii::$app->params['serverUrl'] . '/item/' . $this->id . '-' . $this->getTranslit();
     }
 
     public function strReplaceUrl($url){

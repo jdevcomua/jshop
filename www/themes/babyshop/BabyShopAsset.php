@@ -17,8 +17,11 @@ class BabyShopAsset extends AssetBundle
         'stylesheet/owl.theme.css',
         'stylesheet/jquery.bxslider.css',
         'stylesheet/jquery.mobile-menu.css',
-        'stylesheet/style.css',
-        'stylesheet/responsive.css',
+        'stylesheet/socials/jssocials.css',
+        'stylesheet/socials/jssocials-theme-classic.css',
+        'stylesheet/socials/jssocials-theme-flat.css',
+        'stylesheet/socials/jssocials-theme-minima.css',
+        'stylesheet/socials/jssocials-theme-plain.css',
     ];
     public $js = [
         'js/bootstrap.min.js',
@@ -29,13 +32,19 @@ class BabyShopAsset extends AssetBundle
         'js/owl.carousel.min.js',
         'js/jquery.mobile-menu.min.js',
         'js/countdown.js',
+        'js/socials/jssocials.js',
+        'js/socials/jssocials.min.js',
     ];
     public $depends = [
-//        'yii\web\YiiAsset',
-//        'yii\bootstrap\BootstrapAsset',
-//        'yii\bootstrap\BootstrapPluginAsset',
         'www\assets\AppAsset',
         'yii\widgets\PjaxAsset'
     ];
+
+    public function init()
+    {
+        parent::init();
+        $this->css[] = 'stylesheet/style.css?v='.CustomAssets::version();
+        $this->css[] = 'stylesheet/responsive.css?v='.CustomAssets::version();
+    }
     
 }

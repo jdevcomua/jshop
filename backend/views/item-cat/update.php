@@ -15,18 +15,9 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
 ?>
 
 <div class="item-cat-update">
-    <div class="box box-info">
-        <div class="box-header with-border">
-            <h3 class="box-title">
-                <?= Html::encode($this->title);?>
-            </h3>
-        </div>
-        <div class="box-body">
-            <?= $this->render('_form', [
-                'model' => $model,
-                'categories' => $categories,
-                'seo'=>$seo,
-            ]); ?>
-        </div>
-    </div>
+    <?= $this->render('_form', [
+        'model' => $model,
+        'categories' => $categories,
+        'seo' => $seo,
+    ]); ?>
 </div>

@@ -11,7 +11,7 @@ Text Domain:  Qmarto
 
 1. Body
 
-2. Layout 
+2. Layout
 
 3. Header
 
@@ -26,7 +26,7 @@ Text Domain:  Qmarto
 	6b. offer slider
 
 	6c. bestsell slider
- 
+
 	6d. featured slider
 
 	6e. special slider
@@ -34,7 +34,7 @@ Text Domain:  Qmarto
 	6f. Other Slider
 
 
-7. Products Grid 
+7. Products Grid
 
 8. Products List
 
@@ -58,7 +58,7 @@ Text Domain:  Qmarto
 	12k. Block: Tags
 	12l. Block: Subscribe
 	12m Block: Recently Viewed
-	12n. Block: Reorder 
+	12n. Block: Reorder
 	12m. Block: Banner
 
 13. custom-slider
@@ -70,10 +70,10 @@ Text Domain:  Qmarto
 	15a. Product Images
 	15b. Product Shop
 	15c.  Product Collatera
-	
+
 16. related slider & upsell slider
 
-17. Global Messages 
+17. Global Messages
 
 18. bottom banner
 
@@ -212,7 +212,9 @@ header {
 
 }
 
-#header {}
+#header {
+    border-top: 10px #131e2c solid;
+}
 
 .sticky-header {
     transition: opacity .5s ease, transform .5s ease; transform: translateY(-200%);
@@ -241,7 +243,7 @@ header {
     display: block;
     float: left;
     margin-right:18px;
-    padding:0px 30px;
+    padding:0 20px;
     border-right:1px #eaeaea solid;
     line-height:75px;
     padding-bottom:2px;
@@ -652,6 +654,9 @@ ul.currencies_list li a:hover {
 
 }
 .mini-cart .basket a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #333;
     margin: 0px;
     line-height: 17px;
@@ -660,7 +665,6 @@ ul.currencies_list li a:hover {
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.5px;
     font-weight: normal;
-    display: block;
     line-height: 80px;
     height: 80px;
     -webkit-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
@@ -673,19 +677,19 @@ ul.currencies_list li a:hover {
 }
 .mini-cart .basket a span {
     background: #fff;
-    display: inline-block;
     color: #333;
-    width: 28px;
+    min-width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 999px;
     font-size: 12px;
-    height: 28px;
+    height: 25px;
     line-height: 26px;
-    text-align: center;
-    vertical-align: top;
-    margin-top: -7px;
     position: absolute;
     font-weight: 700;
-    right: 26px;
+    top: 2px;
+    border: 1px solid #ddd;
 }
 .fl-mini-cart-content .pull-right {
     margin-right: 10px;
@@ -702,7 +706,6 @@ ul.currencies_list li a:hover {
     content: '\f291';
     font-family: FontAwesome;
     font-size: 20px;
-    padding-right: 5px;
     color:#ed6663
 
 }
@@ -3604,6 +3607,7 @@ ul.pdt-list li.item a img.image-hover {
     display: none;
 }
 .products-grid .item .item-inner .item-info .info-inner .item-title {
+    height: 75px;
     margin-bottom: 10px;
     padding:0px 15px;
     padding-top: 20px;
@@ -6085,12 +6089,13 @@ ul#magicat li .open-close, .block-layered-nav dt .toggleBtn {
     position: relative;
 }
 .box-category > ul > li > a {
-    color: #292929;
-    text-transform: uppercase;
-    display: block;
-    font-size: 14px;
-    font-weight:500;
-    letter-spacing:0.5px
+	color: #292929;
+	text-transform: uppercase;
+	display: block;
+	font-size: 14px;
+	font-weight:500;
+	letter-spacing:0.5px;
+    word-break: break-word;
 }
 .box-category > ul > li ul {
     display: none;
@@ -9354,7 +9359,7 @@ a.button.view-all {
 	border-right: 0px solid #eaeaea;
 	border-bottom: 1px solid #eaeaea;
 	padding: 15px 20px;
-	word-break: break-word;
+	/*word-break: break-word;*/
 }
 #customer-reviews ul {
     margin: auto;
@@ -12553,8 +12558,8 @@ select#shipping-address-select {
     border-bottom:1px #eaeaea solid;
 
 }
-.table-striped>tbody>tr:nth-child(odd) {
-    background-color: #fff;
+.table-striped>tbody>tr {
+    background-color: #fff !important;
 }
 .data-table thead th:first-child {
     background-color: #fff;

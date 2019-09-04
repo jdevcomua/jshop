@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'metric',
                                 'value' => $model->getMetricTitle(),
                             ],
-                            'link:url',
+                            'url:url',
                             'self_cost',
                             [
                                 'attribute' => 'description',

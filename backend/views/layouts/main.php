@@ -211,11 +211,6 @@ AppAsset::register($this);
                             <i class="fa fa-file-text-o"></i><span>Статические страницы</span>
                         </a>
                     </li>
-                    <li class="<?= $controller == 'stock' ? 'active' : '' ?>">
-                        <a href="<?= Yii::$app->urlHelper->to(['stock/index']) ?>">
-                            <i class="fa    fa-gift"></i><span>Акции</span>
-                        </a>
-                    </li>
                     <li class="<?= $controller == 'kit' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['kit/index']) ?>">
                             <i class="fa fa-suitcase"></i><span>Комплекты</span>

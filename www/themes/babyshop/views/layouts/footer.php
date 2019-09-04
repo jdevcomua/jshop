@@ -1,32 +1,6 @@
 <footer>
     <!-- BEGIN INFORMATIVE FOOTER -->
     <div class="footer-inner">
-        <div class="newsletter-row">
-            <div class="container">
-                <div class="row">
-
-                    <!-- Footer Newsletter -->
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col1">
-                        <div class="newsletter-wrap">
-                            <h5><?= Yii::t('app','Newsletter')?></h5>
-                            <h4><?= Yii::t('app','Get discount 30% off')?></h4>
-                            <form action="#" method="post" id="newsletter-validate-detail1">
-                                <div id="container_form_news">
-                                    <div id="container_form_news2">
-                                        <input type="text" name="email" id="newsletter1" title="<?=Yii::t('app','Sign up for our newsletter')?>" class="input-text required-entry validate-email" placeholder="<?=Yii::t('app','Enter your email address')?>">
-                                        <button type="submit" title="<?= Yii::t('app','Subscribe')?>" class="button subscribe"><span><?= Yii::t('app','Subscribe')?></span></button>
-                                    </div>
-                                    <!--container_form_news2-->
-                                </div>
-                                <!--container_form_news-->
-                            </form>
-                        </div>
-                        <!--newsletter-wrap-->
-                    </div>
-                </div>
-            </div>
-            <!--footer-column-last-->
-        </div>
         <div class="footer-middle">
             <div class="container">
                 <div class="row">

@@ -4,27 +4,11 @@ use yii\widgets\Pjax;
 
 ?>
 <header>
-    <div class="container">
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="header-banner">
-                        <div class="assetBlock">
-                            <div id="slideshow">
-                                <p><?= Yii::t('app','Special Offers! - Get')?> <span>50%</span> <?= Yii::t('app','off on vegetables')?></p>
-                                <p><?= Yii::t('app','Sale')?> <span>40%</span> <?= Yii::t('app','of  on bulk shopping!')?> </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="header">
         <div class="container">
             <div class="header-container row">
                 <div class="logo"> <a href="<?= Url::home() ?>" title="<?=Yii::t('app','Home')?>">
-                        <div><img src="/images/logo.png" alt="logo"></div>
+                        <div><img src="/images/logo_new.png" alt="logo"></div>
                     </a> </div>
                 <div class="fl-nav-menu">
                     <nav>

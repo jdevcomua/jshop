@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property string $title
+ * @property integer $adult
  * @property integer $parent_id
  * @property string $image
  * @property integer $lft
@@ -40,8 +41,6 @@ class ItemCat extends ModelWithImage
     public $count;
     public $h1;
     public $dir = 'categories';
-    const ALCOHOL = 'Алкогольные напитки';
-    const TOBACOO = 'Табачные изделия';
 
     /**
      * @inheritdoc
@@ -72,7 +71,7 @@ class ItemCat extends ModelWithImage
         return [
             [['title'], 'required'],
             [['title', 'image'], 'string'],
-            [['parent_id', 'active'], 'integer']
+            [['parent_id', 'active','adult'], 'integer']
         ];
     }
 
@@ -113,7 +112,8 @@ class ItemCat extends ModelWithImage
             'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'active' => 'Активно',
-            'parse_url'=>'URL для парсинга'
+            'parse_url' => 'URL для парсинга',
+            'adult' => 'Для совершеннолетних 18+'
         ];
     }
 

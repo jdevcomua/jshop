@@ -29,6 +29,17 @@ use kartik\select2\Select2;
 
             <?= $form->field($model, 'active')->checkbox(); ?>
 
+            <?= $form->field($model, 'adult')->checkbox(); ?>
+
+            <?= $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                'data' => $categories,
+                'options' => ['placeholder' => ''],
+                'theme' => Select2::THEME_DEFAULT,
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ]); ?>
+
             <?= $form->field($model, 'parent_id')->widget(Select2::class, [
                 'data' => $categories,
                 'options' => ['placeholder' => ''],
@@ -37,6 +48,7 @@ use kartik\select2\Select2;
                     'allowClear' => true
                 ],
             ]); ?>
+
             <?php
                 $images = [];
                 if (!$model->isNewRecord && !empty($model->image)) {

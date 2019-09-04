@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $category->title;
 
 <section class="main-container col2-left-layout bounceInUp animated">
     <?php
-    if($category->title == ItemCat::ALCOHOL || $category->title == ItemCat::TOBACOO):
+    if($category->adult):
         ?>
         <div id='forAdults'>
         <?=Notification::widget([

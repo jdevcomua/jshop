@@ -20,6 +20,8 @@ use kartik\select2\Select2;
     
     echo $form->field($model, 'active')->checkbox();
 
+    echo $form->field($model, 'adult')->checkbox();
+
     echo $form->field($model, 'parent_id')->widget(Select2::classname(), [
         'data' => $categories,
         'options' => ['placeholder' => ''],

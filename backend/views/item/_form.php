@@ -11,10 +11,14 @@ use zxbodya\yii2\tinymce\TinyMce;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $categories array */
 ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-<div class="item-form">
-    <div style="width: 100%;">
-        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title"><?= Html::encode($this->title) ?></h3>
+    </div>
+    <div class="box-body">
+
 
         <div class="row">
             <div class="col-md-6">
@@ -72,36 +76,6 @@ use zxbodya\yii2\tinymce\TinyMce;
             </div>
         </div>
 
-        <div class="box-header with-border">
-            <h3 class="box-title">Seo</h3>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($seo, 'title')->textInput(['maxlength' => true]) ?>
-            </div>
-            <div class="col-md-6">
-                <?= $form->field($seo, 'description')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
-            </div>
-            <div class="col-md-6">
-                <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
-            </div>
-            <div class="col-md-6">
-
-            </div>
-        </div>
 
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
             'options' => ['rows' => 10],
@@ -133,25 +107,60 @@ use zxbodya\yii2\tinymce\TinyMce;
                'aspectRatio' => '4:4',
                ]);
            ?>
+    </div>
+</div>
 
-        <div class="form-group"><br>
-            <?= Html::submitButton(Yii::t('app', 'Сохранить'), [
-                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-                'name' => 'action',
-                'value' => 'save'
-            ]); ?>
-            <?= Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
-                'class' => 'btn btn-info',
-                'name' => 'action',
-                'value' => 'characteristics'
-            ]); ?>
+
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">Seo</h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'title')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($seo, 'description')->textInput(['maxlength' => true]) ?>
+            </div>
         </div>
 
-        <?php ActiveForm::end(); ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
     </div>
-
 </div>
+
+<div class="box box-info">
+    <div class="box-body">
+        <?= Html::submitButton(Yii::t('app', 'Сохранить'), [
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+            'name' => 'action',
+            'value' => 'save'
+        ]); ?>
+        <?= Html::submitButton(Yii::t('app', 'Редактировать характеристики'), [
+            'class' => 'btn btn-info',
+            'name' => 'action',
+            'value' => 'characteristics'
+        ]); ?>
+    </div>
+</div>
+
+<?php ActiveForm::end(); ?>
 <script>
 
 </script>

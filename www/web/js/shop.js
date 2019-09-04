@@ -410,13 +410,11 @@ $('#submit_step_one').on('click', function(){
             $('#address_view').text('Address: ' + $('#orders-address').val());
         }
     },1000);
-
-
 });
 
 $(document).on('click', '.cart__remove', function(){ // нажатие на кнопку удаления товара в корзине
     deleteFromCart($(this).data('id'), $(this).data('type'), $(this).data('reload'));
-    $.pjax.reload({container: '#total_sum', async: false});F
+    $.pjax.reload({container: '#total_sum', async: false});
 });
 
 $(document).on('click', '#see_reviews', function(){ // изменение значения количество в корзине

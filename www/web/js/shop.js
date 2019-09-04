@@ -394,8 +394,8 @@ function setRating(rating) {
     $('.star-'+rating).addClass('active');
 }
 
-$('#submit_step_one').on('click', function(){
-    $('#order-form').yiiActiveForm('validate', true);
+$('#submit_step_one').on('click', async function(){
+    await $('#order-form').yiiActiveForm('validate', true);
     setTimeout(function () {
         var validate = $('#order-form').find('.has-error').length;
         if(validate){
@@ -491,22 +491,23 @@ function orderCheck(check,event) {
 $(document).ready(function() { // Ждём загрузки страницы
     var element = document.getElementById('forAdults');
     if(element){
-        var conteiner = document.getElementById('itemList');
-        conteiner.className +=' fadeContainer';
-
+        var container = document.getElementById('itemList');
+        container.className +=' fadeContainer';
+        container.setAttribute("disabled", "disabled");
+        container.addEventListener('click', doNothing,true)
     }
 });
 $(document).on('click','.toast-success',function(){
-    var conteiner = document.getElementById('itemList');
-    conteiner.className ='';
-
+    var container = document.getElementById('itemList');
+    container.className ='';
+    container.removeAttribute("disabled");
+    container.removeEventListener('click',doNothing,true);
 });
-$(document).on('click','.toast-success',function(){
-    var conteiner = document.getElementById('itemList');
-    conteiner.className ='';
-
-});
-
+function doNothing(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}
 $("#share").jsSocials({
     text: 'Я купил(а) '+$('.product-name h1').text()+' на Sdelivery',
     showLabel: false,

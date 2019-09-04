@@ -12956,6 +12956,9 @@ select#shipping-address-select {
 .fadeContainer{
 	filter: blur(2px);
 }
+.fadeContainer .toolbar ul ul {
+    display: none;
+}
 .down{
 	height: 40px;
 }

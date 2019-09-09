@@ -12999,11 +12999,19 @@ select#shipping-address-select {
 .cart_success .product-name{
 	width: 260px;
 }
-.row-footer{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+@media (min-width: 550px) {
+    .row-footer{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
 }
+@media (max-width: 549px) {
+    .row-footer{
+        text-align: center;
+    }
+}
+
 
 
 /*	Testimonials */

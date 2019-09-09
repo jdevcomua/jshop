@@ -12999,6 +12999,11 @@ select#shipping-address-select {
 .cart_success .product-name{
 	width: 260px;
 }
+.row-footer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 
 
 /*	Testimonials */

@@ -13010,6 +13010,9 @@ select#shipping-address-select {
     .row-footer{
         text-align: center;
     }
+    .row-footer .contacts-info{
+        text-align: left;
+    }
 }
 
 

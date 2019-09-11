@@ -201,6 +201,7 @@ html {
 	margin-left: 0;
 	padding-left: 0;
 	position: relative;
+	word-break: break-word;
 }
 .mobile-menu li .home a {
 	color: #ed6663;

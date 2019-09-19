@@ -118,7 +118,7 @@ $imageUrls = $item->getImageUrls();
 
                                         $text_implode = implode(" ", $text_explode);
 
-                                        echo $text_implode.'... <a class="link-learn" title="Learn More" data-pjax="0" id="all_description" href="#product_tabs_description" data-toggle="tab">Learn More</a>';
+                                        echo $text_implode.'... <a class="link-learn" title="'.Yii::t('app','Learn More').'" data-pjax="0" id="all_description" href="#product_tabs_description" data-toggle="tab">'.Yii::t('app','Learn More').'</a>';
                                     } else {
                                         echo $text;
                                     }

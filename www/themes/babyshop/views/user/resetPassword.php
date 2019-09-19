@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="content">
                         <ul class="form-list">
                             <li>
-                                <label for="email"><?=Yii::t('app', 'New Password')?><em class="required">*</em></label>
+                                <label for="email"><?=Yii::t('app', 'New password')?><em class="required">*</em></label>
                                 <div class="input-box">
                                     <input type="password" name="ResetPasswordForm[password]" value="" id="resetpasswordform-password" class="input-text required-entry validate-password" title="Email Address">
                                 </div>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p class="required">* <?=Yii::t('app', 'Required Fields')?></p>
                         <div class="buttons-set">
 
-                            <?= Html::submitButton('Forgot', ['class' => 'button login']) ?>
+                            <?= Html::submitButton(Yii::t('app','Submit'), ['class' => 'button login']) ?>
 
 
                             <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>" class="forgot-word"><?=Yii::t('app', 'Forgot Your Password?')?></a>

@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p class="required">* <?= Yii::t('app','Required Fields')?></p>
                         <div class="buttons-set">
 
-                            <?= Html::submitButton('Forgot', ['class' => 'button login']) ?>
+                            <?= Html::submitButton(Yii::t('app','Submit'), ['class' => 'button login']) ?>
 
 
                             <a href="<?= Yii::$app->urlHelper->to(['forgot-password']) ?>" class="forgot-word"><?= Yii::t('app','Forgot Your Password?')?></a>

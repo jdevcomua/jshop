@@ -211,4 +211,6 @@ return array(
     'reviews for'=>'отзывов на',
     'Related Products'=>'Cопутствующие Tовары',
     'Submit'=>'Отправить',
+    'Hurry Up!'=>'Поспешите!',
+    'Deal of the week'=>'Лучшее предложение недели',
 );

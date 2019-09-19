@@ -133,7 +133,6 @@ $this->title = Yii::$app->name;
                 <div class="ad-info">
                     <h2><?= Yii::t('app','Hurry Up!')?></h2>
                     <h3><?= Yii::t('app','Deal of the week')?></h3>
-                    <h4><?= Yii::t('app','From our family farm right to your doorstep.')?></h4>
                 </div>
             </div>
             <div class="row">

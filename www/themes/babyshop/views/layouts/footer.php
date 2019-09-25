@@ -17,7 +17,6 @@ use yii\helpers\Html;
                                 <li><a href="payment.html" title="Payment"><?= Yii::t('app','Payment')?></a></li>
                                 <li><?= Html::a(Yii::t('app','Where is my order').'?', Yii::$app->urlHelper->to(['site/where-is-my-order'])) ?></li>
                                 <li><a href="returnPolicy.html" title="Return policy"><?= Yii::t('app','Return Policy')?></a></li>
-                                <li><a href="aboutUs.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
                                 <li><?= Html::a(Yii::t('app','Contact Us'), Yii::$app->urlHelper->to(['site/contact-us'])) ?></li>
                             </ul>
                         </div>
@@ -27,10 +26,9 @@ use yii\helpers\Html;
                             <h4><?= Yii::t('app','Style Advisor')?></h4>
                             <ul class="links">
                                 <li><a href="login.html" title="Your Account"><?= Yii::t('app','Your Account')?></a></li>
-                                <li><a href="information.html" title="Information"><?= Yii::t('app','Information')?></a></li>
                                 <li><a href="discount.html" title="Addresses"><?= Yii::t('app','Discount')?></a></li>
                                 <li><a href="ordersHistory.html" title="Orders History"><?= Yii::t('app','Orders History')?></a></li>
-                                <li><a href="orderTracking.html" title="Order Tracking"><?= Yii::t('app','Order Tracking')?></a></li>
+                                <li><a href="aboutUs.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
                             </ul>
                         </div>
                     </div>

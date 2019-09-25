@@ -112,9 +112,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     background:#f5f5f5;
-    line-height:1.6em
-
-
+    line-height:1.6em;
+    min-height: 100%;
 }
 h2, .h2 {
     font-size: 20px;
@@ -13015,7 +13014,20 @@ select#shipping-address-select {
         text-align: left;
     }
 }
-
+html{
+   min-height: 100%;
+}
+.page_footer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+#page {
+    flex: 1 0 auto;
+}
+footer {
+    flex: 0 0 auto;
+}
 
 
 /*	Testimonials */

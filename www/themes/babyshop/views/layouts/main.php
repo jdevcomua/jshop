@@ -42,7 +42,7 @@ use yii\widgets\Pjax;
 </head>
 <body>
 <?php $this->beginBody() ?>
-
+<div class="page_footer">
     <div id="page">
         <?= $this->render('header')  ?>
         <!--container-->
@@ -140,7 +140,7 @@ use yii\widgets\Pjax;
                                                     <?php else:?>
                                                         <?=$text?>
                                                     <?php endif;?>
-                                                    </div>
+                                                </div>
                                                 <div class="email-addto-box">
                                                     <ul class="add-to-links">
                                                         <li> <a class="link-wishlist" href="#"><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
@@ -166,7 +166,9 @@ use yii\widgets\Pjax;
 
 
 
-<?= $this->render('footer') ?>
+    <?= $this->render('footer') ?>
+</div>
+
 <!-- End For version 1,2,3,4,6 -->
     <!--page-->
 

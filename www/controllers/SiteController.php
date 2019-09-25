@@ -8,6 +8,8 @@ use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Letter;
+use common\models\OrderItem;
+use common\models\Orders;
 use common\models\Seo;
 use common\models\Slider;
 use common\models\StaticPage;
@@ -493,6 +495,27 @@ class SiteController extends Controller
     }
     public function actionWhereIsMyOrder()
     {
+        if(Yii::$app->request->post()){
+            $order_id = Yii::$app->request->post('order_id');
+            $model = self::findModelOrder($order_id);
+            if(Yii::$app->user->id){
+                if ($model->user_id == Yii::$app->user->id){
+                    return $this->render('old_order', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    return $this->redirect(Url::home());
+                }
+            }else{
+                if(empty($model->user_id)){
+                    return $this->render('old_order', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    $this->redirect('/login');
+                }
+            }
+        }
         return $this->render('whereIsMyOrder');
     }
     public function actionContactUs()
@@ -510,5 +533,13 @@ class SiteController extends Controller
         }
         return $this->render('contactUs',compact('model'));
     }
-    
+
+    protected function findModelOrder($id)
+    {
+        if (($model = Orders::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

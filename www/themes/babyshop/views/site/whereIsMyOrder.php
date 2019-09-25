@@ -12,9 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="main">
         <div class="account-login container">
-            <br>
-            <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
-
             <!--page-title-->
             <fieldset class="col2-set">
                 <div class="col-1 new-users">
@@ -24,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 <div class="col-2 registered-users">
-                    <?php $form = ActiveForm::begin(['id' => 'cart-old-order','action' => '/cart/old-order','method' => 'get']); ?>
+                    <?php $form = ActiveForm::begin(['id' => 'cart-old-order','method' => 'post']); ?>
                     <div class="content">
                         <ul class="form-list">
                             <li>

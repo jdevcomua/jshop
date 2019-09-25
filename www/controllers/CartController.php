@@ -47,26 +47,12 @@ class CartController extends Controller
                 'pageSize' => 5,
             ]
         ]);
-        if(Yii::$app->user->id){
-            if ($model->user_id == Yii::$app->user->id){
-                return $this->render('old_order', [
-                    'model' => $model,
-                    'itemsDataProvider' => $itemsDataProvider
-                ]);
-            }else{
-                return $this->redirect(Url::home());
-            }
-        }else{
-            if(empty($model->user_id)){
-                return $this->render('old_order', [
-                    'model' => $model,
-                    'itemsDataProvider' => $itemsDataProvider
-                ]);
-            }else{
-                $this->redirect('/login');
-            }
-        }
-
+        if ($model->user_id == Yii::$app->user->id)
+            return $this->render('old_order', [
+                'model' => $model,
+                'itemsDataProvider' => $itemsDataProvider
+            ]);
+        else return $this->redirect(Url::home());
     }
 
     public function actionReorder($order_id)

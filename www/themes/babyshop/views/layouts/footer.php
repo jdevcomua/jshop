@@ -1,3 +1,8 @@
+<?php
+
+use yii\helpers\Html;
+
+?>
 <footer>
     <!-- BEGIN INFORMATIVE FOOTER -->
     <div class="footer-inner">
@@ -10,7 +15,7 @@
                             <ul class="links">
                                 <li><a href="faq.html" title="FAQs"><?= Yii::t('app','FAQs')?></a></li>
                                 <li><a href="payment.html" title="Payment"><?= Yii::t('app','Payment')?></a></li>
-                                <li><a href="whereIsMyOrder.html" title="Where is my order?"><?= Yii::t('app','Where is my order')?>?</a></li>
+                                <li><?= Html::a(Yii::t('app','Where is my order').'?', Yii::$app->urlHelper->to(['site/where-is-my-order'])) ?></li>
                                 <li><a href="returnPolicy.html" title="Return policy"><?= Yii::t('app','Return Policy')?></a></li>
                                 <li><a href="aboutUs.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
                                 <li><a href="contactUs.html" title="Contact Us"><?= Yii::t('app','Contact Us')?></a></li>

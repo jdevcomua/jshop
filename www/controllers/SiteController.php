@@ -488,5 +488,9 @@ class SiteController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
     }
+    public function actionWhereIsMyOrder()
+    {
+        return $this->render('whereIsMyOrder');
+    }
     
 }

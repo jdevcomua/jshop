@@ -11,6 +11,7 @@ use common\models\User;
 use common\components\CartAdd;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 class CartController extends Controller
@@ -39,19 +40,33 @@ class CartController extends Controller
 
     public function actionOldOrder($order_id)
     {
-        $model = Orders::findOne($order_id);
+        $model = self::findModelOrder($order_id);
         $itemsDataProvider = new ActiveDataProvider([
             'query' => OrderItem::find()->where(['order_id' => $model->id]),
             'pagination' => [
                 'pageSize' => 5,
             ]
         ]);
-        if ($model->user_id == Yii::$app->user->id)
-        return $this->render('old_order', [
-            'model' => $model,
-            'itemsDataProvider' => $itemsDataProvider
-        ]);
-        else return $this->redirect(Url::home());
+        if(Yii::$app->user->id){
+            if ($model->user_id == Yii::$app->user->id){
+                return $this->render('old_order', [
+                    'model' => $model,
+                    'itemsDataProvider' => $itemsDataProvider
+                ]);
+            }else{
+                return $this->redirect(Url::home());
+            }
+        }else{
+            if(empty($model->user_id)){
+                return $this->render('old_order', [
+                    'model' => $model,
+                    'itemsDataProvider' => $itemsDataProvider
+                ]);
+            }else{
+                $this->redirect('/login');
+            }
+        }
+
     }
 
     public function actionReorder($order_id)
@@ -179,6 +194,15 @@ class CartController extends Controller
                 'countAll' =>  Yii::$app->cart->getCount(),
                 'oldPriceItem' => $sumItem['oldPrice']
         ];
+    }
+
+    protected function findModelOrder($id)
+    {
+        if (($model = Orders::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
 }

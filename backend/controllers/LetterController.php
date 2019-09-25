@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Seo;
-use common\models\search\SearchSeo;
+use common\models\Letter;
+use common\models\search\SearchLetter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SeoController implements the CRUD actions for Seo model.
+ * LetterController implements the CRUD actions for Letter model.
  */
-class SeoController extends Controller
+class LetterController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class SeoController extends Controller
     }
 
     /**
-     * Lists all Seo models.
+     * Lists all Letter models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SearchSeo();
+        $searchModel = new SearchLetter();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class SeoController extends Controller
     }
 
     /**
-     * Displays a single Seo model.
+     * Displays a single Letter model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,45 +58,7 @@ class SeoController extends Controller
     }
 
     /**
-     * Creates a new Seo model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Seo();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Seo model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing Seo model.
+     * Deletes an existing Letter model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,15 +81,15 @@ class SeoController extends Controller
     }
 
     /**
-     * Finds the Seo model based on its primary key value.
+     * Finds the Letter model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Seo the loaded model
+     * @return Letter the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Seo::findOne($id)) !== null) {
+        if (($model = Letter::findOne($id)) !== null) {
             return $model;
         }
 

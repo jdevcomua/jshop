@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = Yii::t('app', 'Password recovery');
+$this->title = Yii::t('app', 'Where is my order');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">

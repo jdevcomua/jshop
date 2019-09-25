@@ -13,6 +13,7 @@ use common\models\Slider;
 
 $this->title = Yii::$app->name;
 ?>
+<?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
 <div class="content">
     <div id="thmg-slider-slideshow" class="thmg-slider-slideshow">
         <div class="container">

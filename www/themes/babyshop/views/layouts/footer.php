@@ -18,7 +18,7 @@ use yii\helpers\Html;
                                 <li><?= Html::a(Yii::t('app','Where is my order').'?', Yii::$app->urlHelper->to(['site/where-is-my-order'])) ?></li>
                                 <li><a href="returnPolicy.html" title="Return policy"><?= Yii::t('app','Return Policy')?></a></li>
                                 <li><a href="aboutUs.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
-                                <li><a href="contactUs.html" title="Contact Us"><?= Yii::t('app','Contact Us')?></a></li>
+                                <li><?= Html::a(Yii::t('app','Contact Us'), Yii::$app->urlHelper->to(['site/contact-us'])) ?></li>
                             </ul>
                         </div>
                     </div>

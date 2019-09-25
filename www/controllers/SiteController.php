@@ -7,16 +7,19 @@ use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Letter;
 use common\models\Seo;
 use common\models\Slider;
 use common\models\StaticPage;
 use common\models\Stock;
+use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -491,6 +494,21 @@ class SiteController extends Controller
     public function actionWhereIsMyOrder()
     {
         return $this->render('whereIsMyOrder');
+    }
+    public function actionContactUs()
+    {
+        $model = new Letter();
+        if(Yii::$app->request->post() && $model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('success', 'Письмо успешно отправлено');
+            return $this->redirect(Url::home());
+        }
+        $user = User::findOne(Yii::$app->user->id);
+        if ($user) {
+            $model->email = $user->email;
+            $model->phone = $user->phone;
+            $model->name = $user->name . ' ' . $user->surname;
+        }
+        return $this->render('contactUs',compact('model'));
     }
     
 }

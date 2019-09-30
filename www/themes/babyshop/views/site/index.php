@@ -13,6 +13,7 @@ use common\models\Slider;
 
 $this->title = Yii::$app->name;
 ?>
+<?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
 <div class="content">
     <div id="thmg-slider-slideshow" class="thmg-slider-slideshow">
         <div class="container">
@@ -133,7 +134,6 @@ $this->title = Yii::$app->name;
                 <div class="ad-info">
                     <h2><?= Yii::t('app','Hurry Up!')?></h2>
                     <h3><?= Yii::t('app','Deal of the week')?></h3>
-                    <h4><?= Yii::t('app','From our family farm right to your doorstep.')?></h4>
                 </div>
             </div>
             <div class="row">

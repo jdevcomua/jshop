@@ -7,16 +7,21 @@ use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
+use common\models\Letter;
+use common\models\OrderItem;
+use common\models\Orders;
 use common\models\Seo;
 use common\models\Slider;
 use common\models\StaticPage;
 use common\models\Stock;
+use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -488,5 +493,53 @@ class SiteController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
     }
-    
+    public function actionWhereIsMyOrder()
+    {
+        if(Yii::$app->request->post()){
+            $order_id = Yii::$app->request->post('order_id');
+            $model = self::findModelOrder($order_id);
+            if(Yii::$app->user->id){
+                if ($model->user_id == Yii::$app->user->id){
+                    return $this->render('old_order', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    return $this->redirect(Url::home());
+                }
+            }else{
+                if(empty($model->user_id)){
+                    return $this->render('old_order', [
+                        'model' => $model,
+                    ]);
+                }else{
+                    $this->redirect('/login');
+                }
+            }
+        }
+        return $this->render('whereIsMyOrder');
+    }
+    public function actionContactUs()
+    {
+        $model = new Letter();
+        if(Yii::$app->request->post() && $model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->session->setFlash('success', 'Письмо успешно отправлено');
+            return $this->redirect(Url::home());
+        }
+        $user = User::findOne(Yii::$app->user->id);
+        if ($user) {
+            $model->email = $user->email;
+            $model->phone = $user->phone;
+            $model->name = $user->name . ' ' . $user->surname;
+        }
+        return $this->render('contactUs',compact('model'));
+    }
+
+    protected function findModelOrder($id)
+    {
+        if (($model = Orders::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

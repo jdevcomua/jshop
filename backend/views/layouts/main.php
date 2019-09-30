@@ -206,6 +206,11 @@ AppAsset::register($this);
                             <i class="fa fa-commenting-o"></i><span>Отзывы</span>
                         </a>
                     </li>
+                    <li class="<?= $controller == 'letter' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['letter/index']) ?>">
+                            <i class="fa fa-commenting-o"></i><span>Письмо</span>
+                        </a>
+                    </li>
                     <li class="<?= $controller == 'static-page' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['static-page/index']) ?>">
                             <i class="fa fa-file-text-o"></i><span>Статические страницы</span>

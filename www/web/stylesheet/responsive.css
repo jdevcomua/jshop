@@ -1299,8 +1299,8 @@ footer address span {
 }
 .mini-cart .basket a span {
 	margin-top: -20px;
-	background: #131e2c;
-	color: #fff;
+	background: #fff;
+	color: #131e2c;
 }
 .navbar-form .search-btn {
 	height: 50px;

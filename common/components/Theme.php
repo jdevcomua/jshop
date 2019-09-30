@@ -3,9 +3,10 @@
 
 namespace common\components;
 
-use yii\base\Object;
 
-class Theme extends Object
+use yii\base\BaseObject;
+
+class Theme extends BaseObject
 {
     const TEMPLATE_BASIC    = 'basic';
     const TEMPLATE_OPENCART = 'opencart';

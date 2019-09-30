@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'id',
                         'timestamp:datetime',
                         [
-                            'label' => 'Order status',
+                            'label' => Yii::t('app','Order status'),
                             'value' => Orders::getStatusTitles()[$model->order_status],
                         ],
                     ],

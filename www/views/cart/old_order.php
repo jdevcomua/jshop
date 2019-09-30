@@ -26,27 +26,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attributes' => [
                         'id',
                         [
-                            'label' => 'User',
+                            'label' => Yii::t('app','User'),
                             'value' => $model->user->name . ' ' . $model->user->surname,
                         ],
                         'timestamp:datetime',
                         'email:email',
                         'phone',
                         [
-                            'label' => 'Cost',
+                            'label' => Yii::t('app','Cost'),
                             'value' => number_format((float)$model->sum, 2, '.', ''),
                         ],
                         [
-                            'label' => 'Order status',
+                            'label' => Yii::t('app','Order status'),
                             'value' => Orders::getStatusTitles()[$model->order_status],
                         ],
                         [
-                            'label' => 'Payment status',
+                            'label' => Yii::t('app','Payment status'),
                             'value' => Orders::getPaymentStatusTitles()[$model->payment_status],
                         ],
                         'comment:html',
                         [
-                            'label' => 'Basket',
+                            'label' => Yii::t('app','Basket'),
                             'format' => 'html',
                             'value' => \yii\grid\GridView::widget([
                                 'dataProvider' => $itemsDataProvider,
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="block-content">
                             <dl>
                                 <div id="shipping_method-progress-opcheckout">
-                                    <dt> <?=Yii::t('app','Shipping Method')?> : <?= (Yii::$app->user->isGuest) ? 'Not registered' : 'Registered' ?> </dt>
+                                    <dt> <?=Yii::t('app','Shipping Method')?> : <?= (Yii::$app->user->isGuest) ? Yii::t('app','Not registered') : Yii::t('app','Registered') ?> </dt>
                                 </div>
                                 <!--                                <div id="payment-progress-opcheckout">-->
                                 <!--                                    <dt> Payment Method</dt>-->

@@ -213,4 +213,8 @@ return array(
     'Submit'=>'Отправить',
     'Hurry Up!'=>'Поспешите!',
     'Deal of the week'=>'Лучшее предложение недели',
+    'Basket'=>'Корзина',
+    'Shipping Method'=>'Cпособ доставки',
+    'Not registered'=>'Не зарегистрирован',
+    'Registered'=>'Зарегистрирован',
 );

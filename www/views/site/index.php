@@ -13,8 +13,8 @@ use common\models\Slider;
 
 $this->title = Yii::$app->name;
 ?>
-<?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
 <div class="content">
+    <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
     <div id="thmg-slider-slideshow" class="thmg-slider-slideshow">
         <div class="container">
             <div id='thm_slider_wrapper' class='thm_slider_wrapper fullwidthbanner-container' >

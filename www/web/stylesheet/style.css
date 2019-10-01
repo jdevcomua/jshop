@@ -13027,6 +13027,10 @@ html,body{
 footer {
     flex: 0 0 auto;
 }
+.in-wish-list{
+    background-color: #80b435 !important;
+    border-color: #80b435 !important;
+}
 
 
 /*	Testimonials */

@@ -454,7 +454,6 @@ class SiteController extends Controller
         }
         return ['html' => $html];
     }
-
     /**
      * @param $wish_id integer
      * @return false|int

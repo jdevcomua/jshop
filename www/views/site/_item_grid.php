@@ -1,5 +1,17 @@
 <?php
 /* @var $model \common\models\Item */
+
+use common\models\Wish;
+use common\models\WishList;
+
+$wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
+
+if(empty($wishList)){
+    $wishList = [];
+}else{
+    $wishList = Wish::findAll(['list_id' => $wishList->id]);
+    $wishList = \yii\helpers\ArrayHelper::getColumn($wishList,'item_id');
+}
 ?>
 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
     <div class="item-inner">
@@ -12,7 +24,7 @@
                 <div class="item-box-hover">
                     <div class="box-inner">
                         <div class="product-detail-bnt"><a href=""  onclick="quickView(<?= $model->id ?>)" class="button detail-bnt"><span>Quick View</span></a></div>
-                        <div class="actions"><span class="add-to-links"><a href="" class="link-wishlist"  onclick="addToWishList(<?= $model->id ?>)" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                        <div class="actions"><span class="add-to-links"><a href="" class="link-wishlist <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>)" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
 
                     </div>
                 </div>

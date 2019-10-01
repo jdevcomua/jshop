@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
-use yii\helpers\Url;
 use common\models\Orders;
 
 /* @var $this yii\web\View */
@@ -47,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'comment:html',
                         [
                             'label' => Yii::t('app','Basket'),
-                            'format' => 'html',
+                            'format' => 'raw',
                             'value' => \yii\grid\GridView::widget([
                                 'dataProvider' => $itemsDataProvider,
                                 'layout'=>"{items}\n<div class='pages'>{pager}</div>",
@@ -58,11 +56,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => 'yii\grid\DataColumn',
                                         'attribute' => 'item_id',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'format' => 'html',
+                                        'format' => 'raw',
                                         'label' => Yii::t('app','Product'),
                                         'contentOptions' => ['style' => 'width: ;', 'class' => 'text-center'],
-                                        'value' => function ($model, $key, $index, $widget) {
-                                            return "<a href='" . $model->item->getUrl() . "' >" . $model->item->title . "</a>";
+                                        'content' => function ($model, $key, $index, $widget) {
+                                            return Html::a($model->item->title,$model->item->getUrl(),['data-pjax' => '0']);
                                         }
                                     ],
                                     [

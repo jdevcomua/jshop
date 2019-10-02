@@ -151,7 +151,7 @@ return array(
     'Farm Fresh Produce Right to Your Door' => 'Ферма свежих продуктов прямо к вашей двери',
     'Best Seller' => 'Бестселлер',
     'So you get to know me better' => 'Так ты узнаешь меня лучше',
-    'Hello, john doe!' => 'Привет, Джон Доу!',
+    'Hello' => 'Привет',
     'From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.' => 'На домашней странице «Моя учетная запись» у вас есть возможность просмотреть снимок вашей недавней активности в учетной записи и обновить информацию о вашей учетной записи. Выберите ссылку ниже для просмотра или редактирования информации.',
     'View All' => 'Посмотреть все',
     'View Order' => 'Посмотреть заказ',

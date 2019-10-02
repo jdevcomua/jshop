@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <!-- BEGIN DASHBOARD-->
                     <div class="dashboard">
                         <div class="welcome-msg">
-                            <p class="hello"><strong><?= Yii::t('app','Hello, john doe!')?></strong></p>
+                            <p class="hello"><strong><?= Yii::t('app','Hello').', '. $model->name . ' ' . $model->surname    ?></strong></p>
                             <p><?= Yii::t('app','From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.')?></p>
                         </div>
                         <div class="recent-orders">

@@ -12,7 +12,7 @@
             </div>
             <p class="meta">
                 <strong><?= ($model->user) ? $model->user->name : 'Anonymous' ?></strong>
-                <span>–</span> April 19, 2018 <?= $model->timestamp ?>
+                <span>–</span> <?= Yii::$app->formatter->asDatetime($model->timestamp,'dd/MM/yy   H:i') ?>
             </p>
             <div class="description">
                 <?= $model->text ?>

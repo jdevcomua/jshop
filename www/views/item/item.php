@@ -46,19 +46,6 @@ $imageUrls = $item->getImageUrls();
                                     '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                                 <div class="product-image">
                                     <div class="product-full"> <img id="product-zoom" src="<?=$item->getOneImageUrl()?>" data-zoom-image="<?=$item->getOneImageUrl()?>" alt="product-image"/> </div>
-                                    <?php if(count($imageUrls) >=2) {?>
-                                    <div class="more-views">
-                                        <div class="slider-items-products">
-                                            <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
-                                                <div class="slider-items slider-width-col4 block-content">
-                                                    <?php foreach ($imageUrls as $url) {?>
-                                                    <div class="more-views-items"> <a href="#" data-image="<?=$url?>" data-zoom-image="<?=$url?>"> <img id="product-zoom0"  src="<?=$url?>" alt="product-image"/> </a></div>
-                                                    <?php }?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
                                 </div>
                                 <!-- end: more-images -->
                             </div>

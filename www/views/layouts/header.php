@@ -134,7 +134,7 @@ use yii\widgets\Pjax;
                     <div class="collapse navbar-collapse">
                         <form class="navbar-form" role="search" method="get" action="search">
                             <div class="input-group">
-                                <input id="search" name="search" type="text" class="form-control" placeholder="Search">
+                                <input id="search" name="search" type="text" class="form-control" placeholder="<?=Yii::t('app','Search')?>">
                                 <span class="input-group-btn">
                   <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only"><?= Yii::t('app','Search')?></span> </span> </button>
                   </span> </div>

@@ -217,4 +217,6 @@ return array(
     'Shipping Method'=>'Cпособ доставки',
     'Not registered'=>'Не зарегистрирован',
     'Registered'=>'Зарегистрирован',
+    'New wish added'=>'Новое желание добавлено',
+    'Item already are added at wish list'=>'Товар уже добавлен в список желаний',
 );

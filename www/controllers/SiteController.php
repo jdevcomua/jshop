@@ -448,9 +448,9 @@ class SiteController extends Controller
             $wish->list_id = $wishList->id;
             $wish->item_id = $item_id;
             $wish->save();
-            $html = "New wish added";
+            $html = Yii::t('app','New wish added');
         } else {
-            $html = "Item already are added at wish list";
+            $html = Yii::t('app','Item already are added at wish list');
         }
         return ['html' => $html];
     }

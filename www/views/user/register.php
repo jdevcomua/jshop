@@ -1,4 +1,6 @@
 <?php
+
+use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use \yii\widgets\MaskedInput;
@@ -61,6 +63,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'clearIncomplete' => true
                                     ]
                                 ])->label(Yii::t('app', 'Phone number')) ?>
+                            </li>
+                            <?php
+                                $image = [];
+
+                                if (!$model->isNewRecord && !empty($model->image)) {
+                                    $image = Html::img($model->getImageUrl(), ['width' => '120px']);
+                                }
+                            ?>
+                            <li>
+                                <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
+                                    'pluginOptions' => [
+                                            'showCancel'=>false,
+                                        'showCaption' => false,
+                                        'showRemove' => false,
+                                        'showUpload' => false,
+                                        'removeLabel' => '',
+                                        'browseClass' => 'btn btn-block',
+                                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                                        'browseLabel' =>  'Выберите фото'
+                                    ],
+                                    'options' => ['accept' => 'image/*']
+                                ])->label('Фото');  ?>
                             </li>
                         </ul>
 

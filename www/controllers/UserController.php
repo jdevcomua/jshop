@@ -8,6 +8,7 @@ use common\models\User;
 use common\models\WishList;
 use common\models\Wish;
 
+use igogo5yo\uploadfromurl\UploadFromUrl;
 use www\models\ChangePassword;
 use www\models\PasswordResetRequestForm;
 use www\models\ResetPasswordForm;
@@ -40,6 +41,7 @@ class UserController extends Controller
         }
         $model = User::findOne($user->id);
         if ($model->load(Yii::$app->request->post())) {
+            $model->upload();
             $model->save();
         }
         return $this->render('profile', ['model' => $model]);
@@ -161,7 +163,7 @@ class UserController extends Controller
         try {
             // Get the \Facebook\GraphNodes\GraphUser object for the current user.
             // If you provided a 'default_access_token', the '{access-token}' is optional.
-            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender', $_SESSION['fb_access_token']);
+            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,profile_pic', $_SESSION['fb_access_token']);
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -185,8 +187,10 @@ class UserController extends Controller
                     $user = new User();
                     $user->fb_id = $userNode['id'];
                     $user->name = explode(' ', $userNode['name'])[0];
-                    $user->surname = explode(' ', $userNode['name'])[3];
+                    $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
+                    $user->imageFile = UploadFromUrl::initWithUrl($userNode['profile_pic']);
+                    $user->upload();
                     $user->save();
                 }
             }
@@ -244,6 +248,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->setPassword($model->password);
             $model->generateAuthKey();
+            $model->upload();
             if ($model->save()) {
                 if (Yii::$app->getUser()->login($model)) {
                     return $this->goHome();

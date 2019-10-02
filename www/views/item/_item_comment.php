@@ -3,7 +3,7 @@
 ?>
 <li class="comment">
     <div>
-        <img alt="" src="/images/member1.png" class="avatar avatar-60 photo">
+        <img alt="" src="<?=$model->user->getImageUrl()?>" class="avatar avatar-60 photo">
         <div class="comment-text">
             <div class="ratings">
                 <div class="rating-box">

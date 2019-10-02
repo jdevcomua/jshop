@@ -6,6 +6,7 @@
 /* @var $orderDataProvider \yii\data\ActiveDataProvider */
 
 use common\models\WishList;
+use kartik\file\FileInput;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\models\Orders;
@@ -71,6 +72,32 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         <div class="input-box">
                                                             <label for="orders-mail"><?=Yii::t('app', 'Address')?></label>
                                                             <?= $form->field($model, 'address')->textInput(['class' => 'input-text'])->label(false) ?>
+                                                        </div>
+                                                    </li>
+
+                                                    <?php
+                                                    $image = [];
+
+                                                    if (!$model->isNewRecord && !empty($model->image)) {
+                                                        $image = Html::img($model->getImageUrl(), ['width' => '120px']);
+                                                    }
+                                                    ?>
+                                                    <li>
+                                                        <div class="input-box">
+                                                            <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
+                                                                'pluginOptions' => [
+                                                                    'initialPreview' => $image,
+                                                                    'showCancel'=>false,
+                                                                    'showCaption' => false,
+                                                                    'showRemove' => false,
+                                                                    'showUpload' => false,
+                                                                    'removeLabel' => '',
+                                                                    'browseClass' => 'btn btn-block',
+                                                                    'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                                                                    'browseLabel' =>  'Выберите фото'
+                                                                ],
+                                                                'options' => ['accept' => 'image/*']
+                                                            ])->label('Фото');  ?>
                                                         </div>
                                                     </li>
                                                 </ul>

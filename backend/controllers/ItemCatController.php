@@ -133,7 +133,6 @@ class ItemCatController extends Controller
                 $continue = $model->makeRoot();
             }
             if ($continue) {
-
                 if (Yii::$app->request->post()['action'] == 'save') {
                     if($seo->load(Yii::$app->request->post())){
                         $seo->url = Yii::$app->params['serverUrl'] . '/category/' . $model->id . '-' . $model->getTranslit();

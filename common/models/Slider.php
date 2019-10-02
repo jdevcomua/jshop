@@ -72,7 +72,6 @@ class Slider extends ModelWithImage
         }else{
             return true;
         }
-
     }
 
     public function upload()
@@ -80,6 +79,9 @@ class Slider extends ModelWithImage
         $file = UploadedFile::getInstance($this, 'imageFile');
         if (isset($file)) {
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            if(!empty($this->getAttribute('image'))){
+                $this->deleteImage($this->getAttribute('image'));
+            }
             $this->deleteImage($fileName);
             $file->saveAs($this->getPath() . $fileName);
             $this->image = $fileName;

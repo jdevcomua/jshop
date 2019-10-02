@@ -27,8 +27,12 @@ class ModelWithImage extends Model
         return [];
     }
 
-    public function deleteImage($imageName)
+    public function deleteImage($imageName = null)
     {
+        if(empty($imageName)){
+            $imageName = $this->getAttribute('image');
+        }
+
         if (file_exists($this->pathToFile($imageName))){
             unlink( $this->pathToFile($imageName));
         }

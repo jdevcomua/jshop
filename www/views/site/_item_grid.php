@@ -16,15 +16,17 @@ if(empty($wishList)){
 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
     <div class="item-inner">
         <div class="item-img">
-            <div class="item-img-info"><a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>" class="product-image">
-                    <img src="<?=$model->getOneImageUrl()?>" alt="<?= $model->title?>"></a>
+            <div class="item-img-info">
+                <a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>" class="product-image">
+                    <img src="<?=$model->getOneImageUrl()?>" alt="<?= $model->title?>">
+                </a>
                 <?php if($discount = $model->getMaxDiscount()) echo  ($discount->type == 1)
                     ? '<div class="sale-label sale-top-left"> -' .$discount->value .'%</div>':
                     '<div class="sale-label sale-top-left">' .'Sale'. '</div>' ?>
                 <div class="item-box-hover">
                     <div class="box-inner">
-                        <div class="product-detail-bnt"><a href=""  onclick="quickView(<?= $model->id ?>)" class="button detail-bnt"><span>Quick View</span></a></div>
-                        <div class="actions"><span class="add-to-links"><a href="" class="link-wishlist <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>)" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                        <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $model->id ?>)" class="button detail-bnt item-button"><span>Quick View</span></a></div>
+                        <div class="actions"><span class="add-to-links"><a href="" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>)" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
 
                     </div>
                 </div>

@@ -3510,7 +3510,6 @@ ul.pdt-list li.item a img.image-hover {
     display: inline;
 }
 .products-grid .item .item-inner .item-img .item-box-hover {
-    z-index: 2;
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
@@ -3637,8 +3636,6 @@ ul.pdt-list li.item a img.image-hover {
 .products-grid .item:hover .item-inner .item-img .item-box-hover {
     visibility: visible;
     opacity: 1;
-    left: 0px;
-    bottom: 0px;
 }
 .products-grid .item:hover .item-inner .item-info .info-inner {
     border-color: #fff;
@@ -13030,6 +13027,11 @@ footer {
 .in-wish-list{
     background-color: #80b435 !important;
     border-color: #80b435 !important;
+}
+
+.item-button{
+    z-index: 2;
+    position: relative;
 }
 
 

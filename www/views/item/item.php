@@ -128,7 +128,6 @@ $imageUrls = $item->getImageUrls();
                                     <ul class="add-to-links">
                                         <li> <a class="link-wishlist" href=""  onclick="addToWishList(<?= $item->id ?>); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
                                       </ul>
-                                    <p class="email-friend"><a href="#" class=""><span><?= Yii::t('app','Email to a Friend')?></span></a></p>
                                 </div>
                                 <div id="share"></div>
                             </div>

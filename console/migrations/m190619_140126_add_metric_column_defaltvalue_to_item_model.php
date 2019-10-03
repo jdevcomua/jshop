@@ -12,7 +12,7 @@ class m190619_140126_add_metric_column_defaltvalue_to_item_model extends Migrati
      */
     public function up()
     {
-        $this->alterColumn('item', 'metric', $this->integer()->null()->defaultValue(1));
+        $this->addColumn('item', 'metric', $this->integer()->null());
     }
 
     /**
@@ -21,7 +21,7 @@ class m190619_140126_add_metric_column_defaltvalue_to_item_model extends Migrati
     public function down()
     {
 
-        $this->alterColumn('item', 'metric', $this->integer()->null());
+        $this->dropColumn('item', 'metric');
 
     }
 

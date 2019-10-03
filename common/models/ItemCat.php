@@ -151,7 +151,7 @@ class ItemCat extends ModelWithImage
         $slugs = [];
         $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
         foreach ($parsers as $parser){
-            $slugs[$i]=$parser->slug;
+            $slugs[$i++]=$parser->slug;
         }
 
         return $slugs;

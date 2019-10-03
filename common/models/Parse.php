@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $url
  * @property string $slug
+ * @property string $parse_time
  * @property int $category_id
  *
  * @property ItemCat $category
@@ -31,6 +32,7 @@ class Parse extends \yii\db\ActiveRecord
     {
         return [
             [['category_id'], 'integer'],
+            [['parse_time'], 'safe'],
             [['url', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ItemCat::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['url','url'],

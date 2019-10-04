@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $message string */
 /* @var $exception Exception */
 
-$this->title = $name;
+$this->title = Yii::t('app',$name);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="text-center">

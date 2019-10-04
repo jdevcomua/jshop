@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => [
                     'id',
                     [
-                        'label' => 'enable',
+                        'label' => $model->getAttributeLabel('enable'),
                         'value' => Html::tag('span', $model->enable == 1 ? 'Да' : 'Нет',
                             ['class' => 'label ' . ($model->enable == 1 ? 'label-success' : 'label-danger')]),
                         'format' => 'raw',

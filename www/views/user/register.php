@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ->label(Yii::t('app', 'Password').'<em class="required">*</em>')?>
                             </li>
                             <li>
-                                <?= $form->field($model, 'name')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'User Name'))?>
+                                <?= $form->field($model, 'name')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'User name'))?>
                             </li>
                             <li>
                                 <?= $form->field($model, 'address')->textInput(['class' => 'input-box input-text'])->label(Yii::t('app', 'Address'))?>

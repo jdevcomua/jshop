@@ -39,8 +39,8 @@ class Log extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date' => 'Date',
-            'message' => 'Message',
+            'date' => 'Дата',
+            'message' => 'Сообщение',
         ];
     }
 }

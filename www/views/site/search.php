@@ -195,7 +195,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
             <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
                 <!-- BEGIN SIDE-NAV-CATEGORY -->
                 <div class="side-nav-categories">
-                    <div class="block-title"> Categories </div>
+                    <div class="block-title"> <?= Yii::t('app','Categories')?> </div>
                     <!--block-title-->
                     <!-- BEGIN BOX-CATEGORY -->
                     <?= \www\widgets\category\CategoriesView::widget(['view' => 'grid-menu']) ?>
@@ -203,18 +203,18 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                 </div>
                 <!--side-nav-categories-->
                 <div class="block block-layered-nav">
-                    <div class="block-title"> Shop By </div>
+                    <div class="block-title"> <?= Yii::t('app','Shop by')?> </div>
                     <div class="block-content">
-                        <p class="block-subtitle">Shopping Options</p>
+                        <p class="block-subtitle"><?= Yii::t('app','Shopping Options')?></p>
                         <dl id="narrow-by-list">
-                            <dt class="odd">Price</dt>
+                            <dt class="odd"><?= Yii::t('app','Price')?></dt>
                             <dd class="odd">
                                 <ol>
                                     <li> <a class="price-range" onclick="setPriceRange(<?=$minCost?>,<?=$maxCost?>)" href=""><?= Yii::t('app','All')?></a> </li>
                                     <li> <a class="price-range" onclick="setPriceRange(0,99.99)" href=""><span class="price">0.00</span> - <span class="price">99.99</span></a> (<?= $countCosts[0] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(100,499.99)" href=""><span class="price">100.00</span> - <span class="price">499.99</span></a> (<?= $countCosts[1] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(500,999.99)" href=""><span class="price">500.00</span> - <span class="price">999.99</span></a> (<?= $countCosts[2] ?>) </li>
-                                    <li> <a class="price-range" onclick="setPriceRange(1000,-1)" href=""><span class="price">1000.00</span> <?= Yii::t('app','and above')?></a> (<?= $countCosts[3] ?>) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(1000,-1)" href=""><span class="price">1000.00</span> <?= Yii::t('app','and above')?> </a> (<?= $countCosts[3] ?>) </li>
                                 </ol>
                             </dd>
                             <!--                            <dt class="even">Manufacturer</dt>-->
@@ -246,57 +246,21 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                         </dl>
                     </div>
                 </div>
-                <div class="custom-slider">
-                    <div>
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active"><img src="/images/slide2.jpg" alt="slide3">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Fruit Shop')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Up to 70% Off')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a></div>
-                                </div>
-                                <div class="item"><img src="/images/slide3.jpg" alt="slide1">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Black Grapes')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Mega Sale')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
-                                    </div>
-                                </div>
-                                <div class="item"><img src="/images/slide1.jpg" alt="slide2">
-                                    <div class="carousel-caption">
-                                        <h4><?= Yii::t('app','Food Farm')?></h4>
-                                        <h3><a title=" Sample Product" href="product-detail.html"><?= Yii::t('app','Up to 50% Off')?></a></h3>
-                                        <p><?= Yii::t('app','Lorem ipsum dolor sit amet, consectetur adipiscing elit.')?></p>
-                                        <a class="link" href="#"><?= Yii::t('app','Buy Now')?></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"> <span class="sr-only"><?= Yii::t('app','Previous')?></span> </a> <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"> <span class="sr-only"><?= Yii::t('app','Next')?></span> </a></div>
-                    </div>
-                </div>
 
                 <div class="block block-list block-cart">
-                    <div class="block-title"><?= Yii::t('app','My Cart')?> </div>
+                    <div class="block-title"> <?=Yii::t('app','My Cart')?> </div>
                     <div class="block-content">
                         <?php Pjax::begin(['id'=>'cart_cat']) ?>
                         <div class="summary">
-                            <p class="amount"><?= Yii::t('app','There is')?> <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?></a><?= Yii::t('app','in your cart.')?> </p>
-                            <p class="subtotal"> <span class="label"><?= Yii::t('app','Cart Subtotal')?> :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
+                            <p class="amount"><?=Yii::t('app','There is')?> <a href="<?=Url::toRoute('cart/index')?>"><?=Yii::$app->cart->getCount()?> <?= Yii::t('app','item')?> </a><?= Yii::t('app','in your cart.')?> </p>
+                            <p class="subtotal"> <span class="label"><?=Yii::t('app','Cart Subtotal')?> :</span> <span class="price"><?= number_format((float)Yii::$app->cart->getSum(), 2, '.', '');  ?></span> </p>
                         </div>
                         <div class="ajax-checkout">
                             <button type="button" title="Checkout" class="button button-checkout" onClick="window.location='<?= Url::toRoute('cart/index')?>'" style="white-space: normal;"> <span><?= Yii::t('app','Checkout')?></span> </button>
                         </div>
 
                         <?php if(!Yii::$app->cart->isEmpty()) { ?>
-                            <p class="block-subtitle">Recently added item(s)</p>
+                            <p class="block-subtitle"><?= Yii::t('app','Recently added item(s)')?></p>
                             <ul id="cart-sidebar1" class="mini-products-list">
                                 <?php foreach (Yii::$app->cart->getModels() as $key => $cartElement) {?>
                                     <li class="item <?=($key == count(Yii::$app->cart->getModels())-1) ? 'last1' : ''?>">
@@ -307,7 +271,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
 
                                                 <div class="access"><a data-reload = "1" href="" class="btn-remove1 cart__remove" title="Remove This Item"  data-id="<?= $cartElement->model->getId(); ?>" data-type="<?= $cartElement->model->getType(); ?>"><?= Yii::t('app','Remove')?></a></div>
                                                 <!--access-->
-                                                <strong><?= $cartElement->count ?></strong> x <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
+                                                <strong><?= $cartElement->count ?></strong> <?= $cartElement->model->getMetricTitle()?> X <span class="price"><?= number_format((float) $cartElement->model->getNewPrice(), 2, '.', '') ?></span>
                                                 <p class="product-name"><a data-pjax=0 href="<?= $cartElement->model->getUrl() ?>"><?= $cartElement->model->title ?></a></p>
                                             </div>
                                         </div>

@@ -43,7 +43,7 @@ class StaticPage extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Название',
             'content' => 'Контент',
-            'route' => 'Route',
+            'route' => 'Путь',
         ];
     }
 }

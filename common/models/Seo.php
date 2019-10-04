@@ -49,7 +49,7 @@ class Seo extends \yii\db\ActiveRecord
             'keywords' => 'Keywords',
             'url' => 'Url',
             'h1'=>'H1',
-            'new_url'=>'New Url',
+            'new_url'=>'Новый Url',
         ];
 
     }

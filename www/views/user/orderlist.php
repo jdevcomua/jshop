@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <ul>
                             <li><a href="<?= Url::toRoute('user/dashboard') ?>"><span><?=Yii::t('app', 'Account Dashboard')?></span></a></li>
                             <li><a href="<?= Url::toRoute('user/profile') ?>"><span><?=Yii::t('app', 'Account Information')?></span></a></li>
-                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span><?=Yii::t('app', 'Change password')?></span></a></li>
+                            <li><a href="<?= Url::toRoute('user/change-password') ?>"><span><?=Yii::t('app', 'Change Password')?></span></a></li>
                             <li class="current"><a href="<?= Url::toRoute('user/orderlist') ?>"><span><?=Yii::t('app', 'My Orders')?></span></a></li>
                             <li><a href="<?= Url::toRoute('user/wishlist') ?>"><?=Yii::t('app', 'My Wishlist')?></a></li>
                             <!--                            <li class="last"><a href="#"><span> Newsletter Subscriptions</span></a></li>-->

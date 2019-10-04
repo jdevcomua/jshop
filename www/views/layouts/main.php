@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 ?>
 <!DOCTYPE html>
 <?php $this->beginPage() ?>
-<html lang="en">
+<html lang="<?php echo Yii::$app->language ?>">
 <head>
 
     <!-- Basic page needs ================================================== -->

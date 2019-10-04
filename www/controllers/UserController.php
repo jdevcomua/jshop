@@ -342,7 +342,7 @@ class UserController extends Controller
     public function actionEditWishList($id = null)
     {
         if (!Yii::$app->request->isAjax) {
-            throw new NotFoundHttpException('Page not found.');
+            throw new NotFoundHttpException( Yii::t('app', 'Page not found.'));
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;

@@ -18,10 +18,13 @@ use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
 use Yii;
+use yii\base\Exception;
+use yii\base\UserException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -434,7 +437,7 @@ class SiteController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if(Yii::$app->user->isGuest){
-            $html = "<div class='wish_check'>Register for use Wish List</div>";
+            $html = "<div class='wish_check'><?=Yii::t('app','Register for use Wish List')?></div>";
             return ['html' => $html];
         }
         $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);

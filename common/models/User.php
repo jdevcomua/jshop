@@ -90,6 +90,7 @@ class User extends ModelWithImage implements \yii\web\IdentityInterface
             'email' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
             'password' => Yii::t('app', 'Пароль'),
+            'confirm_password' => Yii::t('app', 'Подтвердить Пароль'),
             'address' => Yii::t('app', 'Адрес'),
             'phone' => Yii::t('app', 'Телефон'),
             'name' => Yii::t('app', 'Имя'),

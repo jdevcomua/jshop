@@ -120,9 +120,11 @@ class SliderController extends Controller
 
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $model = Slider::findOne($id);
-            $model->delete();
+        if(isset(Yii::$app->request->post()['id'])) {
+            foreach (Yii::$app->request->post()['id'] as $id) {
+                $model = Slider::findOne($id);
+                $model->delete();
+            }
         }
         return $this->redirect(['index']);
     }

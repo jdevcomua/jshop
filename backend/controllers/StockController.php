@@ -41,7 +41,9 @@ class StockController extends Controller
      */
     public function actionDel()
     {
-        Stock::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        if(isset(Yii::$app->request->post()['id'])) {
+            Stock::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        }
         return $this->redirect(Yii::$app->urlHelper->to(['stock/index']));
     }
 

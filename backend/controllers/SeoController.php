@@ -99,9 +99,11 @@ class SeoController extends Controller
 
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $model = $this->findModel($id);
-            $model->delete();
+        if(isset(Yii::$app->request->post()['id'])){
+            foreach (Yii::$app->request->post()['id'] as $id) {
+                $model = $this->findModel($id);
+                $model->delete();
+            }
         }
         return $this->redirect(['index']);
     }

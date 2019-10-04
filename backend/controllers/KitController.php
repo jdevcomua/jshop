@@ -41,7 +41,9 @@ class KitController extends Controller
      */
     public function actionDel()
     {
-        Kit::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        if(isset(Yii::$app->request->post()['id'])) {
+            Kit::deleteAll(['in', 'id', Yii::$app->request->post()['id']]);
+        }
         return $this->redirect(Yii::$app->urlHelper->to(['kit/index']));
     }
     

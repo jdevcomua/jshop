@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 /* @var $vote \common\models\Vote */
 /* @var $related \common\models\Item[] */
 
-$this->title = $item->title;
+$this->title = !empty(Yii::$app->controller->seo->title) ? Yii::$app->controller->seo->title : $item->title;
 if(isset($item->category->parent->parent))
     $this->params['breadcrumbs'][] = ['label' => $item->category->parent->parent->title, 'url' => $item->category->parent->parent->getUrl()];
 if(isset($item->category->parent))

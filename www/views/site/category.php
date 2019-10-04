@@ -23,7 +23,7 @@ use lavrentiev\widgets\toastr\Notification;
 /* @var $countCosts string[] */
 /* @var $slider Slider[] */
 
-$this->title = $category->title;
+$this->title = !empty(Yii::$app->controller->seo->title) ? Yii::$app->controller->seo->title : $category->title;
 if(isset($category->parent->parent))
     $this->params['breadcrumbs'][] = ['label' => $category->parent->parent->title, 'url' => $category->parent->parent->getUrl()];
 if(isset($category->parent))

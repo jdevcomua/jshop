@@ -30,14 +30,14 @@ use yii\widgets\Pjax;
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600,800,400' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i,900" rel="stylesheet">
     <?php if(isset(Yii::$app->controller->seo)):?>
-        <title><?= Yii::$app->controller->seo->title ?></title>
         <meta name="description" content="<?= Yii::$app->controller->seo->description?>">
         <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords?>">
     <?php else:?>
-        <title><?= Html::encode($this->title) ?></title>
         <meta name="description" content="Default Description">
         <meta name="keywords" content="fashion, store, E-commerce">
     <?php endif;?>
+    <title><?=$this->title?></title>
+
 
 </head>
 <body>

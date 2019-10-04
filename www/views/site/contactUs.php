@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                                 <?= $form->field($model, 'letter')->textarea(['maxlength' => true,'rows'=>6, 'class'=>'form-control'])->label($model->getAttributeLabel('letter').'<span class="required">*</span>'); ?>
-                                <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class'=>'input-box input-text']); ?>
-                                <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class'=>'input-box input-text']); ?>
+                                <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'class'=>'input-box input-text'])->label($model->getAttributeLabel('email').'<span class="required">*</span>'); ?>
+                                <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'class'=>'input-box input-text'])->label($model->getAttributeLabel('name').'<span class="required">*</span>'); ?>
                                 <?= $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-text required-entry',
                                     'mask' => '+38 (099) 999-99-99',
                                     'options' => [
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'clientOptions' => [
                                         'clearIncomplete' => true
                                     ]
-                                ])->label(Yii::t('app','Phone number'));?>
+                                ])->label(Yii::t('app','Phone number').'<span class="required">*</span>')?>
                                 <?= $form->field($model, 'order_id')->textInput(['maxlength' => true, 'class'=>'input-box input-text']); ?>
                             </li>
                         </ul>

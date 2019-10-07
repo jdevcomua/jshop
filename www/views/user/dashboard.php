@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <a href="<?=Url::toRoute('user/profile')?>"><?= Yii::t('app','Edit')?></a> </div>
                                         <!--box-title-->
                                         <div class="box-content">
-                                            <p> <?= $model->username . '<br>' . $model->name . ' ' . $model->surname . '<br>' . $model->phone . '<br>' .$model->address . '<br>' ?></p>
+                                            <p> <?= $model->username . '<br>' . $model->phone . '<br>' .$model->address . '<br>' ?></p>
                                         </div>
                                         <!--box-content-->
                                     </div>

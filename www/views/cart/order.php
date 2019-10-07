@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </li>
                                 </ul>
                                 <div class="buttons-set" id="billing-buttons-container">
-                                    <p class="required"><?=Yii::t('app','Required Fields')?></p>
+                                    <p class="required"><?=Yii::t('app','Required Fields')?> *</p>
                                     <button id="submit_step_one" type="button" title="Continue" class="button continue"><span><?=Yii::t('app','Continue')?></span></button>
 <!--                                        <span class="please-wait" id="billing-please-wait" style="display:none;"> <img src="images/opc-ajax-loader.gif" alt="Loading next step..." title="Loading next step..." class="v-middle"> Loading next step... </span> -->
                                 </div>

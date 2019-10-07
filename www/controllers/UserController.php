@@ -373,5 +373,12 @@ class UserController extends Controller
             ];
         }
     }
+    public function actionDeleteImage(){
+        if(Yii::$app->user->identity->image){
+            return Yii::$app->user->identity->deleteImage();
+        }else{
+            return false;
+        }
+    }
 
 }

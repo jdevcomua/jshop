@@ -87,11 +87,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                             <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
                                                                 'pluginOptions' => [
                                                                     'initialPreview' => $image,
+                                                                    'initialPreviewConfig' => [
+                                                                            'initialPreviewAsData' => true,
+                                                                    ],
+                                                                    'deleteUrl'=>'/user/delete-image',
+                                                                    'overwriteInitial' => true,
+                                                                    'maxFileCount' => 1,
                                                                     'showCancel'=>false,
                                                                     'showCaption' => false,
                                                                     'showRemove' => false,
                                                                     'showUpload' => false,
-                                                                    'removeLabel' => '',
                                                                     'browseClass' => 'btn btn-block',
                                                                     'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
                                                                     'browseLabel' =>  'Выберите фото'

@@ -136,7 +136,9 @@ class SiteController extends Controller
             if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
             if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
             if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            if(isset(Yii::$app->request->post()['left'])){
+                Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            }
             if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
             if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
             if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
@@ -158,8 +160,6 @@ class SiteController extends Controller
 
         if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
             $items->andFilterWhere(['between', 'cost',$left,$right]);
-        } else {
-            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
         }
         $items->with(['stockItems', 'images', 'stocks']);
 
@@ -201,7 +201,9 @@ class SiteController extends Controller
             if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
             if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
             if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            if(isset(Yii::$app->request->post()['left'])){
+                Yii::$app->session->set('left',Yii::$app->request->post('left'));
+            }
             if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
             if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
             if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
@@ -238,14 +240,11 @@ class SiteController extends Controller
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',100,499.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',500,999.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['>=', 'cost',1000])->count();
-
         if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
             $items->andFilterWhere(['between', 'cost',$left,$right]);
-        } else {
-            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
         }
-        $items->with(['stockItems', 'images', 'stocks']);
 
+        $items->with(['stockItems', 'images', 'stocks']);
         $filterCounts = CharacteristicItem::find()->select(['characteristic_id', 'count(characteristic_id) as count'])
             ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')
             ->where(['category_id' => $id])->groupBy('characteristic_id')
@@ -261,7 +260,8 @@ class SiteController extends Controller
         foreach ($dataProvider->getModels() as $key => $model){
             $mapData[$model->id] = $key;
         }
-//var_dump($modalId);
+
+
         $this->breadcrumbs = [$category->getUrl() => $category->title];
 
 

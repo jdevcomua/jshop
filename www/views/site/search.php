@@ -214,7 +214,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                                     <li> <a class="price-range" onclick="setPriceRange(0,99.99)" href=""><span class="price">0.00</span> - <span class="price">99.99</span></a> (<?= $countCosts[0] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(100,499.99)" href=""><span class="price">100.00</span> - <span class="price">499.99</span></a> (<?= $countCosts[1] ?>) </li>
                                     <li> <a class="price-range" onclick="setPriceRange(500,999.99)" href=""><span class="price">500.00</span> - <span class="price">999.99</span></a> (<?= $countCosts[2] ?>) </li>
-                                    <li> <a class="price-range" onclick="setPriceRange(1000,-1)" href=""><span class="price">1000.00</span> <?= Yii::t('app','and above')?> </a> (<?= $countCosts[3] ?>) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(1000.00,<?=$maxCost?>)" href=""><span class="price">1000.00</span> <?= Yii::t('app','and above')?> </a> (<?= $countCosts[3] ?>) </li>
                                 </ol>
                             </dd>
                             <!--                            <dt class="even">Manufacturer</dt>-->

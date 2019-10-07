@@ -7387,7 +7387,7 @@ ol#compare-items li:last-child {
     text-transform:uppercase
 }
 .pager .pages {
-    margin: 0 0;
+    margin: 0 -10px;
 }
 .pages .pagination {
     margin: auto;

@@ -120,7 +120,8 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                         </div>',
                             'pager' => [
                                 'hideOnSinglePage' => false,
-                                'disabledListItemSubTagOptions' => ['tag' => 'a']
+                                'disabledListItemSubTagOptions' => ['tag' => 'a'],
+                                'maxButtonCount' => 4,
                             ],
                             'emptyText' =>  '<div class="toolbar">   
                            ' . $sorter . '

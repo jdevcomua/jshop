@@ -126,31 +126,12 @@ $imageUrls = $item->getImageUrls();
                 <div class="product-collateral container">
                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                         <li class="active"> <a id="description_button" href="#product_tabs_description" data-toggle="tab"><?= Yii::t('app','Product Description')?></a> </li>
-                        <li><a id="tags_button" href="#product_tabs_tags" data-toggle="tab"><?= Yii::t('app','Tags')?></a></li>
                         <li> <a id="reviews_button" href="#reviews_tabs" data-toggle="tab"><?= Yii::t('app','Reviews')?></a> </li>
                     </ul>
                     <div id="productTabContent" class="tab-content">
                         <div class="tab-pane  in active" id="product_tabs_description">
                             <div class="std">
                                 <?= $item->description ?>
-                            </div>
-                        </div>
-                        <div class="tab-pane " id="product_tabs_tags">
-                            <div class="box-collateral box-tags">
-                                <div class="tags">
-                                    <form id="addTagForm" action="#" method="get">
-                                        <div class="form-add-tags">
-
-                                            <div class="input-box">
-                                                <input class="input-text" name="productTagName" id="productTagName" type="text" value="<?= Yii::t('app','enter your tags')?>">
-                                                <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span><?= Yii::t('app','Add Tags')?></span> </button>
-                                            </div>
-                                            <!--input-box-->
-                                        </div>
-                                    </form>
-                                </div>
-                                <!--tags-->
-                                <p class="note"><?= Yii::t('app','Use spaces to separate tags. Use single quotes (\') for phrases.')?></p>
                             </div>
                         </div>
                         <div class="tab-pane  in" id="reviews_tabs">

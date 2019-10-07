@@ -75,6 +75,7 @@ class User extends ModelWithImage implements \yii\web\IdentityInterface
             [['password'], 'string', 'length' => [6, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password','city'], 'string'],
             [['address','name','surname'],'string','length' => [0, 50]],
+            [['imageFile'], 'image', 'extensions' => 'png, jpg, jpeg, svg'],
             [['image',],'string'],
             [['email'], 'email'],
         ];

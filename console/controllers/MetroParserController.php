@@ -59,9 +59,5 @@ class MetroParserController extends Controller
             echo "\n".$log->message;
             $log->save();
         }
-
     }
-
-
-
 }

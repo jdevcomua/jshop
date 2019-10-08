@@ -35,9 +35,10 @@ class ItemParse
                                     if(!isset($item)){
                                         $item = new Item();
                                         $item->title = $items[$i]['name'];
-                                        $ful_info = $this->parseDescription($items[$i]['ean']);
-                                        if(isset($ful_info[0]['responses'][0]['data']['items'][0]['legend'][0]))
-                                            $item->description = $ful_info[0]['responses'][0]['data']['items'][0]['legend'][0];
+                                        $fullInfo = $this->parseDescription($items[$i]['ean']);
+                                        if(isset($fullInfo[0]['responses'][0]['data']['items'][0]['legend'][0])){
+                                            $item->description = $fullInfo[0]['responses'][0]['data']['items'][0]['legend'][0];
+                                        }
                                         $item->category_id = $category->id;
                                         $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
                                         $item->active = 1;
@@ -76,7 +77,8 @@ class ItemParse
      * @param $category string
      * @return bool|mixed|string
      */
-    public function parseItem($offset, $category){
+    public function parseItem($offset, $category)
+    {
         $myCurl = curl_init();
         curl_setopt_array($myCurl, array(
             CURLOPT_URL => 'https://metro.zakaz.ua/api/query.json',
@@ -128,7 +130,8 @@ class ItemParse
         return $response[0]['responses'][0]['data']['items'][0]['items'];
     }
 
-    public function getCountOfPagination($offset, $category){
+    public function getCountOfPagination($offset, $category)
+    {
         $myCurl = curl_init();
         curl_setopt_array($myCurl, array(
             CURLOPT_URL => 'https://metro.zakaz.ua/api/query.json',
@@ -179,7 +182,9 @@ class ItemParse
         $response = Json::decode('['.$response.']');
         return ceil($response[0]['responses'][0]['data']['items'][0]['total']/$response[0]['responses'][0]['data']['items'][0]['limit']);
     }
-    public function parseDescription($ean){
+
+    public function parseDescription($ean)
+    {
         $myCurl = curl_init();
         curl_setopt_array($myCurl, array(
             CURLOPT_URL => 'https://metro.zakaz.ua/api/query.json',
@@ -209,7 +214,8 @@ class ItemParse
     /**
      * @param $category ItemCat[]
      */
-    public function getCountOfSlug($categories){
+    public function getCountOfSlug($categories)
+    {
         $count = 0;
         foreach ($categories as $category){
             $count += count($category->slug());

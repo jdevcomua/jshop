@@ -437,7 +437,7 @@ class SiteController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if(Yii::$app->user->isGuest){
-            $html = "<div class='wish_check'><?=Yii::t('app','Register for use Wish List')?></div>";
+            $html = "<div class='wish_check'>".Yii::t('app','Register for use Wish List')."</div>";
             return ['html' => $html];
         }
         $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);

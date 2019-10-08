@@ -7,7 +7,7 @@ use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-$this->title = Yii::t('app', 'Change password') ;
+$this->title = Yii::t('app', 'Change Password') ;
 $this->params['breadcrumbs'][] = ['label' => 'Account Dashboard', 'url' => '/dashboard'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

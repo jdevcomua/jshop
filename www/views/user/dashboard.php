@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 /* @var $model common\models\User */
 /* @var $orderDataProvider \yii\data\ActiveDataProvider */
 
-$this->title = 'Account Dashboard';
+$this->title = Yii::t('app','Account Dashboard');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

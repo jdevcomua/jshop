@@ -26,7 +26,7 @@ use yii\helpers\Html;
                             <h4><?= Yii::t('app','Style Advisor')?></h4>
                             <ul class="links">
                                 <li><a href="login.html" title="Your Account"><?= Yii::t('app','Your Account')?></a></li>
-                                <li><a href="discount.html" title="Addresses"><?= Yii::t('app','Discount')?></a></li>
+                                <li><a href="discount.html" title="<?= Yii::t('app','Discount')?>"><?= Yii::t('app','Discount')?></a></li>
                                 <li><a href="ordersHistory.html" title="Orders History"><?= Yii::t('app','Orders History')?></a></li>
                                 <li><a href="aboutUs.html" title="About Us"><?= Yii::t('app','About Us')?></a></li>
                             </ul>

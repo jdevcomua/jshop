@@ -13,6 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="text-center">
 
     <h1><?php echo Html::encode($this->title) ?></h1>
-    <p><?php echo nl2br(Html::encode($message)) ?></p>
+    <p><?php echo Yii::t('app',nl2br(Html::encode($message))) ?></p>
 
 </div>

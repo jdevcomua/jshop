@@ -407,7 +407,7 @@ $('#submit_step_one').on('click', async function(){
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#opc-review").offset().top - 200
             }, 800);
-            $('#address_view').text('Address: ' + $('#orders-address').val());
+            $('#address_view').text('Aдрес: ' + $('#orders-address').val());
         }
     },1000);
 });

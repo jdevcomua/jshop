@@ -12,7 +12,7 @@
             </div>
             <p class="meta">
                 <strong><?= ($model->user) ? $model->user->name : 'Anonymous' ?></strong>
-                <span>–</span> <?= Yii::$app->formatter->asDatetime($model->timestamp,'dd/MM/yy H:mm') ?>
+                <span>–</span> <?= Yii::$app->formatter->asDatetime($model->timestamp,'dd/MM/yy HH:mm') ?>
             </p>
             <div class="description">
                 <?= $model->text ?>

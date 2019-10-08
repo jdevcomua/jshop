@@ -202,6 +202,26 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                     <?= \www\widgets\category\CategoriesView::widget(['view' => 'grid-menu']) ?>
                     <!--box-content box-category-->
                 </div>
+
+                <div class="block block-layered-nav">
+                    <div class="block-title"> <?=Yii::t('app','Manufacturers')?> </div>
+                    <div class="block-content">
+                        <dl id="narrow-by-list">
+                            <dd class="odd">
+                                <ol>
+                                    <?php foreach (\common\models\Manufacturer::getManufacturerNames() as $key=>$value): ?>
+                                        <li>
+                                            <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$key?>,this)"">
+                                            <span class="price"><?=$value?></span>
+                                        </li>
+                                    <?php endforeach;?>
+                                    <li> <a class="price-range" onclick="removeManufacturer()" href="#"><?= Yii::t('app','Clear Manufacturer')?></a> </li>
+                                </ol>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
                 <!--side-nav-categories-->
                 <div class="block block-layered-nav">
                     <div class="block-title"> <?= Yii::t('app','Shop by')?> </div>

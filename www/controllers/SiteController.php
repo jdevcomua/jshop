@@ -142,6 +142,25 @@ class SiteController extends Controller
             if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
             if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
             if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+            if(Yii::$app->request->post('removeManufacturer')) Yii::$app->session->remove('manufacturer');
+            if(Yii::$app->request->post('manufacturer')){
+                $manufacturer = Yii::$app->session->get('manufacturer');
+                if (!empty($manufacturer)){
+                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }else{
+                    $manufacturer = [];
+                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }
+            }
+            if(Yii::$app->request->post('removeOneManufacturer')){
+                $manufacturer = Yii::$app->session->get('manufacturer');
+                if (!empty($manufacturer) && isset($manufacturer[Yii::$app->request->post('removeOneManufacturer')])){
+                    unset($manufacturer[Yii::$app->request->post('removeOneManufacturer')]);
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }
+            }
         }
 
         $request = Yii::$app->request;
@@ -158,8 +177,14 @@ class SiteController extends Controller
         $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['between', 'cost',500,999.99])->count();
         $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['>=', 'cost',1000])->count();
 
-        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+        $left = Yii::$app->session->get('left');
+        $right = Yii::$app->session->get('right');
+        if (isset($left) && isset($right)){
             $items->andFilterWhere(['between', 'cost',$left,$right]);
+        }
+
+        if($manufacturer = Yii::$app->session->get('manufacturer')){
+            $items->andFilterWhere(['in', 'manufacturer_id',$manufacturer]);
         }
         $items->with(['stockItems', 'images', 'stocks']);
 
@@ -207,6 +232,25 @@ class SiteController extends Controller
             if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
             if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
             if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+            if(Yii::$app->request->post('removeManufacturer')) Yii::$app->session->remove('manufacturer');
+            if(Yii::$app->request->post('manufacturer')){
+                $manufacturer = Yii::$app->session->get('manufacturer');
+                if (!empty($manufacturer)){
+                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }else{
+                    $manufacturer = [];
+                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }
+            }
+            if(Yii::$app->request->post('removeOneManufacturer')){
+                $manufacturer = Yii::$app->session->get('manufacturer');
+                if (!empty($manufacturer) && isset($manufacturer[Yii::$app->request->post('removeOneManufacturer')])){
+                    unset($manufacturer[Yii::$app->request->post('removeOneManufacturer')]);
+                    Yii::$app->session->set('manufacturer',$manufacturer);
+                }
+            }
         }
 
         $id = explode('-', $id)[0];
@@ -244,6 +288,10 @@ class SiteController extends Controller
         $right = Yii::$app->session->get('right');
         if (isset($left) && isset($right)){
             $items->andFilterWhere(['between', 'cost',$left,$right]);
+        }
+
+        if($manufacturer = Yii::$app->session->get('manufacturer')){
+            $items->andFilterWhere(['in', 'manufacturer_id',$manufacturer]);
         }
 
         $items->with(['stockItems', 'images', 'stocks']);

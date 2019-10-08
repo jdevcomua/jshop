@@ -236,5 +236,6 @@ return array(
     'Manufacturers'=>'Производители',
     'Create Manufacturer'=>'Создать производителя',
     'Update Manufacturer: '=>'Обновить производителя: ',
+    'Clear Manufacturer'=>'Очистить производителей',
     'Update'=>'Обновить',
 );

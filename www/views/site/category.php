@@ -344,5 +344,18 @@ $this->params['breadcrumbs'][] = $category->title;
         <!--row-->
     </div>
     <!--container-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            $('.side-nav-categories a').each(function (key,elem) {
+                var location = window.location.href;
+                location = location.split('-')[0];
+                var elemHref = elem.href;
+                elemHref = elemHref.split('-')[0];
+                if(location === elemHref){
+                    $(elem).addClass(' active-category');
+                }
+            });
+        });
+    </script>
 </section>
 

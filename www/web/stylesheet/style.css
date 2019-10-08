@@ -13033,6 +13033,9 @@ footer {
     position: relative;
 }
 
+.active-category{
+    color: #80b435 !important;
+}
 
 /*	Testimonials */
 

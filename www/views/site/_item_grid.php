@@ -5,7 +5,6 @@ use common\models\Wish;
 use common\models\WishList;
 
 $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
-
 if(empty($wishList)){
     $wishList = [];
 }else{

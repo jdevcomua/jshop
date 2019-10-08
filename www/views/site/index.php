@@ -1,5 +1,7 @@
 <?php
-use yii\widgets\ListView;
+
+use common\models\Wish;
+use common\models\WishList;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Slider;
@@ -12,6 +14,13 @@ use common\models\Slider;
 /* @var $category_slider ItemCat[] */
 
 $this->title = Yii::$app->name;
+$wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
+if(empty($wishList)){
+    $wishList = [];
+}else{
+    $wishList = Wish::findAll(['list_id' => $wishList->id]);
+    $wishList = \yii\helpers\ArrayHelper::getColumn($wishList,'item_id');
+}
 ?>
 <div class="content">
     <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
@@ -93,7 +102,7 @@ $this->title = Yii::$app->name;
                                     <div class="item-box-hover">
                                         <div class="box-inner">
                                             <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +164,7 @@ $this->title = Yii::$app->name;
                                         <div class="item-box-hover">
                                             <div class="box-inner">
                                                 <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a></span> </div>
+                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a></span> </div>
                                             </div>
                                         </div>
                                     </div>

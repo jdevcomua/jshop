@@ -137,7 +137,7 @@ class ItemController extends Controller
         return $this->render('create', [
             'model' => $model,
             'categories' => $categoriesArray,
-            'seo'=>$seo,
+            'seo' => $seo,
         ]);
 
     }

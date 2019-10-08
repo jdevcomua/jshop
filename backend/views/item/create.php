@@ -13,7 +13,9 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Товары'), 'url
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="item-create">
-    <?php echo $this->render('_form', [
-        'model' => $model, 'categories' => $categories,'seo'=>$seo,
+    <?= $this->render('_form', [
+        'model' => $model,
+        'categories' => $categories,
+        'seo' => $seo,
     ]) ?>
 </div>

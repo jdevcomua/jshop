@@ -232,4 +232,9 @@ return array(
     'Please contact us if you think this is a server error. Thank you.'=>'Пожалуйста, свяжитесь с нами, если считаете, что это ошибка сервера. Спасибо.',
     'RBAC_ASSIGNED'=>'Относиться к пользователю',
     'RBAC_UNASSIGNED'=>'Не относиться к пользователю',
+    'Manufacturer'=>'Производитель',
+    'Manufacturers'=>'Производители',
+    'Create Manufacturer'=>'Создать производителя',
+    'Update Manufacturer: '=>'Обновить производителя: ',
+    'Update'=>'Обновить',
 );

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Manufacturer;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
@@ -73,6 +74,12 @@ use zxbodya\yii2\tinymce\TinyMce;
             </div>
             <div class="col-md-6">
                 <?php echo $form->field($model, 'self_cost')->textInput(); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'manufacturer_id')
+                    ->dropDownList(Manufacturer::getManufacturerNames(),['prompt' => Yii::t('app','Выберите производителя')]); ?>
             </div>
         </div>
 

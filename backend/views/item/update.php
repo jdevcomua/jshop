@@ -14,6 +14,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Редактировать');
 ?>
 <div class="item-update">
     <?php echo $this->render('_form', [
-        'model' => $model, 'categories' => $categories,'seo'=>$seo,
+        'model' => $model,
+        'categories' => $categories,
+        'seo' => $seo,
     ]) ?>
 </div>

@@ -277,6 +277,25 @@ $this->params['breadcrumbs'][] = $category->title;
                     </div>
                 </div>
 
+                <div class="block block-layered-nav">
+                    <div class="block-title"> Купить по </div>
+                    <div class="block-content">
+                        <p class="block-subtitle">Варианты покупок</p>
+                        <dl id="narrow-by-list">
+                            <dt class="odd">Цена</dt>
+                            <dd class="odd">
+                                <ol>
+                                    <li> <a class="price-range" onclick="setPriceRange(3.8,289.8)" href="#">Все</a> </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(0,99.99)" href="#"><span class="price">0.00</span> - <span class="price">99.99</span></a> (195) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(100,499.99)" href="#"><span class="price">100.00</span> - <span class="price">499.99</span></a> (25) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(500,999.99)" href="#"><span class="price">500.00</span> - <span class="price">999.99</span></a> (0) </li>
+                                    <li> <a class="price-range" onclick="setPriceRange(1000.00,289.8)" href="#"><span class="price">1000.00</span> и выше </a> (0) </li>
+                                </ol>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
                 <div class="block block-list block-cart">
                     <div class="block-title"> <?=Yii::t('app','My Cart')?> </div>
                     <div class="block-content">

@@ -17,7 +17,9 @@ class ItemParse
         try{
             $categories = ItemCat::find()->all();
             foreach ($categories as $category){
+                echo 'Category: '.$category->title;
                 foreach ($category->slug() as $slug){
+                    echo 'Slug: '.$slug;
                     for ($i = 1;$i<50;$i++){
                         $items = $this->parseItem($i, $slug);
                         if(!empty($items)){

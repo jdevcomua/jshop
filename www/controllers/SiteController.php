@@ -240,7 +240,9 @@ class SiteController extends Controller
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',100,499.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',500,999.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['>=', 'cost',1000])->count();
-        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+        $left = Yii::$app->session->get('left');
+        $right = Yii::$app->session->get('right');
+        if (isset($left) && isset($right)){
             $items->andFilterWhere(['between', 'cost',$left,$right]);
         }
 

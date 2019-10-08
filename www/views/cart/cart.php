@@ -12,7 +12,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="main-container col1-layout wow bounceInUp animated">
 
     <div class="main">
-        <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
+        <div class="container">
+            <div class="row">
+                <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>
+            </div>
+        </div>
         <div class="cart wow bounceInUp animated">
 
             <div class="table-responsive shopping-cart-tbl  container">

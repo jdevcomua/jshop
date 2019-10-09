@@ -212,7 +212,7 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
                                     <?php foreach (\common\models\Manufacturer::getManufacturerNames() as $key=>$value): ?>
                                         <li>
                                             <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$key?>,this)"">
-                                            <span class="price"><?=$value?></span>
+                                            <span class="manufacturer-text"><?=$value?></span>
                                         </li>
                                     <?php endforeach;?>
                                     <li> <a class="price-range" onclick="removeManufacturer()" href="#"><?= Yii::t('app','Clear Manufacturer')?></a> </li>

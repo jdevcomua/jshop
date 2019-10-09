@@ -13036,6 +13036,13 @@ footer {
 .active-category{
     color: #80b435 !important;
 }
+.manufacturer-text{
+    white-space: normal;
+    word-break: break-word;
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+}
 
 /*	Testimonials */
 

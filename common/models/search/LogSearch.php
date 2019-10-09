@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use common\models\Log;
 
 /**
- * SearchLog represents the model behind the search form of `common\models\Log`.
+ * LogSearch represents the model behind the search form of `common\models\Log`.
  */
-class SearchLog extends Log
+class LogSearch extends Log
 {
     /**
      * {@inheritdoc}

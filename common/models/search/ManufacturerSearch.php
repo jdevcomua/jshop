@@ -4,12 +4,12 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Seo;
+use common\models\Manufacturer;
 
 /**
- * SearchSeo represents the model behind the search form of `common\models\Seo`.
+ * ManufacturerSearch represents the model behind the search form of `common\models\Manufacturer`.
  */
-class SearchSeo extends Seo
+class ManufacturerSearch extends Manufacturer
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class SearchSeo extends Seo
     {
         return [
             [['id'], 'integer'],
-            [['title', 'description', 'keywords', 'url','h1'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SearchSeo extends Seo
      */
     public function search($params)
     {
-        $query = Seo::find();
+        $query = Manufacturer::find();
 
         // add conditions that should always apply here
 
@@ -61,11 +61,7 @@ class SearchSeo extends Seo
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'h1', $this->h1])
-            ->andFilterWhere(['like', 'url', $this->url]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

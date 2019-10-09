@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\search\LogSearch;
+use common\models\search\ManufacturerSearch;
 use Yii;
 use common\models\Manufacturer;
 use yii\data\ActiveDataProvider;
@@ -19,11 +21,11 @@ class ManufacturerController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Manufacturer::find(),
-        ]);
+        $searchModel = new ManufacturerSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

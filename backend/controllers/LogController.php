@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Log;
-use common\models\search\SearchLog;
+use common\models\search\LogSearch;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -18,7 +18,7 @@ class LogController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchLog();
+        $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

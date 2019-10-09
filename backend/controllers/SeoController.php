@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Seo;
-use common\models\search\SearchSeo;
+use common\models\search\SeoSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -23,7 +23,7 @@ class SeoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchSeo();
+        $searchModel = new SeoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

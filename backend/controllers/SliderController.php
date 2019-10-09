@@ -5,7 +5,7 @@ namespace backend\controllers;
 use common\models\Image;
 use Yii;
 use common\models\Slider;
-use common\models\search\SearchSlider;
+use common\models\search\SliderSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -24,7 +24,7 @@ class SliderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchSlider();
+        $searchModel = new SliderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

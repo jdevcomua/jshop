@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use common\models\Slider;
 
 /**
- * SearchSlider represents the model behind the search form of `common\models\Slider`.
+ * SliderSearch represents the model behind the search form of `common\models\Slider`.
  */
-class SearchSlider extends Slider
+class SliderSearch extends Slider
 {
     /**
      * {@inheritdoc}

@@ -4,12 +4,12 @@ namespace common\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Letter;
+use common\models\Seo;
 
 /**
- * SearchSeo represents the model behind the search form of `common\models\Seo`.
+ * SeoSearch represents the model behind the search form of `common\models\Seo`.
  */
-class SearchLetter extends Letter
+class SeoSearch extends Seo
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class SearchLetter extends Letter
     public function rules()
     {
         return [
-            [['id','order_id'], 'integer'],
-            [['letter', 'email', 'phone', 'name'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'description', 'keywords', 'url','h1'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class SearchLetter extends Letter
      */
     public function search($params)
     {
-        $query = Letter::find();
+        $query = Seo::find();
 
         // add conditions that should always apply here
 
@@ -57,13 +57,15 @@ class SearchLetter extends Letter
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['id' => $this->id])
-            ->andFilterWhere(['order_id'=>$this->order_id]);
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
 
-        $query->andFilterWhere(['like', 'letter', $this->letter])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'keywords', $this->keywords])
+            ->andFilterWhere(['like', 'h1', $this->h1])
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

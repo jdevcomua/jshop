@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Seo */
 
-$this->title = 'Обновить Seo: ' . $model->title;
+$this->title = Yii::t('app','Update Seo').': ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Seos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="seo-update">
     <div class="box box-info">

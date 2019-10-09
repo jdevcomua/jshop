@@ -57,6 +57,7 @@ class Slider extends ModelWithImage
             'largeTitle' => Yii::t('app','Длинное Название'),
             'description' => Yii::t('app','Описание'),
             'image' => Yii::t('app','Рисунок'),
+            'imageFile' => Yii::t('app','Рисунок'),
             'type' => Yii::t('app','Тип'),
         ];
     }

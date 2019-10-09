@@ -238,4 +238,13 @@ return array(
     'Update Manufacturer: '=>'Обновить производителя: ',
     'Clear Manufacturer'=>'Очистить производителей',
     'Update'=>'Обновить',
+    'Letters'=>'Письма',
+    'Letter'=>'Письмо',
+    'Update Slider'=>'Обновить Слайдер',
+    'Create Slider'=>'Создать Слайдер',
+    'Create'=>'Создать',
+    'Sliders'=>'Слайдеры',
+    'Slider'=>'Слайдер',
+    'Save'=>'Сохранить',
+    'Update Seo'=>'Обновить Seo',
 );

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\SeoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Letters';
+$this->title = Yii::t('app','Letters');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="seo-index">

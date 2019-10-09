@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'new_url')->textInput(['maxlength' => true])->label(Yii::t('app','New URL(Фраза которая находиться после номера элемента)')) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

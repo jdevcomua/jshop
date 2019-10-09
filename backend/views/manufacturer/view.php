@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Manufacturer */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Manufacturers', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Manufacturers'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body">
             <p>
-                <?= Html::a(Yii::t('app', 'Создать'), Yii::$app->urlHelper->to(['manufacturer/create']), ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('app', 'Create'), Yii::$app->urlHelper->to(['manufacturer/create']), ['class' => 'btn btn-success']) ?>
                 <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',

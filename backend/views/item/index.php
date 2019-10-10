@@ -62,11 +62,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->getAdditionTitle();
                         },
                     ],
-                    ['class' => 'yii\grid\ActionColumn',
-                        'urlCreator' => function ($action, $model, $key, $index) {
-                            return Yii::$app->urlHelper->to(['item/' . $action, 'id' => $model->id]);
-                        }
-                    ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {delete} {viewOnSite}',  // the default buttons + your custom button
+                        'buttons' => [
+                            'viewOnSite' => function($url,Item $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-globe"></span>',$model->getUrl(),['title'=>Yii::t('app','View on site')]);
+                }
+                        ]
+                    ]
                 ],
             ]);
 

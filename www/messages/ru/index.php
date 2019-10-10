@@ -248,4 +248,5 @@ return array(
     'Save'=>'Сохранить',
     'Update Seo'=>'Обновить Seo',
     'Cash'=>'Наличными',
+    'View on site'=>'Просмотреть на сайте',
 );

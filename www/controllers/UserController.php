@@ -215,7 +215,7 @@ class UserController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())) {
             if($model->facebook()){
-                Yii::$app->session->setFlash('error', 'Вы зарегестрированы через Facebook, создайте свой пароль');
+                Yii::$app->session->setFlash('error', 'Вы зарегистрированы через Facebook, создайте свой пароль');
                 return $this->redirect(Yii::$app->urlHelper->to(['user/forgot-password']));
             }elseif($model->login())
                 return $this->redirect(Yii::$app->urlHelper->to(['site/index']));

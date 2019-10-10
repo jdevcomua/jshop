@@ -8,7 +8,6 @@ use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Letter;
-use common\models\OrderItem;
 use common\models\Orders;
 use common\models\Seo;
 use common\models\Slider;
@@ -17,14 +16,12 @@ use common\models\Stock;
 use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
+use www\filters\ItemsFilter;
 use Yii;
-use yii\base\Exception;
-use yii\base\UserException;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -50,7 +47,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('modalId',Yii::$app->request->post('modalId'));
         }
 
         $catIds = null;
@@ -132,36 +129,8 @@ class SiteController extends Controller
     public function actionSearch($search = '')
     {
         $this->getDefault(Yii::$app->request->post('data'));
-        if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
-            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
-            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(isset(Yii::$app->request->post()['left'])){
-                Yii::$app->session->set('left',Yii::$app->request->post('left'));
-            }
-            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
-            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
-            if(Yii::$app->request->post('removeManufacturer')) Yii::$app->session->remove('manufacturer');
-            if(Yii::$app->request->post('manufacturer')){
-                $manufacturer = Yii::$app->session->get('manufacturer');
-                if (!empty($manufacturer)){
-                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }else{
-                    $manufacturer = [];
-                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }
-            }
-            if(Yii::$app->request->post('removeOneManufacturer')){
-                $manufacturer = Yii::$app->session->get('manufacturer');
-                if (!empty($manufacturer) && isset($manufacturer[Yii::$app->request->post('removeOneManufacturer')])){
-                    unset($manufacturer[Yii::$app->request->post('removeOneManufacturer')]);
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }
-            }
-        }
+        $filter = new ItemsFilter(Yii::$app->request->post());
+        $filter->addFilterData();
 
         $request = Yii::$app->request;
         $items = Item::find()->where(['like', 'title', $search]);
@@ -222,38 +191,15 @@ class SiteController extends Controller
     public function actionCategory($id)
     {
         $this->getDefault(Yii::$app->request->post('data'));
-        if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
-            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
-            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(isset(Yii::$app->request->post()['left'])){
-                Yii::$app->session->set('left',Yii::$app->request->post('left'));
-            }
-            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
-            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
-            if(Yii::$app->request->post('removeManufacturer')) Yii::$app->session->remove('manufacturer');
-            if(Yii::$app->request->post('manufacturer')){
-                $manufacturer = Yii::$app->session->get('manufacturer');
-                if (!empty($manufacturer)){
-                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }else{
-                    $manufacturer = [];
-                    $manufacturer[Yii::$app->request->post('manufacturer')] = Yii::$app->request->post('manufacturer');
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }
-            }
-            if(Yii::$app->request->post('removeOneManufacturer')){
-                $manufacturer = Yii::$app->session->get('manufacturer');
-                if (!empty($manufacturer) && isset($manufacturer[Yii::$app->request->post('removeOneManufacturer')])){
-                    unset($manufacturer[Yii::$app->request->post('removeOneManufacturer')]);
-                    Yii::$app->session->set('manufacturer',$manufacturer);
-                }
-            }
-        }
 
         $id = explode('-', $id)[0];
+        $data = Yii::$app->request->post();
+        if(Yii::$app->session->get('currentCategoryId') !=$id){
+            Yii::$app->session->set('currentCategoryId',$id);
+            $data['currentCategoryId'] = true;
+        }
+        $filter = new ItemsFilter($data);
+        $filter->addFilterData();
         $request = Yii::$app->request;
         $selected = $request->get('filter');
         $items = $this->filter($selected);

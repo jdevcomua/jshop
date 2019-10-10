@@ -56,10 +56,10 @@ use yii\widgets\Pjax;
                     <div class="modal-body">
                         <div class="popup1" style="display: block;">
 
-                            <?php if (Yii::$app->session->get('lastQuickView')) {
+                            <?php if (Yii::$app->session->get('modalId')) {
 
 
-                                $modalModel = \common\models\Item::findOne(Yii::$app->session->get('lastQuickView'));
+                                $modalModel = \common\models\Item::findOne(Yii::$app->session->get('modalId'));
                                 ?>
 
                                 <div class="quick-view-box">

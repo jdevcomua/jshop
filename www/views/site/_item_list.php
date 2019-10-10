@@ -1,5 +1,7 @@
 <?php
 /* @var $model \common\models\Item */
+use common\models\WishList;
+$wishList = WishList::getAllWish();
 ?>
 
 <li class="item ">
@@ -42,6 +44,6 @@
         </div>
         <div class="actions">
             <button class="button btn-cart ajx-cart" data-pjax="true" onclick="addToCart(<?= $model->id?>)" title="Add to Cart" type="button"><span><?= Yii::t('app','Add to Cart')?></span></button>
-            <span class="add-to-links"> <a title="Add to Wishlist"  onclick="addToWishList(<?= $model->id ?>)" class="button link-wishlist" href=""><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+            <span class="add-to-links"> <a title="Add to Wishlist"  onclick="addToWishList(<?= $model->id ?>)" class="button link-wishlist <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" href=""><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
     </div>
 </li>

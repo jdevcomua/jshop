@@ -14,13 +14,7 @@ use common\models\Slider;
 /* @var $category_slider ItemCat[] */
 
 $this->title = Yii::$app->name;
-$wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
-if(empty($wishList)){
-    $wishList = [];
-}else{
-    $wishList = Wish::findAll(['list_id' => $wishList->id]);
-    $wishList = \yii\helpers\ArrayHelper::getColumn($wishList,'item_id');
-}
+$wishList = WishList::getAllWish();
 ?>
 <div class="content">
     <?= \common\widgets\Alert::widget(['options' => ['class'=>'visible']]) ?>

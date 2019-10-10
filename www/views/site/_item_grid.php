@@ -3,14 +3,7 @@
 
 use common\models\Wish;
 use common\models\WishList;
-
-$wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
-if(empty($wishList)){
-    $wishList = [];
-}else{
-    $wishList = Wish::findAll(['list_id' => $wishList->id]);
-    $wishList = \yii\helpers\ArrayHelper::getColumn($wishList,'item_id');
-}
+$wishList = WishList::getAllWish();
 ?>
 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
     <div class="item-inner">
@@ -25,7 +18,7 @@ if(empty($wishList)){
                 <div class="item-box-hover">
                     <div class="box-inner">
                         <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $model->id ?>)" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?=Yii::t('app','Quick View')?></span></a></div>
-                        <div class="actions"><span class="add-to-links"><a href="" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>)" title="<?=Yii::t('app','Add to Wishlist')?>"><span><?=Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                        <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>)" title="<?=Yii::t('app','Add to Wishlist')?>"><span><?=Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                     </div>
                 </div>
             </div>

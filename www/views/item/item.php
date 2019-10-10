@@ -1,5 +1,6 @@
 <?php
 
+use common\models\WishList;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
@@ -17,7 +18,7 @@ if(isset($item->category->parent))
     $this->params['breadcrumbs'][] = ['label' => $item->category->parent->title, 'url' => $item->category->parent->getUrl()];
 $this->params['breadcrumbs'][] = ['label' => $item->category->title, 'url' => $item->category->getUrl()];
 $this->params['breadcrumbs'][] = $this->title;
-
+$wishList = WishList::getAllWish();
 $imageUrls = $item->getImageUrls();
 ?>
 <div>
@@ -113,7 +114,7 @@ $imageUrls = $item->getImageUrls();
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <li> <a class="link-wishlist" href=""  onclick="addToWishList(<?= $item->id ?>); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
+                                        <li> <a class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" href="#"  onclick="addToWishList(<?= $item->id ?>); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
                                       </ul>
                                 </div>
                                 <div id="share"></div>

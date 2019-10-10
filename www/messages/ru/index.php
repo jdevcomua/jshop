@@ -247,4 +247,5 @@ return array(
     'Slider'=>'Слайдер',
     'Save'=>'Сохранить',
     'Update Seo'=>'Обновить Seo',
+    'Cash'=>'Наличными',
 );

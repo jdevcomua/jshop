@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="block-content">
                             <dl>
                                 <div id="shipping_method-progress-opcheckout">
-                                    <dt> <?=Yii::t('app','Shipping Method')?> : <?= (Yii::$app->user->isGuest) ? Yii::t('app','Not registered') : Yii::t('app','Registered') ?> </dt>
+                                    <dt> <?=Yii::t('app','Shipping Method')?> : <?= Yii::t('app','Cash') ?> </dt>
                                 </div>
                                 <!--                                <div id="payment-progress-opcheckout">-->
                                 <!--                                    <dt> Payment Method</dt>-->

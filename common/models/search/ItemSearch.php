@@ -14,6 +14,7 @@ class ItemSearch extends Item
 {
     
     public $categoryTitle;
+    public $manufacturerTitle;
 
     /**
      * @inheritdoc
@@ -24,7 +25,7 @@ class ItemSearch extends Item
             [['id', 'category_id', 'count_of_views','tracker_of_addition'], 'integer'],
             [['title','updated_at'], 'safe'],
             [['cost'], 'number'],
-            [['categoryTitle'], 'safe']
+            [['categoryTitle','manufacturerTitle'], 'safe']
         ];
     }
 
@@ -60,6 +61,11 @@ class ItemSearch extends Item
                     'desc' => ['item_cat.title' => SORT_DESC],
                     'label' => 'Category Title'
                 ],
+                'manufacturerTitle' => [
+                    'asc' => ['manufacturer.name' => SORT_ASC],
+                    'desc' => ['manufacturer.name' => SORT_DESC],
+                    'label' => 'Manufacturer Title'
+                ],
             ]
         ]);
 
@@ -79,10 +85,12 @@ class ItemSearch extends Item
         $query->andFilterWhere(['like', 'item.title', $this->title])
             ->andFilterWhere(['<', 'cost', $this->cost])
             ->andFilterWhere(['<', 'count_of_views', $this->count_of_views])
-            ->andFilterWhere(['like', 'updated_at', $this->updated_at]);
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at])
+            ->andFilterWhere(['like', 'manufacturer.name', $this->manufacturerTitle]);
         $query->joinWith(['category' => function ($q) {
             $q->where('item_cat.title LIKE "%' . $this->categoryTitle . '%"');
         }]);
+        $query->joinWith('manufacturer');
 
         return $dataProvider;
     }

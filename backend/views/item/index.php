@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $filterByCategories array */
-
+/* @var $filterByManufacturers array */
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -41,15 +41,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     'updated_at',
                     [
                         'attribute' => 'cost',
-                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...']),
+                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'count_of_views',
-                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньче чем ...']),
+                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньче чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'categoryTitle',
                         'filter' => $filterByCategories,
+                    ],
+                    [
+                        'attribute' => 'manufacturerTitle',
+                        'filter' => $filterByManufacturers,
                     ],
                     [
                         'attribute' => 'tracker_of_addition',

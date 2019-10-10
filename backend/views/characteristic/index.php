@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\CharacteristicSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $categories array */
+/* @var $categories array  */
 
 $this->title = Yii::t('app', 'Характеристики');
 $this->params['breadcrumbs'][] = $this->title;

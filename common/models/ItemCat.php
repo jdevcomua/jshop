@@ -6,6 +6,7 @@ use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
 use SplFileInfo;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use dosamigos\transliterator\TransliteratorHelper;
 use yii\db\ActiveRecord;
@@ -239,5 +240,15 @@ class ItemCat extends ModelWithImage
         } else {
             throw new NotFoundHttpException('Страница не найдена.');
         }
+    }
+
+    public static function getItemFilterByName()
+    {
+        $categories = ItemCat::find()
+            ->select(['item_cat.title'])
+            ->join('JOIN', 'item', 'item.category_id = item_cat.id')
+            ->distinct(true)
+            ->all();
+        return ArrayHelper::map($categories, 'title', 'title');
     }
 }

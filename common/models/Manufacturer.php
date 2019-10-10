@@ -43,9 +43,19 @@ class Manufacturer extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getManufacturerNames(){
+    public static function getManufacturerNames()
+    {
         $model = Manufacturer::find()->select(['id', 'name'])->all();
         $model = ArrayHelper::map($model, 'id', 'name');
         return $model;
+    }
+
+    public static function getItemFilterByName()
+    {
+        $manufacturers = Manufacturer::find()
+            ->select(['manufacturer.name'])
+            ->join('JOIN', 'item', 'item.manufacturer_id = manufacturer.id')
+            ->all();
+        return ArrayHelper::map($manufacturers, 'name', 'name');
     }
 }

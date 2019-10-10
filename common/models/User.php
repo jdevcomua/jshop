@@ -129,7 +129,11 @@ class User extends ModelWithImage implements \yii\web\IdentityInterface
 
     public function getUserName()
     {
-        return $this->name . ' ' . $this->surname;
+        if (!empty($this->name) || !empty($this->surname)){
+            return $this->name . ' ' . $this->surname;
+        }else{
+            return null;
+        }
     }
 
     /**

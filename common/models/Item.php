@@ -415,7 +415,7 @@ class Item extends Model implements CartAdd
 
     public function getManufacturer()
     {
-        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
+        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id'])??new Manufacturer();
     }
 
     /**

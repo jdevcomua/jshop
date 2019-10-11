@@ -23,10 +23,15 @@ class Theme extends BaseObject
     const PARAM_ITEMS_SORT_RATING = 'rating';
     const PARAM_ITEMS_SORT_TOP = 'top';
     const PARAM_ITEMS_SORT_PROM = 'promo';
+    const THEME_PARAMS= [
+            Theme::PARAM_ITEMS_ON_FIRST_PAGE => 12,
+            Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18 => 18,
+            Theme::PARAM_ITEMS_ON_CATALOG_PAGE_12 => 12,
+            ];
 
     public static function getParam($name)
     {
-        return \Yii::$app->params['themeParams'][$name];
+        return static::THEME_PARAMS[$name];
     }
 
     public static function getPagination($current)

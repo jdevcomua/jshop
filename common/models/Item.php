@@ -212,7 +212,11 @@ class Item extends Model implements CartAdd
 
     public function getManufacturerTitle()
     {
-        return $this->manufacturer->name;
+        if (!empty($this->manufacturer)){
+            return $this->manufacturer->name;
+        }else{
+            return null;
+        }
     }
 
     /**

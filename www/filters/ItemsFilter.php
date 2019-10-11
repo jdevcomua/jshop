@@ -64,7 +64,7 @@ class ItemsFilter
                 }
             }
 
-            if($this->data[static::R_ALL_M_FILTER]){
+            if(isset($this->data[static::M_FILTER])){
                 $session->remove(static::M_FILTER);
             }
         }

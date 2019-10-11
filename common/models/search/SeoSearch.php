@@ -49,6 +49,7 @@ class SeoSearch extends Seo
         ]);
 
         $this->load($params);
+        $this->url = rtrim($this->url, '/');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -59,13 +60,13 @@ class SeoSearch extends Seo
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'url' => $this->url,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
-            ->andFilterWhere(['like', 'h1', $this->h1])
-            ->andFilterWhere(['like', 'url', $this->url]);
+            ->andFilterWhere(['like', 'h1', $this->h1]);
 
         return $dataProvider;
     }

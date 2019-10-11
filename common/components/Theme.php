@@ -31,7 +31,11 @@ class Theme extends BaseObject
 
     public static function getParam($name)
     {
-        return static::THEME_PARAMS[$name];
+        if (isset(static::THEME_PARAMS[$name])){
+            return static::THEME_PARAMS[$name];
+        }else{
+            return 18;
+        }
     }
 
     public static function getPagination($current)

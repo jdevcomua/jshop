@@ -44,7 +44,7 @@ use common\models\Slider;
     <?= $form->field($model, 'type')->dropDownList(Slider::getSliderTypes(),[ 'prompt' => Yii::t('app','Выберите тип слайдера')]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app','Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -41,11 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'updated_at',
                     [
                         'attribute' => 'cost',
-                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...','class' => 'form-control']),
+                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньше чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'count_of_views',
-                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньче чем ...','class' => 'form-control']),
+                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньше чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'categoryTitle',

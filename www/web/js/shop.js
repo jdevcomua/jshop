@@ -171,7 +171,7 @@ function setListType(listType) {
         }
     });
 }
-function addToWishList(id) {
+function addToWishList(id,target) {
     $.ajax({
         url: '/site/wish',
         data: {item_id: id},
@@ -181,6 +181,9 @@ function addToWishList(id) {
             var fancys = document.getElementsByClassName('fancybox-inner');
             for(fancy of fancys){
                 fancy.className += ' check_fancybox';
+            }
+            if(target && !$(target).hasClass('in-wish-list')){
+                $(target).addClass('in-wish-list');
             }
         }
     });

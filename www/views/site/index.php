@@ -96,7 +96,7 @@ $wishList = WishList::getAllWish();
                                     <div class="item-box-hover">
                                         <div class="box-inner">
                                             <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                                            <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>,this); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@ $wishList = WishList::getAllWish();
                                         <div class="item-box-hover">
                                             <div class="box-inner">
                                                 <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $item->id ?>); return false;" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?= Yii::t('app','Quick View')?></span></a></div>
-                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a></span> </div>
+                                                <div class="actions"><span class="add-to-links"><a href=""  onclick="addToWishList(<?= $item->id ?>,this); return false;" class="link-wishlist item-button <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="<?= Yii::t('app','Add to Wishlist')?>"><span><?= Yii::t('app','Add to Wishlist')?></span></a></span> </div>
                                             </div>
                                         </div>
                                     </div>

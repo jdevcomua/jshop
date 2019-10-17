@@ -66,7 +66,7 @@ use yii\helpers\Html;
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12 coppyright"> <?= Yii::t('app','©2019 Copyright')?></div>
+                <div class="col-sm-4 col-xs-12 coppyright">©<span id="year">2019</span> Copyright</div>
                 <div class="col-xs-12 col-sm-4">
                 </div>
             </div>

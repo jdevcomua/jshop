@@ -555,3 +555,5 @@ $("#share").jsSocials({
     shareIn: "popup",
     shares: ["facebook", "twitter"]
 });
+
+document.getElementById('year').innerHTML = new Date().getFullYear();

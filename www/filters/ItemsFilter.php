@@ -14,7 +14,6 @@ class ItemsFilter
     ];
 
     const R_FILTERS = [
-        'page',
         'manufacturer',
         'left',
         'right',

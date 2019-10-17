@@ -50,10 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'categoryTitle',
                         'filter' => $filterByCategories,
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
                     ],
                     [
                         'attribute' => 'manufacturerTitle',
                         'filter' => $filterByManufacturers,
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
                     ],
                     [
                         'attribute' => 'tracker_of_addition',
@@ -61,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function (Item $model) {
                             return $model->getAdditionTitle();
                         },
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
                     ],
                     [
                         'class' => 'yii\grid\ActionColumn',

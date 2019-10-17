@@ -146,22 +146,6 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
-    public function slug()
-    {
-        $i=0;
-        $slugs = [];
-        $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
-        foreach ($parsers as $parser){
-            $slug = str_replace("https://metro.zakaz.ua/ru/", '',$parser->url);
-            $slug = str_replace("https://metro.zakaz.ua/uk/", '',$slug);
-            $slug = str_replace(" ", '',$slug);
-            $slug = str_replace("/", '',$slug);
-            $slugs[$i++]=$slug;
-        }
-
-        return $slugs;
-    }
-
 
     /**
      * @inheritdoc

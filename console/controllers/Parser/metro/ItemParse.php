@@ -216,9 +216,15 @@ class ItemParse
      */
     public function getCountOfSlug($categories)
     {
+
         $count = 0;
         foreach ($categories as $category){
-            $count += count($category->slug());
+            foreach ($category->parse as $parse){
+                $minusHour = time() - 3600;
+                if((int)$parse->parse_time <$minusHour){
+                    $count++;
+                }
+            }
         }
         return $count;
     }

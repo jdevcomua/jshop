@@ -151,3 +151,6 @@ a.desc:after {
 .grid-view .table-striped tr td:first-child {
     white-space:nowrap;
 }
+.grid-view{
+    overflow: auto;
+}

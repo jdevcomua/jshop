@@ -3391,7 +3391,7 @@ ul.pdt-list li.item a img.image-hover {
 .products-grid .link-compare:before {
     content: "\f012";
 }
-.products-grid .link-wishlist {
+.products-grid .link-wishlist, .products-grid .edit-item-bnt {
     color: #252932;
     font-family: 'FontAwesome';
     font-size: 14px;
@@ -7910,7 +7910,7 @@ li .list {
     border: none;
     box-shadow: none;
 }
-.link-wishlist:hover, .link-compare:hover {
+.link-wishlist:hover, .link-compare:hover ,.edit-item-bnt:hover{
     background-color: #252932;
     cursor: pointer;
     bottom: 10%;
@@ -7929,7 +7929,7 @@ li .list {
     content: "\f012";
     font-family: 'FontAwesome';
 }
-.products-list .actions .add-to-links a.link-wishlist {
+.products-list .actions .add-to-links a.link-wishlist, .products-list .actions .add-to-links a.edit-item-bnt{
     font-family: 'Rubik', sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -7949,7 +7949,7 @@ li .list {
     background-color: #efecec;
     border-radius:999px
 }
-.products-list .actions .add-to-links a.link-wishlist span {
+.products-list .actions .add-to-links a.link-wishlist span, .products-list .actions .add-to-links a.edit-item-bnt span {
     font-size: 13px;
     padding: 0px;
     font-family: 'Rubik', sans-serif;
@@ -7979,7 +7979,7 @@ li .list {
     padding: 0px;
     font-family: 'Rubik', sans-serif;
 }
-.products-list .actions .add-to-links a.link-wishlist:hover {
+.products-list .actions .add-to-links a.link-wishlist:hover , .products-list .actions .add-to-links a.edit-item-bnt:hover{
     color: #fff;
     background:#80b435
 }
@@ -9807,7 +9807,7 @@ button.button#empty_cart_button:before {
     float: left;
     margin-top: 0px;
 }
-.edit-bnt:before {
+.edit-bnt:before, .edit-item-bnt:before {
     content: "\f040";
     font-family: FontAwesome;
     font-size: 12px;
@@ -9816,7 +9816,7 @@ button.button#empty_cart_button:before {
 a.edit-bnt:hover {
     color: #339900;
 }
-.edit-bnt span {
+.edit-bnt span , .edit-item-bnt span{
     display: none;
 }
 #shopping-cart-table a.remove-item {
@@ -11276,7 +11276,7 @@ button.button span span {
 .products-grid-home .link-compare:before {
     content: "\f012";
 }
-.products-grid-home .link-wishlist {
+    .products-grid-home .link-wishlist {
     color: #fff;
     font-family: 'FontAwesome';
     font-size: 14px;

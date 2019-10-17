@@ -1,8 +1,9 @@
 <?php
 /* @var $model \common\models\Item */
 
-use common\models\Wish;
 use common\models\WishList;
+use yii\helpers\Html;
+
 $wishList = WishList::getAllWish();
 ?>
 <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
@@ -19,6 +20,15 @@ $wishList = WishList::getAllWish();
                     <div class="box-inner">
                         <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $model->id ?>)" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?=Yii::t('app','Quick View')?></span></a></div>
                         <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>,this)" title="<?=Yii::t('app','Add to Wishlist')?>"><span><?=Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                        <?php if(Yii::$app->user->can('admin')):?>
+                            <div class="actions"><span class="add-to-links">
+                                    <?=Html::a('<span>'.Yii::t('app','Edit').'</span>',
+                                        Yii::$app->urlHelper->to(['admin/item/update', 'id' => $model->id]),
+                                        ['class' => 'edit-item-bnt item-button', 'title'=>Yii::t('app','Edit')])?>
+
+                                </span>
+                            </div>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

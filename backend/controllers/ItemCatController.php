@@ -3,7 +3,6 @@
 namespace backend\controllers;
 
 use common\models\Characteristic;
-use common\models\Image;
 use common\models\Parse;
 use common\models\Seo;
 use Yii;
@@ -335,6 +334,50 @@ class ItemCatController extends Controller
         return $this->render('characteristics', [
             'models' => $models, 'category' => ItemCat::findOne($id)
         ]);
+    }
+
+    public function actionSetInSlider()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $model->in_slider = filter_var($post['checked'], FILTER_VALIDATE_BOOLEAN);
+            return $model->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function actionOrderUp()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order-1]);
+            $prev = $modelPrev->slider_order;
+            $modelPrev->slider_order = $model->slider_order;
+            $modelPrev->save();
+            $model->slider_order = $prev;
+            return $model->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function actionOrderDown()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order+1]);
+            $next = $modelPrev->slider_order;
+            $modelPrev->slider_order = $model->slider_order;
+            $modelPrev->save();
+            $model->slider_order = $next;
+            return $model->save();
+        }else{
+            return false;
+        }
     }
 
 }

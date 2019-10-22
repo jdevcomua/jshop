@@ -53,7 +53,7 @@ class SiteController extends Controller
         $cat_sliders = [];
         do {
             $category = ItemCat::find()->andFilterWhere(['in', 'parent_id', $catIds])
-                ->andFilterWhere(['active' => (int) true])->all();
+                ->andFilterWhere(['active' => (int) true])->orderBy('slider_order')->andFilterWhere(['in_slider' => (int) true])->all();
             $catIds = null;
             if ($category && count($cat_sliders) <= 16 && count($cat_sliders) < count(ItemCat::find()->all())) {
                 foreach ($category as $cat) {

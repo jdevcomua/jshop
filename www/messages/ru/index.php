@@ -249,5 +249,6 @@ return array(
     'Update Seo'=>'Обновить Seo',
     'Cash'=>'Наличными',
     'View on site'=>'Просмотреть на сайте',
-    'Are you sure you want to delete this item?'=>'Вы уверены, что хотите удалить этот элемент?'
+    'Are you sure you want to delete this item?'=>'Вы уверены, что хотите удалить этот элемент?',
+    'In slider'=>'В слайдере',
 );

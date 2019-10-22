@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'buttons' => [
                             'viewOnSite' => function($url,Item $model, $key) {
                                 return Html::a('<span class="glyphicon glyphicon-globe"></span>',$model->getUrl(),['title'=>Yii::t('app','View on site')]);
-                }
+                            }
                         ]
                     ]
                 ],

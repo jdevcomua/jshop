@@ -24,6 +24,8 @@ use yii\db\ActiveRecord;
  * @property integer $depth
  * @property integer $tree
  * @property integer $active
+ * @property integer $slider_order
+ * @property integer $in_slider
  * @property string $h1
  *
  * @property Characteristic[] $characteristics
@@ -49,6 +51,15 @@ class ItemCat extends ModelWithImage
     public static function tableName()
     {
         return 'item_cat';
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $maxSliderOrder= ItemCat::find()->max('slider_order');
+            $this->slider_order =$maxSliderOrder+1;
+        }
+        return true;
     }
 
     /**
@@ -221,7 +232,7 @@ class ItemCat extends ModelWithImage
         }
 
     }
-    public function findModel($id)
+    public static function findModel($id)
     {
         if (($model = ItemCat::findOne(['id' => $id, 'active' => true])) !== null) {
             return $model;

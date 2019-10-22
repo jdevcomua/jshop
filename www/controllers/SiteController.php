@@ -2,7 +2,6 @@
 
 namespace www\controllers;
 
-use common\components\Theme;
 use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
@@ -31,11 +30,11 @@ class SiteController extends Controller
     protected function getDefault($reload = null)
     {
         if($reload) {
-            Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            Yii::$app->session->set('page', ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18);
             Yii::$app->session->set('listType', 'grid');
             Yii::$app->session->set('sort', 'date');
         }else{
-            if(!Yii::$app->session->get('page')) Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            if(!Yii::$app->session->get('page')) Yii::$app->session->set('page', ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18);
             if(!Yii::$app->session->get('listType')) Yii::$app->session->set('listType', 'grid');
             if(!Yii::$app->session->get('sort')) Yii::$app->session->set('sort', 'date');
         }
@@ -77,7 +76,7 @@ class SiteController extends Controller
         }
 
         $items = Item::find()->andWhere(['active' => true])->orderBy('created_at desc')
-            ->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
+            ->limit(ItemsFilter::getParam(ItemsFilter::PARAM_ITEMS_ON_FIRST_PAGE));
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
@@ -162,7 +161,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => ItemsFilter::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];
@@ -249,7 +248,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => ItemsFilter::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];

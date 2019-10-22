@@ -1,6 +1,5 @@
 <?php
 
-use common\components\Theme;
 
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),

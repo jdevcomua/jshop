@@ -1,7 +1,9 @@
 <?php
 namespace www\filters;
 
-class ItemsFilter
+use yii\base\BaseObject;
+
+class ItemsFilter extends BaseObject
 {
     const FILTERS = [
         'listType',
@@ -22,6 +24,23 @@ class ItemsFilter
     const M_FILTER = 'manufacturer';
     const R_M_FILTER = 'removeOneManufacturer';
     const R_ALL_M_FILTER = 'removeManufacturer';
+
+    const PARAM_ITEMS_ON_FIRST_PAGE = 1;
+    const PARAM_ITEMS_ON_CATALOG_PAGE_12 = 2;
+    const PARAM_ITEMS_ON_CATALOG_PAGE_18 = 3;
+
+    const PARAM_ITEMS_SORT_DATE = 'date';
+    const PARAM_ITEMS_SORT_ASC = 'asc';
+    const PARAM_ITEMS_SORT_DESC = 'desc';
+    const PARAM_ITEMS_SORT_NEW = 'new';
+    const PARAM_ITEMS_SORT_RATING = 'rating';
+    const PARAM_ITEMS_SORT_TOP = 'top';
+    const PARAM_ITEMS_SORT_PROM = 'promo';
+    const THEME_PARAMS= [
+        ItemsFilter::PARAM_ITEMS_ON_FIRST_PAGE => 12,
+        ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18 => 18,
+        ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_12 => 12,
+    ];
 
     protected $data;
 
@@ -74,5 +93,53 @@ class ItemsFilter
         foreach (static::R_FILTERS as $filter){
             $session->remove($filter);
         }
+    }
+
+    public static function getParam($name)
+    {
+        if (isset(static::THEME_PARAMS[$name])){
+            return static::THEME_PARAMS[$name];
+        }else{
+            return 18;
+        }
+    }
+
+    public static function getPagination($current)
+    {
+        $array = [
+            ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_12 => ItemsFilter::getParam(ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_12),
+            ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18 => ItemsFilter::getParam(ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18),
+        ];
+        unset($array[$current]);
+        $res = '';
+        foreach ($array as $key => $line) {
+            $res .= '<li><a href="" data-pjax = true onclick="setPerPage('. $key.')">' . $line . '</a></li>';
+        }
+        return $res;
+    }
+
+    public static function getSort($current)
+    {
+        $array = ItemsFilter::getSortName();
+        unset($array[$current]);
+        $res = '';
+        foreach ($array as $key => $line) {
+            $res .= '<li><a href="" data-pjax = true onclick="setSort(\''. $key.'\')">' . $line . '</a></li>';
+        }
+        return $res;
+    }
+
+
+    public static function getSortName()
+    {
+        return [
+            ItemsFilter::PARAM_ITEMS_SORT_DATE => \Yii::t('app','date'),
+            ItemsFilter::PARAM_ITEMS_SORT_ASC => \Yii::t('app','asc'),
+            ItemsFilter::PARAM_ITEMS_SORT_DESC => \Yii::t('app','desc'),
+            ItemsFilter::PARAM_ITEMS_SORT_NEW => \Yii::t('app','new'),
+            ItemsFilter::PARAM_ITEMS_SORT_RATING => \Yii::t('app','rating'),
+            ItemsFilter::PARAM_ITEMS_SORT_TOP => \Yii::t('app','top'),
+            ItemsFilter::PARAM_ITEMS_SORT_PROM => \Yii::t('app','promo'),
+        ];
     }
 }

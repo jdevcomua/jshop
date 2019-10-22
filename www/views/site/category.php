@@ -7,7 +7,7 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 use \common\models\ItemCat;
 use www\themes\babyshop\QuickViewAsset;
-use common\components\Theme;
+use www\filters\ItemsFilter;
 use lavrentiev\widgets\toastr\Notification;
 
 /* @var $this \yii\web\View */
@@ -108,9 +108,9 @@ $this->params['breadcrumbs'][] = $category->title;
                             <div class="sort-by">
                                 <label class="left">'. Yii::t('app', 'Sort By') .': </label>
                                 <ul>
-                                    <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.Theme::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
+                                    <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.ItemsFilter::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
                                         <ul>
-                                            '.Theme::getSort(Yii::$app->session->get('sort')).'
+                                            '.ItemsFilter::getSort(Yii::$app->session->get('sort')).'
                                            
                                         </ul>
                                     </li>
@@ -120,9 +120,9 @@ $this->params['breadcrumbs'][] = $category->title;
                                 <div class="limiter">
                                     <label>'. Yii::t('app', 'View').' : </label>
                                     <ul>
-                                        <li><a href=""  data-pjax="true" onclick="setPerPage('.Yii::$app->session->get('page').')">' . Theme::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
+                                        <li><a href=""  data-pjax="true" onclick="setPerPage('.Yii::$app->session->get('page').')">' . ItemsFilter::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
                                             <ul>
-                                                '.Theme::getPagination(Yii::$app->session->get('page')).'
+                                                '.ItemsFilter::getPagination(Yii::$app->session->get('page')).'
                                             </ul>
                                         </li>
                                     </ul>
@@ -157,9 +157,9 @@ $this->params['breadcrumbs'][] = $category->title;
                             <div class="sort-by">
                                 <label class="left">'. Yii::t('app', 'Sort By').': </label>
                                 <ul>
-                                    <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.Theme::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
+                                    <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.ItemsFilter::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
                                         <ul>
-                                            '.Theme::getSort(Yii::$app->session->get('sort')).'
+                                            '.ItemsFilter::getSort(Yii::$app->session->get('sort')).'
                                            
                                         </ul>
                                     </li>
@@ -169,9 +169,9 @@ $this->params['breadcrumbs'][] = $category->title;
                                 <div class="limiter">
                                     <label>'. Yii::t('app', 'View').': </label>
                                     <ul>
-                                        <li><a href=""  data-pjax="true" onclick="setPerPage('.Yii::$app->session->get('page').')">' . Theme::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
+                                        <li><a href=""  data-pjax="true" onclick="setPerPage('.Yii::$app->session->get('page').')">' . ItemsFilter::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
                                             <ul>
-                                                '.Theme::getPagination(Yii::$app->session->get('page')).'
+                                                '.ItemsFilter::getPagination(Yii::$app->session->get('page')).'
                                             </ul>
                                         </li>
                                     </ul>
@@ -193,9 +193,9 @@ $this->params['breadcrumbs'][] = $category->title;
                                     <div class="sort-by">
                                         <label class="left">'. Yii::t('app', 'Sort By').': </label>
                                         <ul>
-                                            <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.Theme::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
+                                            <li><a href="" data-pjax="true" onclick="setSort(\''.Yii::$app->session->get('sort').'\')">'.ItemsFilter::getSortName()[Yii::$app->session->get('sort')].'<span class="right-arrow"></span></a>
                                                 <ul>
-                                                    '.Theme::getSort(Yii::$app->session->get('sort')).'
+                                                    '.ItemsFilter::getSort(Yii::$app->session->get('sort')).'
                                                    
                                                 </ul>
                                             </li>
@@ -205,9 +205,9 @@ $this->params['breadcrumbs'][] = $category->title;
                                         <div class="limiter">
                                             <label>'. Yii::t('app', 'View').' : </label>
                                             <ul>
-                                                <li><a href="" onclick="setPerPage('.Yii::$app->session->get('page').')">' . Theme::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
+                                                <li><a href="" onclick="setPerPage('.Yii::$app->session->get('page').')">' . ItemsFilter::getParam(Yii::$app->session->get('page')) . '<span class="right-arrow"></span></a>
                                                     <ul>
-                                                        '.Theme::getPagination(Yii::$app->session->get('page')).'
+                                                        '.ItemsFilter::getPagination(Yii::$app->session->get('page')).'
                                                     </ul>
                                                 </li>
                                             </ul>

@@ -59,8 +59,9 @@ class ItemController extends Controller
      */
     public function actionDel()
     {
-        if(isset(Yii::$app->request->post()['id'])){
-            foreach (Yii::$app->request->post()['id'] as $id) {
+        if(Yii::$app->request->post('id')){
+            $ids = Yii::$app->request->post('id');
+            foreach ($ids as $id) {
                 $model = $this->findModel($id);
                 $image = Image::findOne(['item_id'=>$id]);
                 if(isset($image)){

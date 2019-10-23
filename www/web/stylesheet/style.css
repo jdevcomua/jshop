@@ -1050,7 +1050,7 @@ classic: custom block drop-down box */
 
 /* Inner wrapper for additional padding */
 #nav .level0-wrapper2 {
-    padding: 20px 10px 10px 20px;
+    padding: 0px;
     background: #fff;
     border-top: none;
     box-shadow: 0 10px 20px -15px;
@@ -1320,7 +1320,7 @@ ul.level1 {
 }
 #nav .level0-wrapper2 .col-1 {
     float: left;
-    width: 72%;
+    width: 74%;
 }
 #nav .level0-wrapper2 .col-2 {
     padding: 0;
@@ -1365,6 +1365,16 @@ ul.level1 {
     vertical-align: top;
     width: 14.4%;
 }
+#nav ul.level5 > li {
+     display: list-item;
+     float: none;
+     margin-right: 0px;
+     padding-bottom: 10px;
+     padding-top: 10px;
+     vertical-align: middle;
+     width: auto;
+     border: 1px #e5e5e5 solid;
+ }
 #nav ul.level0 > li.last {
     display: inline-block;
     float: none;
@@ -1374,6 +1384,7 @@ ul.level1 {
     margin-right: 0px
 }
 #nav ul.level0 > li > a {
+    word-break: break-word;
     color: #131e2c;
     font-size: 14px;
     font-weight: 500;
@@ -13072,3 +13083,37 @@ footer {
 .testimonials-section.slider-items-products .owl-buttons .owl-next { position: absolute; right: -100px; top: 0%; margin-top:50px;}
 .testimonials-section.slider-items-products .owl-buttons .owl-next a {opacity: 1; height: 60px; line-height: 50px; width: 60px; background:none; border-left: 1px double #999;}
 .testimonials-section.slider-items-products .owl-buttons .owl-next a:before {font-size:40px; font-weight:100; line-height:60px}
+
+.background-lightgrey{
+    position: absolute;
+    background-color: #f8f6f6;
+    left: 26%;
+    bottom: 0;
+    top: 0;
+}
+
+.next-button{
+    float: right;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+.next-button:before{
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: bold;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    content: "\f105";
+    text-transform: none;
+    font-size: 19px;
+    color: #80b435;
+}
+
+.d-none{
+    display: none !important;
+}
+
+.mt-0{
+    margin-top: 0 !important;
+}

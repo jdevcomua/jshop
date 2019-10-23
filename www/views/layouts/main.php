@@ -224,7 +224,6 @@ use yii\widgets\Pjax;
         gtag('config', 'UA-142414740-1');
     </script>
 <?php endif; ?>
-
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -223,16 +223,7 @@ $this->params['breadcrumbs'][] = $category->title;
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
             <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
-                <!-- BEGIN SIDE-NAV-CATEGORY -->
-                <div class="side-nav-categories">
-                    <div class="block-title"> <?= Yii::t('app','Categories')?> </div>
-                    <!--block-title-->
-                    <!-- BEGIN BOX-CATEGORY -->
-                    <?= \www\widgets\category\CategoriesView::widget(['view' => 'grid-menu']) ?>
-                    <!--box-content box-category-->
-                </div>
-                <!--side-nav-categories-->
-                <div class="block block-layered-nav">
+                <div class="block block-layered-nav mt-0">
                     <div class="block-title"> <?=Yii::t('app','Manufacturers')?> </div>
                     <div class="block-content">
                         <dl id="narrow-by-list">
@@ -364,18 +355,5 @@ $this->params['breadcrumbs'][] = $category->title;
         <!--row-->
     </div>
     <!--container-->
-    <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            $('.side-nav-categories a').each(function (key,elem) {
-                var location = window.location.href;
-                location = location.split('-')[0];
-                var elemHref = elem.href;
-                elemHref = elemHref.split('-')[0];
-                if(location === elemHref){
-                    $(elem).addClass(' active-category');
-                }
-            });
-        });
-    </script>
 </section>
 

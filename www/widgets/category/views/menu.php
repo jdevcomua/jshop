@@ -65,10 +65,12 @@ use yii\helpers\Url;
     document.addEventListener('DOMContentLoaded', function(){
         $('.level0-wrapper2 .level5 .parent').on({
             mouseenter: function (elem) {
-                if(prevMenuId && $(this).data('id')){
+                if(prevMenuId){
                     $('#'+prevMenuId).addClass('d-none');
                 }
-                prevMenuId = $(this).data('id');
+                if($(this).data('id')){
+                    prevMenuId = $(this).data('id');
+                }
                 $('#'+prevMenuId).removeClass('d-none');
 
             },

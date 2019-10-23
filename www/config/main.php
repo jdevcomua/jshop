@@ -114,16 +114,6 @@ $config = [
                 ],
             ],
         ],
-        'view' => [
-            'theme' => [
-                'basePath' => '@app/themes/' . $params['theme'],
-                'baseUrl' => '@web/themes/'. $params['theme'],
-                'pathMap' => [
-                    '@app/views'    => '@app/themes/' . $params['theme'] . '/views',
-                    '@app/widgets'  => '@app/themes/' . $params['theme'] . '/widgets',
-                ],
-            ],
-        ],
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => false,

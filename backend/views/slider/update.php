@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = Yii::t('app','Update Slider').': ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Sliders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('app','Update');
 ?>
 <div class="slider-update">
     <div class="box box-info">

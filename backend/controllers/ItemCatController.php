@@ -159,9 +159,6 @@ class ItemCatController extends Controller
         $model = new Parse();
         if ($model->load(Yii::$app->request->post())) {
             $model->category_id = $id;
-            $model->slug = str_replace("https://metro.zakaz.ua/ru/", '',$model->url);
-            $model->slug = str_replace(" ", '',$model->slug);
-            $model->slug = str_replace("/", '',$model->slug);
             if($model->save()){
                 return $this->redirect(['view', 'id' => $id]);
             }
@@ -181,9 +178,6 @@ class ItemCatController extends Controller
             $p = Parse::findOne(['category_id'=>$id,'url'=>$parse->url]);
             if(!isset($p) && $parse->url!==''){
                 $parse->category_id = $id;
-                $parse->slug = str_replace("https://metro.zakaz.ua/ru/", '',$parse->url);
-                $parse->slug = str_replace(" ", '',$parse->slug);
-                $parse->slug = str_replace("/", '',$parse->slug);
                 $parse->save();
             }
         }

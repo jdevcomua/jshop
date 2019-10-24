@@ -189,8 +189,10 @@ class UserController extends Controller
                     $user->name = explode(' ', $userNode['name'])[0];
                     $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
-                    $user->imageFile = UploadFromUrl::initWithUrl($userNode['profile_pic']);
-                    $user->upload();
+                    if(!empty($userNode['profile_pic'])){
+                        $user->imageFile = UploadFromUrl::initWithUrl($userNode['profile_pic']);
+                        $user->upload();
+                    }
                     $user->save();
                 }
             }

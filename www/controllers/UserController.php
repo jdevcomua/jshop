@@ -163,7 +163,7 @@ class UserController extends Controller
         try {
             // Get the \Facebook\GraphNodes\GraphUser object for the current user.
             // If you provided a 'default_access_token', the '{access-token}' is optional.
-            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,profile_pic', $_SESSION['fb_access_token']);
+            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,picture.type(large)', $_SESSION['fb_access_token']);
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -189,10 +189,8 @@ class UserController extends Controller
                     $user->name = explode(' ', $userNode['name'])[0];
                     $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
-                    if(!empty($userNode['profile_pic'])){
-                        $user->imageFile = UploadFromUrl::initWithUrl($userNode['profile_pic']);
-                        $user->upload();
-                    }
+                    $user->imageFile = UploadFromUrl::initWithUrl($userNode['picture']['data']['url']);
+                    $user->upload();
                     $user->save();
                 }
             }

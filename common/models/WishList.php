@@ -62,4 +62,21 @@ class WishList extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
+
+    public static function getAllWish(){
+        if (!Yii::$app->user->isGuest){
+            $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
+            if(empty($wishList)){
+                $wishList = [];
+            }else{
+                $wishList = Wish::findAll(['list_id' => $wishList->id]);
+                $wishList = \yii\helpers\ArrayHelper::getColumn($wishList,'item_id');
+            }
+            return $wishList;
+        }else{
+            $wishList = [];
+            return $wishList;
+        }
+
+    }
 }

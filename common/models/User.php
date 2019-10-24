@@ -6,6 +6,7 @@ use budyaga\users\models\AuthAssignment;
 use budyaga\users\models\AuthItem;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "user".
@@ -33,10 +34,13 @@ use yii\helpers\ArrayHelper;
  * @property AuthItem[] $assignedRules
  * @property AuthAssignment[] $assignments
  */
-class User extends Model implements \yii\web\IdentityInterface
+class User extends ModelWithImage implements \yii\web\IdentityInterface
 {
 
     public $password;
+    public $imageFile;
+    public $dir = 'users';
+    const IMG = '/img/users/';
 
     public $confirm_password;
 
@@ -71,6 +75,8 @@ class User extends Model implements \yii\web\IdentityInterface
             [['password'], 'string', 'length' => [6, 25]],
             [['name', 'surname', 'address', 'phone', 'access_token', 'password','city'], 'string'],
             [['address','name','surname'],'string','length' => [0, 50]],
+            [['imageFile'], 'image', 'extensions' => 'png, jpg, jpeg, svg'],
+            [['image',],'string'],
             [['email'], 'email'],
         ];
     }
@@ -85,6 +91,7 @@ class User extends Model implements \yii\web\IdentityInterface
             'email' => Yii::t('app', 'E-mail'),
             'city' => Yii::t('app', 'Город'),
             'password' => Yii::t('app', 'Пароль'),
+            'confirm_password' => Yii::t('app', 'Подтвердить Пароль'),
             'address' => Yii::t('app', 'Адрес'),
             'phone' => Yii::t('app', 'Телефон'),
             'name' => Yii::t('app', 'Имя'),
@@ -122,7 +129,11 @@ class User extends Model implements \yii\web\IdentityInterface
 
     public function getUserName()
     {
-        return $this->name . ' ' . $this->surname;
+        if (!empty($this->name) || !empty($this->surname)){
+            return $this->name . ' ' . $this->surname;
+        }else{
+            return null;
+        }
     }
 
     /**
@@ -265,6 +276,34 @@ class User extends Model implements \yii\web\IdentityInterface
     public function getNotAssignedRules()
     {
         return AuthItem::find()->where(['not in', 'name', ArrayHelper::getColumn($this->assignedRules, 'name')])->all();
+    }
+
+    public function upload()
+    {
+        $file = UploadedFile::getInstance($this, 'imageFile');
+        if (isset($file)) {
+            $fileName = $this->id . mt_rand() . '.' . $file->extension;
+            if(!empty($this->getAttribute('image'))){
+                $this->deleteImage($this->getAttribute('image'));
+            }
+            $this->deleteImage($fileName);
+            $file->saveAs($this->getPath() . $fileName);
+            $this->image = $fileName;
+        }
+    }
+
+    public function beforeDelete()
+    {
+        if(isset($this->image) && file_exists($this->pathToFile($this->image))){
+            return unlink( $this->pathToFile($this->image));
+        }else{
+            return true;
+        }
+    }
+
+    public function getImageUrl()
+    {
+        return Yii::$app->getRequest()->getHostInfo().self::IMG.$this->image;
     }
 
 }

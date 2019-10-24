@@ -70,14 +70,15 @@ Text Domain:  Qmarto
 }
 .top-cate .slider-items-products .owl-buttons .owl-prev {
 	margin-top: 60px;
-	left: 16px
+	left: 22px
 }
 .top-cate .slider-items-products .owl-buttons .owl-prev a {
 	background: #dddd;
 }
 .top-cate .slider-items-products .owl-buttons .owl-next {
 	margin-top: 60px;
-	right: -1px
+	right: -0px;
+	padding: 5px 0;
 }
 .top-cate .slider-items-products .owl-buttons .owl-next a {
 	background: #dddd;

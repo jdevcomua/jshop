@@ -20,7 +20,7 @@ class ItemController extends Controller
     public function actionItem($id)
     {
         if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('modalId',Yii::$app->request->post('modalId'));
         }
 
         $id = explode('-', $id)[0];

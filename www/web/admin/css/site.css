@@ -146,5 +146,11 @@ a.desc:after {
     padding-left: 5px;
 }
 .grid-view .table-striped tr td:last-child {
-    width:65px;
+    white-space: nowrap;
+}
+.grid-view .table-striped tr td:first-child {
+    white-space:nowrap;
+}
+.grid-view{
+    overflow: auto;
 }

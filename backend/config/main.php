@@ -60,11 +60,12 @@ $config = [
             'translations' => [
                 'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/messages',
-                    'sourceLanguage' => 'ru',
+                    'basePath' => '@www/messages',
+                    'sourceLanguage' => 'en',
                     'fileMap' => [
-                        'app' => 'index.php',
+                        'app'       => 'index.php',
                         'app/error' => 'error.php',
+                        'app/model'     => 'model.php',
                     ],
                 ],
             ],

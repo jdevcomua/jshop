@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Yii;
 use common\models\StaticPage;
 use common\models\search\StaticPageSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -17,17 +16,6 @@ class StaticPageController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all StaticPage models.

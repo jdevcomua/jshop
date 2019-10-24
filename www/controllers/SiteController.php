@@ -2,13 +2,11 @@
 
 namespace www\controllers;
 
-use common\components\Theme;
 use common\models\Banner;
 use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Letter;
-use common\models\OrderItem;
 use common\models\Orders;
 use common\models\Seo;
 use common\models\Slider;
@@ -17,6 +15,7 @@ use common\models\Stock;
 use common\models\User;
 use common\models\Wish;
 use common\models\WishList;
+use www\filters\ItemsFilter;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
@@ -31,11 +30,11 @@ class SiteController extends Controller
     protected function getDefault($reload = null)
     {
         if($reload) {
-            Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            Yii::$app->session->set('page', ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18);
             Yii::$app->session->set('listType', 'grid');
             Yii::$app->session->set('sort', 'date');
         }else{
-            if(!Yii::$app->session->get('page')) Yii::$app->session->set('page', Theme::PARAM_ITEMS_ON_CATALOG_PAGE_18);
+            if(!Yii::$app->session->get('page')) Yii::$app->session->set('page', ItemsFilter::PARAM_ITEMS_ON_CATALOG_PAGE_18);
             if(!Yii::$app->session->get('listType')) Yii::$app->session->set('listType', 'grid');
             if(!Yii::$app->session->get('sort')) Yii::$app->session->set('sort', 'date');
         }
@@ -47,14 +46,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
+            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('modalId',Yii::$app->request->post('modalId'));
         }
 
         $catIds = null;
         $cat_sliders = [];
         do {
             $category = ItemCat::find()->andFilterWhere(['in', 'parent_id', $catIds])
-                ->andFilterWhere(['active' => (int) true])->all();
+                ->andFilterWhere(['active' => (int) true])->orderBy('slider_order')->andFilterWhere(['in_slider' => (int) true])->all();
             $catIds = null;
             if ($category && count($cat_sliders) <= 16 && count($cat_sliders) < count(ItemCat::find()->all())) {
                 foreach ($category as $cat) {
@@ -77,7 +76,7 @@ class SiteController extends Controller
         }
 
         $items = Item::find()->andWhere(['active' => true])->orderBy('created_at desc')
-            ->limit(Theme::getParam(Theme::PARAM_ITEMS_ON_FIRST_PAGE));
+            ->limit(ItemsFilter::getParam(ItemsFilter::PARAM_ITEMS_ON_FIRST_PAGE));
         $salesItemsQuery = Item::find()->threeItems();
         $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
@@ -129,15 +128,8 @@ class SiteController extends Controller
     public function actionSearch($search = '')
     {
         $this->getDefault(Yii::$app->request->post('data'));
-        if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
-            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
-            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
-            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
-            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
-        }
+        $filter = new ItemsFilter(Yii::$app->request->post());
+        $filter->addFilterData();
 
         $request = Yii::$app->request;
         $items = Item::find()->where(['like', 'title', $search]);
@@ -153,10 +145,14 @@ class SiteController extends Controller
         $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['between', 'cost',500,999.99])->count();
         $countCosts[] = Item::find()->where(['like', 'title', $search])->andFilterWhere(['>=', 'cost',1000])->count();
 
-        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+        $left = Yii::$app->session->get('left');
+        $right = Yii::$app->session->get('right');
+        if (isset($left) && isset($right)){
             $items->andFilterWhere(['between', 'cost',$left,$right]);
-        } else {
-            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
+        }
+
+        if($manufacturer = Yii::$app->session->get('manufacturer')){
+            $items->andFilterWhere(['in', 'manufacturer_id',$manufacturer]);
         }
         $items->with(['stockItems', 'images', 'stocks']);
 
@@ -165,7 +161,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => ItemsFilter::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];
@@ -194,17 +190,15 @@ class SiteController extends Controller
     public function actionCategory($id)
     {
         $this->getDefault(Yii::$app->request->post('data'));
-        if (Yii::$app->request->isPost) {
-            if(Yii::$app->request->post('listType')) Yii::$app->session->set('listType',Yii::$app->request->post('listType'));
-            if(Yii::$app->request->post('page')) Yii::$app->session->set('page',Yii::$app->request->post('page'));
-            if(Yii::$app->request->post('sort')) Yii::$app->session->set('sort',Yii::$app->request->post('sort'));
-            if(Yii::$app->request->post('left')) Yii::$app->session->set('left',Yii::$app->request->post('left'));
-            if(Yii::$app->request->post('right')) Yii::$app->session->set('right',Yii::$app->request->post('right'));
-            if(Yii::$app->request->post('right') == -1) Yii::$app->session->remove('right');
-            if(Yii::$app->request->post('modalId')) Yii::$app->session->set('lastQuickView',Yii::$app->request->post('modalId'));
-        }
 
         $id = explode('-', $id)[0];
+        $data = Yii::$app->request->post();
+        if(Yii::$app->session->get('currentCategoryId') !=$id){
+            Yii::$app->session->set('currentCategoryId',$id);
+            $data['currentCategoryId'] = true;
+        }
+        $filter = new ItemsFilter($data);
+        $filter->addFilterData();
         $request = Yii::$app->request;
         $selected = $request->get('filter');
         $items = $this->filter($selected);
@@ -235,14 +229,17 @@ class SiteController extends Controller
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',100,499.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['between', 'cost',500,999.99])->count();
         $countCosts[] = Item::find()->andFilterWhere(['category_id' => $category_ids])->andFilterWhere(['>=', 'cost',1000])->count();
-
-        if (($left = Yii::$app->session->get('left')) && ($right = Yii::$app->session->get('right'))) {
+        $left = Yii::$app->session->get('left');
+        $right = Yii::$app->session->get('right');
+        if (isset($left) && isset($right)){
             $items->andFilterWhere(['between', 'cost',$left,$right]);
-        } else {
-            if ($left = $request->post('left')) $items->andFilterWhere(['>=', 'cost',1000]);
         }
-        $items->with(['stockItems', 'images', 'stocks']);
 
+        if($manufacturer = Yii::$app->session->get('manufacturer')){
+            $items->andFilterWhere(['in', 'manufacturer_id',$manufacturer]);
+        }
+
+        $items->with(['stockItems', 'images', 'stocks']);
         $filterCounts = CharacteristicItem::find()->select(['characteristic_id', 'count(characteristic_id) as count'])
             ->join('inner join', 'characteristic', 'characteristic_item.characteristic_id=characteristic.id')
             ->where(['category_id' => $id])->groupBy('characteristic_id')
@@ -251,14 +248,15 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
-                'pageSize' => Theme::getParam((Yii::$app->session->get('page'))),
+                'pageSize' => ItemsFilter::getParam((Yii::$app->session->get('page'))),
             ],
         ]);
         $mapData = [];
         foreach ($dataProvider->getModels() as $key => $model){
             $mapData[$model->id] = $key;
         }
-//var_dump($modalId);
+
+
         $this->breadcrumbs = [$category->getUrl() => $category->title];
 
 
@@ -434,7 +432,7 @@ class SiteController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if(Yii::$app->user->isGuest){
-            $html = "<div class='wish_check'>Register for use Wish List</div>";
+            $html = Yii::t('app','Register for use Wish List');
             return ['html' => $html];
         }
         $wishList = WishList::findOne(['user_id'=>Yii::$app->user->id]);
@@ -448,13 +446,12 @@ class SiteController extends Controller
             $wish->list_id = $wishList->id;
             $wish->item_id = $item_id;
             $wish->save();
-            $html = "New wish added";
+            $html = Yii::t('app','New wish added');
         } else {
-            $html = "Item already are added at wish list";
+            $html = Yii::t('app','Item already are added at wish list');
         }
         return ['html' => $html];
     }
-
     /**
      * @param $wish_id integer
      * @return false|int

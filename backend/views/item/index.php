@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $filterByCategories array */
-
+/* @var $filterByManufacturers array */
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -41,15 +41,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     'updated_at',
                     [
                         'attribute' => 'cost',
-                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньче чем ...']),
+                        'filter' => Html::activeTextInput($searchModel, 'cost', ['placeholder' => 'меньше чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'count_of_views',
-                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньче чем ...']),
+                        'filter' => Html::activeTextInput($searchModel, 'count_of_views', ['placeholder' => 'меньше чем ...','class' => 'form-control']),
                     ],
                     [
                         'attribute' => 'categoryTitle',
                         'filter' => $filterByCategories,
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
+                    ],
+                    [
+                        'attribute' => 'manufacturerTitle',
+                        'filter' => $filterByManufacturers,
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
                     ],
                     [
                         'attribute' => 'tracker_of_addition',
@@ -57,12 +63,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function (Item $model) {
                             return $model->getAdditionTitle();
                         },
+                        'filterInputOptions' => ['class' => 'form-control','prompt' => Yii::t('app','All')],
                     ],
-                    ['class' => 'yii\grid\ActionColumn',
-                        'urlCreator' => function ($action, $model, $key, $index) {
-                            return Yii::$app->urlHelper->to(['item/' . $action, 'id' => $model->id]);
-                        }
-                    ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {delete} {viewOnSite}',  // the default buttons + your custom button
+                        'buttons' => [
+                            'viewOnSite' => function($url,Item $model, $key) {
+                                return Html::a('<span class="glyphicon glyphicon-globe"></span>',$model->getUrl(),['title'=>Yii::t('app','View on site')]);
+                            }
+                        ]
+                    ]
                 ],
             ]);
 

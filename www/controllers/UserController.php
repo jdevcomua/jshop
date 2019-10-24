@@ -8,6 +8,7 @@ use common\models\User;
 use common\models\WishList;
 use common\models\Wish;
 
+use igogo5yo\uploadfromurl\UploadFromUrl;
 use www\models\ChangePassword;
 use www\models\PasswordResetRequestForm;
 use www\models\ResetPasswordForm;
@@ -40,6 +41,7 @@ class UserController extends Controller
         }
         $model = User::findOne($user->id);
         if ($model->load(Yii::$app->request->post())) {
+            $model->upload();
             $model->save();
         }
         return $this->render('profile', ['model' => $model]);
@@ -161,7 +163,7 @@ class UserController extends Controller
         try {
             // Get the \Facebook\GraphNodes\GraphUser object for the current user.
             // If you provided a 'default_access_token', the '{access-token}' is optional.
-            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender', $_SESSION['fb_access_token']);
+            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,profile_pic', $_SESSION['fb_access_token']);
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -185,8 +187,12 @@ class UserController extends Controller
                     $user = new User();
                     $user->fb_id = $userNode['id'];
                     $user->name = explode(' ', $userNode['name'])[0];
-                    $user->surname = explode(' ', $userNode['name'])[3];
+                    $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
+                    if(!empty($userNode['profile_pic'])){
+                        $user->imageFile = UploadFromUrl::initWithUrl($userNode['profile_pic']);
+                        $user->upload();
+                    }
                     $user->save();
                 }
             }
@@ -211,7 +217,7 @@ class UserController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())) {
             if($model->facebook()){
-                Yii::$app->session->setFlash('error', 'Вы зарегестрированы через Facebook, создайте свой пароль');
+                Yii::$app->session->setFlash('error', 'Вы зарегистрированы через Facebook, создайте свой пароль');
                 return $this->redirect(Yii::$app->urlHelper->to(['user/forgot-password']));
             }elseif($model->login())
                 return $this->redirect(Yii::$app->urlHelper->to(['site/index']));
@@ -244,6 +250,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->setPassword($model->password);
             $model->generateAuthKey();
+            $model->upload();
             if ($model->save()) {
                 if (Yii::$app->getUser()->login($model)) {
                     return $this->goHome();
@@ -337,7 +344,7 @@ class UserController extends Controller
     public function actionEditWishList($id = null)
     {
         if (!Yii::$app->request->isAjax) {
-            throw new NotFoundHttpException('Page not found.');
+            throw new NotFoundHttpException( Yii::t('app', 'Page not found.'));
         }
 
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -366,6 +373,13 @@ class UserController extends Controller
                 ]),
                 'title' => $title,
             ];
+        }
+    }
+    public function actionDeleteImage(){
+        if(Yii::$app->user->identity->image){
+            return Yii::$app->user->identity->deleteImage();
+        }else{
+            return false;
         }
     }
 

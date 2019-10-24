@@ -3,7 +3,6 @@
 namespace backend\controllers;
 
 use common\models\Characteristic;
-use common\models\Image;
 use common\models\Parse;
 use common\models\Seo;
 use Yii;
@@ -66,7 +65,6 @@ class ItemCatController extends Controller
      */
     public function actionIndex()
     {
-
         $searchModel = new ItemCatSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(new Pagination(['pageSize' =>Yii::$app->params['pageSize']]));
@@ -133,7 +131,6 @@ class ItemCatController extends Controller
                 $continue = $model->makeRoot();
             }
             if ($continue) {
-
                 if (Yii::$app->request->post()['action'] == 'save') {
                     if($seo->load(Yii::$app->request->post())){
                         $seo->url = Yii::$app->params['serverUrl'] . '/category/' . $model->id . '-' . $model->getTranslit();
@@ -162,9 +159,6 @@ class ItemCatController extends Controller
         $model = new Parse();
         if ($model->load(Yii::$app->request->post())) {
             $model->category_id = $id;
-            $model->slug = str_replace("https://metro.zakaz.ua/ru/", '',$model->url);
-            $model->slug = str_replace(" ", '',$model->slug);
-            $model->slug = str_replace("/", '',$model->slug);
             if($model->save()){
                 return $this->redirect(['view', 'id' => $id]);
             }
@@ -184,9 +178,6 @@ class ItemCatController extends Controller
             $p = Parse::findOne(['category_id'=>$id,'url'=>$parse->url]);
             if(!isset($p) && $parse->url!==''){
                 $parse->category_id = $id;
-                $parse->slug = str_replace("https://metro.zakaz.ua/ru/", '',$parse->url);
-                $parse->slug = str_replace(" ", '',$parse->slug);
-                $parse->slug = str_replace("/", '',$parse->slug);
                 $parse->save();
             }
         }
@@ -337,6 +328,50 @@ class ItemCatController extends Controller
         return $this->render('characteristics', [
             'models' => $models, 'category' => ItemCat::findOne($id)
         ]);
+    }
+
+    public function actionSetInSlider()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $model->in_slider = filter_var($post['checked'], FILTER_VALIDATE_BOOLEAN);
+            return $model->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function actionOrderUp()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order-1]);
+            $prev = $modelPrev->slider_order;
+            $modelPrev->slider_order = $model->slider_order;
+            $modelPrev->save();
+            $model->slider_order = $prev;
+            return $model->save();
+        }else{
+            return false;
+        }
+    }
+
+    public function actionOrderDown()
+    {
+        if(Yii::$app->request->isAjax){
+            $post = Yii::$app->request->post();
+            $model = ItemCat::findModel($post['id']);
+            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order+1]);
+            $next = $modelPrev->slider_order;
+            $modelPrev->slider_order = $model->slider_order;
+            $modelPrev->save();
+            $model->slider_order = $next;
+            return $model->save();
+        }else{
+            return false;
+        }
     }
 
 }

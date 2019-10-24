@@ -787,3 +787,49 @@ function deleteParser(ev, th, block) {
     },
   });
 }
+
+
+function inSlider(id, checked) {
+  $.ajax({
+      url: '/admin/item-cat/set-in-slider',
+      data: {id: id,checked:checked},
+      dataType: 'text',
+      type: 'POST',
+  });
+}
+
+function orderUp(id) {
+  console.log(id);
+  $.ajax({
+      url: '/admin/item-cat/order-up',
+      data: {id: id},
+      dataType: 'text',
+      type: 'POST',
+      success:function (data) {
+          $.ajax({
+              url: window.location,
+              success: function () {
+                  $.pjax.reload('#itemCatList');
+              }
+          });
+      }
+  });
+}
+
+function orderDown(id) {
+  console.log(id);
+  $.ajax({
+      url: '/admin/item-cat/order-down',
+      data: {id: id},
+      dataType: 'text',
+      type: 'POST',
+      success:function (data) {
+          $.ajax({
+              url: window.location,
+              success: function () {
+                  $.pjax.reload('#itemCatList');
+              }
+          });
+      }
+  });
+}

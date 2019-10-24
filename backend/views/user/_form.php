@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -22,7 +23,16 @@ use yii\widgets\ActiveForm;
 
     echo $form->field($model, 'address')->textInput(['maxlength' => true]);
 
-    echo $form->field($model, 'phone')->textInput(['maxlength' => true]);
+    echo  $form->field($model, 'phone')->widget(MaskedInput::className(), ['class' => 'input-box input-text',
+                                    'mask' => '+38 (099) 999-99-99',
+                                    'options' => [
+                                        'class' => 'input-box input-text',
+                                        'id' => 'phone2',
+                                    ],
+                                    'clientOptions' => [
+                                        'clearIncomplete' => true
+                                    ]
+                                ])->label(Yii::t('app', 'Phone number'));
 
     echo $form->field($model, 'fb_id')->textInput(['maxlength' => true]);
 

@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Letter;
-use common\models\search\SearchLetter;
+use common\models\search\LetterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -17,17 +17,6 @@ class LetterController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Letter models.
@@ -35,7 +24,7 @@ class LetterController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchLetter();
+        $searchModel = new LetterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -73,9 +62,11 @@ class LetterController extends Controller
 
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $model = $this->findModel($id);
-            $model->delete();
+        if(isset(Yii::$app->request->post()['id'])){
+            foreach (Yii::$app->request->post()['id'] as $id) {
+                $model = $this->findModel($id);
+                $model->delete();
+            }
         }
         return $this->redirect(['index']);
     }

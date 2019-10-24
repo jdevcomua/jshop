@@ -4,10 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Log;
-use common\models\search\SearchLog;
-use yii\web\Controller;
+use common\models\search\LogSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * LogController implements the CRUD actions for Log model.
@@ -15,27 +13,12 @@ use yii\filters\VerbFilter;
 class LogController extends Controller
 {
     /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
-    /**
      * Lists all Log models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SearchLog();
+        $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

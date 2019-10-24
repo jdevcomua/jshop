@@ -110,7 +110,7 @@ class CartController extends Controller
                             'user' => Yii::$app->user->identity,
                             'order' => Orders::findOne($model->id)
                         ])
-                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setFrom([\Yii::$app->params['adminEmail'] => \Yii::$app->name . ' robot'])
                         ->setTo($model->email)
                         ->setSubject('Новый заказ №'.$model->id)
                         ->send();
@@ -120,7 +120,7 @@ class CartController extends Controller
                     ->compose('order', [
                         'order' => Orders::findOne($model->id)
                     ])
-                    ->setFrom(Yii::$app->params['adminEmail'])
+                    ->setFrom([\Yii::$app->params['adminEmail'] => \Yii::$app->name . ' robot'])
                     ->setTo(Yii::$app->params['orderEmail'])
                     ->setSubject('Новый заказ №'.$model->id)
                     ->send();

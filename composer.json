@@ -43,7 +43,8 @@
         "yiisoft/yii2-httpclient": "^2.0",
         "keltstr/yii2-simplehtmldom": "dev-master",
         "electrolinux/phpquery": "^0.9.6",
-        "lavrentiev/yii2-toastr": "dev-master"
+        "lavrentiev/yii2-toastr": "dev-master",
+        "igogo5yo/yii2-upload-from-url": ">=1.0"
 
     },
     "require-dev": {

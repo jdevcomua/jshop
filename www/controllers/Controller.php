@@ -19,9 +19,9 @@ class Controller extends \yii\web\Controller
     public function beforeAction($action)
     {
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
-        $this->seo = Seo::findOne(['url'=> $this->current_url()]);
-        if(!isset($this->seo)){
-            $new_url = str_replace(Yii::$app->params['serverUrl'], '',$action->controller->current_url());
+        $this->seo = Seo::findOne(['url'=>rtrim($this->current_url(),'/')]);
+         if(!isset($this->seo)){
+            $new_url = str_replace(Yii::$app->params['serverUrl'], '',rtrim($this->current_url(),'/'));
             $new_url = str_replace('/item/', '',$new_url);
             $new_url = str_replace('/category/', '',$new_url);
             $new_url = str_replace( (int)$new_url . '-', '',$new_url);

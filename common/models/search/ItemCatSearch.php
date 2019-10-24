@@ -18,8 +18,7 @@ class ItemCatSearch extends ItemCat
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['title'], 'safe'],
+            [['slider_order'], 'integer'],
         ];
     }
 
@@ -45,6 +44,12 @@ class ItemCatSearch extends ItemCat
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => ['slider_order'],
+                'defaultOrder' => [
+                    'slider_order' => SORT_ASC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -58,8 +63,6 @@ class ItemCatSearch extends ItemCat
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

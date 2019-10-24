@@ -33,7 +33,7 @@
                             </p>
                             <p style="font-size:15px;line-height:24px;margin:0">Вы можете отследить статус своего заказа
                                 в
-                                <a href="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['profile']); ?>"
+                                <a href="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['user/dashboard']); ?>"
                                    target="_blank" style="text-decoration:none;color:#3e77aa">личном кабинете</a>.
                             </p>
                         </td>
@@ -77,12 +77,12 @@
                                                             <tr>
                                                                 <td align="center"
                                                                     style="padding-left:20px;padding-right:20px;padding-top:5px;padding-bottom:5px;width:100px;vertical-align:middle">
-                                                                    <a href="<?= Yii::$app->request->hostInfo . Yii::$app->urlHelper->to(['item/' . $orderItem->item_id]); ?>"
+                                                                    <a href="<?= $orderItem->item->getUrl() ?>"
                                                                        target="_blank"
                                                                        style="text-decoration:none;line-height:0;">
                                                                         <img border="0"
                                                                              style="display:block;background-color:#ffffff;max-width: 80px; max-height: 55px;"
-                                                                             src="<?php echo $orderItem->item->getOneImageUrl(); ?>">
+                                                                             src="<?= $orderItem->item->getOneImageUrl(); ?>">
                                                                     </a>
                                                                 </td>
                                                                 <td style="padding-top:5px;padding-bottom:5px;vertical-align:top">
@@ -92,22 +92,22 @@
                                                                         <tr>
                                                                             <td colspan="3"
                                                                                 style="padding:0 0 3px 0;line-height:20px">
-                                                                                <a href="<?php echo Yii::$app->urlHelper->to(['item/' . $orderItem->item_id]); ?>"
+                                                                                <a href="<?= $orderItem->item->getUrl() ?>"
                                                                                    target="_blank"
                                                                                    style="color:#3e77aa;font-size:15px;text-decoration:none;">
-                                                                                    <?php echo $orderItem->item->title; ?>
+                                                                                    <?= $orderItem->item->title; ?>
                                                                                 </a>
                                                                             </td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td style="font-size:15px;width:140px;vertical-align:top;padding-top:5px">
-                                                                                <?php echo $orderItem->sum / $orderItem->count; ?> грн
+                                                                                <?= $orderItem->sum / $orderItem->count ?> грн
                                                                             </td>
                                                                             <td style="font-size:15px;width:100px;vertical-align:top;padding-top:5px">
-                                                                                <?php echo $orderItem->count; ?> шт.
+                                                                                <?= $orderItem->count ?> шт.
                                                                             </td>
                                                                             <td style="font-size:18px;width:200px;vertical-align:top;text-align:right;color:#333333;padding-top:5px">
-                                                                                <?php echo $orderItem->sum; ?> грн
+                                                                                <?= $orderItem->sum ?> грн
                                                                             </td>
                                                                         </tr>
                                                                         </tbody>
@@ -130,7 +130,7 @@
                                                                 Доставка
                                                             </td>
                                                             <td style="width:260px;vertical-align:top;padding:0">
-                                                                <?php echo $order->delivery; ?>
+                                                                <?= $order->delivery; ?>
                                                             </td>
                                                             <td style="width:180px;text-align:right;vertical-align:top;padding:0">
                                                                 <span
@@ -164,7 +164,7 @@
                                                                 Оплата
                                                             </td>
                                                             <td style="font-size:15px;vertical-align:top;">
-                                                                <?php echo $order->payment; ?>
+                                                                <?= $order->payment; ?>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -182,7 +182,7 @@
                                                                 Телефон
                                                             </td>
                                                             <td style="font-size:15px;vertical-align:top;">
-                                                                <?php echo $order->phone; ?>
+                                                                <?= $order->phone; ?>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -200,7 +200,7 @@
                                                                 Адрес
                                                             </td>
                                                             <td style="font-size:15px;vertical-align:top;">
-                                                                <?php echo $order->address; ?>
+                                                                <?= $order->address; ?>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -218,7 +218,7 @@
                                                                 Покупатель
                                                             </td>
                                                             <td style="font-size:15px;vertical-align:top;">
-                                                                <?php echo $order->name; ?>
+                                                                <?= $order->name; ?>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -236,7 +236,7 @@
                                                                 оплате
                                                             </td>
                                                             <td style="font-size:26px;text-align:right;vertical-align:baseline">
-                                                                <?php echo $order->sum; ?> грн
+                                                                <?= $order->sum; ?> грн
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -280,7 +280,7 @@
                                 <tbody>
                                 <tr>
                                     <td style="vertical-align:middle;border-right:1px solid #cccccc;width:290px;padding-left:20px;">
-										<span style="color:#666666;font-size:12px">Интернет-магазин Umka.ua<br> 04080,
+										<span style="color:#666666;font-size:12px">Интернет-магазин <?=\Yii::$app->name?><br> 04080,
 											<a href=""
                                                style="color:#3e77aa" target="_blank">Киев, ул. Ярославская, 57</a>
 										</span>
@@ -310,65 +310,21 @@
                 <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                     <tbody>
                     <tr>
-                        <td style="text-align:left;vertical-align:bottom;padding-top:10px">
-                            <a href=""
-                               target="_blank" style="text-decoration:none">
-                                <img width="101" height="36" alt="Скачать в App Store" title="Скачать в App Store"
-                                     style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/ico-app.png">
-                            </a>
-                            <a href=""
-                               target="_blank" style="text-decoration:none">
-                                <img width="111" height="36" alt="Скачать в Google play" title="Скачать в Google play"
-                                     style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/ico-google.png">
-                            </a>
-                        </td>
                         <td style="text-align:right;vertical-align:bottom;padding-top:10px">
                             <a href="" title="Facebook" target="_blank"
                                style="text-decoration:none">
                                 <img width="36" height="36" alt="Facebook" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-fb.png">
-                            </a>
-                            <a href="" title="Вконтакте" target="_blank"
-                               style="text-decoration:none">
-                                <img width="36" height="36" alt="Вконтакте" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-vk.png">
-                            </a>
-                            <a href="" title="Одноклассники"
-                               target="_blank" style="text-decoration:none">
-                                <img width="36" height="36" alt="Одноклассники" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-ok.png">
+                                     src="<?=Yii::$app->getRequest()->getHostInfo().'/images/facebook.png'?>">
                             </a>
                             <a href="" title="Twitter" target="_blank"
                                style="text-decoration:none">
                                 <img width="36" height="36" alt="Twitter" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-tw.png">
-                            </a>
-                            <a href="" title="Google+"
-                               target="_blank" style="text-decoration:none">
-                                <img width="36" height="36" alt="Google+" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-gp.png">
-                            </a>
-                            <a href="" title="YouTube"
-                               target="_blank" style="text-decoration:none">
-                                <img width="36" height="36" alt="YouTube" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-yt.png">
-                            </a>
-                            <a href="" title="Instagram" target="_blank"
-                               style="text-decoration:none">
-                                <img width="36" height="36" alt="Instagram" style="border:0;line-height:0;outline:0"
-                                     src="http://i.rozetka.ua/design/sprite/social-large-in.png">
+                                     src="<?=Yii::$app->getRequest()->getHostInfo().'/images/twitter.png'?>">
                             </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align:center;padding:5px 0 20px">
-                <span style="font-size:11px;color:#999999">Добавьте наш адрес bestdeal@umka.com.ua в ваш список контактов чтоб не пропустить ни одной скидки!</span>
             </td>
         </tr>
         </tbody>

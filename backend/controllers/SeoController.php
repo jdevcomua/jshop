@@ -4,8 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Seo;
-use common\models\search\SearchSeo;
-use yii\web\Controller;
+use common\models\search\SeoSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -17,17 +16,6 @@ class SeoController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Seo models.
@@ -35,7 +23,7 @@ class SeoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchSeo();
+        $searchModel = new SeoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -111,9 +99,11 @@ class SeoController extends Controller
 
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $model = $this->findModel($id);
-            $model->delete();
+        if(isset(Yii::$app->request->post()['id'])){
+            foreach (Yii::$app->request->post()['id'] as $id) {
+                $model = $this->findModel($id);
+                $model->delete();
+            }
         }
         return $this->redirect(['index']);
     }

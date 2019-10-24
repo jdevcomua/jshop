@@ -6,6 +6,7 @@ use common\models\query\ItemCatQuery;
 use creocoder\nestedsets\NestedSetsBehavior;
 use SplFileInfo;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use dosamigos\transliterator\TransliteratorHelper;
 use yii\db\ActiveRecord;
@@ -23,6 +24,8 @@ use yii\db\ActiveRecord;
  * @property integer $depth
  * @property integer $tree
  * @property integer $active
+ * @property integer $slider_order
+ * @property integer $in_slider
  * @property string $h1
  *
  * @property Characteristic[] $characteristics
@@ -48,6 +51,15 @@ class ItemCat extends ModelWithImage
     public static function tableName()
     {
         return 'item_cat';
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $maxSliderOrder= ItemCat::find()->max('slider_order');
+            $this->slider_order =$maxSliderOrder+1;
+        }
+        return true;
     }
 
     /**
@@ -145,21 +157,6 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
-    public function slug()
-    {
-        $i=0;
-        $slugs = [];
-        $parsers = Parse::find()->where(['category_id'=>$this->id])->all();
-        foreach ($parsers as $parser){
-            $slug = str_replace("https://metro.zakaz.ua/ru/", '',$parser->url);
-            $slug = str_replace("https://metro.zakaz.ua/uk/", '',$slug);
-            $slug = str_replace(" ", '',$slug);
-            $slug = str_replace("/", '',$slug);
-            $slugs[$i++]=$slug;
-        }
-        return $slugs;
-    }
-
 
     /**
      * @inheritdoc
@@ -235,12 +232,22 @@ class ItemCat extends ModelWithImage
         }
 
     }
-    public function findModel($id)
+    public static function findModel($id)
     {
         if (($model = ItemCat::findOne(['id' => $id, 'active' => true])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('Страница не найдена.');
         }
+    }
+
+    public static function getItemFilterByName()
+    {
+        $categories = ItemCat::find()
+            ->select(['item_cat.title'])
+            ->join('JOIN', 'item', 'item.category_id = item_cat.id')
+            ->distinct(true)
+            ->all();
+        return ArrayHelper::map($categories, 'title', 'title');
     }
 }

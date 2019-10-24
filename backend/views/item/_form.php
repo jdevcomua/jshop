@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Manufacturer;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
@@ -75,6 +76,12 @@ use zxbodya\yii2\tinymce\TinyMce;
                 <?php echo $form->field($model, 'self_cost')->textInput(); ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?php echo $form->field($model, 'manufacturer_id')
+                    ->dropDownList(Manufacturer::getManufacturerNames(),['prompt' => Yii::t('app','Выберите производителя')]); ?>
+            </div>
+        </div>
 
 
         <?= $form->field($model, 'description')->widget(TinyMce::className(), [
@@ -127,7 +134,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
+                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label(Yii::t('app','Keywords (comma separated)')) ?>
             </div>
             <div class="col-md-6">
                 <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
@@ -136,7 +143,7 @@ use zxbodya\yii2\tinymce\TinyMce;
 
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
+                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label(Yii::t('app','New URL(Фраза которая находиться после номера элемента)')) ?>
             </div>
             <div class="col-md-6">
 

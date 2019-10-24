@@ -21,6 +21,7 @@ use Eventviva\ImageResize;
  *
  * @property integer $id
  * @property integer $category_id
+ * @property integer $manufacturer_id
  * @property string $title
  * @property double $cost
  * @property double $metro_cost
@@ -44,6 +45,7 @@ use Eventviva\ImageResize;
  * @property string $image
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
+ * @property Manufacturer $manufacturer
  * @property OrderItem[] $orderItems
  * @property StockItem[] $stockItems
  * @property KitItem[] $kitItems
@@ -83,7 +85,7 @@ class Item extends Model implements CartAdd
     public function rules()
     {
         return [
-            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','tracker_of_addition','metric'], 'integer'],
+            [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','tracker_of_addition','metric','manufacturer_id'], 'integer'],
             [['title', 'cost', 'category_id'], 'required'],
             ['title', 'trim'],
             [['created_at','imageFiles','updated_at'], 'safe'],
@@ -128,7 +130,9 @@ class Item extends Model implements CartAdd
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
             'metro_cost' =>Yii::t('app', 'Цена метро'),
-            'tracker_of_addition'=>Yii::t('app', 'Добавлено:')
+            'tracker_of_addition'=>Yii::t('app', 'Добавлено:'),
+            'manufacturer_id'=>Yii::t('app', 'Manufacturer'),
+            'manufacturerTitle'=>Yii::t('app', 'Manufacturer'),
         ];
     }
 
@@ -204,6 +208,15 @@ class Item extends Model implements CartAdd
     public function getCategoryTitle()
     {
         return $this->category->title;
+    }
+
+    public function getManufacturerTitle()
+    {
+        if (!empty($this->manufacturer)){
+            return $this->manufacturer->name;
+        }else{
+            return null;
+        }
     }
 
     /**
@@ -404,6 +417,11 @@ class Item extends Model implements CartAdd
         return $this->hasOne(ItemCat::className(), ['id' => 'category_id']);
     }
 
+    public function getManufacturer()
+    {
+        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id'])??new Manufacturer();
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -564,9 +582,9 @@ class Item extends Model implements CartAdd
         $url = Yii::$app->params['serverUrl']. '/item/' . $this->id . '-' . $this->getTranslit();
         $seo = Seo::findOne(['url'=>$url]);
         if(isset($seo)&& !empty($seo->new_url)){
-            return Yii::$app->params['serverUrl'].'/item/' . $this->id . '-' . $this->strReplaceUrl($seo->new_url);
+            return Yii::$app->params['serverUrl'].'/item/' . $this->id . '-' . str_replace('.','',$this->strReplaceUrl($seo->new_url));
         }
-        return Yii::$app->params['serverUrl'] . '/item/' . $this->id . '-' . $this->getTranslit();
+        return Yii::$app->params['serverUrl'] . '/item/' . $this->id . '-' . str_replace('.','',$this->getTranslit());
     }
 
     public function strReplaceUrl($url){

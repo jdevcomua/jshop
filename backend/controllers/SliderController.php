@@ -5,8 +5,7 @@ namespace backend\controllers;
 use common\models\Image;
 use Yii;
 use common\models\Slider;
-use common\models\search\SearchSlider;
-use yii\web\Controller;
+use common\models\search\SliderSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -18,17 +17,6 @@ class SliderController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Slider models.
@@ -36,7 +24,7 @@ class SliderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchSlider();
+        $searchModel = new SliderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -132,9 +120,11 @@ class SliderController extends Controller
 
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-            $model = Slider::findOne($id);
-            $model->delete();
+        if(isset(Yii::$app->request->post()['id'])) {
+            foreach (Yii::$app->request->post()['id'] as $id) {
+                $model = Slider::findOne($id);
+                $model->delete();
+            }
         }
         return $this->redirect(['index']);
     }

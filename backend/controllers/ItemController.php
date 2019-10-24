@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Image;
 use common\models\ItemCat;
+use common\models\Manufacturer;
 use common\models\search\ItemSearch;
 use common\models\Seo;
 use yii\base\Model;
@@ -42,16 +43,12 @@ class ItemController extends Controller
         $searchModel = new ItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(new Pagination(['pageSize' => Yii::$app->params['pageSize']]));
-        $categories = Item::find()
-            ->select(['i.title'])
-            ->join('JOIN', 'item_cat i', 'item.category_id = i.id')
-            ->distinct(true)
-            ->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'filterByCategories' => ArrayHelper::map($categories, 'title', 'title'),
+            'filterByCategories' => ItemCat::getItemFilterByName(),
+            'filterByManufacturers' => Manufacturer::getItemFilterByName(),
         ]);
     }
 
@@ -62,16 +59,17 @@ class ItemController extends Controller
      */
     public function actionDel()
     {
-        foreach (Yii::$app->request->post()['id'] as $id) {
-
-            $model = $this->findModel($id);
-            $image = Image::findOne(['item_id'=>$id]);
-            if(isset($image)){
-                $model->deleteImages($image);
+        if(Yii::$app->request->post('id')){
+            $ids = Yii::$app->request->post('id');
+            foreach ($ids as $id) {
+                $model = $this->findModel($id);
+                $image = Image::findOne(['item_id'=>$id]);
+                if(isset($image)){
+                    $model->deleteImages($image);
+                }
+                $model->delete();
             }
-            $model->delete();
         }
-
         return $this->redirect(['index']);
     }
 
@@ -137,7 +135,7 @@ class ItemController extends Controller
         return $this->render('create', [
             'model' => $model,
             'categories' => $categoriesArray,
-            'seo'=>$seo,
+            'seo' => $seo,
         ]);
 
     }

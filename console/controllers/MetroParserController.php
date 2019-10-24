@@ -56,12 +56,8 @@ class MetroParserController extends Controller
         if($link->parseData()){
             $log = new Log();
             $log->message='Parse success';
-            echo $log->message;
+            echo "\n".$log->message;
             $log->save();
         }
-
     }
-
-
-
 }

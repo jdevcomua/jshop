@@ -31,7 +31,7 @@ class Letter extends \yii\db\ActiveRecord
     {
         return [
             [['letter'], 'string'],
-            [['letter'], 'required'],
+            [['letter','email', 'phone', 'name'], 'required'],
             [['order_id'], 'integer'],
             [['email'], 'email'],
             [['email', 'phone', 'name'], 'string', 'max' => 255],

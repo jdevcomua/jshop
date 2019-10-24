@@ -114,6 +114,44 @@ function setPriceRange(left, right) {
     });
 }
 
+function removeManufacturer() {
+    var removeManufacturer = true;
+    $.ajax({
+        url: '',
+        data: {removeManufacturer},
+        type: 'post',
+        success: function () {
+            $.pjax.reload('#itemList');
+        }
+    });
+    $('.manufacturer').each(function (key,elem) {
+        $(elem).prop('checked',false);
+    });
+}
+
+function manufacturer(manufacturer,target) {
+    if($(target).prop('checked')){
+        $.ajax({
+            url: '',
+            data: {manufacturer},
+            type: 'post',
+            success: function () {
+                $.pjax.reload('#itemList');
+            }
+        });
+    }else{
+        var removeOneManufacturer = manufacturer;
+        $.ajax({
+            url: '',
+            data: {removeOneManufacturer},
+            type: 'post',
+            success: function () {
+                $.pjax.reload('#itemList');
+            }
+        });
+    }
+
+}
 function setSort(sort) {
     $.ajax({
         url: '',
@@ -133,7 +171,7 @@ function setListType(listType) {
         }
     });
 }
-function addToWishList(id) {
+function addToWishList(id,target) {
     $.ajax({
         url: '/site/wish',
         data: {item_id: id},
@@ -143,6 +181,9 @@ function addToWishList(id) {
             var fancys = document.getElementsByClassName('fancybox-inner');
             for(fancy of fancys){
                 fancy.className += ' check_fancybox';
+            }
+            if(target && !$(target).hasClass('in-wish-list')){
+                $(target).addClass('in-wish-list');
             }
         }
     });
@@ -407,7 +448,7 @@ $('#submit_step_one').on('click', async function(){
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#opc-review").offset().top - 200
             }, 800);
-            $('#address_view').text('Address: ' + $('#orders-address').val());
+            $('#address_view').text('Aдрес: ' + $('#orders-address').val());
         }
     },1000);
 });
@@ -514,3 +555,5 @@ $("#share").jsSocials({
     shareIn: "popup",
     shares: ["facebook", "twitter"]
 });
+
+document.getElementById('year').innerHTML = new Date().getFullYear();

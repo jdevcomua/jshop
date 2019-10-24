@@ -3,7 +3,6 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use common\models\Orders;
 use common\models\User;
 use yii\helpers\Html;
 use backend\assets\AppAsset;
@@ -189,6 +188,11 @@ AppAsset::register($this);
                     <li class="<?= $controller == 'item-cat' ? 'active' : '' ?>">
                         <a href="<?= Yii::$app->urlHelper->to(['item-cat/index']) ?>">
                             <i class="fa fa-list"></i><span>Категории</span>
+                        </a>
+                    </li>
+                    <li class="<?= $controller == 'manufacturer' ? 'active' : '' ?>">
+                        <a href="<?= Yii::$app->urlHelper->to(['manufacturer/index']) ?>">
+                            <i class="fa fa-list"></i><span>Производители</span>
                         </a>
                     </li>
                     <li class="<?= $controller == 'characteristic' ? 'active' : '' ?>">

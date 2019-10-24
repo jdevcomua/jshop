@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\search\SearchSlider */
+/* @var $searchModel common\models\search\SliderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Слайдер';
+$this->title = Yii::t('app','Slider');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="slider-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-header with-border">
             <h3 class="box-title">
                 <?= Html::encode($this->title) ?>
-                <?= Html::a('Создать слайдер', ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('app','Create Slider'), ['create'], ['class' => 'btn btn-success']) ?>
             </h3>
         </div>
         <div class="box-body">

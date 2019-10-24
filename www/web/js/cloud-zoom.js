@@ -58,7 +58,7 @@ if (typeof Object.create !== 'function') {
 		fetch: function(imgsrc) {
 			//get the image
 			var self = this;
-			var newImg = new Image();
+			var newImg = new Image(self.jQueryelem.width()*2,self.jQueryelem.height()*2);
 			newImg.onload = function() {
 				//set the large image dimensions - used to calculte ratio's
 				self.largeWidth = newImg.width;
@@ -104,7 +104,7 @@ if (typeof Object.create !== 'function') {
 			if (self.options.zoomType == "inner") {
 				//has a border been put on the image? Lets cater for this
 				var borderWidth = self.jQueryelem.css("border-left-width");
-				self.zoomWindowStyle = "overflow: hidden;" + "margin-left: " + String(borderWidth) + ";" + "margin-top: " + String(borderWidth) + ";" + "background-position: 0px 0px;" + "width: " + String(self.nzWidth) + "px;" + "height: " + String(self.nzHeight) + "px;float: left;" + "display: none;" + "cursor:" + (self.options.cursor) + ";" + "px solid " + self.options.borderColour + ";background-repeat: no-repeat;" + "position: absolute;";
+				self.zoomWindowStyle = "background-size: "+String(self.nzWidth)*2+"px;overflow: hidden;" + "margin-left: " + String(borderWidth) + ";" + "margin-top: " + String(borderWidth) + ";" + "background-position: 0px 0px;" + "width: " + String(self.nzWidth) + "px;" + "height: " + String(self.nzHeight) + "px;float: left;" + "display: none;" + "cursor:" + (self.options.cursor) + ";" + "px solid " + self.options.borderColour + ";background-repeat: no-repeat;" + "position: absolute;";
 			}
 			//lens style for window zoom
 			if (self.options.zoomType == "window") {
@@ -974,7 +974,7 @@ if (typeof Object.create !== 'function') {
 		},
 		swaptheimage: function(smallimage, largeimage) {
 			var self = this;
-			var newImg = new Image();
+			var newImg = new Image(800,800);
 			if (self.options.loadingIcon) {
 				self.spinner = jQuery('<div style="background: url(\'' + self.options.loadingIcon + '\') no-repeat center;height:' + self.nzHeight + 'px;width:' + self.nzWidth + 'px;z-index: 2000;position: absolute; background-position: center center;"></div>');
 				self.jQueryelem.after(self.spinner);

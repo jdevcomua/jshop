@@ -31,15 +31,6 @@ use kartik\select2\Select2;
 
             <?= $form->field($model, 'adult')->checkbox(); ?>
 
-            <?= $form->field($model, 'parent_id')->widget(Select2::classname(), [
-                'data' => $categories,
-                'options' => ['placeholder' => ''],
-                'theme' => Select2::THEME_DEFAULT,
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]); ?>
-
             <?= $form->field($model, 'parent_id')->widget(Select2::class, [
                 'data' => $categories,
                 'options' => ['placeholder' => ''],
@@ -109,7 +100,7 @@ use kartik\select2\Select2;
         </div>
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label('Keywords (comma separated)') ?>
+                <?= $form->field($seo, 'keywords')->textInput(['maxlength' => true])->label(Yii::t('app','Keywords (comma separated)')) ?>
             </div>
             <div class="col-md-6">
                 <?= $form->field($seo, 'h1')->textInput(['maxlength' => true]) ?>
@@ -117,7 +108,7 @@ use kartik\select2\Select2;
         </div>
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label('New URL(Фраза которая находиться после номера элемента)') ?>
+                <?= $form->field($seo, 'new_url')->textInput(['maxlength' => true])->label(Yii::t('app','New URL(Фраза которая находиться после номера элемента)')) ?>
             </div>
             <div class="col-md-6">
 

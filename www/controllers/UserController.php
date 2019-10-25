@@ -329,7 +329,7 @@ class UserController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password was saved.');
+            Yii::$app->session->setFlash('success', Yii::t('app','New password was saved.'));
 
             return $this->redirect('login');
         }

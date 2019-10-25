@@ -252,4 +252,7 @@ return array(
     'Are you sure you want to delete this item?'=>'Вы уверены, что хотите удалить этот элемент?',
     'In slider'=>'В слайдере',
     'New password was saved.'=>'Новый пароль сохранен.',
+    'Password reset token cannot be blank.'=>'Токен сброса пароля не может быть пустым.',
+    'Wrong password reset token.'=>'Неверный токен сброса пароля.
+',
 );

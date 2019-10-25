@@ -1328,7 +1328,7 @@ ul.level1 {
 #nav .level0-wrapper2 .col-2 {
     padding: 0;
     float: left;
-    width: 26%;
+    width: 26% !important;
 }
 #nav .level0-wrapper2 .col-3 {
     padding: 5px 0;

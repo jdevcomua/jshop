@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}&nbsp;&nbsp;{permissions}',
                         'buttons' => [
                             'permissions' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url);
+                                return Html::a('<span class="glyphicon glyphicon-cog" title="'.Yii::t('app','Settings').'"></span>', $url);
                             },
                         ],
                         'contentOptions' => [

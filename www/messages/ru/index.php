@@ -253,6 +253,6 @@ return array(
     'In slider'=>'В слайдере',
     'New password was saved.'=>'Новый пароль сохранен.',
     'Password reset token cannot be blank.'=>'Токен сброса пароля не может быть пустым.',
-    'Wrong password reset token.'=>'Неверный токен сброса пароля.
-',
+    'Wrong password reset token.'=>'Неверный токен сброса пароля.',
+    'Settings'=>'Настройки',
 );

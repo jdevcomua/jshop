@@ -114,7 +114,7 @@ $imageUrls = $item->getImageUrls();
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <li> <a class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" href="#"  onclick="addToWishList(<?= $item->id ?>,this); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
+                                        <li> <a class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" href="#" data-item-id="<?= $item->id ?>"  onclick="addToWishList(<?= $item->id ?>,this); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
                                       </ul>
                                 </div>
                                 <div id="share"></div>
@@ -233,7 +233,7 @@ $imageUrls = $item->getImageUrls();
                                                     <div class="item-box-hover">
                                                         <div class="box-inner">
                                                             <div class="product-detail-bnt"><a  href=""  onclick="quickView(<?= $product->id ?>); return false;" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                            <div class="actions"><span class="add-to-links"><a href="" onclick="addToWishList(<?= $product->id ?>,this); return false;" class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                                                            <div class="actions"><span class="add-to-links"><a href="" data-item-id="<?= $product->id ?>" onclick="addToWishList(<?= $product->id ?>,this); return false;" class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
 
                                                         </div>
                                                     </div>

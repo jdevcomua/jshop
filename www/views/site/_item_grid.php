@@ -19,7 +19,7 @@ $wishList = WishList::getAllWish();
                 <div class="item-box-hover">
                     <div class="box-inner">
                         <div class="product-detail-bnt"><a href="" onclick="quickView(<?= $model->id ?>)" class="button detail-bnt item-button" title="<?=Yii::t('app','Quick View')?>"><span><?=Yii::t('app','Quick View')?></span></a></div>
-                        <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>,this)" title="<?=Yii::t('app','Add to Wishlist')?>"><span><?=Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+                        <div class="actions"><span class="add-to-links"><a href="#" data-item-id="<?= $model->id ?>" class="link-wishlist item-button <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" onclick="addToWishList(<?= $model->id ?>,this)" title="<?=Yii::t('app','Add to Wishlist')?>"><span><?=Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
                         <?php if(Yii::$app->user->can('admin')):?>
                             <div class="actions"><span class="add-to-links">
                                     <?=Html::a('<span>'.Yii::t('app','Edit').'</span>',

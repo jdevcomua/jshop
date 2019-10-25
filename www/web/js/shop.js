@@ -182,8 +182,8 @@ function addToWishList(id,target) {
             for(fancy of fancys){
                 fancy.className += ' check_fancybox';
             }
-            if(target && !$(target).hasClass('in-wish-list')){
-                $(target).addClass('in-wish-list');
+            if($('a[data-item-id="'+id+'"]') && !$('a[data-item-id="'+id+'"]').hasClass('in-wish-list')){
+                $('a[data-item-id="'+id+'"]').addClass('in-wish-list');
             }
         }
     });

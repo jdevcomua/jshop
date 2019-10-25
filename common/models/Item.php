@@ -591,6 +591,7 @@ class Item extends Model implements CartAdd
         $new_url = str_replace(Yii::$app->params['serverUrl'], '',$url);
         $new_url = str_replace('/item/', '',$new_url);
         $new_url = str_replace( $this->id . '-', '',$new_url);
+        $new_url = str_replace( '%', '',$new_url);
         return $new_url;
     }
 

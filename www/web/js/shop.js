@@ -553,7 +553,7 @@ $("#share").jsSocials({
     showCount: false,
     url:"https://sdelivery.dn.ua/",
     shareIn: "popup",
-    shares: ["facebook", "twitter"]
+    shares: ["facebook", "instagram"]
 });
 
 document.getElementById('year').innerHTML = new Date().getFullYear();

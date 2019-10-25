@@ -532,7 +532,13 @@
             countUrl: "",
             shareIn: "self"
         },
-
+        instagram: {
+            label: "Instagram",
+            logo: "fa fa-instagram",
+            shareUrl: "https://www.instagram.com/username/",
+            countUrl: "",
+            shareIn: "self"
+        },
 
         pocket: {
             label: "Pocket",

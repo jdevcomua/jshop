@@ -1293,6 +1293,9 @@ ul.level1 {
 #nav .level0-wrapper, #nav.classic ul.level0 {
     top: 80px;
 }
+#nav .level0-wrapper, #nav.classic ul.level5 {
+    top: 80px;
+}
 #nav > li > a {
     color: #80b435;
 }
@@ -1320,7 +1323,7 @@ ul.level1 {
 }
 #nav .level0-wrapper2 .col-1 {
     float: left;
-    width: 74%;
+    width: 74% !important;
 }
 #nav .level0-wrapper2 .col-2 {
     padding: 0;
@@ -1333,6 +1336,10 @@ ul.level1 {
     width: 20%;
 }
 #nav .col-1 ul.level0 > li {
+    width: 30%;
+    word-break: break-word;
+}
+#nav .col-1 ul.level5 > li {
     width: 30%;
     word-break: break-word;
 }
@@ -1366,15 +1373,29 @@ ul.level1 {
     width: 14.4%;
 }
 #nav ul.level5 > li {
-     display: list-item;
-     float: none;
-     margin-right: 0px;
-     padding-bottom: 10px;
-     padding-top: 10px;
-     vertical-align: middle;
-     width: auto;
-     border: 1px #e5e5e5 solid;
- }
+    display: inline-block;
+    float: none;
+    margin-right: 20px;
+    padding-bottom: 30px;
+    padding-top: 0;
+    vertical-align: top;
+    width: 14.4%;
+}
+#nav ul.level5 > li {
+    float: none;
+    margin-right: 0px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    vertical-align: middle;
+    width: auto;
+    height: 68px;
+    border: 1px #e5e5e5 solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+}
 #nav ul.level0 > li.last {
     display: inline-block;
     float: none;
@@ -1395,6 +1416,32 @@ ul.level1 {
     margin-bottom: 0px;
     font-family:'Rubik', sans-serif
 
+}
+#nav ul.level5 > li.last {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    padding-top: 0;
+    padding-bottom: 15px;
+    margin-right: 0px
+}
+#nav ul.level5 > li > a {
+    word-break: break-word;
+    color: #131e2c;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0px;
+    font-family:'Rubik', sans-serif
+
+}
+
+#nav ul.level5 > li > a {
+    display: flex;
+    justify-content: center;
 }
 /* 2nd level+ */
 #nav ul li {
@@ -13097,6 +13144,7 @@ footer {
     left: 26%;
     bottom: 0;
     top: 0;
+    padding-left: 3%;
 }
 
 .next-button{
@@ -13123,4 +13171,34 @@ footer {
 
 .mt-0{
     margin-top: 0 !important;
+}
+
+.menu-item-green{
+    background-color: #80b435;
+}
+.menu-item-green a  span.next-button:before{
+    font-size: 19px;
+    color: black;
+}
+/* this is the box */
+.arrow-right {
+    position: relative;
+}
+
+/* this CS forms the triangles */
+.arrow-right:after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 100%;
+    border-style: solid;
+    z-index: 1000;
+    bottom: 0;
+    top: 0;
+    border-color: transparent transparent transparent #80b435;
+    border-width: 33px;
+}
+
+ul .level5 {
+    padding-left: 0;
 }

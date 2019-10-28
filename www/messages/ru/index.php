@@ -255,4 +255,5 @@ return array(
     'Password reset token cannot be blank.'=>'Токен сброса пароля не может быть пустым.',
     'Wrong password reset token.'=>'Неверный токен сброса пароля.',
     'Settings'=>'Настройки',
+    'For delete or edit'=>'Для удаления или редактирования',
 );

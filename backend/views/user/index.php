@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         // you may configure additional properties here
                         'checkboxOptions' => function (User $model) {
                             return ['value' => $model->id];
-                        }
+                        },
+                        'header' => HTML::tag('span',null,['class'=>'glyphicon glyphicon-alert','title'=>Yii::t('app','For delete or edit')]),
                     ],
                     'id',
                     'email',

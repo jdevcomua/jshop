@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         // you may configure additional properties here
                         'checkboxOptions' => function (User $model) {
                             return ['value' => $model->id];
-                        }
+                        },
+                        'header' => HTML::tag('span',null,['class'=>'glyphicon glyphicon-alert','title'=>Yii::t('app','For delete or edit')]),
                     ],
                     'id',
                     'email',
@@ -51,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view}&nbsp;&nbsp;{update}&nbsp;&nbsp;{delete}&nbsp;&nbsp;{permissions}',
                         'buttons' => [
                             'permissions' => function ($url) {
-                                return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url);
+                                return Html::a('<span class="glyphicon glyphicon-cog" title="'.Yii::t('app','Settings').'"></span>', $url);
                             },
                         ],
                         'contentOptions' => [

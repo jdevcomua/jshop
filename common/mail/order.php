@@ -316,10 +316,10 @@
                                 <img width="36" height="36" alt="Facebook" style="border:0;line-height:0;outline:0"
                                      src="<?=Yii::$app->getRequest()->getHostInfo().'/images/facebook.png'?>">
                             </a>
-                            <a href="" title="Twitter" target="_blank"
+                            <a href="" title="Instagram" target="_blank"
                                style="text-decoration:none">
-                                <img width="36" height="36" alt="Twitter" style="border:0;line-height:0;outline:0"
-                                     src="<?=Yii::$app->getRequest()->getHostInfo().'/images/twitter.png'?>">
+                                <img width="36" height="36" alt="Instagram" style="border:0;line-height:0;outline:0"
+                                     src="<?=Yii::$app->getRequest()->getHostInfo().'/images/instagram.png'?>">
                             </a>
                         </td>
                     </tr>

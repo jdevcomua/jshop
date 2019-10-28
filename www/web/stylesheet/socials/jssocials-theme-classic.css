@@ -17,9 +17,10 @@
     background: #c23321; }
 
 .jssocials-share-instagram .jssocials-share-link {
-  background: #dd4b39;
+  background: white;
   border: 1px solid #d73925; }
 .jssocials-share-instagram .jssocials-share-link:hover {
+  color: white;
   background: #c23321; }
 
 .jssocials-share-linkedin .jssocials-share-link {

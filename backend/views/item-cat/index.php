@@ -44,7 +44,8 @@ $map = ArrayHelper::getColumn($dataProvider->models,'id');
                         // you may configure additional properties here
                         'checkboxOptions' => function ($model, $key, $index, $column) {
                             return ['value' => $model->id];
-                        }
+                        },
+                        'header' => HTML::tag('span',null,['class'=>'glyphicon glyphicon-alert','title'=>Yii::t('app','For delete or edit')]),
                     ],
                     [
                         'attribute' => 'id',

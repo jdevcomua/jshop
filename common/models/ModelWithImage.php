@@ -70,4 +70,9 @@ class ModelWithImage extends Model
         }
     }
 
+    public function beforeDelete()
+    {
+        return $this->deleteImage();
+    }
+
 }

@@ -62,7 +62,6 @@ use yii\helpers\Html;
                         <ul>
                             <li class="fb"><a href="#"></a></li>
                             <li class="instagram"><a href="#"></a></li>
-                            <li class="viber"><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>

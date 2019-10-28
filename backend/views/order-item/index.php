@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'name' => 'id',
                 'checkboxOptions' => function ($model, $key, $index, $column) {
                     return ['value' => $model->id];
-                }
+                },
+                'header' => HTML::tag('span',null,['class'=>'glyphicon glyphicon-alert','title'=>Yii::t('app','For delete or edit')]),
             ],
             ['class' => 'yii\grid\SerialColumn'],
             'id',

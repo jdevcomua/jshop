@@ -16,17 +16,21 @@ use yii\helpers\Url;
         <div class="container">
             <div class="level0-wrapper2">
                 <div class="col-2">
-                    <div class="nav-block nav-block-center">
+                    <div class="nav-block">
                         <!--mega menu-->
-                        <ul class="level0 level5">
+                        <ul class="level5">
                             <?php foreach ($allCategories as $category): ?>
+
                             <li class="level3 nav-6-1 parent item" <?php if(!empty($category->children)):?>data-id="<?=$category->id?>" <?php endif;?>>
                                 <a href="<?= $category->getUrl() ?>">
-                                    <div style="display: inline-block; width: 95%;">
-                                        <span  ><?= $category->title ?></span>
+                                    <div style="width: 95%;">
+                                        <span><?= $category->title ?></span>
                                     </div>
+
                                     <?php if(!empty($category->children)): ?>
-                                    <span class="next-button"></span>
+                                        <div style="width: 5%;">
+                                            <span class="next-button"></span>
+                                        </div>
                                     <?php endif;?>
                                 </a>
                             </li>
@@ -62,14 +66,22 @@ use yii\helpers\Url;
 
 <script>
     var prevMenuId;
+    var prevMenuItem;
     document.addEventListener('DOMContentLoaded', function(){
         $('.level0-wrapper2 .level5 .parent').on({
             mouseenter: function (elem) {
-                if(prevMenuId){
+                if(prevMenuId && prevMenuItem && $(this).data('id')){
                     $('#'+prevMenuId).addClass('d-none');
+                    prevMenuItem.removeClass('menu-item-green');
+                    prevMenuItem.removeClass('arrow-right');
                 }
                 if($(this).data('id')){
+                    prevMenuItem = $(this);
+                    prevMenuItem.addClass('menu-item-green');
                     prevMenuId = $(this).data('id');
+                    prevMenuItem.addClass('arrow-right');
+                    console.log($('.arrow-right:after'));
+                    $('.arrow-right:after').css('border-width', '50px');
                 }
                 $('#'+prevMenuId).removeClass('d-none');
 

@@ -169,7 +169,7 @@ $imageUrls = $item->getImageUrls();
                                             <?php if(Yii::$app->user->isGuest) {?>
                                             <label><span class="required"><?= Yii::t('app','Sign up before writing a review!')?></span></label>
                                             <?php } else { ?>
-                                                <p class="comment-notes"><?= $message?></p>
+                                                <p class="comment-notes comment-notes-alert"><?= $message?></p>
                                                 <p class="comment-notes"><?= Yii::t('app','Required fields are marked')?> <span class="required">*</span></p>
                                                 <div class="comment-form-rating">
                                                     <label id="rating"><?= Yii::t('app','Your rating')?> <span class="required">*</span></label>

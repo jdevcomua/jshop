@@ -81,6 +81,10 @@ class UserController extends Controller
     public function actionChangePassword()
     {
         $changePasswordModel = new ChangePassword();
+        if($changePasswordModel->facebook()){
+            Yii::$app->session->setFlash('error', 'Вы зарегистрированы через Facebook, создайте свой пароль');
+            return $this->redirect(Yii::$app->urlHelper->to(['user/forgot-password']));
+        }
         if ($changePasswordModel->load(Yii::$app->request->post())) {
             if ($changePasswordModel->validate() && $changePasswordModel->changePassword()) {
                 Yii::$app->session->setFlash('success', 'Пароль успешно изменен');

@@ -50,7 +50,8 @@ $gridColumns = [
                         ExportMenu::FORMAT_PDF => false,
                         ExportMenu::FORMAT_HTML => false,
                         ExportMenu::FORMAT_CSV => false,
-                    ]
+                    ],
+                    'filename' => date('dmy').'_товары_SDelivery',
                 ]);
                 ?>
             </h3>

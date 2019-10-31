@@ -54,6 +54,7 @@ use Eventviva\ImageResize;
  * @property Image[] $images
  * @property Stock[] $stocks
  * @property string $url
+ * @property string $tree
  */
 class Item extends Model implements CartAdd
 {
@@ -130,9 +131,10 @@ class Item extends Model implements CartAdd
             'barcode' => Yii::t('app', 'Штрихкод'),
             'code' => Yii::t('app', 'Артикул'),
             'metro_cost' =>Yii::t('app', 'Цена метро'),
-            'tracker_of_addition'=>Yii::t('app', 'Добавлено:'),
+            'tracker_of_addition'=>Yii::t('app', 'Добавлено'),
             'manufacturer_id'=>Yii::t('app', 'Manufacturer'),
             'manufacturerTitle'=>Yii::t('app', 'Manufacturer'),
+            'tree'=>Yii::t('app', 'Категория'),
         ];
     }
 
@@ -619,5 +621,17 @@ class Item extends Model implements CartAdd
         $titles = static::getMetrics();
 
         return key_exists($this->metric, $titles) ? $titles[$this->metric] : 'шт.';
+    }
+
+    public function getTree()
+    {
+        $tree = '';
+        if(isset($this->category->parent->parent))
+            $tree .= $this->category->parent->parent->title . ' > ';
+        if(isset($this->category->parent))
+            $tree .= $this->category->parent->title . ' > ';
+        $tree .= $this->category->title;
+
+        return $tree;
     }
 }

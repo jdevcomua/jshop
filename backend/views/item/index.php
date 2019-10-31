@@ -1,5 +1,6 @@
 <?php
 
+use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use \common\models\Item;
 use yii\grid\GridView;
@@ -11,6 +12,30 @@ use yii\grid\GridView;
 /* @var $filterByManufacturers array */
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
+$gridColumns = [
+    'tree',
+    'id',
+    'title',
+    'updated_at',
+    'barcode',
+    'code',
+    'cost',
+    'metro_cost',
+    [
+        'attribute' => 'metric',
+        'value' => function($model){
+            return $model->getMetricTitle();
+
+        },
+    ],
+    'manufacturerTitle',
+    [
+        'attribute' => 'tracker_of_addition',
+        'value' => function (Item $model) {
+            return $model->getAdditionTitle();
+        },
+    ],
+];
 ?>
 <div class="item-index">
     <div class="box box-info">
@@ -18,6 +43,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <h3 class="box-title">
                 <?= Html::encode($this->title) ?>
                 <?= Html::a(Yii::t('app', 'Создать товар'), Yii::$app->urlHelper->to(['item/create']), ['class' => 'btn btn-success']) ?>
+                <?= ExportMenu::widget([
+                    'dataProvider' => $dataProvider,
+                    'columns' => $gridColumns,
+                    'exportConfig' => [
+                        ExportMenu::FORMAT_TEXT => false,
+                        ExportMenu::FORMAT_PDF => false,
+                        ExportMenu::FORMAT_HTML => false,
+                        ExportMenu::FORMAT_CSV => false,
+                    ]
+                ]);
+                ?>
             </h3>
         </div>
         <div class="box-body">

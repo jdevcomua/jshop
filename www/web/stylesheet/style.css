@@ -13202,3 +13202,8 @@ footer {
 ul .level5 {
     padding-left: 0;
 }
+
+.comment-notes-alert{
+    color: #80b435;
+    font-weight: bold;
+}

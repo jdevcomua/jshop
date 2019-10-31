@@ -95,4 +95,14 @@ class ChangePassword extends Model
         return $this->_user;
     }
 
+    public function facebook()
+    {
+        $model = $this->getUser();
+
+        if (!empty($model->fb_id) && empty($model->password_hash)) {
+            return true;
+        }
+        return false;
+    }
+
 }

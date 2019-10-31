@@ -81,6 +81,10 @@ class UserController extends Controller
     public function actionChangePassword()
     {
         $changePasswordModel = new ChangePassword();
+        if($changePasswordModel->facebook()){
+            Yii::$app->session->setFlash('error', 'Вы зарегистрированы через Facebook, создайте свой пароль');
+            return $this->redirect(Yii::$app->urlHelper->to(['user/forgot-password']));
+        }
         if ($changePasswordModel->load(Yii::$app->request->post())) {
             if ($changePasswordModel->validate() && $changePasswordModel->changePassword()) {
                 Yii::$app->session->setFlash('success', 'Пароль успешно изменен');
@@ -163,7 +167,8 @@ class UserController extends Controller
         try {
             // Get the \Facebook\GraphNodes\GraphUser object for the current user.
             // If you provided a 'default_access_token', the '{access-token}' is optional.
-            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,picture.type(large)', $_SESSION['fb_access_token']);
+            $response = $fb->get('/me?fields=id,name,email,first_name,last_name,gender,albums', $_SESSION['fb_access_token']);
+            $userNode = $response->getGraphUser();
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -173,8 +178,6 @@ class UserController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-
-        $userNode = $response->getGraphUser();
 
         if (isset($userNode)) {
             $user = User::find()->andFilterWhere(['fb_id' => $userNode['id']])->one();
@@ -189,8 +192,22 @@ class UserController extends Controller
                     $user->name = explode(' ', $userNode['name'])[0];
                     $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
-                    $user->imageFile = UploadFromUrl::initWithUrl($userNode['picture']['data']['url']);
-                    $user->upload();
+                    if(!empty($userNode['albums']['data']) && !empty($userNode['albums']['data'][0]['id'])){
+                        try {
+                            $responsePhoto = $fb->get('/'.$userNode['albums']['data'][0]['id'].'/photos?fields=picture', $_SESSION['fb_access_token']);
+                            $photo = $responsePhoto->getGraphAlbum();
+                        } catch (FacebookResponseException $e) {
+                            echo 'Graph returned an error: ' . $e->getMessage();
+                            exit;
+                        } catch (FacebookSDKException $e) {
+                            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                            exit;
+                        }
+                        if(!empty($photo) && !empty($photo['data'])){
+                            $user->imageFile = UploadFromUrl::initWithUrl($photo['data'][0]['picture']);
+                            $user->upload();
+                        }
+                    }
                     $user->save();
                 }
             }

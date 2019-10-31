@@ -179,7 +179,7 @@ return array(
     'Signup' => 'Войти',
     'Register and unlock the opportunity' => 'Зарегистрируйтесь и разблокируйте возможность',
     'Leave feedback' => 'Оставить отзыв',
-    'Use wish list' => 'Используйте список пожеланий',
+    'Use wish list' => 'Использовать список пожеланий',
     'Reset password' => 'Сброс пароля',
     'Add All to Cart' => 'Добавить все в корзину',
     'Update Wishlist' => 'Обновить список желаний',

@@ -16,7 +16,6 @@ $gridColumns = [
     'tree',
     'id',
     'title',
-    'updated_at',
     'barcode',
     'code',
     'cost',

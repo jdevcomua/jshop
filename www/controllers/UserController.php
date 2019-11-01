@@ -204,7 +204,7 @@ class UserController extends Controller
                         }
                         if(!empty($photo) && !empty($photo['data'])){
                             $user->imageFile = UploadFromUrl::initWithUrl($photo['data'][0]['picture']);
-                            $user->uploadWithInstance();
+                            $user->upload($user->imageFile);
                         }
                     }
                     $user->save();

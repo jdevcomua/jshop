@@ -278,23 +278,13 @@ class User extends ModelWithImage implements \yii\web\IdentityInterface
         return AuthItem::find()->where(['not in', 'name', ArrayHelper::getColumn($this->assignedRules, 'name')])->all();
     }
 
-    public function upload()
+    public function upload($instance = null)
     {
-        $file = UploadedFile::getInstance($this, 'imageFile');
-        if (isset($file)) {
-            $fileName = $this->id . mt_rand() . '.' . $file->extension;
-            if(!empty($this->getAttribute('image'))){
-                $this->deleteImage($this->getAttribute('image'));
-            }
-            $this->deleteImage($fileName);
-            $file->saveAs($this->getPath() . $fileName);
-            $this->image = $fileName;
+        if(!empty($instance)){
+            $file = $instance;
+        }else{
+            $file = UploadedFile::getInstance($this, 'imageFile');
         }
-    }
-
-    public function uploadWithInstance()
-    {
-        $file = $this->imageFile;
         if (isset($file)) {
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
             if(!empty($this->getAttribute('image'))){

@@ -25,7 +25,6 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\helpers\Url;
 
 class UserController extends Controller
 {
@@ -205,7 +204,7 @@ class UserController extends Controller
                         }
                         if(!empty($photo) && !empty($photo['data'])){
                             $user->imageFile = UploadFromUrl::initWithUrl($photo['data'][0]['picture']);
-                            $user->upload();
+                            $user->uploadWithInstance();
                         }
                     }
                     $user->save();

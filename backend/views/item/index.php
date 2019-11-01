@@ -13,13 +13,15 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Товары');
 $this->params['breadcrumbs'][] = $this->title;
 $gridColumns = [
-    'tree',
     'id',
     'title',
+    'cost',
+    'category1',
+    'category2',
+    'category3',
+    'metro_cost',
     'barcode',
     'code',
-    'cost',
-    'metro_cost',
     [
         'attribute' => 'metric',
         'value' => function($model){

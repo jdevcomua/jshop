@@ -134,7 +134,9 @@ class Item extends Model implements CartAdd
             'tracker_of_addition'=>Yii::t('app', 'Добавлено'),
             'manufacturer_id'=>Yii::t('app', 'Manufacturer'),
             'manufacturerTitle'=>Yii::t('app', 'Manufacturer'),
-            'tree'=>Yii::t('app', 'Категория'),
+            'category1'=>Yii::t('app', 'Категория 1'),
+            'category2'=>Yii::t('app', 'Категория 2'),
+            'category3'=>Yii::t('app', 'Категория 3'),
         ];
     }
 
@@ -624,16 +626,25 @@ class Item extends Model implements CartAdd
         return key_exists($this->metric, $titles) ? $titles[$this->metric] : 'шт.';
     }
 
-    public function getTree()
+    public function getCategory1()
     {
-        $tree = '';
-        if(isset($this->category->parent->parent))
-            $tree .= $this->category->parent->parent->title . ' > ';
-        if(isset($this->category->parent))
-            $tree .= $this->category->parent->title . ' > ';
-        $tree .= $this->category->title;
+        return $this->category->title;
+    }
 
-        return $tree;
+    public function getCategory2()
+    {
+        if (isset($this->category->parent)){
+            return $this->category->parent->title;
+        }
+        return null;
+    }
+
+    public function getCategory3()
+    {
+        if (isset($this->category->parent->parent)){
+            return $this->category->parent->parent->title;
+        }
+        return null;
     }
 
     public static function roundUp($cost,$precision){

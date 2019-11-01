@@ -7,8 +7,6 @@ use common\models\Orders;
 use common\models\User;
 use common\models\WishList;
 use common\models\Wish;
-
-use igogo5yo\uploadfromurl\UploadFromUrl;
 use www\models\ChangePassword;
 use www\models\PasswordResetRequestForm;
 use www\models\ResetPasswordForm;
@@ -20,8 +18,6 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
-use yii\debug\models\timeline\DataProvider;
-use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -203,8 +199,7 @@ class UserController extends Controller
                             exit;
                         }
                         if(!empty($photo) && !empty($photo['data'])){
-                            $user->imageFile = UploadFromUrl::initWithUrl($photo['data'][0]['picture']);
-                            $user->upload($user->imageFile);
+                            $user->upload($photo['data'][0]['picture']);
                         }
                     }
                     $user->save();

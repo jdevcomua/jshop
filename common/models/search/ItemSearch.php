@@ -78,7 +78,7 @@ class ItemSearch extends Item
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
+            'item.id' => $this->id,
             'category_id' => $this->category_id,
             'tracker_of_addition' => $this->tracker_of_addition,
             ]);

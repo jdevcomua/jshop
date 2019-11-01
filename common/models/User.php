@@ -4,6 +4,7 @@ namespace common\models;
 
 use budyaga\users\models\AuthAssignment;
 use budyaga\users\models\AuthItem;
+use igogo5yo\uploadfromurl\UploadFromUrl;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
@@ -278,9 +279,18 @@ class User extends ModelWithImage implements \yii\web\IdentityInterface
         return AuthItem::find()->where(['not in', 'name', ArrayHelper::getColumn($this->assignedRules, 'name')])->all();
     }
 
-    public function upload()
+    public function upload($url = null)
     {
-        $file = UploadedFile::getInstance($this, 'imageFile');
+        if(!empty($url)){
+            $file = UploadFromUrl::initWithUrl($url);
+        }else{
+            $file = UploadedFile::getInstance($this, 'imageFile');
+        }
+        $this->uploadWithInstance($file);
+    }
+
+    public function uploadWithInstance($file)
+    {
         if (isset($file)) {
             $fileName = $this->id . mt_rand() . '.' . $file->extension;
             if(!empty($this->getAttribute('image'))){

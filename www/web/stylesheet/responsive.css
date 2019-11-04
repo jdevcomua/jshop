@@ -2525,7 +2525,7 @@ ul.slideshow {
 .toolbar.bottom .pager {  width:20%;}
 
 .pager .pages li a {
-/*padding: 2px 8px;*/
+padding: 2px 8px;
 }
 .category-products ul.products-grid li.item {
 	width: 50%;

@@ -7450,8 +7450,10 @@ ol#compare-items li:last-child {
     display: inline;
     text-transform:uppercase
 }
-.pager .pages {
-    margin: 0 -10px;
+@media (min-width: 992px){
+    .pager .pages {
+        margin: 0 -50px;
+    }
 }
 .pages .pagination {
     margin: auto;

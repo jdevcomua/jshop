@@ -40,7 +40,7 @@ use yii\db\ActiveRecord;
  */
 class ItemCat extends ModelWithImage
 {
-    
+    public $treeDepth;
     public $count;
     public $h1;
     public $dir = 'categories';
@@ -56,8 +56,8 @@ class ItemCat extends ModelWithImage
     public function beforeSave($insert)
     {
         if ($insert) {
-            $maxSliderOrder= ItemCat::find()->max('slider_order');
-            $this->slider_order =$maxSliderOrder+1;
+            $maxSliderOrder = ItemCat::find()->max('slider_order');
+            $this->slider_order =$maxSliderOrder + 1;
         }
         return true;
     }
@@ -134,7 +134,7 @@ class ItemCat extends ModelWithImage
      */
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['category_id' => 'id']);
+        return $this->hasMany(Item::class, ['category_id' => 'id']);
     }
 
     public function urlRename()
@@ -147,7 +147,7 @@ class ItemCat extends ModelWithImage
      */
     public function getCharacteristics()
     {
-        return $this->hasMany(Characteristic::className(), ['category_id' => 'id'])->indexBy('id');
+        return $this->hasMany(Characteristic::class, ['category_id' => 'id'])->indexBy('id');
     }
 
     /**
@@ -155,7 +155,7 @@ class ItemCat extends ModelWithImage
      */
     public function getChildren()
     {
-        return $this->hasMany(ItemCat::className(), ['parent_id' => 'id'])->andWhere(['active' => true]);
+        return $this->hasMany(ItemCat::class, ['parent_id' => 'id'])->andWhere(['active' => true]);
     }
 
     /**
@@ -174,10 +174,12 @@ class ItemCat extends ModelWithImage
     {
         return $this->hasOne(ItemCat::className(), ['id' => 'parent_id']);
     }
+
     public function getParse()
     {
         return $this->hasMany(Parse::className(), ['category_id' => 'id']);
     }
+
     public function setParse($value)
     {
         return $this->parse = $value;
@@ -197,7 +199,8 @@ class ItemCat extends ModelWithImage
         return Yii::$app->urlHelper->to(['/category/' . $this->id . '-' . $this->getTranslit()]);
     }
 
-    public function strReplaceUrl($url){
+    public function strReplaceUrl($url)
+    {
         $new_url = str_replace(Yii::$app->params['serverUrl'], '',$url);
         $new_url = str_replace('/category/', '',$new_url);
         $new_url = str_replace( $this->id . '-', '',$new_url);
@@ -221,6 +224,7 @@ class ItemCat extends ModelWithImage
         }
         return $childrenIdList;
     }
+
     public function getImageUrl()
     {
         $info = new SplFileInfo($this->image);

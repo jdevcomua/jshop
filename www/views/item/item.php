@@ -115,6 +115,13 @@ $imageUrls = $item->getImageUrls();
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
                                         <li> <a class="link-wishlist <?=!empty($wishList) ? in_array($item->id,$wishList)?'in-wish-list':'':''?>" href="#" data-item-id="<?= $item->id ?>"  onclick="addToWishList(<?= $item->id ?>,this); return false;" ><span><?= Yii::t('app','Add to Wishlist')?></span></a></li>
+                                        <?php if(Yii::$app->user->can('admin')):?>
+                                            <li>
+                                                <?=Html::a('<span>'.Yii::t('app','Edit').'</span>',
+                                                Yii::$app->urlHelper->to(['admin/item/update', 'id' => $item->id]),
+                                                ['class' => 'edit-item-bnt', 'title'=>Yii::t('app','Edit'),'target'=>'_blank'])?>
+                                            </li>
+                                        <?php endif;?>
                                       </ul>
                                 </div>
                                 <div id="share"></div>

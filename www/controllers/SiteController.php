@@ -204,7 +204,7 @@ class SiteController extends Controller
         $items = $this->filter($selected);
         $items->andFilterWhere(['category_id' => $id]);
         /**@var ItemCat $category*/
-        $category = ItemCat::findModel($id);
+        $category = self::findItemCatModel($id);
         $category_ids = $category->getFamily();
         $items->orFilterWhere(['in','category_id',$category_ids]);
         $slider = Slider::find()->all();
@@ -534,6 +534,14 @@ class SiteController extends Controller
     protected function findModelOrder($id)
     {
         if (($model = Orders::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function findItemCatModel($id)
+    {
+        if (($model = ItemCat::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

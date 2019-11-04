@@ -187,10 +187,10 @@ class UserController extends Controller
                     $user->name = explode(' ', $userNode['name'])[0];
                     $user->surname = $userNode['last_name'];
                     $user->email = $userNode['email'];
-                    if(!empty($userNode['albums']['data']) && !empty($userNode['albums']['data'][0]['id'])){
+                    if(!empty($userNode['albums']) && !empty($userNode['albums'][0]['id'])){
                         try {
-                            $responsePhoto = $fb->get('/'.$userNode['albums']['data'][0]['id'].'/photos?fields=picture', $_SESSION['fb_access_token']);
-                            $photo = $responsePhoto->getGraphNode();
+                            $responsePhoto = $fb->get('/'.$userNode['albums'][0]['id'].'/photos?fields=picture', $_SESSION['fb_access_token']);
+                            $photo = $responsePhoto->getGraphEdge();
                         } catch (FacebookResponseException $e) {
                             echo 'Graph returned an error: ' . $e->getMessage();
                             exit;
@@ -198,8 +198,8 @@ class UserController extends Controller
                             echo 'Facebook SDK returned an error: ' . $e->getMessage();
                             exit;
                         }
-                        if(!empty($photo) && !empty($photo['data'])){
-                            $user->upload($photo['data'][0]['picture']);
+                        if(!empty($photo)){
+                            $user->upload($photo[0]['picture']);
                         }
                     }
                     $user->save();

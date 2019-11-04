@@ -557,3 +557,8 @@ $("#share").jsSocials({
 });
 
 document.getElementById('year').innerHTML = new Date().getFullYear();
+
+$('a.edit-item-bnt').on('click',function(e){
+    e.stopPropagation();
+    window.open(this.href);
+});

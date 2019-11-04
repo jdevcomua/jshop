@@ -24,7 +24,7 @@ $wishList = WishList::getAllWish();
                             <div class="actions"><span class="add-to-links">
                                     <?=Html::a('<span>'.Yii::t('app','Edit').'</span>',
                                         Yii::$app->urlHelper->to(['admin/item/update', 'id' => $model->id]),
-                                        ['class' => 'edit-item-bnt item-button', 'title'=>Yii::t('app','Edit')])?>
+                                        ['class' => 'edit-item-bnt item-button', 'title'=>Yii::t('app','Edit'),'target'=>'_blank'])?>
 
                                 </span>
                             </div>
@@ -56,5 +56,4 @@ $wishList = WishList::getAllWish();
             </div>
         </div>
     </div>
-
 </li>

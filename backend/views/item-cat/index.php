@@ -18,9 +18,10 @@ $map = ArrayHelper::getColumn($dataProvider->models,'id');
 <div class="item-cat-index">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title"><?= Html::encode($this->title) . ' ';
-                echo Html::a(Yii::t('app', 'Создать категорию'), Yii::$app->urlHelper->to(['item-cat/create']),
-                    ['class' => 'btn btn-success']) ?>
+            <h3 class="box-title">
+                <?= Html::encode($this->title) ?>
+                <?= Html::a(Yii::t('app', 'Создать категорию'),['item-cat/create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('app', 'Tree'), ['index-tree'], ['class' => 'btn btn-success']) ?>
             </h3>
         </div>
         <div class="box-body">

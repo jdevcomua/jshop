@@ -3467,7 +3467,7 @@ ul.pdt-list li.item a img.image-hover {
     background:#fff;
     border-radius:50px
 }
-.products-grid .box-inner .actions .link-wishlist span, .products-grid .box-inner .actions .add-to-links a.link-compare span {
+.products-grid .box-inner .actions .link-wishlist span,.products-grid .box-inner .actions .edit-item-bnt span, .products-grid .box-inner .actions .add-to-links a.link-compare span {
     display: none;
 }
 .products-grid .link-compare {
@@ -8577,7 +8577,29 @@ ul.shipping-pro li {
     font-size: 13px;
     margin-right: 3px;
 }
+.product-view .product-shop .add-to-links .edit-item-bnt:before {
+    content: "\f040";
+    font-family: FontAwesome;
+    font-size: 13px;
+    margin-right: 3px;
+}
 .product-view .product-shop .add-to-links .link-wishlist {
+    background: #efecec;
+    color: #333;
+    line-height: normal;
+    font-weight: normal;
+    vertical-align: top;
+    display: block;
+    height: 38px;
+    border: none;
+    line-height: 36px;
+    vertical-align: top;
+    text-align: center;
+    border-radius: 5px;
+    padding: 0px 15px;
+    transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
+}
+.product-view .product-shop .add-to-links .edit-item-bnt {
     background: #efecec;
     color: #333;
     line-height: normal;
@@ -8615,7 +8637,8 @@ ul.shipping-pro li {
     padding: 0px 15px;
     transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
 }
-.product-view .product-shop .add-to-links .link-compare:hover, .product-view .product-shop .add-to-links .link-wishlist:hover {
+.product-view .product-shop .add-to-links .link-compare:hover, .product-view .product-shop .add-to-links .link-wishlist:hover,
+.product-view .product-shop .add-to-links .edit-item-bnt:hover {
     color: #fff;
     background-color: #88be4c;
     border-color:#88be4c
@@ -9881,9 +9904,9 @@ button.button#empty_cart_button:before {
 a.edit-bnt:hover {
     color: #339900;
 }
-.edit-bnt span , .edit-item-bnt span{
-    display: none;
-}
+/*.edit-bnt span , .edit-item-bnt span{*/
+/*    display: none;*/
+/*}*/
 #shopping-cart-table a.remove-item {
     background-color: #fff;
     background-image: none;

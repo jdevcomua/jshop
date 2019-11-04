@@ -9,6 +9,7 @@ use Yii;
 use yii\base\Model;
 use common\models\ItemCat;
 use common\models\search\ItemCatSearch;
+use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
@@ -77,6 +78,36 @@ class ItemCatController extends Controller
             $context['deleted'] = $deleted;
         }
         return $this->render('index', $context);
+    }
+
+    private function getChildrenItemCat(&$models, ItemCat $parent, $depth)
+    {
+        $parent->treeDepth = $depth;
+        $models[] = $parent;
+        foreach ($parent->children as $model){
+            $this->getChildrenItemCat($models, $model, $depth + 1);
+        }
+    }
+
+    /**
+     * Lists all ItemCat models.
+     * @return mixed
+     */
+    public function actionIndexTree()
+    {
+        $models = [];
+        foreach (ItemCat::find()->all() as $root){
+            $this->getChildrenItemCat($models, $root, 1);
+        }
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $models,
+            'pagination' => [
+                'pageSize' => 100,
+            ],
+        ]);
+        return $this->render('index-tree', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
     
     /**

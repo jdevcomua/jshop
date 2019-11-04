@@ -37,11 +37,14 @@ $map = ArrayHelper::getColumn($dataProvider->models,'id');
                         'filter' => false,
                         'value' => function(ItemCat $model){
                             $s = '';
-                            foreach ($model->treeDepth as $k){
-                                $s .= '--';
+                            for ($i = 1; $i < $model->treeDepth; $i++){
+                                $s .= '----';
                             }
                             return $s . ' ' . $model->title;
                         }
+                    ],
+                    [
+                        'attribute' => 'active',
                     ],
                     [
                          'class' => 'yii\grid\ActionColumn',

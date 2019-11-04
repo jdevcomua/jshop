@@ -232,14 +232,6 @@ class ItemCat extends ModelWithImage
         }
 
     }
-    public static function findModel($id)
-    {
-        if (($model = ItemCat::findOne(['id' => $id, 'active' => true])) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('Страница не найдена.');
-        }
-    }
 
     public static function getItemFilterByName()
     {

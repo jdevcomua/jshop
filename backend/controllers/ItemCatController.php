@@ -334,7 +334,7 @@ class ItemCatController extends Controller
     {
         if(Yii::$app->request->isAjax){
             $post = Yii::$app->request->post();
-            $model = ItemCat::findModel($post['id']);
+            $model = self::findModel($post['id']);
             $model->in_slider = filter_var($post['checked'], FILTER_VALIDATE_BOOLEAN);
             return $model->save();
         }else{
@@ -346,7 +346,7 @@ class ItemCatController extends Controller
     {
         if(Yii::$app->request->isAjax){
             $post = Yii::$app->request->post();
-            $model = ItemCat::findModel($post['id']);
+            $model = self::findModel($post['id']);
             $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order-1]);
             $prev = $modelPrev->slider_order;
             $modelPrev->slider_order = $model->slider_order;
@@ -362,7 +362,7 @@ class ItemCatController extends Controller
     {
         if(Yii::$app->request->isAjax){
             $post = Yii::$app->request->post();
-            $model = ItemCat::findModel($post['id']);
+            $model = self::findModel($post['id']);
             $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order+1]);
             $next = $modelPrev->slider_order;
             $modelPrev->slider_order = $model->slider_order;

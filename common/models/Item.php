@@ -625,26 +625,35 @@ class Item extends Model implements CartAdd
 
         return key_exists($this->metric, $titles) ? $titles[$this->metric] : 'шт.';
     }
-
     public function getCategory1()
     {
-        return $this->category->title;
+        if (isset($this->category->parent->parent)){
+            return $this->category->parent->parent->title;
+        }elseif (isset($this->category->parent)){
+            return $this->category->parent->title;
+        }else{
+            return $this->category->title;
+        }
     }
 
     public function getCategory2()
     {
-        if (isset($this->category->parent)){
+        if (isset($this->category->parent->parent)){
             return $this->category->parent->title;
+        }elseif (isset($this->category->parent)){
+            return $this->category->title;
+        }else{
+            return null;
         }
-        return null;
     }
 
     public function getCategory3()
     {
         if (isset($this->category->parent->parent)){
-            return $this->category->parent->parent->title;
+            return $this->category->title;
+        }else{
+            return null;
         }
-        return null;
     }
 
     public static function roundUp($cost,$precision){

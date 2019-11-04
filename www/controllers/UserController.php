@@ -190,7 +190,7 @@ class UserController extends Controller
                     if(!empty($userNode['albums']) && !empty($userNode['albums'][0]['id'])){
                         try {
                             $responsePhoto = $fb->get('/'.$userNode['albums'][0]['id'].'/photos?fields=picture', $_SESSION['fb_access_token']);
-                            $photo = $responsePhoto->getGraphNode();
+                            $photo = $responsePhoto->getGraphEdge();
                         } catch (FacebookResponseException $e) {
                             echo 'Graph returned an error: ' . $e->getMessage();
                             exit;

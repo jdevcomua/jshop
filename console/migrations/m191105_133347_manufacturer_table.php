@@ -12,7 +12,7 @@ class m191105_133347_manufacturer_table extends Migration
      */
     public function safeUp()
     {
-        $tableOption = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+        $tableOption = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         $this->dropTable('{{%manufacturer}}');
         $this->createTable('{{%manufacturer}}', [
             'id' => $this->primaryKey(),

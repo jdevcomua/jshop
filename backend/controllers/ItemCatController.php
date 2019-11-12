@@ -101,9 +101,7 @@ class ItemCatController extends Controller
         }
         $dataProvider = new ArrayDataProvider([
             'allModels' => $models,
-            'pagination' => [
-                'pageSize' => 100,
-            ],
+            'pagination' => false,
         ]);
         return $this->render('index-tree', [
             'dataProvider' => $dataProvider,

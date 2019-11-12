@@ -83,8 +83,8 @@ class ItemCatController extends Controller
     private function getChildrenItemCat(&$models, ItemCat $parent, $depth)
     {
         $parent->treeDepth = $depth;
-        $models[] = $parent;
-        foreach ($parent->children as $model){
+        $models[$parent->id] = $parent;
+        foreach ($parent->getChildren()->orderBy('slider_order')->all() as $model){
             $this->getChildrenItemCat($models, $model, $depth + 1);
         }
     }
@@ -96,7 +96,7 @@ class ItemCatController extends Controller
     public function actionIndexTree()
     {
         $models = [];
-        foreach (ItemCat::find()->all() as $root){
+        foreach (ItemCat::find()->andWhere(['parent_id' => null])->orderBy('slider_order')->all() as $root){
             $this->getChildrenItemCat($models, $root, 1);
         }
         $dataProvider = new ArrayDataProvider([
@@ -286,6 +286,7 @@ class ItemCatController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException
+     * @throws \Exception|\Throwable
      */
     public function actionDelete($id)
     {
@@ -293,7 +294,7 @@ class ItemCatController extends Controller
         if ($category->getItems()->count() > 0) {
             $deleted = false;
         } else {
-            $this->findModel($id)->deleteWithChildren();
+            $category->delete();
             $deleted = true;
         }
 
@@ -378,7 +379,9 @@ class ItemCatController extends Controller
         if(Yii::$app->request->isAjax){
             $post = Yii::$app->request->post();
             $model = self::findModel($post['id']);
-            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order-1]);
+            $modelPrev = ItemCat::find()->where(['<', 'slider_order', $model->slider_order])
+                ->orderBy(['slider_order' => SORT_DESC])
+                ->one();
             $prev = $modelPrev->slider_order;
             $modelPrev->slider_order = $model->slider_order;
             $modelPrev->save();
@@ -394,10 +397,12 @@ class ItemCatController extends Controller
         if(Yii::$app->request->isAjax){
             $post = Yii::$app->request->post();
             $model = self::findModel($post['id']);
-            $modelPrev = ItemCat::findOne(['slider_order'=>$model->slider_order+1]);
-            $next = $modelPrev->slider_order;
-            $modelPrev->slider_order = $model->slider_order;
-            $modelPrev->save();
+            $modelNext = ItemCat::find()->where(['>', 'slider_order', $model->slider_order])
+                ->orderBy(['slider_order' => SORT_ASC])
+                ->one();
+            $next = $modelNext->slider_order;
+            $modelNext->slider_order = $model->slider_order;
+            $modelNext->save();
             $model->slider_order = $next;
             return $model->save();
         }else{

@@ -155,7 +155,8 @@ class ItemCat extends ModelWithImage
      */
     public function getChildren()
     {
-        return $this->hasMany(ItemCat::class, ['parent_id' => 'id'])->andWhere(['active' => true]);
+        return $this->hasMany(ItemCat::class, ['parent_id' => 'id'])->andWhere(['active' => true])
+            ->orderBy(['slider_order' =>SORT_ASC]);
     }
 
     /**

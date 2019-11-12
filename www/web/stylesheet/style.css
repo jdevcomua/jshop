@@ -1388,7 +1388,7 @@ ul.level1 {
     padding-top: 10px;
     vertical-align: middle;
     width: auto;
-    height: 68px;
+    height: 54px;
     border: 1px #e5e5e5 solid;
     display: flex;
     flex-direction: column;
@@ -13219,11 +13219,15 @@ footer {
     bottom: 0;
     top: 0;
     border-color: transparent transparent transparent #80b435;
-    border-width: 33px;
+    border-width: 26px;
 }
 
 ul .level5 {
     padding-left: 0;
+}
+
+ul.level0.sub-menu{
+    margin-top: 14px;
 }
 
 .comment-notes-alert{

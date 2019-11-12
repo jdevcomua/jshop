@@ -45,7 +45,7 @@ use yii\helpers\Url;
 
                 <div class="col-1 background-lightgrey d-none" id="<?=$category->id?>">
                     <div class="nav-block nav-block-center">
-                        <ul class="level0">
+                        <ul class="level0 sub-menu">
                             <?php foreach ($category->children as $children): ?>
                             <li class="level3 nav-6-1 parent item"> <a href="<?=$children->getUrl()?>"><span><?=$children->title?></span></a>
                                 <ul class="level1">

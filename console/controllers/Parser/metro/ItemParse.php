@@ -18,10 +18,10 @@ class ItemParse
             $categories = ItemCat::find()->all();
             $count = $this->getCountOfSlug($categories);
             $countSlag = 0;
-            foreach ($categories as $category){
+            foreach ($categories as $c => $category){
                 foreach ($category->parse as $parse){
                     $minusHour = time() - 3600;
-                    if((int)$parse->parse_time <$minusHour){
+                    if((int)$parse->parse_time < $minusHour){
                         echo "\n".$parse->slug;
                         $countSlag++;
                         if($countSlag % 10 === 0){
@@ -62,6 +62,7 @@ class ItemParse
                         $parse->save();
                     }
                 }
+                Log::write("Parser category {$category->title} Success ({$countSlag}) of {$count}");
             }
             return true;
         }catch (Exception $exception){
@@ -212,7 +213,8 @@ class ItemParse
     }
 
     /**
-     * @param $category ItemCat[]
+     * @param $categories ItemCat[]
+     * @return int
      */
     public function getCountOfSlug($categories)
     {
@@ -221,12 +223,11 @@ class ItemParse
         foreach ($categories as $category){
             foreach ($category->parse as $parse){
                 $minusHour = time() - 3600;
-                if((int)$parse->parse_time <$minusHour){
+                if((int)$parse->parse_time < $minusHour){
                     $count++;
                 }
             }
         }
         return $count;
     }
-
 }

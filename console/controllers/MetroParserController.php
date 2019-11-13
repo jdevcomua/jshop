@@ -13,21 +13,6 @@ class MetroParserController extends Controller
 {
     const TIMEOUT = 60;
 
-    private $afishaTypes = [
-        'newyear',
-        'concerts',
-        'theatres',
-        'circus',
-        'clubs',
-        'excursions',
-        'festivals',
-        'child',
-        'sport',
-        'exhibitions',
-        'poetry',
-        'seminars',
-        'quest',
-    ];
     private $response;
     public $active_cities;
 
@@ -47,17 +32,21 @@ class MetroParserController extends Controller
     /**
      * Парсит список городов и добавляет в кеш
      */
-    public function actionParseCategory(){//парс всех категорий из сайта метро(осторожно на сайте метро около 1000 категорий)
-        $link = new CategoryParser('https://metro.zakaz.ua/ru/', self::TIMEOUT);
-        $link->downloadContent()->parseData();
-    }
-    public function actionParseItem(){//парс всех айтемов по категориям которые находяться в базе
+//    public function actionParseCategory()
+//    {
+//        //парс всех категорий из сайта метро(осторожно на сайте метро около 1000 категорий)
+//        $link = new CategoryParser('https://metro.zakaz.ua/ru/', self::TIMEOUT);
+//        $link->downloadContent()->parseData();
+//    }
+
+    public function actionIndex()
+    {
+        //парс всех айтемов по категориям которые находяться в базе
         $link = new ItemParse();
         if($link->parseData()){
-            $log = new Log();
-            $log->message='Parse success';
-            echo "\n".$log->message;
-            $log->save();
+            $message = 'Parse success';
+            echo "\n" . $message;
+            Log::write($message);
         }
     }
 }

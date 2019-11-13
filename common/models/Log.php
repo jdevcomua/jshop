@@ -43,4 +43,11 @@ class Log extends \yii\db\ActiveRecord
             'message' => 'Сообщение',
         ];
     }
+
+    public static function write($message)
+    {
+        $log = new self();
+        $log->message = $message;
+        $log->save();
+    }
 }

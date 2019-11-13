@@ -62,7 +62,7 @@ class ItemParse
                         $parse->save();
                     }
                 }
-                Log::write("Parser category {$category->title} Success ({$countSlag}) of {$count}");
+                Log::write("Parser category {$category->title} Success ({$countSlag} of {$count})");
             }
             return true;
         }catch (Exception $exception){

@@ -27,8 +27,8 @@ class ItemParse
                         if($countSlag % 10 === 0){
                             echo "\n".$countSlag . ' of ' . $count;
                         }
-                        for ($i = 1;$i<=$this->getCountOfPagination(1,$parse->slug);$i++){
-                            $items = $this->parseItem($i, $parse->slug);
+                        for ($j = 1;$j<=$this->getCountOfPagination(1,$parse->slug);$j++){
+                            $items = $this->parseItem($j, $parse->slug);
                             if(!empty($items)){
                                 for ($i = 0;$i<count($items);$i++){
                                     $item = Item::find()->where(['barcode'=> $items[$i]['ean']])->one();

@@ -94,18 +94,12 @@ class UploadAction extends Action
                         'error' => Yii::t('cropper', 'ERROR_NO_SAVE_DIR')]
                     ;
                 } else {
-
                     $saveOptions = ['jpeg_quality' => $this->jpegQuality, 'png_compression_level' => $this->pngCompressionLevel];
-
                     if($origin->save($this->path . $model->{$this->uploadParam}->name, $saveOptions)) {
                         $info = new SplFileInfo($model->{$this->uploadParam}->name);
                         $path_parts = pathinfo($model->{$this->uploadParam}->name);
-                        $newname = $path_parts['filename'] . Item::SIZE . $info->getExtension();
-
-
-
-                        if ($image->save($this->path . $newname, $saveOptions)) {
-
+                        $newName = $path_parts['filename'] . Item::SIZE . $info->getExtension();
+                        if ($image->save($this->path . $newName, $saveOptions)) {
                             $result = [
                                 'filelink' => $this->url . $model->{$this->uploadParam}->name
                             ];

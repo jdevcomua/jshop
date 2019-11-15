@@ -45,7 +45,8 @@
         "electrolinux/phpquery": "^0.9.6",
         "lavrentiev/yii2-toastr": "dev-master",
         "igogo5yo/yii2-upload-from-url": ">=1.0",
-        "kartik-v/yii2-export": "dev-master"
+        "kartik-v/yii2-export": "dev-master",
+        "yiisoft/yii2-imagine": "^2.2"
     },
     "require-dev": {
         "codeception/codeception": "*",

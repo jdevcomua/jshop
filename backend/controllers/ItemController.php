@@ -118,7 +118,7 @@ class ItemController extends Controller
         if ($model->load($request->post())) {
             $model->metric = Item::METRIC_PIECES;
             if ($model->save()) {
-                $model->imageFiles= $model->urlRename();
+                $model->imageFiles = $model->urlRename();
                 $model->upload();
                 if($seo->load($request->post())){
                     $seo->url = Yii::$app->params['serverUrl'] . '/item/' . $model->id . '-' . $model->getTranslit();

@@ -13,6 +13,7 @@ use Yii;
  * @property integer $item_id
  * @property string $storage
  * @property string $small
+ * @property string $created_at
  *
  * @property Item $item
  */
@@ -33,7 +34,8 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             [['item_id'], 'integer'],
-            [['name', 'storage', 'small'], 'string']
+            [['name', 'storage', 'small'], 'string'],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -47,6 +49,7 @@ class Image extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'item_id' => Yii::t('app', 'Item ID'),
             'storage' => Yii::t('app', 'Storage'),
+            'created_at' => Yii::t('app', 'Дата создания'),
         ];
     }
 

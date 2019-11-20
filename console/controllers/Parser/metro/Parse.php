@@ -9,7 +9,74 @@ use Exception;
 use phpQuery;
 use SplFileInfo;
 use yii\helpers\Json;
-
+/*
+[
+    'available' => true,
+    'proxy_title' => null,
+    'retailer_attributes' => [
+        'bundle' => '1'
+    ],
+    'proxy_number' => null,
+    'name' => 'Напиток Бон Буассон Байкал сильногазированный 0,5л',
+    'weight' => 500,
+    'ean' => '04820203710072',
+    'd_unit' => null,
+    'price' => 920,
+    'extended_info' => [
+        'volume' => '500мл',
+        'tm' => 'БОН БУАССОН',
+        'method' => 'газированная',
+    ],
+    'sale' => false,
+    'bundle' => null,
+    'volume' => 500,
+    'main_image' => [
+        's200x200' => 'https://img3.zakaz.ua/mega.1565179643.ad72436478c_2019-08-09_MarinaR/mega.1565179643.SNCPSG10.obj.0.1.jpg.oe.jpg.pf.jpg.200nowm.jpg.200x.jpg',
+        's150x150' => 'https://img3.zakaz.ua/mega.1565179643.ad72436478c_2019-08-09_MarinaR/mega.1565179643.SNCPSG10.obj.0.1.jpg.oe.jpg.pf.jpg.150nowm.jpg.150x.jpg',
+        's350x350' => 'https://img3.zakaz.ua/mega.1565179643.ad72436478c_2019-08-09_MarinaR/mega.1565179643.SNCPSG10.obj.0.1.jpg.oe.jpg.pf.jpg.350nowm.jpg.350x.jpg',
+        's1350x1350' => 'https://img3.zakaz.ua/mega.1565179643.ad72436478c_2019-08-09_MarinaR/mega.1565179643.SNCPSG10.obj.0.1.jpg.oe.jpg.pf.jpg.1350nowm.jpg.1350x.jpg',
+    ],
+    'tier_prices' => [],
+    'sku' => '411961',
+    'path' => [
+        0 => 'drinks'
+    ],
+    'group_id' => [
+        0 => 'google-product-feed-413',
+        1 => 'drinks-stolichnyi',
+        2 => 'soft-drinks-furshet',
+        3 => 'carbonated-soft-drinks-furshet',
+        4 => 'no-ingredient-carbohydrates-all',
+        5 => 'drinks-novus',
+        6 => 'carbonated-soft-drinks-megamarket',
+        7 => 'soft-drinks-novus',
+        8 => 'drinks-megamarket',
+        9 => 'no-ingredient-protein',
+        10 => 'no-ingredient-fat',
+        11 => 'beverages',
+        12 => 'no-ingredient-energy-all',
+        13 => 'drinks',
+        14 => 'no-ingredient-energy',
+        15 => 'soft-drinks-auchan',
+        16 => 'drinks-1',
+        17 => 'soft-drinks-fozzy',
+        18 => 'soft-drinks',
+        19 => 'no-trange-food-and-drink',
+        20 => 'no-ingredient-carbohydrates',
+        21 => 'zone-2-auchan',
+        22 => 'drinks-auchan',
+        23 => 'water-drinks-juices',
+        24 => 'soft-drinks-megamarket',
+        25 => 'drinks-fozzy',
+        26 => 'no-ingredient-fat-all',
+        27 => 'no-ingredient-protein-all',
+        28 => 'zone-2',
+    ],
+    'slug' => 'напиток-бон_буассон-500мл',
+    'unit' => 'item',
+    'weight_netto' => 500,
+];
+*/
 abstract class Parse
 {
     protected abstract function process(array $itemArray, int $categoryId, Item $item = null);
@@ -47,8 +114,9 @@ abstract class Parse
             return true;
         }catch (Exception $exception){
             $log = new Log();
-            $log->message = $exception->getMessage();
-            echo "\n".$log->message;
+            $log->message = $exception->getLine() . " " . $exception->getFile() . ": " . $exception->getMessage();
+            echo "\n" . $log->message . "\n";
+            echo  $exception->getTraceAsString();
             $log->save();
         }
     }

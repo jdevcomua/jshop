@@ -3664,9 +3664,9 @@ ul.pdt-list li.item a img.image-hover {
     display: none;
 }
 .products-grid .item .item-inner .item-info .info-inner .item-title {
-    height: 75px;
+    height: 80px;
     margin-bottom: 10px;
-    padding:0px 15px;
+    padding:0 15px;
     padding-top: 20px;
     font-size: 16px;
     overflow: hidden;

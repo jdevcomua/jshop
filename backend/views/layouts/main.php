@@ -20,6 +20,8 @@ AppAsset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
+        <link rel="icon" type="image/png" sizes="32x32" href="/admin/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/admin/favicon-16x16.png">
         <?php $this->head() ?>
     </head>
     <body class="skin-blue fixed sidebar-mini">
@@ -30,10 +32,7 @@ AppAsset::register($this);
         <header class="main-header">
             <!-- Logo -->
             <a href="/" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Admin</b>LTE</span>
+                <img src="/images/logo.svg" alt="sdelivery logo" width="161px" height="40px">
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">

@@ -9,7 +9,6 @@ use yii\web\View;
 
 class Controller extends \yii\web\Controller
 {
-    public $layout = '@app/views/layouts/main';
     private $jsVars;
     public $seo;
     public $breadcrumbs = [];
@@ -21,11 +20,20 @@ class Controller extends \yii\web\Controller
         Yii::$app->language = Yii::$app->getRequest()->getQueryParam('language', 'ru');
         $this->seo = Seo::findOne(['url'=>rtrim($this->current_url(),'/')]);
          if(!isset($this->seo)){
-            $new_url = str_replace(Yii::$app->params['serverUrl'], '',rtrim($this->current_url(),'/'));
-            $new_url = str_replace('/item/', '',$new_url);
-            $new_url = str_replace('/category/', '',$new_url);
-            $new_url = str_replace( (int)$new_url . '-', '',$new_url);
-            $this->seo = Seo::findOne(['new_url'=> $new_url]);
+            $newUrl = str_replace(Yii::$app->params['serverUrl'], '',rtrim($this->current_url(),'/'));
+            $newUrl = str_replace('/item/', '',$newUrl);
+            $newUrl = str_replace('/category/', '',$newUrl);
+            $newUrl = str_replace( (int)$newUrl . '-', '',$newUrl);
+            if ($newUrl){
+                $this->seo = Seo::findOne(['new_url'=> $newUrl]);
+            }
+        }
+
+        if(!isset($this->seo)){
+            $this->seo = new Seo();
+            $this->seo->title = 'Заказать продукты с бесплатной доставкой на дом или офис в Мариуполе | SDelivery';
+            $this->seo->description = 'Бесплатная доставка продуктоы с 10:00 до 20:00 на дом и офис по районам Мариуполя, Левый берег, восточный, посёлок моряков';
+            $this->seo->keywords = 'Доставка, Мариуполь, продукты, еда, вода';
         }
 
         return parent::beforeAction($action);

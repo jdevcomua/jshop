@@ -22,21 +22,22 @@ use yii\widgets\Pjax;
     <meta name="theme-color" content="#07785c">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
     <!-- CSS Style -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600,800,400' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i,900" rel="stylesheet">
-    <?php if(isset(Yii::$app->controller->seo)):?>
-        <meta name="description" content="<?= Yii::$app->controller->seo->description?>">
-        <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords?>">
-    <?php else:?>
-        <meta name="description" content="Default Description">
-        <meta name="keywords" content="fashion, store, E-commerce">
-    <?php endif;?>
-    <title><?=$this->title?></title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="description" content="<?= Yii::$app->controller->seo->description ?>">
+    <meta name="keywords" content="<?= Yii::$app->controller->seo->keywords ?>">
+    <meta property="og:title" content="<?= Yii::$app->controller->seo->title ?>"/>
+    <meta property="og:description" content="<?= Yii::$app->controller->seo->description ?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="<?= Url::base(true)?>/images/sdelivery-cover-300.png"/>
+    <meta property="og:url" content= "<?= Url::current() ?>"/>
+    <title><?= Yii::$app->controller->seo->title ?></title>
 
 
 </head>

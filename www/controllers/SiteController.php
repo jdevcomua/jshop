@@ -77,8 +77,6 @@ class SiteController extends Controller
 
         $items = Item::find()->andWhere(['active' => true])->orderBy('created_at desc')
             ->limit(ItemsFilter::getParam(ItemsFilter::PARAM_ITEMS_ON_FIRST_PAGE));
-        $salesItemsQuery = Item::find()->threeItems();
-        $stocks = Stock::find()->current()->all();
         $itemsDataProvider = new ActiveDataProvider([
             'query' => $items,
             'pagination' => false,
@@ -89,13 +87,7 @@ class SiteController extends Controller
             'special' => $special,
             'deal_week' => $deal_week,
             'best_seller' => $best_seller,
-            'stocks' => $stocks,
-            'saleItems' => $salesItemsQuery->all(),
-            'salesCount' => $salesItemsQuery->count(),
-            //'topItems' => Item::find()->top()->all(),
-            'centerBanners' => $centerBannersImages,
             'slider' => $slider,
-            'rightBanner' => Banner::findOne(['enable' => 1, 'position' => Banner::POSITION_INDEX_RIGHT]),
         ]);
     }
 
@@ -155,9 +147,6 @@ class SiteController extends Controller
             $items->andFilterWhere(['in', 'manufacturer_id',$manufacturer]);
         }
         $items->with(['stockItems', 'images', 'stocks']);
-
-//        var_dump($items->asArray()->all());
-
         $dataProvider = new ActiveDataProvider([
             'query' => $items->andWhere(['active' => true]),
             'pagination' => [
@@ -168,7 +157,6 @@ class SiteController extends Controller
         foreach ($dataProvider->getModels() as $key => $model){
             $mapData[$model->id] = $key;
         }
-//var_dump($modalId);
         $this->breadcrumbs = ['Search - ' . $search];
 
 
@@ -186,6 +174,7 @@ class SiteController extends Controller
     /**
      * @param integer $id of category
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionCategory($id)
     {
@@ -255,27 +244,13 @@ class SiteController extends Controller
         foreach ($dataProvider->getModels() as $key => $model){
             $mapData[$model->id] = $key;
         }
-
-
         $this->breadcrumbs = [$category->getUrl() => $category->title];
-
-
-
         return $this->render('category', [
-            'selected' => empty($selected) ? [] : $selected,
-            'sort' => $sort,
-            'chars' => $category->characteristics,
-            'filterCounts' => $filterCounts,
             'minCost' => $minCost,
             'maxCost' => $maxCost,
             'countCosts' => $countCosts,
             'dataProvider' => $dataProvider,
             'category' => $category,
-            'count' => $items->count(),
-            'quantity' => $quantity,
-            'slider' => $slider,
-            'mapData' => $mapData,
-            'isajax' => false,
         ]);
     }
 
@@ -459,6 +434,11 @@ class SiteController extends Controller
     public function actionDelwish($wish_id)
     {
         return Wish::findOne($wish_id)->delete();
+    }
+
+    public function actionFaq()
+    {
+        return $this->render('faq');
     }
     
     public function actionSearchHint($q = null) {

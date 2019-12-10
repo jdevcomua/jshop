@@ -118,7 +118,7 @@ h2, .h2 {
     font-size: 20px;
 }
 a {
-    color: #333;
+    color: #80b435;
 }
 a:hover {
     color: #ed6663;
@@ -13236,4 +13236,15 @@ ul.level0.sub-menu{
 .comment-notes-alert{
     color: #80b435;
     font-weight: bold;
+}
+
+.xhr {
+    text-decoration: none;
+    border-bottom: 1px dotted;
+}
+
+a.xhr {
+    color: #80b435;
+    text-decoration: none;
+    outline: 0;
 }

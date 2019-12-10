@@ -1,16 +1,14 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'litvinova.a95@gmail.com',
+    'adminEmail' => 'info@sdelivery.dn.ua',
+    'supportEmail' => 'support@sdelivery.dn.ua',
+    'orderEmail' => 'order@sdelivery.dn.ua',
     'user.passwordResetTokenExpire' => 3600,
-    'amazonKey' => 'AKIAIR2NVD2HK4P7BW4Q',
-    'serverUrl' => 'http://jshop.jdev.com.ua',
-    'amazonSecret' => '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',
-    'amazonBucket' => 'umo4ka',
-    'vkAppId' => '5231107',
-    'vkSecretKey' => 'bzvW6ULy2hUZhf7Nn48C',
-    'amazonImageLink' => 'https://s3.eu-central-1.amazonaws.com/umo4ka/',
+    'serverUrl' => 'https://sdelivery.dn.ua',
     'pageSize' => 20,
     'defaultKitImage' => '/images/noimage.png',
+    'workTime' => 'c 8:00 до 18:00',
+    'workDay' => 'понедельник — воскресенье',
+    'phoneNumber' => '<a href="tel:+380675963064">+38 (067) 5963064</a>',
 ];

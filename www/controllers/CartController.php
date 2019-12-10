@@ -4,11 +4,10 @@ namespace www\controllers;
 
 use common\models\Item;
 use common\models\Kit;
-use common\models\Orders;
 use common\models\OrderItem;
-use Yii;
+use common\models\Orders;
 use common\models\User;
-use common\components\CartAdd;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -29,15 +28,20 @@ class CartController extends Controller
         /**@var Item $item*/
         $item = Item::findOne($item_id);
         Yii::$app->cart->addItem($item, $count);
-        /*return [
-            'count' => Yii::$app->cart->getCount(),
-            'price' => Yii::$app->cart->getSum(),
-        ];*/
-        
-        return ['html' => $this->renderPartial('cartSuccess', ['model' => $item,
-            'count' => $count]), 'title' => 'Корзина'];
+
+        return [
+            'html' => $this->renderPartial('cartSuccess', [
+                'model' => $item,
+                'count' => $count]),
+            'title' => 'Корзина',
+        ];
     }
 
+    /**
+     * @param $order_id
+     * @return string|Response
+     * @throws NotFoundHttpException
+     */
     public function actionOldOrder($order_id)
     {
         $model = self::findModelOrder($order_id);
@@ -70,8 +74,12 @@ class CartController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         Yii::$app->cart->addItem(Kit::findOne($item_id), $count);
-        return ['html' => $this->renderPartial('cartItems', ['models' => Yii::$app->cart->getModels(),
-            'sum' => Yii::$app->cart->getSum()]), 'title' => 'Корзина'];
+        return [
+            'html' => $this->renderPartial('cartItems', [
+                'models' => Yii::$app->cart->getModels(),
+                'sum' => Yii::$app->cart->getSum()]),
+            'title' => 'Корзина',
+        ];
     }
 
     public function actionAjaxReset()
@@ -133,7 +141,6 @@ class CartController extends Controller
             'models' => Yii::$app->cart->getModels(),
             'sum' => $sum,
             'model' => $model,
-            'user' => $user
         ]);
     }
 
@@ -160,7 +167,10 @@ class CartController extends Controller
     {
         Yii::$app->cart->deleteItem($item_id, $cart_type);
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return ['sumAll' => Yii::$app->cart->getSum(), 'countAll' => Yii::$app->cart->getCount()];
+        return [
+            'sumAll' => Yii::$app->cart->getSum(),
+            'countAll' => Yii::$app->cart->getCount(),
+        ];
     }
 
     /**
@@ -174,14 +184,20 @@ class CartController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         Yii::$app->cart->setItem($id, $cart_type, $count);
         $sumItem = Yii::$app->cart->getSumForItem($id, $cart_type);
-        return ['sumAll' => Yii::$app->cart->getSum(),
-                'sumItem' => $sumItem['newPrice'],
-                'countItem' => Yii::$app->cart->getCountForItem($id, $cart_type),
-                'countAll' =>  Yii::$app->cart->getCount(),
-                'oldPriceItem' => $sumItem['oldPrice']
+        return [
+            'sumAll' => Yii::$app->cart->getSum(),
+            'sumItem' => $sumItem['newPrice'],
+            'countItem' => Yii::$app->cart->getCountForItem($id, $cart_type),
+            'countAll' =>  Yii::$app->cart->getCount(),
+            'oldPriceItem' => $sumItem['oldPrice']
         ];
     }
 
+    /**
+     * @param $id
+     * @return Orders|null
+     * @throws NotFoundHttpException
+     */
     protected function findModelOrder($id)
     {
         if (($model = Orders::findOne($id)) !== null) {
@@ -190,5 +206,4 @@ class CartController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 }

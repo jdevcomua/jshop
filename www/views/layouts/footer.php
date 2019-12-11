@@ -13,11 +13,11 @@ use yii\helpers\Html;
                         <div class="footer-column">
                             <h4><?= Yii::t('app','Shopping Guide')?></h4>
                             <ul class="links">
-                                <li><a href="faq.html" title="FAQs"><?= Yii::t('app','FAQs')?></a></li>
+                                <li><?= Html::a(Yii::t('app','FAQs').'?', ['site/faq']) ?></li>
                                 <li><a href="payment.html" title="Payment"><?= Yii::t('app','Payment')?></a></li>
-                                <li><?= Html::a(Yii::t('app','Where is my order').'?', Yii::$app->urlHelper->to(['site/where-is-my-order'])) ?></li>
+                                <li><?= Html::a(Yii::t('app','Where is my order').'?', ['site/where-is-my-order']) ?></li>
                                 <li><a href="returnPolicy.html" title="Return policy"><?= Yii::t('app','Return Policy')?></a></li>
-                                <li><?= Html::a(Yii::t('app','Contact Us'), Yii::$app->urlHelper->to(['site/contact-us'])) ?></li>
+                                <li><?= Html::a(Yii::t('app','Contact Us'), ['site/contact-us']) ?></li>
                             </ul>
                         </div>
                     </div>
@@ -37,11 +37,14 @@ use yii\helpers\Html;
                             <h4><?= Yii::t('app','Contact Us')?></h4>
                             <div class="contacts-info">
                                 <address>
-                                    <i class="add-icon"></i>ThemesGround, 789 Main rd,<br>
-                                    Anytown, CA 12345 USA<br>
+                                    <i class="add-icon"></i>бульвар Шевченко 270а,<br>
+                                    Мариуполь
                                 </address>
-                                <div class="phone-footer"><i class="phone-icon"></i>+ 888 456-7890</div>
-                                <div class="email-footer"><i class="email-icon"></i><a href="mailto:qmarto@example.com">Qmarto@example.com</a></div>
+                                <div class="phone-footer"><i class="phone-icon"></i><?= Yii::$app->params['phoneNumber'] ?></div>
+                                <div class="email-footer">
+                                    <i class="email-icon"></i>
+                                    <a href="mailto:<?= Yii::$app->params['supportEmail'] ?>"><?= Yii::$app->params['supportEmail'] ?></a>
+                                </div>
                             </div>
                         </div>
                     </div>

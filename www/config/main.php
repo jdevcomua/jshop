@@ -59,6 +59,7 @@ $config = [
                 'site'=>'site/index',
                 'search/<search>'=>'site/search',
                 'search'=>'site/search',
+                'faq'=>'site/faq',
                 'site/img/*'=>'img/*',
                 'cart'=>'cart/index',
                 'item/quick-view'=>'item/quick-view',

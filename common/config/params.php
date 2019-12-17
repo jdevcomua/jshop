@@ -8,7 +8,10 @@ return [
     'serverUrl' => 'https://sdelivery.dn.ua',
     'pageSize' => 20,
     'defaultKitImage' => '/images/noimage.png',
-    'workTime' => 'c 8:00 до 18:00',
+    'workTime' => 'c 9:00 до 18:00',
     'workDay' => 'понедельник — воскресенье',
-    'phoneNumber' => '<a href="tel:+380675963064">+38 (067) 5963064</a>',
+    'phoneNumber' => '<a href="tel:+380973327544">+38 (097) 3327544</a>',
+    'address' => 'бульвар Шевченко 270а, г. Мариуполь',
+    'fbLink' => 'https://www.facebook.com/SDelivery-103879181108936',
+    'instagramLink' => 'https://www.instagram.com/sdeliveryua/',
 ];

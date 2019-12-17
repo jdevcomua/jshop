@@ -40,6 +40,10 @@ use yii\web\UploadedFile;
  * @property string $link
  * @property string $h1
  * @property string $image
+ *
+ * @property string $confirmText
+ * @property string $additionText
+ *
  * @property CharacteristicItem[] $characteristicItems
  * @property ItemCat $category
  * @property Manufacturer $manufacturer
@@ -156,6 +160,26 @@ class Item extends Model implements CartAdd
             static::ADDITION_BY_PARSER => 'Через парсер',
         ];
     }
+    public static function getConfirmTitles()
+    {
+        return [
+            1 => 'Проверено',
+            0 => 'Не Проверено',
+        ];
+    }
+
+    public function getConfirmText()
+    {
+        return isset($this->confirm) && isset(self::getConfirmTitles()[$this->confirm])
+            ? self::getConfirmTitles()[$this->confirm] : null;
+    }
+
+    public function getAdditionText()
+    {
+        return isset($this->tracker_of_addition) && isset(self::getAdditionTitles()[$this->tracker_of_addition])
+            ? self::getAdditionTitles()[$this->tracker_of_addition] : null;
+    }
+
     public function getAdditionTitle()
     {
         $titles = static::getAdditionTitles();
@@ -196,7 +220,7 @@ class Item extends Model implements CartAdd
 
     public function getKits()
     {
-        return $this->hasMany(Kit::className(), ['id' => 'kit_id'])->viaTable('kit_item', ['item_id' => 'id'])
+        return $this->hasMany(Kit::class, ['id' => 'kit_id'])->viaTable('kit_item', ['item_id' => 'id'])
             ->joinWith('kitItems')->where(['is_main_item' => true, 'item_id' => $this->id]);
     }
 

@@ -7,6 +7,7 @@ use common\models\CharacteristicItem;
 use common\models\Item;
 use common\models\ItemCat;
 use common\models\Letter;
+use common\models\Manufacturer;
 use common\models\Orders;
 use common\models\Seo;
 use common\models\Slider;
@@ -18,6 +19,7 @@ use common\models\WishList;
 use www\filters\ItemsFilter;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -207,8 +209,8 @@ class SiteController extends Controller
         if ($search = $request->get('search')) {
             $items->andFilterWhere(['like', 'title', $search]);
         }
-        $sort = (Yii::$app->session->get('sort')) ? Yii::$app->session->get('sort') : 'date';
-        $quantity = $request->get('quantity', self::PAGE_SIZE);
+        $sort = (Yii::$app->session->get('sort')) ? Yii::$app->session->get('sort') : '';
+        $sort = '';
         $this->sorting($items, $sort);
 
         //for filter by price
@@ -239,18 +241,30 @@ class SiteController extends Controller
             'pagination' => [
                 'pageSize' => ItemsFilter::getParam((Yii::$app->session->get('page'))),
             ],
+            'sort' => [
+                'defaultOrder' => ['tracker_of_addition' => SORT_ASC],
+            ],
         ]);
         $mapData = [];
         foreach ($dataProvider->getModels() as $key => $model){
             $mapData[$model->id] = $key;
         }
         $this->breadcrumbs = [$category->getUrl() => $category->title];
+        $manufacturers = Manufacturer::find()
+            ->innerJoinWith('items')
+            ->select(['manufacturer.id','manufacturer.name', new Expression('count(*) as quantity')])
+            ->where(['item.category_id' => $category_ids, 'item.active' => Item::ACTIVE_YES])
+            ->groupBy('manufacturer.id')
+            ->orderBy('manufacturer.name')
+            ->all();
+
         return $this->render('category', [
             'minCost' => $minCost,
             'maxCost' => $maxCost,
             'countCosts' => $countCosts,
             'dataProvider' => $dataProvider,
             'category' => $category,
+            'manufacturers' => $manufacturers,
         ]);
     }
 

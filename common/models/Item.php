@@ -70,6 +70,9 @@ class Item extends Model implements CartAdd
     const ADDITION_BY_ADMIN = 0;
     const ADDITION_BY_PARSER = 1;
 
+    const ACTIVE_YES = 1;
+    const ACTIVE_NO = 0;
+
     /**
      * @var UploadedFile[]
      */

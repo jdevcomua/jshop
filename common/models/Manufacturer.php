@@ -10,9 +10,12 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
+ *
+ * @property Item[] $items
  */
 class Manufacturer extends \yii\db\ActiveRecord
 {
+    public $quantity;
     /**
      * {@inheritdoc}
      */
@@ -41,6 +44,11 @@ class Manufacturer extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => Yii::t('app','Name'),
         ];
+    }
+
+    public function getItems()
+    {
+        return $this->hasMany(Item::class, ['manufacturer_id' => 'id']);
     }
 
     public static function getManufacturerNames()

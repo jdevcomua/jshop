@@ -1,12 +1,11 @@
 <?php
 
+use common\models\Manufacturer;
 use common\models\Slider;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\ListView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use \common\models\ItemCat;
-use www\themes\babyshop\QuickViewAsset;
 use www\filters\ItemsFilter;
 use lavrentiev\widgets\toastr\Notification;
 
@@ -22,6 +21,7 @@ use lavrentiev\widgets\toastr\Notification;
 /* @var $maxCost float */
 /* @var $countCosts string[] */
 /* @var $slider Slider[] */
+/* @var $manufacturers Manufacturer[] */
 
 $this->title = !empty(Yii::$app->controller->seo->title) ? Yii::$app->controller->seo->title : $category->title;
 if(isset($category->parent->parent))
@@ -229,10 +229,10 @@ $this->params['breadcrumbs'][] = $category->title;
                         <dl id="narrow-by-list">
                             <dd class="odd">
                                 <ol>
-                                    <?php foreach (\common\models\Manufacturer::getManufacturerNames() as $key=>$value): ?>
+                                    <?php foreach ($manufacturers as $key => $manufacturer): ?>
                                         <li>
-                                            <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$key?>,this)"">
-                                            <span class="manufacturer-text"><?=$value?></span>
+                                            <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$manufacturer->id?>,this)"">
+                                            <span class="manufacturer-text"><?=$manufacturer->name ?> (<?=$manufacturer->quantity ?>)</span>
                                         </li>
                                     <?php endforeach;?>
                                     <li> <a class="price-range" onclick="removeManufacturer()" href="#"><?= Yii::t('app','Clear Manufacturer')?></a> </li>

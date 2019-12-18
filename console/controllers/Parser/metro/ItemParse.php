@@ -3,6 +3,7 @@
 namespace console\controllers\Parser\metro;
 
 use common\models\Item;
+use common\models\Log;
 use common\models\Manufacturer;
 
 class ItemParse extends Parse
@@ -21,15 +22,17 @@ class ItemParse extends Parse
             $item->tracker_of_addition = Item::ADDITION_BY_PARSER;
             $item->active = 1;
             $item->self_cost = $itemArray['price']/100;
-            $item->cost = $itemArray['price']/100;
-            $item->metro_cost = $itemArray['price']/100;
+            $item->cost = round((1 + \Yii::$app->params['metro_percent'] / 100) * $itemArray['price']/100, 2);
             $item->barcode = $itemArray['ean'];
             $item->code = $itemArray['sku'];
         }else{
             $item->category_id = $categoryId;
-            $item->self_cost = $itemArray['price']/100;
-            $item->cost = $itemArray['price']/100;
-            $item->metro_cost = $itemArray['price']/100;
+            if ($item->self_cost != $itemArray['price']/100){
+                $newPrice = $itemArray['price']/100;
+                Log::write("{$item->id} {$item->title} цена изменена с {$item->self_cost} на {$newPrice}");
+                $item->self_cost = $newPrice;
+                $item->cost = round((1 + \Yii::$app->params['metro_percent'] / 100) * $itemArray['price']/100, 2);
+            }
         }
 
         $manufacturerTitle = $itemArray['extended_info']['tm'];

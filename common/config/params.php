@@ -14,4 +14,5 @@ return [
     'address' => 'бульвар Шевченко 270а, г. Мариуполь',
     'fbLink' => 'https://www.facebook.com/SDelivery-103879181108936',
     'instagramLink' => 'https://www.instagram.com/sdeliveryua/',
+    'metro_percent' => 7,
 ];

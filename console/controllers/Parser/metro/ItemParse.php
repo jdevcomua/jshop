@@ -36,6 +36,7 @@ class ItemParse extends Parse
             $item->cost = round((1 + \Yii::$app->params['metro_percent'] / 100) * $itemArray['price']/100, 2);
             $item->barcode = $itemArray['ean'];
             $item->code = $itemArray['sku'];
+            Log::write("Add new https://sdelivery.dn.ua/item/{$item->id} {$item->title}");
         }else{
             $item->category_id = $categoryId;
             if ($item->self_cost != $itemArray['price']/100){

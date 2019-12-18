@@ -30,6 +30,7 @@ class MetroParserController extends Controller
     public function actionIndex()
     {
         //парс всех айтемов по категориям которые находяться в базе
+        Log::write('Start metro parser');
         $link = new ItemParse();
         if($link->parseData()){
             $message = 'Parse success';

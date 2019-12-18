@@ -11,6 +11,17 @@ class ItemParse extends Parse
 
     protected function process(array $itemArray, int $categoryId, Item $item = null)
     {
+        $manufacturer = null;
+        if (isset($itemArray['extended_info']['tm'])){
+            $manufacturerTitle = $itemArray['extended_info']['tm'];
+            $manufacturer = Manufacturer::findOne(['name' => $manufacturerTitle]);
+            if (empty($manufacturer)) {
+                $manufacturer = new Manufacturer();
+                $manufacturer->name = $manufacturerTitle;
+                $manufacturer->save();
+            }
+        }
+
         if(!isset($item)){
             $item = new Item();
             $item->title = $itemArray['name'];
@@ -34,15 +45,10 @@ class ItemParse extends Parse
                 $item->cost = round((1 + \Yii::$app->params['metro_percent'] / 100) * $itemArray['price']/100, 2);
             }
         }
-
-        $manufacturerTitle = $itemArray['extended_info']['tm'];
-        $m = Manufacturer::findOne(['name' => $manufacturerTitle]);
-        if (empty($m)) {
-            $m = new Manufacturer();
-            $m->name = $manufacturerTitle;
-            $m->save();
-            $item->manufacturer_id = $m->id;
+        if($manufacturer){
+            $item->manufacturer_id = $manufacturer->id;
         }
+
         $item->save();
     }
 }

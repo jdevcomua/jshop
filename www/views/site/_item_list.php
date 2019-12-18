@@ -5,7 +5,11 @@ $wishList = WishList::getAllWish();
 ?>
 
 <li class="item ">
-    <div class="product-image"> <a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>"> <img class="small-image" src="<?= $model->getOneImageUrl()?>" alt="<?= $model->title?>"></a> </div>
+    <div class="product-image">
+        <a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>">
+            <img class="small-image" src="<?= $model->getOneImageUrl()?>" alt="<?= $model->title?>">
+        </a>
+    </div>
     <div class="product-shop">
         <h2 class="product-name"><a data-pjax="0" href="<?=$model->getUrl()?>" title="<?= $model->title?>"><?= $model->title?></a></h2>
         <div class="ratings">
@@ -44,6 +48,11 @@ $wishList = WishList::getAllWish();
         </div>
         <div class="actions">
             <button class="button btn-cart ajx-cart" data-pjax="true" onclick="addToCart(<?= $model->id?>)" title="Add to Cart" type="button"><span><?= Yii::t('app','Add to Cart')?></span></button>
-            <span class="add-to-links"> <a title="<?=Yii::t('app','Add to Wishlist')?>" data-item-id="<?= $model->id ?>"  onclick="addToWishList(<?= $model->id ?>,this)" class="button link-wishlist <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" href=""><span><?= Yii::t('app','Add to Wishlist')?></span></a> </span> </div>
+            <span class="add-to-links">
+                <a title="<?=Yii::t('app','Add to Wishlist')?>" data-item-id="<?= $model->id ?>" onclick="addToWishList(<?= $model->id ?>,this)" class="button link-wishlist <?=!empty($wishList) ? in_array($model->id,$wishList)?'in-wish-list':'':''?>" href="">
+                    <span><?= Yii::t('app','Add to Wishlist')?></span>
+                </a>
+            </span>
+        </div>
     </div>
 </li>

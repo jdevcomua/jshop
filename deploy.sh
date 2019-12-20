@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cd /home/freemark/sdelivery.dn.ua
+git add .
 git reset --hard HEAD
 git pull origin master
 /usr/local/php71/bin/php ~/composer install

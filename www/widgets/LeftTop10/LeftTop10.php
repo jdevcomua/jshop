@@ -3,9 +3,7 @@
 namespace www\widgets\LeftTop10;
 
 use common\models\Manufacturer;
-use Yii;
 use yii\base\Widget;
-use common\models\ItemCat;
 
 class LeftTop10 extends Widget
 {

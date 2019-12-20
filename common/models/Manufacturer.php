@@ -79,7 +79,7 @@ class Manufacturer extends \yii\db\ActiveRecord
             ->groupBy('manufacturer.id')
             ->orderBy('manufacturer.name');
         if ($categoryIds){
-            $q->andWhere(['item.category_id' => $categoryIds, 'item.active' => Item::ACTIVE_YES]);
+            $q->andWhere(['item.category_id' => $categoryIds]);
         }
         return $q->all();
     }

@@ -8,8 +8,6 @@ use yii\helpers\Url;
 
 ?>
 
-
-
 <div class="block block-layered-nav mt-0">
     <div class="block-title"> <?=Yii::t('app','Manufacturers')?> </div>
     <div class="block-content">

@@ -55,7 +55,7 @@ class Manufacturer extends \yii\db\ActiveRecord
 
     public static function getManufacturerNames()
     {
-        $model = Manufacturer::find()->select(['id', 'name'])->all();
+        $model = Manufacturer::find()->select(['id', 'name'])->orderBy('name')->all();
         $model = ArrayHelper::map($model, 'id', 'name');
         return $model;
     }

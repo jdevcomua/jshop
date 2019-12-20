@@ -75,6 +75,17 @@ function HideMe()
     jQuery('#fade').hide();
 }
 
+function filterHideShow(el) {
+    el = $(el);
+    if (el.hasClass('full')){
+        el.parents('div').find('.filter-top.full').addClass('hidden');
+        el.parents('div').find('.filter-top.top-10').removeClass('hidden');
+    }else{
+        el.parents('div').find('.filter-top.full').removeClass('hidden');
+        el.parents('div').find('.filter-top.top-10').addClass('hidden');
+    }
+}
+
 
 var dthen1 = new Date("12/25/17 11:59:00 PM");
 start = "08/04/15 03:02:11 AM";

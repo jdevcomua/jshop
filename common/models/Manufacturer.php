@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
+ * @property string $metro_name
  *
  * @property Item[] $items
  */
@@ -31,7 +32,7 @@ class Manufacturer extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'metro_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,6 +44,7 @@ class Manufacturer extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => Yii::t('app','Name'),
+            'metro_name' => Yii::t('app','Metro Name'),
         ];
     }
 

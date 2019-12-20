@@ -88,7 +88,7 @@ class Item extends Model implements CartAdd
     {
         return [
             [['category_id', 'count_of_views', 'top', 'active', 'best_seller', 'special', 'deal_week','tracker_of_addition','metric','manufacturer_id'], 'integer'],
-            [['title', 'cost', 'category_id'], 'required'],
+            [['title', 'cost', 'category_id', 'self_cost'], 'required'],
             ['title', 'trim'],
             [['created_at','imageFiles','updated_at'], 'safe'],
             [['cost', 'self_cost', 'quantity','metro_cost'], 'number'],

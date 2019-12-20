@@ -258,6 +258,15 @@ class SiteController extends Controller
             ->orderBy('manufacturer.name')
             ->all();
 
+        $manufacturersTop10 = null;
+        if (count($manufacturers) > 10){
+            $manufacturersTop10 = $manufacturers;
+            usort($manufacturersTop10, function (Manufacturer $item1, Manufacturer $item2){
+                return $item2->quantity - $item1->quantity;
+            });
+            $manufacturersTop10 = array_slice($manufacturersTop10, 0, 10);
+        }
+
         return $this->render('category', [
             'minCost' => $minCost,
             'maxCost' => $maxCost,
@@ -265,6 +274,7 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
             'category' => $category,
             'manufacturers' => $manufacturers,
+            'manufacturersTop10' => $manufacturersTop10,
         ]);
     }
 

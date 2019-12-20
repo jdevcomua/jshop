@@ -14,10 +14,11 @@ class ItemParse extends Parse
         $manufacturer = null;
         if (isset($itemArray['extended_info']['tm'])){
             $manufacturerTitle = $itemArray['extended_info']['tm'];
-            $manufacturer = Manufacturer::findOne(['name' => $manufacturerTitle]);
+            $manufacturer = Manufacturer::findOne(['metro_name' => $manufacturerTitle]);
             if (empty($manufacturer)) {
                 $manufacturer = new Manufacturer();
                 $manufacturer->name = $manufacturerTitle;
+                $manufacturer->metro_name = $manufacturerTitle;
                 $manufacturer->save();
             }
         }
@@ -38,7 +39,6 @@ class ItemParse extends Parse
             $item->code = $itemArray['sku'];
             Log::write("Add new https://sdelivery.dn.ua/item/{$item->id} {$item->title}");
         }else{
-            $item->category_id = $categoryId;
             if ($item->self_cost != $itemArray['price']/100){
                 $newPrice = $itemArray['price']/100;
                 Log::write("{$item->id} {$item->title} цена изменена с {$item->self_cost} на {$newPrice}");

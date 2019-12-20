@@ -7,7 +7,7 @@ class m151212_141046_m1112 extends Migration
 {
     public function up()
     {
-        $this->execute(file_get_contents(__DIR__."/mobidev.sql"));
+        $this->execute(file_get_contents(__DIR__ . "/init.sql"));
     }
 
     public function down()

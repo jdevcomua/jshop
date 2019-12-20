@@ -2,6 +2,7 @@
 
 use common\models\Manufacturer;
 use common\models\Slider;
+use www\widgets\LeftTop10\LeftTop10;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\ListView;
 use yii\helpers\Url;
@@ -22,7 +23,6 @@ use lavrentiev\widgets\toastr\Notification;
 /* @var $countCosts string[] */
 /* @var $slider Slider[] */
 /* @var $manufacturers Manufacturer[] */
-/* @var $manufacturersTop10 Manufacturer[] */
 
 $this->title = !empty(Yii::$app->controller->seo->title) ? Yii::$app->controller->seo->title : $category->title;
 if(isset($category->parent->parent))
@@ -224,37 +224,9 @@ $this->params['breadcrumbs'][] = $category->title;
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
             <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
-                <div class="block block-layered-nav mt-0">
-                    <div class="block-title"> <?=Yii::t('app','Manufacturers')?> </div>
-                    <div class="block-content">
-                        <dl id="narrow-by-list">
-                            <dd class="odd">
-                                <ol class="filter-top full <?= isset($manufacturersTop10) ? 'hidden' : ''?>">
-                                    <?php foreach ($manufacturers as $key => $manufacturer): ?>
-                                        <li>
-                                            <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$manufacturer->id?>,this)"">
-                                            <span class="manufacturer-text"><?=$manufacturer->name ?> (<?=$manufacturer->quantity ?>)</span>
-                                        </li>
-                                    <?php endforeach;?>
-                                </ol>
-                                <?php if ($manufacturersTop10):?>
-                                    <ol class="filter-top top-10">
-                                        <?php foreach ($manufacturersTop10 as $key => $manufacturer): ?>
-                                            <li>
-                                                <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$manufacturer->id?>,this)"">
-                                                <span class="manufacturer-text"><?=$manufacturer->name ?> (<?=$manufacturer->quantity ?>)</span>
-                                            </li>
-                                        <?php endforeach;?>
-                                    </ol>
-                                    <a class="filter-top full <?= isset($manufacturersTop10) ? 'hidden' : ''?>" onclick="filterHideShow(this)" href="#"><?= Yii::t('app','Show Top 10')?></a>
-                                    <a class="filter-top top-10" onclick="filterHideShow(this)" href="#"><?= Yii::t('app','Show all')?></a>
-                                    <br />
-                                <?php endif ?>
-                                <a class="price-range" onclick="removeManufacturer()" href="#"><?= Yii::t('app','Clear Manufacturer')?></a>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
+                <?= LeftTop10::widget([
+                    'items' => $manufacturers,
+                ]) ?>
 
                 <div class="block block-layered-nav">
                     <div class="block-title"> <?= Yii::t('app','Shop by')?> </div>

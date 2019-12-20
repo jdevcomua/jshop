@@ -161,6 +161,13 @@ class SiteController extends Controller
         }
         $this->breadcrumbs = ['Search - ' . $search];
 
+        $subq = clone $items;
+        $manufacturers = $subq
+            ->select(['manufacturer.id','manufacturer.name', new Expression('count(*) as quantity')])
+            ->innerJoinWith('manufacturer')
+            ->groupBy('manufacturer.id')
+            ->orderBy('manufacturer.name')
+            ->all();
 
         return $this->render('search', [
             'sort' => $sort,
@@ -169,7 +176,8 @@ class SiteController extends Controller
             'countCosts' => $countCosts,
             'dataProvider' => $dataProvider,
             'count' => $items->count(),
-            'search' => $search
+            'search' => $search,
+            'manufacturers' => $manufacturers,
         ]);
     }
 
@@ -250,22 +258,7 @@ class SiteController extends Controller
             $mapData[$model->id] = $key;
         }
         $this->breadcrumbs = [$category->getUrl() => $category->title];
-        $manufacturers = Manufacturer::find()
-            ->innerJoinWith('items')
-            ->select(['manufacturer.id','manufacturer.name', new Expression('count(*) as quantity')])
-            ->where(['item.category_id' => $category_ids, 'item.active' => Item::ACTIVE_YES])
-            ->groupBy('manufacturer.id')
-            ->orderBy('manufacturer.name')
-            ->all();
-
-        $manufacturersTop10 = null;
-        if (count($manufacturers) > 10){
-            $manufacturersTop10 = $manufacturers;
-            usort($manufacturersTop10, function (Manufacturer $item1, Manufacturer $item2){
-                return $item2->quantity - $item1->quantity;
-            });
-            $manufacturersTop10 = array_slice($manufacturersTop10, 0, 10);
-        }
+        $manufacturers = Manufacturer::getManufacturesWithQuantity($category_ids);
 
         return $this->render('category', [
             'minCost' => $minCost,
@@ -274,7 +267,6 @@ class SiteController extends Controller
             'dataProvider' => $dataProvider,
             'category' => $category,
             'manufacturers' => $manufacturers,
-            'manufacturersTop10' => $manufacturersTop10,
         ]);
     }
 

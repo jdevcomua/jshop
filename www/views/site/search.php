@@ -1,6 +1,8 @@
 <?php
 
 use common\models\ItemCat;
+use common\models\Manufacturer;
+use www\widgets\LeftTop10\LeftTop10;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 use www\filters\ItemsFilter;
@@ -14,6 +16,7 @@ use yii\widgets\ListView;
 /* @var $category_id integer */
 /* @var $sort string */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $manufacturers Manufacturer[] */
 
 $this->title = Yii::t('app','Searching results'). '«' . $search . '»';
 $this->params['breadcrumbs'][] = Yii::t('app','Search');
@@ -195,24 +198,9 @@ $this->params['breadcrumbs'][] = Yii::t('app','Search');
             </div>
             <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
 
-                <div class="block block-layered-nav mt-0">
-                    <div class="block-title"> <?=Yii::t('app','Manufacturers')?> </div>
-                    <div class="block-content">
-                        <dl id="narrow-by-list">
-                            <dd class="odd">
-                                <ol>
-                                    <?php foreach (\common\models\Manufacturer::getManufacturerNames() as $key=>$value): ?>
-                                        <li>
-                                            <input class="manufacturer" type="checkbox" <?php if (!empty(Yii::$app->session->get('manufacturer')) && in_array($key,Yii::$app->session->get('manufacturer'))):?> checked <?php endif;?> onclick="manufacturer(<?=$key?>,this)"">
-                                            <span class="manufacturer-text"><?=$value?></span>
-                                        </li>
-                                    <?php endforeach;?>
-                                    <li> <a class="price-range" onclick="removeManufacturer()" href="#"><?= Yii::t('app','Clear Manufacturer')?></a> </li>
-                                </ol>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
+                <?= LeftTop10::widget([
+                    'items' => $manufacturers,
+                ]) ?>
 
                 <!--side-nav-categories-->
                 <div class="block block-layered-nav">

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -67,5 +68,19 @@ class Manufacturer extends \yii\db\ActiveRecord
             ->join('JOIN', 'item', 'item.manufacturer_id = manufacturer.id')
             ->all();
         return ArrayHelper::map($manufacturers, 'name', 'name');
+    }
+
+    public static function getManufacturesWithQuantity($categoryIds = null)
+    {
+        $q = Manufacturer::find()
+            ->innerJoinWith('items')
+            ->select(['manufacturer.id','manufacturer.name', new Expression('count(*) as quantity')])
+            ->where(['item.active' => Item::ACTIVE_YES])
+            ->groupBy('manufacturer.id')
+            ->orderBy('manufacturer.name');
+        if ($categoryIds){
+            $q->andWhere(['item.category_id' => $categoryIds, 'item.active' => Item::ACTIVE_YES]);
+        }
+        return $q->all();
     }
 }

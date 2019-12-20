@@ -64,7 +64,7 @@ use yii\widgets\Pjax;
                             <ul id="nav" class="hidden-xs">
 
                                 <li> <a class="level-top" href="<?= Url::home() ?>"><span><?=Yii::t('app','Home')?></span></a></li>
-                                <?= \www\widgets\category\CategoriesView::widget() ?>
+                                <?= \www\widgets\category\LeftTop10::widget() ?>
 
 
                 <!--row-->

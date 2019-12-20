@@ -193,7 +193,7 @@ use yii\widgets\Pjax;
             <div class="home"><a href="<?= Url::home() ?>"><?= Yii::t('app','Home')?></a> </div>
         </li>
 
-        <?= \www\widgets\category\CategoriesView::widget(['view' => 'mob-menu']) ?>
+        <?= \www\widgets\category\LeftTop10::widget(['view' => 'mob-menu']) ?>
 
     </ul>
     <div class="top-links">

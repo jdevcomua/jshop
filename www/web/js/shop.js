@@ -114,21 +114,6 @@ function setPriceRange(left, right) {
     });
 }
 
-function removeManufacturer() {
-    var removeManufacturer = true;
-    $.ajax({
-        url: '',
-        data: {removeManufacturer},
-        type: 'post',
-        success: function () {
-            $.pjax.reload('#itemList');
-        }
-    });
-    $('.manufacturer').each(function (key,elem) {
-        $(elem).prop('checked',false);
-    });
-}
-
 function manufacturer(manufacturer,target) {
     if($(target).prop('checked')){
         $.ajax({

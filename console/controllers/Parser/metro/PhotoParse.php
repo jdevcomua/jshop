@@ -21,7 +21,12 @@ class PhotoParse extends Parse
             dg($itemArray['main_image'], 0);
             echo "\n$oldImage \n";
             $watermark = BaseImage::getImagine()->open(Yii::getAlias('@www/web/images/logo-sdelivery_' . self::LOGO_SIZE . '.png'));
-            $imagine = BaseImage::getImagine()->open($oldImage);
+            try{
+                $imagine = BaseImage::getImagine()->open($oldImage);
+            }catch (\Exception $e){
+                echo "\n" . $e->getMessage() . "\n";
+                return;
+            }
             $size = $imagine->getSize();
             echo $size->getWidth() . 'x' . $size->getHeight() . "\n";
             if ($size->getWidth() > self::LOGO_SIZE && $size->getHeight() > self::LOGO_SIZE){
